@@ -1,0 +1,12 @@
+.card-header{
+    background-color:  #161e22;
+}
+.btn-primary{
+    background-color: #0d6efd;
+}
+.toast-success {
+    background-color: #4CAF50 !important;
+}
+.toast-error {
+    background-color: #F44336 !important;
+}
