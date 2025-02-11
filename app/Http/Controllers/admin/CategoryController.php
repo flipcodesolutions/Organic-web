@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::paginate(10)->where('categoryStatus','Y');
+        $categories = Category::paginate(10);
         return view('admin.category.index', compact('categories'));
     }
 
@@ -23,7 +23,7 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-
+        // return $request;
         try {
             // Create the category
             $category = new Category();

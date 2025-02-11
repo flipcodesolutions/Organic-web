@@ -52,7 +52,7 @@
                 @endif
             </table>
             {{-- table end --}}
-            {!! $categories->withQueryString()->links('pagination::bootstrap-5') !!}
+            {!! $categories->links('pagination::bootstrap-5') !!}
 
         </div>
     </div>
