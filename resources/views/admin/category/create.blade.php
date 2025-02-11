@@ -14,6 +14,8 @@
             </div>
         </div>
 
+
+        
         <div class="card-body">
             <form id="categoryForm">
                 @csrf
