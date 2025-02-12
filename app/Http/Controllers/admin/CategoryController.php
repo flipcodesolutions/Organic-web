@@ -24,11 +24,25 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         // return $request;
-        try {
             // Create the category
             $category = new Category();
-            $category->category_name = $request->category_name;
-            $category->parent_id = $request->parent_id[0] == '0' ? 0 : $request->parent_id[0];
+            $category->categoryName = $request->category_name;
+            $category->categoryNameGUj = $request->category_name_guj;
+            $category->categoryNameHin = $request->category_name_hin;
+            $category->categoryDescription = $request->category_des;
+            $category->categoryDescriptionGuj = $request->category_des_guj;
+            $category->categoryDescriptionHin = $request->category_des_hin;
+            $parentId = isset($request->parent_id) && is_array($request->parent_id) ? $request->parent_id[0] : null;
+            $category->parent_category_id = $parentId === '0' ? 0 : $parentId;
+            
+            if($request->hasFile('category_image')){
+                $image = $request->file('category_image');
+                $path = 'categoryImage/';
+                $imagename = time().'.'.$image->getClientOriginalExtension();
+                $image->move($path,$imagename);
+                $category->cat_icon = $imagename;
+            }
+
             $category->save();
 
             return response()->json([
@@ -36,12 +50,7 @@ class CategoryController extends Controller
                 'message' => 'Category created successfully!',
                 'data' => $category,
             ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to create category. Please try again.'
-            ], 500);
-        }
+       
     }
 
     public function edit($id)
@@ -57,7 +66,22 @@ class CategoryController extends Controller
         try {
             $category = Category::find($id);
             $category->category_name = $request->category_name;
-            $category->parent_id = $request->parent_id[0] == '0' ? 0 : $request->parent_id[0];
+            $category->categoryNameGUj = $request->category_name_guj;
+            $category->categoryNameHin = $request->category_name_hin;
+            $category->categoryDescription = $request->category_des;
+            $category->categoryDescriptionGuj = $request->category_des_guj;
+            $category->categoryDescriptionHin = $request->category_des_hin;
+            $parentId = isset($request->parent_id) && is_array($request->parent_id) ? $request->parent_id[0] : null;
+            $category->parent_category_id = $parentId === '0' ? 0 : $parentId;
+            if($request->hasFile('category_image')){
+                $image = $request->file('category_image');
+                $path = 'categoryImage/';
+                $imagename = time().'.'.$image->getClientOriginalExtension();
+                $currentimagepath = public_path('categoryImage/'.$category->cat_icon);
+                unlink($currentimagepath);
+                $image->move($path,$imagename);
+                $category->cat_icon = $imagename;
+            }
             $category->save();
 
 

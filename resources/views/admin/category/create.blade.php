@@ -15,7 +15,7 @@
             </div>
 
             <div class="card-body">
-                <form id="categoryForm" action="{{ route('category.store') }}" enctype="multipart/form-data" method="post">
+                <form id="categoryForm">
                     @csrf
                     {{-- Category --}}
                     <div class="row mb-3">
@@ -41,13 +41,13 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="category_name_hin" id="category_name"
-                                placeholder="Category Name Hindi" class="form-control">
+                                    placeholder="Category Name Hindi" class="form-control">
                                 <label for="">Hindi</label>
                                 <span id="nameError" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
-                    
+
                     {{-- Category Description --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
@@ -57,8 +57,8 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="text" name="category_name" id="category_name" placeholder="Category Name"
-                                            class="form-control">
+                                        <input type="text" name="category_des" id="category_name"
+                                            placeholder="Category Name" class="form-control">
                                         <label for="">English</label>
                                         <span id="nameError" class="text-danger"></span>
                                     </div>
@@ -67,8 +67,8 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="text" name="category_name" id="category_name" placeholder="Category Name"
-                                            class="form-control">
+                                        <input type="text" name="category_des_guj" id="category_name"
+                                            placeholder="Category Name" class="form-control">
                                         <label for="">Gujarati</label>
                                         <span id="nameError" class="text-danger"></span>
                                     </div>
@@ -77,8 +77,8 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="text" name="category_name" id="category_name" placeholder="Category Name"
-                                            class="form-control">
+                                        <input type="text" name="category_des_hin" id="category_name"
+                                            placeholder="Category Name" class="form-control">
                                         <label for="">Hindi</label>
                                         <span id="nameError" class="text-danger"></span>
                                     </div>
@@ -105,18 +105,18 @@
                     {{-- Parent Category --}}
                     <div class="row mb-3">
                         {{-- <div class="form-group"> --}}
-                            <div class="col-sm-12 col-lg-3 col-md-12">
-                                Parent Category<span class="text-danger">*</span>
-                            </div>
-                            <div class="col">
-                                <select class="form-select ddCategory" name="parent_id[]" class="form-control">
-                                    <option value="0" selected>-- select category --</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                                    @endforeach
-                                </select>
-                                <span id="parentIdError" class="text-danger"></span>
-                            </div>
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Parent Category<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <select class="form-select ddCategory" name="parent_id[]" class="form-control">
+                                <option value="0" selected>-- select category --</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                @endforeach
+                            </select>
+                            <span id="parentIdError" class="text-danger"></span>
+                        </div>
                         {{-- </div> --}}
                     </div>
 
@@ -143,7 +143,7 @@
                 $('#nameError').text('');
                 $('#parentIdError').text('');
 
-                let formData = $(this).serialize();
+                let formData = new FormData(this);
 
                 let name = $('#category_name').val();
                 console.log(name);
@@ -169,6 +169,11 @@
                         url: "{{ route('category.store') }}",
                         method: "POST",
                         data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr('content')
+                        },
                         success: function(response) {
                             if (response.success) {
                                 toastr.options = {
