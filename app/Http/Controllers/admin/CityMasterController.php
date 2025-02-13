@@ -13,8 +13,8 @@ class CityMasterController extends Controller
      */
     public function index()
     {
-        $city = CityMaster::all();
-        return view('admin.city_master.index', compact('city'));
+        $cities = CityMaster::all();
+        return view('admin.city_master.index', compact('cities'));
 
     }
 
@@ -31,19 +31,32 @@ class CityMasterController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $request->validate([
-            'city_name_en' => 'required|string',
-            'city_name_hi' => 'required|string',
-            'city_name_gu' => 'required|string',
+            'city_name_eng' => 'required|string',
+            'city_name_hin' => 'required|string',
+            'city_name_guj' => 'required|string',
             'pincode' => 'required|string|max:10',
-            'area_en' => 'required|string',
-            'area_hi' => 'required|string',
-            'area_gu' => 'required|string',
+            'area_eng' => 'required|string',
+            'area_hin' => 'required|string',
+            'area_guj' => 'required|string',
         ]);
 
-        CityMaster::create($request->all());
+        $citymaster = new CityMaster();
+        $citymaster->city_name_eng = $request->city_name_eng;
+        $citymaster->city_name_hin = $request->city_name_hin;
+        $citymaster->city_name_guj = $request->city_name_guj;
+       
+        $citymaster->pincode = $request->pincode;
 
-        return redirect()->route('admin.city_master.index')->with('success', 'City added successfully!');
+        $citymaster->area_eng = $request->area_eng;
+        $citymaster->area_hin = $request->area_hin;
+        $citymaster->area_guj = $request->area_guj;
+
+        // return $citymaster;
+        
+        $citymaster->save();
+        return redirect()->route('city_master.index');
 
     }
 
@@ -53,16 +66,15 @@ class CityMasterController extends Controller
     public function show(CityMaster $cityMaster)
     {
         //
-    }
+}
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(CityMaster $cityMaster)
-    {
-        //
+{
+              //
     }
-
     /**
      * Update the specified resource in storage.
      */

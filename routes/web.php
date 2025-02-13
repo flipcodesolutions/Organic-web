@@ -68,9 +68,9 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('product/price', 'price')->name('product.price.index');
     });
 
-    Route::get('citymaster/index', [CityMasterController::class, 'index'])->name('city_master.index');
-Route::get('citymaster/create', [CityMasterController::class, 'create'])->name('city_master.create');
-Route::post('citymaster', [CityMasterController::class, 'store'])->name('city_master.store');
+    Route::get('city/index', [CityMasterController::class, 'index'])->name('city_master.index');
+    Route::get('city/create', [CityMasterController::class, 'create'])->name('city_master.create');
+    Route::post('city/store', [CityMasterController::class, 'store'])->name('city_master.store');
 
 });
 
