@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sliders', function (Blueprint $table) {
+        Schema::create('add_to_carts', function (Blueprint $table) {
             $table->id();
-            $table->integer('city_id');
-            $table->string('url');
-            $table->enum('is_navigate', ['yes', 'no'])->default('no');
-            $table->string('navigatemaster_id')->nullable();
+            $table->integer('userId');
+            $table->integer('productId');
+            $table->integer('qty');
+            $table->integer('price');
+            $table->string('unit');
             $table->enum('status', ['active', 'deactive','deleted'])->default('active');
             $table->timestamps();
         });
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sliders');
+        Schema::dropIfExists('add_to_carts');
     }
 };

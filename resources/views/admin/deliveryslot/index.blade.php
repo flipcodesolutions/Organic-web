@@ -17,7 +17,7 @@
                 <div class="loader"></div>
                 <table class="table table-bordered mt-2">
                     <tr>
-                        <th>No</th>admi
+                        <th>No</th>
                         <th>Start Time</th>
                         <th>End Time</th>
                         <th>Available</th>
@@ -33,22 +33,22 @@
                             <td>{{ $deliveryslots->endTime }}</td>
                             <td>{{ $deliveryslots->isAvailable }}</td>
                             <td>
-                                <a href="" class="btn btn-primary">
+                                <a href="{{ Route('deliveryslot.edit', $deliveryslots->id) }}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </td>
                         </tr>
                     @endforeach
 
-                    <tr>
-                        <td colspan="8" align="center" style="color: red;">
-                            <h5>No Data Record Found</h5>
-                        </td>
-                    </tr>
+                    {{-- <tr>
+                            <td colspan="8" align="center" style="color: red;">
+                                <h5>No Data Record Found</h5>
+                            </td>
+                        </tr> --}}
 
                 </table>
                 {{-- table end --}}
-                {{-- {!! $categories->links('pagination::bootstrap-5') !!} --}}
+
 
             </adiv>
         </div>

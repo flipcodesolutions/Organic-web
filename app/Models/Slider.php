@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Slider extends Model
 {
-    // public function city(){
-    //     return $this->belongsTo(city::class);
-    // }
+    public function city(){
+        return $this->belongsTo(CityMaster::class);
+    }
 
-    // public function namespace(){
-    //     return $this->belongsTo(Namespace::class,'navigation_url);
-    // }
+    public function navigatemaster(){
+        return $this->belongsTo(NavigateMaster::class);
+    }
 
     // it willl be in cities and navigationmasters table
     // public function slider(){

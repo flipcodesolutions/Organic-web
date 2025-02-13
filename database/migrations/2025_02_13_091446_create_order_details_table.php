@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sliders', function (Blueprint $table) {
+        Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('city_id');
-            $table->string('url');
-            $table->enum('is_navigate', ['yes', 'no'])->default('no');
-            $table->string('navigatemaster_id')->nullable();
+            $table->integer('orderMasterId');
+            $table->integer('productId');
+            $table->integer('qty');
+            $table->integer('price');
+            $table->string('unit');
+            $table->integer('total');
             $table->enum('status', ['active', 'deactive','deleted'])->default('active');
             $table->timestamps();
         });
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sliders');
+        Schema::dropIfExists('order_details');
     }
 };

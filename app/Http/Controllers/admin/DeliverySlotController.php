@@ -27,14 +27,23 @@ class DeliverySlotController extends Controller
         $deliveryslot->isAvailable=$request->isavailable;
         // return $deliverySlot;
         $deliveryslot->save();
+
+        return redirect()->route('deliveryslot.index');
     }
     public function edit($id)
     {
-
+        $deliveryslot = DeliverySlot::find($id);
+        return view('admin.deliveryslot.edit', compact('deliveryslot'));
     }
     public function update(Request $request, $id)
     {
+        $deliveryslot = DeliverySlot::find($id);
+        $deliveryslot->startTime=$request->starttime;
+        $deliveryslot->endTime=$request->endtime;
+        $deliveryslot->isAvailable=$request->isavailable;
+        $deliveryslot->save();
 
+        return redirect()->route('deliveryslot.index');
     }
     public function delete($id)
     {
