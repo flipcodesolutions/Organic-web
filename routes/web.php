@@ -7,12 +7,14 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductPriceController;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\admin\CityMasterController;
+use App\Http\Controllers\LandmarkMasterController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -65,4 +67,18 @@ Route::group(['middleware' => ['auth']], function() {
     Route::controller(ProductPriceController::class)->group(function () {
         Route::get('product/price', 'price')->name('product.price.index');
     });
+
+    Route::get('citymaster/index', [CityMasterController::class, 'index'])->name('city_master.index');
+Route::get('citymaster/create', [CityMasterController::class, 'create'])->name('city_master.create');
+Route::post('citymaster', [CityMasterController::class, 'store'])->name('city_master.store');
+
 });
+
+
+
+
+
+
+
+
+
