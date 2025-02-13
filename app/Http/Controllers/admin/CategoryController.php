@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::paginate(10);
+        $categories = Category::where('status', 'active')->paginate(10);;
         return view('admin.category.index', compact('categories'));
     }
 
@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
 
         $categories = Category::all();
-        
+
         return view('admin.category.create', compact('categories'));
     }
 
@@ -96,8 +96,37 @@ class CategoryController extends Controller
         }
     }
 
-    public function destroy() 
+    public function deactive($id)
     {
-        
+        $category = Category::find($id);
+        $category->status = 'deactive';
+        $category->save();
+        // return response()->json([
+        //     'success' => true,
+        // 'message' => 'Category deactivated successfully!'
+        // ]);  
+        return back()->with(['success', 'message'], ['true', 'Category deactivated successfully!']);
+    }
+
+    public function active($id)
+    {
+        $category = Category::find($id);
+        $category->status = 'active';
+        $category->save();
+        return redirect()->route('category.index');
+    }
+
+    public function deleted()
+    {
+        $categories = Category::where('status', 'deactive')->paginate(10);;
+        return view('admin.category.deleted', compact('categories'));
+    }
+
+    public function destroy($id)
+    {
+        $category = Category::find($id);
+        $category->status = 'deleted';
+        $category->save();
+        return redirect()->route('category.deleted');
     }
 }
