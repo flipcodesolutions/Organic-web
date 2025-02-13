@@ -105,6 +105,11 @@
                     <i class="fa fa-bookmark"></i>
                     <span>DeliverySlot</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{Route('cms_master.index')}}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>Cms_Master</span></a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 

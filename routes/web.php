@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\Cms_MasterController;
 use App\Http\Controllers\admin\DeliverySlotController;
 use App\Http\Controllers\admin\ImagesController;
 use App\Http\Controllers\admin\ModuleController;
@@ -74,6 +75,15 @@ Route::group(['middleware' => ['auth']], function() {
         Route::post('deliveryslot/store', 'store')->name('deliveryslot.store');
         Route::get('deliveryslot/edit/{id}', 'edit')->name('deliveryslot.edit');
         Route::post('deliveryslot/update/{id}', 'update')->name('deliveryslot.update');
+    });
+
+    //cms_master route
+    Route::controller(Cms_MasterController::class)->group(function () {
+        Route::get('cms_master/index', 'index')->name('cms_master.index');
+        Route::get('cms_master/create', 'create')->name('cms_master.create');
+        // Route::post('cms_master/store', 'store')->name('cms_master.store');
+        // Route::get('cms_master/edit/{id}', 'edit')->name('cms_master.edit');
+        // Route::post('cms_master/update/{id}', 'update')->name('cms_master.update');
     });
 
 });
