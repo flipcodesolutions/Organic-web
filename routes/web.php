@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::post('category/store','store')->name('category.store');
         Route::get('category/edit/{id?}', 'edit')->name('category.edit');
         Route::post('category/update/{id?}', 'update')->name('category.update');
+        Route::post('category/delete/{id?}', 'update')->name('category.update');
     });
 
     // product route

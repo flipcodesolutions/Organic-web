@@ -58,6 +58,9 @@
                                     <a href="{{ route('category.edit') }}/{{ $categoryData->id }}" class="btn btn-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
+                                    <a href="{{ route('category.edit') }}/{{ $categoryData->id }}" class="btn btn-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

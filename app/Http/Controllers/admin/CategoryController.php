@@ -24,33 +24,32 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         // return $request;
-            // Create the category
-            $category = new Category();
-            $category->categoryName = $request->category_name;
-            $category->categoryNameGUj = $request->category_name_guj;
-            $category->categoryNameHin = $request->category_name_hin;
-            $category->categoryDescription = $request->category_des;
-            $category->categoryDescriptionGuj = $request->category_des_guj;
-            $category->categoryDescriptionHin = $request->category_des_hin;
-            $parentId = isset($request->parent_id) && is_array($request->parent_id) ? $request->parent_id[0] : null;
-            $category->parent_category_id = $parentId === '0' ? 0 : $parentId;
-            
-            if($request->hasFile('category_image')){
-                $image = $request->file('category_image');
-                $path = 'categoryImage/';
-                $imagename = time().'.'.$image->getClientOriginalExtension();
-                $image->move($path,$imagename);
-                $category->cat_icon = $imagename;
-            }
+        // Create the category
+        $category = new Category();
+        $category->categoryName = $request->category_name;
+        $category->categoryNameGUj = $request->category_name_guj;
+        $category->categoryNameHin = $request->category_name_hin;
+        $category->categoryDescription = $request->category_des;
+        $category->categoryDescriptionGuj = $request->category_des_guj;
+        $category->categoryDescriptionHin = $request->category_des_hin;
+        $parentId = isset($request->parent_id) && is_array($request->parent_id) ? $request->parent_id[0] : null;
+        $category->parent_category_id = $parentId === '0' ? 0 : $parentId;
 
-            $category->save();
+        if ($request->hasFile('category_image')) {
+            $image = $request->file('category_image');
+            $path = 'categoryImage/';
+            $imagename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($path, $imagename);
+            $category->cat_icon = $imagename;
+        }
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Category created successfully!',
-                'data' => $category,
-            ]);
-       
+        $category->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Category created successfully!',
+            'data' => $category,
+        ]);
     }
 
     public function edit($id)
@@ -73,12 +72,12 @@ class CategoryController extends Controller
             $category->categoryDescriptionHin = $request->category_des_hin;
             $parentId = isset($request->parent_id) && is_array($request->parent_id) ? $request->parent_id[0] : null;
             $category->parent_category_id = $parentId === '0' ? 0 : $parentId;
-            if($request->hasFile('category_image')){
+            if ($request->hasFile('category_image')) {
                 $image = $request->file('category_image');
                 $path = 'categoryImage/';
-                $imagename = time().'.'.$image->getClientOriginalExtension();
-                $image->move($path,$imagename);
-                $currentimagepath = public_path('categoryImage/'.$category->cat_icon);
+                $imagename = time() . '.' . $image->getClientOriginalExtension();
+                $image->move($path, $imagename);
+                $currentimagepath = public_path('categoryImage/' . $category->cat_icon);
                 unlink($currentimagepath);
                 $category->cat_icon = $imagename;
             }
@@ -94,5 +93,10 @@ class CategoryController extends Controller
                 'message' => 'Failed to update category. Please try again.'
             ], 500);
         }
+    }
+
+    public function destroy() 
+    {
+        
     }
 }
