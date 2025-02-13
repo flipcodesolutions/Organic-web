@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('deliveryslots', function (Blueprint $table) {
+        Schema::create('delivery_slots', function (Blueprint $table) {
             $table->id();
             $table->time('startTime')->nullable();
             $table->time('endTime')->nullable();

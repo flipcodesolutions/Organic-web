@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\DeliverySlotController;
 use App\Http\Controllers\admin\ImagesController;
 use App\Http\Controllers\admin\ModuleController;
 use App\Http\Controllers\admin\ProductController;
@@ -65,4 +66,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::controller(ProductPriceController::class)->group(function () {
         Route::get('product/price', 'price')->name('product.price.index');
     });
+
+    // delivery slot route
+    Route::controller(DeliverySlotController::class)->group(function () {
+        Route::get('deliveryslot/index', 'index')->name('deliveryslot.index');
+        Route::get('deliveryslot/create', 'create')->name('deliveryslot.create');
+        Route::post('deliveryslot/store', 'store')->name('deliveryslot.store');
+    });
+
 });
