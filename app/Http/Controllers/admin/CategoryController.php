@@ -65,7 +65,7 @@ class CategoryController extends Controller
 
         try {
             $category = Category::find($id);
-            $category->category_name = $request->category_name;
+            $category->categoryName = $request->category_name;
             $category->categoryNameGUj = $request->category_name_guj;
             $category->categoryNameHin = $request->category_name_hin;
             $category->categoryDescription = $request->category_des;
@@ -77,13 +77,12 @@ class CategoryController extends Controller
                 $image = $request->file('category_image');
                 $path = 'categoryImage/';
                 $imagename = time().'.'.$image->getClientOriginalExtension();
+                $image->move($path,$imagename);
                 $currentimagepath = public_path('categoryImage/'.$category->cat_icon);
                 unlink($currentimagepath);
-                $image->move($path,$imagename);
                 $category->cat_icon = $imagename;
             }
             $category->save();
-
 
             return response()->json([
                 'success' => true,
