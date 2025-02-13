@@ -98,6 +98,13 @@
                     <i class="fa fa-university"></i>
                     <span>Product-Price</span></a>
             </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{Route('deliveryslot.index')}}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>DeliverySlot</span></a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 

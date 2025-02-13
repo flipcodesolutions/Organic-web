@@ -1,20 +1,19 @@
 <?php
 
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\DeliverySlotController;
 use App\Http\Controllers\admin\ImagesController;
 use App\Http\Controllers\admin\ModuleController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductPriceController;
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Controllers\admin\CityMasterController;
-use App\Http\Controllers\LandmarkMasterController;
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -69,17 +68,13 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('product/price', 'price')->name('product.price.index');
     });
 
-    Route::get('citymaster/index', [CityMasterController::class, 'index'])->name('city_master.index');
-Route::get('citymaster/create', [CityMasterController::class, 'create'])->name('city_master.create');
-Route::post('citymaster', [CityMasterController::class, 'store'])->name('city_master.store');
+    // delivery slot route
+    Route::controller(DeliverySlotController::class)->group(function () {
+        Route::get('deliveryslot/index', 'index')->name('deliveryslot.index');
+        Route::get('deliveryslot/create', 'create')->name('deliveryslot.create');
+        Route::post('deliveryslot/store', 'store')->name('deliveryslot.store');
+        Route::get('deliveryslot/edit/{id}', 'edit')->name('deliveryslot.edit');
+        Route::post('deliveryslot/update/{id}', 'update')->name('deliveryslot.update');
+    });
 
 });
-
-
-
-
-
-
-
-
-
