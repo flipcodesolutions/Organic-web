@@ -9,10 +9,10 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Cms_Master Management</h6>
+                        <h6 class="mb-0">Faq Management</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-primary" href="{{Route('cms_master.create')}}">Add</a>
+                        <a class="btn btn-primary" href="{{Route('faq.create')}}">Add</a>
                     </div>
                 </div>
             </div>
@@ -21,34 +21,32 @@
                 <table class="table table-bordered mt-2">
                     <tr>
                         <th>No</th>
-                        <th>Title</th>
-                        <th>Slug</th>
-                        <th>Description</th>
+                        <th>Question</th>
+                        <th>Answer</th>
                         <th>Action</th>
                     </tr>
                     @php
                         $index = 1;
                     @endphp
-                    @foreach ($cms_masters as $cms)
+                    @foreach ($faqs as $faqs)
                         <tr>
                             <td>{{$index++}}</td>
                             <td>
                                 <ul>
-                                    <li>{{$cms->title}}</li>
-                                    <li>{{$cms->titleGuj}}</li>
-                                    <li>{{$cms->titleHin}}</li>
+                                    <li>{{$faqs->question}}</li>
+                                    <li>{{$faqs->questionGuj}}</li>
+                                    <li>{{$faqs->questionHin}}</li>
                                 </ul>
                             </td>
-                            <td>{{$cms->slug}}</td>
                             <td>
                                 <ul>
-                                    <li>{{$cms->description}}</li>
-                                    <li>{{$cms->descriptionGuj}}</li>
-                                    <li>{{$cms->descriptionHin}}</li>
+                                    <li>{{$faqs->answer}}</li>
+                                    <li>{{$faqs->answerGuj}}</li>
+                                    <li>{{$faqs->answerHin}}</li>
                                 </ul>
                             </td>
                             <td>
-                                <a href="{{Route('cms_master.edit',$cms->id)}}" class="btn btn-primary">
+                                <a href="{{Route('faq.edit',$faqs->id)}}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </td>

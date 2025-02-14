@@ -110,6 +110,11 @@
                     <i class="fa fa-bookmark"></i>
                     <span>Cms_Master</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{Route('faq.index')}}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>Faq</span></a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
