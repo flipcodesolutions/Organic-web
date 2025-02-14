@@ -24,8 +24,7 @@ class LandmarkMasterController extends Controller
     {
         $cities = CityMaster::all();
         return View('admin.landmark.create',compact('cities'));
-     
-
+        
     }
 
     /**
@@ -35,6 +34,7 @@ class LandmarkMasterController extends Controller
     {
         $request->validate([
             'city_id' => 'required|exists:city_master,id',
+
             'landmark_eng' => 'required|string',
             'landmark_hin' => 'required|string',
             'landmark_guj' => 'required|string',
@@ -42,9 +42,20 @@ class LandmarkMasterController extends Controller
             'longitude' => 'required|numeric',
         ]);
 
-        LandmarkMaster::create($request->all());
+        $landmarkmaster = new LandmarkMaster();
+        $landmarkmaster->landmark_eng = $request->landmark_eng;
+        $landmarkmaster->landmark_hin = $request->landmark_hin;
+        $landmarkmaster->landmark_guj = $request->landmark_guj;
 
-        return redirect()->route('landmark_master.index')->with('success', 'Landmark added successfully!');
+        $landmarkmaster->pincode = $request->pincode;
+
+        $landmarkmaster->latitude = $request->latitude;
+        $landmarkmaster->longitude = $request->longitude;
+
+        // return $citymaster;
+
+        $landmarkmaster->save();
+        return redirect()->route('city_master.index');
     }
 
     /**
@@ -58,9 +69,10 @@ class LandmarkMasterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(LandmarkMaster $landmarkMaster)
+    public function edit($id)
     {
-        //
+        $landamrk = LandmarkMaster::find($id);
+        return view('admin.landmark.edit',compact('landamrk'));
     }
 
     /**
@@ -68,7 +80,7 @@ class LandmarkMasterController extends Controller
      */
     public function update(Request $request, LandmarkMaster $landmarkMaster)
     {
-        //
+        
     }
 
     /**

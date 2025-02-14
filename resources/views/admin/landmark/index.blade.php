@@ -6,32 +6,31 @@
     <table class="table">
         <tr>
             <th>ID</th>
-            <th>City Name (ENG)</th>
-            <th>City Name (HIN)</th>
-            <th>City Name (GUJ)</th>
-            <th>Pincode</th>
-            <th>Area (ENG)</th>
-            <th>Area (HIN)</th>
-            <th>Area (GUJ)</th>
+            <th> Landmark (ENG)</th>
+            <th> Landmark (HIN)</th>
+            <th> Landmark (GUJ)</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
             <th>Actions</th>
         </tr>
-        @foreach($cities as $city)
+        @foreach($landmarks as Landmark)
         <tr>
-            <td>{{ $city->id }}</td>
-            <td>{{ $city->city_name_eng }}</td>
-            <td>{{ $city->city_name_hin }}</td>
-            <td>{{ $city->city_name_guj }}</td>
-            <td>{{ $city->pincode }}</td>
-            <td>{{ $city->area_eng }}</td>
-            <td>{{ $city->area_hin }}</td>
-            <td>{{ $city->area_guj }}</td>
+          
+            <td>{{ $landmark->city->city_name_eng }}</td>
+            <td>{{ $landmark->city->city_name_hin }}</td>
+            <td>{{ $landmark->city->city_name_guj }}</td>
+            
+            <td>{{ $landmark->landmark_eng }}</td>
+            <td>{{ $landmark->landmark_hin }}</td>
+            <td>{{ $landmark->landmark_guj }}</td>
+            <td>{{ $landmark->latitude  }}</td>
+            <td>{{ $landmark->longitude }}</td>
+            
+            
             <td>
-                <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}" >Edit</a>
+                <a class="btn btn-primary" href="{{ route('landmark.edit')}}/ {{ $landmark->id }}" >Edit</a>
         
-                {{--  <form action="{{ route('city_master.destroy', $city->id) }}" method="POST" style="display:inline;">
-                    @csrf @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>  --}}
+               
             </td>
         </tr>
         @endforeach

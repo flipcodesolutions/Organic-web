@@ -75,7 +75,7 @@
 
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label"> Latitude : </label>
-                    <input type="text" name="pincode" class="form-control" id="#">
+                    <input type="text" name="latitude" class="form-control" id="#">
                     @error('pincode')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -83,7 +83,7 @@
 
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label"> Longitude : </label>
-                    <input type="text" name="area_eng" class="form-control" id="#">
+                    <input type="text" name="longitude" class="form-control" id="#">
                     @error('area')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
