@@ -46,7 +46,7 @@ class CityMasterController extends Controller
         $citymaster->city_name_eng = $request->city_name_eng;
         $citymaster->city_name_hin = $request->city_name_hin;
         $citymaster->city_name_guj = $request->city_name_guj;
-       
+
         $citymaster->pincode = $request->pincode;
 
         $citymaster->area_eng = $request->area_eng;
@@ -54,7 +54,7 @@ class CityMasterController extends Controller
         $citymaster->area_guj = $request->area_guj;
 
         // return $citymaster;
-        
+
         $citymaster->save();
         return redirect()->route('city_master.index');
 
@@ -66,21 +66,36 @@ class CityMasterController extends Controller
     public function show(CityMaster $cityMaster)
     {
         //
-}
+    }
 
     /**
      * Show the form for editing the specified resource.
-     */
-    public function edit(CityMaster $cityMaster)
-{
-              //
+ */
+    public function edit($id)
+    {
+        
+        $city_master = CityMaster::find($id);
+        return view('admin.city_master.edit',compact('city_master'));
     }
+
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, CityMaster $cityMaster)
     {
-        //
+        $citymaster=CityMaster::find($request->city_id);
+
+        $citymaster->city_name_eng = $request->city_name_eng;
+        $citymaster->city_name_hin = $request->city_name_hin;
+        $citymaster->city_name_guj = $request->city_name_guj;
+        $citymaster->pincode = $request->pincode;
+        $citymaster->area_eng = $request->area_eng;
+        $citymaster->area_hin = $request->area_hin;
+        $citymaster->area_guj = $request->area_guj;
+
+        $citymaster->save();
+        return redirect()->back();
     }
 
     /**

@@ -19,6 +19,6 @@ class LandmarkMaster extends Model
 
     public function city()
     {
-        return $this->belongsTo(CityMaster::class, 'city_id');
+        return $this->belongsTo(CityMaster::class);
     }
 }

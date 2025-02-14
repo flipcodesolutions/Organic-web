@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 use App\Models\LandmarkMaster;
 use App\Models\CityMaster;
 use Illuminate\Http\Request;
@@ -13,8 +13,8 @@ class LandmarkMasterController extends Controller
      */
     public function index()
     {
-        return view('landmark_master.index', ['landmarks' => LandmarkMaster::with('city')->get()]);
-
+        $landmark = LandmarkMaster::all();
+        return view('admin.landmark_master.index', compact('landmark'));
     }
 
     /**
@@ -22,7 +22,9 @@ class LandmarkMasterController extends Controller
      */
     public function create()
     {
-        return view('landmark_master.create', ['cities' => CityMaster::all()]);
+        $cities = CityMaster::all();
+        return View('admin.landmark.create',compact('cities'));
+     
 
     }
 
@@ -33,9 +35,9 @@ class LandmarkMasterController extends Controller
     {
         $request->validate([
             'city_id' => 'required|exists:city_master,id',
-            'landmark_en' => 'required|string',
-            'landmark_hi' => 'required|string',
-            'landmark_gu' => 'required|string',
+            'landmark_eng' => 'required|string',
+            'landmark_hin' => 'required|string',
+            'landmark_guj' => 'required|string',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
         ]);

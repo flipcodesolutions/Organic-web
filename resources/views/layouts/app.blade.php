@@ -101,10 +101,27 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="{{route('city_master.index')}}">
-                    <i class="fa fa-university"></i>
+                    <i class="fa fa-bookmark"></i>
                     <span>Cities</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('city_master.index')}}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>Landmark</span></a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{Route('deliveryslot.index')}}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>DeliverySlot</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{Route('cms_master.index')}}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>Cms_Master</span></a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
