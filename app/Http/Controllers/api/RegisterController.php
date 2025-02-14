@@ -15,11 +15,11 @@ class RegisterController extends Controller
         // return $request;
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8'],
+            'email' => ['string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6'],
             'phone' => ['required', 'string', 'min:10', 'max:10'],
             'role' => ['required', 'string', 'max:255'],
-            'pro_pic' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'pro_pic' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -33,7 +33,7 @@ class RegisterController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        $user->password = bcrypt($request->password);
         $user->phone = $request->phone;
         $user->role = $request->role;
         if ($request->hasFile('pro_pic')) {
