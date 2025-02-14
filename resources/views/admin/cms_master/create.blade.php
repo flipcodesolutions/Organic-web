@@ -14,7 +14,7 @@
             </div>
 
             <div class="card-body">
-                <form id="categoryForm">
+                <form id="categoryForm" href="{{Route('cms_master.store')}}" method="POST">
                     @csrf
                     {{-- Cms_Master --}}
                     <div class="row mb-3">

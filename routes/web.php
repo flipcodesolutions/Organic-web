@@ -81,7 +81,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::controller(Cms_MasterController::class)->group(function () {
         Route::get('cms_master/index', 'index')->name('cms_master.index');
         Route::get('cms_master/create', 'create')->name('cms_master.create');
-        // Route::post('cms_master/store', 'store')->name('cms_master.store');
+        Route::post('cms_master/store', 'store')->name('cms_master.store');
         // Route::get('cms_master/edit/{id}', 'edit')->name('cms_master.edit');
         // Route::post('cms_master/update/{id}', 'update')->name('cms_master.update');
     });

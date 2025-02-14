@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('landmark_masters', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('city_id')->constrained('city_master')->onDelete('cascade');
+            $table->integer('city_id');
             $table->string('landmark_eng', 255);
             $table->string('landmark_hin', 255);
             $table->string('landmark_guj', 255);

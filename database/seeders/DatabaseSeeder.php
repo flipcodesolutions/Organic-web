@@ -16,20 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
 
-        $permission = new PermissionTableSeeder();
-        $permission->run();
 
-        $admin = new CreateAdminUserSeeder();
-        $admin->run();
-
-        $category = new CategorySeeder();
-        $category->run();
-
-        
     }
 }

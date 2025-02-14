@@ -30,7 +30,17 @@ class Cms_MasterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cms_master = new Cms_Master();
+        $cms_master->title=$request->title;
+        $cms_master->titleGuj=$request->titleguj;
+        $cms_master->titleHin=$request->titlehin;
+        $cms_master->slug=$request->slug;
+        $cms_master->description=$request->description;
+        $cms_master->descriptionGuj=$request->descriptionguj;
+        $cms_master->descriptionHin=$request->descriptionhin;
+        $cms_master->save();
+
+        return redirect()->route('cms_master.index');
     }
 
     /**
@@ -44,7 +54,7 @@ class Cms_MasterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         //
     }
