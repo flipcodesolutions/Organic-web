@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('categoryDescriptionGuj');
             $table->string('categoryDescriptionHin');
             $table->string('cat_icon');
-            $table->integer('parent_category_id');
+            $table->string('parent_category_id');
+            $table->enum('status', ['active', 'deactive'])->default('active');
             $table->timestamps();
         });
     }

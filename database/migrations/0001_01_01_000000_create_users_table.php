@@ -14,9 +14,18 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('email')->unique()->nullable();
             $table->string('password');
+            $table->string('phone');
+            $table->enum('role', ['admin', 'customer','vendor','manager'])->default('customer');
+            $table->string('pro_pic')->nullable();
+            $table->enum('is_verfiy_email', ['yes', 'no'])->default('no');
+            $table->enum('is_verify_phone', ['yes', 'no'])->default('no');
+            $table->enum('status', ['active', 'deactive','deleted'])->default('active');
+
+            $table->enum('is_special', ['yes', 'no'])->default('yes');
+
+            $table->string('default_language');
             $table->rememberToken();
             $table->timestamps();
         });
