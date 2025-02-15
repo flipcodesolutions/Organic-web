@@ -13,8 +13,8 @@ class Cms_MasterController extends Controller
      */
     public function index()
     {
-        $cms_master = Cms_Master::all();
-        return view('admin.cms_master.index', compact('cms_master'));
+        $cms_masters = Cms_Master::all();
+        return view('admin.cms_master.index', compact('cms_masters'));
     }
 
     /**
@@ -30,7 +30,17 @@ class Cms_MasterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cms_master = new Cms_Master();
+        $cms_master->title=$request->title;
+        $cms_master->titleGuj=$request->titleguj;
+        $cms_master->titleHin=$request->titlehin;
+        $cms_master->slug=$request->slug;
+        $cms_master->description=$request->description;
+        $cms_master->descriptionGuj=$request->descriptionguj;
+        $cms_master->descriptionHin=$request->descriptionhin;
+        $cms_master->save();
+
+        return redirect()->route('cms_master.index')->with('msg', 'Data Is Inserted successfully.');
     }
 
     /**
@@ -44,9 +54,10 @@ class Cms_MasterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $cms_masters = Cms_Master::find($id);
+        return view('admin.cms_master.edit', compact('cms_masters'));
     }
 
     /**
@@ -54,7 +65,17 @@ class Cms_MasterController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $cms_master = Cms_Master::find($id);
+        $cms_master->title=$request->title;
+        $cms_master->titleGuj=$request->titleguj;
+        $cms_master->titleHin=$request->titlehin;
+        $cms_master->slug=$request->slug;
+        $cms_master->description=$request->description;
+        $cms_master->descriptionGuj=$request->descriptionguj;
+        $cms_master->descriptionHin=$request->descriptionhin;
+        $cms_master->save();
+
+        return redirect()->route('cms_master.index')->with('msg', 'Data Is Updated successfully.');
     }
 
     /**

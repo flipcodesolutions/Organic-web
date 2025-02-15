@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>Cities</h2>
-    <a href="{{ route('city_master.create') }}" class="btn btn-primary">Add City</a>
+<h2>Landmarks</h2>
+    <a href="{{ route('landmark.create') }}" class="btn btn-primary mb-4">Add Landamrk</a>
     <table class="table">
         <tr>
-            <th>ID</th>
+            <th>City name English</th>
+            <th>City name Hindi</th>
+            <th>City name Gujarati</th>
+
             <th> Landmark (ENG)</th>
             <th> Landmark (HIN)</th>
             <th> Landmark (GUJ)</th>
@@ -13,26 +16,25 @@
             <th>Longitude</th>
             <th>Actions</th>
         </tr>
-        @foreach($landmarks as Landmark)
+        @foreach($landmarkmasters as $landmark)
         <tr>
-          
-            <td>{{ $landmark->city->city_name_eng }}</td>
-            <td>{{ $landmark->city->city_name_hin }}</td>
-            <td>{{ $landmark->city->city_name_guj }}</td>
-            
+
+            <td>{{ $landmark->citymaster->city_name_eng }}</td>
+            <td>{{ $landmark->citymaster->city_name_hin }}</td>
+            <td>{{ $landmark->citymaster->city_name_guj }}</td>
+
             <td>{{ $landmark->landmark_eng }}</td>
             <td>{{ $landmark->landmark_hin }}</td>
             <td>{{ $landmark->landmark_guj }}</td>
             <td>{{ $landmark->latitude  }}</td>
             <td>{{ $landmark->longitude }}</td>
-            
-            
+
+
             <td>
-                <a class="btn btn-primary" href="{{ route('landmark.edit')}}/ {{ $landmark->id }}" >Edit</a>
-        
-               
+                <a class="btn btn-primary" href="{{ route('landmark.edit',$landmark->id)}}" >Edit</a>
             </td>
+
         </tr>
         @endforeach
     </table>
-@endsection 
+@endsection

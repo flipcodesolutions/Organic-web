@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('landmark_masters', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->integer('city_id');
-            $table->string('landmark_eng', 255);
-            $table->string('landmark_hin', 255);
-            $table->string('landmark_guj', 255);
-            $table->decimal('latitude', 10, 7);
-            $table->decimal('longitude', 10, 7);
+            $table->integer('order_id');
+            $table->integer('amount');
+            $table->string('transaction_id');
+            $table->string('date');
+            $table->enum('status', ['active', 'deactive','deleted'])->default('active');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('landmark_masters');
+        Schema::dropIfExists('payments');
     }
 };

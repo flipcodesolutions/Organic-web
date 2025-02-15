@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+@if(Session::has('msg'))
+<p class="alert alert-info">{{ Session::get('msg') }}</p>
+@endif
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">

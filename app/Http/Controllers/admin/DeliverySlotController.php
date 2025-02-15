@@ -28,7 +28,7 @@ class DeliverySlotController extends Controller
         // return $deliverySlot;
         $deliveryslot->save();
 
-        return redirect()->route('deliveryslot.index');
+        return redirect()->route('deliveryslot.index')->with('msg', 'Data Is Inserted successfully');
     }
     public function edit($id)
     {
@@ -43,7 +43,7 @@ class DeliverySlotController extends Controller
         $deliveryslot->isAvailable=$request->isavailable;
         $deliveryslot->save();
 
-        return redirect()->route('deliveryslot.index');
+        return redirect()->route('deliveryslot.index')->with('mes', 'Data Is Updated successfully');
     }
     public function delete($id)
     {

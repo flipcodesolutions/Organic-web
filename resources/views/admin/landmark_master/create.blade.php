@@ -14,45 +14,40 @@
     <form action="{{ route('landmark.store') }}" method="post" enctype="multipart/form-data">
 
         @csrf
-        <div class="mb-3">
-            <label for="exampleFormControlSelect1">city Name</label>
-                <select class="form-control" name="city_id" id="exampleFormControlSelect1">
-                    <option disabled selected >-- Select Category --</option>
-                    @foreach ($cities as $city)
-                        <option value="{{ $city->id }}">{{ $city->city_name_eng }}</option>
+            <div class="mb-3">
+            <label for="exampleFormControlSelect1">City name</label>
+                <select class="form-control" name="city_name_eng" id="exampleFormControlSelect1">
+                    <option value="">-- Select City --</option>
+                    @foreach ($cities as $citymaster)
+                        <option value="{{  $citymaster->id }}">{{ $citymaster->city_name_eng }}</option>
                     @endforeach
-    
                 </select>
             </div>
 
             <div class="mb-3">
-                <label for="exampleFormControlSelect1">city Name</label>
-                    <select class="form-control" name="city_id" id="exampleFormControlSelect1">
-                        <option disabled selected >-- Select Category --</option>
-                        @foreach ($cities as $city)
-                            <option value="{{ $city->id }}">{{ $city->city_name_hin }}</option>
+                <label for="exampleFormControlSelect1">City name</label>
+                    <select class="form-control" name="city_name_hin" id="exampleFormControlSelect1">
+                        <option value="">-- Select City --</option>
+                        @foreach ($cities as $citymaster)
+                            <option value="{{  $citymaster->id }}">{{ $citymaster->city_name_hin }}</option>
                         @endforeach
-        
                     </select>
                 </div>
 
                 <div class="mb-3">
-                    <label for="exampleFormControlSelect1">city Name</label>
-                        <select class="form-control" name="city_id" id="exampleFormControlSelect1">
-                            <option disabled selected >-- Select Category --</option>
-                            @foreach ($cities as $city)
-                                <option value="{{ $city->id }}">{{ $city->city_name_guj }}</option>
+                    <label for="exampleFormControlSelect1">City name</label>
+                        <select class="form-control" name="city_name_guj" id="exampleFormControlSelect1">
+                            <option value="">-- Select City --</option>
+                            @foreach ($cities as $citymaster)
+                                <option value="{{  $citymaster->id }}">{{ $citymaster->city_name_guj }}</option>
                             @endforeach
-            
                         </select>
                     </div>
-    
-
 
                 <div class="mb-3">
-                        <label class="form-label">Landmark English : </label>
+                        <label class="form-label">Landmark English</label>
                         <input type="text" name="landmark_eng" class="form-control" id="#" aria-describedby="#">
-                        @error('landmark_eng')
+                        @error('landmark english')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                 </div>
@@ -76,7 +71,7 @@
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label"> Latitude : </label>
                     <input type="text" name="latitude" class="form-control" id="#">
-                    @error('pincode')
+                    @error('latitude')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
@@ -84,16 +79,14 @@
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label"> Longitude : </label>
                     <input type="text" name="longitude" class="form-control" id="#">
-                    @error('area')
+                    @error('longitude')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
 
-
                 <button type="submit" class="btn btn-primary"> Create </button>
-            
+
           </form>
 </div>
 @endsection
 
- 

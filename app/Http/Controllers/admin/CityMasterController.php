@@ -73,7 +73,7 @@ class CityMasterController extends Controller
  */
     public function edit($id)
     {
-        
+
         $city_master = CityMaster::find($id);
         return view('admin.city_master.edit',compact('city_master'));
     }
