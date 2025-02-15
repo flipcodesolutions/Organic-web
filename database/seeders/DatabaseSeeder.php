@@ -23,6 +23,10 @@ class DatabaseSeeder extends Seeder
             LandmarkMasterSeeder::class
         ]);
 
+        $this->call([
+            ContactSeeder::class
+        ])
+
         // User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
@@ -36,11 +40,5 @@ class DatabaseSeeder extends Seeder
 
         // $category = new CategorySeeder();
         // $category->run();
-
-
-
-
-
+        }
     }
-}
-

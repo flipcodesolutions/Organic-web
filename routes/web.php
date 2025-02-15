@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\CityMasterController;
 use App\Http\Controllers\admin\LandmarkMasterController;
+use App\Http\Controllers\admin\ContactController;
 
 use App\Http\Controllers\admin\Cms_MasterController;
 use App\Http\Controllers\admin\DeliverySlotController;
@@ -71,7 +72,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::controller(ProductPriceController::class)->group(function () {
         Route::get('product/price', 'price')->name('product.price.index');
     });
-    
+
 
     Route::get('city/index', [CityMasterController::class, 'index'])->name('city_master.index');
     Route::get('city/create', [CityMasterController::class, 'create'])->name('city_master.create');
@@ -88,7 +89,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('landmark/update/{id?}', [LandmarkMasterController::class, 'update'])->name('landmark.update');
     Route::get('landmark/show/{id?}', [LandmarkMasterController::class, 'show'])->name('landmark.show');
 
-
+    Route::get('contact/index', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('contact/create', [ContactController::class, 'create'])->name('contact.create');
+    Route::post('contact/store', [ContactController::class, 'store'])->name('contact.store');
+    Route::get('contact/edit/{id?}', [ContactController::class, 'edit'])->name('contact.edit');
+    Route::post('contact/update/{id?}', [ContactController::class, 'update'])->name('contact.update');
+    Route::get('contact/show/{id?}', [ContactController::class, 'show'])->name('contact.show');
 
     // delivery slot route
     Route::controller(DeliverySlotController::class)->group(function () {
