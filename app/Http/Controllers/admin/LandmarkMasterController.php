@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 use App\Models\LandmarkMaster;
 use App\Models\CityMaster;
 use Illuminate\Http\Request;
@@ -13,8 +13,8 @@ class LandmarkMasterController extends Controller
      */
     public function index()
     {
-        return view('landmark_master.index', ['landmarks' => LandmarkMaster::with('city')->get()]);
-
+        $landmark = LandmarkMaster::all();
+        return view('admin.landmark_master.index', compact('landmark'));
     }
 
     /**
@@ -22,8 +22,9 @@ class LandmarkMasterController extends Controller
      */
     public function create()
     {
-        return view('landmark_master.create', ['cities' => CityMaster::all()]);
-
+        $cities = CityMaster::all();
+        return View('admin.landmark.create',compact('cities'));
+        
     }
 
     /**
@@ -33,16 +34,28 @@ class LandmarkMasterController extends Controller
     {
         $request->validate([
             'city_id' => 'required|exists:city_master,id',
-            'landmark_en' => 'required|string',
-            'landmark_hi' => 'required|string',
-            'landmark_gu' => 'required|string',
+
+            'landmark_eng' => 'required|string',
+            'landmark_hin' => 'required|string',
+            'landmark_guj' => 'required|string',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
         ]);
 
-        LandmarkMaster::create($request->all());
+        $landmarkmaster = new LandmarkMaster();
+        $landmarkmaster->landmark_eng = $request->landmark_eng;
+        $landmarkmaster->landmark_hin = $request->landmark_hin;
+        $landmarkmaster->landmark_guj = $request->landmark_guj;
 
-        return redirect()->route('landmark_master.index')->with('success', 'Landmark added successfully!');
+        $landmarkmaster->pincode = $request->pincode;
+
+        $landmarkmaster->latitude = $request->latitude;
+        $landmarkmaster->longitude = $request->longitude;
+
+        // return $citymaster;
+
+        $landmarkmaster->save();
+        return redirect()->route('city_master.index');
     }
 
     /**
@@ -56,9 +69,10 @@ class LandmarkMasterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(LandmarkMaster $landmarkMaster)
+    public function edit($id)
     {
-        //
+        $landamrk = LandmarkMaster::find($id);
+        return view('admin.landmark.edit',compact('landamrk'));
     }
 
     /**
@@ -66,7 +80,7 @@ class LandmarkMasterController extends Controller
      */
     public function update(Request $request, LandmarkMaster $landmarkMaster)
     {
-        //
+        
     }
 
     /**

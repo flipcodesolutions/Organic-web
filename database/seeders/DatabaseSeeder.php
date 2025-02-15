@@ -15,8 +15,25 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+        $this->call([
+            CityMasterSeeder::class
+        ]);
 
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+
+        // $permission = new PermissionTableSeeder();
+        // $permission->run();
+
+        // $admin = new CreateAdminUserSeeder();
+        // $admin->run();
+
+        // $category = new CategorySeeder();
+        // $category->run();
 
 
     }
 }
+
