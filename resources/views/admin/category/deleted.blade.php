@@ -11,7 +11,7 @@
                         <h6 class="mb-0">Category Management</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-primary" href="{{ route('category.create') }}">Add</a>
+                        <button class="btn btn-primary" type="button" onclick="javascript:history.go(-1)"> Back </button>
                     {{-- </div>
                     <div class="col" align="right"> --}}
                         <a class="btn btn-danger" href="{{ route('category.deleted') }}">Deleted</a>
@@ -58,10 +58,10 @@
                                     <img src="{{asset('categoryImage/'.$categoryData->cat_icon)}}" alt="" height="100px" width="150px">
                                 </td>
                                 <td>
-                                    <a href="{{ route('category.edit') }}/{{ $categoryData->id }}" class="btn btn-warning">
+                                    <a href="{{ route('category.active') }}/{{ $categoryData->id }}" class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('category.deactive') }}/{{ $categoryData->id }}" class="btn btn-danger">
+                                    <a href="{{ route('category.delete') }}/{{ $categoryData->id }}" class="btn btn-danger">
                                         <i class="fas fa-remove"></i>
                                     </a>
                                 </td>
