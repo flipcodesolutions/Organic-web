@@ -10,7 +10,7 @@ class DeliverySlotController extends Controller
 {
     public function index()
     {
-        $deliveryslots = DeliverySlot::all();
+        $deliveryslots = DeliverySlot::where('status', 'active')->get();
         return view('admin.deliveryslot.index', compact('deliveryslots'));
     }
     public function create()
@@ -63,6 +63,7 @@ class DeliverySlotController extends Controller
     }
     public function deactive()
     {
-        return view('admin.deliveryslot.deactivedata');
+        $deliveryslots = DeliverySlot::where('status', 'deactive')->get();
+        return view('admin.deliveryslot.deactivedata', compact('deliveryslots'));
     }
 }
