@@ -59,11 +59,26 @@ class DeliverySlotController extends Controller
         $deliveryslot = DeliverySlot::find($id);
         $deliveryslot->status = 'deactive';
         $deliveryslot->save();
-        return redirect()->route('deliveryslot.index')->with('msg', 'Status Deactive successfully');
+        return redirect()->back();
     }
     public function deactive()
     {
         $deliveryslots = DeliverySlot::where('status', 'deactive')->get();
         return view('admin.deliveryslot.deactivedata', compact('deliveryslots'));
+    }
+
+    public function active($id)
+    {
+        $deliveryslot = DeliverySlot::find($id);
+        $deliveryslot->status = 'active';
+        $deliveryslot->save();
+        return redirect()->route('deliveryslot.deactive')->with('msg', 'Status Active successfully');
+    }
+
+    public function permdelete($id)
+    {
+        $deliveryslot =DeliverySlot::find($id);
+        $deliveryslot->delete();
+        return redirect()->back();
     }
 }
