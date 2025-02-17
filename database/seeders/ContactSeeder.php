@@ -16,13 +16,11 @@ class ContactSeeder extends Seeder
     public function run(): void
     {
         ModelsContact::create([
-            'city_name_eng'=>'Surendranagar',
-            'city_name_hin'=>'सुरेन्द्रनगर',
-            'city_name_guj'=>'સુરેન્દ્રનગર',
-            'pincode'=>'363030',
-           'area_eng'=>'Wadhwan',
-           'area_hin'=>'वढवान',
-           'area_guj'=>'વઢવાણ'
+            'subject'=>'Vegetavle Enqiry',
+            'message'=>'Let me know if Brocolly available or not.',
+            'contact'=>'9898989898',
+            'email'=>'customer@gmail.com',
+           'status'=>'active',
        ]);
     }
 }

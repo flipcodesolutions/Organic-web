@@ -1,8 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>Cities</h2>
-    <a href="{{ route('city_master.create') }}" class="btn btn-primary">Add City</a>
+
+<div class="container">
+    <div class="card shadow-sm  bg-body rounded">
+        <div class="card-header">
+            <div class="row d-flex align-items-center">
+                <div class="col text-white">
+                    <h6 class="mb-0">All Citites</h6>
+                </div>
+                <div class="col" align="right">
+                    <a href="{{ route('city_master.create') }}" class="btn btn-primary">Add City</a>
+                </div>
+            </div>
+        </div>
+
+    
     <table class="table">
         <tr>
             <th>ID</th>

@@ -25,7 +25,23 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             ContactSeeder::class
-        ])
+        ]);
+
+        $this->call([
+            PointPerSeeder::class
+        ]);
+        
+        $this->call([
+            DeliverySlotSeeder::class
+        ]);
+        
+        $this->call([
+            UnitMasterSeeder::class
+        ]);
+        
+        $this->call([
+            NavigateMasterSeeder::class
+        ]);
 
         // User::factory()->create([
         //     'name' => 'Test User',
