@@ -1,8 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>Landmarks</h2>
-    <a href="{{ route('landmark.create') }}" class="btn btn-primary mb-4">Add Landamrk</a>
+
+<div class="container">
+    <div class="card shadow-sm  bg-body rounded">
+        <div class="card-header">
+            <div class="row d-flex align-items-center">
+                <div class="col text-white">
+                    <h6> Landmark </h6>
+                </div>
+                <div class="col" align="right">
+                    <a href="{{ route('landmark.create') }}" class="btn btn-primary">Add Landamrk</a>
+                </div>
+            </div>
+        </div>
+
+    
     <table class="table">
         <tr>
             <th>City name English</th>

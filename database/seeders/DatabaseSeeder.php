@@ -24,6 +24,26 @@ class DatabaseSeeder extends Seeder
         //     LandmarkMasterSeeder::class
         // ]);
 
+        $this->call([
+            ContactSeeder::class
+        ]);
+
+        $this->call([
+            PointPerSeeder::class
+        ]);
+        
+        $this->call([
+            DeliverySlotSeeder::class
+        ]);
+        
+        $this->call([
+            UnitMasterSeeder::class
+        ]);
+        
+        $this->call([
+            NavigateMasterSeeder::class
+        ]);
+
         // User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
@@ -37,11 +57,5 @@ class DatabaseSeeder extends Seeder
 
         // $category = new CategorySeeder();
         // $category->run();
-
-
-
-
-
+        }
     }
-}
-
