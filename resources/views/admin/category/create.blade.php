@@ -15,7 +15,7 @@
             </div>
 
             <div class="card-body">
-                <form id="categoryForm">
+                <form id="categoryForm" >
                     @csrf
                     {{-- Category --}}
                     <div class="row mb-3">
