@@ -106,7 +106,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('city_master.index')}}">
+                <a class="nav-link" href="{{route('landmark.index')}}">
                     <i class="fa fa-bookmark"></i>
                     <span>Landmark</span></a>
             </li>

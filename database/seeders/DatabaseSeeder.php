@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Commands\CreatePermission;
+// use Spatie\Permission\Commands\CreatePermission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,6 +17,30 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call([
             CityMasterSeeder::class
+        ]);
+
+        $this->call([
+            LandmarkMasterSeeder::class
+        ]);
+
+        $this->call([
+            ContactSeeder::class
+        ]);
+
+        $this->call([
+            PointPerSeeder::class
+        ]);
+
+        $this->call([
+            DeliverySlotSeeder::class
+        ]);
+
+        $this->call([
+            UnitMasterSeeder::class
+        ]);
+
+        $this->call([
+            NavigateMasterSeeder::class
         ]);
 
         $this->call([
@@ -35,8 +59,5 @@ class DatabaseSeeder extends Seeder
 
         // $category = new CategorySeeder();
         // $category->run();
-
-
+        }
     }
-}
-
