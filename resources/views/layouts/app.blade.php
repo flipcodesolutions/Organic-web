@@ -99,6 +99,18 @@
                     <span>Product-Price</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('city_master.index')}}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>Cities</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('landmark.index')}}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>Landmark</span></a>
+            </li>
+
 
             <li class="nav-item">
                 <a class="nav-link" href="{{Route('deliveryslot.index')}}">
@@ -109,6 +121,11 @@
                 <a class="nav-link" href="{{Route('cms_master.index')}}">
                     <i class="fa fa-bookmark"></i>
                     <span>Cms_Master</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{Route('faq.index')}}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>Faq</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -866,6 +883,8 @@
                         <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
                         <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
                         <li><a class="nav-link" href="{{ route('products.index') }}">Manage Product</a></li>
+                        <li><a class="nav-link" href="{{ route('citymaster.index') }}">Manage cities</a></li>
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

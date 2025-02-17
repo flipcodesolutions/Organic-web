@@ -5,16 +5,16 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Cms_Master New Category</h6>
+                        <h6 class="mb-0">Create New Cms_Master</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-primary" href="{{Route('cms_master.index')}}">Back</a>
+                        <a class="btn btn-primary" href="{{ Route('cms_master.index') }}">Back</a>
                     </div>
                 </div>
             </div>
 
             <div class="card-body">
-                <form id="categoryForm" href="{{Route('cms_master.store')}}" method="POST">
+                <form id="cms_master" method="post" action="{{ Route('cms_master.store') }}">
                     @csrf
                     {{-- Cms_Master --}}
                     <div class="row mb-3">
@@ -49,8 +49,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="slug" id="" placeholder=""
-                                    class="form-control">
+                                <input type="text" name="slug" id="" placeholder="" class="form-control">
                                 <span id="nameError" class="text-danger"></span>
                             </div>
                         </div>
@@ -69,6 +68,8 @@
                                         <span id="nameError" class="text-danger"></span>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
                                         <input type="text" name="descriptionguj" id="" placeholder="Giujarati"
@@ -76,6 +77,8 @@
                                         <span id="nameError" class="text-danger"></span>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
                                         <input type="text" name="descriptionhin" id="" placeholder="Hindi"

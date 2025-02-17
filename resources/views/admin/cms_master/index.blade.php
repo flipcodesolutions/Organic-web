@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+@if(Session::has('msg'))
+<p class="alert alert-info">{{ Session::get('msg') }}</p>
+@endif
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">
@@ -23,13 +26,34 @@
                         <th>Description</th>
                         <th>Action</th>
                     </tr>
+                    @php
+                        $index = 1;
+                    @endphp
+                    @foreach ($cms_masters as $cms)
                         <tr>
+                            <td>{{$index++}}</td>
                             <td>
-                                <a href="" class="btn btn-primary">
+                                <ul>
+                                    <li>{{$cms->title}}</li>
+                                    <li>{{$cms->titleGuj}}</li>
+                                    <li>{{$cms->titleHin}}</li>
+                                </ul>
+                            </td>
+                            <td>{{$cms->slug}}</td>
+                            <td>
+                                <ul>
+                                    <li>{{$cms->description}}</li>
+                                    <li>{{$cms->descriptionGuj}}</li>
+                                    <li>{{$cms->descriptionHin}}</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <a href="{{Route('cms_master.edit',$cms->id)}}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </td>
                         </tr>
+                    @endforeach
 
 
                     {{-- <tr>

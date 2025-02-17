@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="card-body">
             <form id="productForm" multipart="multipart/form-data">
                 @csrf
