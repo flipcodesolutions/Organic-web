@@ -41,6 +41,9 @@ class DatabaseSeeder extends Seeder
         
         $this->call([
             NavigateMasterSeeder::class
+            // CreateAdminUserSeeder::class
+
+            
         ]);
 
         // User::factory()->create([

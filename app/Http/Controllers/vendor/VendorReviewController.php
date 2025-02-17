@@ -1,19 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\vendor;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Review;
+use Illuminate\Support\Facades\Auth;
 
-class ContactController extends Controller
+class VendorReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $vendor = Auth::user(); // Get the authenticated vendor
 
-        return view('admin.contact.index');
+        // Fetch reviews for products owned by the vendor
+        $reviews = Review::whereHas('product', function ($query) use ($vendor) {
+            $query->where('vendor_id', $vendor->id);
+        })->with(['product', 'user'])->get();
+
+        return view('vendor.reviews.index', compact('reviews'));
     }
 
     /**
@@ -21,8 +29,9 @@ class ContactController extends Controller
      */
     public function create()
     {
-        
+        //
     }
+
     /**
      * Store a newly created resource in storage.
      */

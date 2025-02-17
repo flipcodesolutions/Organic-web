@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\vendor;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Review;
 
 class ReviewController extends Controller
 {
@@ -12,7 +13,8 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        $reviews = Review::with(['product', 'user'])->get();
+        return view('admin.reviews.index', compact('reviews'));
     }
 
     /**
@@ -58,8 +60,11 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Review $review)
     {
-        //
+        $review->delete();
+        return redirect()->route('admin.reviews.index')->with('success', 'Review deleted successfully.');
     }
+    
+
 }
