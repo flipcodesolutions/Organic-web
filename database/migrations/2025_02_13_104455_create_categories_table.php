@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('categoryDescriptionHin');
             $table->string('cat_icon');
             $table->string('parent_category_id');
-            $table->enum('status', ['active', 'deactive'])->default('active');
+            $table->enum('status', ['active', 'deactive','deleted'])->default('active');
             $table->timestamps();
         });
     }

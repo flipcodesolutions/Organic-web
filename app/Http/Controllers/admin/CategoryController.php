@@ -125,8 +125,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
-        $category->status = 'deleted';
-        $category->save();
+        $currentimagepath = public_path('categoryImage/' . $category->cat_icon);
+        unlink($currentimagepath);   
+        $category->delete();
         return redirect()->route('category.deleted');
     }
 }

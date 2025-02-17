@@ -27,7 +27,6 @@ class CreateAdminUserSeeder extends Seeder
             'is_special' => 'yes',
             'default_language' => 'eng',
 
-
         ]);
 
     }

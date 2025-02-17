@@ -16,12 +16,13 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         $this->call([
-            CityMasterSeeder::class
+            CityMasterSeeder::class,
+            CreateAdminUserSeeder::class
         ]);
 
-        $this->call([
-            LandmarkMasterSeeder::class
-        ]);
+        // $this->call([
+        //     LandmarkMasterSeeder::class
+        // ]);
 
         // User::factory()->create([
         //     'name' => 'Test User',
