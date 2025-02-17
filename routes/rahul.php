@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\Cms_MasterController;
 use App\Http\Controllers\admin\DeliverySlotController;
 use App\Http\Controllers\admin\FaqController;
+use App\Http\Controllers\admin\ModuleController;
 use Illuminate\Support\Facades\Route;
 // delivery slot route
 Route::controller(DeliverySlotController::class)->group(function () {
@@ -29,4 +30,9 @@ Route::controller(FaqController::class)->group(function () {
     Route::post('faq/store', 'store')->name('faq.store');
     Route::get('faq/edit/{id}', 'edit')->name('faq.edit');
     Route::post('faq/update/{id}', 'update')->name('faq.update');
+});
+
+// module route
+Route::controller(ModuleController::class)->group(function () {
+    Route::get('module/index', 'index')->name('module.index');
 });
