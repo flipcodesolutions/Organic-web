@@ -71,7 +71,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::controller(ProductPriceController::class)->group(function () {
         Route::get('product/price', 'price')->name('product.price.index');
     });
-    
+
 
     Route::get('city/index', [CityMasterController::class, 'index'])->name('city_master.index');
     Route::get('city/create', [CityMasterController::class, 'create'])->name('city_master.create');
@@ -97,6 +97,8 @@ Route::group(['middleware' => ['auth']], function() {
         Route::post('deliveryslot/store', 'store')->name('deliveryslot.store');
         Route::get('deliveryslot/edit/{id}', 'edit')->name('deliveryslot.edit');
         Route::post('deliveryslot/update/{id}', 'update')->name('deliveryslot.update');
+        Route::get('deliveryslot/delete/{id}', 'delete')->name('deliveryslot.delete');
+        Route::get('deliveryslot/deactive', 'deactive')->name('deliveryslot.deactive');
     });
 
     //cms_master route

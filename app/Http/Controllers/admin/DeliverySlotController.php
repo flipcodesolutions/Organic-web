@@ -19,13 +19,17 @@ class DeliverySlotController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'starttime' => 'required',
+            'endtime' => 'required',
+            'isavailable' => 'required',
+        ]);
 
         //create the delivery slot
         $deliveryslot = new DeliverySlot();
         $deliveryslot->startTime=$request->starttime;
         $deliveryslot->endTime=$request->endtime;
         $deliveryslot->isAvailable=$request->isavailable;
-        // return $deliverySlot;
         $deliveryslot->save();
 
         return redirect()->route('deliveryslot.index')->with('msg', 'Data Is Inserted successfully');
@@ -37,16 +41,28 @@ class DeliverySlotController extends Controller
     }
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'starttime' => 'required',
+            'endtime' => 'required',
+            'isavailable' => 'required',
+        ]);
         $deliveryslot = DeliverySlot::find($id);
         $deliveryslot->startTime=$request->starttime;
         $deliveryslot->endTime=$request->endtime;
         $deliveryslot->isAvailable=$request->isavailable;
         $deliveryslot->save();
 
-        return redirect()->route('deliveryslot.index')->with('mes', 'Data Is Updated successfully');
+        return redirect()->route('deliveryslot.index')->with('msg', 'Data Is Updated successfully');
     }
     public function delete($id)
     {
-
+        $deliveryslot = DeliverySlot::find($id);
+        $deliveryslot->status = 'deactive';
+        $deliveryslot->save();
+        return redirect()->route('deliveryslot.index')->with('msg', 'Status Deactive successfully');
+    }
+    public function deactive()
+    {
+        return view('admin.deliveryslot.deactivedata');
     }
 }

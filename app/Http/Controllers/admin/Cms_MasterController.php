@@ -30,6 +30,15 @@ class Cms_MasterController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'titleguj' => 'required',
+            'titlehin' => 'required',
+            'slug' => 'required',
+            'description' => 'required',
+            'descriptionguj' => 'required',
+            'descriptionhin' => 'required',
+        ]);
         $cms_master = new Cms_Master();
         $cms_master->title=$request->title;
         $cms_master->titleGuj=$request->titleguj;
@@ -65,6 +74,15 @@ class Cms_MasterController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'title' => 'required',
+            'titleguj' => 'required',
+            'titlehin' => 'required',
+            'slug' => 'required',
+            'description' => 'required',
+            'descriptionguj' => 'required',
+            'descriptionhin' => 'required',
+        ]);
         $cms_master = Cms_Master::find($id);
         $cms_master->title=$request->title;
         $cms_master->titleGuj=$request->titleguj;

@@ -25,27 +25,39 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="text" name="question" id=""
+                                        <input type="text" name="question" id="" value="{{ old('question') }}"
                                             placeholder="Enter Question English" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                        <span id="nameError" class="text-danger">
+                                            @error('question')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="text" name="questionguj" id=""
+                                        <input type="text" name="questionguj" id="" value="{{ old('questionguj') }}"
                                             placeholder="Enter Question Gujarati" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                        <span id="nameError" class="text-danger">
+                                            @error('questionguj')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="text" name="questionhin" id=""
+                                        <input type="text" name="questionhin" id="" value="{{ old('questionhin') }}"
                                             placeholder="Enter Question Hindi" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                        <span id="nameError" class="text-danger">
+                                            @error('questionhin')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -61,27 +73,39 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="text" name="answer" id=""
+                                        <input type="text" name="answer" id="" value="{{ old('answer') }}"
                                             placeholder="Enter Answer English" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                        <span id="nameError" class="text-danger">
+                                            @error('answer')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="text" name="answerguj" id=""
+                                        <input type="text" name="answerguj" id=""   value="{{ old('answerguj') }}"
                                             placeholder="Enter Answer Giujarati" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                        <span id="nameError" class="text-danger">
+                                            @error('answerguj')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="text" name="answerhin" id=""
+                                        <input type="text" name="answerhin" id="" value="{{ old('answerhin') }}"
                                             placeholder="Enter Answer Hindi" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                        <span id="nameError" class="text-danger">
+                                            @error('answerhin')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>

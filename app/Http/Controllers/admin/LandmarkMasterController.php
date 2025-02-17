@@ -14,7 +14,7 @@ class LandmarkMasterController extends Controller
     public function index()
     {
         $landmark = LandmarkMaster::all();
-        return view('admin.landmark_master.index', compact('landmark'));
+        return view('admin.landmark.index', compact('landmark'));
     }
 
     /**
@@ -24,7 +24,7 @@ class LandmarkMasterController extends Controller
     {
         $cities = CityMaster::all();
         return View('admin.landmark.create',compact('cities'));
-        
+
     }
 
     /**
@@ -80,7 +80,7 @@ class LandmarkMasterController extends Controller
      */
     public function update(Request $request, LandmarkMaster $landmarkMaster)
     {
-        
+
     }
 
     /**

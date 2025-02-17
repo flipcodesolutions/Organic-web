@@ -12,6 +12,7 @@
                         <h6 class="mb-0">DilverySlot Management</h6>
                     </div>
                     <div class="col" align="right">
+                        <a class="btn btn-danger" href="{{Route('deliveryslot.deactive')}}">Deactive-Data</a>
                         <a class="btn btn-primary" href="{{ Route('deliveryslot.create') }}">Add</a>
                     </div>
                 </div>
@@ -38,6 +39,9 @@
                             <td>
                                 <a href="{{ Route('deliveryslot.edit', $deliveryslots->id) }}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{{Route('deliveryslot.delete',$deliveryslots->id)}}" class="btn btn-danger ml-2">
+                                    <i class="fas fa-trash"></i>
                                 </a>
                             </td>
                         </tr>
