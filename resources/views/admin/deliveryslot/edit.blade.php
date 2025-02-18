@@ -27,7 +27,11 @@
                                 <div class="col">
                                     <div class="form-floating">
                                         <input type="time" name="starttime" id="" value="{{$deliveryslot->startTime}}" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                        <span id="nameError" class="text-danger">
+                                            @error('starttime')
+                                                {{$message}}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +47,11 @@
                                 <div class="col">
                                     <div class="form-floating">
                                         <input type="time" name="endtime" id="" value="{{$deliveryslot->endTime}}" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                        <span id="nameError" class="text-danger">
+                                            @error('endtime')
+                                                {{$message}}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +70,11 @@
                                             <option value="Yes"{{$deliveryslot->isAvailable=='yes'?'selected':''}}>Yes</option>
                                             <option value="No"{{$deliveryslot->isAvailable=='no'?'selected':''}}>No</option>
                                         </select>
-                                        <span id="nameError" class="text-danger"></span>
+                                        <span id="nameError" class="text-danger">
+                                            @error('isavailable')
+                                                {{$message}}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>

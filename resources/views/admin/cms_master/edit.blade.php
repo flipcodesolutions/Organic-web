@@ -25,21 +25,33 @@
                             <div class="form-floating">
                                 <input type="text" name="title" value="{{ $cms_masters->title }}" id=""
                                     placeholder="English" class="form-control">
-                                <span id="nameError" class="text-danger"></span>
+                                <span id="nameError" class="text-danger">
+                                    @error('title')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="titleguj" value="{{ $cms_masters->titleGuj }}" id=""
                                     placeholder="Gujarati" class="form-control">
-                                <span id="nameError" class="text-danger"></span>
+                                <span id="nameError" class="text-danger">
+                                    @error('titleguj')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="titlehin" value="{{ $cms_masters->titleHin }}" id=""
                                     placeholder="Hindi" class="form-control">
-                                <span id="nameError" class="text-danger"></span>
+                                <span id="nameError" class="text-danger">
+                                    @error('titlehin')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -51,7 +63,11 @@
                             <div class="form-floating">
                                 <input type="text" name="slug" value="{{ $cms_masters->slug }}" id=""
                                     placeholder="" class="form-control">
-                                <span id="nameError" class="text-danger"></span>
+                                <span id="nameError" class="text-danger">
+                                    @error('slug')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -66,7 +82,11 @@
                                     <div class="form-floating">
                                         <input type="text" name="description" value="{{ $cms_masters->description }}"
                                             id="" placeholder="English" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                        <span id="nameError" class="text-danger">
+                                            @error('description')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +96,11 @@
                                         <input type="text" name="descriptionguj"
                                             value="{{ $cms_masters->descriptionGuj }}" id=""
                                             placeholder="Giujarati" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                        <span id="nameError" class="text-danger">
+                                            @error('descriptionguj')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +110,11 @@
                                         <input type="text" name="descriptionhin"
                                             value="{{ $cms_masters->descriptionHin }}" id="" placeholder="Hindi"
                                             class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                        <span id="nameError" class="text-danger">
+                                            @error('descriptionhin')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>

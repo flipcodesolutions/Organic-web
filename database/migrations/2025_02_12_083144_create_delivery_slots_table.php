@@ -16,6 +16,7 @@ return new class extends Migration
             $table->time('startTime')->nullable();
             $table->time('endTime')->nullable();
             $table->string('isAvailable');
+            $table->enum('status', ['active', 'deactive','deleted'])->default('active');
             $table->timestamps();
         });
     }
