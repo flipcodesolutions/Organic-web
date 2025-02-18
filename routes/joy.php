@@ -27,6 +27,11 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('product/store', 'store')->name('product.store');
     Route::get('product/edit/{id?}', 'edit')->name('product.edit');
     Route::post('product/update/{id?}', 'update')->name('product.update');
+    Route::get('product/deactive/{id?}', 'deactive')->name('product.deactive');
+    Route::get('product/deactiveproducts', 'deactiveindex')->name('product.deactiveindex');
+    Route::get('product/active/{id?}','active')->name('product.active');
+    Route::get('product/delete/{id?}','destroy')->name('product.delete');
+    Route::get('product/image/deactive/{id?}','deactiveimage')->name('productimage.deactive');
 });
 
 // product price route

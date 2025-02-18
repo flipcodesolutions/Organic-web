@@ -13,9 +13,16 @@ class CityMasterController extends Controller
      */
     public function index()
     {
+        try{
         $cities = CityMaster::all();
         return view('admin.city_master.index', compact('cities'));
-
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**

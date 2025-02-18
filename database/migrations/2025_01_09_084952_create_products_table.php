@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('stock');
             $table->string('image');
             $table->string('season');
+            $table->enum('status', ['active', 'deactive'])->default('active');
             $table->timestamps();
         });
     }

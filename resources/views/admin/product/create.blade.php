@@ -9,18 +9,18 @@
                         <h6 class="mb-0">Create New Products</h6>
                     </div>
                     <div class="col" align="right">
-                        <a href="{{route('product.index')}}" class="btn btn-primary" type="button" > Back </a>
+                        <a href="{{ route('product.index') }}" class="btn btn-primary" type="button"> Back </a>
                     </div>
                 </div>
             </div>
-            @if(session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
 
             <div class="card-body">
-                <form id="productForm"  action="{{route('product.store')}}" method="POST"  enctype="multipart/form-data">
+                <form id="productForm" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     {{-- product --}}
@@ -100,8 +100,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="number" min="0" name="product_price" id="product_price" placeholder="Product Price"
-                                    class="form-control">
+                                <input type="number" min="0" name="product_price" id="product_price"
+                                    placeholder="Product Price" class="form-control">
                                 <label for="">Price</label>
                                 <span id="priceError" class="text-danger"></span>
                             </div>
@@ -126,13 +126,40 @@
                     {{-- product image --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Images<span class="text-danger">*</span>
+                            Images/Videos<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="input-group mb-3">
+
+                            {{-- <select class="form-select form-select-lg mb-3" name="image_and_video" aria-label="Large select example">
+                                <option selected>Select Season</option>
+                                <option value="Photo">Photo</option>
+                                <option value="Video">Video</option>
+                            </select> --}}
+
+                            {{-- <div class="row"> --}}
+                                <select class="form-select form-select-lg mb-3" name="image_and_video"
+                                    id="image_and_video" aria-label="Large select example">
+                                    <option selected>Select Season</option>
+                                    <option value="Photo">Photo</option>
+                                    <option value="Video">Video</option>
+                                </select>
+                            {{-- </div> --}}
+                            <div class="row form-floating">
+                                <div id="photoInput" style="display: none;">
+                                    <label for="photoUpload" class="form-label">Upload Photo</label>
+                                    <input type="file" class="form-control" id="photoUpload" name="product_image[]" multiple>
+                                </div>
+
+                                <div id="videoInput" style="display: none;">
+                                    <label for="videoLink">Video Link</label>
+                                    <input type="text" class="form-control" id="videoLink" name="video_link"
+                                    placeholder="Enter video link">
+                                </div>
+                            </div>
+                            {{-- <div class="input-group mb-3">
                                 <input type="file" class="form-control" id="inputGroupFile02" name="product_image[]" multiple>
                                 <span id="imageError" class="text-danger"></span>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 
@@ -142,7 +169,8 @@
                             Season<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <select class="form-select form-select-lg mb-3" name="season" aria-label="Large select example">
+                            <select class="form-select form-select-lg mb-3" name="season"
+                                aria-label="Large select example">
                                 <option selected>Select Season</option>
                                 <option value="Winter">Winter</option>
                                 <option value="Summer">Summer</option>
@@ -158,10 +186,11 @@
                             Category<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <select class="form-select form-select-lg mb-3" name="category_id" aria-label="Large select example">
+                            <select class="form-select form-select-lg mb-3" name="category_id"
+                                aria-label="Large select example">
                                 <option selected>Select Category</option>
                                 @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
+                                    <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
                                 @endforeach
                             </select>
                             <span id="categoryIdError" class="text-danger"></span>
@@ -173,7 +202,7 @@
                         <button type="submit" class="btn btn-primary btn-sm mb-3"><i
                                 class="fa-solid fa-floppy-disk"></i> Submit</button>
                     </div>
-                    
+
                 </form>
             </div>
         </div>
@@ -302,5 +331,28 @@
             });
         });
     </script> --}}
+
+    <script>
+        // Get the select element
+        const imageAndVideoSelect = document.getElementById('image_and_video');
+
+        // Get the divs for photo and video inputs
+        const photoInput = document.getElementById('photoInput');
+        const videoInput = document.getElementById('videoInput');
+
+        // Add event listener for the change event on the select dropdown
+        imageAndVideoSelect.addEventListener('change', function() {
+            // Reset both inputs to hide them initially
+            photoInput.style.display = 'none';
+            videoInput.style.display = 'none';
+
+            // Check the selected value and display the appropriate input
+            if (this.value === 'Photo') {
+                photoInput.style.display = 'block'; // Show the file input for photo
+            } else if (this.value === 'Video') {
+                videoInput.style.display = 'block'; // Show the text input for video link
+            }
+        });
+    </script>
 
 @endsection
