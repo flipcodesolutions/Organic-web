@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\admin\CityMasterController;
 use App\Http\Controllers\admin\LandmarkMasterController;
+use App\Http\Controllers\admin\ContactController;
+use App\Http\Controllers\admin\ReviewController;
+use App\Http\Controllers\vendor\VendorReviewController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('city/index', [CityMasterController::class, 'index'])->name('city_master.index');
@@ -18,6 +22,18 @@ Route::post('landmark/store', [LandmarkMasterController::class, 'store'])->name(
 Route::get('landmark/edit/{id?}', [LandmarkMasterController::class, 'edit'])->name('landmark.edit');
 Route::post('landmark/update/{id?}', [LandmarkMasterController::class, 'update'])->name('landmark.update');
 Route::get('landmark/show/{id?}', [LandmarkMasterController::class, 'show'])->name('landmark.show');
+
+
+Route::get('contact',[ContactController::class, 'index'])->name('contact.index');
+
+Route::get('review',[ReviewController::class,'index'])->name('review.index');
+
+Route::middleware('auth:vendor')->prefix('vendor')->group(function () {
+    Route::get('vendorreviews', [VendorReviewController::class, 'index'])->name('vendor.reviews.index');
+});
+
+
+
 
 
 ?>

@@ -42,6 +42,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             NavigateMasterSeeder::class
+            // CreateAdminUserSeeder::class
+
+            
         ]);
 
         $this->call([
