@@ -10,6 +10,8 @@
                     <h6 class="mb-0">All Citites</h6>
                 </div>
                 <div class="col" align="right">
+                    <a class="btn btn-danger" href="{{ Route('city_master.deactivedata') }}">Deactive-Data</a>
+
                     <a href="{{ route('city_master.create') }}" class="btn btn-primary">Add City</a>
                 </div>
             </div>
@@ -41,10 +43,9 @@
             <td>
                 <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}" >Edit</a>
         
-                {{--  <form action="{{ route('city_master.destroy', $city->id) }}" method="POST" style="display:inline;">
-                    @csrf @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>  --}}
+                <a href="{{ route('city_master.deactivedata') }}/{{ $city->id }}" class="btn btn-danger">
+                    <i class="fas fa-remove"></i>
+            </a>
             </td>
         </tr>
         @endforeach

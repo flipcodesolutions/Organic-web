@@ -14,8 +14,16 @@ class LandmarkMasterController extends Controller
      */
     public function index()
     {
-        $landmarkmasters = LandmarkMaster::with('citymaster')->get();
-        return view('admin.landmark_master.index', compact('landmarkmasters'));
+        try{
+            $landmarkmasters = LandmarkMaster::with('citymaster')->get();
+            return view('admin.landmark_master.index', compact('landmarkmasters'));
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**
@@ -24,40 +32,56 @@ class LandmarkMasterController extends Controller
 
     public function create()
     {
-        $cities = CityMaster::all();
-        return View('admin.landmark_master.create',compact('cities'));
+        try{
+            $cities = CityMaster::all();
+            return View('admin.landmark_master.create',compact('cities'));
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**
+     * 
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $request->validate([
-            // 'city_id' => 'required|exists:city_master,id',
-            'landmark_eng' => 'required|string',
-            'landmark_hin' => 'required|string',
-            'landmark_guj' => 'required|string',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-        ]);
+        try{
+            $request->validate([
+                // 'city_id' => 'required|exists:city_master,id',
+                'landmark_eng' => 'required|string',
+                'landmark_hin' => 'required|string',
+                'landmark_guj' => 'required|string',
+                'latitude' => 'required|numeric',
+                'longitude' => 'required|numeric',
+            ]);
 
-        $landmarkmasters = new LandmarkMaster();
-        $landmarkmasters->city_id = $request->city_name_eng;
-        $landmarkmasters->city_id = $request->city_name_hin;
-        $landmarkmasters->city_id = $request->city_name_guj;
+            $landmarkmasters = new LandmarkMaster();
+            $landmarkmasters->city_id = $request->city_name_eng;
+            $landmarkmasters->city_id = $request->city_name_hin;
+            $landmarkmasters->city_id = $request->city_name_guj;
 
-        $landmarkmasters->landmark_eng = $request->landmark_eng;
-        $landmarkmasters->landmark_hin = $request->landmark_hin;
-        $landmarkmasters->landmark_guj = $request->landmark_guj;
-        $landmarkmasters->latitude = $request->latitude;
-        $landmarkmasters->longitude = $request->longitude;
+            $landmarkmasters->landmark_eng = $request->landmark_eng;
+            $landmarkmasters->landmark_hin = $request->landmark_hin;
+            $landmarkmasters->landmark_guj = $request->landmark_guj;
+            $landmarkmasters->latitude = $request->latitude;
+            $landmarkmasters->longitude = $request->longitude;
 
-
-        // return $landmarkmaster;
-        // return $request;
-        $landmarkmasters->save();
-        return redirect()->route('landmark.index');
+            // return $landmarkmaster;
+            // return $request;
+            $landmarkmasters->save();
+            return redirect()->route('landmark.index');
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**
@@ -73,10 +97,18 @@ class LandmarkMasterController extends Controller
      */
     public function edit($id)
     {
-        $cities = CityMaster::all();
+        try{
+            $cities = CityMaster::all();
 
-        $landmarkmaster = LandmarkMaster::find($id);
-        return view('admin.landmark_master.edit',compact('landmarkmaster','cities'));
+            $landmarkmaster = LandmarkMaster::find($id);
+            return view('admin.landmark_master.edit',compact('landmarkmaster','cities'));
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**
@@ -84,21 +116,29 @@ class LandmarkMasterController extends Controller
      */
     public function update(Request $request, LandmarkMaster $landmarkMaster)
     {
+        try{
 
-        $landmarkmasters =LandmarkMaster::find($request->landmark_id);
+            $landmarkmasters =LandmarkMaster::find($request->landmark_id);
 
-        $landmarkmasters->city_id = $request->city_name_eng;
-        $landmarkmasters->city_id = $request->city_name_hin;
-        $landmarkmasters->city_id = $request->city_name_guj;
+            $landmarkmasters->city_id = $request->city_name_eng;
+            $landmarkmasters->city_id = $request->city_name_hin;
+            $landmarkmasters->city_id = $request->city_name_guj;
 
-        $landmarkmasters->landmark_eng = $request->landmark_eng;
-        $landmarkmasters->landmark_hin = $request->landmark_hin;
-        $landmarkmasters->landmark_guj = $request->landmark_guj;
-        $landmarkmasters->latitude = $request->latitude;
-        $landmarkmasters->longitude = $request->longitude;
+            $landmarkmasters->landmark_eng = $request->landmark_eng;
+            $landmarkmasters->landmark_hin = $request->landmark_hin;
+            $landmarkmasters->landmark_guj = $request->landmark_guj;
+            $landmarkmasters->latitude = $request->latitude;
+            $landmarkmasters->longitude = $request->longitude;
 
-        $landmarkmasters->save();
-        return redirect()->route('landmark.index');
+            $landmarkmasters->save();
+            return redirect()->route('landmark.index');
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**

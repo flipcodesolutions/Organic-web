@@ -17,9 +17,9 @@ class VendorReviewController extends Controller
         $vendor = Auth::user(); // Get the authenticated vendor
 
         // Fetch reviews for products owned by the vendor
-        $reviews = Review::whereHas('product', function ($query) use ($vendor) {
-            $query->where('vendor_id', $vendor->id);
-        })->with(['product', 'user'])->get();
+        $reviews = Review::whereHas('review', function ($query) use ($vendor) {
+            // $query->where('_id', $->id);
+        })->with(['review', 'user'])->get();
 
         return view('vendor.reviews.index', compact('reviews'));
     }
