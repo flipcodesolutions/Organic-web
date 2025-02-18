@@ -7,7 +7,7 @@
         <div class="card-header">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
-                    <h6 class="mb-0">Create New Cms_Master</h6>
+                    <h6 class="mb-0">Create New Landmark</h6>
                 </div>
                 <div class="col" align="right">
                     <a class="btn btn-primary" href="{{ route('landmark.index') }}" role="button" >Back </a>
@@ -31,6 +31,7 @@
                 <div class="form-floating">
                     <input type="text" name="city_name_eng" id="city_name_eng" placeholder="English"
                         class="form-control">
+                        <label for="city_name_eng">English</label>
                         @error('city_name_eng')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -41,6 +42,7 @@
                 <div class="form-floating">
                     <input type="text" name="city_name_hin" id="city_name_hin" placeholder="Hindi"
                         class="form-control">
+                        <label for="city_name_hin">Hindi</label>
                         @error('city_name_hin')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -51,6 +53,7 @@
                 <div class="form-floating">
                     <input type="text" name="city_name_guj" id="city_name_guj" placeholder="Gujarati"
                         class="form-control">
+                        <label for="city_name_guj">Gujarati</label>
                         @error('city_name_guj')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
