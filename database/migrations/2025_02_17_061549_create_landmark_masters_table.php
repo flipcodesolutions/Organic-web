@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('delivery_slots', function (Blueprint $table) {
+        Schema::create('landmark_masters', function (Blueprint $table) {
             $table->id();
-            $table->time('startTime')->nullable();
-            $table->time('endTime')->nullable();
-            $table->string('isAvailable');
-            $table->enum('status', ['active', 'deactive','deleted'])->default('active');
+            $table->integer('city_id');
+            $table->string('landmark_eng', 255);
+            $table->string('landmark_hin', 255);
+            $table->string('landmark_guj', 255);
+            $table->decimal('latitude', 10, 7);
+            $table->decimal('longitude', 10, 7);
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('deliveryslots');
+        Schema::dropIfExists('landmark_masters');
     }
 };

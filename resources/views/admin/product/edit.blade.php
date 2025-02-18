@@ -1,26 +1,183 @@
 @extends('layouts.app')
 @section('header', 'Edit Product')
 @section('content')
-<div class="container">
-    <div class="card shadow-sm  bg-body rounded">
-        <div class="card-header">
-            <div class="row d-flex align-items-center">
-                <div class="col text-white">
-                    <h6 class="mb-0">Edit Product</h6>
-                </div>
-                <div class="col" align="right">
-                    <button class="btn btn-primary" type="button" onclick="javascript:history.go(-1)"> Back </button>
+    <div class="container">
+        <div class="card shadow-sm  bg-body rounded">
+            <div class="card-header">
+                <div class="row d-flex align-items-center">
+                    <div class="col text-white">
+                        <h6 class="mb-0">Edit Product</h6>
+                    </div>
+                    <div class="col" align="right">
+                        <button class="btn btn-primary" type="button" onclick="javascript:history.go(-1)"> Back </button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card-body">
-            <form id="productForm"
-                enctype="multipart/form-data">
-                @csrf
-                <!-- This is necessary for PUT request -->
+            <div class="card-body">
+                <form id="productForm" action="{{ route('product.update',$product->id) }}" enctype="multipart/form-data" method="post">
+                    @csrf
+                    <!-- This is necessary for PUT request -->
 
-                <div class="row">
+                    {{-- product --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Name <span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" name="product_name" id="product_name"
+                                    value="{{ $product->productName }}" class="form-control">
+                                <label for="">English</label>
+                                <span id="nameError" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" name="product_name_guj" id="product_name"
+                                    value="{{ $product->productNameGuj }}" class="form-control">
+                                <label for="">Gujarati</label>
+                                <span id="nameErrorGuj" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" name="product_name_hin" id="product_name"
+                                    value="{{ $product->productNameHin }}" class="form-control">
+                                <label for="">Hindi</label>
+                                <span id="nameErrorHin" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- product description --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input type="text" name="product_des" id="product_des"
+                                            value="{{ $product->productDescription }}" class="form-control">
+                                        <label for="">English</label>
+                                        <span id="descriptionError" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input type="text" name="product_des_guj" id="product_des"
+                                            value="{{ $product->productDescriptionGuj }}" class="form-control">
+                                        <label for="">Gujarati</label>
+                                        <span id="descriptionErrorGuj" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input type="text" name="product_des_hin" id="product_des"
+                                            value="{{ $product->productDescriptionHin }}" class="form-control">
+                                        <label for="">Hindi</label>
+                                        <span id="descriptionErrorHin" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- product price --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Price<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="number" min="0" name="product_price" id="product_price"
+                                    value="{{ $product->productPrice }}" class="form-control">
+                                <label for="">Price</label>
+                                <span id="priceError" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- product stock --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Stock<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="number" name="product_stock" id="product_stock"
+                                    value="{{ $product->stock }}" class="form-control">
+                                <label for="">Stock</label>
+                                <span id="stockError" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- product image --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Images<span class="text-danger">*</span>
+                        </div>
+                        @foreach ($productimg as $data)
+                            <div class="col">
+                                <div class="input-group mb-3">
+                                    <img src="{{ asset('productImage/'.$data->url) }}"
+                                        alt="" height="80px" width="50px" style="list-style-type:none">
+                                    <input type="file" class="form-control" id="inputGroupFile02"
+                                       value="{{ $data->id }}" name="product_image">
+                                    <span id="imageError" class="text-danger"></span>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    {{-- season --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Season<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <select class="form-control form-select-lg mb-3" name="season"
+                                aria-label="Large select example">
+                                {{-- <option selected>Select Season</option> --}}
+                                <option value="Winter"{{$product->season=='Winter'?'selected':''}}>Winter</option>
+                                <option value="Summer"{{$product->season=='Summer'?'selected':''}}>Summer</option>
+                                <option value="Monsoon"{{$product->season=='Monsoon'?'selected':''}}>Monsoon</option>
+                            </select>
+                        </div>
+                        <span id="seasonError" class="text-danger"></span>
+                    </div>
+
+                    {{-- Product Category --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Category<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <select class="form-control form-select-lg mb-3" name="category_id"
+                                aria-label="Large select example">
+                                <option selected>Select Category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}"{{$product->categoryId == $category->id ?'selected':''}}>{{ $category->categoryName }}</option>
+                                @endforeach
+                            </select>
+                            <span id="categoryIdError" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    {{-- submit --}}
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i
+                                class="fa-solid fa-floppy-disk"></i> Submit</button>
+                    </div>
+
+                    {{-- <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Product Name:</strong>
@@ -35,7 +192,7 @@
                             <select class="form-select ddCategory" name="category_id" id="category_id"
                                 class="form-control">
                                 <option selected>-- select category --</option>
-                                @foreach($categories as $category)
+                                @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" {{ $category->id == $product->category_id ?
                                     'selected' : '' }}>
                                     {{ $category->category_name }}
@@ -68,16 +225,16 @@
                         <button type="submit" class="btn btn-primary btn-sm mb-3"><i
                                 class="fa-solid fa-floppy-disk"></i> Update</button>
                     </div>
-                </div>
-            </form>
+                </div> --}}
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
-<script>
+    {{-- <script>
     function readURL(input, tgt) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -183,6 +340,6 @@
     });
 });
 
-</script>
+</script> --}}
 
 @endsection

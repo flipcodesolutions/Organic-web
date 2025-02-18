@@ -8,16 +8,16 @@
                         <h6 class="mb-0">Create New DeliverySlot</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-primary" href="{{Route('deliveryslot.index')}}">Back</a>
+                        <a class="btn btn-primary" href="{{ Route('deliveryslot.index') }}">Back</a>
                     </div>
                 </div>
             </div>
 
             <div class="card-body">
-                <form id="deliveryslotform" method="post" action="{{Route('deliveryslot.store')}}">
+                <form id="deliveryslotform" method="post" action="{{ Route('deliveryslot.store') }}">
                     @csrf
                     {{-- deliveryslot --}}
-                    {{--start time--}}
+                    {{-- start time --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             startTime<span class="text-danger">*</span>
@@ -26,14 +26,19 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="time" name="starttime" id="" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                        <input type="time" name="starttime" id="" value="{{ old('starttime') }}"
+                                            class="form-control">
+                                        <span id="nameError" class="text-danger">
+                                            @error('starttime')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{--end time--}}
+                    {{-- end time --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             endTime<span class="text-danger">*</span>
@@ -42,14 +47,19 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="time" name="endtime" id="" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                        <input type="time" name="endtime" id="" value="{{ old('endtime') }}"
+                                            class="form-control">
+                                        <span id="nameError" class="text-danger">
+                                            @error('endtime')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{--isavailable--}}
+                    {{-- isavailable --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             isAvailable<span class="text-danger">*</span>
@@ -58,11 +68,23 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <select name="isavailable" id=""  class="form-control">
-                                            <option value="yes">Yes</option>
-                                            <option value="no">No</option>
+                                        @php
+                                            if (old('isavailable') == null) {
+                                                $option = old('isavailable');
+                                            } else {
+                                                $option = old('isavailable');
+                                            }
+                                        @endphp
+                                        <select name="isavailable" id="" class="form-control">
+                                            <option selected disabled>--Select your isavailable--</option>
+                                            <option value="yes" {{ $option == 'yes' ? 'selected' : '' }}>Yes</option>
+                                            <option value="no" {{ $option == 'no' ? 'selected' : '' }}>No</option>
                                         </select>
-                                        <span id="nameError" class="text-danger"></span>
+                                        <span id="nameError" class="text-danger">
+                                            @error('isavailable')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>

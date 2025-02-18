@@ -12,6 +12,10 @@ Route::controller(DeliverySlotController::class)->group(function () {
     Route::post('deliveryslot/store', 'store')->name('deliveryslot.store');
     Route::get('deliveryslot/edit/{id}', 'edit')->name('deliveryslot.edit');
     Route::post('deliveryslot/update/{id}', 'update')->name('deliveryslot.update');
+    Route::get('deliveryslot/delete/{id}', 'delete')->name('deliveryslot.delete');
+    Route::get('deliveryslot/active/{id}', 'active')->name('deliveryslot.active');
+    Route::get('deliveryslot/deactive', 'deactive')->name('deliveryslot.deactive');
+    Route::get('deliveryslot/permdelete/{id}','permdelete')->name('deliveryslot.permdelete');
 });
 
 //cms_master route

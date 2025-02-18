@@ -12,10 +12,10 @@ class Product extends Model
     // relation belongsTo
     public function categories()
     {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+        return $this->belongsTo(Category::class, 'categoryId');
     }
     public function prodcutImages()
     {
-        return $this->hasMany(ProductImage::class, 'product_id');
+        return $this->hasMany(ProductImage::class, 'productId');
     }
 }
