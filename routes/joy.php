@@ -38,3 +38,4 @@ Route::controller(ProductPriceController::class)->group(function () {
 Route::controller(ImagesController::class)->group(function () {
     Route::get('image/index', 'index')->name('image.index');
 });
+

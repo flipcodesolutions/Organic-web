@@ -84,6 +84,7 @@ class LandmarkMasterController extends Controller
      */
     public function update(Request $request, LandmarkMaster $landmarkMaster)
     {
+
         $landmarkmasters =LandmarkMaster::find($request->landmark_id);
 
         $landmarkmasters->city_id = $request->city_name_eng;

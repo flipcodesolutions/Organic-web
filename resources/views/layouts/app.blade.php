@@ -25,6 +25,9 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
+    {{-- boostrap link --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <title>Vegitable e-comm</title>
 
     <!-- Custom fonts for this template-->
@@ -794,6 +797,8 @@
     <script src="{{ asset('asset/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+
+
     {{-- <script>
         var type = '{{ session()->get("success") ? "success" : (session()->get("error") ? "error" : ($errors->any() ? "error" : "")) }}';
         var message = '{{ session()->get("success") ? session()->get("success")["message"] : (session()->get("error") ? session()->get("error")["message"] : implode("\\n", $errors->all())) }}';
@@ -801,6 +806,8 @@
             toastr[type](message);
         }
     </script> --}}
+    {{-- javascript cdn --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('asset/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
