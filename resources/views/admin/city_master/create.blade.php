@@ -29,10 +29,15 @@
 
                     <div class="col">
                         <div class="form-floating">
+<<<<<<< HEAD
                             <input type="text" name="city_name_eng" id="city_name_eng" placeholder="English"
                                 class="form-control">
                                 <label for="city_name_eng">English</label>
                                 @error('city_name_eng')
+=======
+                            <input type="text" name="city_name_eng" id="city_name_eng"  placeholder="English" class="form-control">
+                                 @error('city_name_eng')
+>>>>>>> 930421b0ed59d07bbeceaa48cc2db4647dbbad49
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             <span id="nameError" class="text-danger"></span>
@@ -40,9 +45,13 @@
                     </div>
                     <div class="col">
                         <div class="form-floating">
+<<<<<<< HEAD
                             <input type="text" name="city_name_hin" id="city_name_hin" placeholder="Hindi"
                                 class="form-control">
                                 <label for="city_name_hin">Hindi</label>
+=======
+                            <input type="text" name="city_name_hin" id="city_name_hin" placeholder="Hindi" class="form-control">
+>>>>>>> 930421b0ed59d07bbeceaa48cc2db4647dbbad49
                                 @error('city_name_hin')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -51,9 +60,13 @@
                     </div>
                     <div class="col">
                         <div class="form-floating">
+<<<<<<< HEAD
                             <input type="text" name="city_name_guj" id="city_name_guj" placeholder="Gujarati"
                                 class="form-control">
                                 <label for="city_name_guj">Gujarati</label>
+=======
+                            <input type="text" name="city_name_guj" id="city_name_guj" placeholder="Gujarati" class="form-control">
+>>>>>>> 930421b0ed59d07bbeceaa48cc2db4647dbbad49
                                 @error('city_name_guj')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -68,7 +81,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="pincode" id="pincode" placeholder="" class="form-control">
+                                <input type="text" name="pincode" id="pincode" placeholder="Pincode" class="form-control">
                                 @error('pincode')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -86,7 +99,7 @@
 
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="area_eng" id="area_eng" placeholder="English"
+                                <input type="text" name="area_eng" id="area_eng"  placeholder="English"
                                     class="form-control">
                                     <label for="area_eng">English</label>
                                     @error('area_eng')

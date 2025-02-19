@@ -13,8 +13,16 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = Review::with(['product', 'user'])->get();
-        return view('admin.reviews.index', compact('reviews'));
+        try{
+            $reviews = Review::with(['product', 'user'])->get();
+            return view('admin.reviews.index', compact('reviews'));
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**
@@ -62,8 +70,16 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        $review->delete();
-        return redirect()->route('admin.reviews.index')->with('success', 'Review deleted successfully.');
+        try{
+            $review->delete();
+            return redirect()->route('admin.reviews.index')->with('success', 'Review deleted successfully.');
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e
+            ], 500);
+        }
     }
     
 

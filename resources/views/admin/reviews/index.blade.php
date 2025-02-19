@@ -2,7 +2,7 @@
 @section('content')
 <div class="container mt-4">
     <h2 class="mb-4">Manage Reviews</h2>
-    
+
     <table class="table table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -41,6 +41,7 @@
             @endforeach
         </tbody>
     </table>
+    
 
     @if($reviews->isEmpty())
         <p class="text-center">No reviews available.</p>
