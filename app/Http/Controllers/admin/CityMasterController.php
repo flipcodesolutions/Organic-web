@@ -13,10 +13,10 @@ class CityMasterController extends Controller
      */
     public function index()
     {
-    try{
+        try{
         $cities = CityMaster::all();
         return view('admin.city_master.index', compact('cities'));
-    }
+        }
         catch (\Exception $e) {
             return response()->json([
                 'success' => false,

@@ -8,11 +8,11 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Products Management</h6>
+                        <h6 class="mb-0">Deactive Products</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-primary" href="{{ route('product.create') }}">Add</a>
-                        <a class="btn btn-danger" href="{{ route('product.deactiveindex') }}">Deactive Products</a>
+                        <a class="btn btn-primary" href="{{ route('product.index') }}">back</a>
+                        <a class="btn btn-danger" href="">Deactive Products</a>
                     </div>
                 </div>
             </div>
@@ -68,11 +68,11 @@
                                         alt="" height="80px" width="50px" style="list-style-type:none">
                                 </td>
                                 <td>
-                                    <a href="{{ route('product.edit') }}/{{ $productData->id }}" class="btn btn-primary">
+                                    <a href="{{ route('product.active') }}/{{ $productData->id }}"
+                                        class="btn btn-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('product.deactive') }}/{{ $productData->id }}"
-                                        class="btn btn-danger">
+                                    <a href="{{ route('product.delete') }}/{{ $productData->id }}" class="btn btn-danger">
                                         <i class="fas fa-remove"></i>
                                     </a>
                                 </td>

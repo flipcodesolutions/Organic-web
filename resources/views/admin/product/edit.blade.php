@@ -9,13 +9,14 @@
                         <h6 class="mb-0">Edit Product</h6>
                     </div>
                     <div class="col" align="right">
-                        <button class="btn btn-primary" type="button" onclick="javascript:history.go(-1)"> Back </button>
+                        <a href="{{ route('product.index') }}" class="btn btn-secondary" type="button"> Back </a>
                     </div>
                 </div>
             </div>
 
             <div class="card-body">
-                <form id="productForm" action="{{ route('product.update',$product->id) }}" enctype="multipart/form-data" method="post">
+                <form id="productForm" action="{{ route('product.update', $product->id) }}" enctype="multipart/form-data"
+                    method="post">
                     @csrf
                     <!-- This is necessary for PUT request -->
 
@@ -122,20 +123,61 @@
                     {{-- product image --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Images<span class="text-danger">*</span>
+                            Images/Videos<span class="text-danger">*</span>
                         </div>
-                        @foreach ($productimg as $data)
+                        <div class="col">
                             <div class="col">
-                                <div class="input-group mb-3">
-                                    <img src="{{ asset('productImage/'.$data->url) }}"
-                                        alt="" height="80px" width="50px" style="list-style-type:none">
-                                    <input type="file" class="form-control" id="inputGroupFile02"
-                                       value="{{ $data->id }}" name="product_image">
-                                    <span id="imageError" class="text-danger"></span>
-                                </div>
+                                <a href="" class="btn btn-primary btn-sm mb-3">Add Photo/Video</a>
+                                <a href="" class="btn btn-warning btn-sm mb-3">deactive Photo/Video</a>
                             </div>
-                        @endforeach
+                            @foreach ($productimg as $data)
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <div class="col-2 mb-1">
+                                            <img src="{{ asset('productImage/' . $data->url) }}" alt=""
+                                                height="80px" width="50px" style="list-style-type:none">
+                                        </div>
+                                        {{-- <div class="row mb-1">
+                                                <input type="file" class="form-control" id="inputGroupFile02"
+                                                    name="product_image[]">
+                                                <input type="hidden" name="imageid[]" value="{{ $data->id }}">
+                                                <span id="imageError" class="text-danger"></span>
+                                            </div> --}}
+                                        <div class="col mt-3">
+                                            <select class="form-select form-select-lg mb-3" name="image_and_video"
+                                                id="image_and_video" aria-label="Large select example"
+                                                image-id='{{ $data->id }}'>
+                                                <option selected>Select file type</option>
+                                                <option value="photo"{{ $data->type == 'photo' ? 'selected' : '' }}>
+                                                    Photo</option>
+                                                <option value="video"{{ $data->type == 'video' ? 'selected' : '' }}>
+                                                    Video</option>
+                                            </select>
+
+                                            <div class="row form-floating">
+                                                <div id="photoInput" style="display: none;">
+                                                    <label for="photoUpload" class="form-label">Upload Photo</label>
+                                                    <input type="file" class="form-control" id="photoUpload"
+                                                        name="product_image[]" multiple>
+                                                    <input type="hidden" name="imageid" value="{{ $data->id }}">
+                                                </div>
+
+                                                <div id="videoInput" style="display: none;">
+                                                    <label for="videoLink">Video Link</label>
+                                                    <input type="text" class="form-control" id="videoLink"
+                                                        name="video_link" placeholder="Enter video link">
+                                                </div>
+                                            </div>
+
+                                            <a href="{{ route('productimage.deactive', $data->id) }}"
+                                                class="btn btn-danger btn-sm mb-3 mt-3"><i class="fas fa-remove"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
+
 
                     {{-- season --}}
                     <div class="row mb-3">
@@ -146,9 +188,10 @@
                             <select class="form-control form-select-lg mb-3" name="season"
                                 aria-label="Large select example">
                                 {{-- <option selected>Select Season</option> --}}
-                                <option value="Winter"{{$product->season=='Winter'?'selected':''}}>Winter</option>
-                                <option value="Summer"{{$product->season=='Summer'?'selected':''}}>Summer</option>
-                                <option value="Monsoon"{{$product->season=='Monsoon'?'selected':''}}>Monsoon</option>
+                                <option value="Winter"{{ $product->season == 'Winter' ? 'selected' : '' }}>Winter</option>
+                                <option value="Summer"{{ $product->season == 'Summer' ? 'selected' : '' }}>Summer</option>
+                                <option value="Monsoon"{{ $product->season == 'Monsoon' ? 'selected' : '' }}>Monsoon
+                                </option>
                             </select>
                         </div>
                         <span id="seasonError" class="text-danger"></span>
@@ -164,7 +207,9 @@
                                 aria-label="Large select example">
                                 <option selected>Select Category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"{{$product->categoryId == $category->id ?'selected':''}}>{{ $category->categoryName }}</option>
+                                    <option
+                                        value="{{ $category->id }}"{{ $product->categoryId == $category->id ? 'selected' : '' }}>
+                                        {{ $category->categoryName }}</option>
                                 @endforeach
                             </select>
                             <span id="categoryIdError" class="text-danger"></span>
@@ -174,7 +219,8 @@
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <button type="submit" class="btn btn-primary btn-sm mb-3"><i
-                                class="fa-solid fa-floppy-disk"></i> Submit</button>
+                                class="fa-solid fa-floppy-disk"></i>
+                            Submit</button>
                     </div>
 
                     {{-- <div class="row">
@@ -225,7 +271,7 @@
                         <button type="submit" class="btn btn-primary btn-sm mb-3"><i
                                 class="fa-solid fa-floppy-disk"></i> Update</button>
                     </div>
-                </div> --}}
+                    </div> --}}
                 </form>
             </div>
         </div>
@@ -233,6 +279,41 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to update the visibility of the inputs based on the selection
+            function updateInputVisibility(selectElement) {
+                const photoInput = selectElement.closest('.input-group').querySelector('#photoInput');
+                const videoInput = selectElement.closest('.input-group').querySelector('#videoInput');
+
+                // Reset both inputs to hide them initially
+                photoInput.style.display = 'none';
+                videoInput.style.display = 'none';
+
+                // Show the appropriate input based on selected value
+                if (selectElement.value === 'photo') {
+                    photoInput.style.display = 'block'; // Show the file input for photo
+                } else if (selectElement.value === 'video') {
+                    videoInput.style.display = 'block'; // Show the text input for video link
+                }
+            }
+
+            // Get all select elements with name "image_and_video"
+            const imageAndVideoSelects = document.querySelectorAll('[name="image_and_video"]');
+
+            // Add event listeners to each select dropdown
+            imageAndVideoSelects.forEach(select => {
+                select.addEventListener('change', function() {
+                    updateInputVisibility(this); // Update visibility on change
+                });
+
+                // Update visibility based on the current selected value when the page loads
+                updateInputVisibility(select);
+            });
+        });
+    </script>
+
 
     {{-- <script>
     function readURL(input, tgt) {

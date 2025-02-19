@@ -73,60 +73,60 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('category.index')}}">
+                <a class="nav-link" href="{{ route('category.index') }}">
                     <i class="fa fa-bookmark"></i>
                     <span>Categories</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('product.index')}}">
+                <a class="nav-link" href="{{ route('product.index') }}">
                     <i class="fa fa-bookmark"></i>
                     <span>Products</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('module.index')}}">
+                <a class="nav-link" href="{{ route('module.index') }}">
                     <i class="fa fa-bookmark"></i>
                     <span>Modules</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('image.index')}}">
+                <a class="nav-link" href="{{ route('image.index') }}">
                     <i class="fa fa-bookmark"></i>
                     <span>Images</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('product.price.index')}}">
+                <a class="nav-link" href="{{ route('product.price.index') }}">
                     <i class="fa fa-university"></i>
                     <span>Product-Price</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('city_master.index')}}">
+                <a class="nav-link" href="{{ route('city_master.index') }}">
                     <i class="fa fa-bookmark"></i>
                     <span>Cities</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('landmark.index')}}">
+                <a class="nav-link" href="{{ route('landmark.index') }}">
                     <i class="fa fa-bookmark"></i>
                     <span>Landmark</span></a>
             </li>
 
 
             <li class="nav-item">
-                <a class="nav-link" href="{{Route('deliveryslot.index')}}">
+                <a class="nav-link" href="{{ Route('deliveryslot.index') }}">
                     <i class="fa fa-bookmark"></i>
                     <span>DeliverySlot</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{Route('cms_master.index')}}">
+                <a class="nav-link" href="{{ Route('cms_master.index') }}">
                     <i class="fa fa-bookmark"></i>
                     <span>Cms_Master</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{Route('faq.index')}}">
+                <a class="nav-link" href="{{ Route('faq.index') }}">
                     <i class="fa fa-bookmark"></i>
                     <span>Faq</span></a>
             </li>
@@ -173,7 +173,8 @@
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Permission Management</span>
                 </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('permission.index') }}">Pemission List</a>
                     </div>
@@ -213,8 +214,8 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -272,7 +273,8 @@
                                     </div>
                                     <div>
                                         <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                        <span class="font-weight-bold">A new monthly report is ready to
+                                            download!</span>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -297,7 +299,8 @@
                                         Spending Alert: We've noticed unusually high spending for your account.
                                     </div>
                                 </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All
+                                    Alerts</a>
                             </div>
                         </li>
 
@@ -343,15 +346,16 @@
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                                        <div class="text-truncate">Last month's report looks great, I am very happy
+                                            with
                                             the progress so far, keep up the good work!</div>
                                         <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                            alt="...">
+                                        <img class="rounded-circle"
+                                            src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div>
@@ -360,7 +364,8 @@
                                         <div class="small text-gray-500">Chicken the Dog · 2w</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More
+                                    Messages</a>
                             </div>
                         </li>
 
@@ -370,8 +375,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name
-                                    }}</span>
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('asset/img/undraw_profile.svg') }}">
                             </a>
@@ -391,13 +396,15 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    class="d-none">
                                     @csrf
                                 </form>
 
@@ -798,10 +805,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
+    @if (session()->has('success') || session()->has('error') || $errors->any())
+        <script>
+            var message =
+                '{{ session()->has('success') ? session()->get('success') : (session()->has('error') ? session()->get('error') : implode("\\n", $errors->all())) }}';
+
+            // If there is a success message
+            if (message) {
+                toastr.success(message, 'Success', {
+                    timeOut: 5000
+                });
+            }
+        </script>
+    @endif
+
 
     {{-- <script>
-        var type = '{{ session()->get("success") ? "success" : (session()->get("error") ? "error" : ($errors->any() ? "error" : "")) }}';
-        var message = '{{ session()->get("success") ? session()->get("success")["message"] : (session()->get("error") ? session()->get("error")["message"] : implode("\\n", $errors->all())) }}';
+        var type =
+            '{{ session()->get('success') ? 'success' : (session()->get('error') ? 'error' : ($errors->any() ? 'error' : '')) }}';
+        var message =
+            '{{ session()->get('success') ? session()->get('success')['message'] : (session()->get('error') ? session()->get('error')['message'] : implode("\\n", $errors->all())) }}';
         if (type) {
             toastr[type](message);
         }
