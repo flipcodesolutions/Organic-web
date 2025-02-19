@@ -121,7 +121,97 @@
                     </div>
 
                     {{-- product image --}}
+
                     <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Images/Videos<span class="text-danger">*</span>
+                        </div>
+
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-warning mt-3" type="button" id="Add">+
+                                        ADD Image/Video </button>
+                                </div>
+                            </div>
+
+                            @if ($product->productImages && $product->productImages->count() > 0)
+                                @foreach ($product->productImages as $key => $image)
+                                    <div class="row form-floating my-1 pt-1">
+                                        <div class="col">
+                                            <img src="{{ asset('productImage/' . $image->url) }}" alt=""
+                                                height="80px" width="50px" style="list-style-type:none">
+                                        </div>
+
+                                        <div class="col">
+                                            <select class="form-select form-select-lg mb-3"
+                                                name="image_and_video.{{ $image->id }}" id="image_and_video"
+                                                aria-label="Large select example">
+                                                {{-- <option selected>Select file type</option> --}}
+                                                <option value="photo"{{ $image->type == 'photo' ? 'selected' : '' }}>
+                                                    Photo</option>
+                                                <option value="video"{{ $image->type == 'video' ? 'selected' : '' }}>
+                                                    Video</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col">
+                                            <div id="photoInput" style="display: none">
+                                                <input type="file" class="form-control" id="photoUpload"
+                                                    name="product_images.{{ $image->id }}">
+                                            </div>
+                                            <div id="videoInput" style="display: none">
+                                                {{-- <label for="videoLink">Video Link</label> --}}
+                                                <input type="text" class="form-control" id="videoLink"
+                                                    name="video_link.{{ $image->id }}" placeholder="Enter video link">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-2 ">
+                                            <a href="{{ route('productimage.deactive', $image->id) }}"
+                                                class="btn btn-danger btn-sm">
+                                                <i class="fas fa-remove"></i></a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+
+                            <div class="row mt-3">
+
+                                <div class="col" id="addnew" style="display: none">
+                                    <select class="form-select form-select-lg mb-3" name="image_and_video"
+                                        id="image_and_video" aria-label="Large select example">
+                                        <option value="null" selected>Select file type</option>
+                                        <option value="photo">Photo</option>
+                                        <option value="video">Video</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <div id="photoInput" style="display: none">
+                                        <input type="file" class="form-control" id="photoUpload"
+                                            name="product_images[]" multiple>
+                                    </div>
+                                    <div id="videoInput" style="display: none">
+                                        {{-- <label for="videoLink">Video Link</label> --}}
+                                        <input type="text" class="form-control" id="videoLink" name="video_link[]"
+                                            placeholder="Enter video link">
+
+                                        <div id="videolist">
+
+                                        </div>
+
+                                        <a class="btn btn-primary" id="addVideo">+</a>
+                                        <a class="btn btn-danger" id="removeVideo">-</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {{-- product image --}}
+                    {{-- <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Images/Videos<span class="text-danger">*</span>
                         </div>
@@ -136,14 +226,14 @@
                                         <div class="col-2 mb-1">
                                             <img src="{{ asset('productImage/' . $data->url) }}" alt=""
                                                 height="80px" width="50px" style="list-style-type:none">
-                                        </div>
-                                        {{-- <div class="row mb-1">
+                                        </div> --}}
+                    {{-- <div class="row mb-1">
                                                 <input type="file" class="form-control" id="inputGroupFile02"
                                                     name="product_image[]">
                                                 <input type="hidden" name="imageid[]" value="{{ $data->id }}">
                                                 <span id="imageError" class="text-danger"></span>
                                             </div> --}}
-                                        <div class="col mt-3">
+                    {{-- <div class="col mt-3">
                                             <select class="form-select form-select-lg mb-3" name="image_and_video"
                                                 id="image_and_video" aria-label="Large select example"
                                                 image-id='{{ $data->id }}'>
@@ -176,7 +266,7 @@
                                 </div>
                             @endforeach
                         </div>
-                    </div>
+                    </div> --}}
 
 
                     {{-- season --}}
@@ -282,33 +372,52 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Function to update the visibility of the inputs based on the selection
-            function updateInputVisibility(selectElement) {
-                const photoInput = selectElement.closest('.input-group').querySelector('#photoInput');
-                const videoInput = selectElement.closest('.input-group').querySelector('#videoInput');
 
-                // Reset both inputs to hide them initially
+            document.getElementById('Add').addEventListener('click', function() {
+                const image = document.getElementById('addnew');
+                image.style.display = 'block';
+            });
+
+            document.getElementById('addVideo').addEventListener('click', function() {
+                const link = document.getElementById('videolist');
+                let newinput = document.createElement('input');
+                newinput.type = 'text';
+                newinput.classList.add('form-control', 'my-1');
+                newinput.id = 'videoLink';
+                newinput.name = 'video_link[]';
+                newinput.placeholder = 'Enter video link';
+
+                link.appendChild(newinput);
+
+            });
+
+            document.getElementById('removeVideo').addEventListener('click', function() {
+                const link = document.getElementById('videolist');
+                link.removeChild(link.lastElementChild);
+            });
+
+            function updateInputVisibility(selectElement) {
+                const parentRow = selectElement.closest('.row');
+                const photoInput = parentRow.querySelector('#photoInput');
+                const videoInput = parentRow.querySelector('#videoInput');
+
                 photoInput.style.display = 'none';
                 videoInput.style.display = 'none';
 
-                // Show the appropriate input based on selected value
                 if (selectElement.value === 'photo') {
-                    photoInput.style.display = 'block'; // Show the file input for photo
+                    photoInput.style.display = 'block';
                 } else if (selectElement.value === 'video') {
-                    videoInput.style.display = 'block'; // Show the text input for video link
+                    videoInput.style.display = 'block';
                 }
             }
 
-            // Get all select elements with name "image_and_video"
-            const imageAndVideoSelects = document.querySelectorAll('[name="image_and_video"]');
+            const imageAndVideoSelects = document.querySelectorAll('[id="image_and_video"]');
 
-            // Add event listeners to each select dropdown
             imageAndVideoSelects.forEach(select => {
                 select.addEventListener('change', function() {
-                    updateInputVisibility(this); // Update visibility on change
+                    updateInputVisibility(this);
                 });
 
-                // Update visibility based on the current selected value when the page loads
                 updateInputVisibility(select);
             });
         });

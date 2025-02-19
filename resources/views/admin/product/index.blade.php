@@ -64,11 +64,20 @@
                                     {{ $productData->season }}
                                 </td>
                                 <td>
-                                    <img src="{{ asset('productImage/' . $productData->prodcutImages->first()->url) }}"
+                                    
+                                    @if (isset($productData->productImages) && $productData->productImages->isNotEmpty())
+                                    <img src="{{ asset('productImage/' . $productData->productImages->first()->url) }}"
                                         alt="" height="80px" width="50px" style="list-style-type:none">
+                                        {{-- <img src="{{ asset('productImage/' . $productData->productImages->first()->url) }}"
+                                            alt="Product Image" /> --}}
+                                    @else
+                                        <p>No product images available.</p>
+                                    @endif
+
+
                                 </td>
                                 <td>
-                                    <a href="{{ route('product.edit') }}/{{ $productData->id }}" class="btn btn-primary">
+                                    <a href="{{ route('product.edit') }}/{{ $productData->id }}" class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="{{ route('product.deactive') }}/{{ $productData->id }}"
