@@ -15,12 +15,12 @@
             </div>
         </div>
 
-    <div class="card-body">
+        <div class="card-body">
 
-    <form action="{{ route('city_master.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('city_master.store') }}" method="post" enctype="multipart/form-data">
 
-        @csrf
- {{-- City_Master --}}
+                @csrf
+                {{-- City_Master --}}
 
                 <div class="row mb-3">
                     <div class="col-sm-12 col-lg-3 col-md-12">
@@ -29,117 +29,101 @@
 
                     <div class="col">
                         <div class="form-floating">
-<<<<<<< HEAD
                             <input type="text" name="city_name_eng" id="city_name_eng" placeholder="English"
                                 class="form-control">
-                                <label for="city_name_eng">English</label>
-                                @error('city_name_eng')
-=======
-                            <input type="text" name="city_name_eng" id="city_name_eng"  placeholder="English" class="form-control">
-                                 @error('city_name_eng')
->>>>>>> 930421b0ed59d07bbeceaa48cc2db4647dbbad49
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                            <label for="city_name_eng">English</label>
+                            @error('city_name_eng')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                             <span id="nameError" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-floating">
-<<<<<<< HEAD
                             <input type="text" name="city_name_hin" id="city_name_hin" placeholder="Hindi"
                                 class="form-control">
-                                <label for="city_name_hin">Hindi</label>
-=======
-                            <input type="text" name="city_name_hin" id="city_name_hin" placeholder="Hindi" class="form-control">
->>>>>>> 930421b0ed59d07bbeceaa48cc2db4647dbbad49
-                                @error('city_name_hin')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                            <label for="city_name_hin">Hindi</label>
+                            @error('city_name_hin')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                             <span id="nameError" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-floating">
-<<<<<<< HEAD
                             <input type="text" name="city_name_guj" id="city_name_guj" placeholder="Gujarati"
                                 class="form-control">
-                                <label for="city_name_guj">Gujarati</label>
-=======
-                            <input type="text" name="city_name_guj" id="city_name_guj" placeholder="Gujarati" class="form-control">
->>>>>>> 930421b0ed59d07bbeceaa48cc2db4647dbbad49
-                                @error('city_name_guj')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                            <label for="city_name_guj">Gujarati</label>
+                            @error('city_name_guj')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                             <span id="nameError" class="text-danger"></span>
                         </div>
                     </div>
-            </div>
+                </div>
 
-                    <div class="row mb-3">
-                        <div class="col-sm-12 col-lg-3 col-md-12">
-                            Pincode :  <span class="text-danger">*</span>
-                        </div>
-                        <div class="col">
-                            <div class="form-floating">
-                                <input type="text" name="pincode" id="pincode" placeholder="Pincode" class="form-control">
-                                @error('pincode')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                                <span id="nameError" class="text-danger"></span>
-                            </div>
+                <div class="row mb-3">
+                    <div class="col-sm-12 col-lg-3 col-md-12">
+                        Pincode : <span class="text-danger">*</span>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" name="pincode" id="pincode" placeholder="Pincode" class="form-control">
+                            @error('pincode')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            <span id="nameError" class="text-danger"></span>
                         </div>
                     </div>
-
-
-
-                    <div class="row mb-3">
-                        <div class="col-sm-12 col-lg-3 col-md-12">
-                            Area Name : <span class="text-danger">*</span>
-                        </div>
-
-                        <div class="col">
-                            <div class="form-floating">
-                                <input type="text" name="area_eng" id="area_eng"  placeholder="English"
-                                    class="form-control">
-                                    <label for="area_eng">English</label>
-                                    @error('area_eng')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                <span id="nameError" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-floating">
-                                <input type="text" name="area_hin" id="area_hin" placeholder="Hindi"
-                                    class="form-control">
-                                    <label for="area_hin">Hindi</label>
-                                    @error('area_hin')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                                <span id="nameError" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-floating">
-                                <input type="text" name="area_guj" id="area_guj" placeholder="Gujarati"
-                                    class="form-control">
-                                    <label for="area_guj">Gujarati</label>
-                                    @error('area_guj')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                                <span id="nameError" class="text-danger"></span>
-                            </div>
-                        </div>
                 </div>
 
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary btn-sm  mt-3 mb-3"><i
-                            class="fa-solid fa-floppy-disk"></i> Submit</button>
+
+
+                <div class="row mb-3">
+                    <div class="col-sm-12 col-lg-3 col-md-12">
+                        Area Name : <span class="text-danger">*</span>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" name="area_eng" id="area_eng" placeholder="English" class="form-control">
+                            <label for="area_eng">English</label>
+                            @error('area_eng')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            <span id="nameError" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" name="area_hin" id="area_hin" placeholder="Hindi" class="form-control">
+                            <label for="area_hin">Hindi</label>
+                            @error('area_hin')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            <span id="nameError" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" name="area_guj" id="area_guj" placeholder="Gujarati"
+                                class="form-control">
+                            <label for="area_guj">Gujarati</label>
+                            @error('area_guj')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            <span id="nameError" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-          </form>
-</div>
-@endsection
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary btn-sm  mt-3 mb-3"><i
+                                class="fa-solid fa-floppy-disk"></i> Submit</button>
+                    </div>
+                </div>
 
+            </form>
+        </div>
+        @endsection
