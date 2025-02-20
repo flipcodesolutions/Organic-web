@@ -805,7 +805,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
-    @if (session()->has('success') || session()->has('error') || $errors->any())
+    @if (session()->has('success'))
         <script>
             var message =
                 '{{ session()->has('success') ? session()->get('success') : (session()->has('error') ? session()->get('error') : implode("\\n", $errors->all())) }}';

@@ -13,11 +13,6 @@
                     </div>
                 </div>
             </div>
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
 
             <div class="card-body">
                 <form id="productForm" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
@@ -126,40 +121,58 @@
                     {{-- product image --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Images/Videos<span class="text-danger">*</span>
+                            Images<span class="text-danger">*</span>
                         </div>
                         <div class="col">
 
-                            {{-- <select class="form-select form-select-lg mb-3" name="image_and_video" aria-label="Large select example">
+                            <div id="photoInput">
+                                <label for="photoUpload" class="form-label">Upload Photo</label>
+                                <input type="file" class="form-control" id="photoUpload" name="product_image[]"
+                                    multiple>
+                            </div>
+
+                            {{-- <div class="row"> --}}
+                            {{-- <select class="form-select form-select-lg mb-3" name="image_and_video" id="image_and_video"
+                                aria-label="Large select example">
                                 <option selected>Select Season</option>
                                 <option value="Photo">Photo</option>
                                 <option value="Video">Video</option>
                             </select> --}}
-
-                            {{-- <div class="row"> --}}
-                                <select class="form-select form-select-lg mb-3" name="image_and_video"
-                                    id="image_and_video" aria-label="Large select example">
-                                    <option selected>Select Season</option>
-                                    <option value="Photo">Photo</option>
-                                    <option value="Video">Video</option>
-                                </select>
                             {{-- </div> --}}
-                            <div class="row form-floating">
+                            {{-- <div class="row form-floating">
                                 <div id="photoInput" style="display: none;">
                                     <label for="photoUpload" class="form-label">Upload Photo</label>
-                                    <input type="file" class="form-control" id="photoUpload" name="product_image[]" multiple>
+                                    <input type="file" class="form-control" id="photoUpload" name="product_image[]"
+                                        multiple>
                                 </div>
 
                                 <div id="videoInput" style="display: none;">
                                     <label for="videoLink">Video Link</label>
                                     <input type="text" class="form-control" id="videoLink" name="video_link"
-                                    placeholder="Enter video link">
+                                        placeholder="Enter video link">
                                 </div>
-                            </div>
+                            </div> --}}
                             {{-- <div class="input-group mb-3">
                                 <input type="file" class="form-control" id="inputGroupFile02" name="product_image[]" multiple>
                                 <span id="imageError" class="text-danger"></span>
                             </div> --}}
+                        </div>
+                    </div>
+
+                    {{-- video --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            video<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating" id="videoInput">
+                                <input type="text" class="form-control" id="videoLink" name="video_link[]"
+                                    placeholder="Enter video link">
+                                <span id="videolinklist"> </span>
+                                <label for="videoLink">Video Link</label>
+                                <a class="btn btn-primary my-2" id="addVideo">+</a>
+                                <a class="btn btn-danger my-2" id="removeVideo">-</a>
+                            </div>
                         </div>
                     </div>
 
@@ -210,6 +223,34 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const addVideoButton = document.getElementById("addVideo");
+            const videoLinkInput = document.getElementById("videoLink");
+
+            document.getElementById('addVideo').addEventListener('click', function() {
+
+                const list = document.getElementById('videolinklist');
+
+                let newinput = document.createElement('input');
+                newinput.type = 'text';
+                newinput.classList.add('form-control', 'my-1');
+                newinput.id = 'videoLink';
+                newinput.name = 'video_link[]';
+                newinput.placeholder = 'Enter video link';
+
+
+                list.appendChild(newinput);
+            });
+
+            document.getElementById('removeVideo').addEventListener('click', function() {
+                const link = document.getElementById('videolinklist');
+                link.removeChild(link.lastElementChild);
+            });
+        })
+    </script>
 
     {{-- <script>
         function readURL(input, tgt) {
@@ -332,7 +373,7 @@
         });
     </script> --}}
 
-    <script>
+    {{-- <script>
         // Get the select element
         const imageAndVideoSelect = document.getElementById('image_and_video');
 
@@ -353,6 +394,6 @@
                 videoInput.style.display = 'block'; // Show the text input for video link
             }
         });
-    </script>
+    </script> --}}
 
 @endsection

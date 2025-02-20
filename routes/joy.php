@@ -31,7 +31,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('product/deactiveproducts', 'deactiveindex')->name('product.deactiveindex');
     Route::get('product/active/{id?}','active')->name('product.active');
     Route::get('product/delete/{id?}','destroy')->name('product.delete');
-    Route::get('product/image/deactive/{id?}','deactiveimage')->name('productimage.deactive');
+    Route::get('product/image/deactive/{id?}','destroyimage')->name('productimage.delete');
 });
 
 // product price route

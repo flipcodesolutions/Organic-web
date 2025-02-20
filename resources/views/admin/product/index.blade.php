@@ -104,40 +104,4 @@
         </div>
     </div>
 
-    @if (session('success'))
-        <script>
-            toastr.success("{{ session('success') }}", 'Success', {
-                timeOut: 5000
-            });
-        </script>
-    @endif
-
-    @if (session('error'))
-        <script>
-            toastr.error("{{ session('error') }}", 'Error', {
-                timeOut: 5000
-            });
-        </script>
-    @endif
-
-    <script>
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": true,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-    </script>
-
 @endsection

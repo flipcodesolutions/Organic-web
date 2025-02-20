@@ -121,13 +121,81 @@
                     </div>
 
                     {{-- product image --}}
-
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Images/Videos<span class="text-danger">*</span>
+                            Images<span class="text-danger">*</span>
+                        </div>
+
+                        <div class="col d-flex">
+                            @if ($product->productImages && $product->productImages->count() > 0)
+                                @foreach ($product->productImages as $key => $image)
+                                    @if ($image->type == 'photo')
+                                        <div class="col">
+                                            <div class="image">
+                                                <img src="{{ asset('productImage/' . $image->url) }}" alt=""
+                                                    height="110px" width="100px" style="list-style-type:none">
+                                            </div>
+                                            <div class="addimage" style="justify-content: center">
+                                                <a href="{{ route('productimage.delete', $image->id) }}"
+                                                    class="btn btn-danger btn-sm mt-2" style="width: 100px">
+                                                    <i class="fas fa-remove"></i></a>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+                            <div class="col">
+                                <div class="row">
+                                    Add new image
+                                </div>
+                                <div class="row">
+                                    <input type="file" class="form-control" id="photoUpload"
+                                        name="new_product_images[]" multiple>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- product video --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            videos<span class="text-danger">*</span>
                         </div>
 
                         <div class="col">
+                            @if ($product->productImages && $product->productImages->count() > 0)
+                                @foreach ($product->productImages as $key => $image)
+                                    @if ($image->type == 'video')
+                                        <div class="row my-1">
+                                            <div class="col">
+                                                <input type="text" class="form-control" name="videolink"
+                                                    value="{{ $image->url }}" id="" readonly>
+                                            </div>
+                                            <div class="col-2">
+                                                <a href="{{ route('productimage.delete', $image->id) }}"
+                                                    class="btn btn-danger btn-sm mt-1" style="width: 100px">
+                                                    <i class="fas fa-remove"></i></a>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-floating" id="videoInput">
+                                        <input type="text" class="form-control" id="videoLink" name="new_video_link[]"
+                                            placeholder="Enter video link">
+                                        <span id="videolinklist"> </span>
+                                        <label for="videoLink">Video Link</label>
+                                        <a class="btn btn-primary my-2" id="addVideo">+</a>
+                                        <a class="btn btn-danger my-2" id="removeVideo">-</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="col">
                             <div class="row">
                                 <div class="col">
                                     <button class="btn btn-warning mt-3" type="button" id="Add">+
@@ -147,7 +215,6 @@
                                             <select class="form-select form-select-lg mb-3"
                                                 name="image_and_video.{{ $image->id }}" id="image_and_video"
                                                 aria-label="Large select example">
-                                                {{-- <option selected>Select file type</option> --}}
                                                 <option value="photo"{{ $image->type == 'photo' ? 'selected' : '' }}>
                                                     Photo</option>
                                                 <option value="video"{{ $image->type == 'video' ? 'selected' : '' }}>
@@ -161,7 +228,6 @@
                                                     name="product_images.{{ $image->id }}">
                                             </div>
                                             <div id="videoInput" style="display: none">
-                                                {{-- <label for="videoLink">Video Link</label> --}}
                                                 <input type="text" class="form-control" id="videoLink"
                                                     name="video_link.{{ $image->id }}" placeholder="Enter video link">
                                             </div>
@@ -192,7 +258,6 @@
                                             name="product_images[]" multiple>
                                     </div>
                                     <div id="videoInput" style="display: none">
-                                        {{-- <label for="videoLink">Video Link</label> --}}
                                         <input type="text" class="form-control" id="videoLink" name="video_link[]"
                                             placeholder="Enter video link">
 
@@ -206,9 +271,8 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div> --}}
 
-                    </div>
 
                     {{-- product image --}}
                     {{-- <div class="row mb-3">
@@ -278,8 +342,10 @@
                             <select class="form-control form-select-lg mb-3" name="season"
                                 aria-label="Large select example">
                                 {{-- <option selected>Select Season</option> --}}
-                                <option value="Winter"{{ $product->season == 'Winter' ? 'selected' : '' }}>Winter</option>
-                                <option value="Summer"{{ $product->season == 'Summer' ? 'selected' : '' }}>Summer</option>
+                                <option value="Winter"{{ $product->season == 'Winter' ? 'selected' : '' }}>Winter
+                                </option>
+                                <option value="Summer"{{ $product->season == 'Summer' ? 'selected' : '' }}>Summer
+                                </option>
                                 <option value="Monsoon"{{ $product->season == 'Monsoon' ? 'selected' : '' }}>Monsoon
                                 </option>
                             </select>
@@ -370,7 +436,35 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
-    <script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+    
+                const addVideoButton = document.getElementById("addVideo");
+                const videoLinkInput = document.getElementById("videoLink");
+    
+                document.getElementById('addVideo').addEventListener('click', function() {
+    
+                    const list = document.getElementById('videolinklist');
+    
+                    let newinput = document.createElement('input');
+                    newinput.type = 'text';
+                    newinput.classList.add('form-control', 'my-1');
+                    newinput.id = 'videoLink';
+                    newinput.name = 'new_video_link[]';
+                    newinput.placeholder = 'Enter video link';
+    
+    
+                    list.appendChild(newinput);
+                });
+    
+                document.getElementById('removeVideo').addEventListener('click', function() {
+                    const link = document.getElementById('videolinklist');
+                    link.removeChild(link.lastElementChild);
+                });
+            })
+        </script>
+        
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
 
             document.getElementById('Add').addEventListener('click', function() {
@@ -421,7 +515,7 @@
                 updateInputVisibility(select);
             });
         });
-    </script>
+    </script> --}}
 
 
     {{-- <script>
