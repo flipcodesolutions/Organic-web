@@ -46,62 +46,52 @@
                                 <a href="{{ Route('admin.citymaster.active', $citymaster->id) }}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
                                 </a>
+
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"
                                     onclick="openDeleteModal('{{ Route('admin.citymaster.permdelete', $citymaster->id) }}')">
                                     <i class="fas fa-trash"></i>
                                 </a>
-
+                                {{--  <!-- Delete Confirmation Modal -->
+                                {{--  <div id="deleteModal" style="display: none;">  --}}
+                                    {{--  <p>Are you sure you want to delete this item?</p>
+                                    <button onclick="deleteItem()">Yes, Delete</button>
+                                    <button onclick="closeDeleteModal()">Cancel</button>
+                                </div>  --}}
                             </td>
                         </tr>
                     @endforeach
-
-                    {{-- <tr>
-                            <td colspan="8" align="center" style="color: red;">
-                                <h5>No Data Record Found</h5>
-                            </td>
-                        </tr> --}}
-
                 </table>
-                {{-- table end --}}
-
-
             </adiv>
         </div>
     </div>
 
-    <!-- Confirmation Modal -->
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Delete Data</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                {{-- <div class="modal-body">
-                 Are you sure you want to delete this Delivery Slot?
-             </div> --}}
-                <div class="modal-footer">
-                    {{-- @foreach ($deliveryslots as $deliveryslots) --}}
-                        {{-- <a href="{{ Route('deliveryslot.permdelete', $deliveryslots->id) }}" class="btn btn-danger">Yes</a> --}}
-                        <a href="" id="delete-link" class="btn btn-danger">Yes</a>
-                        <a href="" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
-                    {{-- @endforeach --}}
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // function openDeleteModal() {
-        //     var myModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
-        //     myModal.show();
-        // }
-        function openDeleteModal(deleteUrl) {
-            // Update the delete link in the modal dynamically
-            document.getElementById('delete-link').setAttribute('href', deleteUrl);
-            var myModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
-            myModal.show();
+        let itemIdToDelete = null;
+
+        function openDeleteModal(id) {
+            itemIdToDelete = id;
+            document.getElementById("deleteModal").style.display = "block";
+        }
+
+        function closeDeleteModal() {
+            document.getElementById("deleteModal").style.display = "none";
+        }
+
+        function deleteItem() {
+            if (itemIdToDelete) {
+                fetch(`/delete-item/${itemIdToDelete}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => response.json())
+                  .then(data => {
+                      alert("Item deleted successfully!");
+                      closeDeleteModal();
+                      location.reload();
+                  }).catch(error => console.error("Error:", error));
+            }
         }
     </script>
 @endsection

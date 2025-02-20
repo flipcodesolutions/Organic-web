@@ -14,7 +14,7 @@ class CityMaster extends Model
         'area_eng', 'area_hin', 'area_guj'
     ];
 
-    public function landmarks()
+    public function landmark()
     {
         return $this->hasMany(LandmarkMaster::class, 'city_id','id');
     }

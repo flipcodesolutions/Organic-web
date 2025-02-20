@@ -16,7 +16,7 @@ Route::post('city/update/{id?}', [CityMasterController::class, 'update'])->name(
 Route::get('city/show/{id?}', [CityMasterController::class, 'show'])->name('city_master.show');
 Route::get('city/delete/{id}', [CityMasterController::class, 'delete'])->name('city_master.delete');
 Route::get('city/active/{id}',[CityMasterController::class, 'active'])->name('city_master.active');
-Route::get('city/deactive', [CityMasterController::class,'deactivedata'])->name('city_master.deactivedata');
+Route::get('city/deactivedata', [CityMasterController::class,'deactivedata'])->name('city_master.deactivedata');
 Route::get('city/permdelete/{id}',[CityMasterController::class,'permdelete'])->name('city_master.permdelete');
 
 
@@ -26,10 +26,10 @@ Route::post('landmark/store', [LandmarkMasterController::class, 'store'])->name(
 Route::get('landmark/edit/{id?}', [LandmarkMasterController::class, 'edit'])->name('landmark.edit');
 Route::post('landmark/update/{id?}', [LandmarkMasterController::class, 'update'])->name('landmark.update');
 Route::get('landmark/show/{id?}', [LandmarkMasterController::class, 'show'])->name('landmark.show');
-Route::get('landmark/delete/{id?}', [LandmarkMasterController::class, 'delete'])->name('landmark.delete');
-Route::get('landmark/active/{id?}', [LandmarkMasterController::class, 'active'])->name('landmark.active');
-Route::get('landmark/deactive/{id?}', [LandmarkMasterController::class, 'deactive'])->name('landmark.deactive');
-Route::get('landmark/permdelete/{id?}', [LandmarkMasterController::class, 'permdelete'])->name('landmark.permdelete');
+// Route::get('landmark/delete/{id?}', [LandmarkMasterController::class, 'delete'])->name('landmark.delete');
+// Route::get('landmark/active/{id?}', [LandmarkMasterController::class, 'active'])->name('landmark.active');
+// Route::get('landmark/deactive/{id?}', [LandmarkMasterController::class, 'deactive'])->name('landmark.deactive');
+// Route::get('landmark/permdelete/{id?}', [LandmarkMasterController::class, 'permdelete'])->name('landmark.permdelete');
 
 Route::get('contact',[ContactController::class,'index'])->name('contact.index');
 

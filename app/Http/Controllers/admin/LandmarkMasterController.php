@@ -14,16 +14,11 @@ class LandmarkMasterController extends Controller
      */
     public function index()
     {
-        try{
+        
             $landmarkmasters = LandmarkMaster::with('citymaster')->get();
             return view('admin.landmark_master.index', compact('landmarkmasters'));
-        }
-        catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => $e
-            ], 500);
-        }
+        
+       
     }
 
     /**
@@ -32,27 +27,25 @@ class LandmarkMasterController extends Controller
 
     public function create()
     {
-        try{
+       
             $cities = CityMaster::all();
             return View('admin.landmark_master.create',compact('cities'));
-        }
-        catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => $e
-            ], 500);
-        }
+        
+       
     }
 
     /**
-     * 
+     *
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        try{
+        // try{
+
+            // dd($request->all());
+            // return $request;
             $request->validate([
-                // 'city_id' => 'required|exists:city_master,id',
+                'city_id' => 'required|exists:city_masters,id',
                 'landmark_eng' => 'required|string',
                 'landmark_hin' => 'required|string',
                 'landmark_guj' => 'required|string',
@@ -61,9 +54,8 @@ class LandmarkMasterController extends Controller
             ]);
 
             $landmarkmasters = new LandmarkMaster();
-            $landmarkmasters->city_id = $request->city_name_eng;
-            $landmarkmasters->city_id = $request->city_name_hin;
-            $landmarkmasters->city_id = $request->city_name_guj;
+
+            $landmarkmasters->city_id = $request->city_id;
 
             $landmarkmasters->landmark_eng = $request->landmark_eng;
             $landmarkmasters->landmark_hin = $request->landmark_hin;
@@ -71,26 +63,18 @@ class LandmarkMasterController extends Controller
             $landmarkmasters->latitude = $request->latitude;
             $landmarkmasters->longitude = $request->longitude;
 
-            // return $landmarkmaster;
-            // return $request;
             $landmarkmasters->save();
-            return redirect()->route('landmark.index');
-        }
-        catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => $e
-            ], 500);
-        }
+            return redirect()->route('landmark.index')->with('success','stored');
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(LandmarkMaster $landmarkMaster)
-    {
-        //
-    }
+    // public function show(LandmarkMaster $landmarkMaster)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.

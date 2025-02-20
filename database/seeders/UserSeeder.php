@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'password'=>'xyz123',
             'phone'=>'6363636363',
             'role'=>'admin',
-            'pro_pic'=>'public\image\adminImage.png',
+            'pro_pic'=>'user_profile/adminImage.png',
             'status'=>'active',
             'default_language'=>'gujarati',
        ]);

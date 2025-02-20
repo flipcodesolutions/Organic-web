@@ -17,7 +17,7 @@
             </div>
         </div>
 
-    
+
     <table class="table">
         <tr>
             <th>ID</th>
@@ -42,7 +42,7 @@
             <td>{{ $city->area_guj }}</td>
             <td>
                 <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}" >Edit</a>
-        
+
                 <a href="{{ route('city_master.deactivedata') }}/{{ $city->id }}" class="btn btn-danger">
                     <i class="fas fa-remove"></i>
             </a>
@@ -50,4 +50,4 @@
         </tr>
         @endforeach
     </table>
-@endsection 
+@endsection
