@@ -14,10 +14,12 @@ Route::post('city/store', [CityMasterController::class, 'store'])->name('city_ma
 Route::get('city/edit/{id?}', [CityMasterController::class, 'edit'])->name('city_master.edit');
 Route::post('city/update/{id?}', [CityMasterController::class, 'update'])->name('city_master.update');
 Route::get('city/show/{id?}', [CityMasterController::class, 'show'])->name('city_master.show');
-Route::get('city/delete/{id}', [CityMasterController::class, 'delete'])->name('city_master.delete');
-Route::get('city/active/{id}',[CityMasterController::class, 'active'])->name('city_master.active');
-Route::get('city/deactivedata', [CityMasterController::class,'deactivedata'])->name('city_master.deactivedata');
-Route::get('city/permdelete/{id}',[CityMasterController::class,'permdelete'])->name('city_master.permdelete');
+
+Route::get('city/deactive/{id?}', [CityMasterController::class, 'deactive'])->name('city_master.deactive');
+Route::get('city/deleted', [CityMasterController::class, 'deleted'])->name('city_master.deleted');
+Route::post('city/active/{id?}', [CityMasterController::class, 'active'])->name('city_master.active');
+Route::post('city/destroy/{id?}', [CityMasterController::class, 'destroy'])->name('city_master.destroy');
+
 
 
 Route::get('landmark/index', [LandmarkMasterController::class, 'index'])->name('landmark.index');
@@ -26,15 +28,15 @@ Route::post('landmark/store', [LandmarkMasterController::class, 'store'])->name(
 Route::get('landmark/edit/{id?}', [LandmarkMasterController::class, 'edit'])->name('landmark.edit');
 Route::post('landmark/update/{id?}', [LandmarkMasterController::class, 'update'])->name('landmark.update');
 Route::get('landmark/show/{id?}', [LandmarkMasterController::class, 'show'])->name('landmark.show');
-// Route::get('landmark/delete/{id?}', [LandmarkMasterController::class, 'delete'])->name('landmark.delete');
-// Route::get('landmark/active/{id?}', [LandmarkMasterController::class, 'active'])->name('landmark.active');
-// Route::get('landmark/deactive/{id?}', [LandmarkMasterController::class, 'deactive'])->name('landmark.deactive');
-// Route::get('landmark/permdelete/{id?}', [LandmarkMasterController::class, 'permdelete'])->name('landmark.permdelete');
+
+Route::get('landmark/deactive/{id?}', [LandmarkMasterController::class, 'deactive'])->name('landmark.deactive');
+Route::get('landmark/deleted', [LandmarkMasterController::class, 'deleted'])->name('landmark.deleted');
+Route::post('landmark/active/{id?}', [LandmarkMasterController::class, 'active'])->name('landmark.active');
+Route::post('landmark/destroy/{id?}', [LandmarkMasterController::class, 'destroy'])->name('landmark.destroy');
 
 Route::get('contact',[ContactController::class,'index'])->name('contact.index');
 
 Route::get('review',[ReviewController::class,'index'])->name('review.index');
-
 
 
 Route::get('vendor/reviews', [VendorReviewController::class, 'index'])->name('vendor.reviews.index');

@@ -14,28 +14,25 @@ class CityMasterController extends Controller
     public function index()
     {
         try{
-        $cities = CityMaster::all();
-        return view('admin.city_master.index', compact('cities'));
+            $cities = CityMaster::all();
+            return view('admin.city_master.index', compact('cities'));
         }
         catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
     }
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
         try{
-
-            return view('admin.city_master.create');
+            return view('admin.city_master.create')->with('success', 'City added successfully.');
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -51,9 +48,8 @@ class CityMasterController extends Controller
                 'area_hin' => 'required|string',
                 'area_guj' => 'required|string',
             ]);
-    
+            
             $citymaster = new CityMaster();
-    
             $citymaster->city_name_eng = $request->city_name_eng;
             $citymaster->city_name_hin = $request->city_name_hin;
             $citymaster->city_name_guj = $request->city_name_guj;
@@ -61,11 +57,8 @@ class CityMasterController extends Controller
             $citymaster->area_eng = $request->area_eng;
             $citymaster->area_hin = $request->area_hin;
             $citymaster->area_guj = $request->area_guj;
-    
             $citymaster->save();
-    
             return redirect()->route('city_master.index')->with('success', 'City added successfully.');
-    
         } 
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
@@ -75,7 +68,7 @@ class CityMasterController extends Controller
     {
         try{
             $city_master = CityMaster::find($id);
-            return view('admin.city_master.edit',compact('city_master'));
+            return view('admin.city_master.edit',compact('city_master'))->with('success', 'City added successfully.');
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
@@ -84,12 +77,10 @@ class CityMasterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-
     public function update(Request $request, CityMaster $cityMaster)
     {
         try{
             $citymaster=CityMaster::find($request->city_id);
-
             $citymaster->city_name_eng = $request->city_name_eng;
             $citymaster->city_name_hin = $request->city_name_hin;
             $citymaster->city_name_guj = $request->city_name_guj;
@@ -99,61 +90,58 @@ class CityMasterController extends Controller
             $citymaster->area_guj = $request->area_guj;
 
             $citymaster->save();
-            return redirect()->route('city_master.index');
+            return redirect()->route('city_master.index')->with('success', 'City updated successfully.');
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
-
     }
     /**
      * Remove the specified resource from storage.
      */
-    public function deactivedata()
+    public function deactive($id)
     {
-        try{
-            $citymaster = CityMaster::where('status', 'deactive')->get();
-            return view('admin.city_master.deactivedata', compact('deliveryslots'));
-        }
+        try {
+            $citymasters = CityMaster::find($id);
+            $citymasters->status = 'deactive';
+            $citymasters->save(); 
+            return redirect()->back()->with('success','successfully deleted');
+        } 
         catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
-        }
-
-    }
-    public function delete($id)
-    {
-        try{
-            return $id;
-            $citymaster = CityMaster::find($id);
-            $citymaster->status = 'deactive';
-            $citymaster->save();
-            return redirect()->back();
-        }
-        catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
     }
     public function active($id)
     {
-        try{
+        try {
             $citymaster = CityMaster::find($id);
             $citymaster->status = 'active';
             $citymaster->save();
-            return redirect()->route('city_master.deactive')->with('msg', 'Status Active successfully');
-        }
+            return redirect()->route('city_master.index');
+        } 
         catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
     }
-    public function permdelete($id)
+    public function deleted()
     {
-        try{
-            $citymaster = CityMaster::find($id);
-            $citymaster->delete();
-            return redirect()->back();
-        }
+        try {
+            $citymaster = CityMaster::where('status', 'deactive')->paginate(10);
+            return view('admin.city_master.deleted', compact('citymaster'));
+        } 
         catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
     }
-}
+    public function destroy($id)
+    {
+        try {
+            $citymaster = CityMaster::find($id);   
+            $citymaster->delete();
+            return redirect()->route('city_master.index');
+        } 
+        catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
+        }
+    }
+} 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('landmark_guj', 255);
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
+            $table->enum('status', ['active', 'deactive','deleted'])->default('active');
             $table->timestamps();
         });
     }
