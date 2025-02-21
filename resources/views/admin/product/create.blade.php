@@ -103,6 +103,69 @@
                         </div>
                     </div>
 
+                    {{-- unit --}}
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Unit<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <table class="table table-bordered mt-2" id="unitTable">
+                                <thead>
+                                    <tr>
+                                        <th>Unit</th>
+                                        <th>Detail (aprox Weight)</th>
+                                        <th>Discount Percentage</th>
+                                        <th>Sell Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select class="form-select form-select-lg mb-3" name="unit_id"
+                                                aria-label="Large select example">
+                                                <option selected>Select Unit</option>
+                                                @foreach ($units as $data)
+                                                    <option value="{{ $data->id }}">{{ $data->unit }}</option>
+                                                @endforeach
+                                            </select>
+                                            <span id="unitIdError" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            <div class="form-floating">
+                                                <input type="text" name="unit_det" id="unit_det"
+                                                    placeholder="Unit Detail in Aprox Weight" class="form-control">
+                                                <label for="">Aprox Weight</label>
+                                                <span id="unitdetailError" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-floating">
+                                                <input type="text" name="discount_per" id="discount_per"
+                                                    placeholder="Discount Percentage" class="form-control">
+                                                <label for="">Discount Per </label>
+                                                <span id="discountperError" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-floating">
+                                                <input type="text" name="sellin_price" id="selling_price"
+                                                    placeholder="Selling Price" class="form-control">
+                                                <label for="">Selling Price</label>
+                                                <span id="sellingpriceError" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        {{-- <td style="display: flex; gap:5px">
+                                            <a class="btn btn-primary my-2" id="addUnit">+</a>
+                                            <a class="btn btn-danger my-2" id="removeUnit">-</a>
+                                        </td> --}}
+                                    </tr>
+                                </tbody>
+                                {{-- <span id="unitTable"></span> --}}
+                            </table>
+                        </div>
+                    </div>
+
+
                     {{-- product stock --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
@@ -226,10 +289,6 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-
-            const addVideoButton = document.getElementById("addVideo");
-            const videoLinkInput = document.getElementById("videoLink");
-
             document.getElementById('addVideo').addEventListener('click', function() {
 
                 const list = document.getElementById('videolinklist');
@@ -251,6 +310,100 @@
             });
         })
     </script>
+
+    {{-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            for video link add and remove
+            const addVideoButton = document.getElementById("addVideo");
+            const videoLinkInput = document.getElementById("videoLink");
+
+
+
+            for add and remove unit
+            const addUnitButton = document.getElementById("addUnit");
+            const tablebody = document.getElementById('unitTable').getElementsByTagName('tbody')[0];
+
+            function addButtonsToLastRow() {
+                const lastRow = tablebody.lastElementChild;
+                if (lastRow) {
+                    const buttonCell = document.createElement('td');
+                    buttonCell.style.display = "flex";
+                    buttonCell.style.gap = "5px";
+
+                    // Create and add the "Add" button
+                    const addButton = document.createElement('a');
+                    addButton.classList.add('btn', 'btn-primary', 'my-2');
+                    addButton.textContent = '+';
+                    addButton.id = 'addUnit';
+                    buttonCell.appendChild(addButton);
+
+                    // Create and add the "Remove" button
+                    const removeButton = document.createElement('a');
+                    removeButton.classList.add('btn', 'btn-danger', 'my-2');
+                    removeButton.textContent = '-';
+                    removeButton.id = 'removeUnit';
+                    buttonCell.appendChild(removeButton);
+
+                    lastRow.appendChild(buttonCell);
+                }
+            }
+
+            if (tablebody.rows.length > 0) {
+                addButtonsToLastRow(); // Add buttons to the last row after page load
+            }
+
+            document.getElementById('addUnit').addEventListener('click', function() {
+
+                const newrow = document.createElement('tr');
+
+                newrow.innerHTML = `
+                                <td>
+                                    <select class="form-select form-select-lg mb-3" name="unit_id[]"
+                                        aria-label="Large select example">
+                                        <option selected>Select Unit</option>
+                                        @foreach ($units as $data)
+                                            <option value="{{ $data->id }}">{{ $data->unit }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span id="unitIdError" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <div class="form-floating">
+                                        <input type="text" name="unit_det[]" id="unit_det"
+                                            placeholder="Unit Detail in Aprox Weight" class="form-control">
+                                        <label for="">Aprox Weight</label>
+                                        <span id="unitdetailError" class="text-danger"></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-floating">
+                                        <input type="text" name="discount_per[]" id="discount_per"
+                                            placeholder="Discount Percentage" class="form-control">
+                                        <label for="">Discount Per </label>
+                                        <span id="discountperError" class="text-danger"></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-floating">
+                                        <input type="text" name="sellin_price[]" id="selling_price"
+                                            placeholder="Selling Price" class="form-control">
+                                        <label for="">Selling Price</label>
+                                        <span id="sellingpriceError" class="text-danger"></span>
+                                    </div>
+                                </td>`;
+
+                tablebody.appendChild(newrow);
+            });
+
+            document.getElementById('removeUnit').addEventListener('click', function() {
+                const tbody = document.getElementById('unitTable').getElementsByTagName('tbody')[0];
+                if (tbody.rows.length > 1) {
+                    tbody.removeChild(tbody.lastElementChild);
+                }
+            });
+        })
+    </script> --}}
 
     {{-- <script>
         function readURL(input, tgt) {

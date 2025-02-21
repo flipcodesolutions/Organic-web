@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\Unit;
+use App\Models\UnitMaster;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,10 +16,9 @@ class ProductController extends Controller
     public function index()
     {
         try {
-            // $activeproduct = Product::where('status','active')->get();
             $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
                 $query->where('status', 'active');
-            })->with(['categories', 'productImages'])->paginate(10);
+            })->with(['categories', 'productImages','productUnit.unitMaster'])->paginate(10);
             // return $products;    
             return view('admin.product.index', compact('products'));
         } catch (\Exception $e) {
@@ -31,7 +32,9 @@ class ProductController extends Controller
         try {
 
             $categories = Category::where('status', 'active')->get();
-            return view('admin.product.create', compact('categories'));
+            $units = UnitMaster::where('status','active')->get();
+            // return $units;
+            return view('admin.product.create', compact('categories','units'));
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
@@ -93,6 +96,15 @@ class ProductController extends Controller
             $productimage = ProductImage::where('productId', $product->id)->get();
             $product->image = $productimage->first()->url;
             $product->save();
+
+            Unit::create([
+                'unit' => $request->unit_id,
+                'product_id' => $product->id,
+                'price' => $request->product_price,
+                'detail' => $request->unit_det,
+                'per' => $request->discount_per,
+                'sell_price' => $request->sellin_price
+            ]);
 
             return redirect()->route('product.index')->with('success', 'Product created successfully!');
         } catch (\Exception $e) {

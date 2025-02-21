@@ -25,6 +25,10 @@
                         <th>Product Name</th>
                         <th>Product Description</th>
                         <th>Product Price</th>
+                        <th>unit</th>
+                        <th>Aprox weight</th>
+                        <th>Discount Percentage</th>
+                        <th>Sell Price</th>
                         <th>Product Stock</th>
                         <th>Season</th>
                         <th>Images</th>
@@ -40,6 +44,7 @@
                                         <li>{{ $productData->categories->categoryNameGuj }}</li>
                                         <li>{{ $productData->categories->categoryNameHin }}</li>
                                     </ul>
+                                </td>
                                 <td>
                                     <ul>
                                         <li>{{ $productData->productName }}</li>
@@ -58,18 +63,30 @@
                                     {{ $productData->productPrice }}
                                 </td>
                                 <td>
+                                    {{ $productData->productUnit->unitMaster->unit }}
+                                </td>
+                                <td>
+                                    {{ $productData->productUnit->detail }}
+                                </td>
+                                <td>
+                                    {{ $productData->productUnit->per }}
+                                </td>
+                                <td>
+                                    {{ $productData->productUnit->sell_price }}
+                                </td>
+                                <td>
                                     {{ $productData->stock }}
                                 </td>
                                 <td>
                                     {{ $productData->season }}
                                 </td>
                                 <td>
-                                    
+
                                     @if (isset($productData->productImages) && $productData->productImages->isNotEmpty())
-                                    <img src="{{ asset('productImage/' . $productData->productImages->first()->url) }}"
-                                        alt="" height="80px" width="50px" style="list-style-type:none">
+                                        <img src="{{ asset('productImage/' . $productData->productImages->first()->url) }}"
+                                            alt="" height="80px" width="50px" style="list-style-type:none">
                                         {{-- <img src="{{ asset('productImage/' . $productData->productImages->first()->url) }}"
-                                            alt="Product Image" /> --}}
+                                    alt="Product Image" /> --}}
                                     @else
                                         <p>No product images available.</p>
                                     @endif
@@ -85,7 +102,6 @@
                                         <i class="fas fa-remove"></i>
                                     </a>
                                 </td>
-
                             </tr>
                         @endforeach
                     @else
