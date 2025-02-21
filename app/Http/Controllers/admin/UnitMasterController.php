@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\UnitMaster;
 use Illuminate\Http\Request;
 
 class UnitMasterController extends Controller
@@ -12,7 +13,8 @@ class UnitMasterController extends Controller
      */
     public function index()
     {
-        //
+        $unitmasters = UnitMaster::where('status', 'active')->get();
+        return view('admin.unitmaster.index', compact('unitmasters'));
     }
 
     /**
@@ -20,7 +22,7 @@ class UnitMasterController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.unitmaster.create');
     }
 
     /**
@@ -28,7 +30,15 @@ class UnitMasterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'unit' => 'required',
+        ]);
+
+        $unitmaster = new UnitMaster();
+        $unitmaster->unit = $request->unit;
+        $unitmaster->save();
+
+        return redirect()->route('unitmaster.index')->with('msg', 'Unit Is Inserted Successfully');
     }
 
     /**
@@ -44,7 +54,8 @@ class UnitMasterController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $unitmasters = UnitMaster::find($id);
+        return view('admin.unitmaster.edit', compact('unitmasters'));
     }
 
     /**
@@ -52,14 +63,47 @@ class UnitMasterController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'unit' => 'required',
+        ]);
+
+        $unitmaster = UnitMaster::find($id);
+        $unitmaster->unit = $request->unit;
+        $unitmaster->save();
+
+        return redirect()->route('unitmaster.index')->with('msg', 'Unit Is Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
-        //
+        $unitmaster = UnitMaster::find($id);
+        $unitmaster->status ='deactive';
+        $unitmaster->save();
+
+        return redirect()->back();
     }
+    public function deactive()
+    {
+        $unitmasters = UnitMaster::where('status', 'deactive')->get();
+        return view('admin.unitmaster.deactivedata', compact('unitmasters'));
+    }
+    public function active($id)
+    {
+        $unitmaster = UnitMaster::find($id);
+        $unitmaster->status = 'active';
+        $unitmaster->save();
+
+        return redirect()->back()->with('msg', 'Status Is Active Successfully');
+    }
+    public function permdelete($id)
+    {
+        $unitmaster = UnitMaster::find($id);
+        $unitmaster->delete();
+
+        return redirect()->back();
+    }
+
 }

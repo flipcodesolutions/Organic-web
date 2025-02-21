@@ -9,7 +9,7 @@
                 <div class="col text-white">
                     <h6 class="mb-0">Create New City</h6>
                 </div>
-                <div class="col">
+                <div class="col" align="right">
                     <a class="btn btn-primary" href="{{ Route('city_master.index') }}">Back</a>
                 </div>
             </div>
