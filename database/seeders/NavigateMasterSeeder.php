@@ -14,12 +14,12 @@ class NavigateMasterSeeder extends Seeder
     {
         ModelsNavigateMaster::create([
             'screenname'=>'Home',
-           'status'=>'active',
+            'status'=>'active',
        ]);
 
        ModelsNavigateMaster::create([
         'screenname'=>'Vegetable',
-       'status'=>'active',
+        'status'=>'active',
    ]);
        
     }

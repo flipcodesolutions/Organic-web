@@ -14,12 +14,11 @@ class VendorReviewController extends Controller
      */
     public function index()
     {
-        $vendor = Auth::user(); // Get the authenticated vendor
-
-        // Fetch reviews for products owned by the vendor
-        $reviews = Review::whereHas('review', function ($query) use ($vendor) {
-            // $query->where('_id', $->id);
-        })->with(['review', 'user'])->get();
+       
+        $vendorId = Auth::id();
+        $reviews = Review::whereHas('product', function ($query) use ($vendorId) {
+            $query->where('vendor_id', $vendorId);
+        })->with('product', 'user')->orderBy('rev_date', 'desc')->paginate(10);
 
         return view('vendor.reviews.index', compact('reviews'));
     }
