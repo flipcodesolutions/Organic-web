@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('city_id');
             $table->string('url');
+            $table->string('slider_screen');
             $table->enum('is_navigate', ['yes', 'no'])->default('no');
             $table->string('navigatemaster_id')->nullable();
             $table->enum('status', ['active', 'deactive','deleted'])->default('active');

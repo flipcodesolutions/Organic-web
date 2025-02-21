@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-@if(Session::has('msg'))
-<p class="alert alert-info">{{ Session::get('msg') }}</p>
-@endif
+    @if (Session::has('msg'))
+        <p class="alert alert-info">{{ Session::get('msg') }}</p>
+    @endif
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">
@@ -12,7 +12,8 @@
                         <h6 class="mb-0">Cms_Master Management</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-primary" href="{{Route('cms_master.create')}}">Add</a>
+                        <a class="btn btn-danger" href="{{Route('cms_master.deactive')}}">Deactive-Data</a>
+                        <a class="btn btn-primary" href="{{ Route('cms_master.create') }}">Add</a>
                     </div>
                 </div>
             </div>
@@ -31,25 +32,29 @@
                     @endphp
                     @foreach ($cms_masters as $cms)
                         <tr>
-                            <td>{{$index++}}</td>
+                            <td>{{ $index++ }}</td>
                             <td>
                                 <ul>
-                                    <li>{{$cms->title}}</li>
-                                    <li>{{$cms->titleGuj}}</li>
-                                    <li>{{$cms->titleHin}}</li>
+                                    <li>{{ $cms->title }}</li>
+                                    <li>{{ $cms->titleGuj }}</li>
+                                    <li>{{ $cms->titleHin }}</li>
                                 </ul>
                             </td>
-                            <td>{{$cms->slug}}</td>
+                            <td>{{ $cms->slug }}</td>
                             <td>
                                 <ul>
-                                    <li>{{$cms->description}}</li>
-                                    <li>{{$cms->descriptionGuj}}</li>
-                                    <li>{{$cms->descriptionHin}}</li>
+                                    <li>{{ $cms->description }}</li>
+                                    <li>{{ $cms->descriptionGuj }}</li>
+                                    <li>{{ $cms->descriptionHin }}</li>
                                 </ul>
                             </td>
-                            <td>
-                                <a href="{{Route('cms_master.edit',$cms->id)}}" class="btn btn-primary">
+                            <td class="d-flex">
+                                <a href="{{ Route('cms_master.edit', $cms->id) }}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                    onclick="openDeleteModal('{{ Route('cms_master.delete', $cms->id) }}')">
+                                    <i class="fas fa-trash"></i>
                                 </a>
                             </td>
                         </tr>
@@ -69,4 +74,34 @@
             </adiv>
         </div>
     </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deactive Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                {{-- <div class="modal-body">
+                    Are you sure you want to delete this Delivery Slot?
+                </div> --}}
+                <div class="modal-footer">
+
+                            <a href="" id="deleteLink" class="btn btn-danger">Yes</a>
+                            <a href="" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openDeleteModal(url) {
+            $('#deleteLink').attr('href', url);
+            $('#confirmDeleteModal').modal('show');
+        }
+    </script>
+
 @endsection

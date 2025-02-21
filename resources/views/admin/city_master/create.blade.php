@@ -10,7 +10,7 @@
                     <h6 class="mb-0">Create New Cms_Master</h6>
                 </div>
                 <div class="col" align="right">
-                    <a class="btn btn-primary" href="{{ Route('cms_master.index') }}">Back</a>
+                    <a class="btn btn-primary" href="{{ Route('city_master.index') }}">Back</a>
                 </div>
             </div>
         </div>

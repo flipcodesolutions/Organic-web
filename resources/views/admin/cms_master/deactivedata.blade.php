@@ -9,10 +9,10 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">DilverySlot Management</h6>
+                        <h6 class="mb-0">Cms_Master Management</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-primary" href="{{ Route('deliveryslot.index') }}">Back</a>
+                        <a class="btn btn-primary" href="{{ Route('cms_master.index') }}">Back</a>
                     </div>
                 </div>
             </div>
@@ -21,26 +21,38 @@
                 <table class="table table-bordered mt-2">
                     <tr>
                         <th>No</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Available</th>
+                        <th>Title</th>
+                        <th>Slug</th>
+                        <th>Description</th>
                         <th>Action</th>
                     </tr>
                     @php
                         $index = 1;
                     @endphp
-                    @foreach ($deliveryslots as $deliveryslots)
+                    @foreach ($cms_masters as $cms_masters)
                         <tr>
                             <td>{{ $index++ }}</td>
-                            <td>{{ $deliveryslots->startTime }}</td>
-                            <td>{{ $deliveryslots->endTime }}</td>
-                            <td>{{ $deliveryslots->isAvailable }}</td>
                             <td>
-                                <a href="{{ Route('deliveryslot.active', $deliveryslots->id) }}" class="btn btn-primary">
+                                <ul>
+                                    <li>{{ $cms_masters->title }}</li>
+                                    <li>{{ $cms_masters->titleGuj }}</li>
+                                    <li>{{ $cms_masters->titleHin }}</li>
+                                </ul>
+                            </td>
+                            <td>{{ $cms_masters->slug }}</td>
+                            <td>
+                                <ul>
+                                    <li>{{ $cms_masters->description }}</li>
+                                    <li>{{ $cms_masters->descriptionGuj }}</li>
+                                    <li>{{ $cms_masters->descriptionHin }}</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <a href="{{ Route('cms_master.active', $cms_masters->id) }}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                    onclick="openDeleteModal('{{ Route('deliveryslot.permdelete', $deliveryslots->id) }}')">
+                                    onclick="openDeleteModal('{{ Route('cms_master.permdelete', $cms_masters->id) }}')">
                                     <i class="fas fa-trash"></i>
                                 </a>
 
