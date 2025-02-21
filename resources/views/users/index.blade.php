@@ -34,17 +34,11 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
-                    @if(!empty($user->getRoleNames()))
-                    @foreach($user->getRoleNames() as $v)
-                    <label class="badge bg-success">{{ $v }}</label>
-                    @endforeach
-                    @endif
+                    {{ $user->role }}
                 </td>
                 <td>
-                    <a class="btn btn-info btn-sm" href="{{ route('users.show',$user->id) }}"><i
-                            class="fa-solid fa-list"></i> Show</a>
-                    <a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}"><i
-                            class="fa-solid fa-pen-to-square"></i> Edit</a>
+                    <a class="btn btn-info btn-sm" href="{{ route('users.show',$user->id) }}"><i class="fa-solid fa-list"></i> Show</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                     <form method="POST" action="{{ route('users.destroy', $user->id) }}" style="display:inline">
                         @csrf
                         @method('DELETE')
@@ -60,5 +54,5 @@
         {!! $data->links('pagination::bootstrap-5') !!}
     </div>
 </div>
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
+
 @endsection

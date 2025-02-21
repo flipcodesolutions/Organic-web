@@ -16,7 +16,7 @@ Route::controller(CategoryController::class)->group(function () {
     Route::post('category/update/{id?}', 'update')->name('category.update');
     Route::get('category/deactive/{id?}', 'deactive')->name('category.deactive');
     Route::get('category/active/{id?}', 'active')->name('category.active');
-    Route::get('category/deleted', 'deleted')->name('category.deleted');
+    Route::get('category/deactiveted', 'deleted')->name('category.deleted');
     Route::get('category/delete/{id?}', 'destroy')->name('category.delete');
 });
 

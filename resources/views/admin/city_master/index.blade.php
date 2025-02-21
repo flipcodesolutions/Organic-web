@@ -27,7 +27,9 @@
             <th>Area (ENG)</th>
             <th>Area (HIN)</th>
             <th>Area (GUJ)</th>
+            <th>Status</th>
             <th>Actions</th>
+            
         </tr>
         @foreach($cities as $city)
         <tr>

@@ -19,7 +19,7 @@ class NavigateMasterSeeder extends Seeder
 
        ModelsNavigateMaster::create([
         'screenname'=>'Vegetable',
-       'status'=>'active',
+        'status'=>'active',
    ]);
        
     }

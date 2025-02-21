@@ -8,13 +8,10 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Category Management</h6>
+                        <h6 class="mb-0">Deactiveted Category</h6>
                     </div>
                     <div class="col" align="right">
-                        <button class="btn btn-primary" type="button" onclick="javascript:history.go(-1)"> Back </button>
-                    {{-- </div>
-                    <div class="col" align="right"> --}}
-                        <a class="btn btn-danger" href="{{ route('category.deleted') }}">Deleted</a>
+                        <a href="{{ route('category.index') }}" class="btn btn-primary" type="button"> Back </a>
                     </div>
                 </div>
             </div>

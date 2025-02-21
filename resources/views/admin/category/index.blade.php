@@ -14,7 +14,7 @@
                         <a class="btn btn-primary" href="{{ route('category.create') }}">Add</a>
                     {{-- </div>
                     <div class="col" align="right"> --}}
-                        <a class="btn btn-danger" href="{{ route('category.deleted') }}">Deleted</a>
+                        <a class="btn btn-danger" href="{{ route('category.deleted') }}">Deactive categories </a>
                     </div>
                 </div>
             </div>
