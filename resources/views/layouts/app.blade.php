@@ -80,11 +80,11 @@
                     <span>Products</span></a>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('module.index') }}">
                     <i class="fa fa-bookmark"></i>
                     <span>Modules</span></a>
-            </li>
+            </li> --}}
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('image.index') }}">
@@ -143,6 +143,11 @@
                 <a class="nav-link" href="{{Route('unitmaster.index')}}">
                     <i class="fa fa-bookmark"></i>
                     <span>UnitMaster</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{Route('slider.index')}}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>Slider</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
