@@ -26,7 +26,7 @@
                                 <div class="col">
                                     <div class="form-floating mb-3">
                                         <select name="city_id" id="floatingInput" class="form-control"
-                                            placeholder="cityname" value="{{ old('city_id') }}">
+                                            placeholder="cityname" value="">
                                             <option selected disabled>--Select your Cityname--</option>
                                             @foreach ($cities as $cities)
                                                 <option

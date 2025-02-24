@@ -40,6 +40,12 @@
     {{-- comman card header css --}}
     <link href="{{ asset('asset/css/card.min.css') }}" rel="stylesheet">
 
+    {{-- sweetalert cdn --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+
+
 </head>
 
 <body id="page-top">
