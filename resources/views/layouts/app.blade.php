@@ -39,6 +39,7 @@
 
     {{-- comman card header css --}}
     <link href="{{ asset('asset/css/card.min.css') }}" rel="stylesheet">
+    
 
 </head>
 
@@ -78,6 +79,23 @@
                 <a class="nav-link" href="{{ route('product.index') }}">
                     <i class="fa fa-bookmark"></i>
                     <span>Products</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('navigate.index') }}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>Navigate</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('notification.index') }}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>Notification</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('pointper.index') }}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>Point Per</span></a>
             </li>
 
             <li class="nav-item">

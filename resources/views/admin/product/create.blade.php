@@ -165,7 +165,6 @@
                         </div>
                     </div>
 
-
                     {{-- product stock --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
