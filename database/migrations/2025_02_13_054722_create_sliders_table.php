@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('sliders', function (Blueprint $table) {
             $table->id();
             $table->integer('city_id');
-            $table->string('url');
-            $table->enum('is_navigate', ['yes', 'no'])->default('no');
+            $table->string('slider_pos');
+            $table->boolean('is_navigate')->default(false);
             $table->string('navigatemaster_id')->nullable();
             $table->enum('status', ['active', 'deactive','deleted'])->default('active');
             $table->timestamps();

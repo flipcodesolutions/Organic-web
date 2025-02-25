@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\PointPer;
 use Illuminate\Http\Request;
 
 class PointPerController extends Controller
@@ -12,7 +13,8 @@ class PointPerController extends Controller
      */
     public function index()
     {
-        //
+        $per = PointPer::get();
+        return view('admin.pointper.index',compact('per'));
     }
 
     /**
@@ -44,15 +46,20 @@ class PointPerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $per = PointPer::find($id);
+        return view('admin.pointper.edit',compact('per'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,$id)
     {
-        //
+        $per = Pointper::find($id);
+        $per->per = $request->pointpercentage;
+        $per->save();
+
+        return redirect()->route('pointper.index')->with('success','Percentage updated successfully!');
     }
 
     /**

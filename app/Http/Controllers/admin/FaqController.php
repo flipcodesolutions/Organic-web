@@ -13,7 +13,7 @@ class FaqController extends Controller
      */
     public function index()
     {
-        $faqs= Faq::all();
+        $faqs= Faq::where('status','active')->get();
         return view('admin.faq.index',compact('faqs'));
     }
 
@@ -93,8 +93,32 @@ class FaqController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
-        //
+        $faq =Faq::find($id);
+        $faq->status = 'deactive';
+        $faq->save();
+
+        return redirect()->back();
+    }
+    public function deactive()
+    {
+        $faqs = Faq::where('status','deactive')->get();
+        return view('admin.faq.deactivedata',compact('faqs'));
+    }
+    public function active(string $id)
+    {
+        $faq =Faq::find($id);
+        $faq->status = 'active';
+        $faq->save();
+
+        return redirect()->back()->with('msg','Status Is Active successfully');
+    }
+    public function permdelete(string $id)
+    {
+        $faq = Faq::find($id);
+        $faq->delete();
+        return redirect()->back();
     }
 }
+

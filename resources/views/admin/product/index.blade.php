@@ -25,6 +25,10 @@
                         <th>Product Name</th>
                         <th>Product Description</th>
                         <th>Product Price</th>
+                        <th>unit</th>
+                        <th>Aprox weight</th>
+                        <th>Discount Percentage</th>
+                        <th>Sell Price</th>
                         <th>Product Stock</th>
                         <th>Season</th>
                         <th>Images</th>
@@ -40,6 +44,7 @@
                                         <li>{{ $productData->categories->categoryNameGuj }}</li>
                                         <li>{{ $productData->categories->categoryNameHin }}</li>
                                     </ul>
+                                </td>
                                 <td>
                                     <ul>
                                         <li>{{ $productData->productName }}</li>
@@ -58,23 +63,32 @@
                                     {{ $productData->productPrice }}
                                 </td>
                                 <td>
+                                    {{ $productData->productUnit->unitMaster->unit }}
+                                </td>
+                                <td>
+                                    {{ $productData->productUnit->detail }}
+                                </td>
+                                <td>
+                                    {{ $productData->productUnit->per }}
+                                </td>
+                                <td>
+                                    {{ $productData->productUnit->sell_price }}
+                                </td>
+                                <td>
                                     {{ $productData->stock }}
                                 </td>
                                 <td>
                                     {{ $productData->season }}
                                 </td>
                                 <td>
-                                    
                                     @if (isset($productData->productImages) && $productData->productImages->isNotEmpty())
-                                    <img src="{{ asset('productImage/' . $productData->productImages->first()->url) }}"
-                                        alt="" height="80px" width="50px" style="list-style-type:none">
+                                        <img src="{{ asset('productImage/' . $productData->productImages->first()->url) }}"
+                                            alt="" height="80px" width="50px" style="list-style-type:none">
                                         {{-- <img src="{{ asset('productImage/' . $productData->productImages->first()->url) }}"
-                                            alt="Product Image" /> --}}
+                                    alt="Product Image" /> --}}
                                     @else
                                         <p>No product images available.</p>
                                     @endif
-
-
                                 </td>
                                 <td>
                                     <a href="{{ route('product.edit') }}/{{ $productData->id }}" class="btn btn-warning">
@@ -85,12 +99,11 @@
                                         <i class="fas fa-remove"></i>
                                     </a>
                                 </td>
-
                             </tr>
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="8" align="center" style="color: red;">
+                            <td colspan="13" align="center" style="color: red;">
                                 <h5>No Data Record Found</h5>
                             </td>
                         </tr>
@@ -103,41 +116,5 @@
             </div>
         </div>
     </div>
-
-    @if (session('success'))
-        <script>
-            toastr.success("{{ session('success') }}", 'Success', {
-                timeOut: 5000
-            });
-        </script>
-    @endif
-
-    @if (session('error'))
-        <script>
-            toastr.error("{{ session('error') }}", 'Error', {
-                timeOut: 5000
-            });
-        </script>
-    @endif
-
-    <script>
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": true,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-    </script>
 
 @endsection

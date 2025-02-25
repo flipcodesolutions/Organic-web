@@ -16,7 +16,6 @@ return new class extends Migration
             $table->integer('productId');
             $table->string('url');
             $table->enum('type', ['photo', 'video'])->default('photo');
-            $table->enum('status', ['active', 'deactive','deleted'])->default('active');
             $table->timestamps();
         });
     }

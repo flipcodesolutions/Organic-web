@@ -24,9 +24,10 @@
                         <div class="col">
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="question" id="" value="{{ old('question') }}"
-                                            placeholder="Enter Question English" class="form-control">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="question" value="{{ old('question') }}"
+                                            class="form-control" id="floatingInput" placeholder="question">
+                                        <label for="floatingInput">Enter question English</label>
                                         <span id="nameError" class="text-danger">
                                             @error('question')
                                                 {{ $message }}
@@ -37,9 +38,10 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="questionguj" id="" value="{{ old('questionguj') }}"
-                                            placeholder="Enter Question Gujarati" class="form-control">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="questionguj" value="{{ old('questionguj') }}"
+                                            class="form-control" id="floatingInput" placeholder="questionguj">
+                                        <label for="floatingInput">Enter question Gujarati</label>
                                         <span id="nameError" class="text-danger">
                                             @error('questionguj')
                                                 {{ $message }}
@@ -50,9 +52,10 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="questionhin" id="" value="{{ old('questionhin') }}"
-                                            placeholder="Enter Question Hindi" class="form-control">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="questionhin" value="{{ old('questionhin') }}"
+                                            class="form-control" id="floatingInput" placeholder="questionhin">
+                                        <label for="floatingInput">Enter question Hindi</label>
                                         <span id="nameError" class="text-danger">
                                             @error('questionhin')
                                                 {{ $message }}
@@ -72,9 +75,10 @@
                         <div class="col">
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="answer" id="" value="{{ old('answer') }}"
-                                            placeholder="Enter Answer English" class="form-control">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="answer" value="{{ old('answer') }}"
+                                            class="form-control" id="floatingInput" placeholder="answer">
+                                        <label for="floatingInput">Enter answer English</label>
                                         <span id="nameError" class="text-danger">
                                             @error('answer')
                                                 {{ $message }}
@@ -85,9 +89,10 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="answerguj" id=""   value="{{ old('answerguj') }}"
-                                            placeholder="Enter Answer Giujarati" class="form-control">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="answerguj" value="{{ old('answerguj') }}"
+                                            class="form-control" id="floatingInput" placeholder="answerguj">
+                                        <label for="floatingInput">Enter answer Gujarati</label>
                                         <span id="nameError" class="text-danger">
                                             @error('answerguj')
                                                 {{ $message }}
@@ -98,9 +103,10 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="answerhin" id="" value="{{ old('answerhin') }}"
-                                            placeholder="Enter Answer Hindi" class="form-control">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="answerhin" value="{{ old('answerhin') }}"
+                                            class="form-control" id="floatingInput" placeholder="answerhin">
+                                        <label for="floatingInput">Enter answer Hindi</label>
                                         <span id="nameError" class="text-danger">
                                             @error('answerhin')
                                                 {{ $message }}
