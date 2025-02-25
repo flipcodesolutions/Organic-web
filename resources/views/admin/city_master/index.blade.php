@@ -3,11 +3,11 @@
 @section('content')
 
 <div class="container">
-    <div class="card shadow-sm  bg-body rounded">
-        <div class="card-header">
+    {{-- <div class="card shadow-sm  bg-body rounded"> --}}
+        <div class="card-header" style="background-color: #19aa5c">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
-                    <h6 class="mb-0">All Citites</h6>
+                    <h2 class="mb-0">All Citites</h2>
                 </div>
                 <div class="col" align="right">
                     <a class="btn btn-danger" href="{{ Route('city_master.deleted') }}">Deleted Data</a>
@@ -17,7 +17,7 @@
             </div>
         </div>
 
-    <table class="table">
+    <table class="table table-striped">
         <tr>
             <th>ID</th>
             <th>City Name (ENG)</th>
@@ -41,8 +41,9 @@
             <td>{{ $city->area_eng }}</td>
             <td>{{ $city->area_hin }}</td>
             <td>{{ $city->area_guj }}</td>
+            <td>{{ $city->status }}</td>
             <td>
-                <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}" >Edit</a>
+                <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}" ><i class="fas fa-edit"></i></a>
         
                 <a href="{{ route('city_master.deactive') }}/{{ $city->id }}" class="btn btn-danger">
                     <i class="fas fa-remove"></i></a>
