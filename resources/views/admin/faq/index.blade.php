@@ -73,36 +73,6 @@
         </div>
     </div>
 
-
-
-    <!-- Confirmation Modal -->
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deactive Data</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                {{-- <div class="modal-body">
-                    Are you sure you want to delete this Delivery Slot?
-                </div> --}}
-                <div class="modal-footer">
-
-                    <a href="" id="deleteLink" class="btn btn-danger">Yes</a>
-                    <a href="" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-
-        function openDeleteModal(url) {
-            $('#deleteLink').attr('href', url);
-        // Show the modal
-        $('#confirmDeleteModal').modal('show');
-    }
-    </script>
+  {{-- sweet alert deactive file includ --}}
+  @include('admin.sweetalert.deactive')
 @endsection

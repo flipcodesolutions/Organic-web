@@ -3,7 +3,7 @@
 use App\Http\Controllers\admin\Cms_MasterController;
 use App\Http\Controllers\admin\DeliverySlotController;
 use App\Http\Controllers\admin\FaqController;
-use App\Http\Controllers\admin\ModuleController;
+// use App\Http\Controllers\admin\ModuleController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\UnitMasterController;
 use Illuminate\Support\Facades\Route;
@@ -46,18 +46,18 @@ Route::controller(FaqController::class)->group(function () {
     Route::get('faq/permdelete/{id}','permdelete')->name('faq.permdelete');
 });
 
-//slider route
-// Route::controller(SliderController::class)->group(function(){
-//     // Route::get('slider/index', 'index')->name('slider.index');
-//     Route::get('slider/create', 'create')->name('slider.create');
-//     // Route::post('slider/store', 'store')->name('slider.store');
-//     // Route::get('slider/edit/{id}', 'edit')->name('slider.edit');
-//     // Route::post('slider/update/{id}', 'update')->name('slider.update');
-//     // Route::get('slider/delete/{id}', 'delete')->name('slider.delete');
-//     // Route::get('slider/active/{id}', 'active')->name('slider.active');
-//     // Route::get('slider/deactive', 'deactive')->name('slider.deactive');
-//     // Route::get('slider/permdelete/{id}','permdelete')->name('slider.permdelete');
-// });
+// slider route
+Route::controller(SliderController::class)->group(function(){
+    Route::get('slider/index', 'index')->name('slider.index');
+    Route::get('slider/create', 'create')->name('slider.create');
+    Route::post('slider/store', 'store')->name('slider.store');
+    Route::get('slider/edit/{id}', 'edit')->name('slider.edit');
+    Route::post('slider/update/{id}', 'update')->name('slider.update');
+    Route::get('slider/delete/{id}', 'delete')->name('slider.delete');
+    Route::get('slider/active/{id}', 'active')->name('slider.active');
+    Route::get('slider/deactive', 'deactive')->name('slider.deactive');
+    Route::get('slider/permdelete/{id}','permdelete')->name('slider.permdelete');
+});
 
 // unitmaster route
 Route::controller(UnitMasterController::class)->group(function(){
@@ -73,6 +73,6 @@ Route::controller(UnitMasterController::class)->group(function(){
 });
 
 // module route
-Route::controller(ModuleController::class)->group(function () {
-    Route::get('module/index', 'index')->name('module.index');
-});
+// Route::controller(ModuleController::class)->group(function () {
+//     Route::get('module/index', 'index')->name('module.index');
+// });

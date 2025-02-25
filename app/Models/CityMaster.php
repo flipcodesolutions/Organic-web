@@ -23,10 +23,11 @@ class CityMaster extends Model
     {
         return $this->hasMany(LandmarkMaster::class, 'city_id','id');
     }
+    public function sliders()
+    {
+        return $this->hasMany(Slider::class, 'city_id');
+    }
 }
 
-    // public function sliders()
-    // {
-    //     return $this->hasMany(Slider::class, 'city_id');
-    // }
+
 

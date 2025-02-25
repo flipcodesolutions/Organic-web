@@ -41,6 +41,12 @@
     <link href="{{ asset('asset/css/card.min.css') }}" rel="stylesheet">
     
 
+    {{-- sweetalert cdn --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+
+
 </head>
 
 <body id="page-top">
@@ -99,10 +105,11 @@
             </li>
 
             <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('module.index') }}">
                     <i class="fa fa-bookmark"></i>
                     <span>Modules</span></a>
-            </li>
+            </li> --}}
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('image.index') }}">
@@ -161,6 +168,11 @@
                 <a class="nav-link" href="{{Route('unitmaster.index')}}">
                     <i class="fa fa-bookmark"></i>
                     <span>UnitMaster</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{Route('slider.index')}}">
+                    <i class="fa fa-bookmark"></i>
+                    <span>Slider</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">

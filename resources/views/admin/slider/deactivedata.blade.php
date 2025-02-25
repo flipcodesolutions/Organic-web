@@ -9,10 +9,10 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">UnitMaster Management</h6>
+                        <h6 class="mb-0">Slider Management</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-primary" href="{{Route('unitmaster.index')}}">Back</a>
+                        <a class="btn btn-primary" href="{{Route('slider.index')}}">Back</a>
                     </div>
                 </div>
             </div>
@@ -20,22 +20,35 @@
                 <table class="table table-bordered mt-2">
                     <tr>
                         <th>No</th>
-                        <th>Unit</th>
+                        <th>CityName</th>
+                        <th>SliderPos</th>
+                        <th>Is_Navigate</th>
+                        <th>ScreenName</th>
                         <th>Action</th>
                     </tr>
                     @php
                         $index = 1;
                     @endphp
-                    @foreach ($unitmasters as $unitmasters)
+                    @foreach ($sliders as $sliders)
                         <tr>
                             <td>{{ $index++ }}</td>
-                            <td>{{ $unitmasters->unit }}</td>
+                            <td>{{ $sliders->city->city_name_eng }}</td>
+                            <td>{{ $sliders->slider_pos }}</td>
                             <td>
-                                <a href="{{Route('unitmaster.active',$unitmasters->id)}}" class="btn btn-primary">
+                                @if ($sliders->is_navigate=='1')
+                                Yes
+                        @else
+                                No
+
+                        @endif
+                            </td>
+                            <td>{{ $sliders->navigatemaster->screenname }}</td>
+                            <td>
+                                <a href="{{Route('slider.active',$sliders->id)}}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                    onclick="openDeleteModal('{{Route('unitmaster.permdelete',$unitmasters->id)}}')">
+                                    onclick="openDeleteModal('{{Route('slider.permdelete',$sliders->id)}}')">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -48,5 +61,4 @@
 
     {{-- sweet alert delete file include --}}
     @include('admin.sweetalert.delete')
-
-@endsection
+  @endsection

@@ -14,6 +14,7 @@ class Slider extends Model
         return $this->belongsTo(NavigateMaster::class);
     }
 
+
     // it willl be in cities and navigationmasters table
     // public function slider(){
     //     return $this->hasMany(Slider::class);
