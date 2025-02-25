@@ -83,9 +83,9 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating mb-3">
-                                        <input type="text" name="description" value="{{ old('description') }}"
-                                            class="form-control" id="floatingInput" placeholder="description">
-                                        <label for="floatingInput">Enter description English</label>
+                                        <textarea class="ckeditor form-control" name="description" value="{{ old('description') }}" placeholder="description"
+                                            id="floatingTextarea"></textarea>
+                                        {{-- <label for="floatingTextarea">Enter description English</label> --}}
                                         <span id="nameError" class="text-danger">
                                             @error('description')
                                                 {{ $message }}
@@ -97,9 +97,9 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating mb-3">
-                                        <input type="text" name="descriptionguj" value="{{ old('descriptionguj') }}"
-                                            class="form-control" id="floatingInput" placeholder="descriptionguj">
-                                        <label for="floatingInput">Enter description Gujarati</label>
+                                        <textarea class="ckeditor form-control" name="descriptionguj" value="{{ old('descriptionguj') }}" placeholder="descriptionguj"
+                                            id="floatingTextarea"></textarea>
+                                        {{-- <label for="floatingTextarea">Enter description Gujarati</label> --}}
                                         <span id="nameError" class="text-danger">
                                             @error('descriptionguj')
                                                 {{ $message }}
@@ -111,9 +111,9 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating mb-3">
-                                        <input type="text" name="descriptionhin" value="{{ old('descriptionhin') }}"
-                                            class="form-control" id="floatingInput" placeholder="descriptionhin">
-                                        <label for="floatingInput">Enter description Hindi</label>
+                                        <textarea class="ckeditor form-control" name="descriptionhin" value="{{ old('descriptionhin') }}" placeholder="descriptionhin"
+                                            id="floatingTextarea"></textarea>
+                                        {{-- <label for="floatingTextarea">Enter description Hindi</label> --}}
                                         <span id="nameError" class="text-danger">
                                             @error('descriptionhin')
                                                 {{ $message }}
@@ -135,4 +135,13 @@
             </div>
         </div>
     </div>
+
+    {{-- ck editor --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('.ckeditor').ckeditor();
+
+        });
+    </script>
 @endsection

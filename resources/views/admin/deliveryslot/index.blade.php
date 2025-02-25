@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    @if (Session::has('msg'))
-        <p class="alert alert-info">{{ Session::get('msg') }}</p>
-    @endif
+
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">
@@ -29,28 +27,34 @@
                     @php
                         $index = 1;
                     @endphp
-                    @foreach ($deliveryslots as $deliveryslot)
+                    @if (count($deliveryslots) > 0)
+                        @foreach ($deliveryslots as $deliveryslot)
+                            <tr>
+                                <td>{{ $index++ }}</td>
+                                <td>{{ $deliveryslot->startTime }}</td>
+                                <td>{{ $deliveryslot->endTime }}</td>
+                                <td>{{ $deliveryslot->isAvailable }}</td>
+                                <td>
+                                    <a href="{{ Route('deliveryslot.edit', $deliveryslot->id) }}" class="btn btn-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        onclick="openDeactiveModal('{{ Route('deliveryslot.delete', $deliveryslot->id) }}')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
                         <tr>
-                            <td>{{ $index++ }}</td>
-                            <td>{{ $deliveryslot->startTime }}</td>
-                            <td>{{ $deliveryslot->endTime }}</td>
-                            <td>{{ $deliveryslot->isAvailable }}</td>
-                            <td>
-                                <a href="{{ Route('deliveryslot.edit', $deliveryslot->id) }}" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                    onclick="openDeleteModal('{{ Route('deliveryslot.delete', $deliveryslot->id) }}')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
+                            <td colspan="8" align="center" style="color: red;">
+                                <h5>No Data Record Found</h5>
                             </td>
                         </tr>
-                    @endforeach
+                    @endif
                 </table>
             </div>
         </div>
     </div>
 
-    {{-- sweet alert deactive file includ --}}
-    @include('admin.sweetalert.deactive')
 @endsection

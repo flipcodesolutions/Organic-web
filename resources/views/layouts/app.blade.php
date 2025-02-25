@@ -39,10 +39,10 @@
 
     {{-- comman card header css --}}
     <link href="{{ asset('asset/css/card.min.css') }}" rel="stylesheet">
-    
+
 
     {{-- sweetalert cdn --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
 
@@ -845,6 +845,63 @@
     @endif
 
 
+    {{-- SweetAlert2 toast notification code--}}
+    @if (Session::has('msg'))
+    <script>
+        Swal.fire({
+            icon: "{{ Session::get('msg_type') ?? 'success' }}", // You can pass 'msg_type' to change the icon dynamically
+            title: "{{ Session::get('msg') }}",
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+    </script>
+@endif
+
+
+    {{-- sweet alert deactive code--}}
+<script>
+    function openDeactiveModal(url) {
+        Swal.fire({
+            title: 'Are you sure you want to deactive it?',
+            text: "You will be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            // confirmButtonColor: '#d33',
+            // cancelButtonColor: '#6e7881',
+            confirmButtonText: 'Yes, Deactive it!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to the delete route
+                window.location.href = url;
+            }
+        });
+    }
+</script>
+
+ {{-- sweet alert delete code --}}
+<script>
+    function openDeleteModal(url) {
+        Swal.fire({
+            title: 'Are you sure you want to delete it?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6e7881',
+            confirmButtonText: 'Yes, Delete it!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to the delete route
+                window.location.href = url;
+            }
+        });
+    }
+</script>
+
+
     {{-- <script>
         var type =
             '{{ session()->get('success') ? 'success' : (session()->get('error') ? 'error' : ($errors->any() ? 'error' : '')) }}';
@@ -869,6 +926,9 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('asset/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('asset/js/demo/chart-pie-demo.js') }}"></script>
+
+    {{-- ckeditor cdn --}}
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
 </body>
 
