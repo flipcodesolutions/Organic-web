@@ -17,7 +17,7 @@ class VendorReviewController extends Controller
        
         $vendorId = Auth::id();
         $reviews = Review::whereHas('product', function ($query) use ($vendorId) {
-            $query->where('vendor_id', $vendorId);
+            $query->where('user_id', $vendorId);
         })->with('product', 'user')->orderBy('rev_date', 'desc')->paginate(10);
 
         return view('vendor.reviews.index', compact('reviews'));

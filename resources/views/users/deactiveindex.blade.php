@@ -1,8 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    @if (Session::has('msg'))
-        <p class="alert alert-info">{{ Session::get('msg') }}</p>
-    @endif
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">
@@ -12,8 +9,7 @@
                         <h6 class="mb-0">Users Management</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-danger" href="{{ route('user.deactiveindex') }}">Deactive Users</a>
-                        <a class="btn btn-primary" href="{{ route('user.create') }}">Add</a>
+                        <a class="btn btn-primary" href="{{ Route('user.index') }}">Back</a>
                     </div>
                 </div>
             </div>
@@ -21,27 +17,25 @@
                 <table class="table table-bordered mt-2">
                     <tr>
                         <th>No</th>
-                        <th>User image</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Roles</th>
-                        <th>Action</th>
+                        <th width="280px">Action</th>
                     </tr>
-                    
+
                     @foreach ($data as $key => $user)
                         <tr>
-                            <td>{{ ++$i }}</td>
-                            <td><img src="{{ $user->pro_pic}}" alt="profile_picture" class="img-profile rounded-circle">
+                            <td>{{ $key + 1 }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
                                 {{ $user->role }}
                             </td>
                             <td>
-                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">
+                                <a href="{{ route('user.active', $user->id) }}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                    onclick="openDeleteModal('{{ route('user.deactive', $user->id) }}')">
+                                    onclick="openDeleteModal('{{ route('user.delete', $user->id) }}')">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
