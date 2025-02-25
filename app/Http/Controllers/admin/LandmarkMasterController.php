@@ -62,8 +62,8 @@ class LandmarkMasterController extends Controller
 
             $landmarkmasters = new LandmarkMaster();
             $landmarkmasters->city_id = $request->city_name_eng;
-            $landmarkmasters->city_id = $request->city_name_hin;
-            $landmarkmasters->city_id = $request->city_name_guj;
+            // $landmarkmasters->city_id = $request->city_name_hin;
+            // $landmarkmasters->city_id = $request->city_name_guj;
 
             $landmarkmasters->landmark_eng = $request->landmark_eng;
             $landmarkmasters->landmark_hin = $request->landmark_hin;

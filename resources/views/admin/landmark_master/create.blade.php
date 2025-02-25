@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="col">
+            <!-- <div class="col">
                 <div class="form-floating">
                     <select class="form-control" name="city_name_hin" id="exampleFormControlSelect1">
                         <option value="">-- Select City --</option>
@@ -69,16 +69,16 @@
                     <span id="nameError" class="text-danger"></span>
                 </div>
             </div>  
-        </div>
+        </div> -->
 
 
-        <div class="row mb-3">
+        <div class="row my-3">
             <div class="col-sm-12 col-lg-3 col-md-12">
                     Landmark Name : <span class="text-danger">*</span>
             </div>
 
             <div class="col">
-                <div class="form-floating">
+                <div class="col">
                         <input type="text" name="landmark_eng" class="form-control" placeholder="English" id="#" aria-describedby="#">
                         @error('landmark english')
                             <span class="text-danger">{{ $message }}</span>

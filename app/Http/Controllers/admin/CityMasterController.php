@@ -113,7 +113,7 @@ class CityMasterController extends Controller
             $citymaster->area_guj = $request->area_guj;
 
             $citymaster->save();
-            return redirect()->back();
+            return redirect()->route('city_master.index');;
         }  
         catch (\Exception $e) {
             return response()->json([
