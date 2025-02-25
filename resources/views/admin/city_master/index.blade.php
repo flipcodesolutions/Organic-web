@@ -10,14 +10,13 @@
                     <h6 class="mb-0">All Citites</h6>
                 </div>
                 <div class="col" align="right">
-                    <a class="btn btn-danger" href="{{ Route('city_master.deactivedata') }}">Deactive-Data</a>
+                    <a class="btn btn-danger" href="{{ Route('city_master.deleted') }}">Deleted Data</a>
 
                     <a href="{{ route('city_master.create') }}" class="btn btn-primary">Add City</a>
                 </div>
             </div>
         </div>
 
-    
     <table class="table">
         <tr>
             <th>ID</th>
@@ -28,7 +27,9 @@
             <th>Area (ENG)</th>
             <th>Area (HIN)</th>
             <th>Area (GUJ)</th>
+            <th>Status</th>
             <th>Actions</th>
+            
         </tr>
         @foreach($cities as $city)
         <tr>
@@ -43,9 +44,9 @@
             <td>
                 <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}" >Edit</a>
         
-                <a href="{{ route('city_master.deactivedata') }}/{{ $city->id }}" class="btn btn-danger">
-                    <i class="fas fa-remove"></i>
-            </a>
+                <a href="{{ route('city_master.deactive') }}/{{ $city->id }}" class="btn btn-danger">
+                    <i class="fas fa-remove"></i></a>
+            
             </td>
         </tr>
         @endforeach

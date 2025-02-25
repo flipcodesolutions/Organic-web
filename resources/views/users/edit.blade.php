@@ -13,14 +13,14 @@
 </div>
 
 @if (count($errors) > 0)
-    <div class="alert alert-danger">
-      <strong>Whoops!</strong> There were some problems with your input.<br><br>
-      <ul>
-         @foreach ($errors->all() as $error)
-           <li>{{ $error }}</li>
-         @endforeach
-      </ul>
-    </div>
+<div class="alert alert-danger">
+    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
 
 <form method="POST" action="{{ route('users.update', $user->id) }}">
@@ -57,10 +57,10 @@
                 <strong>Role:</strong>
                 <select name="roles[]" class="form-control" multiple="multiple">
                     @foreach ($roles as $value => $label)
-                        <option value="{{ $value }}" {{ isset($userRole[$value]) ? 'selected' : ''}}>
-                            {{ $label }}
-                        </option>
-                     @endforeach
+                    <option value="{{ $value }}" {{ isset($userRole[$value]) ? 'selected' : ''}}>
+                        {{ $label }}
+                    </option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -70,5 +70,5 @@
     </div>
 </form>
 
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
+
 @endsection

@@ -12,6 +12,7 @@
                         <h6 class="mb-0">Faq Management</h6>
                     </div>
                     <div class="col" align="right">
+                        <a class="btn btn-danger" href="{{Route('faq.deactive')}}">Deactive-Data</a>
                         <a class="btn btn-primary" href="{{Route('faq.create')}}">Add</a>
                     </div>
                 </div>
@@ -49,6 +50,10 @@
                                 <a href="{{Route('faq.edit',$faqs->id)}}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
                                 </a>
+                                <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                    onclick="openDeleteModal('{{ Route('faq.delete', $faqs->id) }}')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -67,4 +72,7 @@
             </adiv>
         </div>
     </div>
+
+  {{-- sweet alert deactive file includ --}}
+  @include('admin.sweetalert.deactive')
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\NavigateMaster;
 use Illuminate\Http\Request;
 
 class NavigateMasterController extends Controller
@@ -12,7 +13,9 @@ class NavigateMasterController extends Controller
      */
     public function index()
     {
-        //
+        $screen = NavigateMaster::where('status', 'active')->paginate(10);
+        // return $screen;
+        return view('admin.navigate.index', compact('screen'));
     }
 
     /**
@@ -20,7 +23,7 @@ class NavigateMasterController extends Controller
      */
     public function create()
     {
-        //
+        return view(('admin.navigate.create'));
     }
 
     /**
@@ -28,7 +31,13 @@ class NavigateMasterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        $screen = new NavigateMaster();
+
+        $screen->screenname = $request->screenName;
+        $screen->save();
+
+        return redirect()->route('navigate.index')->with('success', 'New screen created successfully!');
     }
 
     /**
@@ -42,24 +51,59 @@ class NavigateMasterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $screen = NavigateMaster::find($id);
+
+        return view('admin.Navigate.edit', compact('screen'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $screen = NavigateMaster::find($id);
+        $screen->screenname = $request->screenName;
+        $screen->save();
+
+        return redirect()->route('navigate.index')->with('success', 'Screen updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $screen = NavigateMaster::find($id);
+        $screen->delete();
+
+        return redirect()->back()->with('success','Screen deleted successfully! ');
+    }
+
+    public function deactive($id)
+    {
+        $screen = NavigateMaster::find($id);
+        $screen->status = 'deactive';
+        $screen->save();
+
+        return redirect()->back()->with('success','Screen Deactivated successfully!');
+    }
+
+    public function deactiveindex()
+    {
+        $screen = NavigateMaster::where('status','deactive')->paginate(10);
+        
+        return view('admin.navigate.deactive',compact('screen'));
+    }
+
+    public function active($id)
+    {
+        $screen = NavigateMaster::find($id);
+
+        $screen->status = 'active';
+        $screen->save();
+
+        return redirect()->route('navigate.index')->with('success','Screen activated Successfully!');
     }
 }

@@ -13,7 +13,7 @@ class Cms_MasterController extends Controller
      */
     public function index()
     {
-        $cms_masters = Cms_Master::all();
+        $cms_masters = Cms_Master::where('status', 'active')->get();
         return view('admin.cms_master.index', compact('cms_masters'));
     }
 
@@ -99,8 +99,33 @@ class Cms_MasterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
-        //
+        $cms_master = Cms_Master::find($id);
+        $cms_master->status = 'deactive';
+        $cms_master->save();
+
+        return redirect()->back();
     }
+    public function deactive()
+    {
+        $cms_masters = Cms_Master::where('status', 'deactive')->get();
+        return view('admin.cms_master.deactivedata', compact('cms_masters'));
+    }
+    public function active($id)
+    {
+        $cms_master = Cms_Master::find($id);
+        $cms_master->status = 'active';
+        $cms_master->save();
+
+        return redirect()->back()->with('msg', 'Status Is Active successfully.');
+    }
+    public function permdelete(string $id)
+    {
+        $cms_master = Cms_Master::find($id);
+        $cms_master->delete();
+
+        return redirect()->back();
+    }
+
 }

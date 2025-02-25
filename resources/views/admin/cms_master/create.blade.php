@@ -22,9 +22,10 @@
                             title <span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="form-floating">
-                                <input type="text" name="title" value="{{old('title')}}" id="" placeholder="English"
-                                    class="form-control">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="title" value="{{ old('title') }}" class="form-control"
+                                    id="floatingInput" placeholder="English">
+                                <label for="floatingInput">English</label>
                                 <span id="nameError" class="text-danger">
                                     @error('title')
                                         {{ $message }}
@@ -33,9 +34,10 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-floating">
-                                <input type="text" name="titleguj" value="{{old('titleguj')}}" id="" placeholder="Gujarati"
-                                    class="form-control">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="titleguj" value="{{ old('titleguj') }}" class="form-control"
+                                    id="floatingInput" placeholder="Gujarati">
+                                <label for="floatingInput">Gujarati</label>
                                 <span id="nameError" class="text-danger">
                                     @error('titleguj')
                                         {{ $message }}
@@ -44,9 +46,10 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-floating">
-                                <input type="text" name="titlehin" value="{{old('titlehin')}}" id="" placeholder="Hindi"
-                                    class="form-control">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="titlehin" value="{{ old('titlehin') }}" class="form-control"
+                                    id="floatingInput" placeholder="Hindi">
+                                <label for="floatingInput">Hindi</label>
                                 <span id="nameError" class="text-danger">
                                     @error('titlehin')
                                         {{ $message }}
@@ -61,7 +64,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="slug" value="{{old('slug')}}" id="" placeholder="" class="form-control">
+                                <input type="text" name="slug" value="{{ old('slug') }}" id=""
+                                    placeholder="" class="form-control">
                                 <span id="nameError" class="text-danger">
                                     @error('slug')
                                         {{ $message }}
@@ -78,9 +82,10 @@
                         <div class="col">
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="description" value="{{old('description')}}" id="" placeholder="English"
-                                            class="form-control">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="description" value="{{ old('description') }}"
+                                            class="form-control" id="floatingInput" placeholder="description">
+                                        <label for="floatingInput">Enter description English</label>
                                         <span id="nameError" class="text-danger">
                                             @error('description')
                                                 {{ $message }}
@@ -91,9 +96,10 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="descriptionguj" value="{{old('descriptionguj')}}" id="" placeholder="Giujarati"
-                                            class="form-control">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="descriptionguj" value="{{ old('descriptionguj') }}"
+                                            class="form-control" id="floatingInput" placeholder="descriptionguj">
+                                        <label for="floatingInput">Enter description Gujarati</label>
                                         <span id="nameError" class="text-danger">
                                             @error('descriptionguj')
                                                 {{ $message }}
@@ -104,9 +110,10 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="descriptionhin" value="{{old('descriptionhin')}}" id="" placeholder="Hindi"
-                                            class="form-control">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="descriptionhin" value="{{ old('descriptionhin') }}"
+                                            class="form-control" id="floatingInput" placeholder="descriptionhin">
+                                        <label for="floatingInput">Enter description Hindi</label>
                                         <span id="nameError" class="text-danger">
                                             @error('descriptionhin')
                                                 {{ $message }}

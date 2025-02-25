@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ImagesController;
+use App\Http\Controllers\admin\NavigateMasterController;
+use App\Http\Controllers\admin\NotificationController;
+use App\Http\Controllers\admin\PointPerController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductPriceController;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +34,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('product/deactiveproducts', 'deactiveindex')->name('product.deactiveindex');
     Route::get('product/active/{id?}','active')->name('product.active');
     Route::get('product/delete/{id?}','destroy')->name('product.delete');
-    Route::get('product/image/deactive/{id?}','deactiveimage')->name('productimage.deactive');
+    Route::get('product/image/delete/{id?}','destroyimage')->name('productimage.delete');
 });
 
 // product price route
@@ -44,3 +47,35 @@ Route::controller(ImagesController::class)->group(function () {
     Route::get('image/index', 'index')->name('image.index');
 });
 
+// Navigate route
+Route::controller(NavigateMasterController::class)->group(function(){
+    Route::get('navigate/index','index')->name('navigate.index');
+    Route::get('navigate/create','create')->name('navigate.create');
+    Route::post('navigate/store','store')->name('navigate.store');
+    Route::get('navigate/edit/{id?}','edit')->name('navigate.edit');
+    Route::post('navigate/update/{id?}','update')->name('navigate.update');
+    Route::get('navigate/deactive/{id?}','deactive')->name('navigate.deactive');
+    Route::get('navigate/deactiveindex','deactiveindex')->name('navigate.deactiveindex');
+    Route::get('navigate/active/{id?}','active')->name('navigate.active');
+    Route::get('navigate/delete/{id?}','destroy')->name('navigate.delete');
+});
+
+// Notification route
+Route::controller(NotificationController::class)->group(function(){
+    Route::get('notification/index','index')->name('notification.index');
+    Route::get('notification/create','create')->name('notification.create');
+    Route::post('notification/store','store')->name('notification.store');
+    Route::get('notification/edit/{id?}','edit')->name('notification.edit');
+    Route::post('notification/update/{id?}','update')->name('notification.update');
+    Route::get('notification/deactive/{id?}','deactive')->name('notification.deactive');
+    Route::get('notification/deactiveindex','deactiveindex')->name('notification.deactiveindex');
+    Route::get('notification/active/{id?}','active')->name('notification.active');
+    Route::get('notification/delete/{id?}','destroy')->name('notification.delete');
+});
+
+// point per route
+Route::controller(PointPerController::class)->group(function(){
+    Route::get('pointper/index','index')->name('pointper.index');
+    Route::get('pointper/edit/{id?}','edit')->name('pointper.edit');
+    Route::post('pointper/update/{id?}','update')->name('pointper.update');
+});
