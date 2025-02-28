@@ -117,18 +117,18 @@
             <span>Modules</span></a>
             </li> --}}
 
-            <li class="nav-item mb-0">
+            {{-- <li class="nav-item mb-0">
                 <a class="nav-link" href="{{ route('image.index') }}" title="Manage Images">
                     <i class="fas fa-image"></i>
                     <span style="font-size:20px">Images</span></a>
-            </li>
+            </li> --}}
 
-            <li class="nav-item mb-0">
+            {{-- <li class="nav-item mb-0">
                 <a class="nav-link" href="{{ route('product.price.index') }}" title="Manage Product Pricing">
                     <i class="fas fa-tag"></i>
                     <span style="font-size:20px">Product-Price</span></a>
             </li>
-
+ --}}
             <li class="nav-item mb-0">
                 <a class="nav-link" href="{{ route('city_master.index') }}" title="Manage Cities">
                     <i class="fas fa-city"></i>
