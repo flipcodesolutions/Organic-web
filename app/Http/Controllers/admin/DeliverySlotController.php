@@ -32,7 +32,7 @@ class DeliverySlotController extends Controller
         $deliveryslot->isAvailable=$request->isavailable;
         $deliveryslot->save();
 
-        return redirect()->route('deliveryslot.index')->with('msg', 'Data Is Inserted successfully');
+        return redirect()->route('deliveryslot.index')->with('msg', 'DeliverySlot Created Successfully');
     }
     public function edit($id)
     {
@@ -52,14 +52,14 @@ class DeliverySlotController extends Controller
         $deliveryslot->isAvailable=$request->isavailable;
         $deliveryslot->save();
 
-        return redirect()->route('deliveryslot.index')->with('msg', 'Data Is Updated successfully');
+        return redirect()->route('deliveryslot.index')->with('msg', 'DeliverySlot Updated Successfully');
     }
     public function delete($id)
     {
         $deliveryslot = DeliverySlot::find($id);
         $deliveryslot->status = 'deactive';
         $deliveryslot->save();
-        return redirect()->back();
+        return redirect()->route('deliveryslot.index')->with('msg', 'DeliverySlot Deactivated Successfully');
     }
     public function deactive()
     {
@@ -72,13 +72,13 @@ class DeliverySlotController extends Controller
         $deliveryslot = DeliverySlot::find($id);
         $deliveryslot->status = 'active';
         $deliveryslot->save();
-        return redirect()->route('deliveryslot.deactive')->with('msg', 'Status Active successfully');
+        return redirect()->route('deliveryslot.index')->with('msg', 'DeliverySlot Activated Successfully');
     }
 
     public function permdelete($id)
     {
         $deliveryslot =DeliverySlot::find($id);
         $deliveryslot->delete();
-        return redirect()->back();
+        return redirect()->route('deliveryslot.index')->with('msg', 'DeliverySlot Deleted Successfully');
     }
 }

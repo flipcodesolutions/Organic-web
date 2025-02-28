@@ -39,10 +39,10 @@
 
     {{-- comman card header css --}}
     <link href="{{ asset('asset/css/card.min.css') }}" rel="stylesheet">
-    
+
 
     {{-- sweetalert cdn --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
 
@@ -104,7 +104,7 @@
                     <span>Point Per</span></a>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item"> --}}
             {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('module.index') }}">
                     <i class="fa fa-bookmark"></i>
@@ -121,6 +121,28 @@
                 <a class="nav-link" href="{{ route('product.price.index') }}">
                     <i class="fa fa-university"></i>
                     <span>Product-Price</span></a>
+            {{-- <li class="nav-item">
+                <a class="nav-link" href="{{ route('module.index') }}">
+            <i class="fa fa-bookmark"></i>
+            <span>Modules</span></a>
+            </li> --}}
+
+            {{-- <li class="nav-item mb-0">
+                <a class="nav-link" href="{{ route('image.index') }}" title="Manage Images">
+                    <i class="fas fa-image"></i>
+                    <span style="font-size:20px">Images</span></a>
+            </li> --}}
+
+            {{-- <li class="nav-item mb-0">
+                <a class="nav-link" href="{{ route('product.price.index') }}" title="Manage Product Pricing">
+                    <i class="fas fa-tag"></i>
+                    <span style="font-size:20px">Product-Price</span></a>
+            </li>
+ --}}
+            <li class="nav-item mb-0">
+                <a class="nav-link" href="{{ route('city_master.index') }}" title="Manage Cities">
+                    <i class="fas fa-city"></i>
+                    <span style="font-size:20px">Cities</span></a>
             </li>
 
             <li class="nav-item">
@@ -189,13 +211,13 @@
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('users.index') }}">User List</a>
+                        <a class="collapse-item" href="{{ route('user.index') }}">User List</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Role Management</span>
@@ -205,7 +227,9 @@
                         <a class="collapse-item" href="{{ route('roles.index') }}">Role List</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
+
+            
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -218,7 +242,22 @@
                     </div>
                 </div>
             </li>
-
+            
+            <!-- Reports -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+                    aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fa-solid fa-file"></i>
+                    <span>Reports</span>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('reports.purchaseReport') }}">Purchase Report</a>
+                    </div>
+                </div>
+            </li>
+        
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -542,6 +581,9 @@
                         </div>
                     </div> --}}
 
+                    <!-- Page level custom scripts -->
+                    <script src="{{ asset('asset/js/demo/chart-area-demo.js') }}"></script>
+                    <script src="{{ asset('asset/js/demo/chart-pie-demo.js') }}"></script>
                     <!-- Content Row -->
 
                     {{-- <div class="row">
@@ -845,6 +887,63 @@
     @endif
 
 
+    {{-- SweetAlert2 toast notification code--}}
+    @if (Session::has('msg'))
+    <script>
+        Swal.fire({
+            icon: "{{ Session::get('msg_type') ?? 'success' }}", // You can pass 'msg_type' to change the icon dynamically
+            title: "{{ Session::get('msg') }}",
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+    </script>
+@endif
+
+
+    {{-- sweet alert deactive code--}}
+<script>
+    function openDeactiveModal(url) {
+        Swal.fire({
+            title: 'Are you sure you want to deactive it?',
+            text: "You will be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            // confirmButtonColor: '#d33',
+            // cancelButtonColor: '#6e7881',
+            confirmButtonText: 'Yes, Deactive it!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to the delete route
+                window.location.href = url;
+            }
+        });
+    }
+</script>
+
+ {{-- sweet alert delete code --}}
+<script>
+    function openDeleteModal(url) {
+        Swal.fire({
+            title: 'Are you sure you want to delete it?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6e7881',
+            confirmButtonText: 'Yes, Delete it!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to the delete route
+                window.location.href = url;
+            }
+        });
+    }
+</script>
+
+
     {{-- <script>
         var type =
             '{{ session()->get('success') ? 'success' : (session()->get('error') ? 'error' : ($errors->any() ? 'error' : '')) }}';
@@ -869,6 +968,9 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('asset/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('asset/js/demo/chart-pie-demo.js') }}"></script>
+
+    {{-- ckeditor cdn --}}
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
 </body>
 

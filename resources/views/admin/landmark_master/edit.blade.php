@@ -44,7 +44,7 @@
                                 <option value="{{  $citymaster->id }}">{{ $citymaster->city_name_guj }}</option>
                             @endforeach
                         </select>
-                    </div>
+                </div>
 
 
                 <div class="mb-3">

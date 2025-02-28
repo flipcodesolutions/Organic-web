@@ -43,7 +43,7 @@
             </div>
 
 
-        <div class="row mb-3">
+        <div class="row my-3">
             <div class="col-sm-12 col-lg-3 col-md-12">
                     Landmark Name : <span class="text-danger">*</span>
             </div>

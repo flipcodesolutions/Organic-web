@@ -16,20 +16,20 @@ class ProductimageSeeder extends Seeder
             [
                 'id' => '1',
                 'productid' => '1',
-                'url' => 'product/carrot.jpg',
+                'url' => 'carrot.jpg',
                 'type' => 'photo',
                 
             ],
             [
                 'id' => '2',
                 'productid' => '2',
-                'url' => 'product/palak.jpg',
+                'url' => 'palak.jpg',
                 'type' => 'photo',
             ],
             [
                 'id' => '3',
                 'productid' => '3',
-                'url' => 'product/pineapple.jpg',
+                'url' => 'pineapple.jpg',
                 'type' => 'photo',
                 
             ]

@@ -7,8 +7,21 @@ use App\Http\Controllers\admin\NotificationController;
 use App\Http\Controllers\admin\PointPerController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductPriceController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+// user route
+Route::controller(UserController::class)->group(function(){
+    Route::get('user/index','index')->name('user.index');
+    Route::get('user/create','create')->name('user.create');
+    Route::post('user/store','store')->name('user.store');
+    Route::get('user/edit/{id?}','edit')->name('user.edit');
+    Route::post('user/update/{id?}','update')->name('user.update');
+    Route::get('user/deactive/{id?}','deactive')->name('user.deactive');
+    Route::get('user/active/{id?}','active')->name('user.active');
+    Route::get('user/deactiveindex','deactiveindex')->name('user.deactiveindex');
+    Route::get('user/delete/{id?}','destoroy')->name('user.delete');
+});
 
 // category route
 Route::controller(CategoryController::class)->group(function () {
@@ -35,16 +48,6 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('product/active/{id?}','active')->name('product.active');
     Route::get('product/delete/{id?}','destroy')->name('product.delete');
     Route::get('product/image/delete/{id?}','destroyimage')->name('productimage.delete');
-});
-
-// product price route
-Route::controller(ProductPriceController::class)->group(function () {
-    Route::get('product/price', 'price')->name('product.price.index');
-});
-
-// image route
-Route::controller(ImagesController::class)->group(function () {
-    Route::get('image/index', 'index')->name('image.index');
 });
 
 // Navigate route
@@ -79,3 +82,4 @@ Route::controller(PointPerController::class)->group(function(){
     Route::get('pointper/edit/{id?}','edit')->name('pointper.edit');
     Route::post('pointper/update/{id?}','update')->name('pointper.update');
 });
+

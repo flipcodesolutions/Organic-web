@@ -15,6 +15,8 @@ class ProductController extends Controller
 {
     public function index()
     {
+        // return  Auth::user();
+    
         try {
             $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
                 $query->where('status', 'active');

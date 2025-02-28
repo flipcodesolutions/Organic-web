@@ -16,18 +16,18 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         $this->call([
-            // UserSeeder::class,
-             //CityMasterSeeder::class,
-             //LandmarkMasterSeeder::class,
-             //ContactSeeder::class,
-            // PointPerSeeder::class,
-           // DeliverySlotSeeder::class,
-           // UnitMasterSeeder::class,
-            //NavigateMasterSeeder::class,
-            //Cms_Masterseeder::class,
-            //CategorySeeder::class,
-            //ProductImageSeeder::class,
-            //ProductSeeder::class,
+            UserSeeder::class,
+            CityMasterSeeder::class,
+            LandmarkMasterSeeder::class,
+            ContactSeeder::class,
+            PointPerSeeder::class,
+            DeliverySlotSeeder::class,
+            UnitMasterSeeder::class,
+            NavigateMasterSeeder::class,
+            Cms_Masterseeder::class,
+            CategorySeeder::class,
+            ProductImageSeeder::class,
+            ProductSeeder::class,
             UnitSeeder::Class
         ]);
 
