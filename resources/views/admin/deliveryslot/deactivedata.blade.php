@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    @if (Session::has('msg'))
-        <p class="alert alert-info">{{ Session::get('msg') }}</p>
-    @endif
+
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">
@@ -29,31 +27,33 @@
                     @php
                         $index = 1;
                     @endphp
-                    @foreach ($deliveryslots as $deliveryslots)
+                    @if (count($deliveryslots) > 0)
+                        @foreach ($deliveryslots as $deliveryslots)
+                            <tr>
+                                <td>{{ $index++ }}</td>
+                                <td>{{ $deliveryslots->startTime }}</td>
+                                <td>{{ $deliveryslots->endTime }}</td>
+                                <td>{{ $deliveryslots->isAvailable }}</td>
+                                <td>
+                                    <a href="{{ Route('deliveryslot.active', $deliveryslots->id) }}"
+                                        class="btn btn-primary">
+                                        <i class="fas fa-undo"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        onclick="openDeleteModal('{{ Route('deliveryslot.permdelete', $deliveryslots->id) }}')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
                         <tr>
-                            <td>{{ $index++ }}</td>
-                            <td>{{ $deliveryslots->startTime }}</td>
-                            <td>{{ $deliveryslots->endTime }}</td>
-                            <td>{{ $deliveryslots->isAvailable }}</td>
-                            <td>
-                                <a href="{{ Route('deliveryslot.active', $deliveryslots->id) }}" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                    onclick="openDeleteModal('{{ Route('deliveryslot.permdelete', $deliveryslots->id) }}')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-
-                            </td>
-                        </tr>
-                    @endforeach
-
-                    {{-- <tr>
                             <td colspan="8" align="center" style="color: red;">
                                 <h5>No Data Record Found</h5>
                             </td>
-                        </tr> --}}
-
+                        </tr>
+                    @endif
                 </table>
                 {{-- table end --}}
 
@@ -62,6 +62,4 @@
         </div>
     </div>
 
-   {{-- sweet alert delete file include --}}
-   @include('admin.sweetalert.delete')
 @endsection

@@ -38,7 +38,7 @@ class UnitMasterController extends Controller
         $unitmaster->unit = $request->unit;
         $unitmaster->save();
 
-        return redirect()->route('unitmaster.index')->with('msg', 'Unit Is Inserted Successfully');
+        return redirect()->route('unitmaster.index')->with('msg', 'UnitMaster Created Successfully');
     }
 
     /**
@@ -71,7 +71,7 @@ class UnitMasterController extends Controller
         $unitmaster->unit = $request->unit;
         $unitmaster->save();
 
-        return redirect()->route('unitmaster.index')->with('msg', 'Unit Is Updated Successfully');
+        return redirect()->route('unitmaster.index')->with('msg', 'UnitMaster Updated Successfully');
     }
 
     /**
@@ -83,7 +83,7 @@ class UnitMasterController extends Controller
         $unitmaster->status ='deactive';
         $unitmaster->save();
 
-        return redirect()->back();
+        return redirect()->route('unitmaster.index')->with('msg', 'UnitMaster Deactivated Successfully');
     }
     public function deactive()
     {
@@ -96,14 +96,14 @@ class UnitMasterController extends Controller
         $unitmaster->status = 'active';
         $unitmaster->save();
 
-        return redirect()->back()->with('msg', 'Status Is Active Successfully');
+        return redirect()->route('unitmaster.index')->with('msg', 'UnitMaster Activated Successfully');
     }
     public function permdelete($id)
     {
         $unitmaster = UnitMaster::find($id);
         $unitmaster->delete();
 
-        return redirect()->back();
+        return redirect()->route('unitmaster.index')->with('msg', 'UnitMaster Deleted Successfully');
     }
 
 }

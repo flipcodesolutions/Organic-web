@@ -46,7 +46,7 @@ class FaqController extends Controller
         $faq->answerGuj= $request->answerguj;
         $faq->answerHin= $request->answerhin;
         $faq->save();
-        return redirect()->route('faq.index')->with('msg','Data Is Inserted successfully');
+        return redirect()->route('faq.index')->with('msg', 'Faq Created Successfully');
     }
 
     /**
@@ -87,7 +87,7 @@ class FaqController extends Controller
         $faq->answerGuj= $request->answerguj;
         $faq->answerHin= $request->answerhin;
         $faq->save();
-        return redirect()->route('faq.index')->with('msg','Data Is Updated successfully');
+        return redirect()->route('faq.index')->with('msg', 'Faq Updated Successfully');
     }
 
     /**
@@ -98,8 +98,7 @@ class FaqController extends Controller
         $faq =Faq::find($id);
         $faq->status = 'deactive';
         $faq->save();
-
-        return redirect()->back();
+        return redirect()->route('faq.index')->with('msg', 'Faq Deactivated Successfully');
     }
     public function deactive()
     {
@@ -111,14 +110,13 @@ class FaqController extends Controller
         $faq =Faq::find($id);
         $faq->status = 'active';
         $faq->save();
-
-        return redirect()->back()->with('msg','Status Is Active successfully');
+        return redirect()->route('faq.index')->with('msg', 'Faq Activated Successfully');
     }
     public function permdelete(string $id)
     {
         $faq = Faq::find($id);
         $faq->delete();
-        return redirect()->back();
+        return redirect()->route('faq.index')->with('msg', 'Faq Deleted Successfully');
     }
 }
 

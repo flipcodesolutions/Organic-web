@@ -46,7 +46,7 @@ class SliderController extends Controller
         $slider->navigatemaster_id = $request->navigatemaster_id;
         $slider->save();
 
-        return redirect()->route('slider.index')->with('msg', 'Data Is Inserted successfully');
+        return redirect()->route('slider.index')->with('msg', 'Slider Created Successfully');
     }
 
     /**
@@ -85,7 +85,7 @@ class SliderController extends Controller
         $slider->navigatemaster_id = $request->navigatemaster_id;
         $slider->save();
 
-        return redirect()->route('slider.index')->with('msg','Data Is Updated Successfuly');
+        return redirect()->route('slider.index')->with('msg', 'Slider Updated Successfully');
 
     }
 
@@ -98,7 +98,7 @@ class SliderController extends Controller
         $slider->status='deactive';
         $slider->save();
 
-        return redirect()->back();
+        return redirect()->route('slider.index')->with('msg', 'Slider Deactivated Successfully');
     }
     public function deactive()
     {
@@ -111,7 +111,7 @@ class SliderController extends Controller
        $slider->status ='active';
        $slider->save();
 
-       return redirect()->back()->with('msg','Status Is Active Successfuly');
+       return redirect()->route('slider.index')->with('msg', 'Slider Activated Successfully');
 
     }
     public function permdelete($id)
@@ -119,6 +119,6 @@ class SliderController extends Controller
         $slider =Slider::find($id);
         $slider->delete();
 
-        return redirect()->back();
+        return redirect()->route('slider.index')->with('msg', 'Slider Deleted Successfully');
     }
 }
