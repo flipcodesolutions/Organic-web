@@ -35,7 +35,7 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"><img src="{{asset('image/veggi.jpeg')}}" class="img-fluid rounded m-auto"></div>
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"><img src="{{asset('user_profile/veggi.jpeg')}}" class="img-fluid rounded m-auto"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
