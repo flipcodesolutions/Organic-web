@@ -13,4 +13,7 @@ Route::get('/user', function (Request $request) {
 Route::post('/registerApi', [RegisterController::class, 'registerApi']);
 
 Route::get('users', [UserController::class, 'index']);
-Route::post('user/store',[UserController::class,'store']);
+Route::post('user/store', [UserController::class, 'store']);
+
+Route::post('sendOtp', [UserController::class, 'sendOtp']);
+Route::post('verifyOtp', [UserController::class, 'verifyOtp']);

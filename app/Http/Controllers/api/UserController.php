@@ -9,9 +9,75 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Services\TwilioVerifyService;
 
 class UserController extends Controller
 {
+    protected $twilioService;
+
+    public function __construct(TwilioVerifyService $twilioService)
+    {
+        $this->twilioService = $twilioService;
+    }
+
+    public function sendOtp(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'phone' => 'required',
+            ]);
+            if ($validator->fails()) {
+                Util::getErrorMessage('Validation Failed', $validator->errors());
+            }
+            // $otp = rand(1000, 9999);
+            $this->twilioService->sendOtp($request->phone);
+
+
+            return  Util::getSuccessMessage('OTP sent successfully');
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'otp' => 'required',
+                'phone' => 'required|digits:10'
+            ]);
+
+            if ($validator->fails()) {
+                return Util::getErrorMessage("Validation failed", $validator->errors());
+            }
+
+            $verification = $this->twilioService->verifyOtp($request->phone, $request->otp);
+
+            if ($verification->status !== 'approved') {
+                return Util::getErrorMessage("Invalid OTP. Please try again.");
+            }
+
+            // Check if user already exists
+            $user = User::where('phone', $request->phone)->first();
+
+            if (!$user) {
+                $user = new User();
+                $user->phone = $request->phone;
+                $user->is_verify_phone = 'yes';
+                $user->save();
+            }
+
+            // Generate authentication token
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            return Util::getSuccessMessage('User logged in successfully', [
+                'token' => $token,
+                'user' => $user
+            ]);
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
     /**
      * Display a listing of the resource.
      */
