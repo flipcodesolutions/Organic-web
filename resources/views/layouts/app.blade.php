@@ -214,7 +214,7 @@
                 </div>
             </li> --}}
 
-            
+
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -227,7 +227,7 @@
                     </div>
                 </div>
             </li>
-            
+
             <!-- Reports -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
@@ -242,7 +242,7 @@
                     </div>
                 </div>
             </li>
-        
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -760,7 +760,12 @@
     <script src="{{ asset('asset/js/demo/chart-pie-demo.js') }}"></script>
 
     {{-- ckeditor cdn --}}
-    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    {{-- <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script> --}}
+
+    <script src="{{ asset('asset/js/ckeditor/ckeditor.js') }}"></script>
+
+
+
 
 </body>
 
