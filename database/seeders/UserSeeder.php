@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
             [
                 'name'=>'Manager',
                 'email'=>'manager@gmail.com',
-                'password'=>'123456',
+                'password'=>Hash::make(123456),
                 'phone'=>'7272727272',
                 'role'=>'Manager',
                 'pro_pic'=>'ManagerImage.jpeg',

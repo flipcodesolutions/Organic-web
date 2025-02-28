@@ -17,6 +17,11 @@
             </div>
         </div>
 
+
+        
+
+
+
         <div class="card-body table-resposnive">
             <div class="loader"></div>
             <table class="table table-bordered">
@@ -49,7 +54,7 @@
 
                     <td>
                         <a class="btn btn-primary" href="{{ route('landmark.edit',$landmark->id)}}"><i class="fas fa-edit"></i></a>
-                        
+
                         <a href="{{ route('landmark.deactive') }}/{{ $landmark->id }}" class="btn btn-danger">
                             <i class="fas fa-trash"></i></a>
                     </td>

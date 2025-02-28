@@ -55,14 +55,14 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color:  #161e22">
+        <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color:  #81A263">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html" style="background-color: #3E8EF7  !important;">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html" style="background-color: #365E32  !important;">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fa fa-shopping-cart"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3 ">E-comm</div>
+                <div class="sidebar-brand-text mx-3 ">Vegetable E-comm</div>
             </a>
 
             <!-- Divider -->
@@ -72,129 +72,125 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span class="ms-3">Dashboard</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('category.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Categories</span></a>
+                    <i class="fa fa-list"></i>
+                    <span class="ms-3">Categories</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('product.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Products</span></a>
+                    <i class="fa fa-carrot"></i>
+                    <span class="ms-3">Products</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('navigate.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Navigate</span></a>
+                    <i class="fa fa-location-dot"></i>
+                    <span class="ms-3">Navigate</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('notification.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Notification</span></a>
+                    <i class="fa fa-bell"></i>
+                    <span class="ms-3">Notification</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('pointper.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Point Per</span></a>
+                    <i class="fa fa-basket-shopping"></i>
+                    <span class="ms-3">Point Per</span></a>
             </li>
 
             {{-- <li class="nav-item"> --}}
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="{{ route('module.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Modules</span></a>
-            </li> --}}
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('image.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Images</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('product.price.index') }}">
-                    <i class="fa fa-university"></i>
-                    <span>Product-Price</span></a>
             {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('module.index') }}">
             <i class="fa fa-bookmark"></i>
             <span>Modules</span></a>
             </li> --}}
 
+            {{-- <li class="nav-item">
+                <a class="nav-link" href="{{ route('image.index') }}">
+            <i class="fa fa-bookmark"></i>
+            <span>Images</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('product.price.index') }}">
+                    <i class="fa fa-university"></i>
+                    <span>Product-Price</span></a> --}}
+                {{-- <li class="nav-item">
+                <a class="nav-link" href="{{ route('module.index') }}">
+                <i class="fa fa-bookmark"></i>
+                <span>Modules</span></a>
+            </li> --}}
+
             {{-- <li class="nav-item mb-0">
                 <a class="nav-link" href="{{ route('image.index') }}" title="Manage Images">
-                    <i class="fas fa-image"></i>
-                    <span style="font-size:20px">Images</span></a>
+            <i class="fas fa-image"></i>
+            <span style="font-size:20px">Images</span></a>
             </li> --}}
 
             {{-- <li class="nav-item mb-0">
                 <a class="nav-link" href="{{ route('product.price.index') }}" title="Manage Product Pricing">
-                    <i class="fas fa-tag"></i>
-                    <span style="font-size:20px">Product-Price</span></a>
+            <i class="fas fa-tag"></i>
+            <span style="font-size:20px">Product-Price</span></a>
             </li>
- --}}
-            <li class="nav-item mb-0">
-                <a class="nav-link" href="{{ route('city_master.index') }}" title="Manage Cities">
-                    <i class="fas fa-city"></i>
-                    <span style="font-size:20px">Cities</span></a>
-            </li>
+            --}}
+
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('city_master.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Cities</span></a>
+                    <i class="fa fa-location-pin"></i>
+                    <span class="ms-3">Cities</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('landmark.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Landmark</span></a>
+                    <i class="fa fa-street-view"></i>
+                    <span class="ms-3">Landmark</span></a>
             </li>
 
             @if(Auth::user()->role == "Admin")
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.reviews.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Admin Reviews</span></a>
+                    <i class="fa fa-comment"></i>
+                    <span class="ms-3">Admin Reviews</span></a>
             </li>
             @endif
+
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('vendor.reviews.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Vendor Reviews</span></a>
+                    <i class="fa fa-comment"></i>
+                    <span class="ms-3">Vendor Reviews</span></a>
             </li>
-
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ Route('deliveryslot.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>DeliverySlot</span></a>
+                    <i class="fa fa-truck"></i>
+                    <span class="ms-3">DeliverySlot</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ Route('cms_master.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Cms_Master</span></a>
+                    <i class="fa fa-list-check"></i>
+                    <span class="ms-3">Cms_Master</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ Route('faq.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Faq</span></a>
+                    <i class="fa fa-person-circle-question"></i>
+                    <span class="ms-3">Faq</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{Route('unitmaster.index')}}">
                     <i class="fa fa-bookmark"></i>
-                    <span>UnitMaster</span></a>
+                    <span class="ms-3">UnitMaster</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{Route('slider.index')}}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Slider</span></a>
+                    <i class="fa fa-photo-film"></i>
+                    <span class="ms-3">Slider</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -225,277 +221,275 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('roles.index') }}">Role List</a>
-                    </div>
-                </div>
-            </li> --}}
-
-            
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Permission Management</span>
-                </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('permission.index') }}">Pemission List</a>
-                    </div>
-                </div>
-            </li>
-            
-            <!-- Reports -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
-                    aria-expanded="true" aria-controls="collapseFour">
-                    <i class="fa-solid fa-file"></i>
-                    <span>Reports</span>
-                </a>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('reports.purchaseReport') }}">Purchase Report</a>
-                    </div>
-                </div>
-            </li>
-        
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+    </div>
+    </div>
+    </li> --}}
 
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Permission Management</span>
+        </a>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('permission.index') }}">Pemission List</a>
             </div>
+        </div>
+    </li>
 
-        </ul>
-        <!-- End of Sidebar -->
+    <!-- Reports -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+            <i class="fa-solid fa-file"></i>
+            <span>Reports</span>
+        </a>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('reports.purchaseReport') }}">Purchase Report</a>
+            </div>
+        </div>
+    </li>
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
-            <!-- Main Content -->
-            <div id="content">
 
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
 
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Search -->
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
                         </div>
-                    </form>
+                    </div>
+                </form>
 
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                            <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Alerts -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw"></i>
+                            <!-- Counter - Alerts -->
+                            <span class="badge badge-danger badge-counter">3+</span>
+                        </a>
+                        <!-- Dropdown - Alerts -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">
+                                Alerts Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-alt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 12, 2019</div>
+                                    <span class="font-weight-bold">A new monthly report is ready to
+                                        download!</span>
+                                </div>
                             </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-success">
+                                        <i class="fas fa-donate text-white"></i>
                                     </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 7, 2019</div>
+                                    $290.29 has been deposited into your account!
+                                </div>
                             </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-warning">
+                                        <i class="fas fa-exclamation-triangle text-white"></i>
                                     </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to
-                                            download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All
-                                    Alerts</a>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 2, 2019</div>
+                                    Spending Alert: We've noticed unusually high spending for your account.
+                                </div>
                             </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Message Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy
-                                            with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More
-                                    Messages</a>
-                            </div>
-                        </li>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All
+                                Alerts</a>
+                        </div>
+                    </li>
 
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle" src="{{ asset('asset/img/undraw_profile.svg') }}">
+                    <!-- Nav Item - Messages -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-envelope fa-fw"></i>
+                            <!-- Counter - Messages -->
+                            <span class="badge badge-danger badge-counter">7</span>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                            <h6 class="dropdown-header">
+                                Message Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                        problem I've been having.</div>
+                                    <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                </div>
                             </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
+                                    <div class="status-indicator"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">I have the photos that you ordered last month, how
+                                        would you like them sent to you?</div>
+                                    <div class="small text-gray-500">Jae Chun · 1d</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
+                                    <div class="status-indicator bg-warning"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">Last month's report looks great, I am very happy
+                                        with
+                                        the progress so far, keep up the good work!</div>
+                                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                        told me that people say this to all dogs, even if they aren't good...</div>
+                                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Read More
+                                Messages</a>
+                        </div>
+                    </li>
+
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                            <img class="img-profile rounded-circle" src="{{ asset('asset/img/undraw_profile.svg') }}">
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Settings
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Activity Log
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    {{ __('Logout') }}
-                                </a>
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                {{ __('Logout') }}
+                            </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
 
-                                {{--
+                            {{--
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a> --}}
-                            </div>
-                        </li>
+                        </div>
+                    </li>
 
-                    </ul>
+                </ul>
 
-                </nav>
-                <!-- End of Topbar -->
+            </nav>
+            <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        {{-- <h1 class="h3 mb-0 text-gray-800">Dashboard</h1> --}}
-                        {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    {{-- <h1 class="h3 mb-0 text-gray-800">Dashboard</h1> --}}
+                    {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
-                    </div>
+                </div>
 
-                    <!-- Content Row -->
-                    <div class="card-body">
-                        @yield('content')
-                    </div>
-                    {{-- <div class="row">
+                <!-- Content Row -->
+                <div class="card-body">
+                    @yield('content')
+                </div>
+                {{-- <div class="row">
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
@@ -581,12 +575,12 @@
                         </div>
                     </div> --}}
 
-                    <!-- Page level custom scripts -->
-                    <script src="{{ asset('asset/js/demo/chart-area-demo.js') }}"></script>
-                    <script src="{{ asset('asset/js/demo/chart-pie-demo.js') }}"></script>
-                    <!-- Content Row -->
+                <!-- Page level custom scripts -->
+                <script src="{{ asset('asset/js/demo/chart-area-demo.js') }}"></script>
+                <script src="{{ asset('asset/js/demo/chart-pie-demo.js') }}"></script>
+                <!-- Content Row -->
 
-                    {{-- <div class="row">
+                {{-- <div class="row">
 
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
@@ -662,8 +656,8 @@
                         </div>
                     </div> --}}
 
-                    <!-- Content Row -->
-                    {{-- <div class="row">
+                <!-- Content Row -->
+                {{-- <div class="row">
 
                         <!-- Content Column -->
                         <div class="col-lg-6 mb-4">
@@ -815,24 +809,24 @@
                         </div>
                     </div> --}}
 
-                </div>
-                <!-- /.container-fluid -->
-
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2025</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2025</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
@@ -892,56 +886,59 @@
     <script>
         Swal.fire({
             icon: "{{ Session::get('msg_type') ?? 'success' }}", // You can pass 'msg_type' to change the icon dynamically
-            title: "{{ Session::get('msg') }}",
-            toast: true,
-            position: 'top-right',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true
+            title: "{{ Session::get('msg') }}"
+            , toast: true
+            , position: 'top-right'
+            , showConfirmButton: false
+            , timer: 3000
+            , timerProgressBar: true
         });
+
     </script>
-@endif
+    @endif
 
 
     {{-- sweet alert deactive code--}}
-<script>
-    function openDeactiveModal(url) {
-        Swal.fire({
-            title: 'Are you sure you want to deactive it?',
-            text: "You will be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            // confirmButtonColor: '#d33',
-            // cancelButtonColor: '#6e7881',
-            confirmButtonText: 'Yes, Deactive it!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Redirect to the delete route
-                window.location.href = url;
-            }
-        });
-    }
-</script>
+    <script>
+        function openDeactiveModal(url) {
+            Swal.fire({
+                title: 'Are you sure you want to deactive it?'
+                , text: "You will be able to revert this!"
+                , icon: 'warning'
+                , showCancelButton: true,
+                // confirmButtonColor: '#d33',
+                // cancelButtonColor: '#6e7881',
+                confirmButtonText: 'Yes, Deactive it!'
+            , }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to the delete route
+                    window.location.href = url;
+                }
+            });
+        }
 
- {{-- sweet alert delete code --}}
-<script>
-    function openDeleteModal(url) {
-        Swal.fire({
-            title: 'Are you sure you want to delete it?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#6e7881',
-            confirmButtonText: 'Yes, Delete it!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Redirect to the delete route
-                window.location.href = url;
-            }
-        });
-    }
-</script>
+    </script>
+
+    {{-- sweet alert delete code --}}
+    <script>
+        function openDeleteModal(url) {
+            Swal.fire({
+                title: 'Are you sure you want to delete it?'
+                , text: "You won't be able to revert this!"
+                , icon: 'warning'
+                , showCancelButton: true
+                , confirmButtonColor: '#d33'
+                , cancelButtonColor: '#6e7881'
+                , confirmButtonText: 'Yes, Delete it!'
+            , }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to the delete route
+                    window.location.href = url;
+                }
+            });
+        }
+
+    </script>
 
 
     {{-- <script>

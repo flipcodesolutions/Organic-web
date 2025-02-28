@@ -12,8 +12,9 @@ class LandmarkMasterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+    
             $landmarkmasters = LandmarkMaster::with('CityMaster')->get();
             return view('admin.landmark_master.index', compact('landmarkmasters'));   
     }
