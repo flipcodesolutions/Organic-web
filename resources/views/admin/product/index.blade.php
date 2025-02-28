@@ -81,7 +81,6 @@
                                     {{ $productData->season }}
                                 </td>
                                 <td>
-
                                     @if (isset($productData->productImages) && $productData->productImages->isNotEmpty())
                                         <img src="{{ asset('productImage/' . $productData->productImages->first()->url) }}"
                                             alt="" height="80px" width="50px" style="list-style-type:none">
@@ -90,8 +89,6 @@
                                     @else
                                         <p>No product images available.</p>
                                     @endif
-
-
                                 </td>
                                 <td>
                                     <a href="{{ route('product.edit') }}/{{ $productData->id }}" class="btn btn-warning">
@@ -106,7 +103,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="8" align="center" style="color: red;">
+                            <td colspan="13" align="center" style="color: red;">
                                 <h5>No Data Record Found</h5>
                             </td>
                         </tr>

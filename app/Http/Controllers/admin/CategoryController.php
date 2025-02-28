@@ -147,8 +147,8 @@ class CategoryController extends Controller
     public function deleted()
     {
         try {
-            $categories = Category::where('status', 'deactive')->paginate(10);;
-            return view('admin.category.deleted', compact('categories'));
+            $categories = Category::where('status', 'deactive')->paginate(10);
+            return view('admin.category.deactive', compact('categories'));
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');

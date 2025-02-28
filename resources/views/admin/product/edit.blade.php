@@ -18,7 +18,6 @@
                 <form id="productForm" action="{{ route('product.update', $product->id) }}" enctype="multipart/form-data"
                     method="post">
                     @csrf
-                    <!-- This is necessary for PUT request -->
 
                     {{-- product --}}
                     <div class="row mb-3">
@@ -105,6 +104,68 @@
                         </div>
                     </div>
 
+                    {{-- unit --}}
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Unit<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <table class="table table-bordered mt-2" id="unitTable">
+                                <thead>
+                                    <tr>
+                                        <th>Unit</th>
+                                        <th>Detail (aprox Weight)</th>
+                                        <th>Discount Percentage</th>
+                                        <th>Sell Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select class="form-select form-select-lg mb-3" name="unit_id"
+                                                aria-label="Large select example">
+                                                <option selected>Select Unit</option>
+                                                @foreach ($units as $data)
+                                                    <option value="{{ $data->id }}" {{ $product->productUnit ? 'selected' : '' }}>{{ $data->unit }}</option>
+                                                @endforeach
+                                            </select>
+                                            <span id="unitIdError" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            <div class="form-floating">
+                                                <input type="text" name="unit_det" id="unit_det"
+                                                    placeholder="Unit Detail in Aprox Weight" class="form-control" value="{{ $product->productUnit->detail }}">
+                                                <label for="">Aprox Weight</label>
+                                                <span id="unitdetailError" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-floating">
+                                                <input type="text" name="discount_per" id="discount_per"
+                                                    placeholder="Discount Percentage" class="form-control" value="{{ $product->productUnit->per }}">
+                                                <label for="">Discount Per </label>
+                                                <span id="discountperError" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-floating">
+                                                <input type="text" name="sellin_price" id="selling_price"
+                                                    placeholder="Selling Price" class="form-control" value="{{ $product->productUnit->sell_price }}">
+                                                <label for="">Selling Price</label>
+                                                <span id="sellingpriceError" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        {{-- <td style="display: flex; gap:5px">
+                                            <a class="btn btn-primary my-2" id="addUnit">+</a>
+                                            <a class="btn btn-danger my-2" id="removeUnit">-</a>
+                                        </td> --}}
+                                    </tr>
+                                </tbody>
+                                {{-- <span id="unitTable"></span> --}}
+                            </table>
+                        </div>
+                    </div>
+
                     {{-- product stock --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
@@ -183,8 +244,8 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="form-floating" id="videoInput">
-                                        <input type="text" class="form-control" id="videoLink" name="new_video_link[]"
-                                            placeholder="Enter video link">
+                                        <input type="text" class="form-control" id="videoLink"
+                                            name="new_video_link[]" placeholder="Enter video link">
                                         <span id="videolinklist"> </span>
                                         <label for="videoLink">Video Link</label>
                                         <a class="btn btn-primary my-2" id="addVideo">+</a>
@@ -436,34 +497,34 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-    
-                const addVideoButton = document.getElementById("addVideo");
-                const videoLinkInput = document.getElementById("videoLink");
-    
-                document.getElementById('addVideo').addEventListener('click', function() {
-    
-                    const list = document.getElementById('videolinklist');
-    
-                    let newinput = document.createElement('input');
-                    newinput.type = 'text';
-                    newinput.classList.add('form-control', 'my-1');
-                    newinput.id = 'videoLink';
-                    newinput.name = 'new_video_link[]';
-                    newinput.placeholder = 'Enter video link';
-    
-    
-                    list.appendChild(newinput);
-                });
-    
-                document.getElementById('removeVideo').addEventListener('click', function() {
-                    const link = document.getElementById('videolinklist');
-                    link.removeChild(link.lastElementChild);
-                });
-            })
-        </script>
-        
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const addVideoButton = document.getElementById("addVideo");
+            const videoLinkInput = document.getElementById("videoLink");
+
+            document.getElementById('addVideo').addEventListener('click', function() {
+
+                const list = document.getElementById('videolinklist');
+
+                let newinput = document.createElement('input');
+                newinput.type = 'text';
+                newinput.classList.add('form-control', 'my-1');
+                newinput.id = 'videoLink';
+                newinput.name = 'new_video_link[]';
+                newinput.placeholder = 'Enter video link';
+
+
+                list.appendChild(newinput);
+            });
+
+            document.getElementById('removeVideo').addEventListener('click', function() {
+                const link = document.getElementById('videolinklist');
+                link.removeChild(link.lastElementChild);
+            });
+        })
+    </script>
+
     {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
 

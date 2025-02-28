@@ -18,7 +18,7 @@ class ProductController extends Controller
         try {
             $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
                 $query->where('status', 'active');
-            })->with(['categories', 'productImages','productUnit.unitMaster'])->paginate(10);
+            })->with(['categories', 'productImages', 'productUnit.unitMaster'])->paginate(10);
             // return $products;    
             return view('admin.product.index', compact('products'));
         } catch (\Exception $e) {
@@ -32,9 +32,9 @@ class ProductController extends Controller
         try {
 
             $categories = Category::where('status', 'active')->get();
-            $units = UnitMaster::where('status','active')->get();
+            $units = UnitMaster::where('status', 'active')->get();
             // return $units;
-            return view('admin.product.create', compact('categories','units'));
+            return view('admin.product.create', compact('categories', 'units'));
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
@@ -43,7 +43,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        try {
+        // try {
             // return $request;
             // $request->validate([
             //     'product_image' => 'required'
@@ -83,7 +83,7 @@ class ProductController extends Controller
                 }
             }
 
-            if ($request->has('video_link')) {
+            if ($request->new_video_link !== null) {
                 foreach ($request->video_link as $data) {
                     ProductImage::create([
                         'productId' => $product->id,
@@ -107,27 +107,28 @@ class ProductController extends Controller
             ]);
 
             return redirect()->route('product.index')->with('success', 'Product created successfully!');
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function edit($id)
     {
         try {
-            $product = Product::with('productImages')->find($id);
+            $product = Product::with('productImages')->with('productUnit.unitMaster')->find($id);
             // return $product;
             $categories = Category::where('status', 'active')->get();
+            $units = UnitMaster::where('status', 'active')->get();
 
-            return view('admin.product.edit', compact('product', 'categories'));
+            return view('admin.product.edit', compact('product', 'categories', 'units'));
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!')->with('exception_message', $e->getMessage());;
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
         try {
             // return $request;
@@ -239,6 +240,14 @@ class ProductController extends Controller
             $product->image = ProductImage::where(['productId' => $id,])->first()->url;
             $product->save();
 
+            Unit::where('product_id', $id)->update([
+                'unit' => $request->unit_id,
+                'price' => $request->product_price,
+                'detail' => $request->unit_det,
+                'per' => $request->discount_per,
+                'sell_price' => $request->sellin_price
+            ]);
+
             return redirect()->route('product.index')->with('success', 'Product updated successfully!');
         } catch (\Exception $e) {
 
@@ -289,7 +298,8 @@ class ProductController extends Controller
     public function deactiveindex()
     {
         try {
-            $products = Product::where('status', 'deactive')->paginate(10);
+            $products = Product::where('status', 'deactive')->with(['categories', 'productImages', 'productUnit.unitMaster'])->paginate(10);
+            // return $products;
             return view('admin.product.deactiveproduct', compact('products'));
         } catch (\Exception $e) {
 
@@ -316,6 +326,8 @@ class ProductController extends Controller
     public function destroy($id)
     {
         try {
+            $productunit = Unit::where('product_id',$id)->get();
+            // return $productunit;
 
             $product = Product::find($id);
 
@@ -327,6 +339,12 @@ class ProductController extends Controller
                 }
                 $data->delete();
             }
+
+            foreach($productunit as $data){
+
+                $data->delete();
+            }
+
             $product->delete();
 
             return redirect()->back()->with('success', 'Product deleted successfully!');

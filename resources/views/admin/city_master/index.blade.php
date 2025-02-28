@@ -3,53 +3,57 @@
 @section('content')
 
 <div class="container">
-    {{-- <div class="card shadow-sm  bg-body rounded"> --}}
+    <div class="card shadow-sm  bg-body rounded">
         <div class="card-header" style="background-color: #19aa5c">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
                     <h2 class="mb-0">All Citites</h2>
                 </div>
                 <div class="col" align="right">
-                    <a class="btn btn-danger" href="{{ Route('city_master.deleted') }}">Deleted Data</a>
+                    <a class="btn btn-danger" href="{{ Route('city_master.deleted') }}">Deleted City</a>
 
                     <a href="{{ route('city_master.create') }}" class="btn btn-primary">Add City</a>
                 </div>
             </div>
         </div>
+        <div class="card-body table-responsive">
+            <div class="loader"></div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>ID</th>
+                    <th>City Name (ENG)</th>
+                    <th>City Name (HIN)</th>
+                    <th>City Name (GUJ)</th>
+                    <th>Pincode</th>
+                    <th>Area (ENG)</th>
+                    <th>Area (HIN)</th>
+                    <th>Area (GUJ)</th>
+                    <th>Status</th>
+                    <th>Actions</th>
 
-    <table class="table table-striped">
-        <tr>
-            <th>ID</th>
-            <th>City Name (ENG)</th>
-            <th>City Name (HIN)</th>
-            <th>City Name (GUJ)</th>
-            <th>Pincode</th>
-            <th>Area (ENG)</th>
-            <th>Area (HIN)</th>
-            <th>Area (GUJ)</th>
-            <th>Status</th>
-            <th>Actions</th>
-            
-        </tr>
-        @foreach($cities as $city)
-        <tr>
-            <td>{{ $city->id }}</td>
-            <td>{{ $city->city_name_eng }}</td>
-            <td>{{ $city->city_name_hin }}</td>
-            <td>{{ $city->city_name_guj }}</td>
-            <td>{{ $city->pincode }}</td>
-            <td>{{ $city->area_eng }}</td>
-            <td>{{ $city->area_hin }}</td>
-            <td>{{ $city->area_guj }}</td>
-            <td>{{ $city->status }}</td>
-            <td>
-                <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}" ><i class="fas fa-edit"></i></a>
-        
-                <a href="{{ route('city_master.deactive') }}/{{ $city->id }}" class="btn btn-danger">
-                    <i class="fas fa-remove"></i></a>
-            
-            </td>
-        </tr>
-        @endforeach
-    </table>
-@endsection 
+                </tr>
+                @foreach($cities as $city)
+                <tr>
+                    <td>{{ $city->id }}</td>
+                    <td>{{ $city->city_name_eng }}</td>
+                    <td>{{ $city->city_name_hin }}</td>
+                    <td>{{ $city->city_name_guj }}</td>
+                    <td>{{ $city->pincode }}</td>
+                    <td>{{ $city->area_eng }}</td>
+                    <td>{{ $city->area_hin }}</td>
+                    <td>{{ $city->area_guj }}</td>
+                    <td>{{ $city->status }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}"><i class="fas fa-edit"></i></a>
+
+                        <a href="{{ route('city_master.deactive') }}/{{ $city->id }}" class="btn btn-danger">
+                            <i class="fas fa-trash"></i></a>
+
+                    </td>
+                </tr>
+                @endforeach
+            </table>
+        </div>
+    </div>
+</div>
+@endsection

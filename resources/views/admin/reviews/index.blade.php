@@ -4,13 +4,15 @@
 
 <div class="container">
     <div class="card shadow-sm  bg-body rounded">
-        <div class="card-header">
+        <div class="card-header" style="background-color: #19aa5c">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
                     <h2 class="mb-4">All Product Reviews</h2>
                 </div>
             </div>
         </div>
+        <div class="card-body table-responsive">
+            <div class="loader"></div>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -37,6 +39,7 @@
                         </tbody>
                     </table>
             {{ $reviews->links() }}
+        </div>
+    </div>
 </div>
-
 @endsection
