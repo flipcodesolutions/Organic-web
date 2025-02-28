@@ -20,7 +20,7 @@ Route::controller(UserController::class)->group(function(){
     Route::get('user/deactive/{id?}','deactive')->name('user.deactive');
     Route::get('user/active/{id?}','active')->name('user.active');
     Route::get('user/deactiveindex','deactiveindex')->name('user.deactiveindex');
-    Route::get('user/delete/{id?}','destoroy')->name('user.delete');
+    Route::get('user/delete/{id?}','destroy')->name('user.delete');
 });
 
 // category route
