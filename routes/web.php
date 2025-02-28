@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
     require __DIR__ . '/bhavana.php';
     require __DIR__ . '/hardik.php';
 
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
+    // Route::resource('roles', RoleController::class);
+    // Route::resource('users', UserController::class);
 
 });
