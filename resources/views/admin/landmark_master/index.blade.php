@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="card shadow-sm  bg-body rounded">
-        <div class="card-header">
+        <div class="card-header" style="background-color: #19aa5c">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
                     <h6> Landmark </h6>
@@ -24,12 +24,12 @@
                 <th>City name English</th>
                 <th>City name Hindi</th>
                 <th>City name Gujarati</th>
-
                 <th> Landmark (ENG)</th>
                 <th> Landmark (HIN)</th>
                 <th> Landmark (GUJ)</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
             @foreach($landmarkmasters as $landmark)
@@ -44,7 +44,7 @@
                 <td>{{ $landmark->landmark_guj }}</td>
                 <td>{{ $landmark->latitude  }}</td>
                 <td>{{ $landmark->longitude }}</td>
-
+                <td>{{ $landmark->status }}</td>
 
                 <td>
                     <a class="btn btn-primary" href="{{ route('landmark.edit',$landmark->id)}}">Edit</a>

@@ -4,10 +4,10 @@
 
 <div class="container">
     <div class="card shadow-sm  bg-body rounded">
-        <div class="card-header">
+        <div class="card-header" style="background-color: #1B5E20">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
-                    <h6 class="mb-0">Create New City</h6>
+                    <h2 class="mb-0">Create New City</h2>
                 </div>
                 <div class="col" align="right">
                     <a class="btn btn-primary" href="{{ Route('city_master.index') }}">Back</a>
