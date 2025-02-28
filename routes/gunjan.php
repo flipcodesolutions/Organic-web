@@ -7,8 +7,6 @@ use App\Http\Controllers\admin\ContactController;
 
 use App\Http\Controllers\Admin\AdminReviewController;
 use App\Http\Controllers\Vendor\VendorReviewController;
-use App\Http\Middleware\AdminMiddleware;
-use App\Http\Middleware\VendorMiddleware;
 
 
 use Illuminate\Support\Facades\Route;

@@ -90,10 +90,20 @@ class CityMasterController extends Controller
             $citymaster->area_guj = $request->area_guj;
 
             $citymaster->save();
+<<<<<<< HEAD
+            return redirect()->route('city_master.index');;
+        }  
+        catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e
+            ], 500);
+=======
             return redirect()->route('city_master.index')->with('success', 'City updated successfully.');
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+>>>>>>> a147b5a8ccedea6a66a5bec9a7d996e6b0612145
         }
     }
     /**

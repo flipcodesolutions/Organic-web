@@ -1,8 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    @if (Session::has('msg'))
-        <p class="alert alert-info">{{ Session::get('msg') }}</p>
-    @endif
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">
@@ -45,7 +42,7 @@
                             <td>{{ $sliders->navigatemaster->screenname }}</td>
                             <td>
                                 <a href="{{Route('slider.active',$sliders->id)}}" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fas fa-undo"></i>
                                 </a>
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"
                                     onclick="openDeleteModal('{{Route('slider.permdelete',$sliders->id)}}')">
@@ -59,6 +56,4 @@
         </div>
     </div>
 
-    {{-- sweet alert delete file include --}}
-    @include('admin.sweetalert.delete')
   @endsection

@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    @if (Session::has('msg'))
-        <p class="alert alert-info">{{ Session::get('msg') }}</p>
-    @endif
+
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">
@@ -29,43 +27,44 @@
                     @php
                         $index = 1;
                     @endphp
-                    @foreach ($cms_masters as $cms_masters)
+                    @if (count($cms_masters) > 0)
+                        @foreach ($cms_masters as $cms_masters)
+                            <tr>
+                                <td>{{ $index++ }}</td>
+                                <td>
+                                    <ul>
+                                        <li>{{ $cms_masters->title }}</li>
+                                        <li>{{ $cms_masters->titleGuj }}</li>
+                                        <li>{{ $cms_masters->titleHin }}</li>
+                                    </ul>
+                                </td>
+                                <td>{{ $cms_masters->slug }}</td>
+                                <td>
+                                    <ul>
+                                        <li>{{ $cms_masters->description }}</li>
+                                        <li>{{ $cms_masters->descriptionGuj }}</li>
+                                        <li>{{ $cms_masters->descriptionHin }}</li>
+                                    </ul>
+                                </td>
+                                <td class="d-flex">
+                                    <a href="{{ Route('cms_master.active', $cms_masters->id) }}" class="btn btn-primary">
+                                        <i class="fas fa-undo"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        onclick="openDeleteModal('{{ Route('cms_master.permdelete', $cms_masters->id) }}')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
                         <tr>
-                            <td>{{ $index++ }}</td>
-                            <td>
-                                <ul>
-                                    <li>{{ $cms_masters->title }}</li>
-                                    <li>{{ $cms_masters->titleGuj }}</li>
-                                    <li>{{ $cms_masters->titleHin }}</li>
-                                </ul>
-                            </td>
-                            <td>{{ $cms_masters->slug }}</td>
-                            <td>
-                                <ul>
-                                    <li>{{ $cms_masters->description }}</li>
-                                    <li>{{ $cms_masters->descriptionGuj }}</li>
-                                    <li>{{ $cms_masters->descriptionHin }}</li>
-                                </ul>
-                            </td>
-                            <td>
-                                <a href="{{ Route('cms_master.active', $cms_masters->id) }}" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                    onclick="openDeleteModal('{{ Route('cms_master.permdelete', $cms_masters->id) }}')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-
-                            </td>
-                        </tr>
-                    @endforeach
-
-                    {{-- <tr>
                             <td colspan="8" align="center" style="color: red;">
                                 <h5>No Data Record Found</h5>
                             </td>
-                        </tr> --}}
-
+                        </tr>
+                    @endif
                 </table>
                 {{-- table end --}}
 
@@ -74,6 +73,4 @@
         </div>
     </div>
 
-     {{-- sweet alert delete file include --}}
-     @include('admin.sweetalert.delete')
 @endsection

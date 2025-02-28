@@ -83,9 +83,8 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating mb-3">
-                                        <input type="text" name="description" value="{{ $cms_masters->description }}"
-                                            class="form-control" id="floatingInput" placeholder="description">
-                                        <label for="floatingInput">Enter description English</label>
+                                        <textarea class="form-control" name="description"  value="" placeholder="description" id="floatingTextarea">{{ $cms_masters->description }}</textarea>
+                                        <label for="floatingTextarea">Enter description English</label>
                                         <span id="nameError" class="text-danger">
                                             @error('description')
                                                 {{ $message }}
@@ -97,9 +96,8 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating mb-3">
-                                        <input type="text" name="descriptionguj" value="{{ $cms_masters->descriptionGuj }}"
-                                            class="form-control" id="floatingInput" placeholder="descriptionguj">
-                                        <label for="floatingInput">Enter description Gujarati</label>
+                                        <textarea class="form-control" name="descriptionguj"  value="" placeholder="descriptionguj" id="floatingTextarea">{{ $cms_masters->descriptionGuj }}</textarea>
+                                        <label for="floatingTextarea">Enter description Gujarati</label>
                                         <span id="nameError" class="text-danger">
                                             @error('descriptionguj')
                                                 {{ $message }}
@@ -111,9 +109,8 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating mb-3">
-                                        <input type="text" name="descriptionhin" value="{{ $cms_masters->descriptionHin }}"
-                                            class="form-control" id="floatingInput" placeholder="descriptionhin">
-                                        <label for="floatingInput">Enter description Hindi</label>
+                                        <textarea class="form-control" name="descriptionhin"  value="" placeholder="descriptionhin" id="floatingTextarea">{{ $cms_masters->descriptionHin }}</textarea>
+                                        <label for="floatingTextarea">Enter description Hindi</label>
                                         <span id="nameError" class="text-danger">
                                             @error('descriptionhin')
                                                 {{ $message }}
