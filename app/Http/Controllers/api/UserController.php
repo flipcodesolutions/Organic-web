@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Services\TwilioVerifyService;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -18,6 +19,28 @@ class UserController extends Controller
     public function __construct(TwilioVerifyService $twilioService)
     {
         $this->twilioService = $twilioService;
+    }
+
+    public function checkEmail(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+        ]);
+        if ($validator->fails()) {
+            return Util::getErrorMessage('Validation Failed', $validator->errors());
+        }
+        try {
+            $user = User::where('email', $request->email)->first();
+
+            if ($user) {
+                Auth::login($user);
+                return Util::getSuccessMessageWithToken('User already registered', $user, $user->createToken('my-app-token')->plainTextToken);
+            } else {
+                return Util::getErrorMessage('User not registered', ['error' => 'User not registered']);
+            }
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
     }
 
     public function sendOtp(Request $request)
@@ -41,15 +64,15 @@ class UserController extends Controller
 
     public function verifyOtp(Request $request)
     {
-        try {
-            $validator = Validator::make($request->all(), [
-                'otp' => 'required',
-                'phone' => 'required|digits:10'
-            ]);
+        $validator = Validator::make($request->all(), [
+            'otp' => 'required',
+            'phone' => 'required|digits:10'
+        ]);
 
-            if ($validator->fails()) {
-                return Util::getErrorMessage("Validation failed", $validator->errors());
-            }
+        if ($validator->fails()) {
+            return Util::getErrorMessage("Validation failed", $validator->errors());
+        }
+        try {
 
             $verification = $this->twilioService->verifyOtp($request->phone, $request->otp);
 
@@ -83,11 +106,82 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return Util::getSuccessMessage(
-            'All Users',
-            $users
-        );
+        try {
+            $users = User::all();
+            return Util::getSuccessMessage(
+                'All Users',
+                $users
+            );
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
+
+    public function userProfile()
+    {
+        try {
+            $user = Auth::user();
+            return Util::getSuccessMessage(
+                'User Profile',
+                $user
+            );
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
+
+    public function editProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'pro_pic' => 'required',
+            'is_special' => 'required',
+            'default_language' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return Util::getErrorMessage('Validation Failed', $validator->errors());
+        }
+        try {
+            $userId = Auth::user()->id;
+
+            $user = User::find($userId);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->pro_pic = $request->pro_pic;
+            $user->is_special = $request->is_special;
+            $user->default_language = $request->default_language;
+            $user->save();
+
+            return Util::getSuccessMessage('Profile Updated Successfully', $user);
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
+
+    public function updateLanguage(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'default_language' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return Util::getErrorMessage('Validation Failed', $validator->errors());
+        }
+        try {
+            $userId = Auth::user()->id;
+
+            $user = User::find($userId);
+            $user->default_language = $request->default_language;
+            $user->save();
+
+            return Util::getSuccessMessage('Language Updated Successfully', $user);
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
     }
 
     /**
