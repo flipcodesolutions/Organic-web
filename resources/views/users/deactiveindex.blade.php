@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Users Management</h6>
+                        <h6 class="mb-0">Deactive Users</h6>
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-primary" href="{{ Route('user.index') }}">Back</a>
@@ -17,6 +17,7 @@
                 <table class="table table-bordered mt-2">
                     <tr>
                         <th>No</th>
+                        <th>User image</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Roles</th>
@@ -26,6 +27,7 @@
                     @foreach ($data as $key => $user)
                         <tr>
                             <td>{{ $key + 1 }}</td>
+                            <td><img src="{{ asset('user_profile/'.$user->pro_pic)}}" alt="profile_picture" class="img-profile rounded-circle" height="100px" width="100px">
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
@@ -48,5 +50,5 @@
     </div>
 
     {{-- sweet alert deactive file includ --}}
-    @include('admin.sweetalert.deactive')
+    {{-- @include('admin.sweetalert.deactive') --}}
 @endsection

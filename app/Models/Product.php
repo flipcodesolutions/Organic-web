@@ -24,6 +24,6 @@ class Product extends Model
     // relation for unit
     public function productUnit()
     {
-        return $this->hasOne(Unit::class, 'product_id');
+        return $this->hasMany(Unit::class, 'product_id');
     }
 }

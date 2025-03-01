@@ -14,9 +14,36 @@
             </div>
 
             <div class="card-body">
-                <form method="post" action="{{ route('user.update', $user->id) }}">
+                <form method="post" action="{{ route('user.update', $user->id) }}" enctype="multipart/form-data">
                     @csrf
 
+                    {{-- ptofile picture --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Profile picture<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <div class="col mb-2" id="imagepreview"
+                                            style="display:flex; justify-content: center;">
+                                            <img id="profilePicPreview" src="{{ asset('user_profile/'.$user->pro_pic)}}" alt="Profile Picture"
+                                                style="width: 150px; height: 150px; border-radius: 50%; border: 1px solid grey">
+                                        </div>
+                                        <div class="col px-0">
+                                            <input type="file" name="profilePic" id="profilePicInput"
+                                                placeholder="profile_pic" class="form-control"
+                                                onchange="previewImage(event)">
+                                        </div>
+                                        {{-- <input type="file" name="profilePic" placeholder="profile_pic" class="form-control"> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- user name --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Name<span class="text-danger">*</span>
@@ -25,13 +52,16 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="text" name="name" placeholder="Name" class="form-control" value="{{$user->name}}">
+                                        <input type="text" name="name" placeholder="Name" class="form-control"
+                                            value="{{ $user->name }}">
                                         <label for="floatingInput">Enter Name</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    {{-- email --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Email<span class="text-danger">*</span>
@@ -40,14 +70,15 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="email" name="email" placeholder="Email" class="form-control" value="{{$user->email}}">
+                                        <input type="email" name="email" placeholder="Email" class="form-control"
+                                            value="{{ $user->email }}">
                                         <label for="floatingInput">Enter Email</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Password<span class="text-danger">*</span>
                         </div>
@@ -77,8 +108,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
+                    {{-- role --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Role<span class="text-danger">*</span>
@@ -95,6 +127,29 @@
                         </div>
                         <span id="roleError" class="text-danger"></span>
                     </div>
+
+                    {{-- default language --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Default Language<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <select class="form-select form-select-lg mb-3" name="defaultLanguage"
+                                aria-label="Large select example">
+                                <option selected disabled>--Select Default Language--</option>
+                                <option value="english"{{ $user->default_language == 'english' ? 'selected' : ''}}>English</option>
+                                <option value="gujarati"{{ $user->default_language == 'gujarati' ? 'selected' : ''}}>Gujarati</option>
+                                <option value="hindi"{{ $user->default_language == 'hindi' ? 'selected' : ''}}>Hindi</option>
+                            </select>
+                            <span id="nameError" class="text-danger">
+                                @error('defaultLanguage')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
+                    </div>
+
+                    {{-- submit --}}
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-primary btn-sm mb-3"><i
@@ -105,6 +160,25 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                const output = document.getElementById('profilePicPreview');
+                const outputclass = document.getElementById('imagepreview');
+                output.src = reader.result;
+                // outputclass.style.display = 'flex';
+                // outputclass.style.justify-content = 'center'; // Show the image
+            };
+
+            if (file) {
+                reader.readAsDataURL(file); // Read the file as a Data URL
+            }
+        }
+    </script>
 @endsection
 
 {{-- @extends('layouts.app')
