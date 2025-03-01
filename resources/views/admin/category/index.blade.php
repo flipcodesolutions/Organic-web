@@ -12,6 +12,9 @@
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-primary" href="{{ route('category.create') }}">Add</a>
+                    {{-- </div>
+                    <div class="col" align="right"> --}}
+                        <a class="btn btn-danger" href="{{ route('category.deleted') }}">Deactive categories </a>
                     </div>
                 </div>
             </div>
@@ -52,11 +55,14 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <img src="{{asset('categoryImage/'.$categoryData->cat_icon)}}" alt="" height="100px">
+                                    <img src="{{asset('categoryImage/'.$categoryData->cat_icon)}}" alt="" height="100px" width="150px">
                                 </td>
                                 <td>
-                                    <a href="{{ route('category.edit') }}/{{ $categoryData->id }}" class="btn btn-primary">
+                                    <a href="{{ route('category.edit') }}/{{ $categoryData->id }}" class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{ route('category.deactive') }}/{{ $categoryData->id }}" class="btn btn-danger">
+                                        <i class="fas fa-remove"></i>
                                     </a>
                                 </td>
                             </tr>

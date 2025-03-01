@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('detail');
             $table->integer('per');
             $table->integer('sell_price');
-            $table->enum('status', ['active', 'deactive','deleted'])->default('active');
+            $table->enum('status', ['active', 'deactive'])->default('active');
             $table->timestamps();
+
+            
         });
     }
 

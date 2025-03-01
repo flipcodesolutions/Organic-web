@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('detailsGuj');
             $table->string('detailsHin');
             $table->string('navigate_screen');
-            $table->enum('status', ['active', 'deactive','deleted'])->default('active');
+            $table->enum('status', ['active', 'deactive'])->default('active');
             $table->timestamps();
         });
     }

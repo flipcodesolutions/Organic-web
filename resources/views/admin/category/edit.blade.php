@@ -98,7 +98,7 @@
                             Image <span class="text-danger">*</span>
                         </div>
                         <div class="col-2">
-                            <img src="{{ asset('categoryImage/' . $category->cat_icon) }}" alt="" height="100px">
+                            <img src="{{ asset('categoryImage/' . $category->cat_icon) }}" alt="" height="100px" width="150px">
                         </div>
                         <div class="col">
                             <div class="form">

@@ -13,7 +13,7 @@ class FaqController extends Controller
      */
     public function index()
     {
-        $faqs= Faq::all();
+        $faqs= Faq::where('status','active')->get();
         return view('admin.faq.index',compact('faqs'));
     }
 
@@ -30,6 +30,14 @@ class FaqController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'question' => 'required',
+            'questionguj' => 'required',
+            'questionhin' => 'required',
+            'answer' => 'required',
+            'answerguj' => 'required',
+            'answerhin' => 'required',
+        ]);
         $faq = new Faq();
         $faq->question = $request->question;
         $faq->questionGuj= $request->questionguj;
@@ -38,7 +46,7 @@ class FaqController extends Controller
         $faq->answerGuj= $request->answerguj;
         $faq->answerHin= $request->answerhin;
         $faq->save();
-        return redirect()->route('faq.index')->with('msg','Data Is Inserted successfully');
+        return redirect()->route('faq.index')->with('msg', 'Faq Created Successfully');
     }
 
     /**
@@ -63,6 +71,14 @@ class FaqController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'question' => 'required',
+            'questionguj' => 'required',
+            'questionhin' => 'required',
+            'answer' => 'required',
+            'answerguj' => 'required',
+            'answerhin' => 'required',
+        ]);
         $faq = Faq::find($id);
         $faq->question = $request->question;
         $faq->questionGuj= $request->questionguj;
@@ -71,14 +87,36 @@ class FaqController extends Controller
         $faq->answerGuj= $request->answerguj;
         $faq->answerHin= $request->answerhin;
         $faq->save();
-        return redirect()->route('faq.index')->with('msg','Data Is Updated successfully');
+        return redirect()->route('faq.index')->with('msg', 'Faq Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
-        //
+        $faq =Faq::find($id);
+        $faq->status = 'deactive';
+        $faq->save();
+        return redirect()->route('faq.index')->with('msg', 'Faq Deactivated Successfully');
+    }
+    public function deactive()
+    {
+        $faqs = Faq::where('status','deactive')->get();
+        return view('admin.faq.deactivedata',compact('faqs'));
+    }
+    public function active(string $id)
+    {
+        $faq =Faq::find($id);
+        $faq->status = 'active';
+        $faq->save();
+        return redirect()->route('faq.index')->with('msg', 'Faq Activated Successfully');
+    }
+    public function permdelete(string $id)
+    {
+        $faq = Faq::find($id);
+        $faq->delete();
+        return redirect()->route('faq.index')->with('msg', 'Faq Deleted Successfully');
     }
 }
+

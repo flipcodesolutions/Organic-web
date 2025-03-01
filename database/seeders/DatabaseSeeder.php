@@ -16,13 +16,22 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         $this->call([
-            CityMasterSeeder::class
+            UserSeeder::class,
+            CityMasterSeeder::class,
+            LandmarkMasterSeeder::class,
+            ContactSeeder::class,
+            PointPerSeeder::class,
+            DeliverySlotSeeder::class,
+            UnitMasterSeeder::class,
+            NavigateMasterSeeder::class,
+            Cms_Masterseeder::class,
+            CategorySeeder::class,
+            ProductImageSeeder::class,
+            ProductSeeder::class,
+            UnitSeeder::Class
         ]);
 
-        $this->call([
-            LandmarkMasterSeeder::class
-        ]);
-
+       
         // User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
@@ -36,11 +45,5 @@ class DatabaseSeeder extends Seeder
 
         // $category = new CategorySeeder();
         // $category->run();
-
-
-
-
-
+        }
     }
-}
-

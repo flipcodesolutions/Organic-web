@@ -22,24 +22,39 @@
                             title <span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="form-floating">
-                                <input type="text" name="title" value="{{ $cms_masters->title }}" id=""
-                                    placeholder="English" class="form-control">
-                                <span id="nameError" class="text-danger"></span>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="title" value="{{ $cms_masters->title }}" class="form-control"
+                                    id="floatingInput" placeholder="English">
+                                <label for="floatingInput">English</label>
+                                <span id="nameError" class="text-danger">
+                                    @error('title')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-floating">
-                                <input type="text" name="titleguj" value="{{ $cms_masters->titleGuj }}" id=""
-                                    placeholder="Gujarati" class="form-control">
-                                <span id="nameError" class="text-danger"></span>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="titleguj" value="{{ $cms_masters->titleGuj }}" class="form-control"
+                                    id="floatingInput" placeholder="Gujarati">
+                                <label for="floatingInput">Gujarati</label>
+                                <span id="nameError" class="text-danger">
+                                    @error('titleguj')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-floating">
-                                <input type="text" name="titlehin" value="{{ $cms_masters->titleHin }}" id=""
-                                    placeholder="Hindi" class="form-control">
-                                <span id="nameError" class="text-danger"></span>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="titlehin" value="{{ $cms_masters->titleHin }}" class="form-control"
+                                    id="floatingInput" placeholder="Hindi">
+                                <label for="floatingInput">Hindi</label>
+                                <span id="nameError" class="text-danger">
+                                    @error('titlehin')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -51,7 +66,11 @@
                             <div class="form-floating">
                                 <input type="text" name="slug" value="{{ $cms_masters->slug }}" id=""
                                     placeholder="" class="form-control">
-                                <span id="nameError" class="text-danger"></span>
+                                <span id="nameError" class="text-danger">
+                                    @error('slug')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -63,30 +82,40 @@
                         <div class="col">
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="description" value="{{ $cms_masters->description }}"
-                                            id="" placeholder="English" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" name="description"  value="" placeholder="description" id="floatingTextarea">{{ $cms_masters->description }}</textarea>
+                                        <label for="floatingTextarea">Enter description English</label>
+                                        <span id="nameError" class="text-danger">
+                                            @error('description')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="descriptionguj"
-                                            value="{{ $cms_masters->descriptionGuj }}" id=""
-                                            placeholder="Giujarati" class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" name="descriptionguj"  value="" placeholder="descriptionguj" id="floatingTextarea">{{ $cms_masters->descriptionGuj }}</textarea>
+                                        <label for="floatingTextarea">Enter description Gujarati</label>
+                                        <span id="nameError" class="text-danger">
+                                            @error('descriptionguj')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="descriptionhin"
-                                            value="{{ $cms_masters->descriptionHin }}" id="" placeholder="Hindi"
-                                            class="form-control">
-                                        <span id="nameError" class="text-danger"></span>
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" name="descriptionhin"  value="" placeholder="descriptionhin" id="floatingTextarea">{{ $cms_masters->descriptionHin }}</textarea>
+                                        <label for="floatingTextarea">Enter description Hindi</label>
+                                        <span id="nameError" class="text-danger">
+                                            @error('descriptionhin')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>

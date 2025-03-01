@@ -1,18 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\vendor;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Review;
 
-class ReviewController extends Controller
+class AdminReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        try{
+
+            $reviews = Review::with('product', 'user')->orderBy('rev_date', 'desc')->paginate(10);
+            return view('admin.reviews.index', compact('reviews'));
+
+        }
+        catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -58,8 +67,19 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Review $review)
     {
-        //
+        try{
+            $review->delete();
+            return redirect()->route('admin.reviews.index')->with('success', 'Review deleted successfully.');
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e
+            ], 500);
+        }
     }
+    
+
 }

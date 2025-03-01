@@ -9,13 +9,21 @@ class Product extends Model
 {
     use HasFactory;
 
-    // relation belongsTo
+    // relation for category
     public function categories()
     {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+        return $this->belongsTo(Category::class, 'categoryId');
     }
-    public function prodcutImages()
+
+    // relation for productimaes
+    public function productImages()
     {
-        return $this->hasMany(ProductImage::class, 'product_id');
+        return $this->hasMany(ProductImage::class, 'productId');
+    }
+
+    // relation for unit
+    public function productUnit()
+    {
+        return $this->hasOne(Unit::class, 'product_id');
     }
 }

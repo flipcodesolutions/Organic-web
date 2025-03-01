@@ -70,9 +70,9 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-primary"> Upadate </button>
+                <button type="submit" class="btn btn-primary"> Update </button>
 
           </form>
 </div>
 @endsection
- 
+

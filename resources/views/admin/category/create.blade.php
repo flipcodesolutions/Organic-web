@@ -15,7 +15,7 @@
             </div>
 
             <div class="card-body">
-                <form id="categoryForm">
+                <form id="categoryForm" >
                     @csrf
                     {{-- Category --}}
                     <div class="row mb-3">
@@ -127,6 +127,7 @@
                                     class="fa-solid fa-floppy-disk"></i> Submit</button>
                         </div>
                     </div>
+                    
                 </form>
             </div>
         </div>

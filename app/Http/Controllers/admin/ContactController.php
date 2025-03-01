@@ -12,7 +12,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+
+        return view('admin.contact.index');
     }
 
     /**
@@ -20,9 +21,8 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        
     }
-
     /**
      * Store a newly created resource in storage.
      */

@@ -20,8 +20,12 @@ return new class extends Migration
             $table->string('area_eng', 255);
             $table->string('area_hin', 255);
             $table->string('area_guj', 255);
+            $table->enum('status', ['active', 'deactive','deleted'])->default('active');
             $table->timestamps();
         });
+        // Schema::table('city_master', function (Blueprint $table) {
+        //     $table->softDeletes(); // Adds a `deleted_at` column
+        // });
     }
 
     /**
@@ -30,5 +34,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('city_masters');
+        // Schema::table('city_master', function (Blueprint $table) {
+        //     $table->dropSoftDeletes();
+        // });
     }
 };

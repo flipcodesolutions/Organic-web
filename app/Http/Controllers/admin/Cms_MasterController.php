@@ -13,7 +13,7 @@ class Cms_MasterController extends Controller
      */
     public function index()
     {
-        $cms_masters = Cms_Master::all();
+        $cms_masters = Cms_Master::where('status', 'active')->get();
         return view('admin.cms_master.index', compact('cms_masters'));
     }
 
@@ -30,6 +30,15 @@ class Cms_MasterController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'titleguj' => 'required',
+            'titlehin' => 'required',
+            'slug' => 'required',
+            'description' => 'required',
+            'descriptionguj' => 'required',
+            'descriptionhin' => 'required',
+        ]);
         $cms_master = new Cms_Master();
         $cms_master->title=$request->title;
         $cms_master->titleGuj=$request->titleguj;
@@ -40,7 +49,7 @@ class Cms_MasterController extends Controller
         $cms_master->descriptionHin=$request->descriptionhin;
         $cms_master->save();
 
-        return redirect()->route('cms_master.index')->with('msg', 'Data Is Inserted successfully.');
+        return redirect()->route('cms_master.index')->with('msg', 'Cms_Master Created Successfully');
     }
 
     /**
@@ -65,6 +74,15 @@ class Cms_MasterController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'title' => 'required',
+            'titleguj' => 'required',
+            'titlehin' => 'required',
+            'slug' => 'required',
+            'description' => 'required',
+            'descriptionguj' => 'required',
+            'descriptionhin' => 'required',
+        ]);
         $cms_master = Cms_Master::find($id);
         $cms_master->title=$request->title;
         $cms_master->titleGuj=$request->titleguj;
@@ -75,14 +93,37 @@ class Cms_MasterController extends Controller
         $cms_master->descriptionHin=$request->descriptionhin;
         $cms_master->save();
 
-        return redirect()->route('cms_master.index')->with('msg', 'Data Is Updated successfully.');
+        return redirect()->route('cms_master.index')->with('msg', 'Cms_Master Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
-        //
+        $cms_master = Cms_Master::find($id);
+        $cms_master->status = 'deactive';
+        $cms_master->save();
+        return redirect()->route('cms_master.index')->with('msg', 'Cms_Master Deactivated Successfully');
     }
+    public function deactive()
+    {
+        $cms_masters = Cms_Master::where('status', 'deactive')->get();
+        return view('admin.cms_master.deactivedata', compact('cms_masters'));
+    }
+    public function active($id)
+    {
+        $cms_master = Cms_Master::find($id);
+        $cms_master->status = 'active';
+        $cms_master->save();
+
+        return redirect()->route('cms_master.index')->with('msg', 'Cms_Master Activated Successfully');
+    }
+    public function permdelete(string $id)
+    {
+        $cms_master = Cms_Master::find($id);
+        $cms_master->delete();
+        return redirect()->route('cms_master.index')->with('msg', 'Cms_Master Deleted Successfully');
+    }
+
 }
