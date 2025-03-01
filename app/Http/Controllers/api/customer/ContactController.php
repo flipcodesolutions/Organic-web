@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\api\customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
@@ -63,7 +63,6 @@ class ContactController extends Controller
     public function review(Request $request)
     {
         try {
-
             $reviews = Review::where('user_id', Auth::user()->id)
                 ->where('product_id', $request->product_id)
                 ->first();
