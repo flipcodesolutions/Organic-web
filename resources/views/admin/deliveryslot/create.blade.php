@@ -68,17 +68,19 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        @php
+                                        {{-- @php
                                             if (old('isavailable') == null) {
                                                 $option = old('isavailable');
                                             } else {
                                                 $option = old('isavailable');
                                             }
-                                        @endphp
+                                        @endphp --}}
                                         <select name="isavailable" id="" class="form-control">
                                             <option selected disabled>--Select your isavailable--</option>
-                                            <option value="yes" {{ $option == 'yes' ? 'selected' : '' }}>Yes</option>
-                                            <option value="no" {{ $option == 'no' ? 'selected' : '' }}>No</option>
+                                            <option value="Available" {{ old('isavailable') == 'Available' ? 'selected' : '' }}>Available</option>
+                                            <option value="NotAvailable" {{ old('isavailable') == 'NotAvailable' ? 'selected' : '' }}>NotAvailable</option>
+                                            {{-- <option value="yes" {{ $option == 'yes' ? 'selected' : '' }}>Yes</option>
+                                            <option value="no" {{ $option == 'no' ? 'selected' : '' }}>No</option> --}}
                                         </select>
                                         <span id="nameError" class="text-danger">
                                             @error('isavailable')

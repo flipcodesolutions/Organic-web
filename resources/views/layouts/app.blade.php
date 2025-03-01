@@ -998,9 +998,7 @@
     <script src="{{ asset('asset/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('asset/js/demo/chart-pie-demo.js') }}"></script>
 
-    {{-- ckeditor cdn --}}
-    {{-- <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script> --}}
-
+    {{-- ckeditor file path --}}
     <script src="{{ asset('asset/js/ckeditor/ckeditor.js') }}"></script>
 
 
