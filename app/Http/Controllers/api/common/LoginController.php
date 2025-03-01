@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\api\common;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -30,6 +30,5 @@ class LoginController extends Controller
         ];
 
         return response($response, 201);
-
     }
 }

@@ -1,28 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\api\customer;
 
 use App\Http\Controllers\Controller;
-use App\Models\Slider;
+use App\Models\CityMaster;
 use App\Utils\Util;
+use Exception;
 use Illuminate\Http\Request;
 
-class SliderController extends Controller
+class CityController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function sliders(Request $request)
+    public function citiesWithLandmark(Request $request)
     {
         try {
             $currentPage = $request->input('page', 1);
-            $sliders = Slider::with('city', 'navigatemaster')
-                ->where('status', 'active')
+            $cities = CityMaster::with('landmark')
                 ->paginate($request->input('limit', 10), ['*'], 'page', $currentPage);
-
-            return Util::getSuccessMessage('Sliders', $sliders);
-        } catch (\Exception $e) {
-            return Util::getErrorMessage($e->getMessage());
+            return Util::getSuccessMessage('Cities', $cities);
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
         }
     }
 
