@@ -11,19 +11,20 @@
 
     
     <table class="table">
-        <tr>
+    <tr>
             <th>ID</th>
             <th>Product Id</th>
+            <th>Product Name</th>
             <th>Date</th>
             <th>Price</th>
             <th>Quantity</th>
-            <th>Status</th>
-            
+            <th>Status</th> 
         </tr>
         @foreach($purchase as $data)
         <tr>
             <td>{{ $data->id }}</td>
             <td>{{ $data->product_id}}</td>
+            <td>{{$data->productData->productName}}</td>
             <td>{{ $data->date }}</td>
             <td>{{ $data->price }}</td>
             <td>{{ $data->qty }}</td>

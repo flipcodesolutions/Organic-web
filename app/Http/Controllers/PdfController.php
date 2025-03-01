@@ -10,8 +10,8 @@ class PdfController extends Controller
 {
     //
     function purchasePdf(){
-        // return "hello";
-        $purchase=Purchase::get();
+            
+        $purchase=Purchase::with("productData")->get();
         $data=['purchase'=>$purchase];
         $pdf = Pdf::loadView('admin.reports.purchasePdf',$data);
         return $pdf->download('purchaseReport.pdf');

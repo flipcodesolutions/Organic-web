@@ -3,8 +3,8 @@
 @section('content')
 
 <div class="container">
-    <div class="card shadow-sm  bg-body rounded">
-        <div class="card-header" style="background-color: #1B5E20">
+    <div class="card shadow-sm bg-body rounded">
+        <div class="card-header">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
                     <h2 class="mb-0">Create New City</h2>
@@ -123,7 +123,7 @@
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary btn-sm  mt-3 mb-3">
+                        <button type="submit" class="btn btn-primary ">
                             <i class="fa-solid fa-floppy-disk"></i> Submit</button>
                     </div>
                 </div>

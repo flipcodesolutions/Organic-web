@@ -12,25 +12,14 @@ class PointPerSeeder extends Seeder
      */
     public function run(): void
     {
-        ModelsPointPer::create([
-            'per'=>'250',
-           'status'=>'active',
-       ]);
-
-        ModelsPointPer::create([
-            'per'=>'100',
-            'status'=>'active',
+        ModelsPointPer::insert([
+            [
+                'per' => '50',
+                'status' => 'active',
+            ],
+           
         ]);
-
-        ModelsPointPer::create([
-            'per'=>'500',
-        'status'=>'active',
-        ]);
-
-        ModelsPointPer::create([
-            'per'=>'1',
-        'status'=>'active',
-        ]);
+        
 
 
     }

@@ -25,18 +25,18 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Roles</th>
+                        <th>Defalut Language</th>
                         <th>Action</th>
                     </tr>
                     
                     @foreach ($data as $key => $user)
                         <tr>
                             <td>{{ ++$i }}</td>
-                            <td><img src="{{ $user->pro_pic}}" alt="profile_picture" class="img-profile rounded-circle">
+                            <td><img src="{{ asset('user_profile/'.$user->pro_pic)}}" alt="profile_picture" class="img-profile rounded-circle" height="100px" width="100px">
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>
-                                {{ $user->role }}
-                            </td>
+                            <td>{{ $user->role }}</td>
+                            <td>{{ $user->default_language }}</td>
                             <td>
                                 <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i></a>
@@ -54,5 +54,5 @@
     </div>
 
     {{-- sweet alert deactive file includ --}}
-    @include('admin.sweetalert.deactive')
+    {{-- @include('admin.sweetalert.deactive') --}}
 @endsection

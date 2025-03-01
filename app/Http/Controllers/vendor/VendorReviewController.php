@@ -14,7 +14,6 @@ class VendorReviewController extends Controller
      */
     public function index()
     {
-    
         $vendorId = Auth::id();
         $reviews = Review::whereHas('product', function ($query) use ($vendorId) {
             $query->where('user_id', $vendorId);

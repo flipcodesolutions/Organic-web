@@ -15,13 +15,17 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // return  Auth::user();
-    
         try {
             $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
                 $query->where('status', 'active');
-            })->with(['categories', 'productImages', 'productUnit.unitMaster'])->paginate(10);
-            // return $products;    
+            })->with(['categories','productImages'])->paginate(10);
+            
+            // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
+            //     $query->where('status', 'active');
+            // })->with(['categories', 'productImages', 'productUnit.unitMaster'=> function($query){
+            //     $query->where('status','active')->select('id','unit');
+            // }])->paginate(10);
+            // return $products;  
             return view('admin.product.index', compact('products'));
         } catch (\Exception $e) {
 
@@ -35,7 +39,6 @@ class ProductController extends Controller
 
             $categories = Category::where('status', 'active')->get();
             $units = UnitMaster::where('status', 'active')->get();
-            // return $units;
             return view('admin.product.create', compact('categories', 'units'));
         } catch (\Exception $e) {
 
@@ -46,69 +49,82 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // try {
-            // return $request;
-            // $request->validate([
-            //     'product_image' => 'required'
-            // ]);
-            $product = new Product();
-            $product->productName = $request->product_name;
-            $product->productNameGuj = $request->product_name_guj;
-            $product->productNameHin = $request->product_name_hin;
-            $product->productDescription = $request->product_des;
-            $product->productDescriptionGuj = $request->product_des_guj;
-            $product->productDescriptionHin = $request->product_des_hin;
-            $product->productPrice = $request->product_price;
-            $product->Stock = $request->product_stock;
-            $product->season = $request->season;
-            $product->categoryId = $request->category_id;
-            $userId = Auth::user()->id;
-            $product->userId = $userId;
+        // return $request;
+        // $request->validate([
+        //     'product_image' => 'required'
+        // ]);
+        $product = new Product();
+        $product->productName = $request->product_name;
+        $product->productNameGuj = $request->product_name_guj;
+        $product->productNameHin = $request->product_name_hin;
+        $product->productDescription = $request->product_des;
+        $product->productDescriptionGuj = $request->product_des_guj;
+        $product->productDescriptionHin = $request->product_des_hin;
+        $product->productPrice = $request->product_price;
+        $product->Stock = $request->product_stock;
+        $product->season = $request->season;
+        $product->categoryId = $request->category_id;
+        $userId = Auth::user()->id;
+        $product->userId = $userId;
 
-            if ($request->hasFile('product_image')) {
-                $productimg = $request->file('product_image')[0];
-                $imageName = time() . '_' . uniqid() . '.' . $productimg->getClientOriginalExtension();
-                $product->image = $imageName;
+        if ($request->hasFile('product_image')) {
+            $productimg = $request->file('product_image')[0];
+            $imageName = time() . '_' . uniqid() . '.' . $productimg->getClientOriginalExtension();
+            $product->image = $imageName;
 
-                $product->save();
+            $product->save();
 
-                foreach ($request->file('product_image') as $imgdata) {
-                    if ($imgdata->isValid()) {
-                        $imageName = time() . '_' . uniqid() . '.' . $imgdata->getClientOriginalExtension();
-                        $imgdata->move(public_path('productImage/'), $imageName);
+            foreach ($request->file('product_image') as $imgdata) {
+                if ($imgdata->isValid()) {
+                    $imageName = time() . '_' . uniqid() . '.' . $imgdata->getClientOriginalExtension();
+                    $imgdata->move(public_path('productImage/'), $imageName);
 
-                        ProductImage::create([
-                            'productId' => $product->id,
-                            'url' => $imageName,
-                            'type' => 'photo'
-                        ]);
-                    }
-                }
-            }
-
-            if ($request->new_video_link !== null) {
-                foreach ($request->video_link as $data) {
                     ProductImage::create([
                         'productId' => $product->id,
-                        'url' => $data,
-                        'type' => 'video'
+                        'url' => $imageName,
+                        'type' => 'photo'
                     ]);
                 }
             }
+        }
 
-            $productimage = ProductImage::where('productId', $product->id)->get();
-            $product->image = $productimage->first()->url;
-            $product->save();
+        if ($request->new_video_link !== null) {
+            foreach ($request->video_link as $data) {
+                ProductImage::create([
+                    'productId' => $product->id,
+                    'url' => $data,
+                    'type' => 'video'
+                ]);
+            }
+        }
+        
+        $productimage = ProductImage::where('productId', $product->id)->get();
+        $product->image = $productimage->first()->url;
+        $product->save();
 
+        // $unit = $request->unit_id;
+
+        for ($i = 0; $i < count($request->unit_id); $i++) {
             Unit::create([
-                'unit' => $request->unit_id,
+                'unit' => $request->unit_id[$i],
                 'product_id' => $product->id,
-                'price' => $request->product_price,
-                'detail' => $request->unit_det,
-                'per' => $request->discount_per,
-                'sell_price' => $request->sellin_price
+                'price' => $request->product_price[$i],
+                'detail' => $request->unit_det[$i],
+                'per' => $request->discount_per[$i],
+                'sell_price' => $request->sellin_price[$i]
             ]);
+        }
 
-            return redirect()->route('product.index')->with('success', 'Product created successfully!');
+        // Unit::create([
+        //     'unit' => $request->unit_id,
+        //     'product_id' => $product->id,
+        //     'price' => $request->product_price,
+        //     'detail' => $request->unit_det,
+        //     'per' => $request->discount_per,
+        //     'sell_price' => $request->sellin_price
+        // ]);
+
+        return redirect()->route('product.index')->with('success', 'Product created successfully!');
         // } catch (\Exception $e) {
 
         //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
@@ -130,10 +146,10 @@ class ProductController extends Controller
         }
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         try {
-            // return $request;
+            return $request;
             $product = Product::find($id);
             $product->productName = $request->product_name;
             $product->productNameGuj = $request->product_name_guj;
@@ -242,13 +258,23 @@ class ProductController extends Controller
             $product->image = ProductImage::where(['productId' => $id,])->first()->url;
             $product->save();
 
-            Unit::where('product_id', $id)->update([
-                'unit' => $request->unit_id,
-                'price' => $request->product_price,
-                'detail' => $request->unit_det,
-                'per' => $request->discount_per,
-                'sell_price' => $request->sellin_price
-            ]);
+            for ($i = 0; $i < count($request->unit_id); $i++) {
+                Unit::where('product_id',$id)->update([
+                    'unit' => $request->unit_id[$i],
+                    'price' => $request->product_price[$i],
+                    'detail' => $request->unit_det[$i],
+                    'per' => $request->discount_per[$i],
+                    'sell_price' => $request->sellin_price[$i]
+                ]);
+            }
+
+            // Unit::where('product_id', $id)->update([
+            //     'unit' => $request->unit_id,
+            //     'price' => $request->product_price,
+            //     'detail' => $request->unit_det,
+            //     'per' => $request->discount_per,
+            //     'sell_price' => $request->sellin_price
+            // ]);
 
             return redirect()->route('product.index')->with('success', 'Product updated successfully!');
         } catch (\Exception $e) {
@@ -328,7 +354,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         try {
-            $productunit = Unit::where('product_id',$id)->get();
+            $productunit = Unit::where('product_id', $id)->get();
             // return $productunit;
 
             $product = Product::find($id);
@@ -342,7 +368,7 @@ class ProductController extends Controller
                 $data->delete();
             }
 
-            foreach($productunit as $data){
+            foreach ($productunit as $data) {
 
                 $data->delete();
             }

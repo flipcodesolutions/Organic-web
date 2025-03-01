@@ -23,8 +23,7 @@
             <th>Date</th>
             <th>Price</th>
             <th>Quantity</th>
-            <th>Status</th>
-            
+            <th>Status</th> 
         </tr>
         @foreach($purchase as $data)
         <tr>
