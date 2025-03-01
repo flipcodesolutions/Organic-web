@@ -24,7 +24,11 @@ class DatabaseSeeder extends Seeder
             DeliverySlotSeeder::class,
             UnitMasterSeeder::class,
             NavigateMasterSeeder::class,
-            Cms_Masterseeder::class
+            Cms_Masterseeder::class,
+            CategorySeeder::class,
+            ProductImageSeeder::class,
+            ProductSeeder::class,
+            UnitSeeder::Class
         ]);
 
        

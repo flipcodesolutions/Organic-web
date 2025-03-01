@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Edit Screen Name</h6>
+                        <h6 class="mb-0">Edit Point percentage</h6>
                     </div>
                     <div class="col" align="right">
                         <a href="{{ route('pointper.index') }}" class="btn btn-primary" type="button"> Back </a>

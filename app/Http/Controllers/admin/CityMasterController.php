@@ -11,16 +11,34 @@ class CityMasterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         try{
-            $cities = CityMaster::all();
-            return view('admin.city_master.index', compact('cities'));
+            $query = CityMaster::query();
+
+            if ($request->filled('global')) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('city_name_eng', 'like', '%' . $request->global . '%')
+                    ->orWhere('pincode', 'like', '%' . $request->global . '%');
+                });
+            }
+
+            if ($request->filled('cityId')) {
+                $query->where('id', $request->cityId);
+            }
+
+            $data = $query->paginate(10);
+            $cities = CityMaster::where('status', 'active')->get();
+
+
+            return view('admin.city_master.index', compact('data','cities'));
         }
+        
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -90,20 +108,10 @@ class CityMasterController extends Controller
             $citymaster->area_guj = $request->area_guj;
 
             $citymaster->save();
-<<<<<<< HEAD
-            return redirect()->route('city_master.index');;
-        }  
-        catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => $e
-            ], 500);
-=======
             return redirect()->route('city_master.index')->with('success', 'City updated successfully.');
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
->>>>>>> a147b5a8ccedea6a66a5bec9a7d996e6b0612145
         }
     }
     /**

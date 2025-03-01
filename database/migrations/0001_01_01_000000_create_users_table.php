@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('email')->unique()->nullable();
-            $table->string('password');
-            $table->string('phone');    
-            $table->enum('role', ['admin', 'customer','vendor','manager'])->default('customer');
+            $table->string('password')->nullable();
+            $table->string('phone')->nullable();
+            $table->enum('role', ['admin', 'customer', 'vendor', 'manager'])->default('customer')->nullable();
             $table->string('pro_pic')->nullable();
-            $table->enum('is_verfiy_email', ['yes', 'no'])->default('no');
-            $table->enum('is_verify_phone', ['yes', 'no'])->default('no');
-            $table->enum('status', ['active', 'deactive','deleted'])->default('active');
+            $table->enum('is_verfiy_email', ['yes', 'no'])->default('no')->nullable();
+            $table->enum('is_verify_phone', ['yes', 'no'])->default('no')->nullable();
+            $table->enum('status', ['active', 'deactive', 'deleted'])->default('active')->nullable();
 
-            $table->enum('is_special', ['yes', 'no'])->default('yes');
+            $table->enum('is_special', ['yes', 'no'])->default('yes')->nullable();
 
-            $table->string('default_language');
+            $table->string('default_language')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

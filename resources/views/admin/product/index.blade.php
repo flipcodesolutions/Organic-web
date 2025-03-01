@@ -25,10 +25,10 @@
                         <th>Product Name</th>
                         <th>Product Description</th>
                         <th>Product Price</th>
-                        <th>unit</th>
+                        {{-- <th>unit</th>
                         <th>Aprox weight</th>
                         <th>Discount Percentage</th>
-                        <th>Sell Price</th>
+                        <th>Sell Price</th> --}}
                         <th>Product Stock</th>
                         <th>Season</th>
                         <th>Images</th>
@@ -41,39 +41,59 @@
                                 <td>
                                     <ul>
                                         <li>{{ $productData->categories->categoryName }}</li>
-                                        <li>{{ $productData->categories->categoryNameGuj }}</li>
-                                        <li>{{ $productData->categories->categoryNameHin }}</li>
+                                        {{-- <li>{{ $productData->categories->categoryNameGuj }}</li>
+                                        <li>{{ $productData->categories->categoryNameHin }}</li> --}}
                                     </ul>
                                 </td>
                                 <td>
                                     <ul>
                                         <li>{{ $productData->productName }}</li>
-                                        <li>{{ $productData->productNameGuj }}</li>
-                                        <li>{{ $productData->productNameHin }}</li>
+                                        {{-- <li>{{ $productData->productNameGuj }}</li>
+                                        <li>{{ $productData->productNameHin }}</li> --}}
                                     </ul>
                                 </td>
                                 <td>
                                     <ul>
                                         <li>{{ $productData->productDescription }}</li>
-                                        <li>{{ $productData->productDescriptionGuj }}</li>
-                                        <li>{{ $productData->productDescriptionHin }}</li>
+                                        {{-- <li>{{ $productData->productDescriptionGuj }}</li>
+                                        <li>{{ $productData->productDescriptionHin }}</li> --}}
                                     </ul>
                                 </td>
                                 <td>
                                     {{ $productData->productPrice }}
                                 </td>
-                                <td>
-                                    {{ $productData->productUnit->unitMaster->unit }}
+                                {{-- <td>
+                                    <ul>
+                                        @foreach ($productData->productUnit as $data)
+                                            <li>{{ $data->unitMaster->unit }}</li>
+                                        @endforeach
+                                    </ul>
+                                    {{ $productData->product_unit->unitMaster->unit ?? ''}}
                                 </td>
                                 <td>
+                                    <ul>
+                                        @foreach ($productData->productUnit as $data)
+                                            <li>{{ $data->detail }} </li>
+                                        @endforeach
+                                    </ul>
                                     {{ $productData->productUnit->detail }}
                                 </td>
                                 <td>
+                                    <ul>
+                                        @foreach ($productData->productUnit as $data)
+                                            <li>{{ $data->per }}</li>
+                                        @endforeach
+                                    </ul>
                                     {{ $productData->productUnit->per }}
                                 </td>
                                 <td>
+                                    <ul>
+                                        @foreach ($productData->productUnit as $data)
+                                            <li>{{ $data->sell_price }}</li>
+                                        @endforeach
+                                    </ul>
                                     {{ $productData->productUnit->sell_price }}
-                                </td>
+                                </td> --}}
                                 <td>
                                     {{ $productData->stock }}
                                 </td>

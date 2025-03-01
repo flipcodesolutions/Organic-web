@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('sell_price');
             $table->enum('status', ['active', 'deactive'])->default('active');
             $table->timestamps();
+
+            
         });
     }
 

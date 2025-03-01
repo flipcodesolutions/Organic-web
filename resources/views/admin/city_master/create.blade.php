@@ -3,11 +3,11 @@
 @section('content')
 
 <div class="container">
-    <div class="card shadow-sm  bg-body rounded">
+    <div class="card shadow-sm bg-body rounded">
         <div class="card-header">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
-                    <h6 class="mb-0">Create New City</h6>
+                    <h2 class="mb-0">Create New City</h2>
                 </div>
                 <div class="col" align="right">
                     <a class="btn btn-primary" href="{{ Route('city_master.index') }}">Back</a>
@@ -123,7 +123,7 @@
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary btn-sm  mt-3 mb-3">
+                        <button type="submit" class="btn btn-primary ">
                             <i class="fa-solid fa-floppy-disk"></i> Submit</button>
                     </div>
                 </div>
