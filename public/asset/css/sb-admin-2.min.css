@@ -11924,11 +11924,15 @@ a:focus {
     /* color: rgba(255, 255, 255, .8) */
     color: var(--light);
     font-weight:600;
-
+    display: flex;
+    align-items: center;
 }
 
 .sidebar-dark .nav-item .nav-link i {
-    color: rgba(255, 255, 255, .3)
+    color: rgba(255, 255, 255, .3);
+    margin-right: 20px;       /* Consistent space between icon and text */
+    width: 30px;              /* Set a fixed width for all icons */
+    text-align: center;       /* Ensure icon remains centered */
 }
 
 .sidebar-dark .nav-item .nav-link:active,
@@ -11945,7 +11949,8 @@ a:focus {
 }
 
 .sidebar-dark .nav-item .nav-link[data-toggle=collapse]::after {
-    color: rgba(255, 255, 255, .5)
+    color: rgba(255, 255, 255, .5);
+    
 }
 
 .sidebar-dark .nav-item.active .nav-link {
@@ -11953,7 +11958,7 @@ a:focus {
 }
 
 .sidebar-dark .nav-item.active .nav-link i {
-    color: #fff
+    color: #fff;
 }
 
 .sidebar-dark #sidebarToggle {
