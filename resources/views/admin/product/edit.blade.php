@@ -90,7 +90,7 @@
                     </div>
 
                     {{-- product price --}}
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Price<span class="text-danger">*</span>
                         </div>
@@ -102,7 +102,7 @@
                                 <span id="priceError" class="text-danger"></span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     {{-- unit --}}
                     <div class="row">
@@ -115,49 +115,75 @@
                                     <tr>
                                         <th>Unit</th>
                                         <th>Detail (aprox Weight)</th>
+                                        <th>Price</th>
                                         <th>Discount Percentage</th>
                                         <th>Sell Price</th>
+                                        <th>action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="unitTableBody">
                                     <!-- Template Row (First row) -->
                                     @foreach ($product->productUnit as $data)
-                                        <tr class="unitRow">
+                                        <input type="hidden" name="dataid[]" value="{{ $data->id }}">
+                                        <tr>
                                             <td>
-                                                <select class="form-select form-select-lg mb-3" name="unit_id[]"
-                                                    aria-label="Large select example">
+                                                <select class="form-select form-select-lg mb-3"
+                                                    name="unit_id[]" aria-label="Large select example">
                                                     <option disabled>Select Unit</option>
                                                     @foreach ($units as $unitdata)
-                                                        <option value="{{ $unitdata->id }}"{{ $data->unitMaster->id == $unitdata->id ? 'selected' : '' }}>
+                                                        <option
+                                                            value="{{ $unitdata->id }}"{{ $data->unitMaster->id == $unitdata->id ? 'selected' : '' }}>
                                                             {{ $unitdata->unit }}
                                                         </option>
                                                     @endforeach
                                                 </select>
                                                 <span class="text-danger unitIdError"></span>
                                             </td>
+
                                             <td>
                                                 <div class="form-floating">
                                                     <input type="text" name="unit_det[]"
-                                                        placeholder="Unit Detail in Approx Weight" class="form-control" value="{{ $data->detail }}">
+                                                        placeholder="Unit Detail in Approx Weight" class="form-control"
+                                                        value="{{ $data->detail }}">
                                                     <label for="">Approx Weight</label>
                                                     <span class="text-danger unitdetailError"></span>
                                                 </div>
                                             </td>
+
+                                            <td>
+                                                <div class="form-floating">
+                                                    <input type="number" name="product_price[]"
+                                                        placeholder="Product Price" class="form-control"
+                                                        value="{{ $data->per }}">
+                                                    <label for="">Product Price</label>
+                                                    <span class="text-danger productpriceError"></span>
+                                                </div>
+                                            </td>
+
                                             <td>
                                                 <div class="form-floating">
                                                     <input type="number" name="discount_per[]"
-                                                        placeholder="Discount Percentage" class="form-control" value="{{ $data->per }}">
+                                                        placeholder="Discount Percentage" class="form-control"
+                                                        value="{{ $data->per }}">
                                                     <label for="">Discount Per</label>
                                                     <span class="text-danger discountperError"></span>
                                                 </div>
                                             </td>
+
                                             <td>
                                                 <div class="form-floating">
                                                     <input type="number" name="sellin_price[]"
-                                                        placeholder="Selling Price" class="form-control" value="{{ $data->sell_price }}">
+                                                        placeholder="Selling Price" class="form-control"
+                                                        value="{{ $data->sell_price }}">
                                                     <label for="">Selling Price</label>
                                                     <span class="text-danger sellingpriceError"></span>
                                                 </div>
+                                            </td>
+
+                                            <td>
+                                                <a href="{{ route('productunit.delete', $data->id) }}"
+                                                    class="btn btn-danger btn-sm mt-2" style="width: 100px">
+                                                    <i class="fas fa-remove"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -592,6 +618,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
+    {{-- for add and remove new imges and video  --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
@@ -620,6 +647,7 @@
         })
     </script>
 
+    {{-- for add and remove new units --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const addUnitBtn = document.getElementById("addUnit");
@@ -633,7 +661,7 @@
 
                 newRow.innerHTML = `
                 <td>
-                    <select class="form-select form-select-lg mb-3" name="unit_id[]" aria-label="Large select example">
+                    <select class="form-select form-select-lg mb-3" name="new_unit_id[]" aria-label="Large select example">
                         <option selected>Select Unit</option>
                         @foreach ($units as $data)
                             <option value="{{ $data->id }}">{{ $data->unit }}</option>
@@ -643,21 +671,28 @@
                 </td>
                 <td>
                     <div class="form-floating">
-                        <input type="text" name="unit_det[]" placeholder="Unit Detail in Approx Weight" class="form-control">
+                        <input type="text" name="new_unit_det[]" placeholder="Unit Detail in Approx Weight" class="form-control">
                         <label for="">Approx Weight</label>
                         <span class="text-danger unitdetailError"></span>
                     </div>
                 </td>
                 <td>
                     <div class="form-floating">
-                        <input type="text" name="discount_per[]" placeholder="Discount Percentage" class="form-control">
+                        <input type="number" name="new_product_price[].{{ $data->id }}" placeholder="Product Price" class="form-control" value="{{ $data->per }}">
+                        <label for="">Product Price</label>
+                        <span class="text-danger productpriceError"></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="text" name="new_discount_per[]" placeholder="Discount Percentage" class="form-control">
                         <label for="">Discount Per</label>
                         <span class="text-danger discountperError"></span>
                     </div>
                 </td>
                 <td>
                     <div class="form-floating">
-                        <input type="text" name="sellin_price[]" placeholder="Selling Price" class="form-control">
+                        <input type="text" name="new_sellin_price[]" placeholder="Selling Price" class="form-control">
                         <label for="">Selling Price</label>
                         <span class="text-danger sellingpriceError"></span>
                     </div>
@@ -670,11 +705,7 @@
 
             removeUnitBtn.addEventListener("click", function() {
                 const rows = document.querySelectorAll(".unitRow");
-                if (rows.length > 1) {
-                    rows[rows.length - 1].remove(); // Remove the last added row
-                } else {
-                    alert("At least one row must remain.");
-                }
+                rows[rows.length - 1].remove(); // Remove the last added row
             });
         });
     </script>
