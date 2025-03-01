@@ -69,21 +69,9 @@ class PurchaseController extends Controller
     {
         
         $purchase=Purchase::with("productData")->get();
-       // $purchase=Product::get();
-        //return $purchase;
          return view('admin.reports.purchaseReport',['purchase'=>$purchase]);
 
-        // try{
-        // $cities = CityMaster::all();
-        // return view('admin.city_master.index', compact('cities'));
-        // }
-        // catch (\Exception $e) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => $e
-        //     ], 500);
-        // }
-        // $a="hello";
+       
       
     }
 }
