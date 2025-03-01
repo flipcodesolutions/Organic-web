@@ -8,13 +8,13 @@
                         <h6 class="mb-0">Update Slider</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-primary" href="{{Route('slider.index')}}">Back</a>
+                        <a class="btn btn-primary" href="{{ Route('slider.index') }}">Back</a>
                     </div>
                 </div>
             </div>
 
             <div class="card-body">
-                <form id="slider" method="post" action="{{Route('slider.update',$slider->id)}}">
+                <form id="slider" method="post" action="{{ Route('slider.update', $slider->id) }}">
                     @csrf
                     {{-- slider --}}
                     <div class="row mb-3">
@@ -29,9 +29,10 @@
                                             placeholder="cityname" value="">
                                             <option selected disabled>--Select your Cityname--</option>
                                             @foreach ($cities as $cities)
-
-                                            {{-- <option value="{{$cities->id}}"{{old('city_id',$slider->city_id)==$cities->id?'selected':''}}>{{$cities->city_name_eng}}</option> --}}
-                                            <option value="{{$cities->id}}"{{$slider->city_id==$cities->id?'selected':''}}>{{$cities->city_name_eng}}</option>
+                                                {{-- <option value="{{$cities->id}}"{{old('city_id',$slider->city_id)==$cities->id?'selected':''}}>{{$cities->city_name_eng}}</option> --}}
+                                                <option
+                                                    value="{{ $cities->id }}"{{ $slider->city_id == $cities->id ? 'selected' : '' }}>
+                                                    {{ $cities->city_name_eng }}</option>
                                             @endforeach
                                         </select>
                                         <label for="floatingInput">Enter Cityname English</label>
@@ -58,10 +59,11 @@
                                         <select name="slider_pos" id="floatingInput" class="form-control"
                                             placeholder="sliderpos">
                                             <option selected disabled>--Select your position--</option>
-                                            <option value="top"{{$slider->slider_pos=='top'?'selected':''}}>Top</option>
-                                            <option value="bottom"{{$slider->slider_pos=='bottom'?'selected':''}}>Bottom
+                                            <option value="top"{{ $slider->slider_pos == 'top' ? 'selected' : '' }}>Top
                                             </option>
-                                            <option value="middle"{{$slider->slider_pos=='middle'?'selected':''}}>Middle
+                                            <option value="bottom"{{ $slider->slider_pos == 'bottom' ? 'selected' : '' }}>Bottom
+                                            </option>
+                                            <option value="middle"{{ $slider->slider_pos == 'middle' ? 'selected' : '' }}>Middle
                                             </option>
                                         </select>
                                         <label for="floatingInput">Enter Position</label>
@@ -82,7 +84,8 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value=""   {{$slider->is_navigate == 1 ? 'checked' : '' }} name="is_navigate"
+                                        <input class="form-check-input" type="checkbox" value=""
+                                            {{ $slider->is_navigate == 1 ? 'checked' : '' }} name="is_navigate"
                                             id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
 
@@ -100,7 +103,8 @@
 
                     {{-- navigatemaster_id --}}
                     {{-- navigatemaster_id (hidden by default) --}}
-                    <div class="row mb-3" id="navigatemaster_field" style="{{ $slider->is_navigate == 1 ? 'display: flex;' : 'display: none;' }}">
+                    <div class="row mb-3" id="navigatemaster_field"
+                        style="{{ $slider->is_navigate == 1 ? 'display: flex;' : 'display: none;' }}">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             ScreenName<span class="text-danger">*</span>
                         </div>
@@ -112,8 +116,9 @@
                                             placeholder="navigatemaster_id">
                                             <option selected disabled>--Select your screenname--</option>
                                             @foreach ($navigatemasters as $navigatemasters)
-
-                                            <option value="{{$navigatemasters->id}}"{{$slider->navigatemaster_id==$navigatemasters->id?'selected':''}}>{{$navigatemasters->screenname}}</option>
+                                                <option
+                                                    value="{{ $navigatemasters->id }}"{{ $slider->navigatemaster_id == $navigatemasters->id ? 'selected' : '' }}>
+                                                    {{ $navigatemasters->screenname }}</option>
                                             @endforeach
 
                                         </select>
@@ -141,13 +146,19 @@
     </div>
 
     <script>
+
         // JavaScript to toggle navigatemaster field based on checkbox
         document.getElementById('flexCheckDefault').addEventListener('change', function() {
             var navigatemasterField = document.getElementById('navigatemaster_field');
+            var navigatemasterSelect = document.querySelector('select[name="navigatemaster_id"]');
+
             if (this.checked) {
+                // Show navigatemaster field
                 navigatemasterField.style.display = 'flex';
             } else {
+                // Hide navigatemaster field and reset its value
                 navigatemasterField.style.display = 'none';
+                navigatemasterSelect.value = ''; // Reset the value to empty
             }
         });
     </script>

@@ -142,13 +142,19 @@
     </div>
 
     <script>
-        // JavaScript to toggle navigatemaster field based on checkbox
-        document.getElementById('flexCheckDefault').addEventListener('change', function() {
+
+         // JavaScript to toggle navigatemaster field based on checkbox
+         document.getElementById('flexCheckDefault').addEventListener('change', function() {
             var navigatemasterField = document.getElementById('navigatemaster_field');
+            var navigatemasterSelect = document.querySelector('select[name="navigatemaster_id"]');
+
             if (this.checked) {
+                // Show navigatemaster field
                 navigatemasterField.style.display = 'flex';
             } else {
+                // Hide navigatemaster field and reset its value
                 navigatemasterField.style.display = 'none';
+                navigatemasterSelect.value = ''; // Reset the value to empty
             }
         });
     </script>
