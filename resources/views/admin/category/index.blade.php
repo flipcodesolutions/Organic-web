@@ -61,9 +61,13 @@
                                     <a href="{{ route('category.edit') }}/{{ $categoryData->id }}" class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('category.deactive') }}/{{ $categoryData->id }}" class="btn btn-danger">
+                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        onclick="openDeactiveModal('{{ route('category.deactive') }}/{{ $categoryData->id }}')">
                                         <i class="fas fa-remove"></i>
                                     </a>
+                                    {{-- <a href="{{ route('category.deactive') }}/{{ $categoryData->id }}" class="btn btn-danger">
+                                        <i class="fas fa-remove"></i>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach

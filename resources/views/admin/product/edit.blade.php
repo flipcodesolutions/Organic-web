@@ -53,38 +53,48 @@
                     {{-- product description --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description<span class="text-danger">*</span>
+                            Description Eng<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="product_des" id="product_des"
-                                            value="{{ $product->productDescription }}" class="form-control">
-                                        <label for="">English</label>
-                                        <span id="descriptionError" class="text-danger"></span>
-                                    </div>
-                                </div>
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="product_des" value="{{ old('product_des') }}" placeholder="product_des"
+                                    id="floatingTextarea"></textarea>
+                                {{-- <input type="text" name="product_des" id="product_des"
+                                    value="{{ $product->productDescription }}" class="form-control">
+                                <label for="">English</label> --}}
+                                <span id="descriptionError" class="text-danger"></span>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="product_des_guj" id="product_des"
-                                            value="{{ $product->productDescriptionGuj }}" class="form-control">
-                                        <label for="">Gujarati</label>
-                                        <span id="descriptionErrorGuj" class="text-danger"></span>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Guj<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="product_des_guj" value="{{ old('product_des_guj') }}"
+                                    placeholder="product_des_guj" id="floatingTextarea"></textarea>
+                                {{-- <input type="text" name="product_des_guj" id="product_des"
+                                    value="{{ $product->productDescriptionGuj }}" class="form-control">
+                                <label for="">Gujarati</label> --}}
+                                <span id="descriptionErrorGuj" class="text-danger"></span>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="product_des_hin" id="product_des"
-                                            value="{{ $product->productDescriptionHin }}" class="form-control">
-                                        <label for="">Hindi</label>
-                                        <span id="descriptionErrorHin" class="text-danger"></span>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Hin<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="product_des_hin" value="{{ old('product_des_hin') }}"
+                                    placeholder="product_des_hin" id="floatingTextarea"></textarea>
+                                {{-- <input type="text" name="product_des_hin" id="product_des"
+                                    value="{{ $product->productDescriptionHin }}" class="form-control">
+                                <label for="">Hindi</label> --}}
+                                <span id="descriptionErrorHin" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -109,8 +119,8 @@
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Unit<span class="text-danger">*</span>
                         </div>
-                        <div class="col">
-                            <table class="table table-bordered mt-2" id="unitTable">
+                        <div class="col p-0" style="overflow-x: scroll; margin: 0 12px 16px" >
+                            <table class="table table-bordered mt-2" style="width: 900px" id="unitTable">
                                 <thead>
                                     <tr>
                                         <th>Unit</th>
@@ -127,8 +137,8 @@
                                         <input type="hidden" name="dataid[]" value="{{ $data->id }}">
                                         <tr>
                                             <td>
-                                                <select class="form-select form-select-lg mb-3"
-                                                    name="unit_id[]" aria-label="Large select example">
+                                                <select class="form-select form-select-lg mb-3" name="unit_id[]"
+                                                    aria-label="Large select example">
                                                     <option disabled>Select Unit</option>
                                                     @foreach ($units as $unitdata)
                                                         <option
@@ -154,7 +164,7 @@
                                                 <div class="form-floating">
                                                     <input type="number" name="product_price[]"
                                                         placeholder="Product Price" class="form-control"
-                                                        value="{{ $data->per }}">
+                                                        value="{{ $data->price }}">
                                                     <label for="">Product Price</label>
                                                     <span class="text-danger productpriceError"></span>
                                                 </div>
@@ -523,7 +533,7 @@
                         <div class="col">
                             <select class="form-control form-select-lg mb-3" name="season"
                                 aria-label="Large select example">
-                                {{-- <option selected>Select Season</option> --}}
+                                <option disabled>Select Season</option>
                                 <option value="Winter"{{ $product->season == 'Winter' ? 'selected' : '' }}>Winter
                                 </option>
                                 <option value="Summer"{{ $product->season == 'Summer' ? 'selected' : '' }}>Summer
@@ -543,7 +553,7 @@
                         <div class="col">
                             <select class="form-control form-select-lg mb-3" name="category_id"
                                 aria-label="Large select example">
-                                <option selected>Select Category</option>
+                                <option disabled>Select Category</option>
                                 @foreach ($categories as $category)
                                     <option
                                         value="{{ $category->id }}"{{ $product->categoryId == $category->id ? 'selected' : '' }}>
@@ -617,6 +627,13 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <script>
+        // Initialize CKEditor for each
+        CKEDITOR.replace('product_des');
+        CKEDITOR.replace('product_des_guj');
+        CKEDITOR.replace('product_des_hin');
+    </script>
 
     {{-- for add and remove new imges and video  --}}
     <script>

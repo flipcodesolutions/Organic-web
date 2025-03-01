@@ -57,7 +57,7 @@ class CategoryController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Category created successfully!',
+                'msg' => 'Category created successfully!',
                 'data' => $category,
             ]);
         } catch (\Exception $e) {
@@ -106,7 +106,7 @@ class CategoryController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Category updated successfully!'
+                'msg' => 'Category updated successfully!'
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -123,7 +123,7 @@ class CategoryController extends Controller
             $category->status = 'deactive';
             $category->save();
 
-            return back()->with('success','Category deactivated successfully!');
+            return back()->with('msg','Category deactivated successfully!');
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
@@ -136,7 +136,7 @@ class CategoryController extends Controller
             $category = Category::find($id);
             $category->status = 'active';
             $category->save();
-            return redirect()->route('category.index')->with('success','Category activated successfully!');;
+            return redirect()->route('category.index')->with('msg','Category activated successfully!');;
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
@@ -161,7 +161,7 @@ class CategoryController extends Controller
             $currentimagepath = public_path('categoryImage/' . $category->cat_icon);
             unlink($currentimagepath);
             $category->delete();
-            return redirect()->route('category.deleted')->with('success','Category deleted successfully!');;
+            return redirect()->route('category.deleted')->with('msg','Category deleted successfully!');;
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
