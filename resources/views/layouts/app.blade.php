@@ -221,9 +221,41 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('roles.index') }}">Role List</a>
-    </div>
-    </div>
-    </li> --}}
+                    </div>
+                </div>
+            </li> --}}
+
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Permission Management</span>
+                </a>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('permission.index') }}">Pemission List</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Reports -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+                    aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fa-solid fa-file"></i>
+                    <span>Reports</span>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('reports.purchaseReport') }}">Purchase Report</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
 
 
@@ -967,7 +999,12 @@
     <script src="{{ asset('asset/js/demo/chart-pie-demo.js') }}"></script>
 
     {{-- ckeditor cdn --}}
-    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    {{-- <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script> --}}
+
+    <script src="{{ asset('asset/js/ckeditor/ckeditor.js') }}"></script>
+
+
+
 
 </body>
 
