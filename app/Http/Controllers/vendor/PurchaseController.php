@@ -72,7 +72,8 @@ class PurchaseController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
         ]);
-       
+        $request->session()->put('start_date',$request->start_date);
+        $request->session()->put('end_date',$request->end_date);
      //   $data=Purchase::with("productData")->whereBetween('date',[$request->start_date, $request->end_date])->get();
        // return $data;
        $data=Purchase::with("productData")->whereDate('date', '>=', $request->start_date)

@@ -13,8 +13,8 @@
                     
                
                 <div class="col" align="right">
-                <a class="btn btn-primary" href="{{ Route('reports.purchaseDateWisePDF') }}">Download PDF</a>
-                    <a class="btn btn-primary" href="{{ Route('reports.purchaseDateWise') }}">Back</a>
+               
+                <a class="btn btn-primary" href="{{ Route('reports.purchaseDateWise') }}">Back</a>
                 </div>
                 <!-- <div class="col" align="right">
                     <a href="{{route('Report.purchasePdf')}}" class="btn btn-primary">Download PDF</a>
@@ -22,9 +22,7 @@
             </div>
         </div>
 
-        @if ($data->isEmpty()) 
-        <p style="color: red; font-weight: bold;">No records found for this date.</p>
-    @else
+        
     <table class="table">
         <tr>
             <th>ID</th>
@@ -35,6 +33,7 @@
             <th>Quantity</th>
             <th>Status</th> 
         </tr>
+        @if(count($data)>0)
         @foreach($data as $data)
         <tr>
             <td>{{ $data->id }}</td>
@@ -47,6 +46,17 @@
                       
         </tr>
         @endforeach
+        <tr>
+            <td colspan="7" align="center">
+                <a class="btn btn-primary" href="{{ Route('reports.purchaseDateWisePDF') }}">Download PDF</a>
+            </td>
+        @else
+            <tr>
+                <td colspan="7" align="center" style="color: red;">
+                     <h5>No Data Record Found</h5>
+                </td>
+            </tr>
+         @endif
     </table>
-    @endif
+    
 @endsection

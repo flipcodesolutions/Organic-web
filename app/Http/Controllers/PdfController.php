@@ -16,16 +16,18 @@ class PdfController extends Controller
         $pdf = Pdf::loadView('admin.reports.purchasePdf',$data);
         return $pdf->download('purchaseReport.pdf');
     }
-    public function purchaseDateWisePDF(Request $request){
+    public function purchaseDateWisePDF(){
             
         // $purchase=Purchase::with("productData")->get();
         // $data=['purchase'=>$purchase];
-        $data=Purchase::with("productData")->whereDate('date', '>=', $request->start_date)
-        ->whereDate('date', '<=', $request->end_date)
+        $start_date=session('start_date');
+        $end_date=session('end_date');
+        $data=Purchase::with("productData")->whereDate('date', '>=', $start_date)
+        ->whereDate('date', '<=', $end_date)
         ->get();
    
    $data=['data'=>$data];
-        $pdf = Pdf::loadView('admin.reports.purchaseDateWisePDF',$data);
+        $pdf = Pdf::loadView('admin.reports.purchaseDateWisePDF',$data)->setPaper('a4', 'potrait');
         return $pdf->download('purchaseReport.pdf');
     }
 }
