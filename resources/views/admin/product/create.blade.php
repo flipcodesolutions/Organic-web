@@ -25,26 +25,38 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="product_name" id="product_name" placeholder="product Name"
-                                    class="form-control">
+                                <input type="text" name="product_name" value="{{ old('product_name') }}"
+                                    id="product_name" placeholder="product Name" class="form-control">
                                 <label for="">English</label>
-                                <span id="nameError" class="text-danger"></span>
+                                <span>
+                                    @error('product_name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="product_name_guj" id="product_name"
-                                    placeholder="Product Name Gujarati" class="form-control">
+                                <input type="text" name="product_name_guj" value="{{ old('product_name_guj') }}"
+                                    id="product_name" placeholder="Product Name Gujarati" class="form-control">
                                 <label for="">Gujarati</label>
-                                <span id="nameErrorGuj" class="text-danger"></span>
+                                <span>
+                                    @error('product_name_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="product_name_hin" id="product_name"
-                                    placeholder="Product Name Hindi" class="form-control">
+                                <input type="text" name="product_name_hin" value="{{ old('product_name_hin') }}"
+                                    id="product_name" placeholder="Product Name Hindi" class="form-control">
                                 <label for="">Hindi</label>
-                                <span id="nameErrorHin" class="text-danger"></span>
+                                <span>
+                                    @error('product_name_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -61,7 +73,11 @@
                                 {{-- <input type="text" name="product_des" id="product_des"
                                             placeholder="Product Description" class="form-control">
                                         <label for="">English</label> --}}
-                                <span id="descriptionError" class="text-danger"></span>
+                                <span>
+                                    @error('product_des')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -76,7 +92,11 @@
                                 {{-- <input type="text" name="product_des_guj" id="product_des_guj"
                                             placeholder="Product Description Gujarati" class="form-control">
                                         <label for="">Gujarati</label> --}}
-                                <span id="descriptionErrorGuj" class="text-danger"></span>
+                                <span>
+                                    @error('product_des_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -91,7 +111,11 @@
                                 {{-- <input type="text" name="product_des_hin" id="product_des"
                                             placeholder="Product Description Hindi" class="form-control">
                                         <label for="">Hindi</label> --}}
-                                <span id="descriptionErrorHin" class="text-danger"></span>
+                                <span>
+                                    @error('product_des_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -141,14 +165,22 @@
                                                     <option value="{{ $data->id }}">{{ $data->unit }}</option>
                                                 @endforeach
                                             </select>
-                                            <span class="text-danger unitIdError"></span>
+                                            <span>
+                                                @error('unit_id')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @enderror
+                                            </span>
                                         </td>
                                         <td>
                                             <div class="form-floating">
                                                 <input type="text" name="unit_det[]"
                                                     placeholder="Unit Detail in Approx Weight" class="form-control">
                                                 <label for="">Approx Weight</label>
-                                                <span class="text-danger unitdetailError"></span>
+                                                <span>
+                                                    @error('unit_det')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </span>
                                             </div>
                                         </td>
                                         <td>
@@ -156,7 +188,11 @@
                                                 <input type="number" name="price[]" placeholder="Product Price"
                                                     class="form-control">
                                                 <label for="">Product Price</label>
-                                                <span class="text-danger productpriceError"></span>
+                                                <span>
+                                                    @error('price')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </span>
                                             </div>
                                         </td>
                                         <td>
@@ -164,7 +200,11 @@
                                                 <input type="number" name="discount_per[]"
                                                     placeholder="Discount Percentage" class="form-control">
                                                 <label for="">Discount Per</label>
-                                                <span class="text-danger discountperError"></span>
+                                                <span>
+                                                    @error('discount_per')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </span>
                                             </div>
                                         </td>
                                         <td>
@@ -172,7 +212,11 @@
                                                 <input type="number" name="selling_price[]" placeholder="Selling Price"
                                                     class="form-control">
                                                 <label for="">Selling Price</label>
-                                                <span class="text-danger sellingpriceError"></span>
+                                                <span>
+                                                    @error('selling_price')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </span>
                                             </div>
                                         </td>
                                     </tr>
@@ -236,10 +280,14 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="number" name="product_stock" id="product_stock"
-                                    placeholder="Product Stock" class="form-control">
+                                <input type="number" name="product_stock" value="{{ old('product_stock') }}"
+                                    id="product_stock" placeholder="Product Stock" class="form-control">
                                 <label for="">Stock</label>
-                                <span id="stockError" class="text-danger"></span>
+                                <span>
+                                    @error('product_stock')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -256,7 +304,11 @@
                                 <input type="file" class="form-control" id="photoUpload" name="product_image[]"
                                     multiple>
                             </div>
-
+                            <span>
+                                @error('product_image')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span>
                             {{-- <div class="row"> --}}
                             {{-- <select class="form-select form-select-lg mb-3" name="image_and_video" id="image_and_video"
                                 aria-label="Large select example">
@@ -295,6 +347,11 @@
                                 <input type="text" class="form-control" id="videoLink" name="video_link[]"
                                     placeholder="Enter video link">
                                 <span id="videolinklist"> </span>
+                                <span>
+                                    @error('video_link')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                                 <label for="videoLink">Video Link</label>
                                 <a class="btn btn-primary my-2" id="addVideo">+</a>
                                 <a class="btn btn-danger my-2" id="removeVideo">-</a>
@@ -315,8 +372,12 @@
                                 <option value="Summer">Summer</option>
                                 <option value="Monsoon">Monsoon</option>
                             </select>
+                            <span>
+                                @error('season')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span>
                         </div>
-                        <span id="seasonError" class="text-danger"></span>
                     </div>
 
                     {{-- Product Category --}}
@@ -332,7 +393,11 @@
                                     <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
                                 @endforeach
                             </select>
-                            <span id="categoryIdError" class="text-danger"></span>
+                            <span>
+                                @error('category_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span>
                         </div>
                     </div>
 
@@ -416,40 +481,65 @@
 
                 newRow.innerHTML = `
             <td>
-                <select class="form-select form-select-lg mb-3" name="unit_id[]" aria-label="Large select example">
-                    <option selected>Select Unit</option>
-                    @foreach ($units as $data)
-                        <option value="{{ $data->id }}">{{ $data->unit }}</option>
-                    @endforeach
+                <select class="form-select form-select-lg mb-3" name="unit_id[]"
+                aria-label="Large select example">
+                    <option selected disabled>Select Unit</option>
+                        @foreach ($units as $data)
+                            <option value="{{ $data->id }}">{{ $data->unit }}</option>
+                                @endforeach
                 </select>
-                <span class="text-danger unitIdError"></span>
+                <span>
+                    @error('unit_id')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </span>
             </td>
             <td>
                 <div class="form-floating">
-                    <input type="text" name="unit_det[]" placeholder="Unit Detail in Approx Weight" class="form-control">
+                    <input type="text" name="unit_det[]"
+                    placeholder="Unit Detail in Approx Weight" class="form-control">
                     <label for="">Approx Weight</label>
-                    <span class="text-danger unitdetailError"></span>
+                    <span>
+                        @error('unit_det')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </span>
                 </div>
             </td>
             <td>
                 <div class="form-floating">
-                    <input type="number" name="price[]" placeholder="Product Price" class="form-control">
+                    <input type="number" name="price[]" placeholder="Product Price"
+                    class="form-control">
                     <label for="">Product Price</label>
-                    <span class="text-danger productpriceError"></span>
-                </div> 
-            </td>
-            <td>
-                <div class="form-floating">
-                    <input type="text" name="discount_per[]" placeholder="Discount Percentage" class="form-control">
-                    <label for="">Discount Per</label>
-                    <span class="text-danger discountperError"></span>
+                    <span>
+                        @error('price')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </span>
                 </div>
             </td>
             <td>
                 <div class="form-floating">
-                    <input type="text" name="selling_price[]" placeholder="Selling Price" class="form-control">
+                    <input type="number" name="discount_per[]"
+                    placeholder="Discount Percentage" class="form-control">
+                    <label for="">Discount Per</label>
+                    <span>
+                        @error('discount_per')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </span>
+                </div>
+            </td>
+            <td>
+                <div class="form-floating">
+                    <input type="number" name="selling_price[]" placeholder="Selling Price"
+                    class="form-control">
                     <label for="">Selling Price</label>
-                    <span class="text-danger sellingpriceError"></span>
+                    <span>
+                        @error('selling_price')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </span>
                 </div>
             </td>
         `;

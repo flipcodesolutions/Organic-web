@@ -34,10 +34,14 @@
                                     <a href="{{ route('navigate.active') }}/{{ $data->id }}" class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('navigate.delete') }}/{{ $data->id }}"
+                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        onclick="openDeleteModal('{{ route('navigate.delete') }}/{{ $data->id }}')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    {{-- <a href="{{ route('navigate.delete') }}/{{ $data->id }}"
                                         class="btn btn-danger">
                                         <i class="fas fa-remove"></i>
-                                    </a>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach

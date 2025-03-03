@@ -55,6 +55,9 @@ class PointPerController extends Controller
      */
     public function update(Request $request,$id)
     {
+        $request->validate([
+            'pointpercentage' => 'required'
+        ]);
         $per = Pointper::find($id);
         $per->per = $request->pointpercentage;
         $per->save();

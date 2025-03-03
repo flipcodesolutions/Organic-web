@@ -48,11 +48,33 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'product_name' => 'required',
+            'product_name_guj' => 'required',
+            'product_name_hin' => 'required',
+            'product_des' => 'required',
+            'product_des_guj' => 'required',
+            'product_des_hin' => 'required',
+            'unit_id' => 'required|array|min:1',
+            'unit_id.*' => 'required|exists:units,id',
+            // 'unit_det' => 'required|array|min:1',
+            // 'unit_det.*' => 'required|string',
+            // 'price' => 'required|array|min:1',
+            // 'price.*' => 'required|numeric|not_in:null',
+            // 'discount_per' => 'required|array|min:1',
+            // 'discount_per.*' => 'required|numeric|between:0,100',
+            // 'selling_price' => 'required|array|min:1',
+            // 'selling_price.*' => 'required|numeric',
+            'product_stock' => 'required',
+            'season' => 'required',
+            'category_id' => 'required',
+            // 'product_image' => 'nullable|array|required_without:video_link',
+            // 'product_image.*' => 'required_if:product_image,!=,null',
+            // 'video_link' => 'array|required_without:product_image',
+            // 'video_link.*' => 'required_if:video_link,!=,null'
+        ]);
         try {
             // return $request;
-            // $request->validate([
-            //     'product_image' => 'required'
-            // ]);
             $product = new Product();
             $product->productName = $request->product_name;
             $product->productNameGuj = $request->product_name_guj;
@@ -121,7 +143,7 @@ class ProductController extends Controller
             //     'price' => $request->product_price,
             //     'detail' => $request->unit_det,
             //     'per' => $request->discount_per,
-            //     'sell_price' => $request->sellin_price
+            //     'sell_price' => $request->selling_price
             // ]);
 
             return redirect()->route('product.index')->with('msg', 'Product created successfully!');
@@ -148,6 +170,31 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'product_name' => 'required',
+            'product_name_guj' => 'required',
+            'product_name_hin' => 'required',
+            'product_des' => 'required',
+            'product_des_guj' => 'required',
+            'product_des_hin' => 'required',
+            'unit_id' => 'required|array|min:1',
+            'unit_id.*' => 'required|exists:units,id',
+            // 'unit_det' => 'required|array|min:1',
+            // 'unit_det.*' => 'required|string',
+            // 'price' => 'required|array|min:1',
+            // 'price.*' => 'required|numeric|not_in:null',
+            // 'discount_per' => 'required|array|min:1',
+            // 'discount_per.*' => 'required|numeric|between:0,100',
+            // 'selling_price' => 'required|array|min:1',
+            // 'selling_price.*' => 'required|numeric',
+            'product_stock' => 'required',
+            'season' => 'required',
+            'category_id' => 'required',
+            // 'product_image' => 'nullable|array|required_without:video_link',
+            // 'product_image.*' => 'required_if:product_image,!=,null',
+            // 'video_link' => 'array|required_without:product_image',
+            // 'video_link.*' => 'required_if:video_link,!=,null'
+        ]);
         try {
             // return $request;
             $product = Product::find($id);
@@ -262,7 +309,7 @@ class ProductController extends Controller
                     'price' => $request->product_price[$i],
                     'detail' => $request->unit_det[$i],
                     'per' => $request->discount_per[$i],
-                    'sell_price' => $request->sellin_price[$i]
+                    'sell_price' => $request->selling_price[$i]
                 ]);
             }
 
@@ -275,7 +322,7 @@ class ProductController extends Controller
                         'price' => $request->new_product_price[$a],
                         'detail' => $request->new_unit_det[$a],
                         'per' => $request->new_discount_per[$a],
-                        'sell_price' => $request->new_sellin_price[$a]
+                        'sell_price' => $request->new_selling_price[$a]
                     ]);
                 }
             }
@@ -288,7 +335,7 @@ class ProductController extends Controller
             //     'price' => $request->product_price,
             //     'detail' => $request->unit_det,
             //     'per' => $request->discount_per,
-            //     'sell_price' => $request->sellin_price
+            //     'sell_price' => $request->selling_price
             // ]);
 
             return redirect()->route('product.index')->with('msg', 'Product updated successfully!');
@@ -404,7 +451,7 @@ class ProductController extends Controller
 
             $image = ProductImage::find($id);
             $data = ProductImage::where('productId', $image->productId)->get();
-            if (count($data) > 1) {
+            // if (count($data) > 1) {
                 if ($image->type == 'photo') {
                     $currentimagepath = public_path('productImage/' . $image->url);
                     if (file_exists($currentimagepath)) {
@@ -416,9 +463,9 @@ class ProductController extends Controller
                     $image->delete();
                     return redirect()->back()->with('msg', 'Video deleted successfully!');
                 }
-            } else {
-                return redirect()->back()->with('error', 'Please add new images/videos before deleting last image/video!');
-            }
+            // } else {
+            //     return redirect()->back()->with('error', 'Please add new images/videos before deleting last image/video!');
+            // }
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');

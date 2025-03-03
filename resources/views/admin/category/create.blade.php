@@ -9,13 +9,13 @@
                         <h6 class="mb-0">Create New Category</h6>
                     </div>
                     <div class="col" align="right">
-                        <button class="btn btn-primary" type="button" onclick="javascript:history.go(-1)"> Back </button>
+                        <a href="{{ route('category.index') }}" class="btn btn-primary" type="button"> Back </a>
                     </div>
                 </div>
             </div>
 
             <div class="card-body">
-                <form id="categoryForm" >
+                <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     {{-- Category --}}
                     <div class="row mb-3">
@@ -27,7 +27,11 @@
                                 <input type="text" name="category_name" id="category_name" placeholder="Category Name"
                                     class="form-control">
                                 <label for="">English</label>
-                                <span id="nameError" class="text-danger"></span>
+                                <span>
+                                    @error('category_name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
@@ -35,7 +39,11 @@
                                 <input type="text" name="category_name_guj" id="category_name"
                                     placeholder="Category Name Gujarati" class="form-control">
                                 <label for="">Gujarati</label>
-                                <span id="nameError" class="text-danger"></span>
+                                <span>
+                                    @error('category_name_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
@@ -43,7 +51,11 @@
                                 <input type="text" name="category_name_hin" id="category_name"
                                     placeholder="Category Name Hindi" class="form-control">
                                 <label for="">Hindi</label>
-                                <span id="nameError" class="text-danger"></span>
+                                <span>
+                                    @error('category_name_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -54,35 +66,55 @@
                             Description<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="category_des" id="category_name"
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="category_des" value="{{ old('category_des') }}"
+                                    placeholder="Category Description English" id="floatingTextarea"></textarea>
+                                {{-- <input type="text" name="category_des" id="category_name"
                                             placeholder="Category Name" class="form-control">
-                                        <label for="">English</label>
-                                        <span id="nameError" class="text-danger"></span>
-                                    </div>
-                                </div>
+                                        <label for="">English</label> --}}
+                                <span>
+                                    @error('category_des')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="category_des_guj" id="category_name"
-                                            placeholder="Category Name" class="form-control">
-                                        <label for="">Gujarati</label>
-                                        <span id="nameError" class="text-danger"></span>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Gujarati<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="category_des_guj" value="{{ old('category_des_guj') }}"
+                                    placeholder="Category Description Gujarati" id="floatingTextarea"></textarea>
+                                {{-- <input type="text" name="category_des_guj" id="category_name"
+                                    placeholder="Category Name" class="form-control">
+                                <label for="">Gujarati</label> --}}
+                                <span>
+                                    @error('category_des_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="category_des_hin" id="category_name"
-                                            placeholder="Category Name" class="form-control">
-                                        <label for="">Hindi</label>
-                                        <span id="nameError" class="text-danger"></span>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Hindi<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="category_des_hin" value="{{ old('category_des_hin') }}"
+                                    placeholder="Category Description Hindi" id="floatingTextarea"></textarea>
+                                {{-- <input type="text" name="category_des_hin" id="category_name"
+                                    placeholder="Category Name" class="form-control">
+                                <label for="">Hindi</label> --}}
+                                <span>
+                                    @error('category_des_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -97,7 +129,11 @@
                                 <input type="file" name="category_image" id="category_Image" placeholder="Category Name"
                                     class="form-control">
                                 {{-- <label for="">Image</label> --}}
-                                <span id="nameError" class="text-danger"></span>
+                                <span>
+                                    @error('category_image')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -109,13 +145,26 @@
                             Parent Category<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <select class="form-select ddCategory" name="parent_id[]" class="form-control">
-                                <option value="0" selected>-- select category --</option>
+                            <select class="form-select ddCategory" name="parent_id" class="form-control">
+                                <option value="0" selected disabled>-- select category --</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                    <optgroup label="{{ $category->categoryName }}">
+                                        @foreach ($childcat as $child)
+                                            @if ($child->parent_category_id == $category->id)
+                                                <option value="{{ $child->id }}">{{ $child->categoryName }}</option>
+                                            @endif
+                                        @endforeach
+                                    </optgroup>
                                 @endforeach
+                                {{-- @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
+                                @endforeach --}}
                             </select>
-                            <span id="parentIdError" class="text-danger"></span>
+                            <span>
+                                @error('parent_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span>
                         </div>
                         {{-- </div> --}}
                     </div>
@@ -127,7 +176,7 @@
                                     class="fa-solid fa-floppy-disk"></i> Submit</button>
                         </div>
                     </div>
-                    
+
                 </form>
             </div>
         </div>
@@ -137,6 +186,13 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
     <script>
+        // Initialize CKEditor for each
+        CKEDITOR.replace('category_des');
+        CKEDITOR.replace('category_des_guj');
+        CKEDITOR.replace('category_des_hin');
+    </script>
+
+    {{-- <script>
         $(document).ready(function() {
             $("#categoryForm").on("submit", function(e) {
                 e.preventDefault();
@@ -147,7 +203,7 @@
                 let formData = new FormData(this);
 
                 let name = $('#category_name').val();
-                console.log(name);
+                // console.log(name);
 
                 let parent_id = $('#parent_id').val();
 
@@ -219,6 +275,6 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 
 @endsection

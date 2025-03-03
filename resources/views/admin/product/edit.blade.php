@@ -29,7 +29,11 @@
                                 <input type="text" name="product_name" id="product_name"
                                     value="{{ $product->productName }}" class="form-control">
                                 <label for="">English</label>
-                                <span id="nameError" class="text-danger"></span>
+                                <span>
+                                    @error('product_name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
@@ -37,7 +41,11 @@
                                 <input type="text" name="product_name_guj" id="product_name"
                                     value="{{ $product->productNameGuj }}" class="form-control">
                                 <label for="">Gujarati</label>
-                                <span id="nameErrorGuj" class="text-danger"></span>
+                                <span>
+                                    @error('product_name_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
@@ -45,7 +53,11 @@
                                 <input type="text" name="product_name_hin" id="product_name"
                                     value="{{ $product->productNameHin }}" class="form-control">
                                 <label for="">Hindi</label>
-                                <span id="nameErrorHin" class="text-danger"></span>
+                                <span>
+                                    @error('product_name_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -58,11 +70,15 @@
                         <div class="col">
                             <div class="form-floating">
                                 <textarea class="ckeditor form-control" name="product_des" value="{{ old('product_des') }}" placeholder="product_des"
-                                    id="floatingTextarea"></textarea>
+                                    id="floatingTextarea">{{ $product->productDescription }}</textarea>
                                 {{-- <input type="text" name="product_des" id="product_des"
                                     value="{{ $product->productDescription }}" class="form-control">
                                 <label for="">English</label> --}}
-                                <span id="descriptionError" class="text-danger"></span>
+                                <span>
+                                    @error('product_des')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -74,11 +90,15 @@
                         <div class="col">
                             <div class="form-floating">
                                 <textarea class="ckeditor form-control" name="product_des_guj" value="{{ old('product_des_guj') }}"
-                                    placeholder="product_des_guj" id="floatingTextarea"></textarea>
+                                    placeholder="product_des_guj" id="floatingTextarea">{{ $product->productDescriptionGuj }}</textarea>
                                 {{-- <input type="text" name="product_des_guj" id="product_des"
                                     value="{{ $product->productDescriptionGuj }}" class="form-control">
                                 <label for="">Gujarati</label> --}}
-                                <span id="descriptionErrorGuj" class="text-danger"></span>
+                                <span>
+                                    @error('product_des_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -90,11 +110,15 @@
                         <div class="col">
                             <div class="form-floating">
                                 <textarea class="ckeditor form-control" name="product_des_hin" value="{{ old('product_des_hin') }}"
-                                    placeholder="product_des_hin" id="floatingTextarea"></textarea>
+                                    placeholder="product_des_hin" id="floatingTextarea">{{ $product->productDescriptionHin }}</textarea>
                                 {{-- <input type="text" name="product_des_hin" id="product_des"
                                     value="{{ $product->productDescriptionHin }}" class="form-control">
                                 <label for="">Hindi</label> --}}
-                                <span id="descriptionErrorHin" class="text-danger"></span>
+                                <span>
+                                    @error('product_des_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -119,7 +143,7 @@
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Unit<span class="text-danger">*</span>
                         </div>
-                        <div class="col p-0" style="overflow-x: scroll; margin: 0 12px 16px" >
+                        <div class="col p-0" style="overflow-x: scroll; margin: 0 12px 16px">
                             <table class="table table-bordered mt-2" style="width: 900px" id="unitTable">
                                 <thead>
                                     <tr>
@@ -147,7 +171,11 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                                <span class="text-danger unitIdError"></span>
+                                                <span>
+                                                    @error('unit_id')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </span>
                                             </td>
 
                                             <td>
@@ -156,7 +184,11 @@
                                                         placeholder="Unit Detail in Approx Weight" class="form-control"
                                                         value="{{ $data->detail }}">
                                                     <label for="">Approx Weight</label>
-                                                    <span class="text-danger unitdetailError"></span>
+                                                    <span>
+                                                        @error('unit_det')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                             </td>
 
@@ -166,7 +198,11 @@
                                                         placeholder="Product Price" class="form-control"
                                                         value="{{ $data->price }}">
                                                     <label for="">Product Price</label>
-                                                    <span class="text-danger productpriceError"></span>
+                                                    <span>
+                                                        @error('product_price')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                             </td>
 
@@ -176,17 +212,25 @@
                                                         placeholder="Discount Percentage" class="form-control"
                                                         value="{{ $data->per }}">
                                                     <label for="">Discount Per</label>
-                                                    <span class="text-danger discountperError"></span>
+                                                    <span>
+                                                        @error('discount_per')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                             </td>
 
                                             <td>
                                                 <div class="form-floating">
-                                                    <input type="number" name="sellin_price[]"
+                                                    <input type="number" name="selling_price[]"
                                                         placeholder="Selling Price" class="form-control"
                                                         value="{{ $data->sell_price }}">
                                                     <label for="">Selling Price</label>
-                                                    <span class="text-danger sellingpriceError"></span>
+                                                    <span>
+                                                        @error('selling_price')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                             </td>
 
@@ -228,7 +272,7 @@
                                         </td>
                                         <td>
                                             <div class="form-floating">
-                                                <input type="number" name="sellin_price[]" placeholder="Selling Price"
+                                                <input type="number" name="selling_price[]" placeholder="Selling Price"
                                                     class="form-control">
                                                 <label for="">Selling Price</label>
                                                 <span class="text-danger sellingpriceError"></span>
@@ -274,7 +318,7 @@
                                         </td>
                                         <td>
                                             <div class="form-floating">
-                                                <input type="text" name="sellin_price" id="selling_price"
+                                                <input type="text" name="selling_price" id="selling_price"
                                                     placeholder="Selling Price" class="form-control" value="{{ $product->productUnit->sell_price }}">
                                                 <label for="">Selling Price</label>
                                                 <span id="sellingpriceError" class="text-danger"></span>
@@ -307,7 +351,11 @@
                                 <input type="number" name="product_stock" id="product_stock"
                                     value="{{ $product->stock }}" class="form-control">
                                 <label for="">Stock</label>
-                                <span id="stockError" class="text-danger"></span>
+                                <span>
+                                    @error('product_stock')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -542,7 +590,11 @@
                                 </option>
                             </select>
                         </div>
-                        <span id="seasonError" class="text-danger"></span>
+                        <span>
+                            @error('season')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
                     </div>
 
                     {{-- Product Category --}}
@@ -560,7 +612,11 @@
                                         {{ $category->categoryName }}</option>
                                 @endforeach
                             </select>
-                            <span id="categoryIdError" class="text-danger"></span>
+                            <span>
+                                @error('category_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span>
                         </div>
                     </div>
 
@@ -709,7 +765,7 @@
                 </td>
                 <td>
                     <div class="form-floating">
-                        <input type="text" name="new_sellin_price[]" placeholder="Selling Price" class="form-control">
+                        <input type="text" name="new_selling_price[]" placeholder="Selling Price" class="form-control">
                         <label for="">Selling Price</label>
                         <span class="text-danger sellingpriceError"></span>
                     </div>

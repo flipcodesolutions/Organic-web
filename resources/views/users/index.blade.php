@@ -23,6 +23,7 @@
                         <th>No</th>
                         <th>User image</th>
                         <th>Name</th>
+                        <th>Phone</th>
                         <th>Email</th>
                         <th>Roles</th>
                         <th>Defalut Language</th>
@@ -35,6 +36,7 @@
                             <td><img src="{{ asset('user_profile/' . $user->pro_pic) }}" alt="profile_picture"
                                     class="img-profile rounded-circle" height="100px" width="100px">
                             <td>{{ $user->name }}</td>
+                            <td>{{ $user->phone }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->role }}</td>
                             <td>{{ $user->default_language }}</td>
