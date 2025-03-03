@@ -16,7 +16,7 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $sliders = Slider::with('city','navigatemaster')->where('status','active')->get();
+        $sliders = Slider::with('city', 'navigatemaster')->where('status', 'active')->get();
         return view('admin.slider.index', compact('sliders'));
     }
 
@@ -26,8 +26,8 @@ class SliderController extends Controller
     public function create()
     {
         $cities = CityMaster::all();
-        $navigatemasters =NavigateMaster::all();
-        return view('admin.slider.create', compact('cities','navigatemasters'));
+        $navigatemasters = NavigateMaster::all();
+        return view('admin.slider.create', compact('cities', 'navigatemasters'));
     }
 
     /**
@@ -38,14 +38,26 @@ class SliderController extends Controller
         $request->validate([
             'city_id' => 'required',
             'slider_pos' => 'required',
+            // 'image' => 'required|array',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        $slider = new Slider();
-        $slider->city_id = $request->city_id;
-        $slider->slider_pos = $request->slider_pos;
-        $slider->is_navigate = $request->has('is_navigate') ? 1 : 0;
-        $slider->navigatemaster_id = $request->navigatemaster_id;
-        $slider->save();
 
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            // store image in public folder (sliderimage folder)
+            $imageName = $image->getClientOriginalName();
+
+            $image->move(public_path('sliderimage/'), $imageName);
+
+
+            $slider = new Slider();
+            $slider->city_id = $request->city_id;
+            $slider->url = $imageName;
+            $slider->slider_pos = $request->slider_pos;
+            $slider->is_navigate = $request->has('is_navigate') ? 1 : 0;
+            $slider->navigatemaster_id = $request->navigatemaster_id;
+            $slider->save();
+        }
         return redirect()->route('slider.index')->with('msg', 'Slider Created Successfully');
     }
 
@@ -65,7 +77,7 @@ class SliderController extends Controller
         $slider = Slider::find($id);
         $cities = CityMaster::all();
         $navigatemasters = NavigateMaster::all();
-        return view('admin.slider.edit', compact('slider', 'cities','navigatemasters'));
+        return view('admin.slider.edit', compact('slider', 'cities', 'navigatemasters'));
     }
 
     /**
@@ -73,20 +85,39 @@ class SliderController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $slider = Slider::find($id);
         $request->validate([
             'city_id' => 'required',
             'slider_pos' => 'required',
+            // 'image' => 'required|array',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $slider = Slider::find($id);
-        $slider->city_id = $request->city_id;
-        $slider->slider_pos = $request->slider_pos;
-        $slider->is_navigate = $request->has('is_navigate') ? 1 : 0;
-        $slider->navigatemaster_id = $request->navigatemaster_id;
-        $slider->save();
+        if ($request->hasFile('image')) {
+
+            // Delete the old image from storage, if it exists
+            if ($slider->url && file_exists(public_path('sliderimage/' . $slider->url))) {
+                unlink(public_path('sliderimage/' . $slider->url));
+            }
+
+
+            $image = $request->file('image');
+            // store image in public folder (sliderimage folder)
+            $imageName = $image->getClientOriginalName();
+
+            $image->move(public_path('sliderimage/'), $imageName);
+
+            $slider->url = $imageName;
+        }
+            // store data in database
+            $slider->city_id = $request->city_id;
+            $slider->slider_pos = $request->slider_pos;
+            $slider->is_navigate = $request->has('is_navigate') ? 1 : 0;
+            $slider->navigatemaster_id = $request->navigatemaster_id;
+            $slider->save();
 
         return redirect()->route('slider.index')->with('msg', 'Slider Updated Successfully');
-
     }
 
     /**
@@ -95,29 +126,29 @@ class SliderController extends Controller
     public function delete(string $id)
     {
         $slider = Slider::find($id);
-        $slider->status='deactive';
+        $slider->status = 'deactive';
         $slider->save();
 
         return redirect()->route('slider.index')->with('msg', 'Slider Deactivated Successfully');
     }
     public function deactive()
     {
-        $sliders = Slider::where('status','deactive')->get();
-        return view('admin.slider.deactivedata',compact('sliders'));
+        $sliders = Slider::where('status', 'deactive')->get();
+        return view('admin.slider.deactivedata', compact('sliders'));
     }
     public function active($id)
     {
-       $slider = Slider::find($id);
-       $slider->status ='active';
-       $slider->save();
+        $slider = Slider::find($id);
+        $slider->status = 'active';
+        $slider->save();
 
-       return redirect()->route('slider.index')->with('msg', 'Slider Activated Successfully');
-
+        return redirect()->route('slider.index')->with('msg', 'Slider Activated Successfully');
     }
     public function permdelete($id)
     {
-        $slider =Slider::find($id);
+        $slider = Slider::find($id);
         $slider->delete();
+        unlink(public_path('sliderimage/'.$slider->url));
 
         return redirect()->route('slider.index')->with('msg', 'Slider Deleted Successfully');
     }

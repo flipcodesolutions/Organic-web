@@ -49,7 +49,7 @@ class Cms_MasterController extends Controller
         $cms_master->descriptionHin=$request->descriptionhin;
         $cms_master->save();
 
-        return redirect()->route('cms_master.index')->with('msg', 'Cms_Master Created Successfully');
+        return redirect()->route('cms_master.index')->with('msg', 'CmsMaster Created Successfully');
     }
 
     /**
@@ -93,7 +93,7 @@ class Cms_MasterController extends Controller
         $cms_master->descriptionHin=$request->descriptionhin;
         $cms_master->save();
 
-        return redirect()->route('cms_master.index')->with('msg', 'Cms_Master Updated Successfully');
+        return redirect()->route('cms_master.index')->with('msg', 'CmsMaster Updated Successfully');
     }
 
     /**
@@ -104,7 +104,7 @@ class Cms_MasterController extends Controller
         $cms_master = Cms_Master::find($id);
         $cms_master->status = 'deactive';
         $cms_master->save();
-        return redirect()->route('cms_master.index')->with('msg', 'Cms_Master Deactivated Successfully');
+        return redirect()->route('cms_master.index')->with('msg', 'CmsMaster Deactivated Successfully');
     }
     public function deactive()
     {
@@ -117,13 +117,13 @@ class Cms_MasterController extends Controller
         $cms_master->status = 'active';
         $cms_master->save();
 
-        return redirect()->route('cms_master.index')->with('msg', 'Cms_Master Activated Successfully');
+        return redirect()->route('cms_master.index')->with('msg', 'CmsMaster Activated Successfully');
     }
     public function permdelete(string $id)
     {
         $cms_master = Cms_Master::find($id);
         $cms_master->delete();
-        return redirect()->route('cms_master.index')->with('msg', 'Cms_Master Deleted Successfully');
+        return redirect()->route('cms_master.index')->with('msg', 'CmsMaster Deleted Successfully');
     }
 
 }

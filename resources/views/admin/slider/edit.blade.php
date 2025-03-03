@@ -14,12 +14,12 @@
             </div>
 
             <div class="card-body">
-                <form id="slider" method="post" action="{{ Route('slider.update', $slider->id) }}">
+                <form id="slider" method="post" action="{{ Route('slider.update', $slider->id) }}" enctype="multipart/form-data">
                     @csrf
                     {{-- slider --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            cityname <span class="text-danger">*</span>
+                            CityName <span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">
@@ -35,7 +35,7 @@
                                                     {{ $cities->city_name_eng }}</option>
                                             @endforeach
                                         </select>
-                                        <label for="floatingInput">Enter Cityname English</label>
+                                        <label for="floatingInput">Enter cityname english</label>
                                         <span>
                                             @error('city_id')
                                                 <p class="text-danger">{{ $message }}</p>
@@ -45,12 +45,34 @@
                                 </div>
                             </div>
                         </div>
-
+                    </div>
+                    {{-- slider url --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Url <span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="form-floating mb-3">
+                                        <div id="photoInput">
+                                            <img src="{{asset('sliderimage/'.$slider->url)}}" id="uploadPreview" style="gap: 10px; width:180px; height:100px; margin-bottom:8px">
+                                            <input type="file" class="form-control" id="uploadImage" name="image" onchange="PreviewImage();">
+                                        </div>
+                                        {{-- <span>
+                                            @error('image')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </span> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     {{-- slider pos --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            slider_pos<span class="text-danger">*</span>
+                            SliderPos<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">
@@ -66,7 +88,7 @@
                                             <option value="middle"{{ $slider->slider_pos == 'middle' ? 'selected' : '' }}>Middle
                                             </option>
                                         </select>
-                                        <label for="floatingInput">Enter Position</label>
+                                        <label for="floatingInput">Enter position</label>
                                         <span>
                                             @error('slider_pos')
                                                 <p class="text-danger">{{ $message }}</p>
@@ -78,7 +100,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            is_navigate<span class="text-danger">*</span>
+                            IsNavigate<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">
@@ -122,7 +144,7 @@
                                             @endforeach
 
                                         </select>
-                                        <label for="floatingInput">Enter Screenname</label>
+                                        <label for="floatingInput">Enter screenname</label>
                                         {{-- <span>
                                             @error('navigatemaster_id')
                                                 <p class="text-danger">{{ $message }}</p>
@@ -161,5 +183,19 @@
                 navigatemasterSelect.value = ''; // Reset the value to empty
             }
         });
+    </script>
+     <script type="text/javascript">
+        // single image show
+        function PreviewImage() {
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+            var previewContainer = document.getElementById("uploadPreview");
+            previewContainer.innerHTML = ""; // Clear previous previews
+
+            oFReader.onload = function (oFREvent) {
+                document.getElementById("uploadPreview").src = oFREvent.target.result;
+                    previewContainer.style.display = 'flex';
+            };
+        };
     </script>
 @endsection

@@ -20,7 +20,7 @@
                     {{-- start time --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            startTime<span class="text-danger">*</span>
+                            StartTime<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">
@@ -41,7 +41,7 @@
                     {{-- end time --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            endTime<span class="text-danger">*</span>
+                            EndTime<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">
@@ -62,7 +62,7 @@
                     {{-- isavailable --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            isAvailable<span class="text-danger">*</span>
+                            IsAvailable<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">

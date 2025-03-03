@@ -19,8 +19,9 @@
                     <tr>
                         <th>No</th>
                         <th>CityName</th>
+                        <th>Image</th>
                         <th>SliderPos</th>
-                        <th>Is_Navigate</th>
+                        <th>IsNavigate</th>
                         <th>ScreenName</th>
                         <th>Action</th>
                     </tr>
@@ -32,6 +33,9 @@
                             <tr>
                                 <td>{{ $index++ }}</td>
                                 <td>{{ $sliders->city->city_name_eng }}</td>
+                                <td>
+                                    <img src="{{asset('sliderimage/'.$sliders->url)}}" alt="" width="180px" height="120px">
+                                </td>
                                 <td>{{ $sliders->slider_pos }}</td>
 
                                 <td>

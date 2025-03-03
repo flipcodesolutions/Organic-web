@@ -181,7 +181,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ Route('cms_master.index') }}">
                     <i class="fa fa-list-check"></i>
-                    <span>Cms_Master</span></a>
+                    <span>CmsMaster</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ Route('faq.index') }}">
