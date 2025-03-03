@@ -76,40 +76,40 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span class="ms-3">Dashboard</span></a>
+                    <span>Dashboard</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('category.index') }}">
                     <i class="fa fa-list"></i>
-                    <span class="ms-3">Categories</span></a>
+                    <span>Categories</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('product.index') }}">
                     <i class="fa fa-carrot"></i>
-                    <span class="ms-3">Products</span></a>
+                    <span>Products</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('navigate.index') }}">
                     <i class="fa fa-location-dot"></i>
-                    <span class="ms-3">Navigate</span></a>
+                    <span>Navigate</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('notification.index') }}">
                     <i class="fa fa-bell"></i>
-                    <span class="ms-3">Notification</span></a>
+                    <span>Notification</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('pointper.index') }}">
                     <i class="fa fa-basket-shopping"></i>
-                    <span class="ms-3">Point Per</span></a>
+                    <span>Point Per</span></a>
             </li>
 
             {{-- <li class="nav-item"> --}}
-                {{--
+            {{--
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('module.index') }}">
                     <i class="fa fa-bookmark"></i>
@@ -126,7 +126,7 @@
                 <a class="nav-link" href="{{ route('product.price.index') }}">
                     <i class="fa fa-university"></i>
                     <span>Product-Price</span></a> --}}
-                {{--
+            {{--
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('module.index') }}">
                     <i class="fa fa-bookmark"></i>
@@ -150,53 +150,53 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('city_master.index') }}">
                     <i class="fa fa-location-pin"></i>
-                    <span class="ms-3">Cities</span></a>
+                    <span>Cities</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('landmark.index') }}">
                     <i class="fa fa-street-view"></i>
-                    <span class="ms-3">Landmark</span></a>
+                    <span>Landmark</span></a>
             </li>
 
-            @if(Auth::user()->role == "Admin")
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.reviews.index') }}">
-                    <i class="fa fa-comment"></i>
-                    <span class="ms-3">Admin Reviews</span></a>
-            </li>
+            @if (Auth::user()->role == 'Admin')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.reviews.index') }}">
+                        <i class="fa fa-comment"></i>
+                        <span>Admin Reviews</span></a>
+                </li>
             @endif
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('vendor.reviews.index') }}">
+                <a class="nav-link " href="{{ route('vendor.reviews.index') }}">
                     <i class="fa fa-comment"></i>
-                    <span class="ms-3">Vendor Reviews</span></a>
+                    <span>Vendor Reviews</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ Route('deliveryslot.index') }}">
                     <i class="fa fa-truck"></i>
-                    <span class="ms-3">DeliverySlot</span></a>
+                    <span>DeliverySlot</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ Route('cms_master.index') }}">
                     <i class="fa fa-list-check"></i>
-                    <span class="ms-3">Cms_Master</span></a>
+                    <span>Cms_Master</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ Route('faq.index') }}">
                     <i class="fa fa-person-circle-question"></i>
-                    <span class="ms-3">Faq</span></a>
+                    <span>Faq</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{Route('unitmaster.index')}}">
+                <a class="nav-link" href="{{ Route('unitmaster.index') }}">
                     <i class="fa fa-bookmark"></i>
-                    <span class="ms-3">UnitMaster</span></a>
+                    <span>UnitMaster</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{Route('slider.index')}}">
+                <a class="nav-link" href="{{ Route('slider.index') }}">
                     <i class="fa fa-photo-film"></i>
-                    <span class="ms-3">Slider</span></a>
+                    <span>Slider</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -230,9 +230,9 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('roles.index') }}">Role List</a>
-                    </div>
-                </div>
-            </li> --}}
+    </div>
+    </div>
+    </li> --}}
 
 
 
@@ -245,12 +245,14 @@
                     <i class="fa-solid fa-file"></i>
                     <span>Reports</span>
                 </a>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('reports.purchaseReport') }}">Purchase Report</a>
                     </div>
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('reports.purchaseDateWise') }}">Purchase Date Wise Report</a>
+                        <a class="collapse-item" href="{{ route('reports.purchaseDateWise') }}">Purchase Date Wise
+                            Report</a>
                     </div>
                 </div>
             </li>
@@ -331,8 +333,8 @@
                             </div>
                         </li> --}}
 
-                        <!-- Nav Item - Alerts -->
-                        {{-- <li class="nav-item dropdown no-arrow mx-1">
+                    <!-- Nav Item - Alerts -->
+                    {{-- <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
@@ -350,6 +352,22 @@
                                         <div class="icon-circle bg-primary">
                                             <i class="fas fa-file-alt text-white"></i>
                                         </div>
+                <!-- Nav Item - Alerts -->
+                {{-- <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw"></i>
+                            <!-- Counter - Alerts -->
+                            <span class="badge badge-danger badge-counter">3+</span>
+                        </a>
+                        <!-- Dropdown - Alerts -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">
+                                Alerts Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-alt text-white"></i>
                                     </div>
                                     <div>
                                         <div class="small text-gray-500">December 12, 2019</div>
@@ -449,21 +467,20 @@
                             </div>
                         </li> --}}
 
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                    <div class="topbar-divider d-none d-sm-block"></div>
 
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow ">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name
-                                    }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('asset/img/undraw_profile.svg') }}">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                {{-- <a class="dropdown-item" href="#">
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow ">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                            <img class="img-profile rounded-circle"
+                                src="{{ asset('asset/img/undraw_profile.svg') }}">
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            {{-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -475,24 +492,25 @@
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
                                 </a> --}}
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    {{ ('Logout') }}
-                                </a>
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                {{ 'Logout' }}
+                            </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
 
-                                {{--
+                            {{--
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a> --}}
-                            </div>
-                        </li>
+                        </div>
+                    </li>
 
                     </ul>
 
@@ -887,82 +905,82 @@
 
 
     @if (session()->has('success'))
-    <script>
-        var message =
-            '{{ session()->has('
-        success ') ? session()->get('
-        success ') : (session()->has('
-        error ') ? session()->get('
-        error ') : implode("\\n", $errors->all())) }}';
+        <script>
+            var message =
+                '{{ session()->has('
+                        success ')
+                    ? session()->get('
+                        success ')
+                    : (session()->has('
+                        error ')
+                        ? session()->get('
+                        error ')
+                        : implode("\\n", $errors->all())) }}';
 
-        // If there is a success message
-        if (message) {
-            toastr.success(message, 'Success', {
-                timeOut: 5000
-            });
-        }
-
-    </script>
+            // If there is a success message
+            if (message) {
+                toastr.success(message, 'Success', {
+                    timeOut: 5000
+                });
+            }
+        </script>
     @endif
 
 
-    {{-- SweetAlert2 toast notification code--}}
+    {{-- SweetAlert2 toast notification code --}}
     @if (Session::has('msg'))
-    <script>
-        Swal.fire({
-            icon: "{{ Session::get('msg_type') ?? 'success' }}", // You can pass 'msg_type' to change the icon dynamically
-            title: "{{ Session::get('msg') }}"
-            , toast: true
-            , position: 'top-right'
-            , showConfirmButton: false
-            , timer: 3000
-            , timerProgressBar: true
-        });
-
-    </script>
+        <script>
+            Swal.fire({
+                icon: "{{ Session::get('msg_type') ?? 'success' }}", // You can pass 'msg_type' to change the icon dynamically
+                title: "{{ Session::get('msg') }}",
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+        </script>
     @endif
 
 
-    {{-- sweet alert deactive code--}}
+    {{-- sweet alert deactive code --}}
     <script>
         function openDeactiveModal(url) {
             Swal.fire({
-                title: 'Are you sure you want to deactive it?'
-                , text: "You will be able to revert this!"
-                , icon: 'warning'
-                , showCancelButton: true,
+                title: 'Are you sure you want to deactive it?',
+                text: "You will be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
                 // confirmButtonColor: '#d33',
                 // cancelButtonColor: '#6e7881',
-                confirmButtonText: 'Yes, Deactive it!'
-            , }).then((result) => {
+                confirmButtonText: 'Yes, Deactive it!',
+            }).then((result) => {
                 if (result.isConfirmed) {
                     // Redirect to the delete route
                     window.location.href = url;
                 }
             });
         }
-
     </script>
 
     {{-- sweet alert delete code --}}
     <script>
         function openDeleteModal(url) {
             Swal.fire({
-                title: 'Are you sure you want to delete it?'
-                , text: "You won't be able to revert this!"
-                , icon: 'warning'
-                , showCancelButton: true
-                , confirmButtonColor: '#d33'
-                , cancelButtonColor: '#6e7881'
-                , confirmButtonText: 'Yes, Delete it!'
-            , }).then((result) => {
+                title: 'Are you sure you want to delete it?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6e7881',
+                confirmButtonText: 'Yes, Delete it!',
+            }).then((result) => {
                 if (result.isConfirmed) {
                     // Redirect to the delete route
                     window.location.href = url;
                 }
             });
         }
-
     </script>
 
 
