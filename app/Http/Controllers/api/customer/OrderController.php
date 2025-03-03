@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AddToCart;
 use App\Models\OrderDetail;
 use App\Models\OrderMaster;
+use App\Models\PointPer;
 use App\Utils\Util;
 use Exception;
 use Illuminate\Http\Request;
@@ -15,15 +16,6 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -86,13 +78,13 @@ class OrderController extends Controller
         }
     }
 
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function pointPer()
     {
-        //
+        try {
+            $pointPer = PointPer::first();
+            return Util::getSuccessMessage('Success', ['pointPer' => $pointPer]);
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
     }
 }

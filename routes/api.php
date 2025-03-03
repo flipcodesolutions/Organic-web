@@ -71,4 +71,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('order', [OrderController::class, 'order']);
     Route::get('orderList', [OrderController::class, 'orderList']);
     Route::get('orderDetails/{id}', [OrderController::class, 'orderDetails']);
+    Route::get('pointPer', [OrderController::class, 'pointPer']);
 });
