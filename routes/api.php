@@ -3,9 +3,11 @@
 use App\Http\Controllers\api\common\NotificationController;
 use App\Http\Controllers\api\common\RegisterController;
 use App\Http\Controllers\api\common\UserController;
+use App\Http\Controllers\api\customer\CartController;
 use App\Http\Controllers\api\customer\CategoryController;
 use App\Http\Controllers\api\customer\CityController;
 use App\Http\Controllers\api\customer\ContactController;
+use App\Http\Controllers\api\customer\OrderController;
 use App\Http\Controllers\api\customer\ShippingAddressController;
 use App\Http\Controllers\api\customer\SliderController;
 use Illuminate\Http\Request;
@@ -58,4 +60,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('updateShippingAddress/{id}', [ShippingAddressController::class, 'updateShippingAddress']);
     Route::get('shippingWithLandmarkUser', [ShippingAddressController::class, 'shippingWithLandmarkUser']);
     Route::post('deleteShippingAddress/{id}', [ShippingAddressController::class, 'deleteShippingAddress']);
+
+    //cart
+    Route::post('addCart', [CartController::class, 'addCart']);
+    Route::get('cartList', [CartController::class, 'cartList']);
+    Route::post('updateCart/{id}', [CartController::class, 'updateCart']);
+    Route::post('removeCart/{id}', [CartController::class, 'removeCart']);
+
+    //order 
+    Route::post('order', [OrderController::class, 'order']);
+    Route::get('orderList', [OrderController::class, 'orderList']);
+    Route::get('orderDetails/{id}', [OrderController::class, 'orderDetails']);
 });
