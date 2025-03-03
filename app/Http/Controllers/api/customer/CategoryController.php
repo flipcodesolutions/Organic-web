@@ -19,6 +19,10 @@ class CategoryController extends Controller
                         if ($request->has('product_id')) {
                             $query->where('id', $request->product_id);
                         }
+                        if ($request->has('search')) {
+                            $query->where('productName', 'like', '%' . $request->search . '%');
+                        }
+                        $query->with('productImages');
                     })
                     ->where('parent_category_id', 0)
                     ->where('id', $request->category_id)
@@ -31,6 +35,10 @@ class CategoryController extends Controller
                         if ($request->has('product_id')) {
                             $query->where('id', $request->product_id);
                         }
+                        if ($request->has('search')) {
+                            $query->where('productName', 'like', '%' . $request->search . '%');
+                        }
+                        $query->with(['productImages', 'productPrice']);
                     })
                     ->where('parent_category_id', 0)
                     ->where('status', 'active')
