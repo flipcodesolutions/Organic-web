@@ -52,15 +52,21 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <img src="{{asset('categoryImage/'.$categoryData->cat_icon)}}" alt="" height="100px" width="150px">
+                                    <img src="{{ asset('categoryImage/' . $categoryData->cat_icon) }}" alt=""
+                                        height="100px" width="150px">
                                 </td>
                                 <td>
-                                    <a href="{{ route('category.active') }}/{{ $categoryData->id }}" class="btn btn-warning">
+                                    <a href="{{ route('category.active') }}/{{ $categoryData->id }}"
+                                        class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('category.delete') }}/{{ $categoryData->id }}" class="btn btn-danger">
-                                        <i class="fas fa-remove"></i>
+                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        onclick="openDeleteModal('{{ route('category.delete') }}/{{ $categoryData->id }}')">
+                                        <i class="fas fa-trash"></i>
                                     </a>
+                                    {{-- <a href="{{ route('category.delete') }}/{{ $categoryData->id }}" class="btn btn-danger">
+                                        <i class="fas fa-remove"></i>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach

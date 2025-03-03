@@ -77,7 +77,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('user.index')->with('success', 'User created successfully!');
+        return redirect()->route('user.index')->with('msg', 'User created successfully!');
 
         // $input = $request->all();
         // $input['password'] = Hash::make($input['password']);
@@ -86,7 +86,7 @@ class UserController extends Controller
         // $user->assignRole($request->input('roles'));
 
         // return redirect()->route('users.index')
-        //                 ->with('success','User created successfully');
+        //                 ->with('msg','User created successfully');
     }
 
     /**
@@ -155,7 +155,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('user.index')->with('success', 'User created successfully!');
+        return redirect()->route('user.index')->with('msg', 'User created successfully!');
 
         // $input = $request->all();
         // if(!empty($input['password'])){ 
@@ -171,7 +171,7 @@ class UserController extends Controller
         // $user->assignRole($request->input('roles'));
 
         // return redirect()->route('users.index')
-        //                 ->with('success','User updated successfully');
+        //                 ->with('msg','User updated successfully');
     }
 
     /**
@@ -189,7 +189,7 @@ class UserController extends Controller
         }
         $user->delete();
         return redirect()->route('user.index')
-            ->with('success', 'User deleted successfully');
+            ->with('msg', 'User deleted successfully');
     }
 
     public function deactiveindex()
@@ -204,7 +204,7 @@ class UserController extends Controller
         $data->status = 'deactive';
         $data->save();
 
-        return redirect()->back()->with('success', 'User deactivated successfully!');
+        return redirect()->back()->with('msg', 'User deactivated successfully!');
     }
 
     public function active($id)
@@ -213,6 +213,6 @@ class UserController extends Controller
         $data->status = 'active';
         $data->save();
 
-        return redirect()->route('user.index')->with('success', 'User activated successfully!');
+        return redirect()->route('user.index')->with('msg', 'User activated successfully!');
     }
 }

@@ -37,7 +37,7 @@ class NavigateMasterController extends Controller
         $screen->screenname = $request->screenName;
         $screen->save();
 
-        return redirect()->route('navigate.index')->with('success', 'New screen created successfully!');
+        return redirect()->route('navigate.index')->with('msg', 'New screen created successfully!');
     }
 
     /**
@@ -67,7 +67,7 @@ class NavigateMasterController extends Controller
         $screen->screenname = $request->screenName;
         $screen->save();
 
-        return redirect()->route('navigate.index')->with('success', 'Screen updated successfully!');
+        return redirect()->route('navigate.index')->with('msg', 'Screen updated successfully!');
     }
 
     /**
@@ -78,7 +78,7 @@ class NavigateMasterController extends Controller
         $screen = NavigateMaster::find($id);
         $screen->delete();
 
-        return redirect()->back()->with('success','Screen deleted successfully! ');
+        return redirect()->back()->with('msg','Screen deleted successfully! ');
     }
 
     public function deactive($id)
@@ -87,7 +87,7 @@ class NavigateMasterController extends Controller
         $screen->status = 'deactive';
         $screen->save();
 
-        return redirect()->back()->with('success','Screen Deactivated successfully!');
+        return redirect()->back()->with('msg','Screen Deactivated successfully!');
     }
 
     public function deactiveindex()
@@ -104,6 +104,6 @@ class NavigateMasterController extends Controller
         $screen->status = 'active';
         $screen->save();
 
-        return redirect()->route('navigate.index')->with('success','Screen activated Successfully!');
+        return redirect()->route('navigate.index')->with('msg','Screen activated Successfully!');
     }
 }

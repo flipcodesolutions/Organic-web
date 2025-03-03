@@ -52,41 +52,51 @@
                     {{-- product description --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description<span class="text-danger">*</span>
+                            Description Eng<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="product_des" id="product_des"
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="product_des" value="{{ old('product_des') }}" placeholder="product_des"
+                                    id="floatingTextarea"></textarea>
+                                {{-- <input type="text" name="product_des" id="product_des"
                                             placeholder="Product Description" class="form-control">
-                                        <label for="">English</label>
-                                        <span id="descriptionError" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="product_des_guj" id="product_des"
-                                            placeholder="Product Description Gujarati" class="form-control">
-                                        <label for="">Gujarati</label>
-                                        <span id="descriptionErrorGuj" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="product_des_hin" id="product_des"
-                                            placeholder="Product Description Hindi" class="form-control">
-                                        <label for="">Hindi</label>
-                                        <span id="descriptionErrorHin" class="text-danger"></span>
-                                    </div>
-                                </div>
+                                        <label for="">English</label> --}}
+                                <span id="descriptionError" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Guj<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="product_des_guj" value="{{ old('product_des_guj') }}"
+                                    placeholder="product_des_guj" id="floatingTextarea"></textarea>
+                                {{-- <input type="text" name="product_des_guj" id="product_des_guj"
+                                            placeholder="Product Description Gujarati" class="form-control">
+                                        <label for="">Gujarati</label> --}}
+                                <span id="descriptionErrorGuj" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Hin<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="product_des_hin" value="{{ old('product_des_hin') }}"
+                                    placeholder="product_des_hin" id="floatingTextarea"></textarea>
+                                {{-- <input type="text" name="product_des_hin" id="product_des"
+                                            placeholder="Product Description Hindi" class="form-control">
+                                        <label for="">Hindi</label> --}}
+                                <span id="descriptionErrorHin" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- </div>
+        </div> --}}
 
                     {{-- product price --}}
                     {{-- <div class="row mb-3">
@@ -126,7 +136,7 @@
                                         <td>
                                             <select class="form-select form-select-lg mb-3" name="unit_id[]"
                                                 aria-label="Large select example">
-                                                <option disabled>Select Unit</option>
+                                                <option selected disabled>Select Unit</option>
                                                 @foreach ($units as $data)
                                                     <option value="{{ $data->id }}">{{ $data->unit }}</option>
                                                 @endforeach
@@ -300,7 +310,7 @@
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="season"
                                 aria-label="Large select example">
-                                <option selected>Select Season</option>
+                                <option selected disabled>Select Season</option>
                                 <option value="Winter">Winter</option>
                                 <option value="Summer">Summer</option>
                                 <option value="Monsoon">Monsoon</option>
@@ -317,7 +327,7 @@
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="category_id"
                                 aria-label="Large select example">
-                                <option selected>Select Category</option>
+                                <option selected disabled>Select Category</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
                                 @endforeach
@@ -329,7 +339,8 @@
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <button type="submit" class="btn btn-primary btn-sm mb-3"><i
-                                class="fa-solid fa-floppy-disk"></i> Submit</button>
+                                class="fa-solid fa-floppy-disk"></i>
+                            Submit</button>
                     </div>
 
                 </form>
@@ -339,6 +350,13 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <script>
+        // Initialize CKEditor for each
+        CKEDITOR.replace('product_des');
+        CKEDITOR.replace('product_des_guj');
+        CKEDITOR.replace('product_des_hin');
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -382,7 +400,7 @@
 
                 // Set the calculated selling price in the corresponding input field
                 row.find('input[name="selling_price[]"]').val(sellingPrice.toFixed(
-                2)); // Displaying with two decimals
+                    2)); // Displaying with two decimals
             });
         }
 

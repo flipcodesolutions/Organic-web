@@ -43,7 +43,7 @@ class NotificationController extends Controller
         $newdata->navigate_screen = $request->navigate_screen;
         $newdata->save();
 
-        return redirect()->route('notification.index')->with('success','Notification created successfully!');
+        return redirect()->route('notification.index')->with('msg','Notification created successfully!');
     }
 
     /**
@@ -80,7 +80,7 @@ class NotificationController extends Controller
         $notification->navigate_screen = $request->navigate_screen;
         $notification->save();
 
-        return redirect()->route('notification.index')->with('success','Notification Updated successfully!');
+        return redirect()->route('notification.index')->with('msg','Notification Updated successfully!');
     }
 
     /**
@@ -90,7 +90,7 @@ class NotificationController extends Controller
     {
         $notification = Notification::find($id);
         $notification->delete();
-        return redirect()->back()->with('success','Notification Deleted Successfully!');
+        return redirect()->back()->with('msg','Notification Deleted Successfully!');
     }
 
     public function deactive($id)
@@ -98,7 +98,7 @@ class NotificationController extends Controller
         $notification = Notification::find($id);
         $notification->status = 'deactive';
         $notification->save();
-        return redirect()->route('notification.index')->with('success','Notification Deactivated Successfully!');
+        return redirect()->route('notification.index')->with('msg','Notification Deactivated Successfully!');
     }
 
     public function deactiveindex()
@@ -114,6 +114,6 @@ class NotificationController extends Controller
         $notification->status = 'active';
         $notification->save();
 
-        return redirect()->route('notification.index')->with('success','Notification Activated Successfully');
+        return redirect()->route('notification.index')->with('msg','Notification Activated Successfully');
     }
 }
