@@ -35,8 +35,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating mb-3">
-                                <input type="text" name="titleguj" value="{{ $cms_masters->titleGuj }}" class="form-control"
-                                    id="floatingInput" placeholder="Gujarati">
+                                <input type="text" name="titleguj" value="{{ $cms_masters->titleGuj }}"
+                                    class="form-control" id="floatingInput" placeholder="Gujarati">
                                 <label for="floatingInput">Gujarati</label>
                                 <span id="nameError" class="text-danger">
                                     @error('titleguj')
@@ -47,8 +47,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating mb-3">
-                                <input type="text" name="titlehin" value="{{ $cms_masters->titleHin }}" class="form-control"
-                                    id="floatingInput" placeholder="Hindi">
+                                <input type="text" name="titlehin" value="{{ $cms_masters->titleHin }}"
+                                    class="form-control" id="floatingInput" placeholder="Hindi">
                                 <label for="floatingInput">Hindi</label>
                                 <span id="nameError" class="text-danger">
                                     @error('titlehin')
@@ -83,8 +83,7 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating mb-3">
-                                        <textarea class="form-control" name="description"  value="" placeholder="description" id="floatingTextarea">{{ $cms_masters->description }}</textarea>
-                                        <label for="floatingTextarea">Enter description English</label>
+                                        <textarea class="ckeditor form-control" name="description" value="" placeholder="description" id="floatingTextarea">{{ $cms_masters->description }}</textarea>
                                         <span id="nameError" class="text-danger">
                                             @error('description')
                                                 {{ $message }}
@@ -93,43 +92,55 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <textarea class="form-control" name="descriptionguj"  value="" placeholder="descriptionguj" id="floatingTextarea">{{ $cms_masters->descriptionGuj }}</textarea>
-                                        <label for="floatingTextarea">Enter description Gujarati</label>
-                                        <span id="nameError" class="text-danger">
-                                            @error('descriptionguj')
-                                                {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Gujarati<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <textarea class="ckeditor form-control" name="descriptionguj" value="" placeholder="descriptionguj" id="floatingTextarea">{{ $cms_masters->descriptionGuj }}</textarea>
+                                <span id="nameError" class="text-danger">
+                                    @error('descriptionguj')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <textarea class="form-control" name="descriptionhin"  value="" placeholder="descriptionhin" id="floatingTextarea">{{ $cms_masters->descriptionHin }}</textarea>
-                                        <label for="floatingTextarea">Enter description Hindi</label>
-                                        <span id="nameError" class="text-danger">
-                                            @error('descriptionhin')
-                                                {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Hindi<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <textarea class="ckeditor form-control" name="descriptionhin" value="" placeholder="descriptionhin" id="floatingTextarea">{{ $cms_masters->descriptionHin }}</textarea>
+                                <span id="nameError" class="text-danger">
+                                    @error('descriptionhin')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
 
+
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-primary btn-sm mb-3"><i
-                                    class="fa-solid fa-floppy-disk"></i> Submit</button>
+                                    class="fa-solid fa-floppy-disk"></i>
+                                Submit</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script>
+        // Initialize CKEditor for each
+        CKEDITOR.replace('description');
+        CKEDITOR.replace('descriptionguj');
+        CKEDITOR.replace('descriptionhin');
+    </script>
 @endsection
