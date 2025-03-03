@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-use App\Models\FaqSeeder as ModelsFaq;
+use App\Models\Faq as ModelsFaq;
 
 class FaqSeeder extends Seeder
 {
@@ -15,7 +15,7 @@ class FaqSeeder extends Seeder
             [
                 'id' => '1',
                 'question' => 'What payment methods do you accept?',
-                'quwstionGuj' => 'તમે કયા ચુકવણી પદ્ધતિઓ સ્વીકારો છો?',
+                'questionGuj' => 'તમે કયા ચુકવણી પદ્ધતિઓ સ્વીકારો છો?',
                 'questionHin' => 'आप कौन-कौन से भुगतान के तरीके स्वीकार करते हैं?',
                 'answer' => 'We accept credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for payments.',
                 'answerGuj' => 'અમે ચૂકવણી માટે ક્રેડિટ કાર્ડ્સ (વિઝા, માસ્ટરકાર્ડ, અમેરિકન એક્સપ્રેસ), પેપાલ અને બેંક ટ્રાન્સફર સ્વીકારીએ છીએ.',

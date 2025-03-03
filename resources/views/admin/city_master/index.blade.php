@@ -28,7 +28,7 @@
                         <label for="global" class="form-label"><b>Filter:</b></label>
                         <input type="text" id="global" name="global" value="{{ request('global') }}" class="form-control" placeholder="Search by City Name">
                     </div>
-        
+
                     <!-- City Filter -->
                     <div class="col-md-4">
                         <label for="cityId" class="form-label"><b>City:</b></label>
@@ -41,8 +41,7 @@
                             @endforeach
                         </select>
                     </div>
-                    
-        
+
                     <!-- Submit & Reset Buttons -->
                     <div class="col-md-4 d-flex justify-content-end gap-2">
                         <button type="submit" class="btn btn-primary">Filter</button>
@@ -67,26 +66,25 @@
                     <th>Area (GUJ)</th>
                     <th>Status</th>
                     <th>Actions</th>
-
                 </tr>
                 @foreach($data as $city)
-                <tr>
-                    <td>{{ $city->id }}</td>
-                    <td>{{ $city->city_name_eng }}</td>
-                    <td>{{ $city->city_name_hin }}</td>
-                    <td>{{ $city->city_name_guj }}</td>
-                    <td>{{ $city->pincode }}</td>
-                    <td>{{ $city->area_eng }}</td>
-                    <td>{{ $city->area_hin }}</td>
-                    <td>{{ $city->area_guj }}</td>
-                    <td>{{ $city->status }}</td>
-                    <td>
-                        <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}"><i class="fas fa-edit"></i></a>
+                    <tr>
+                        <td>{{ $city->id }}</td>
+                        <td>{{ $city->city_name_eng }}</td>
+                        <td>{{ $city->city_name_hin }}</td>
+                        <td>{{ $city->city_name_guj }}</td>
+                        <td>{{ $city->pincode }}</td>
+                        <td>{{ $city->area_eng }}</td>
+                        <td>{{ $city->area_hin }}</td>
+                        <td>{{ $city->area_guj }}</td>
+                        <td>{{ $city->status }}</td>
+                        <td>
+                            <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}"><i class="fas fa-edit"></i></a>
 
-                        <a href="{{ route('city_master.deactive') }}/{{ $city->id }}" class="btn btn-danger">
-                            <i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
+                            <a href="{{ route('city_master.deactive') }}/{{ $city->id }}" class="btn btn-danger">
+                                <i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
                 @endforeach
             </table>
         </div>

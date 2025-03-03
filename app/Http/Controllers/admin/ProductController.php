@@ -18,8 +18,8 @@ class ProductController extends Controller
         try {
             $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
                 $query->where('status', 'active');
-            })->with(['categories','productImages'])->paginate(10);
-            
+            })->with(['categories', 'productImages'])->paginate(10);
+
             // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
             //     $query->where('status', 'active');
             // })->with(['categories', 'productImages', 'productUnit.unitMaster'=> function($query){
@@ -60,7 +60,7 @@ class ProductController extends Controller
         $product->productDescription = $request->product_des;
         $product->productDescriptionGuj = $request->product_des_guj;
         $product->productDescriptionHin = $request->product_des_hin;
-        $product->productPrice = $request->product_price;
+        // $product->productPrice = $request->product_price;
         $product->Stock = $request->product_stock;
         $product->season = $request->season;
         $product->categoryId = $request->category_id;
@@ -97,7 +97,7 @@ class ProductController extends Controller
                 ]);
             }
         }
-        
+
         $productimage = ProductImage::where('productId', $product->id)->get();
         $product->image = $productimage->first()->url;
         $product->save();
@@ -108,10 +108,10 @@ class ProductController extends Controller
             Unit::create([
                 'unit' => $request->unit_id[$i],
                 'product_id' => $product->id,
-                'price' => $request->product_price[$i],
                 'detail' => $request->unit_det[$i],
+                'price' => $request->price[$i],
                 'per' => $request->discount_per[$i],
-                'sell_price' => $request->sellin_price[$i]
+                'sell_price' => $request->selling_price[$i]
             ]);
         }
 
@@ -148,139 +148,153 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        try {
-            return $request;
-            $product = Product::find($id);
-            $product->productName = $request->product_name;
-            $product->productNameGuj = $request->product_name_guj;
-            $product->productNameHin = $request->product_name_hin;
-            $product->productDescription = $request->product_des;
-            $product->productDescriptionGuj = $request->product_des_guj;
-            $product->productDescriptionHin = $request->product_des_hin;
-            $product->productPrice = $request->product_price;
-            $product->stock = $request->product_stock;
-            $product->season = $request->season;
-            $product->categoryId = $request->category_id;
-            $product->save();
+        // try {
+        // return $request;
+        $product = Product::find($id);
+        $product->productName = $request->product_name;
+        $product->productNameGuj = $request->product_name_guj;
+        $product->productNameHin = $request->product_name_hin;
+        $product->productDescription = $request->product_des;
+        $product->productDescriptionGuj = $request->product_des_guj;
+        $product->productDescriptionHin = $request->product_des_hin;
+        $product->productPrice = $request->product_price;
+        $product->stock = $request->product_stock;
+        $product->season = $request->season;
+        $product->categoryId = $request->category_id;
+        $product->save();
 
-            // for add new video
-            if ($request->new_video_link[0] !== null) {
-                foreach ($request->new_video_link as $data) {
+        // for add new video
+        if ($request->new_video_link[0] !== null) {
+            foreach ($request->new_video_link as $data) {
+                ProductImage::create([
+                    'productId' => $id,
+                    'url' => $data,
+                    'type' => 'video'
+                ]);
+            }
+        }
+
+        // for add new image
+        if ($request->hasfile('new_product_images')) {
+            foreach ($request->file('new_product_images') as $imgdata) {
+                if ($imgdata->isValid()) {
+                    $imageName = time() . '_' . uniqid() . '.' . $imgdata->getClientOriginalExtension();
+                    $imgdata->move(public_path('productImage/'), $imageName);
+
                     ProductImage::create([
                         'productId' => $id,
-                        'url' => $data,
-                        'type' => 'video'
+                        'url' => $imageName,
+                        'type' => 'photo'
                     ]);
                 }
             }
+        }
 
-            // for add new image
-            if ($request->hasfile('new_product_images')) {
-                foreach ($request->file('new_product_images') as $imgdata) {
-                    if ($imgdata->isValid()) {
-                        $imageName = time() . '_' . uniqid() . '.' . $imgdata->getClientOriginalExtension();
-                        $imgdata->move(public_path('productImage/'), $imageName);
+        // for add new video
+        // if ($request->video_link[0] !== null) {
+        //     foreach ($request->video_link as $data) {
+        //         ProductImage::create([
+        //             'productId' => $id,
+        //             'url' => $data,
+        //             'type' => $request->image_and_video
+        //         ]);
+        //     }
+        // }
 
-                        ProductImage::create([
-                            'productId' => $id,
-                            'url' => $imageName,
-                            'type' => 'photo'
-                        ]);
-                    }
-                }
-            }
+        // // for add new image
+        // if ($request->hasfile('product_images')) {
+        //     foreach ($request->file('product_images') as $imgdata) {
+        //         if ($imgdata->isValid()) {
+        //             $imageName = time() . '_' . uniqid() . '.' . $imgdata->getClientOriginalExtension();
+        //             $imgdata->move(public_path('productImage/'), $imageName);
 
-            // for add new video
-            // if ($request->video_link[0] !== null) {
-            //     foreach ($request->video_link as $data) {
-            //         ProductImage::create([
-            //             'productId' => $id,
-            //             'url' => $data,
-            //             'type' => $request->image_and_video
-            //         ]);
-            //     }
-            // }
+        //             ProductImage::create([
+        //                 'productId' => $id,
+        //                 'url' => $imageName,
+        //                 'type' => $request->image_and_video
+        //             ]);
+        //         }
+        //     }
+        // }
 
-            // // for add new image
-            // if ($request->hasfile('product_images')) {
-            //     foreach ($request->file('product_images') as $imgdata) {
-            //         if ($imgdata->isValid()) {
-            //             $imageName = time() . '_' . uniqid() . '.' . $imgdata->getClientOriginalExtension();
-            //             $imgdata->move(public_path('productImage/'), $imageName);
+        // // for update current image or video
+        // $productimage = ProductImage::where('productId', $id)->get();
 
-            //             ProductImage::create([
-            //                 'productId' => $id,
-            //                 'url' => $imageName,
-            //                 'type' => $request->image_and_video
-            //             ]);
-            //         }
-            //     }
-            // }
+        // foreach ($productimage as $data) {
+        //     $videoKey = 'video_link_' . $data->id;
+        //     $photoKey = 'product_images_' . $data->id;
+        //     $typeKey = 'image_and_video_' . $data->id;
 
-            // // for update current image or video
-            // $productimage = ProductImage::where('productId', $id)->get();
+        //     if ($request->$videoKey !== null) {
 
-            // foreach ($productimage as $data) {
-            //     $videoKey = 'video_link_' . $data->id;
-            //     $photoKey = 'product_images_' . $data->id;
-            //     $typeKey = 'image_and_video_' . $data->id;
+        //         $currentimagepath = public_path('productImage/' . $data->url);
+        //         if (file_exists($currentimagepath)) {
+        //             unlink($currentimagepath);
+        //         }
+        //         $data->type = $request->$typeKey;
+        //         $data->url = $request->$videoKey;
+        //         $data->save();
+        //     }
 
-            //     if ($request->$videoKey !== null) {
+        //     if ($request->hasFile($photoKey)) {
 
-            //         $currentimagepath = public_path('productImage/' . $data->url);
-            //         if (file_exists($currentimagepath)) {
-            //             unlink($currentimagepath);
-            //         }
-            //         $data->type = $request->$typeKey;
-            //         $data->url = $request->$videoKey;
-            //         $data->save();
-            //     }
+        //         if ($request->$photoKey->isValid()) {
 
-            //     if ($request->hasFile($photoKey)) {
+        //             $currentimagepath = public_path('productImage/' . $data->url);
+        //             if (file_exists($currentimagepath)) {
+        //                 unlink($currentimagepath);
+        //             }
 
-            //         if ($request->$photoKey->isValid()) {
+        //             $imageName = time() . '_' . uniqid() . '.' . $request->$photoKey->getClientOriginalExtension();
+        //             $request->$photoKey->move(public_path('productImage/'), $imageName);
 
-            //             $currentimagepath = public_path('productImage/' . $data->url);
-            //             if (file_exists($currentimagepath)) {
-            //                 unlink($currentimagepath);
-            //             }
+        //             $data->url = $imageName;
+        //             $data->type = 'photo';
+        //             $data->save();
+        //         }
+        //     }
+        // }
 
-            //             $imageName = time() . '_' . uniqid() . '.' . $request->$photoKey->getClientOriginalExtension();
-            //             $request->$photoKey->move(public_path('productImage/'), $imageName);
+        $product->image = ProductImage::where(['productId' => $id,])->first()->url;
+        $product->save();
 
-            //             $data->url = $imageName;
-            //             $data->type = 'photo';
-            //             $data->save();
-            //         }
-            //     }
-            // }
+        for ($i = 0; $i < count($request->unit_id); $i++) {
+            Unit::where('id', $request->dataid[$i])->update([
+                'unit' => $request->unit_id[$i],
+                'price' => $request->product_price[$i],
+                'detail' => $request->unit_det[$i],
+                'per' => $request->discount_per[$i],
+                'sell_price' => $request->sellin_price[$i]
+            ]);
+        }
 
-            $product->image = ProductImage::where(['productId' => $id,])->first()->url;
-            $product->save();
-
-            for ($i = 0; $i < count($request->unit_id); $i++) {
-                Unit::where('product_id',$id)->update([
-                    'unit' => $request->unit_id[$i],
-                    'price' => $request->product_price[$i],
-                    'detail' => $request->unit_det[$i],
-                    'per' => $request->discount_per[$i],
-                    'sell_price' => $request->sellin_price[$i]
+        // if ($request->new_unit_id[0] !== null) {
+        if (!empty($request->new_unit_id) && isset($request->new_unit_id[0])) {
+            for ($a = 0; $a < count($request->new_unit_id); $a++) {
+                Unit::create([
+                    'product_id' => $product->id,
+                    'unit' => $request->new_unit_id[$a],
+                    'price' => $request->new_product_price[$a],
+                    'detail' => $request->new_unit_det[$a],
+                    'per' => $request->new_discount_per[$a],
+                    'sell_price' => $request->new_sellin_price[$a]
                 ]);
             }
-
-            // Unit::where('product_id', $id)->update([
-            //     'unit' => $request->unit_id,
-            //     'price' => $request->product_price,
-            //     'detail' => $request->unit_det,
-            //     'per' => $request->discount_per,
-            //     'sell_price' => $request->sellin_price
-            // ]);
-
-            return redirect()->route('product.index')->with('success', 'Product updated successfully!');
-        } catch (\Exception $e) {
-
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
         }
+
+        // Unit::where('product_id', $id)->update([
+        //     'unit' => $request->unit_id,
+        //     'price' => $request->product_price,
+        //     'detail' => $request->unit_det,
+        //     'per' => $request->discount_per,
+        //     'sell_price' => $request->sellin_price
+        // ]);
+
+        return redirect()->route('product.index')->with('success', 'Product updated successfully!');
+        // } catch (\Exception $e) {
+
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
         // try {
         //     $product = Product::find($id);
         //     $product->product_name = $request->product_name;
@@ -305,6 +319,7 @@ class ProductController extends Controller
         //     ]);
         // }
     }
+
 
     public function deactive($id)
     {
@@ -387,20 +402,38 @@ class ProductController extends Controller
         try {
 
             $image = ProductImage::find($id);
-            if ($image->type == 'photo') {
-                $currentimagepath = public_path('productImage/' . $image->url);
-                if (file_exists($currentimagepath)) {
-                    unlink($currentimagepath);
+            $data = ProductImage::where('productId', $image->productId)->get();
+            if (count($data) > 1) {
+                if ($image->type == 'photo') {
+                    $currentimagepath = public_path('productImage/' . $image->url);
+                    if (file_exists($currentimagepath)) {
+                        unlink($currentimagepath);
+                    }
+                    $image->delete();
+                    return redirect()->back()->with('success', 'Image deleted successfully!');
+                } else {
+                    $image->delete();
+                    return redirect()->back()->with('success', 'Video deleted successfully!');
                 }
-                $image->delete();
-                return redirect()->back()->with('success', 'Image deleted successfully!');
             } else {
-                $image->delete();
-                return redirect()->back()->with('success', 'Video deleted successfully!');
+                return redirect()->back()->with('error', 'Please add new images/videos before deleting last image/video!');
             }
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        }
+    }
+
+    public function destroyunit($id)
+    {
+        $unit = Unit::find($id);
+        $data = Unit::where('product_id', $unit->product_id)->get();
+        if (count($data) > 1) {
+            $unit->delete();
+
+            return redirect()->back()->with('success', 'unit deleted successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Please add new units before deleting last unit!');
         }
     }
 }
