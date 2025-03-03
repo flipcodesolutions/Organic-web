@@ -21,20 +21,19 @@ class CategoryController extends Controller
 
     public function create()
     {
-        try {
-            $categories = Category::all();
-
+        // try {
+            $categories = Category::where('parent_category_id','0')->get();
+            // return $categories;
             return view('admin.category.create', compact('categories'));
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function store(Request $request)
     {
         try {
-            // return $request;
             // Create the category
             $category = new Category();
             $category->categoryName = $request->category_name;

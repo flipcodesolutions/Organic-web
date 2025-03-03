@@ -89,7 +89,7 @@
                     </div>
 
                     {{-- product price --}}
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Price<span class="text-danger">*</span>
                         </div>
@@ -101,7 +101,7 @@
                                 <span id="priceError" class="text-danger"></span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     {{-- unit --}}
                     <div class="row">
@@ -114,6 +114,7 @@
                                     <tr>
                                         <th>Unit</th>
                                         <th>Detail (aprox Weight)</th>
+                                        <th>Price</th>
                                         <th>Discount Percentage</th>
                                         <th>Sell Price</th>
                                     </tr>
@@ -142,6 +143,14 @@
                                         </td>
                                         <td>
                                             <div class="form-floating">
+                                                <input type="number" name="price[]" placeholder="Product Price"
+                                                    class="form-control">
+                                                <label for="">Product Price</label>
+                                                <span class="text-danger productpriceError"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-floating">
                                                 <input type="number" name="discount_per[]"
                                                     placeholder="Discount Percentage" class="form-control">
                                                 <label for="">Discount Per</label>
@@ -150,7 +159,7 @@
                                         </td>
                                         <td>
                                             <div class="form-floating">
-                                                <input type="number" name="sellin_price[]" placeholder="Selling Price"
+                                                <input type="number" name="selling_price[]" placeholder="Selling Price"
                                                     class="form-control">
                                                 <label for="">Selling Price</label>
                                                 <span class="text-danger sellingpriceError"></span>
@@ -356,6 +365,27 @@
     </script>
 
     <script>
+        function calculateSellingPrice() {
+            $('#unitTableBody').on('input', 'input[name="price[]"], input[name="discount_per[]"]', function() {
+                // Find the row the input belongs to
+                var row = $(this).closest('tr');
+
+                // Get the price and discount values from the inputs
+                var price = parseFloat(row.find('input[name="price[]"]').val()) || 0;
+                var discountPercentage = parseFloat(row.find('input[name="discount_per[]"]').val()) || 0;
+
+                // Calculate the discount amount
+                var discountAmount = (price * discountPercentage) / 100;
+
+                // Calculate the selling price
+                var sellingPrice = price - discountAmount;
+
+                // Set the calculated selling price in the corresponding input field
+                row.find('input[name="selling_price[]"]').val(sellingPrice.toFixed(
+                2)); // Displaying with two decimals
+            });
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             const addUnitBtn = document.getElementById("addUnit");
             const removeUnitBtn = document.getElementById("removeUnit");
@@ -385,6 +415,13 @@
             </td>
             <td>
                 <div class="form-floating">
+                    <input type="number" name="price[]" placeholder="Product Price" class="form-control">
+                    <label for="">Product Price</label>
+                    <span class="text-danger productpriceError"></span>
+                </div> 
+            </td>
+            <td>
+                <div class="form-floating">
                     <input type="text" name="discount_per[]" placeholder="Discount Percentage" class="form-control">
                     <label for="">Discount Per</label>
                     <span class="text-danger discountperError"></span>
@@ -392,7 +429,7 @@
             </td>
             <td>
                 <div class="form-floating">
-                    <input type="text" name="sellin_price[]" placeholder="Selling Price" class="form-control">
+                    <input type="text" name="selling_price[]" placeholder="Selling Price" class="form-control">
                     <label for="">Selling Price</label>
                     <span class="text-danger sellingpriceError"></span>
                 </div>

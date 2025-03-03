@@ -41,7 +41,9 @@
                                         No
                                     @endif
                                 </td>
-                                <td>{{ $sliders->navigatemaster->screenname }}</td>
+                                {{-- <td>{{ $sliders->navigatemaster->screenname }}</td> --}}
+                                <td>{{ $sliders->navigatemaster ? $sliders->navigatemaster->screenname : 'N/A' }}</td>
+
 
                                 <td>
                                     <a href="{{ Route('slider.edit', $sliders->id) }}" class="btn btn-primary">
