@@ -10,7 +10,7 @@
                         <h6 class="mb-0">Faq Management</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-danger" href="{{ Route('faq.deactive') }}">Deactive-Data</a>
+                        <a class="btn btn-danger" href="{{ Route('faq.deactive') }}">Deactive Faq</a>
                         <a class="btn btn-primary" href="{{ Route('faq.create') }}">Add</a>
                     </div>
                 </div>
@@ -45,7 +45,8 @@
                                         <li>{{ $faqs->answerHin }}</li>
                                     </ul>
                                 </td>
-                                <td class="d-flex">
+                                <td>
+                                    <div class="d-flex">
                                     <a href="{{ Route('faq.edit', $faqs->id) }}" class="btn btn-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
@@ -53,6 +54,7 @@
                                         onclick="openDeactiveModal('{{ Route('faq.delete', $faqs->id) }}')">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                </div>
                                 </td>
                             </tr>
                         @endforeach

@@ -9,7 +9,7 @@
                         <h6 class="mb-0">Slider Management</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-danger" href="{{ Route('slider.deactive') }}">Deactive-Data</a>
+                        <a class="btn btn-danger" href="{{ Route('slider.deactive') }}">Deactive Slider</a>
                         <a class="btn btn-primary" href="{{ Route('slider.create') }}">Add</a>
                     </div>
                 </div>
@@ -50,6 +50,7 @@
 
 
                                 <td>
+                                    <div class="d-flex">
                                     <a href="{{ Route('slider.edit', $sliders->id) }}" class="btn btn-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
@@ -57,6 +58,7 @@
                                         onclick="openDeactiveModal('{{ Route('slider.delete', $sliders->id) }}')">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                </div>
                                 </td>
                             </tr>
                         @endforeach

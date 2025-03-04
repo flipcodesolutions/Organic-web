@@ -9,7 +9,7 @@
                         <h6 class="mb-0">UnitMaster Management</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-danger" href="{{ Route('unitmaster.deactive') }}">Deactive-Data</a>
+                        <a class="btn btn-danger" href="{{ Route('unitmaster.deactive') }}">Deactive UnitMaster</a>
                         <a class="btn btn-primary" href="{{ Route('unitmaster.create') }}">Add</a>
                     </div>
                 </div>

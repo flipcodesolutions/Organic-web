@@ -9,7 +9,7 @@
                         <h6 class="mb-0">CmsMaster Management</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-danger" href="{{ Route('cms_master.deactive') }}">Deactive-Data</a>
+                        <a class="btn btn-danger" href="{{ Route('cms_master.deactive') }}">Deactive CmsMaster</a>
                         <a class="btn btn-primary" href="{{ Route('cms_master.create') }}">Add</a>
                     </div>
                 </div>
@@ -41,12 +41,13 @@
                                 <td>{{ $cms->slug }}</td>
                                 <td>
                                     <ul>
-                                        <li>{{ $cms->description }}</li>
-                                        <li>{{ $cms->descriptionGuj }}</li>
-                                        <li>{{ $cms->descriptionHin }}</li>
+                                        <li>{!! $cms->description !!}</li>
+                                        <li>{!! $cms->descriptionGuj !!}</li>
+                                        <li>{!! $cms->descriptionHin !!}</li>
                                     </ul>
                                 </td>
-                                <td class="d-flex">
+                                <td>
+                                    <div class="d-flex">
                                     <a href="{{ Route('cms_master.edit', $cms->id) }}" class="btn btn-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
@@ -54,6 +55,7 @@
                                         onclick="openDeactiveModal('{{ Route('cms_master.delete', $cms->id) }}')">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                </div>
                                 </td>
                             </tr>
                         @endforeach

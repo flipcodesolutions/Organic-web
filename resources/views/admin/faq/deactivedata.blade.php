@@ -7,7 +7,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Faq Management</h6>
+                        <h6 class="mb-0">Deactive Faq</h6>
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-primary" href="{{ Route('faq.index') }}">Back</a>
@@ -44,7 +44,8 @@
                                         <li>{{ $faqs->answerHin }}</li>
                                     </ul>
                                 </td>
-                                <td class="d-flex">
+                                <td>
+                                    <div class="d-flex">
                                     <a href="{{ Route('faq.active', $faqs->id) }}" class="btn btn-primary">
                                         <i class="fas fa-undo"></i>
                                     </a>
@@ -52,6 +53,7 @@
                                         onclick="openDeleteModal('{{ Route('faq.permdelete', $faqs->id) }}')">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                </div>
                                 </td>
                             </tr>
                         @endforeach

@@ -22,7 +22,7 @@
         <div class="mb-4 margin-bottom-30 m-4">
             <form action="{{ route('city_master.index') }}" method="GET" class="filter-form">
                 <div class="row align-items-end g-2">
-                    
+
                     <!-- Global Search -->
                     <div class="col-md-4">
                         <label for="global" class="form-label"><b>Filter:</b></label>
@@ -50,7 +50,7 @@
                 </div>
             </form>
         </div>
-        
+
 
         <div class="card-body table-responsive">
             <div class="loader"></div>
