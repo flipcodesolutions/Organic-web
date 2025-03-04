@@ -48,10 +48,14 @@
                                     <a href="{{ route('notification.active') }}/{{ $data->id }}" class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('notification.delete') }}/{{ $data->id }}"
+                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        onclick="openDeleteModal('{{ route('notification.delete') }}/{{ $data->id }}')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    {{-- <a href="{{ route('notification.delete') }}/{{ $data->id }}"
                                         class="btn btn-danger">
                                         <i class="fas fa-remove"></i>
-                                    </a>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach

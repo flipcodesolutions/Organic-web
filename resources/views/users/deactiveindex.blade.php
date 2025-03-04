@@ -19,6 +19,7 @@
                         <th>No</th>
                         <th>User image</th>
                         <th>Name</th>
+                        <th>Phone</th>
                         <th>Email</th>
                         <th>Roles</th>
                         <th width="280px">Action</th>
@@ -29,6 +30,7 @@
                             <td>{{ $key + 1 }}</td>
                             <td><img src="{{ asset('user_profile/'.$user->pro_pic)}}" alt="profile_picture" class="img-profile rounded-circle" height="100px" width="100px">
                             <td>{{ $user->name }}</td>
+                            <td>{{ $user->phone }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
                                 {{ $user->role }}

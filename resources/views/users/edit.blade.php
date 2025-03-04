@@ -28,7 +28,8 @@
                                     <div class="form-floating">
                                         <div class="col mb-2" id="imagepreview"
                                             style="display:flex; justify-content: center;">
-                                            <img id="profilePicPreview" src="{{ asset('user_profile/'.$user->pro_pic)}}" alt="Profile Picture"
+                                            <img id="profilePicPreview" src="{{ asset('user_profile/' . $user->pro_pic) }}"
+                                                alt="Profile Picture"
                                                 style="width: 150px; height: 150px; border-radius: 50%; border: 1px solid grey">
                                         </div>
                                         <div class="col px-0">
@@ -55,6 +56,29 @@
                                         <input type="text" name="name" placeholder="Name" class="form-control"
                                             value="{{ $user->name }}">
                                         <label for="floatingInput">Enter Name</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- phone --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Phone<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input type="number" name="phone" placeholder="Phone Number" class="form-control"
+                                            value="{{ $user->phone }}">
+                                        <label for="floatingInput">Enter Phone Number</label>
+                                        <span id="nameError" class="text-danger">
+                                            @error('phone')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -137,9 +161,12 @@
                             <select class="form-select form-select-lg mb-3" name="defaultLanguage"
                                 aria-label="Large select example">
                                 <option selected disabled>--Select Default Language--</option>
-                                <option value="english"{{ $user->default_language == 'english' ? 'selected' : ''}}>English</option>
-                                <option value="gujarati"{{ $user->default_language == 'gujarati' ? 'selected' : ''}}>Gujarati</option>
-                                <option value="hindi"{{ $user->default_language == 'hindi' ? 'selected' : ''}}>Hindi</option>
+                                <option value="english"{{ $user->default_language == 'english' ? 'selected' : '' }}>English
+                                </option>
+                                <option value="gujarati"{{ $user->default_language == 'gujarati' ? 'selected' : '' }}>
+                                    Gujarati</option>
+                                <option value="hindi"{{ $user->default_language == 'hindi' ? 'selected' : '' }}>Hindi
+                                </option>
                             </select>
                             <span id="nameError" class="text-danger">
                                 @error('defaultLanguage')

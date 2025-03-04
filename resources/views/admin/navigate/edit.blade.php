@@ -15,7 +15,7 @@
             </div>
 
             <div class="card-body">
-                <form id="productForm" action="{{ route('navigate.update', $screen->id ) }}" method="POST">
+                <form id="productForm" action="{{ route('navigate.update', $screen->id) }}" method="POST">
                     @csrf
                     {{-- product stock --}}
                     <div class="row mb-3">
@@ -24,18 +24,22 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="screenName" id="screen_name"
-                                    placeholder="Screen Name" class="form-control" value={{$screen->screename}}>
+                                <input type="text" name="screenName" id="screen_name" placeholder="Screen Name"
+                                    class="form-control" value={{ $screen->screenname }}>
                                 <label for="">Screen Name</label>
-                                <span id="screenNameError" class="text-danger"></span>
+                                <span>
+                                    @error('screenName')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
 
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i
-                                class="fa-solid fa-floppy-disk"></i> Submit</button>
+                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i class="fa-solid fa-floppy-disk"></i>
+                            Submit</button>
                     </div>
 
                 </form>

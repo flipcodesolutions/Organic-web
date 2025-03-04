@@ -9,7 +9,7 @@
                         <h6 class="mb-0">Create New Notification</h6>
                     </div>
                     <div class="col" align="right">
-                        <a href="{{ route('product.index') }}" class="btn btn-primary" type="button"> Back </a>
+                        <a href="{{ route('notification.index') }}" class="btn btn-primary" type="button"> Back </a>
                     </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@
                 <form id="productForm" action="{{ route('notification.store') }}" method="POST">
                     @csrf
 
-                    {{-- product --}}
+                    {{-- title --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Title <span class="text-danger">*</span>
@@ -28,23 +28,35 @@
                                 <input type="text" name="title" id="title" placeholder="Title"
                                     class="form-control">
                                 <label for="">English</label>
-                                <span id="titleError" class="text-danger"></span>
+                                <span>
+                                    @error('title')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="title_guj" id="title"
-                                    placeholder="Title Gujarati" class="form-control">
+                                <input type="text" name="title_guj" id="title" placeholder="Title Gujarati"
+                                    class="form-control">
                                 <label for="">Gujarati</label>
-                                <span id="titleErrorGuj" class="text-danger"></span>
+                                <span>
+                                    @error('title_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="title_hin" id="title"
-                                    placeholder="Title Hindi" class="form-control">
+                                <input type="text" name="title_hin" id="title" placeholder="Title Hindi"
+                                    class="form-control">
                                 <label for="">Hindi</label>
-                                <span id="titleErrorHin" class="text-danger"></span>
+                                <span>
+                                    @error('title_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -55,35 +67,55 @@
                             Details<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="details" id="details"
-                                            placeholder="Details" class="form-control">
-                                        <label for="">English</label>
-                                        <span id="detailsError" class="text-danger"></span>
-                                    </div>
-                                </div>
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="details" value="{{ old('details') }}" placeholder="Details English"
+                                    id="floatingTextarea"></textarea>
+                                {{-- <input type="text" name="details" id="details" placeholder="Details"
+                                            class="form-control">
+                                        <label for="">English</label> --}}
+                                <span>
+                                    @error('details')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="details_guj" id="details"
-                                            placeholder="Details Gujarati" class="form-control">
-                                        <label for="">Gujarati</label>
-                                        <span id="detailsErrorGuj" class="text-danger"></span>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Details Guj<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="details_guj" value="{{ old('details_guj') }}"
+                                    placeholder="Details Gujarati" id="floatingTextarea"></textarea>
+                                {{-- <input type="text" name="details_guj" id="details"
+                                    placeholder="Details Gujarati" class="form-control">
+                                <label for="">Gujarati</label> --}}
+                                <span>
+                                    @error('details_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="details_hin" id="details"
-                                            placeholder="Details Hindi" class="form-control">
-                                        <label for="">Hindi</label>
-                                        <span id="detailsErrorHin" class="text-danger"></span>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Details Hin<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="details_hin" value="{{ old('details_hin') }}" placeholder="Details Hindi"
+                                    id="floatingTextarea"></textarea>
+                                {{-- <input type="text" name="details_hin" id="details" placeholder="Details Hindi"
+                                    class="form-control">
+                                <label for="">Hindi</label> --}}
+                                <span>
+                                    @error('details_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -94,21 +126,25 @@
                             Navigate Screen<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <select class="form-select form-select-lg mb-3" name="navigate_screen"
+                            <select class="form-select form-select-lg" name="navigate_screen"
                                 aria-label="Large select example">
-                                <option selected>Select Navigate Screen	</option>
+                                <option selected disabled>Select Navigate Screen </option>
                                 @foreach ($screen as $data)
                                     <option>{{ $data->screenname }}</option>
                                 @endforeach
                             </select>
-                            <span id="navigateScreenError" class="text-danger"></span>
+                            <span>
+                                @error('navigate_screen')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span>
                         </div>
                     </div>
 
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i
-                                class="fa-solid fa-floppy-disk"></i> Submit</button>
+                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i class="fa-solid fa-floppy-disk"></i>
+                            Submit</button>
                     </div>
 
                 </form>
@@ -118,5 +154,12 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <script>
+        // Initialize CKEditor for each
+        CKEDITOR.replace('details');
+        CKEDITOR.replace('details_guj');
+        CKEDITOR.replace('details_hin');
+    </script>
 
 @endsection
