@@ -26,4 +26,6 @@ class Product extends Model
     {
         return $this->hasMany(Unit::class, 'product_id');
     }
+
+    
 }

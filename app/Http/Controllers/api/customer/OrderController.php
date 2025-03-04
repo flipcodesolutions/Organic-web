@@ -87,4 +87,29 @@ class OrderController extends Controller
             return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
         }
     }
+
+    public function myOrders(Request $request)
+    {
+        try {
+            $currentPage = $request->input('page', 1);
+            $orders = OrderMaster::where('userId', Auth::user()->id)
+                ->with('orderDetails')
+                ->paginate($request->input('limit', 10), ['*'], 'page', $currentPage);
+            return Util::getSuccessMessage('My Orders', $orders);
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
+
+    public function orderDetails($id)
+    {
+        try {
+            $orderDetails = OrderDetail::where('id', $id)
+                ->with(['product'])
+                ->get();
+            return Util::getSuccessMessage('Order Details', $orderDetails);
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
 }

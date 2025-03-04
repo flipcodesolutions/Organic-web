@@ -8,6 +8,7 @@ use App\Http\Controllers\api\customer\CategoryController;
 use App\Http\Controllers\api\customer\CityController;
 use App\Http\Controllers\api\customer\ContactController;
 use App\Http\Controllers\api\customer\OrderController;
+use App\Http\Controllers\api\customer\ProductController;
 use App\Http\Controllers\api\customer\ShippingAddressController;
 use App\Http\Controllers\api\customer\SliderController;
 use Illuminate\Http\Request;
@@ -29,13 +30,14 @@ Route::post('verifyOtp', [UserController::class, 'verifyOtp']);
 Route::post('checkEmail', [UserController::class, 'checkEmail']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    //category and products
+    //category
     Route::get('allCategories', [CategoryController::class, 'allCategories']);
 
     //user Profile
     Route::get('userProfile', [UserController::class, 'userProfile']);
     Route::post('editProfile', [UserController::class, 'editProfile']);
     Route::post('updateLanguage', [UserController::class, 'updateLanguage']);
+    Route::get('policies', [UserController::class, 'policies']);
 
     //sliders
     Route::get('sliders', [SliderController::class, 'sliders']);
@@ -69,7 +71,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     //order 
     Route::post('order', [OrderController::class, 'order']);
-    Route::get('orderList', [OrderController::class, 'orderList']);
+    Route::get('myOrders', [OrderController::class, 'myOrders']);
     Route::get('orderDetails/{id}', [OrderController::class, 'orderDetails']);
     Route::get('pointPer', [OrderController::class, 'pointPer']);
+
+    //product 
+    Route::get('products', [ProductController::class, 'products']);
 });
