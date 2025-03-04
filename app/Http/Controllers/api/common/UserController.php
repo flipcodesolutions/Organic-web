@@ -131,6 +131,66 @@ class UserController extends Controller
         }
     }
 
+    public function isVerified(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+
+            'is_verify_email' => $request->is_verify_phone ? '' : 'required|in:yes,no',
+            'is_verify_phone' => $request->is_verify_email ? '' : 'required|in:yes,no',
+        ]);
+
+        if ($validator->fails()) {
+            return Util::getErrorMessage('Validation Failed', $validator->errors());
+        }
+        try {
+            $user = Auth::user()->id;
+            $user = User::find($user);
+
+            $user->is_verfiy_email = $request->is_verify_email ?? $user->is_verfiy_email;
+
+            $user->is_verify_phone = $request->is_verify_phone ?? $user->is_verify_phone;
+
+            if ($request->is_verify_email || $request->is_verify_phone) {
+                $user->save();
+            }
+            return Util::getSuccessMessage(
+                'User Profile',
+                $user
+            );
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
+    public function createProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+        ]);
+
+        if ($validator->fails()) {
+            return Util::getErrorMessage('Validation Failed', $validator->errors());
+        }
+        try {
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            if ($request->pro_pic) {
+
+
+                $imageName = time() . '.' . $request->pro_pic->extension();
+                $request->pro_pic->move(public_path('profile_pic'), $imageName);
+                $user->pro_pic = 'profile_pic/' . $imageName;
+            }
+            $user->save();
+
+            return Util::getSuccessMessageWithToken('Profile Updated Successfully', $user, $user->createToken('my-app-token')->plainTextToken);
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
+
     public function editProfile(Request $request)
     {
         $validator = Validator::make($request->all(), [
