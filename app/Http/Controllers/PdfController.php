@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Purchase;
 
+
 use Illuminate\Http\Request;
 
 class PdfController extends Controller
@@ -14,6 +15,11 @@ class PdfController extends Controller
         $purchase=Purchase::with("productData")->get();
         $data=['purchase'=>$purchase];
         $pdf = Pdf::loadView('admin.reports.purchasePdf',$data);
+        $pdf = Pdf::loadView('pdf.report', [
+            'title' => 'Product Report',
+            'selected_date' => $request->date,
+            'data' => $data
+        ]);
         return $pdf->download('purchaseReport.pdf');
     }
     public function purchaseDateWisePDF(){
@@ -26,7 +32,13 @@ class PdfController extends Controller
         ->whereDate('date', '<=', $end_date)
         ->get();
    
-   $data=['data'=>$data];
+   //$data=['data'=>$data];
+  
+   $data = [
+    'data' => $data,
+    'start_date' => $start_date,
+    'end_date' => $end_date
+];
         $pdf = Pdf::loadView('admin.reports.purchaseDateWisePDF',$data)->setPaper('a4', 'potrait');
         return $pdf->download('purchaseReport.pdf');
     }

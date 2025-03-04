@@ -83,7 +83,8 @@ class PurchaseController extends Controller
     }
     public function purchaseReport()
     {
-         $purchase=Purchase::with("productData")->get();
-         return view('admin.reports.purchaseReport',['purchase'=>$purchase]);  
+        //  $purchase=Purchase::with("productData")->get();
+        //  return view('admin.reports.purchaseReport',['purchase'=>$purchase]); 
+         return view('admin.reports.purchaseDateWise'); 
     }
 }
