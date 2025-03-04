@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Cms_Master Management</h6>
+                        <h6 class="mb-0">CmsMaster Management</h6>
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-danger" href="{{ Route('cms_master.deactive') }}">Deactive-Data</a>
