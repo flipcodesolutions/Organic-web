@@ -26,7 +26,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="title" id="title" placeholder="Title"
-                                    class="form-control">
+                                    value="{{ old('title') }}" class="form-control">
                                 <label for="">English</label>
                                 <span>
                                     @error('title')
@@ -38,7 +38,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="title_guj" id="title" placeholder="Title Gujarati"
-                                    class="form-control">
+                                    value="{{ old('title_guj') }}" class="form-control">
                                 <label for="">Gujarati</label>
                                 <span>
                                     @error('title_guj')
@@ -50,7 +50,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="title_hin" id="title" placeholder="Title Hindi"
-                                    class="form-control">
+                                    value="{{ old('title_hin') }}" class="form-control">
                                 <label for="">Hindi</label>
                                 <span>
                                     @error('title_hin')
@@ -68,8 +68,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="details" value="{{ old('details') }}" placeholder="Details English"
-                                    id="floatingTextarea"></textarea>
+                                <textarea class="ckeditor form-control" name="details" placeholder="Details English"
+                                    id="floatingTextarea">{{ old('details') }}</textarea>
                                 {{-- <input type="text" name="details" id="details" placeholder="Details"
                                             class="form-control">
                                         <label for="">English</label> --}}
@@ -87,8 +87,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="details_guj" value="{{ old('details_guj') }}"
-                                    placeholder="Details Gujarati" id="floatingTextarea"></textarea>
+                                <textarea class="ckeditor form-control" name="details_guj"
+                                    placeholder="Details Gujarati" id="floatingTextarea">{{ old('details_guj') }}</textarea>
                                 {{-- <input type="text" name="details_guj" id="details"
                                     placeholder="Details Gujarati" class="form-control">
                                 <label for="">Gujarati</label> --}}
@@ -106,8 +106,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="details_hin" value="{{ old('details_hin') }}" placeholder="Details Hindi"
-                                    id="floatingTextarea"></textarea>
+                                <textarea class="ckeditor form-control" name="details_hin" placeholder="Details Hindi"
+                                    id="floatingTextarea">{{ old('details_hin') }}</textarea>
                                 {{-- <input type="text" name="details_hin" id="details" placeholder="Details Hindi"
                                     class="form-control">
                                 <label for="">Hindi</label> --}}

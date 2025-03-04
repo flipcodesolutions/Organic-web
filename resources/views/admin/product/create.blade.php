@@ -68,8 +68,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="product_des" value="{{ old('product_des') }}" placeholder="product_des"
-                                    id="floatingTextarea"></textarea>
+                                <textarea class="ckeditor form-control" name="product_des" placeholder="product_des" id="floatingTextarea">{{ old('product_des') }}</textarea>
                                 {{-- <input type="text" name="product_des" id="product_des"
                                             placeholder="Product Description" class="form-control">
                                         <label for="">English</label> --}}
@@ -87,8 +86,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="product_des_guj" value="{{ old('product_des_guj') }}"
-                                    placeholder="product_des_guj" id="floatingTextarea"></textarea>
+                                <textarea class="ckeditor form-control" name="product_des_guj" placeholder="product_des_guj" id="floatingTextarea">{{ old('product_des_guj') }}</textarea>
                                 {{-- <input type="text" name="product_des_guj" id="product_des_guj"
                                             placeholder="Product Description Gujarati" class="form-control">
                                         <label for="">Gujarati</label> --}}
@@ -106,8 +104,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="product_des_hin" value="{{ old('product_des_hin') }}"
-                                    placeholder="product_des_hin" id="floatingTextarea"></textarea>
+                                <textarea class="ckeditor form-control" name="product_des_hin" placeholder="product_des_hin" id="floatingTextarea">{{ old('product_des_hin') }}</textarea>
                                 {{-- <input type="text" name="product_des_hin" id="product_des"
                                             placeholder="Product Description Hindi" class="form-control">
                                         <label for="">Hindi</label> --}}
@@ -159,7 +156,7 @@
                                     <tr class="unitRow">
                                         <td>
                                             <select class="form-select form-select-lg mb-3" name="unit_id[]"
-                                                aria-label="Large select example">
+                                                aria-label="Large select example" id="unit">
                                                 <option selected disabled>Select Unit</option>
                                                 @foreach ($units as $data)
                                                     <option value="{{ $data->id }}">{{ $data->unit }}</option>
@@ -177,7 +174,7 @@
                                                     placeholder="Unit Detail in Approx Weight" class="form-control">
                                                 <label for="">Approx Weight</label>
                                                 <span>
-                                                    @error('unit_det')
+                                                    @error('unit_det.*')
                                                         <p class="text-danger">{{ $message }}</p>
                                                     @enderror
                                                 </span>
@@ -189,7 +186,7 @@
                                                     class="form-control">
                                                 <label for="">Product Price</label>
                                                 <span>
-                                                    @error('price')
+                                                    @error('price.*')
                                                         <p class="text-danger">{{ $message }}</p>
                                                     @enderror
                                                 </span>
@@ -201,7 +198,7 @@
                                                     placeholder="Discount Percentage" class="form-control">
                                                 <label for="">Discount Per</label>
                                                 <span>
-                                                    @error('discount_per')
+                                                    @error('discount_per.*')
                                                         <p class="text-danger">{{ $message }}</p>
                                                     @enderror
                                                 </span>
@@ -213,7 +210,7 @@
                                                     class="form-control">
                                                 <label for="">Selling Price</label>
                                                 <span>
-                                                    @error('selling_price')
+                                                    @error('selling_price.*')
                                                         <p class="text-danger">{{ $message }}</p>
                                                     @enderror
                                                 </span>
@@ -298,17 +295,23 @@
                             Images<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-
-                            <div id="photoInput">
-                                <label for="photoUpload" class="form-label">Upload Photo</label>
-                                <input type="file" class="form-control" id="photoUpload" name="product_image[]"
-                                    multiple>
+                            <div class="row">
+                                <div id="imagePreviewContainer" style="display: flex; flex-wrap: wrap;">
+                                    <!-- Image previews will be appended here -->
+                                </div>
                             </div>
-                            <span>
-                                @error('product_image')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </span>
+                            <div class="row">
+                                <div id="photoInput">
+                                    <label for="photoUpload" class="form-label">Upload Photo</label>
+                                    <input type="file" class="form-control" id="photoUpload" name="product_image[]"
+                                        onchange="previewImages(event)" accept="image/*" multiple>
+                                </div>
+                                <span>
+                                    @error('product_image.*')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
+                            </div>
                             {{-- <div class="row"> --}}
                             {{-- <select class="form-select form-select-lg mb-3" name="image_and_video" id="image_and_video"
                                 aria-label="Large select example">
@@ -348,7 +351,7 @@
                                     placeholder="Enter video link">
                                 <span id="videolinklist"> </span>
                                 <span>
-                                    @error('video_link')
+                                    @error('video_link.*')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </span>
@@ -390,7 +393,14 @@
                                 aria-label="Large select example">
                                 <option selected disabled>Select Category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
+                                    <optgroup label="{{ $category->categoryName }}">
+                                        @foreach ($childcat as $childdata)
+                                            @if ($childdata->parent_category_id == $category->id)
+                                                <option value="{{ $childdata->id }}">{{ $childdata->categoryName }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </optgroup>
                                 @endforeach
                             </select>
                             <span>
@@ -421,6 +431,35 @@
         CKEDITOR.replace('product_des');
         CKEDITOR.replace('product_des_guj');
         CKEDITOR.replace('product_des_hin');
+    </script>
+
+    <script>
+        function previewImages(event) {
+            const files = event.target.files;
+            const container = document.getElementById('imagePreviewContainer');
+            container.innerHTML = ''; // Clear previous previews
+
+            // Loop through the selected files
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = e.target.result;
+                    imgElement.style.width = '100px'; // Customize size
+                    imgElement.style.margin = '5px';
+
+                    // Append the image to the preview container
+                    container.appendChild(imgElement);
+                };
+
+                // Read the file as a Data URL (base64)
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
     </script>
 
     <script>
@@ -500,7 +539,7 @@
                     placeholder="Unit Detail in Approx Weight" class="form-control">
                     <label for="">Approx Weight</label>
                     <span>
-                        @error('unit_det')
+                        @error('unit_det.*')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </span>
@@ -512,7 +551,7 @@
                     class="form-control">
                     <label for="">Product Price</label>
                     <span>
-                        @error('price')
+                        @error('price.*')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </span>
@@ -524,7 +563,7 @@
                     placeholder="Discount Percentage" class="form-control">
                     <label for="">Discount Per</label>
                     <span>
-                        @error('discount_per')
+                        @error('discount_per.*')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </span>
@@ -536,7 +575,7 @@
                     class="form-control">
                     <label for="">Selling Price</label>
                     <span>
-                        @error('selling_price')
+                        @error('selling_price.*')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </span>
@@ -557,6 +596,25 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                const output = document.getElementById('profilePicPreview');
+                const outputclass = document.getElementById('imagepreview');
+                output.src = reader.result;
+                // outputclass.style.display = 'flex';
+                // outputclass.style.justify-content = 'center'; // Show the image
+            };
+
+            if (file) {
+                reader.readAsDataURL(file); // Read the file as a Data URL
+            }
+        }
     </script>
 
     {{-- <script>

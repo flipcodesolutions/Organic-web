@@ -132,14 +132,14 @@
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Image <span class="text-danger">*</span>
                         </div>
-                        <div class="col-2">
-                            <img src="{{ asset('categoryImage/' . $category->cat_icon) }}" alt="" height="100px"
+                        <div class="col-2" id="imagepreview">
+                            <img id="profilePicPreview" src="{{ asset('categoryImage/' . $category->cat_icon) }}" alt="" height="100px"
                                 width="150px">
                         </div>
                         <div class="col">
                             <div class="form">
                                 <input type="file" name="category_image" id="category_Image" placeholder="Category Name"
-                                    class="form-control">
+                                    class="form-control" onchange="previewImage(event)">
                                 {{-- <label for="">Image</label> --}}
                                 <span>
                                     @error('category_image')
@@ -157,13 +157,13 @@
                             Parent Category<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            {{-- <select class="form-select ddCategory" name="parent_id[]" class="form-control">
-                            <option value="0" selected>-- select category --</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                            @endforeach
-                        </select> --}}
                             <select class="form-select ddCategory" name="parent_id" class="form-control">
+                                <option value="0" selected>-- select category --</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
+                                @endforeach
+                            </select>
+                            {{-- <select class="form-select ddCategory" name="parent_id" class="form-control">
                                 <option value="0" {{ $category->parent_id == 0 ? 'selected' : '' }}>-- select
                                     category
                                     --</option>
@@ -173,7 +173,7 @@
                                         {{ $categoryOption->category_name }}
                                     </option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                             <span>
                                 @error('parent_id')
                                     <p class="text-danger">{{ $message }}</p>
@@ -221,6 +221,25 @@
         CKEDITOR.replace('category_des');
         CKEDITOR.replace('category_des_guj');
         CKEDITOR.replace('category_des_hin');
+    </script>
+
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                const output = document.getElementById('profilePicPreview');
+                const outputclass = document.getElementById('imagepreview');
+                output.src = reader.result;
+                // outputclass.style.display = 'flex';
+                // outputclass.style.justify-content = 'center'; // Show the image
+            };
+
+            if (file) {
+                reader.readAsDataURL(file); // Read the file as a Data URL
+            }
+        }
     </script>
 
     {{-- <script>

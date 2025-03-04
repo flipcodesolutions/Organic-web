@@ -25,7 +25,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="screenName" id="screen_name" placeholder="Screen Name"
-                                    class="form-control">
+                                value="{{ old('screen_name') }}" class="form-control">
                                 <label for="">Screen Name</label>
                                 <span>
                                     @error('screenName')

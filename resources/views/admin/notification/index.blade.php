@@ -33,18 +33,20 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>
-                                    <ul>
+                                    {{ $data->title }}
+                                    {{-- <ul>
                                         <li> {{ $data->title }} </li>
                                         <li> {{ $data->titleGuj }} </li>
                                         <li> {{ $data->titleHin }} </li>
-                                    </ul>
+                                    </ul> --}}
                                 </td>
                                 <td>
-                                    <ul>
+                                    {!! $data->details !!}
+                                    {{-- <ul>
                                         <li> {{ $data->details }} </li>
                                         <li> {{ $data->detailsGuj }} </li>
                                         <li> {{ $data->detailsHin }} </li>
-                                    </ul>
+                                    </ul> --}}
                                 </td>
                                 <td>{{ $data->navigate_screen }}</td>
                                 <td>
