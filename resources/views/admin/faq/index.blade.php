@@ -45,7 +45,7 @@
                                         <li>{{ $faqs->answerHin }}</li>
                                     </ul>
                                 </td>
-                                <td>
+                                <td class="d-flex">
                                     <a href="{{ Route('faq.edit', $faqs->id) }}" class="btn btn-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>

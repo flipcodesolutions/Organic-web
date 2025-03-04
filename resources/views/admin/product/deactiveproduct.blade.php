@@ -12,7 +12,6 @@
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-primary" href="{{ route('product.index') }}">back</a>
-                        <a class="btn btn-danger" href="">Deactive Products</a>
                     </div>
                 </div>
             </div>
@@ -25,10 +24,10 @@
                         <th>Product Name</th>
                         <th>Product Description</th>
                         <th>Product Price</th>
-                        <th>unit</th>
+                        {{-- <th>unit</th>
                         <th>Aprox weight</th>
                         <th>Discount Percentage</th>
-                        <th>Sell Price</th>
+                        <th>Sell Price</th> --}}
                         <th>Product Stock</th>
                         <th>Season</th>
                         <th>Images</th>
@@ -39,30 +38,33 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>
-                                    <ul>
+                                    {{ $productData->categories->categoryName }}
+                                    {{-- <ul>
                                         <li>{{ $productData->categories->categoryName }}</li>
                                         <li>{{ $productData->categories->categoryNameGuj }}</li>
                                         <li>{{ $productData->categories->categoryNameHin }}</li>
-                                    </ul>
+                                    </ul> --}}
                                 </td>
                                 <td>
-                                    <ul>
+                                    {{ $productData->productName }}
+                                    {{-- <ul>
                                         <li>{{ $productData->productName }}</li>
                                         <li>{{ $productData->productNameGuj }}</li>
                                         <li>{{ $productData->productNameHin }}</li>
-                                    </ul>
+                                    </ul> --}}
                                 </td>
                                 <td>
-                                    <ul>
+                                    {{ $productData->productDescription }}
+                                    {{-- <ul>
                                         <li>{{ $productData->productDescription }}</li>
                                         <li>{{ $productData->productDescriptionGuj }}</li>
                                         <li>{{ $productData->productDescriptionHin }}</li>
-                                    </ul>
+                                    </ul> --}}
                                 </td>
                                 <td>
                                     {{ $productData->productPrice }}
                                 </td>
-                                <td>
+                                {{-- <td>
                                     {{ $productData->productUnit->unitMaster->unit }}
                                 </td>
                                 <td>
@@ -73,7 +75,7 @@
                                 </td>
                                 <td>
                                     {{ $productData->productUnit->sell_price }}
-                                </td>
+                                </td> --}}
                                 <td>
                                     {{ $productData->stock }}
                                 </td>
@@ -98,9 +100,13 @@
                                         class="btn btn-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('product.delete') }}/{{ $productData->id }}" class="btn btn-danger">
-                                        <i class="fas fa-remove"></i>
+                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        onclick="openDeleteModal('{{ route('product.delete') }}/{{ $productData->id }}')">
+                                        <i class="fas fa-trash"></i>
                                     </a>
+                                    {{-- <a href="{{ route('product.delete') }}/{{ $productData->id }}" class="btn btn-danger">
+                                        <i class="fas fa-remove"></i>
+                                    </a> --}}
                                 </td>
 
                             </tr>

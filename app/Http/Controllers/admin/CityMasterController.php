@@ -27,7 +27,7 @@ class CityMasterController extends Controller
                 $query->where('id', $request->cityId);
             }
 
-            $data = $query->paginate(10);
+            $data = $query->where('status','active')->paginate(10);
             $cities = CityMaster::where('status', 'active')->get();
 
 
@@ -120,10 +120,8 @@ class CityMasterController extends Controller
     public function deactive($id)
     {
         try {
-            $citymasters = CityMaster::find($id);
-            $citymasters->status = 'deactive';
-            $citymasters->save(); 
-            return redirect()->back()->with('success','successfully deleted');
+            $city_masters = CityMaster::where('status', 'deactive')->get();
+            return view('admin.city_master.deleted', compact('city_masters'));
         } 
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
@@ -135,7 +133,7 @@ class CityMasterController extends Controller
             $citymaster = CityMaster::find($id);
             $citymaster->status = 'active';
             $citymaster->save();
-            return redirect()->route('city_master.index');
+            return redirect()->route('city_master.index')->with('msg','City Activated Successfully');
         } 
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
@@ -145,7 +143,7 @@ class CityMasterController extends Controller
     {
         try {
             $citymaster = CityMaster::where('status', 'deactive')->paginate(10);
-            return view('admin.city_master.deleted', compact('citymaster'));
+            return view('admin.city_master.deleted', compact('citymaster'))->with('msg','Deactivate The Data');
         } 
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
@@ -156,7 +154,7 @@ class CityMasterController extends Controller
         try {
             $citymaster = CityMaster::find($id);   
             $citymaster->delete();
-            return redirect()->route('city_master.index');
+            return redirect()->route('city_master.index')->with('msg','Deleted Permenently');
         } 
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());

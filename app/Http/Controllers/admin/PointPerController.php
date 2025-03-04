@@ -55,11 +55,14 @@ class PointPerController extends Controller
      */
     public function update(Request $request,$id)
     {
+        $request->validate([
+            'pointpercentage' => 'required'
+        ]);
         $per = Pointper::find($id);
         $per->per = $request->pointpercentage;
         $per->save();
 
-        return redirect()->route('pointper.index')->with('success','Percentage updated successfully!');
+        return redirect()->route('pointper.index')->with('msg','Percentage updated successfully!');
     }
 
     /**

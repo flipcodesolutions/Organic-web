@@ -11,10 +11,10 @@
                         <h6 class="mb-0">Notification Management</h6>
                     </div>
                     <div class="col" align="right">
+                        <a class="btn btn-danger" href="{{ route('notification.deactiveindex') }}">Deactive Notifications </a>
                         <a class="btn btn-primary" href="{{ route('notification.create') }}">Add</a>
                     {{-- </div>
                     <div class="col" align="right"> --}}
-                        <a class="btn btn-danger" href="{{ route('notification.deactiveindex') }}">Deactive Notifications </a>
                     </div>
                 </div>
             </div>
@@ -51,9 +51,13 @@
                                     <a href="{{ route('notification.edit') }}/{{ $data->id }}" class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('notification.deactive') }}/{{ $data->id }}" class="btn btn-danger">
+                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        onclick="openDeactiveModal('{{ route('notification.deactive') }}/{{ $data->id }}')">
                                         <i class="fas fa-remove"></i>
                                     </a>
+                                    {{-- <a href="{{ route('notification.deactive') }}/{{ $data->id }}" class="btn btn-danger">
+                                        <i class="fas fa-remove"></i>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach

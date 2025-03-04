@@ -36,6 +36,11 @@
                                                 placeholder="profile_pic" class="form-control"
                                                 onchange="previewImage(event)">
                                         </div>
+                                        <span id="nameError" class="text-danger">
+                                            @error('profilepic')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                         {{-- <input type="file" name="profilePic" placeholder="profile_pic" class="form-control"> --}}
                                     </div>
                                 </div>
@@ -56,6 +61,28 @@
                                         <label for="floatingInput">Enter Name</label>
                                         <span id="nameError" class="text-danger">
                                             @error('name')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- phone --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Phone<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input type="number" name="phone" placeholder="Phone Number" class="form-control">
+                                        <label for="floatingInput">Enter Phone Number</label>
+                                        <span id="nameError" class="text-danger">
+                                            @error('phone')
                                                 {{ $message }}
                                             @enderror
                                         </span>

@@ -48,6 +48,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('product/active/{id?}','active')->name('product.active');
     Route::get('product/delete/{id?}','destroy')->name('product.delete');
     Route::get('product/image/delete/{id?}','destroyimage')->name('productimage.delete');
+    Route::get('product/unit/delete/{id?}','destroyunit')->name('productunit.delete');
 });
 
 // Navigate route

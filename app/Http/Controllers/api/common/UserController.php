@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\api\common;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cms_Master;
 use App\Models\User;
 use App\Utils\Util;
 use Exception;
@@ -137,8 +138,6 @@ class UserController extends Controller
             'email' => 'required|email',
             'phone' => 'required',
             'pro_pic' => 'required',
-            'is_special' => 'required',
-            'default_language' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -151,9 +150,9 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->phone = $request->phone;
-            $user->pro_pic = $request->pro_pic;
-            $user->is_special = $request->is_special;
-            $user->default_language = $request->default_language;
+            $imageName = time() . '.' . $request->pro_pic->extension();
+            $request->pro_pic->move(public_path('profile_pic'), $imageName);
+            $user->pro_pic = 'profile_pic/' . $imageName;
             $user->save();
 
             return Util::getSuccessMessage('Profile Updated Successfully', $user);
@@ -233,32 +232,13 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function policies(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        try {
+            $policies = Cms_Master::where('slug', 'policies')->get();
+            return Util::getSuccessMessage('Policies', $policies);
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
     }
 }

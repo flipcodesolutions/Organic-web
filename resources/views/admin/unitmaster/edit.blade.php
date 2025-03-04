@@ -20,7 +20,7 @@
 
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            unit<span class="text-danger">*</span>
+                            Unit<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">
@@ -28,7 +28,7 @@
                                     <div class="form-floating">
                                         <input type="text" name="unit" id="floatingInput" value="{{$unitmasters->unit}}"
                                             class="form-control" placeholder="Enter Unit">
-                                            <label for="floatingInput">Enter Unit</label>
+                                            <label for="floatingInput">Enter unit</label>
                                         <span id="nameError" class="text-danger">
                                             @error('unit')
                                                 {{ $message }}

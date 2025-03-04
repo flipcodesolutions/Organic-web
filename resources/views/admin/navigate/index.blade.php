@@ -11,8 +11,8 @@
                         <h6 class="mb-0">Navigation Management</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-primary" href="{{ route('navigate.create') }}">Add</a>
                         <a class="btn btn-danger" href="{{ route('navigate.deactiveindex') }}">Deactive Screens</a>
+                        <a class="btn btn-primary" href="{{ route('navigate.create') }}">Add</a>
                     </div>
                 </div>
             </div>
@@ -35,10 +35,14 @@
                                     <a href="{{ route('navigate.edit') }}/{{ $data->id }}" class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('navigate.deactive') }}/{{ $data->id }}"
-                                        class="btn btn-danger">
+                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        onclick="openDeactiveModal('{{ route('navigate.deactive') }}/{{ $data->id }}')">
                                         <i class="fas fa-remove"></i>
                                     </a>
+                                    {{-- <a href="{{ route('navigate.deactive') }}/{{ $data->id }}"
+                                        class="btn btn-danger">
+                                        <i class="fas fa-remove"></i>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach

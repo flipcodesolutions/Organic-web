@@ -29,7 +29,11 @@
                                 <input type="text" name="product_name" id="product_name"
                                     value="{{ $product->productName }}" class="form-control">
                                 <label for="">English</label>
-                                <span id="nameError" class="text-danger"></span>
+                                <span>
+                                    @error('product_name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
@@ -37,7 +41,11 @@
                                 <input type="text" name="product_name_guj" id="product_name"
                                     value="{{ $product->productNameGuj }}" class="form-control">
                                 <label for="">Gujarati</label>
-                                <span id="nameErrorGuj" class="text-danger"></span>
+                                <span>
+                                    @error('product_name_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
@@ -45,7 +53,11 @@
                                 <input type="text" name="product_name_hin" id="product_name"
                                     value="{{ $product->productNameHin }}" class="form-control">
                                 <label for="">Hindi</label>
-                                <span id="nameErrorHin" class="text-danger"></span>
+                                <span>
+                                    @error('product_name_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -53,44 +65,66 @@
                     {{-- product description --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description<span class="text-danger">*</span>
+                            Description Eng<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="product_des" id="product_des"
-                                            value="{{ $product->productDescription }}" class="form-control">
-                                        <label for="">English</label>
-                                        <span id="descriptionError" class="text-danger"></span>
-                                    </div>
-                                </div>
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="product_des" value="{{ old('product_des') }}" placeholder="product_des"
+                                    id="floatingTextarea">{{ $product->productDescription }}</textarea>
+                                {{-- <input type="text" name="product_des" id="product_des"
+                                    value="{{ $product->productDescription }}" class="form-control">
+                                <label for="">English</label> --}}
+                                <span>
+                                    @error('product_des')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="product_des_guj" id="product_des"
-                                            value="{{ $product->productDescriptionGuj }}" class="form-control">
-                                        <label for="">Gujarati</label>
-                                        <span id="descriptionErrorGuj" class="text-danger"></span>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Guj<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="product_des_guj" value="{{ old('product_des_guj') }}"
+                                    placeholder="product_des_guj" id="floatingTextarea">{{ $product->productDescriptionGuj }}</textarea>
+                                {{-- <input type="text" name="product_des_guj" id="product_des"
+                                    value="{{ $product->productDescriptionGuj }}" class="form-control">
+                                <label for="">Gujarati</label> --}}
+                                <span>
+                                    @error('product_des_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="product_des_hin" id="product_des"
-                                            value="{{ $product->productDescriptionHin }}" class="form-control">
-                                        <label for="">Hindi</label>
-                                        <span id="descriptionErrorHin" class="text-danger"></span>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Hin<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="product_des_hin" value="{{ old('product_des_hin') }}"
+                                    placeholder="product_des_hin" id="floatingTextarea">{{ $product->productDescriptionHin }}</textarea>
+                                {{-- <input type="text" name="product_des_hin" id="product_des"
+                                    value="{{ $product->productDescriptionHin }}" class="form-control">
+                                <label for="">Hindi</label> --}}
+                                <span>
+                                    @error('product_des_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
 
                     {{-- product price --}}
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Price<span class="text-danger">*</span>
                         </div>
@@ -102,62 +136,108 @@
                                 <span id="priceError" class="text-danger"></span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     {{-- unit --}}
                     <div class="row">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Unit<span class="text-danger">*</span>
                         </div>
-                        <div class="col">
-                            <table class="table table-bordered mt-2" id="unitTable">
+                        <div class="col p-0" style="overflow-x: scroll; margin: 0 12px 16px">
+                            <table class="table table-bordered mt-2" style="width: 900px" id="unitTable">
                                 <thead>
                                     <tr>
                                         <th>Unit</th>
                                         <th>Detail (aprox Weight)</th>
+                                        <th>Price</th>
                                         <th>Discount Percentage</th>
                                         <th>Sell Price</th>
+                                        <th>action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="unitTableBody">
                                     <!-- Template Row (First row) -->
                                     @foreach ($product->productUnit as $data)
-                                        <tr class="unitRow">
+                                        <input type="hidden" name="dataid[]" value="{{ $data->id }}">
+                                        <tr>
                                             <td>
                                                 <select class="form-select form-select-lg mb-3" name="unit_id[]"
                                                     aria-label="Large select example">
                                                     <option disabled>Select Unit</option>
                                                     @foreach ($units as $unitdata)
-                                                        <option value="{{ $unitdata->id }}"{{ $data->unitMaster->id == $unitdata->id ? 'selected' : '' }}>
+                                                        <option
+                                                            value="{{ $unitdata->id }}"{{ $data->unitMaster->id == $unitdata->id ? 'selected' : '' }}>
                                                             {{ $unitdata->unit }}
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                                <span class="text-danger unitIdError"></span>
+                                                <span>
+                                                    @error('unit_id')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </span>
                                             </td>
+
                                             <td>
                                                 <div class="form-floating">
                                                     <input type="text" name="unit_det[]"
-                                                        placeholder="Unit Detail in Approx Weight" class="form-control" value="{{ $data->detail }}">
+                                                        placeholder="Unit Detail in Approx Weight" class="form-control"
+                                                        value="{{ $data->detail }}">
                                                     <label for="">Approx Weight</label>
-                                                    <span class="text-danger unitdetailError"></span>
+                                                    <span>
+                                                        @error('unit_det')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                             </td>
+
+                                            <td>
+                                                <div class="form-floating">
+                                                    <input type="number" name="product_price[]"
+                                                        placeholder="Product Price" class="form-control"
+                                                        value="{{ $data->price }}">
+                                                    <label for="">Product Price</label>
+                                                    <span>
+                                                        @error('product_price')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                            </td>
+
                                             <td>
                                                 <div class="form-floating">
                                                     <input type="number" name="discount_per[]"
-                                                        placeholder="Discount Percentage" class="form-control" value="{{ $data->per }}">
+                                                        placeholder="Discount Percentage" class="form-control"
+                                                        value="{{ $data->per }}">
                                                     <label for="">Discount Per</label>
-                                                    <span class="text-danger discountperError"></span>
+                                                    <span>
+                                                        @error('discount_per')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                             </td>
+
                                             <td>
                                                 <div class="form-floating">
-                                                    <input type="number" name="sellin_price[]"
-                                                        placeholder="Selling Price" class="form-control" value="{{ $data->sell_price }}">
+                                                    <input type="number" name="selling_price[]"
+                                                        placeholder="Selling Price" class="form-control"
+                                                        value="{{ $data->sell_price }}">
                                                     <label for="">Selling Price</label>
-                                                    <span class="text-danger sellingpriceError"></span>
+                                                    <span>
+                                                        @error('selling_price')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </span>
                                                 </div>
+                                            </td>
+
+                                            <td>
+                                                <a href="{{ route('productunit.delete', $data->id) }}"
+                                                    class="btn btn-danger btn-sm mt-2" style="width: 100px">
+                                                    <i class="fas fa-remove"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -192,7 +272,7 @@
                                         </td>
                                         <td>
                                             <div class="form-floating">
-                                                <input type="number" name="sellin_price[]" placeholder="Selling Price"
+                                                <input type="number" name="selling_price[]" placeholder="Selling Price"
                                                     class="form-control">
                                                 <label for="">Selling Price</label>
                                                 <span class="text-danger sellingpriceError"></span>
@@ -238,7 +318,7 @@
                                         </td>
                                         <td>
                                             <div class="form-floating">
-                                                <input type="text" name="sellin_price" id="selling_price"
+                                                <input type="text" name="selling_price" id="selling_price"
                                                     placeholder="Selling Price" class="form-control" value="{{ $product->productUnit->sell_price }}">
                                                 <label for="">Selling Price</label>
                                                 <span id="sellingpriceError" class="text-danger"></span>
@@ -271,7 +351,11 @@
                                 <input type="number" name="product_stock" id="product_stock"
                                     value="{{ $product->stock }}" class="form-control">
                                 <label for="">Stock</label>
-                                <span id="stockError" class="text-danger"></span>
+                                <span>
+                                    @error('product_stock')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -497,7 +581,7 @@
                         <div class="col">
                             <select class="form-control form-select-lg mb-3" name="season"
                                 aria-label="Large select example">
-                                {{-- <option selected>Select Season</option> --}}
+                                <option disabled>Select Season</option>
                                 <option value="Winter"{{ $product->season == 'Winter' ? 'selected' : '' }}>Winter
                                 </option>
                                 <option value="Summer"{{ $product->season == 'Summer' ? 'selected' : '' }}>Summer
@@ -506,7 +590,11 @@
                                 </option>
                             </select>
                         </div>
-                        <span id="seasonError" class="text-danger"></span>
+                        <span>
+                            @error('season')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
                     </div>
 
                     {{-- Product Category --}}
@@ -517,14 +605,18 @@
                         <div class="col">
                             <select class="form-control form-select-lg mb-3" name="category_id"
                                 aria-label="Large select example">
-                                <option selected>Select Category</option>
+                                <option disabled>Select Category</option>
                                 @foreach ($categories as $category)
                                     <option
                                         value="{{ $category->id }}"{{ $product->categoryId == $category->id ? 'selected' : '' }}>
                                         {{ $category->categoryName }}</option>
                                 @endforeach
                             </select>
-                            <span id="categoryIdError" class="text-danger"></span>
+                            <span>
+                                @error('category_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span>
                         </div>
                     </div>
 
@@ -593,6 +685,14 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
     <script>
+        // Initialize CKEditor for each
+        CKEDITOR.replace('product_des');
+        CKEDITOR.replace('product_des_guj');
+        CKEDITOR.replace('product_des_hin');
+    </script>
+
+    {{-- for add and remove new imges and video  --}}
+    <script>
         document.addEventListener("DOMContentLoaded", function() {
 
             const addVideoButton = document.getElementById("addVideo");
@@ -620,6 +720,7 @@
         })
     </script>
 
+    {{-- for add and remove new units --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const addUnitBtn = document.getElementById("addUnit");
@@ -633,7 +734,7 @@
 
                 newRow.innerHTML = `
                 <td>
-                    <select class="form-select form-select-lg mb-3" name="unit_id[]" aria-label="Large select example">
+                    <select class="form-select form-select-lg mb-3" name="new_unit_id[]" aria-label="Large select example">
                         <option selected>Select Unit</option>
                         @foreach ($units as $data)
                             <option value="{{ $data->id }}">{{ $data->unit }}</option>
@@ -643,21 +744,28 @@
                 </td>
                 <td>
                     <div class="form-floating">
-                        <input type="text" name="unit_det[]" placeholder="Unit Detail in Approx Weight" class="form-control">
+                        <input type="text" name="new_unit_det[]" placeholder="Unit Detail in Approx Weight" class="form-control">
                         <label for="">Approx Weight</label>
                         <span class="text-danger unitdetailError"></span>
                     </div>
                 </td>
                 <td>
                     <div class="form-floating">
-                        <input type="text" name="discount_per[]" placeholder="Discount Percentage" class="form-control">
+                        <input type="number" name="new_product_price[].{{ $data->id }}" placeholder="Product Price" class="form-control" value="{{ $data->per }}">
+                        <label for="">Product Price</label>
+                        <span class="text-danger productpriceError"></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="text" name="new_discount_per[]" placeholder="Discount Percentage" class="form-control">
                         <label for="">Discount Per</label>
                         <span class="text-danger discountperError"></span>
                     </div>
                 </td>
                 <td>
                     <div class="form-floating">
-                        <input type="text" name="sellin_price[]" placeholder="Selling Price" class="form-control">
+                        <input type="text" name="new_selling_price[]" placeholder="Selling Price" class="form-control">
                         <label for="">Selling Price</label>
                         <span class="text-danger sellingpriceError"></span>
                     </div>
@@ -670,11 +778,7 @@
 
             removeUnitBtn.addEventListener("click", function() {
                 const rows = document.querySelectorAll(".unitRow");
-                if (rows.length > 1) {
-                    rows[rows.length - 1].remove(); // Remove the last added row
-                } else {
-                    alert("At least one row must remain.");
-                }
+                rows[rows.length - 1].remove(); // Remove the last added row
             });
         });
     </script>

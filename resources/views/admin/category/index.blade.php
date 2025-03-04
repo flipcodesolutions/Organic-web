@@ -11,10 +11,10 @@
                         <h6 class="mb-0">Category Management</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-primary" href="{{ route('category.create') }}">Add</a>
-                    {{-- </div>
-                    <div class="col" align="right"> --}}
-                        <a class="btn btn-danger" href="{{ route('category.deleted') }}">Deactive categories </a>
+                        {{-- </div>
+                        <div class="col" align="right"> --}}
+                            <a class="btn btn-danger" href="{{ route('category.deleted') }}">Deactive categories </a>
+                            <a class="btn btn-primary" href="{{ route('category.create') }}">Add</a>
                     </div>
                 </div>
             </div>
@@ -61,9 +61,13 @@
                                     <a href="{{ route('category.edit') }}/{{ $categoryData->id }}" class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('category.deactive') }}/{{ $categoryData->id }}" class="btn btn-danger">
+                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        onclick="openDeactiveModal('{{ route('category.deactive') }}/{{ $categoryData->id }}')">
                                         <i class="fas fa-remove"></i>
                                     </a>
+                                    {{-- <a href="{{ route('category.deactive') }}/{{ $categoryData->id }}" class="btn btn-danger">
+                                        <i class="fas fa-remove"></i>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach

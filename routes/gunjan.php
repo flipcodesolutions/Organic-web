@@ -6,7 +6,7 @@ use App\Http\Controllers\admin\ContactController;
 
 
 use App\Http\Controllers\Admin\AdminReviewController;
-use App\Http\Controllers\Vendor\VendorReviewController;
+use App\Http\Controllers\vendor\VendorReviewController;
 
 
 use Illuminate\Support\Facades\Route;

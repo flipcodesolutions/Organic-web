@@ -11,8 +11,8 @@
                         <h6 class="mb-0">Products Management</h6>
                     </div>
                     <div class="col" align="right">
-                        <a class="btn btn-primary" href="{{ route('product.create') }}">Add</a>
                         <a class="btn btn-danger" href="{{ route('product.deactiveindex') }}">Deactive Products</a>
+                        <a class="btn btn-primary" href="{{ route('product.create') }}">Add</a>
                     </div>
                 </div>
             </div>
@@ -39,25 +39,28 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>
-                                    <ul>
+                                    {{ $productData->categories->categoryName }}
+                                    {{-- <ul>
                                         <li>{{ $productData->categories->categoryName }}</li>
-                                        {{-- <li>{{ $productData->categories->categoryNameGuj }}</li>
-                                        <li>{{ $productData->categories->categoryNameHin }}</li> --}}
-                                    </ul>
+                                        <li>{{ $productData->categories->categoryNameGuj }}</li>
+                                        <li>{{ $productData->categories->categoryNameHin }}</li>
+                                    </ul> --}}
                                 </td>
                                 <td>
-                                    <ul>
+                                    {{ $productData->productName }}
+                                    {{-- <ul>
                                         <li>{{ $productData->productName }}</li>
-                                        {{-- <li>{{ $productData->productNameGuj }}</li>
-                                        <li>{{ $productData->productNameHin }}</li> --}}
-                                    </ul>
+                                        <li>{{ $productData->productNameGuj }}</li>
+                                        <li>{{ $productData->productNameHin }}</li>
+                                    </ul> --}}
                                 </td>
                                 <td>
-                                    <ul>
+                                    {{ $productData->productDescription }}
+                                    {{-- <ul>
                                         <li>{{ $productData->productDescription }}</li>
-                                        {{-- <li>{{ $productData->productDescriptionGuj }}</li>
-                                        <li>{{ $productData->productDescriptionHin }}</li> --}}
-                                    </ul>
+                                        <li>{{ $productData->productDescriptionGuj }}</li>
+                                        <li>{{ $productData->productDescriptionHin }}</li>
+                                    </ul> --}}
                                 </td>
                                 <td>
                                     {{ $productData->productPrice }}
@@ -114,10 +117,14 @@
                                     <a href="{{ route('product.edit') }}/{{ $productData->id }}" class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('product.deactive') }}/{{ $productData->id }}"
-                                        class="btn btn-danger">
+                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        onclick="openDeactiveModal('{{ route('product.deactive') }}/{{ $productData->id }}')">
                                         <i class="fas fa-remove"></i>
                                     </a>
+                                    {{-- <a href="{{ route('product.deactive') }}/{{ $productData->id }}"
+                                        class="btn btn-danger">
+                                        <i class="fas fa-remove"></i>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach

@@ -7,7 +7,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Delivery Slot Management</h6>
+                        <h6 class="mb-0">DeliverySlot Management</h6>
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-danger" href="{{ Route('deliveryslot.deactive') }}">Deactive-Data</a>
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="card-body table-responsive">
-                <table class="table table-bordered mt-2">
+                <table class="table table-bordered mt-2" style="border: 1px solid gray;">
                     <tr>
                         <th>No</th>
                         <th>Start Time</th>
@@ -35,6 +35,7 @@
                                 <td>{{ $deliveryslot->endTime }}</td>
                                 <td>{{ $deliveryslot->isAvailable }}</td>
                                 <td>
+                                    <div class="d-flex">
                                     <a href="{{ Route('deliveryslot.edit', $deliveryslot->id) }}" class="btn btn-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
@@ -42,6 +43,7 @@
                                         onclick="openDeactiveModal('{{ Route('deliveryslot.delete', $deliveryslot->id) }}')">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                </div>
                                 </td>
                             </tr>
                         @endforeach
