@@ -14,7 +14,7 @@
             </div>
 
             <div class="card-body">
-                <form id="deliveryslotform" method="post" action="{{ Route('deliveryslot.store') }}">
+                <form id="deliveryslotform" method="post" action="{{ Route('deliveryslot.store') }}" class="form">
                     @csrf
                     {{-- deliveryslot --}}
                     {{-- start time --}}

@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Edit Notification</h6>
+                        <h6 class="mb-0" style="width: 200px">Update New Notification</h6>
                     </div>
                     <div class="col" align="right">
                         <a href="{{ route('notification.index') }}" class="btn btn-primary" type="button"> Back </a>
@@ -15,7 +15,7 @@
             </div>
 
             <div class="card-body">
-                <form id="productForm" action="{{ route('notification.update') }}/{{ $notification->id }}" method="POST">
+                <form id="productForm" action="{{ route('notification.update') }}/{{ $notification->id }}" method="POST" class="form">
                     @csrf
 
                     {{-- title --}}

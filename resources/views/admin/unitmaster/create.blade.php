@@ -14,7 +14,7 @@
             </div>
 
             <div class="card-body">
-                <form id="deliveryslotform" method="post" action="{{Route('unitmaster.store')}}">
+                <form id="deliveryslotform" method="post" action="{{Route('unitmaster.store')}}" class="form">
                     @csrf
                     {{-- unitmaster --}}
 

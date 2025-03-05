@@ -5,30 +5,31 @@
 
         <div class="card shadow-sm  bg-body rounded">
             <div class="card-header d-flex">
-                    <div class="col text-white mt-2">
-                        <h6 class="mb-0">DeliverySlot Management</h6>
-                    </div>
-                <div class="row d-flex align-items-center">
-                    <div class="col" align="right">
-                        <a class="btn btn-danger" href="{{ Route('deliveryslot.deactive') }}">Deactive DeliverySlot</a>
+                <div class="col text-white mt-2">
+                    <h6 class="mb-0">DeliverySlot Management</h6>
+                </div>
+                <div class="heading row align-items-center">
+                    <div class="col d-flex align="right" style="gap: 3px">
+                        <a class="b1 btn btn-danger" href="{{ Route('deliveryslot.deactive') }}">Deactive DeliverySlot</a>
                         <a class="btn btn-primary" href="{{ Route('deliveryslot.create') }}">Add</a>
                     </div>
                 </div>
             </div>
+
             {{-- filter --}}
             <div class="mb-4 margin-bottom-30 m-4">
                 <form action="{{ Route('deliveryslot.index') }}" method="GET" class="filter-form">
                     <div class="row align-items-end g-2">
 
                         <!-- Global Search -->
-                        <div class="col-md-4">
+                        <div class="col">
                             <label for="global" class="form-label"><b>Filter:</b></label>
                             <input type="text" id="global" name="global" value="{{ request('global') }}"
                                 class="form-control" placeholder="Search by Time">
                         </div>
 
                         <!--isavailable  Filter -->
-                        <div class="col-md-4">
+                        <div class="col">
                             <label for="isavailable" class="form-label"><b>isavailable:</b></label>
                             <select name="isavailable" id="isavailable" class="form-control">
                                 <option selected disabled>Select your isavailable</option>

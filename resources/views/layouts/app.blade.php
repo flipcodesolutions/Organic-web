@@ -54,11 +54,11 @@
 <body id="page-top">
 
     <!-- Page Wrapper -->
-    <div id="wrapper">
+    <div id="wrapper" class="overlay-menu">
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar"
-            style="background-color:  #81A263">
+            style="background-color:  #81A263; width: 10.5rem;">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
@@ -251,8 +251,8 @@
                         <a class="collapse-item" href="{{ route('reports.purchaseReport') }}">Purchase Report</a>
                     </div>
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('reports.purchaseDateWise') }}">Purchase Date Wise
-                            Report</a>
+                        {{-- <a class="collapse-item" href="{{ route('reports.purchaseDateWise') }}">Purchase Date Wise
+                            Report</a> --}}
                     </div>
                 </div>
             </li>

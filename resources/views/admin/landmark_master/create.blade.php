@@ -7,7 +7,7 @@
         <div class="card-header">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
-                    <h6 class="mb-0">Landmark</h6>
+                    <h6 class="mb-0">Create New Landmark</h6>
                 </div>
                 <div class="col" align="right">
                     <a class="btn btn-primary" href="{{ route('landmark.index') }}" role="button" >Back </a>
@@ -18,7 +18,7 @@
 
     <div class="card-body">
 
-    <form action="{{ route('landmark.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('landmark.store') }}" method="post" enctype="multipart/form-data" class="form">
         @csrf
 
         <div class="row mb-3">

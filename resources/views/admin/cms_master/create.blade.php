@@ -14,7 +14,7 @@
             </div>
 
             <div class="card-body">
-                <form id="cms_master" method="post" action="{{ Route('cms_master.store') }}">
+                <form id="cms_master" method="post" action="{{ Route('cms_master.store') }}" class="form">
                     @csrf
                     {{-- Cms_Master --}}
                     <div class="row mb-3">
