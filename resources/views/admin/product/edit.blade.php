@@ -185,7 +185,7 @@
                                                         value="{{ $data->detail }}">
                                                     <label for="">Approx Weight</label>
                                                     <span>
-                                                        @error('unit_det')
+                                                        @error('unit_det.*')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </span>
@@ -199,7 +199,7 @@
                                                         value="{{ $data->price }}">
                                                     <label for="">Product Price</label>
                                                     <span>
-                                                        @error('product_price')
+                                                        @error('product_price.*')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </span>
@@ -213,7 +213,7 @@
                                                         value="{{ $data->per }}">
                                                     <label for="">Discount Per</label>
                                                     <span>
-                                                        @error('discount_per')
+                                                        @error('discount_per.*')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </span>
@@ -227,7 +227,7 @@
                                                         value="{{ $data->sell_price }}">
                                                     <label for="">Selling Price</label>
                                                     <span>
-                                                        @error('selling_price')
+                                                        @error('selling_price.*')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </span>
@@ -366,32 +366,41 @@
                             Images<span class="text-danger">*</span>
                         </div>
 
-                        <div class="col d-flex">
-                            @if ($product->productImages && $product->productImages->count() > 0)
-                                @foreach ($product->productImages as $key => $image)
-                                    @if ($image->type == 'photo')
-                                        <div class="col">
-                                            <div class="image">
-                                                <img src="{{ asset('productImage/' . $image->url) }}" alt=""
-                                                    height="110px" width="100px" style="list-style-type:none">
+                        <div class="col">
+                            <div class="col" style="display: flex; flex-wrap: wrap;">
+                                @if ($product->productImages && $product->productImages->count() > 0)
+                                    @foreach ($product->productImages as $key => $image)
+                                        @if ($image->type == 'photo')
+                                            <div class="col">
+                                                <div class="image">
+                                                    <img src="{{ asset('productImage/' . $image->url) }}" alt=""
+                                                        height="110px" width="100px" style="list-style-type:none">
+                                                </div>
+                                                <div class="addimage" style="justify-content: center">
+                                                    <a href="{{ route('productimage.delete', $image->id) }}"
+                                                        class="btn btn-danger btn-sm mt-2" style="width: 100px">
+                                                        <i class="fas fa-remove"></i></a>
+                                                </div>
                                             </div>
-                                            <div class="addimage" style="justify-content: center">
-                                                <a href="{{ route('productimage.delete', $image->id) }}"
-                                                    class="btn btn-danger btn-sm mt-2" style="width: 100px">
-                                                    <i class="fas fa-remove"></i></a>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            @endif
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </div>
                             <div class="col">
-                                <div class="row">
+                                <div class="row my-3">
                                     Add new image
                                 </div>
-                                <div class="row">
-                                    <input type="file" class="form-control" id="photoUpload"
-                                        name="new_product_images[]" multiple>
+                                <div class="row mb-2">
+                                    <div id="imagePreviewContainer" style="display: flex; flex-wrap: wrap;">
+                                        <!-- Image previews will be appended here -->
+                                    </div>
                                 </div>
+                                {{-- <div class="row p-0"> --}}
+                                    <div class="row">
+                                        <input type="file" class="form-control" id="photoUpload"
+                                            onchange="previewImages(event)" name="new_product_images[]" multiple>
+                                    </div>
+                                {{-- </div> --}}
                             </div>
                         </div>
                     </div>
@@ -607,9 +616,15 @@
                                 aria-label="Large select example">
                                 <option disabled>Select Category</option>
                                 @foreach ($categories as $category)
-                                    <option
-                                        value="{{ $category->id }}"{{ $product->categoryId == $category->id ? 'selected' : '' }}>
-                                        {{ $category->categoryName }}</option>
+                                    <optgroup label="{{ $category->categoryName }}">
+                                        @foreach ($childcat as $childdata)
+                                            @if ($childdata->parent_category_id == $category->id)
+                                                <option
+                                                    value="{{ $childdata->id }}"{{ $product->categoryId == $childdata->id ? 'selected' : '' }}>
+                                                    {{ $childdata->categoryName }}</option>
+                                            @endif
+                                        @endforeach
+                                    </optgroup>
                                 @endforeach
                             </select>
                             <span>
@@ -689,6 +704,35 @@
         CKEDITOR.replace('product_des');
         CKEDITOR.replace('product_des_guj');
         CKEDITOR.replace('product_des_hin');
+    </script>
+
+    <script>
+        function previewImages(event) {
+            const files = event.target.files;
+            const container = document.getElementById('imagePreviewContainer');
+            container.innerHTML = ''; // Clear previous previews
+
+            // Loop through the selected files
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = e.target.result;
+                    imgElement.style.width = '100px'; // Customize size
+                    imgElement.style.margin = '5px';
+
+                    // Append the image to the preview container
+                    container.appendChild(imgElement);
+                };
+
+                // Read the file as a Data URL (base64)
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
     </script>
 
     {{-- for add and remove new imges and video  --}}

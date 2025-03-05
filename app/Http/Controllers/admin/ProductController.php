@@ -13,20 +13,49 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
-                $query->where('status', 'active');
-            })->with(['categories', 'productImages'])->paginate(10);
 
-            // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
-            //     $query->where('status', 'active');
-            // })->with(['categories', 'productImages', 'productUnit.unitMaster'=> function($query){
-            //     $query->where('status','active')->select('id','unit');
-            // }])->paginate(10);
-            // return $products;  
-            return view('admin.product.index', compact('products'));
+        $query = Product::query();
+
+        if ($request->filled('global')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('productName', 'like', '%' . $request->global . '%')
+                    ->orWhere('categoryId', 'like', '%' . $request->global . '%');
+            });
+        }
+
+        if ($request->filled('categoryId')) {
+            $query->where('categoryID', $request->CategoryId);
+        }
+        if ($request->filled('season')) {
+            $query->where('season', $request->season);
+        }
+
+        $data = $query->where('status', 'active')->whereHas('categories', function ($query) {
+            $query->where('status', 'active');
+        })->with(['categories', 'productImages'])->paginate(10);
+
+        // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
+        //     $query->where('status', 'active');
+        // })->with(['categories', 'productImages'])->paginate(10);
+
+        $categories = Category::where([
+            ['status', '=', 'active'],
+            ['parent_category_id', '=', 0]
+        ])->get();
+        $childcat = Category::where([
+            ['status', '=', 'active'],
+            ['parent_category_id', '!=', 0]
+        ])->get();
+        // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
+        //     $query->where('status', 'active');
+        // })->with(['categories', 'productImages', 'productUnit.unitMaster'=> function($query){
+        //     $query->where('status','active')->select('id','unit');
+        // }])->paginate(10);
+        // return $products;  
+        return view('admin.product.index', compact('data', 'categories', 'childcat'));
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
@@ -37,11 +66,17 @@ class ProductController extends Controller
     {
         try {
 
-            $categories = Category::where('status', 'active')->get();
+            $categories = Category::where([
+                ['status', '=', 'active'],
+                ['parent_category_id', '=', 0]
+            ])->get();
+            $childcat = Category::where([
+                ['status', '=', 'active'],
+                ['parent_category_id', '!=', 0]
+            ])->get();
             $units = UnitMaster::where('status', 'active')->get();
-            return view('admin.product.create', compact('categories', 'units'));
+            return view('admin.product.create', compact('categories', 'childcat', 'units'));
         } catch (\Exception $e) {
-
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
         }
     }
@@ -57,24 +92,25 @@ class ProductController extends Controller
             'product_des_hin' => 'required',
             'unit_id' => 'required|array|min:1',
             'unit_id.*' => 'required|exists:units,id',
-            // 'unit_det' => 'required|array|min:1',
-            // 'unit_det.*' => 'required|string',
-            // 'price' => 'required|array|min:1',
-            // 'price.*' => 'required|numeric|not_in:null',
-            // 'discount_per' => 'required|array|min:1',
-            // 'discount_per.*' => 'required|numeric|between:0,100',
-            // 'selling_price' => 'required|array|min:1',
-            // 'selling_price.*' => 'required|numeric',
+            'unit_det' => 'required|array|min:1',
+            'unit_det.*' => 'required|string',
+            'price' => 'required|array|min:1',
+            'price.*' => 'required|numeric|not_in:null',
+            'discount_per' => 'required|array|min:1',
+            'discount_per.*' => 'required|numeric|between:0,100',
+            'selling_price' => 'required|array|min:1',
+            'selling_price.*' => 'required|numeric',
             'product_stock' => 'required',
             'season' => 'required',
             'category_id' => 'required',
-            // 'product_image' => 'nullable|array|required_without:video_link',
-            // 'product_image.*' => 'required_if:product_image,!=,null',
-            // 'video_link' => 'array|required_without:product_image',
-            // 'video_link.*' => 'required_if:video_link,!=,null'
+            'product_image' => 'array|nullable|required_without:video_link |mimes:jpeg,png,jpg,gif',
+            // 'product_image.*' => 'required_with:product_image|file|mimes:jpeg,png,jpg,gif', // Ensure valid file format
+
+            'video_link' => 'array|nullable|required_without:product_image',
+            // 'video_link.*' => 'required_with:video_link|url', // Ensure valid URL format  
         ]);
+        // return $request;
         try {
-            // return $request;
             $product = new Product();
             $product->productName = $request->product_name;
             $product->productNameGuj = $request->product_name_guj;
@@ -158,10 +194,17 @@ class ProductController extends Controller
         try {
             $product = Product::with('productImages')->with('productUnit.unitMaster')->find($id);
             // return $product;
-            $categories = Category::where('status', 'active')->get();
+            $categories = Category::where([
+                ['status', '=', 'active'],
+                ['parent_category_id', '=', 0]
+            ])->get();
+            $childcat = Category::where([
+                ['status', '=', 'active'],
+                ['parent_category_id', '!=', 0]
+            ])->get();
             $units = UnitMaster::where('status', 'active')->get();
 
-            return view('admin.product.edit', compact('product', 'categories', 'units'));
+            return view('admin.product.edit', compact('product', 'categories', 'childcat', 'units'));
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!')->with('exception_message', $e->getMessage());;
@@ -177,8 +220,8 @@ class ProductController extends Controller
             'product_des' => 'required',
             'product_des_guj' => 'required',
             'product_des_hin' => 'required',
-            'unit_id' => 'required|array|min:1',
-            'unit_id.*' => 'required|exists:units,id',
+            // 'unit_id' => 'required|array|min:1',
+            // 'unit_id.*' => 'required|exists:units,id',
             // 'unit_det' => 'required|array|min:1',
             // 'unit_det.*' => 'required|string',
             // 'price' => 'required|array|min:1',
@@ -187,13 +230,13 @@ class ProductController extends Controller
             // 'discount_per.*' => 'required|numeric|between:0,100',
             // 'selling_price' => 'required|array|min:1',
             // 'selling_price.*' => 'required|numeric',
-            'product_stock' => 'required',
-            'season' => 'required',
-            'category_id' => 'required',
+            // 'product_stock' => 'required',
+            // 'season' => 'required',
+            // 'category_id' => 'required',
             // 'product_image' => 'nullable|array|required_without:video_link',
             // 'product_image.*' => 'required_if:product_image,!=,null',
-            // 'video_link' => 'array|required_without:product_image',
-            // 'video_link.*' => 'required_if:video_link,!=,null'
+            // // 'video_link' => 'array|required_without:product_image',
+            // 'video_link' => 'array|nullable|required_without:product_image',
         ]);
         try {
             // return $request;
@@ -386,10 +429,40 @@ class ProductController extends Controller
         }
     }
 
-    public function deactiveindex()
+    public function deactiveindex(Request $request)
     {
         try {
-            $products = Product::where('status', 'deactive')->with(['categories', 'productImages', 'productUnit.unitMaster'])->paginate(10);
+            $query = Product::query();
+
+            if ($request->filled('global')) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('productName', 'like', '%' . $request->global . '%')
+                        ->orWhere('categoryId', 'like', '%' . $request->global . '%');
+                });
+            }
+
+            if ($request->filled('categoryId')) {
+                $query->where('categoryID', $request->categoryId);
+            }
+            if ($request->filled('season')) {
+                $query->where('season', $request->season);
+            }
+
+            $data = $query->where('status', 'deactive')->whereHas('categories', function ($query) {
+                $query->where('status', 'active');
+            })->with(['categories', 'productImages'])->paginate(10);
+
+            $categories = Category::where([
+                ['status', '=', 'active'],
+                ['parent_category_id', '=', 0]
+            ])->get();
+            $childcat = Category::where([
+                ['status', '=', 'active'],
+                ['parent_category_id', '!=', 0]
+            ])->get();
+
+            return view('admin.product.deactiveproduct', compact('data', 'categories', 'childcat'));
+            // $products = Product::where('status', 'deactive')->with(['categories', 'productImages', 'productUnit.unitMaster'])->paginate(10);
             // return $products;
             return view('admin.product.deactiveproduct', compact('products'));
         } catch (\Exception $e) {
@@ -452,17 +525,17 @@ class ProductController extends Controller
             $image = ProductImage::find($id);
             $data = ProductImage::where('productId', $image->productId)->get();
             // if (count($data) > 1) {
-                if ($image->type == 'photo') {
-                    $currentimagepath = public_path('productImage/' . $image->url);
-                    if (file_exists($currentimagepath)) {
-                        unlink($currentimagepath);
-                    }
-                    $image->delete();
-                    return redirect()->back()->with('msg', 'Image deleted successfully!');
-                } else {
-                    $image->delete();
-                    return redirect()->back()->with('msg', 'Video deleted successfully!');
+            if ($image->type == 'photo') {
+                $currentimagepath = public_path('productImage/' . $image->url);
+                if (file_exists($currentimagepath)) {
+                    unlink($currentimagepath);
                 }
+                $image->delete();
+                return redirect()->back()->with('msg', 'Image deleted successfully!');
+            } else {
+                $image->delete();
+                return redirect()->back()->with('msg', 'Video deleted successfully!');
+            }
             // } else {
             //     return redirect()->back()->with('error', 'Please add new images/videos before deleting last image/video!');
             // }

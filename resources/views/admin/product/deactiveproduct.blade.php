@@ -15,6 +15,59 @@
                     </div>
                 </div>
             </div>
+
+            <div class="mb-4 margin-bottom-30 m-4">
+                <form action="{{ route('product.deactiveindex') }}" method="GET" class="filter-form">
+                    <div class="row align-items-end g-2">
+
+                        <!-- Global Search -->
+                        <div class="col">
+                            <label for="global" class="form-label"><b>Filter:</b></label>
+                            <input type="text" id="global" name="global" value="{{ request('global') }}"
+                                class="form-control" placeholder="Search by Product Name">
+                        </div>
+
+                        <!-- category Filter -->
+                        <div class="col">
+                            <label for="categoryId" class="form-label"><b>Category:</b></label>
+                            <select id="categoryId" name="categoryId" class="form-select">
+                                <option value="" selected>Select Category</option>
+                                @foreach ($categories as $categorydata)
+                                    <optgroup label="{{ $categorydata->categoryName }}">
+                                        @foreach ($childcat as $childcatdata)
+                                            @if ($childcatdata->parent_category_id == $categorydata->id)
+                                                <option value="{{ $childcatdata->id }}"
+                                                    {{ request('categoryId') == $childcatdata->id ? 'selected' : '' }}>
+                                                    {{ $childcatdata->categoryName }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </optgroup>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{-- session Filter --}}
+                        <div class="col">
+                            <label for="season"><b>Session:</b></label>
+                            <select name="season" id="season" class="form-select">
+                                <option value="" selected>Select Season</option>
+                                <option value="Winter"{{ request('season') == 'Winter' ? 'selected' : '' }}>Winter</option>
+                                <option value="Summer"{{ request('season') == 'Summer' ? 'selected' : '' }}>Summer</option>
+                                <option value="Monsoon"{{ request('season') == 'Monsoon' ? 'selected' : '' }}>Monsoon
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Submit & Reset Buttons -->
+                        <div class="col d-flex justify-content-end gap-2">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                            <a href="{{ route('product.deactiveindex') }}" class="btn btn-danger">Reset</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
             <div class="card-body table-responsive">
                 <div class="loader"></div>
                 <table class="table table-bordered mt-2">
@@ -33,8 +86,8 @@
                         <th>Images</th>
                         <th>Action</th>
                     </tr>
-                    @if (count($products) > 0)
-                        @foreach ($products as $key => $productData)
+                    @if (count($data) > 0)
+                        @foreach ($data as $key => $productData)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>
@@ -54,7 +107,7 @@
                                     </ul> --}}
                                 </td>
                                 <td>
-                                    {{ $productData->productDescription }}
+                                    {!! $productData->productDescription !!}
                                     {{-- <ul>
                                         <li>{{ $productData->productDescription }}</li>
                                         <li>{{ $productData->productDescriptionGuj }}</li>
@@ -96,17 +149,19 @@
 
                                 </td>
                                 <td>
-                                    <a href="{{ route('product.active') }}/{{ $productData->id }}"
-                                        class="btn btn-primary">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                        onclick="openDeleteModal('{{ route('product.delete') }}/{{ $productData->id }}')">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                    {{-- <a href="{{ route('product.delete') }}/{{ $productData->id }}" class="btn btn-danger">
+                                    <div class="d-flex">
+                                        <a href="{{ route('product.active') }}/{{ $productData->id }}"
+                                            class="btn btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                            onclick="openDeleteModal('{{ route('product.delete') }}/{{ $productData->id }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                        {{-- <a href="{{ route('product.delete') }}/{{ $productData->id }}" class="btn btn-danger">
                                         <i class="fas fa-remove"></i>
                                     </a> --}}
+                                    </div>
                                 </td>
 
                             </tr>
@@ -121,46 +176,9 @@
 
                 </table>
                 {{-- table end --}}
-                {!! $products->withQueryString()->links('pagination::bootstrap-5') !!}
+                {!! $data->withQueryString()->links('pagination::bootstrap-5') !!}
 
             </div>
         </div>
     </div>
-
-    @if (session('success'))
-        <script>
-            toastr.success("{{ session('success') }}", 'Success', {
-                timeOut: 5000
-            });
-        </script>
-    @endif
-
-    @if (session('error'))
-        <script>
-            toastr.error("{{ session('error') }}", 'Error', {
-                timeOut: 5000
-            });
-        </script>
-    @endif
-
-    <script>
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": true,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-    </script>
-
 @endsection

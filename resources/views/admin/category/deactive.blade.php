@@ -15,6 +15,41 @@
                     </div>
                 </div>
             </div>
+
+            <div class="mb-4 margin-bottom-30 m-4">
+                <form action="{{ route('category.deactiveindex') }}" method="GET" class="filter-form">
+                    <div class="row align-items-end g-2">
+
+                        <!-- Global Search -->
+                        <div class="col">
+                            <label for="global" class="form-label"><b>Filter:</b></label>
+                            <input type="text" id="global" name="global" value="{{ request('global') }}"
+                                class="form-control" placeholder="Search by Category Name">
+                        </div>
+
+                        <!-- category Filter -->
+                        <div class="col">
+                            <label for="parentCategoryId" class="form-label"><b>Parent Category:</b></label>
+                            <select id="parentCategoryId" name="parentCategoryId" class="form-select">
+                                <option value="" selected>Select Parent Category</option>
+                                @foreach ($categories as $categorydata)
+                                    <option value="{{ $categorydata->id }}"
+                                        {{ request('categoryId') == $categorydata->id ? 'selected' : '' }}>
+                                        {{ $categorydata->categoryName }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Submit & Reset Buttons -->
+                        <div class="col d-flex justify-content-end gap-2">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                            <a href="{{ route('category.deactiveindex') }}" class="btn btn-danger">Reset</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
             <div class="card-body table-responsive">
                 <div class="loader"></div>
                 <table class="table table-bordered mt-2">
@@ -26,30 +61,28 @@
                         <th>Category Icon</th>
                         <th>Action</th>
                     </tr>
-                    @if (count($categories) > 0)
-                        @foreach ($categories as $key => $categoryData)
+                    @if (count($data) > 0)
+                        @foreach ($data as $key => $categoryData)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>
-                                    <ul>
+                                    {{ $categoryData->categoryName}}
+                                    {{-- <ul>
                                         <li> {{ $categoryData->categoryName }} </li>
                                         <li> {{ $categoryData->categoryNameGuj }} </li>
                                         <li> {{ $categoryData->categoryNameHin }} </li>
-                                    </ul>
+                                    </ul> --}}
                                 </td>
                                 <td>
-                                    <ul>
+                                    {!! $categoryData->categoryDescription !!}
+                                    {{-- <ul>
                                         <li> {{ $categoryData->categoryDescription }} </li>
                                         <li> {{ $categoryData->categoryDescriptionGuj }} </li>
                                         <li> {{ $categoryData->categoryDescriptionHin }} </li>
-                                    </ul>
+                                    </ul> --}}
                                 </td>
                                 <td>
-                                    @if ($categoryData->parent_id == 0)
-                                        -
-                                    @else
-                                        {{ $categoryData->parentCategory->category_name }}
-                                    @endif
+                                        {{ $categoryData->parent_category_id }}
                                 </td>
                                 <td>
                                     <img src="{{ asset('categoryImage/' . $categoryData->cat_icon) }}" alt=""
@@ -79,7 +112,7 @@
                     @endif
                 </table>
                 {{-- table end --}}
-                {!! $categories->links('pagination::bootstrap-5') !!}
+                {!! $data->links('pagination::bootstrap-5') !!}
 
             </div>
         </div>

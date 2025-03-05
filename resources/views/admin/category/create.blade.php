@@ -25,7 +25,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="category_name" id="category_name" placeholder="Category Name"
-                                    class="form-control">
+                                value="{{ old('category_name') }}" class="form-control">
                                 <label for="">English</label>
                                 <span>
                                     @error('category_name')
@@ -37,7 +37,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="category_name_guj" id="category_name"
-                                    placeholder="Category Name Gujarati" class="form-control">
+                                value="{{ old('category_name_guj') }}" placeholder="Category Name Gujarati" class="form-control">
                                 <label for="">Gujarati</label>
                                 <span>
                                     @error('category_name_guj')
@@ -49,7 +49,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="category_name_hin" id="category_name"
-                                    placeholder="Category Name Hindi" class="form-control">
+                                value="{{ old('category_name_hin') }}"  placeholder="Category Name Hindi" class="form-control">
                                 <label for="">Hindi</label>
                                 <span>
                                     @error('category_name_hin')
@@ -67,8 +67,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="category_des" value="{{ old('category_des') }}"
-                                    placeholder="Category Description English" id="floatingTextarea"></textarea>
+                                <textarea class="ckeditor form-control" name="category_des"
+                                 placeholder="Category Description English" id="floatingTextarea">{{ old('category_des') }}</textarea>
                                 {{-- <input type="text" name="category_des" id="category_name"
                                             placeholder="Category Name" class="form-control">
                                         <label for="">English</label> --}}
@@ -86,8 +86,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="category_des_guj" value="{{ old('category_des_guj') }}"
-                                    placeholder="Category Description Gujarati" id="floatingTextarea"></textarea>
+                                <textarea class="ckeditor form-control" name="category_des_guj" 
+                                 placeholder="Category Description Gujarati" id="floatingTextarea">{{ old('category_des_guj') }}</textarea>
                                 {{-- <input type="text" name="category_des_guj" id="category_name"
                                     placeholder="Category Name" class="form-control">
                                 <label for="">Gujarati</label> --}}
@@ -105,8 +105,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="category_des_hin" value="{{ old('category_des_hin') }}"
-                                    placeholder="Category Description Hindi" id="floatingTextarea"></textarea>
+                                <textarea class="ckeditor form-control" name="category_des_hin"
+                                 placeholder="Category Description Hindi" id="floatingTextarea">{{ old('category_des_hin') }}</textarea>
                                 {{-- <input type="text" name="category_des_hin" id="category_name"
                                     placeholder="Category Name" class="form-control">
                                 <label for="">Hindi</label> --}}
@@ -124,10 +124,14 @@
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Image <span class="text-danger">*</span>
                         </div>
+                        <div class="col-2" id="imagepreview">
+                            <img id="profilePicPreview" src="" alt="Category Image" height="100px"
+                                width="150px" >
+                        </div>
                         <div class="col">
                             <div class="form">
                                 <input type="file" name="category_image" id="category_Image" placeholder="Category Name"
-                                    class="form-control">
+                                value="{{ old('category_image') }}" class="form-control" onchange="previewImage(event)">
                                 {{-- <label for="">Image</label> --}}
                                 <span>
                                     @error('category_image')
@@ -145,9 +149,12 @@
                             Parent Category<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <select class="form-select ddCategory" name="parent_id" class="form-control">
-                                <option value="0" selected disabled>-- select category --</option>
+                            <select class="form-select ddCategory" name="parent_id" value="{{ old('parent_id') }}" class="form-control">
+                                <option value="0" selected>-- select category --</option>
                                 @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
+                                @endforeach
+                                {{-- @foreach ($categories as $category)
                                     <optgroup label="{{ $category->categoryName }}">
                                         @foreach ($childcat as $child)
                                             @if ($child->parent_category_id == $category->id)
@@ -155,9 +162,6 @@
                                             @endif
                                         @endforeach
                                     </optgroup>
-                                @endforeach
-                                {{-- @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
                                 @endforeach --}}
                             </select>
                             <span>
@@ -190,6 +194,25 @@
         CKEDITOR.replace('category_des');
         CKEDITOR.replace('category_des_guj');
         CKEDITOR.replace('category_des_hin');
+    </script>
+
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                const output = document.getElementById('profilePicPreview');
+                const outputclass = document.getElementById('imagepreview');
+                output.src = reader.result;
+                // outputclass.style.display = 'flex';
+                // outputclass.style.justify-content = 'center'; // Show the image
+            };
+
+            if (file) {
+                reader.readAsDataURL(file); // Read the file as a Data URL
+            }
+        }
     </script>
 
     {{-- <script>

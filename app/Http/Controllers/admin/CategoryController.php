@@ -11,15 +11,30 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // try {
-        $categories = Category::where('status', 'active')->paginate(10);;
-        return view('admin.category.index', compact('categories'));
-        // } catch (\Exception $e) {
+        try {
 
-        //   return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        //}
+            $query = Category::query();
+
+            if ($request->filled('global')) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('categoryName', 'like', '%' . $request->global . '%');
+                    // ->orWhere('categoryId', 'like', '%' . $request->global . '%');
+                });
+            }
+
+            if ($request->filled('parentCategoryId')) {
+                $query->where('parent_category_id', $request->parentCategoryId);
+            }
+
+            $data = $query->where('status', 'active')->paginate(10);
+            $categories = Category::where([['status', '=', 'active'], ['parent_category_id', '=', 0]])->get();
+            return view('admin.category.index', compact('data', 'categories'));
+        } catch (\Exception $e) {
+
+            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        }
     }
 
     public function create()
@@ -31,13 +46,13 @@ class CategoryController extends Controller
         ])->get();
 
         // foreach($categories as $data){
-        $childcat = Category::where([
-            ['status', '=', 'active'],
-            ['parent_category_id', '!=', '0']
-        ])->get();
+        // $childcat = Category::where([
+        //     ['status', '=', 'active'],
+        //     ['parent_category_id', '!=', '0']
+        // ])->get();
         // }
         // return $childcat;
-        return view('admin.category.create', compact('categories', 'childcat'));
+        return view('admin.category.create', compact('categories'));
         // } catch (\Exception $e) {
 
         //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
@@ -65,8 +80,9 @@ class CategoryController extends Controller
             $category->categoryDescription = $request->category_des;
             $category->categoryDescriptionGuj = $request->category_des_guj;
             $category->categoryDescriptionHin = $request->category_des_hin;
-            $parentId = isset($request->parent_id) && is_array($request->parent_id) ? $request->parent_id[0] : null;
-            $category->parent_category_id = $parentId === '0' ? 0 : $parentId;
+            // $parentId = isset($request->parent_id) && is_array($request->parent_id) ? $request->parent_id[0] : null;
+            // $category->parent_category_id = $parentId === '0' ? 0 : $parentId;
+            $category->parent_category_id = $request->parent_id;
 
             if ($request->hasFile('category_image')) {
                 $image = $request->file('category_image');
@@ -78,11 +94,13 @@ class CategoryController extends Controller
 
             $category->save();
 
-            return response()->json([
-                'success' => true,
-                'msg' => 'Category created successfully!',
-                'data' => $category,
-            ]);
+            return redirect()->route('category.index')->with('msg', 'Category Created Successfully!');
+
+            // return response()->json([
+            //     'success' => true,
+            //     'msg' => 'Category created successfully!',
+            //     'data' => $category,
+            // ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -95,7 +113,10 @@ class CategoryController extends Controller
     {
         try {
             $category = Category::find($id);
-            $categories = Category::all();
+            $categories = Category::where([
+                ['status', '=', 'active'],
+                ['parent_category_id', '=', 0]
+            ])->get();
             return view('admin.category.edit', compact('category', 'categories'));
         } catch (\Exception $e) {
 
@@ -124,8 +145,9 @@ class CategoryController extends Controller
             $category->categoryDescription = $request->category_des;
             $category->categoryDescriptionGuj = $request->category_des_guj;
             $category->categoryDescriptionHin = $request->category_des_hin;
-            $parentId = isset($request->parent_id) && is_array($request->parent_id) ? $request->parent_id[0] : null;
-            $category->parent_category_id = $parentId === '0' ? 0 : $parentId;
+            // $parentId = isset($request->parent_id) && is_array($request->parent_id) ? $request->parent_id[0] : null;
+            // $category->parent_category_id = $parentId === '0' ? 0 : $parentId;
+            $category->parent_category_id = $request->parent_id;
             if ($request->hasFile('category_image')) {
                 $image = $request->file('category_image');
                 $path = 'categoryImage/';
@@ -136,11 +158,11 @@ class CategoryController extends Controller
                 $category->cat_icon = $imagename;
             }
             $category->save();
-
-            return response()->json([
-                'success' => true,
-                'msg' => 'Category updated successfully!'
-            ]);
+            return redirect()->route('category.index')->with('msg', 'Category Updated Successfully!');
+            // return response()->json([
+            //     'success' => true,
+            //     'msg' => 'Category updated successfully!'
+            // ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -176,11 +198,28 @@ class CategoryController extends Controller
         }
     }
 
-    public function deleted()
+    public function deleted(Request $request)
     {
         try {
-            $categories = Category::where('status', 'deactive')->paginate(10);
-            return view('admin.category.deactive', compact('categories'));
+            // $categories = Category::where('status', 'deactive')->paginate(10);
+            // return view('admin.category.deactive', compact('categories'));
+            
+            $query = Category::query();
+
+            if ($request->filled('global')) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('categoryName', 'like', '%' . $request->global . '%');
+                    // ->orWhere('categoryId', 'like', '%' . $request->global . '%');
+                });
+            }
+
+            if ($request->filled('parentCategoryId')) {
+                $query->where('parent_category_id', $request->parentCategoryId);
+            }
+
+            $data = $query->where('status', 'deactive')->paginate(10);
+            $categories = Category::where([['status', '=', 'active'], ['parent_category_id', '=', 0]])->get();
+            return view('admin.category.deactive', compact('data', 'categories'));
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
@@ -202,8 +241,8 @@ class CategoryController extends Controller
                     $imagedata->delete();
                 }
 
-                $unit = Unit::where('product_id',$productdata->id)->get();
-                foreach($unit as $unitdata){
+                $unit = Unit::where('product_id', $productdata->id)->get();
+                foreach ($unit as $unitdata) {
                     $unitdata->delete();
                 }
 
@@ -214,8 +253,7 @@ class CategoryController extends Controller
             $currentimagepath = public_path('categoryImage/' . $category->cat_icon);
             unlink($currentimagepath);
             $category->delete();
-            return redirect()->route('category.deleted')->with('msg', 'Category deleted successfully!');
-
+            return redirect()->route('category.deactiveindex')->with('msg', 'Category deleted successfully!');
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
