@@ -28,12 +28,14 @@ Route::post('sendOtp', [UserController::class, 'sendOtp']);
 Route::post('verifyOtp', [UserController::class, 'verifyOtp']);
 
 Route::post('checkEmail', [UserController::class, 'checkEmail']);
+Route::post('createProfile', [UserController::class, 'createProfile']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     //category
     Route::get('allCategories', [CategoryController::class, 'allCategories']);
 
     //user Profile
+    Route::post('isVerified', [UserController::class, 'isVerified']);
     Route::get('userProfile', [UserController::class, 'userProfile']);
     Route::post('editProfile', [UserController::class, 'editProfile']);
     Route::post('updateLanguage', [UserController::class, 'updateLanguage']);

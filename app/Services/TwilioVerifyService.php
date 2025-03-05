@@ -15,20 +15,9 @@ class TwilioVerifyService
 
     public function sendOtp($phone)
     {
-        // Trim spaces and remove any special characters except numbers
-        $phone = preg_replace('/\D/', '', $phone);
-
-        // Ensure phone number does not already start with country code
-        if (!Str::startsWith($phone, '91')) {
-            $phone = '91' . $phone;
-        }
-
-        // Final E.164 format
-        $formattedPhone = '+' . $phone;
-
         return $this->client->verify->v2->services(env('TWILIO_VERIFY_SID'))
             ->verifications
-            ->create($formattedPhone, "sms");
+            ->create("+91" . $phone, "sms");
     }
 
 
