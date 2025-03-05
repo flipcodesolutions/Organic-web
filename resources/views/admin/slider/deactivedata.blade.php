@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Slider Management</h6>
+                        <h6 class="mb-0" style="width: 180px">Deactive Slider</h6>
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-primary" href="{{Route('slider.index')}}">Back</a>
@@ -27,6 +27,7 @@
                     @php
                         $index = 1;
                     @endphp
+                    @if (count($sliders)>0)
                     @foreach ($sliders as $sliders)
                         <tr>
                             <td>{{ $index++ }}</td>
@@ -47,6 +48,7 @@
 
 
                             <td>
+                                <div class="d-flex">
                                 <a href="{{Route('slider.active',$sliders->id)}}" class="btn btn-primary">
                                     <i class="fas fa-undo"></i>
                                 </a>
@@ -54,9 +56,17 @@
                                     onclick="openDeleteModal('{{Route('slider.permdelete',$sliders->id)}}')">
                                     <i class="fas fa-trash"></i>
                                 </a>
+                            </div>
                             </td>
                         </tr>
                     @endforeach
+                    @else
+                    <tr>
+                        <td colspan="8" align="center" style="color: red;">
+                            <h5>No Data Record Found</h5>
+                        </td>
+                    </tr>
+                @endif
                 </table>
             </div>
         </div>

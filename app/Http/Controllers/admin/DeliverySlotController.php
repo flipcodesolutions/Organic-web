@@ -8,10 +8,25 @@ use Illuminate\Http\Request;
 
 class DeliverySlotController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = DeliverySlot::query();
+
+        if($request->filled('global'))
+        {
+            $query->where(function($q) use ($request){
+                $q->where('startTime','like','%'.$request->global.'%');
+            });
+        }
+
+        if ($request->filled('isavailable')) {
+            $query->where('isavailable', $request->isavailable);
+        }
+
+        $data = $query->where('status','active')->paginate(10);
+
         $deliveryslots = DeliverySlot::where('status', 'active')->get();
-        return view('admin.deliveryslot.index', compact('deliveryslots'));
+        return view('admin.deliveryslot.index', compact('data','deliveryslots'));
     }
     public function create()
     {

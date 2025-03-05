@@ -7,7 +7,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">DilverySlot Management</h6>
+                        <h6 class="mb-0" style="width: 180px">Deactive DilverySlot</h6>
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-primary" href="{{ Route('deliveryslot.index') }}">Back</a>
@@ -35,6 +35,7 @@
                                 <td>{{ $deliveryslots->endTime }}</td>
                                 <td>{{ $deliveryslots->isAvailable }}</td>
                                 <td>
+                                    <div class="d-flex">
                                     <a href="{{ Route('deliveryslot.active', $deliveryslots->id) }}"
                                         class="btn btn-primary">
                                         <i class="fas fa-undo"></i>
@@ -43,7 +44,7 @@
                                         onclick="openDeleteModal('{{ Route('deliveryslot.permdelete', $deliveryslots->id) }}')">
                                         <i class="fas fa-trash"></i>
                                     </a>
-
+                                </div>
                                 </td>
                             </tr>
                         @endforeach
