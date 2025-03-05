@@ -10,4 +10,9 @@ class OrderDetail extends Model
     {
         return $this->hasOne(Product::class, 'id', 'productId');
     }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class, 'unit');
+    }
 }

@@ -67,7 +67,9 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'otp' => 'required',
-            'phone' => 'required|digits:10'
+            'phone' => 'required|digits:10',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -88,6 +90,8 @@ class UserController extends Controller
                 $user = new User();
                 $user->phone = $request->phone;
                 $user->is_verify_phone = 'yes';
+                $user->latitude = $request->latitude;
+                $user->longitude = $request->longitude;
                 $user->save();
             }
 
@@ -292,11 +296,22 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function policies(Request $request)
+
+
+    public function updateFcmToken(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'fcm_token' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return Util::getErrorMessage('Validation Failed', $validator->errors());
+        }
         try {
-            $policies = Cms_Master::where('slug', 'policies')->get();
-            return Util::getSuccessMessage('Policies', $policies);
+            $userId = Auth::user()->id;
+            $user = User::find($userId);
+            $user->fcm_token = $request->fcm_token;
+            $user->save();
+            return Util::getSuccessMessage('Fcm Token Updated Successfully', $user);
         } catch (Exception $e) {
             return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
         }

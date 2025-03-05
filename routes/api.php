@@ -34,12 +34,16 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     //category
     Route::get('allCategories', [CategoryController::class, 'allCategories']);
 
-    //user Profile
+    //user
     Route::post('isVerified', [UserController::class, 'isVerified']);
     Route::get('userProfile', [UserController::class, 'userProfile']);
     Route::post('editProfile', [UserController::class, 'editProfile']);
     Route::post('updateLanguage', [UserController::class, 'updateLanguage']);
-    Route::get('policies', [UserController::class, 'policies']);
+    Route::post('updateFcmToken', [UserController::class, 'updateFcmToken']);
+    
+
+
+
 
     //sliders
     Route::get('sliders', [SliderController::class, 'sliders']);

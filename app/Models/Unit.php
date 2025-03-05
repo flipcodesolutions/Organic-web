@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Unit extends Model
 {
-    protected $fillable =[
+    protected $fillable = [
 
         'unit',
         'product_id',
@@ -21,6 +21,7 @@ class Unit extends Model
     {
         return $this->belongsTo(UnitMaster::class, 'unit');
     }
+
 
     // relation for product
     public function product()

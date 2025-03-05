@@ -7,6 +7,7 @@ use App\Models\AddToCart;
 use App\Models\OrderDetail;
 use App\Models\OrderMaster;
 use App\Models\PointPer;
+use App\Models\Unit;
 use App\Utils\Util;
 use Exception;
 use Illuminate\Http\Request;
@@ -95,6 +96,7 @@ class OrderController extends Controller
             $orders = OrderMaster::where('userId', Auth::user()->id)
                 ->with('orderDetails')
                 ->paginate($request->input('limit', 10), ['*'], 'page', $currentPage);
+
             return Util::getSuccessMessage('My Orders', $orders);
         } catch (Exception $e) {
             return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
@@ -105,7 +107,7 @@ class OrderController extends Controller
     {
         try {
             $orderDetails = OrderDetail::where('id', $id)
-                ->with(['product'])
+                ->with(['product.productImages'])
                 ->get();
             return Util::getSuccessMessage('Order Details', $orderDetails);
         } catch (Exception $e) {
