@@ -30,13 +30,13 @@
 
                     <!-- City Filter -->
                     <div class="col-md-4">
-                        <label for="landamrkId" class="form-label"><b>Landmark:</b></label>
+                        <label for="landmarkId" class="form-label"><b>Landmark:</b></label>
                         <select id="landmarkId" name="landmarkId" class="form-select">
                             <option value="" selected> Select Landamrk </option>
                             @foreach ($landmarkmasters as $landmark)
-                            <option value="{{ $landmark->id }}" {{ request('landmarkId') == $landmark->id ? 'selected' : '' }}>
+                                <option value="{{ $landmark->id }}" {{ request('landmarkId') == $landmark->id ? 'selected' : '' }}>
                                 {{ $landmark->landmark_eng }}
-                            </option>
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -50,24 +50,22 @@
             </form>
         </div>
 
-
-
         <div class="card-body table-responsive">
             <div class="loader"></div>
             <table class="table table-bordered">
                 <tr>
                     <th>ID</th>
-                    <th>City name English</th>
-                    <th>City name Hindi</th>
-                    <th>City name Gujarati</th>
-                    <th>Landmark (ENG)</th>
-                    <th>Landmark (HIN)</th>
-                    <th>Landmark (GUJ)</th>
+                    <th>City Name English</th>
+                    <th>City Name Hindi</th>
+                    <th>City Name Gujarati</th>
+                    <th>Landmark(ENG)</th>
+                    <th>Landmark(HIN)</th>
+                    <th>Landmark(GUJ)</th>
                     <th>Latitude</th>
                     <th>Longitude</th>
                     <th>Actions</th>
                 </tr>
-                @foreach($landmarkmasters as $landmark)
+                @foreach($data as $landmark)
                 <tr>
                     <td>{{ $landmark->id }}
                     <td>{{ $landmark->citymaster->city_name_eng }}</td>
@@ -79,9 +77,11 @@
                     <td>{{ $landmark->latitude  }}</td>
                     <td>{{ $landmark->longitude }}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{ route('landmark.edit',$landmark->id)}}"><i class="fas fa-edit"></i></a>
-                        <a href="{{ route('landmark.deactive') }}/{{ $landmark->id }}" class="btn btn-danger">
-                            <i class="fas fa-trash"></i></a>
+                        <div class="d-flex">
+                            <a class="btn btn-primary" href="{{ route('landmark.edit',$landmark->id)}}"><i class="fas fa-edit"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-danger ml-2" onclick="openDeleteModal('{{ route('landmark.deactive') }}/{{ $landmark->id }}')">
+                            <i class="fas fa-trash"></i></a> 
+                        </div>
                     </td>
                 </tr>
                 @endforeach

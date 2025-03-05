@@ -14,9 +14,11 @@ class LandmarkMasterController extends Controller
      */
     public function index(Request $request)
     {
+        $query = LandmarkMaster::with('citymaster')->where('status', 'active');
 
-        $query = LandmarkMaster::query();
+        // $query = LandmarkMaster::query();
 
+        // Global Search (landmark_eng or city_id)
         if ($request->filled('global')) {
             $query->where(function ($q) use ($request) {
                 $q->where('landmark_eng', 'like', '%' . $request->global . '%')
@@ -24,18 +26,20 @@ class LandmarkMasterController extends Controller
             });
         }
 
+
+        // Filter by Specific Landmark
         if ($request->filled('landmarkId')) {
             $query->where('id', $request->landmarkId);
         }
 
-        $data = $query->where('status','active')->paginate(10);
-        $landmarkmasters = CityMaster::where('status', 'active')->get();
+        // Paginate the Filtered Data
+        $data = $query->where('status','active')->with('citymaster')->paginate(10);
 
+        // Get Landmarks for Filter Dropdown
+        $landmarkmasters = LandmarkMaster::where('status', 'active')->select('id', 'landmark_eng')->get();
 
         return view('admin.landmark_master.index', compact('data','landmarkmasters'));
-
-        // $landmarkmasters = LandmarkMaster::with('CityMaster')->get();
-        // return view('admin.landmark_master.index', compact('landmarkmasters'));   
+ 
     }
     /**
      * Show the form for creating a new resource.

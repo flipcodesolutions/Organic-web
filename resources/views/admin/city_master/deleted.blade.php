@@ -39,20 +39,18 @@
                         <td>{{ $city->area_guj }}</td>
                         <td>{{ $city->status }}</td>
                         <td>
-                            <form action="{{ route('city_master.active', $city->id) }}" method="POST" style="display:inline;">
-                                @csrf
+                            <div class="d-flex">
                                 <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure?')">
                                     <i class="fas fa-undo"></i>
 
                                 </button>
-                            </form>
+                
+                                <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                onclick="openDeleteModal('{{ Route('city_master.index', $city->id) }}')">
+                                <i class="fas fa-trash"></i>
+                            </a>
 
-                            <form action="{{ route('city_master.destroy', $city->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure? This action is irreversible!')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
+                            </div>
                         </td>
                     </tr>
                     @endforeach

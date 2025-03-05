@@ -36,7 +36,7 @@
     --breakpoint-md: 768px;
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
-    --font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-sans-serif: "Merriweather", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
 }
 
@@ -68,7 +68,7 @@ section {
 
 body {
     margin: 0;
-    font-family: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Ubuntu, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -2698,9 +2698,9 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary:hover {
-    color: #626F47;
+    color: #365E32;
     background-color: #fff !important;
-    border-color: #626F47 !important;
+    border-color: #365E32 !important;
 }
 
 .btn-primary.focus,
@@ -4486,6 +4486,16 @@ input[type=submit].btn-block {
     color: #6e707e;
     background-color: #fff;
     border-color: #dddfeb #dddfeb #fff
+}
+
+.nav-item.active
+{
+    background-color: #365E32 !important;
+}
+
+a.nav-link[data-toggle=collapse].collapsed::after
+{
+    background-color: #365E32 !important;
 }
 
 .nav-tabs .dropdown-menu {
@@ -11547,6 +11557,7 @@ a:focus {
 
 .sidebar .nav-item.active .nav-link {
     font-weight: 700
+
 }
 
 .sidebar .nav-item .collapse {
@@ -11599,17 +11610,20 @@ a:focus {
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:hover,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover {
     background-color: #eaecf4
+    
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:active {
     background-color: #dddfeb
+    
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item.active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
     color: #4e73df;
-    font-weight: 700
+    font-weight: 700;
+    background-color: #365E32;
 }
 
 .sidebar #sidebarToggle {
@@ -11889,11 +11903,13 @@ a:focus {
 }
 
 .sidebar-light .nav-item.active .nav-link {
-    color: #6e707e
+    color: #6e707e;
+    background-color: #365E32;
 }
 
 .sidebar-light .nav-item.active .nav-link i {
-    color: #6e707e
+    color: #6e707e;
+    /* background-color:#365E32; */
 }
 
 .sidebar-light #sidebarToggle {
@@ -11940,14 +11956,14 @@ a:focus {
 .sidebar-dark .nav-item .nav-link:focus,
 .sidebar-dark .nav-item .nav-link:hover {
     color: #fff;
-    background-color: #626F47 !important;
+    background-color: #365E32 !important;
 }
 
 .sidebar-dark .nav-item .nav-link:active i,
 .sidebar-dark .nav-item .nav-link:focus i,
 .sidebar-dark .nav-item .nav-link:hover i {
     color: #fff;
-    background-color: #626F47 !important;
+    /* background-color: #365E32 !important; */
 }
 
 .sidebar-dark .nav-item .nav-link[data-toggle=collapse]::after {

@@ -24,7 +24,7 @@ class LandmarkMasterSeeder extends Seeder
                     'longitude' => '71.637077',
                 ],
                 [
-                    'city_id' => '2',
+                    'city_id' => '1',
                     'landmark_eng' => 'Surendranagar Junction',
                     'landmark_hin' => 'सुरेंद्रनगर जंक्शन',
                     'landmark_guj' => 'સુરેન્દ્રનગર જંકશન',
@@ -32,7 +32,7 @@ class LandmarkMasterSeeder extends Seeder
                     'longitude' => '71.637500',
                 ],
                 [
-                    'city_id' => '3',
+                    'city_id' => '1',
                     'landmark_eng' => 'Sardar Vallabhbhai Patel Circle',
                     'landmark_hin' => 'सरदार वल्लभभाई पटेल सर्कल',
                     'landmark_guj' => 'સર્દાર વલ્લભભાઈ પટેલ સર્કલ',
@@ -40,7 +40,7 @@ class LandmarkMasterSeeder extends Seeder
                     'longitude' => '71.632900',
                 ],
                 [
-                    'city_id' => '4',
+                    'city_id' => '1',
                     'landmark_eng' => 'Surendranagar District Court',
                     'landmark_hin' => 'सुरेंद्रनगर जिला न्यायालय',
                     'landmark_guj' => 'સુરેન્દ્રનગર જિલ્લા ન્યાયાલય',
@@ -56,7 +56,7 @@ class LandmarkMasterSeeder extends Seeder
                     'longitude' => '71.650000',
                 ],
                 [
-                    'city_id' => '6',
+                    'city_id' => '7',
                     'landmark_eng' => 'Ranasthan Village',
                     'landmark_hin' => 'रणस्थान गाँव',
                     'landmark_guj' => 'રણસ્થાન ગામ',
