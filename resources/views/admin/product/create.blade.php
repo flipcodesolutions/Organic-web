@@ -139,8 +139,8 @@
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Unit<span class="text-danger">*</span>
                         </div>
-                        <div class="col">
-                            <table class="table table-bordered mt-2" id="unitTable">
+                        <div class="col p-0" style="overflow-x: scroll; margin: 0 12px 16px">
+                            <table class="table table-bordered mt-2" style="width: 900px" id="unitTable">
                                 <thead>
                                     <tr>
                                         <th>Unit</th>
@@ -154,9 +154,10 @@
                                 <tbody id="unitTableBody">
                                     <!-- Template Row (First row) -->
                                     <tr class="unitRow">
-                                        <td>
+                                        {{-- <td>
                                             <select class="form-select form-select-lg mb-3" name="unit_id[]"
-                                                aria-label="Large select example" id="unit">
+                                                value="{{ old('unit_id.0') }}" aria-label="Large select example"
+                                                id="unit">
                                                 <option selected disabled>Select Unit</option>
                                                 @foreach ($units as $data)
                                                     <option value="{{ $data->id }}">{{ $data->unit }}</option>
@@ -170,7 +171,7 @@
                                         </td>
                                         <td>
                                             <div class="form-floating">
-                                                <input type="text" name="unit_det[]"
+                                                <input type="text" name="unit_det[]" value="{{ old('unit_det.0') }}"
                                                     placeholder="Unit Detail in Approx Weight" class="form-control">
                                                 <label for="">Approx Weight</label>
                                                 <span>
@@ -183,7 +184,7 @@
                                         <td>
                                             <div class="form-floating">
                                                 <input type="number" name="price[]" placeholder="Product Price"
-                                                    class="form-control">
+                                                    value="{{ old('price.0') }}" class="form-control">
                                                 <label for="">Product Price</label>
                                                 <span>
                                                     @error('price.*')
@@ -195,7 +196,8 @@
                                         <td>
                                             <div class="form-floating">
                                                 <input type="number" name="discount_per[]"
-                                                    placeholder="Discount Percentage" class="form-control">
+                                                    value="{{ old('discount_per.0') }}" placeholder="Discount Percentage"
+                                                    class="form-control">
                                                 <label for="">Discount Per</label>
                                                 <span>
                                                     @error('discount_per.*')
@@ -207,7 +209,7 @@
                                         <td>
                                             <div class="form-floating">
                                                 <input type="number" name="selling_price[]" placeholder="Selling Price"
-                                                    class="form-control">
+                                                    value="{{ old('selling_price.0') }}" class="form-control">
                                                 <label for="">Selling Price</label>
                                                 <span>
                                                     @error('selling_price.*')
@@ -215,7 +217,7 @@
                                                     @enderror
                                                 </span>
                                             </div>
-                                        </td>
+                                        </td> --}}
                                     </tr>
 
                                     <!-- Buttons Row -->
@@ -307,7 +309,7 @@
                                         onchange="previewImages(event)" accept="image/*" multiple>
                                 </div>
                                 <span>
-                                    @error('product_image.*')
+                                    @error('product_image[]')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </span>
@@ -351,7 +353,7 @@
                                     placeholder="Enter video link">
                                 <span id="videolinklist"> </span>
                                 <span>
-                                    @error('video_link.*')
+                                    @error('video_link.0')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </span>
@@ -486,7 +488,303 @@
         })
     </script>
 
+    {{-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const addUnitBtn = document.getElementById("addUnit");
+        const removeUnitBtn = document.getElementById("removeUnit");
+        const unitTableBody = document.getElementById("unitTableBody");
+
+        const oldValues = {
+            unit_id: @json(old('unit_id', [])),
+            unit_det: @json(old('unit_det', [])),
+            price: @json(old('price', [])),
+            discount_per: @json(old('discount_per', [])),
+            selling_price: @json(old('selling_price', []))
+        };
+
+        // Function to create and add a new row
+        function addNewRow(unitIdValue = '', unitDetValue = '', priceValue = '', discountPerValue = '', sellingPriceValue = '') {
+            const newRow = document.createElement("tr");
+            newRow.classList.add("unitRow");
+
+            newRow.innerHTML = `
+                <td>
+                    <select class="form-select form-select-lg mb-3" name="unit_id[]"
+                    aria-label="Large select example">
+                        <option selected disabled>Select Unit</option>
+                        @foreach ($units as $data)
+                            <option value="{{ $data->id }}" ${unitIdValue === '{{ $data->id }}' ? 'selected' : ''}>
+                                {{ $data->unit }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <span>
+                        @error('unit_id.*')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </span>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="text" name="unit_det[]" value="${unitDetValue || ''}"
+                        placeholder="Unit Detail in Approx Weight" class="form-control">
+                        <label for="">Approx Weight</label>
+                        <span>
+                            @error('unit_det.*')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="number" name="price[]" value="${priceValue || ''}"
+                        placeholder="Product Price" class="form-control">
+                        <label for="">Product Price</label>
+                        <span>
+                            @error('price.*')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="number" name="discount_per[]"
+                        value="${discountPerValue || ''}"
+                        placeholder="Discount Percentage" class="form-control">
+                        <label for="">Discount Per</label>
+                        <span>
+                            @error('discount_per.*')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="number" name="selling_price[]" value="${sellingPriceValue || ''}"
+                        placeholder="Selling Price" class="form-control">
+                        <label for="">Selling Price</label>
+                        <span>
+                            @error('selling_price.*')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
+                    </div>
+                </td>
+            `;
+
+            // Insert the new row before the buttons row
+            unitTableBody.insertBefore(newRow, document.getElementById("unitButtonsRow"));
+        }
+
+        // Function to load all rows from the old input data
+        function loadOldRows() {
+            // Loop through each index in the old data arrays and add rows accordingly
+            const unitCount = oldValues.unit_id.length;
+            for (let i = 0; i < unitCount; i++) {
+                addNewRow(
+                    oldValues.unit_id[i], 
+                    oldValues.unit_det[i], 
+                    oldValues.price[i],
+                    oldValues.discount_per[i],
+                    oldValues.selling_price[i]
+                );
+            }
+        }
+
+        // Load old rows on page load
+        loadOldRows();
+
+        // Event listener for adding a new row
+        addUnitBtn.addEventListener("click", function() {
+            // Add a new row with empty values for inputs
+            addNewRow();
+        });
+
+        // Event listener for removing the last row
+        removeUnitBtn.addEventListener("click", function() {
+            const rows = document.querySelectorAll(".unitRow");
+
+            // Only remove a row if there are more than one row
+            if (rows.length > 1) {
+                const lastRow = rows[rows.length - 1];
+                lastRow.remove(); // Remove the last added row
+            } else {
+                alert("At least one row must remain.");
+            }
+        });
+    });
+</script> --}}
+
+
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const addUnitBtn = document.getElementById("addUnit");
+            const removeUnitBtn = document.getElementById("removeUnit");
+            const unitTableBody = document.getElementById("unitTableBody");
+
+            let firstRowAdded = false; // Track if the first row has been added
+
+            // Get all the old values from the Laravel session (use json to make it available in JS)
+            const oldValues = {
+                unit_id: @json(old('unit_id', [])),
+                unit_det: @json(old('unit_det', [])),
+                price: @json(old('price', [])),
+                discount_per: @json(old('discount_per', [])),
+                selling_price: @json(old('selling_price', []))
+            };
+
+            // Function to create and add a new row
+            function addNewRow(unitIdValue = '', unitDetValue = '', priceValue = '', discountPerValue = '',
+                sellingPriceValue = '') {
+                const newRow = document.createElement("tr");
+                newRow.classList.add("unitRow");
+
+                newRow.innerHTML = `
+                <td>
+                    <select class="form-select form-select-lg mb-3" name="unit_id[]"
+                    aria-label="Large select example">
+                        <option selected disabled>Select Unit</option>
+                        @foreach ($units as $data)
+                            <option value="{{ $data->id }}" ${unitIdValue === '{{ $data->id }}' ? 'selected' : ''}>
+                                {{ $data->unit }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <span>
+                        @error('unit_id')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </span>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="text" name="unit_det[]" value="${unitDetValue || ''}"
+                        placeholder="Unit Detail in Approx Weight" class="form-control">
+                        <label for="">Approx Weight</label>
+                        <span>
+                            @error('unit_det.*')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="number" name="price[]" value="${priceValue || ''}"
+                        placeholder="Product Price" class="form-control">
+                        <label for="">Product Price</label>
+                        <span>
+                            @error('price.*')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="number" name="discount_per[]"
+                        value="${discountPerValue || ''}"
+                        placeholder="Discount Percentage" class="form-control">
+                        <label for="">Discount Per</label>
+                        <span>
+                            @error('discount_per.*')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="number" name="selling_price[]" value="${sellingPriceValue || ''}"
+                        placeholder="Selling Price" class="form-control">
+                        <label for="">Selling Price</label>
+                        <span>
+                            @error('selling_price.*')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
+                    </div>
+                </td>
+            `;
+
+                // Insert the new row before the buttons row
+                unitTableBody.insertBefore(newRow, document.getElementById("unitButtonsRow"));
+
+                // Mark that the first row has been added
+                if (!firstRowAdded) {
+                    firstRowAdded = true;
+                    newRow.setAttribute('data-first-row', 'true'); // Add a special attribute to track it
+                }
+            }
+
+
+            // Function to load all rows from the old input data
+            const unitCount = oldValues.unit_id.length;
+            function loadOldRows() {
+                // Loop through each index in the old data arrays and add rows accordingly
+                for (let i = 0; i < unitCount; i++) {
+                    addNewRow(
+                        oldValues.unit_id[i],
+                        oldValues.unit_det[i],
+                        oldValues.price[i],
+                        oldValues.discount_per[i],
+                        oldValues.selling_price[i]
+                    );
+                }
+            }
+
+            // Load old rows on page load (first row will be added automatically by this)
+            loadOldRows();
+            window.framekiller = true;
+
+            window.onload = function() {
+                if (window.framekiller) {
+                    addNewRow();
+                    window.framekiller = false; // Ensure the function runs only once
+                }
+            };
+
+
+            // Event listener for adding a new row
+            addUnitBtn.addEventListener("click", function() {
+                // Add a new row with empty values for inputs
+                addNewRow();
+            });
+
+            // Event listener for removing the last row
+            removeUnitBtn.addEventListener("click", function() {
+                const rows = document.querySelectorAll(".unitRow");
+
+                // Only remove a row if there are more than one row
+                if (rows.length > 1) {
+                    const lastRow = rows[rows.length - 1];
+                    const isFirstRow = lastRow.getAttribute('data-first-row') === 'true';
+
+                    // Prevent removing the first row
+                    if (isFirstRow) {
+                        alert("The first row cannot be removed.");
+                    } else {
+                        lastRow.remove(); // Remove the last added row
+                    }
+                } else {
+                    alert("At least one row must remain.");
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+    {{-- <script>
         function calculateSellingPrice() {
             $('#unitTableBody').on('input', 'input[name="price[]"], input[name="discount_per[]"]', function() {
                 // Find the row the input belongs to
@@ -535,7 +833,7 @@
             </td>
             <td>
                 <div class="form-floating">
-                    <input type="text" name="unit_det[]"
+                    <input type="text" name="unit_det[]" value="{{ old('unit_det[]') }}"
                     placeholder="Unit Detail in Approx Weight" class="form-control">
                     <label for="">Approx Weight</label>
                     <span>
@@ -596,7 +894,7 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 
     <script>
         function previewImage(event) {

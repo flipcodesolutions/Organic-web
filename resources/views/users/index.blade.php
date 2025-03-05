@@ -1,8 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    @if (Session::has('msg'))
-        <p class="alert alert-info">{{ Session::get('msg') }}</p>
-    @endif
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">
@@ -45,7 +42,7 @@
                                     <i class="fas fa-edit"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"
                                     onclick="openDeactiveModal('{{ route('user.deactive', $user->id) }}')">
-                                    <i class="fas fa-remove"></i>
+                                    <i class="fa-solid fa-user-slash"></i>
                                 </a>
                             </td>
                         </tr>

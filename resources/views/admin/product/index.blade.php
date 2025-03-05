@@ -173,7 +173,7 @@
                                         </a>
                                         <a href="javascript:void(0)" class="btn btn-danger ml-2"
                                             onclick="openDeactiveModal('{{ route('product.deactive') }}/{{ $productData->id }}')">
-                                            <i class="fas fa-remove"></i>
+                                            <i class="fa-regular fa-eye-slash"></i>
                                         </a>
                                         {{-- <a href="{{ route('product.deactive') }}/{{ $productData->id }}"
                                         class="btn btn-danger">

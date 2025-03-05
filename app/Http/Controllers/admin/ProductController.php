@@ -8,8 +8,10 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Unit;
 use App\Models\UnitMaster;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
 
 class ProductController extends Controller
 {
@@ -17,45 +19,45 @@ class ProductController extends Controller
     {
         try {
 
-        $query = Product::query();
+            $query = Product::query();
 
-        if ($request->filled('global')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('productName', 'like', '%' . $request->global . '%')
-                    ->orWhere('categoryId', 'like', '%' . $request->global . '%');
-            });
-        }
+            if ($request->filled('global')) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('productName', 'like', '%' . $request->global . '%')
+                        ->orWhere('categoryId', 'like', '%' . $request->global . '%');
+                });
+            }
 
-        if ($request->filled('categoryId')) {
-            $query->where('categoryID', $request->CategoryId);
-        }
-        if ($request->filled('season')) {
-            $query->where('season', $request->season);
-        }
+            if ($request->filled('categoryId')) {
+                $query->where('categoryID', $request->CategoryId);
+            }
+            if ($request->filled('season')) {
+                $query->where('season', $request->season);
+            }
 
-        $data = $query->where('status', 'active')->whereHas('categories', function ($query) {
-            $query->where('status', 'active');
-        })->with(['categories', 'productImages'])->paginate(10);
+            $data = $query->where('status', 'active')->whereHas('categories', function ($query) {
+                $query->where('status', 'active');
+            })->with(['categories', 'productImages'])->paginate(10);
 
-        // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
-        //     $query->where('status', 'active');
-        // })->with(['categories', 'productImages'])->paginate(10);
+            // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
+            //     $query->where('status', 'active');
+            // })->with(['categories', 'productImages'])->paginate(10);
 
-        $categories = Category::where([
-            ['status', '=', 'active'],
-            ['parent_category_id', '=', 0]
-        ])->get();
-        $childcat = Category::where([
-            ['status', '=', 'active'],
-            ['parent_category_id', '!=', 0]
-        ])->get();
-        // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
-        //     $query->where('status', 'active');
-        // })->with(['categories', 'productImages', 'productUnit.unitMaster'=> function($query){
-        //     $query->where('status','active')->select('id','unit');
-        // }])->paginate(10);
-        // return $products;  
-        return view('admin.product.index', compact('data', 'categories', 'childcat'));
+            $categories = Category::where([
+                ['status', '=', 'active'],
+                ['parent_category_id', '=', 0]
+            ])->get();
+            $childcat = Category::where([
+                ['status', '=', 'active'],
+                ['parent_category_id', '!=', 0]
+            ])->get();
+            // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
+            //     $query->where('status', 'active');
+            // })->with(['categories', 'productImages', 'productUnit.unitMaster'=> function($query){
+            //     $query->where('status','active')->select('id','unit');
+            // }])->paginate(10);
+            // return $products;  
+            return view('admin.product.index', compact('data', 'categories', 'childcat'));
         } catch (\Exception $e) {
 
             return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
@@ -83,6 +85,9 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        // return $request;
+        // dd($request->all());
+
         $request->validate([
             'product_name' => 'required',
             'product_name_guj' => 'required',
@@ -91,24 +96,80 @@ class ProductController extends Controller
             'product_des_guj' => 'required',
             'product_des_hin' => 'required',
             'unit_id' => 'required|array|min:1',
-            'unit_id.*' => 'required|exists:units,id',
+            // 'unit_id.*' => 'required|exists:units,id',
             'unit_det' => 'required|array|min:1',
             'unit_det.*' => 'required|string',
             'price' => 'required|array|min:1',
             'price.*' => 'required|numeric|not_in:null',
             'discount_per' => 'required|array|min:1',
-            'discount_per.*' => 'required|numeric|between:0,100',
+            'discount_per.*' => 'required|numeric',
             'selling_price' => 'required|array|min:1',
             'selling_price.*' => 'required|numeric',
             'product_stock' => 'required',
             'season' => 'required',
             'category_id' => 'required',
-            'product_image' => 'array|nullable|required_without:video_link |mimes:jpeg,png,jpg,gif',
-            // 'product_image.*' => 'required_with:product_image|file|mimes:jpeg,png,jpg,gif', // Ensure valid file format
-
-            'video_link' => 'array|nullable|required_without:product_image',
-            // 'video_link.*' => 'required_with:video_link|url', // Ensure valid URL format  
+            // Ensure that either 'product_image' or 'video_link' is provided
+            'product_image' => 'nullable|array|min:1|required_without:video_link',
+            'video_link' => 'nullable|array|min:1|required_without:product_image',
+        ], [
+            'product_image.required_without' => 'You must provide either a product image or a video link.',
+            'video_link.required_without' => 'You must provide either a product image or a video link.',
         ]);
+        // return $request;
+
+        // $request->validate([
+        //     'product_name' => 'required',
+        //     'product_name_guj' => 'required',
+        //     'product_name_hin' => 'required',
+        //     'product_des' => 'required',
+        //     'product_des_guj' => 'required',
+        //     'product_des_hin' => 'required',
+        //     'unit_id' => 'required|array|min:1',
+        //     'unit_id.*' => 'required|exists:units,id', // No need for 'array' here
+        //     'unit_det' => 'required|array|min:1',
+        //     'unit_det.*' => 'required|string', // No need for 'array' here
+        //     'price' => 'required|array|min:1',
+        //     'price.*' => 'required|numeric|not_in:null', // No need for 'array' here
+        //     'discount_per' => 'required|array|min:1',
+        //     'discount_per.*' => 'required|numeric',
+        //     'selling_price' => 'required|array|min:1',
+        //     'selling_price.*' => 'required|numeric',
+        //     'product_stock' => 'required',
+        //     'season' => 'required',
+        //     'category_id' => 'required',
+        //     'product_image' => 'array|nullable|required_without:video_link',
+        //     'video_link' => 'array|nullable|required_without:product_image',
+        // ]);
+
+        // $validator = FacadesValidator::make($request->all(),[
+        //     'product_name' => 'required',
+        //     'product_name_guj' => 'required',
+        //     'product_name_hin' => 'required',
+        //     'product_des' => 'required',
+        //     'product_des_guj' => 'required',
+        //     'product_des_hin' => 'required',
+        //     'unit_id' => 'required|array|min:1',
+        //     'unit_id.*' => 'required|exists:units,id', // No need for 'array' here
+        //     'unit_det' => 'required|array|min:1',
+        //     'unit_det.*' => 'required|string', // No need for 'array' here
+        //     'price' => 'required|array|min:1',
+        //     'price.*' => 'required|numeric|not_in:null', // No need for 'array' here
+        //     'discount_per' => 'required|array|min:1',
+        //     'discount_per.*' => 'required|numeric',
+        //     'selling_price' => 'required|array|min:1',
+        //     'selling_price.*' => 'required|numeric',
+        //     'product_stock' => 'required',
+        //     'season' => 'required',
+        //     'category_id' => 'required',
+        //     'product_image' => 'array|nullable|required_without:video_link',
+        //     'video_link' => 'array|nullable|required_without:product_image',
+
+        // ]);
+
+        // if($validator->fails()){
+        //     return redirect()->back()->with('msg',$validator->errors());
+        // }
+
         // return $request;
         try {
             $product = new Product();
@@ -124,6 +185,7 @@ class ProductController extends Controller
             $product->categoryId = $request->category_id;
             $userId = Auth::user()->id;
             $product->userId = $userId;
+            $product->save();
 
             if ($request->hasFile('product_image')) {
                 $productimg = $request->file('product_image')[0];
@@ -146,7 +208,7 @@ class ProductController extends Controller
                 }
             }
 
-            if ($request->new_video_link !== null) {
+            if ($request->video_link !== null) {
                 foreach ($request->video_link as $data) {
                     ProductImage::create([
                         'productId' => $product->id,
@@ -213,31 +275,58 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        // return $request;
+        $validator = FacadesValidator::make($request->all(), [
             'product_name' => 'required',
             'product_name_guj' => 'required',
             'product_name_hin' => 'required',
             'product_des' => 'required',
             'product_des_guj' => 'required',
             'product_des_hin' => 'required',
-            // 'unit_id' => 'required|array|min:1',
-            // 'unit_id.*' => 'required|exists:units,id',
-            // 'unit_det' => 'required|array|min:1',
-            // 'unit_det.*' => 'required|string',
-            // 'price' => 'required|array|min:1',
-            // 'price.*' => 'required|numeric|not_in:null',
-            // 'discount_per' => 'required|array|min:1',
-            // 'discount_per.*' => 'required|numeric|between:0,100',
-            // 'selling_price' => 'required|array|min:1',
-            // 'selling_price.*' => 'required|numeric',
-            // 'product_stock' => 'required',
-            // 'season' => 'required',
-            // 'category_id' => 'required',
-            // 'product_image' => 'nullable|array|required_without:video_link',
-            // 'product_image.*' => 'required_if:product_image,!=,null',
-            // // 'video_link' => 'array|required_without:product_image',
-            // 'video_link' => 'array|nullable|required_without:product_image',
+            'unit_id' => 'required|array|min:1',
+            'unit_id.*' => 'required|exists:units,id', // No need for 'array' here
+            'unit_det' => 'required|array|min:1',
+            'unit_det.*' => 'required|string', // No need for 'array' here
+            'product_price' => 'required|array|min:1',
+            'product_price.*' => 'required|numeric|not_in:null', // No need for 'array' here
+            'discount_per' => 'required|array|min:1',
+            'discount_per.*' => 'required|numeric',
+            'selling_price' => 'required|array|min:1',
+            'selling_price.*' => 'required|numeric',
+            'product_stock' => 'required',
+            'season' => 'required',
+            'category_id' => 'required',
+            'product_image' => 'array|nullable|required_without:new_video_link', // Ensure "new_video_link" is correct
+            'new_video_link' => 'array|nullable|required_without:product_image',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('msg', $validator->errors());
+        }
+
+        // $request->validate([
+        //     'product_name' => 'required',
+        //     'product_name_guj' => 'required',
+        //     'product_name_hin' => 'required',
+        //     'product_des' => 'required',
+        //     'product_des_guj' => 'required',
+        //     'product_des_hin' => 'required',
+        //     'unit_id' => 'required|array|min:1',
+        //     'unit_id.*' => 'required|exists:units,id', // No need for 'array' here
+        //     'unit_det' => 'required|array|min:1',
+        //     'unit_det.*' => 'required|string', // No need for 'array' here
+        //     'price' => 'required|array|min:1',
+        //     'price.*' => 'required|numeric|not_in:null', // No need for 'array' here
+        //     'discount_per' => 'required|array|min:1',
+        //     'discount_per.*' => 'required|numeric',
+        //     'selling_price' => 'required|array|min:1',
+        //     'selling_price.*' => 'required|numeric',
+        //     'product_stock' => 'required',
+        //     'season' => 'required',
+        //     'category_id' => 'required',
+        //     // 'product_image' => 'array|nullable|required_without:video_link',
+        //     'video_link' => 'array|nullable|required_without:product_image',
+        // ]);
         try {
             // return $request;
             $product = Product::find($id);

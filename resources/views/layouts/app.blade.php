@@ -251,8 +251,8 @@
                         <a class="collapse-item" href="{{ route('reports.purchaseReport') }}">Purchase Report</a>
                     </div>
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('reports.purchaseDateWise') }}">Purchase Date Wise
-                            Report</a>
+                        {{-- <a class="collapse-item" href="{{ route('reports.purchaseDateWise') }}">Purchase Date Wise
+                            Report</a> --}}
                     </div>
                 </div>
             </li>
