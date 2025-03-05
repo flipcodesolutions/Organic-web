@@ -2698,8 +2698,8 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary:hover {
-    color: #fff;
-    background-color: #626F47 !important;
+    color: #626F47;
+    background-color: #fff !important;
     border-color: #626F47 !important;
 }
 
@@ -11933,19 +11933,21 @@ a:focus {
     margin-right: 20px;       /* Consistent space between icon and text */
     width: 30px;              /* Set a fixed width for all icons */
     text-align: center;       /* Ensure icon remains centered */
+
 }
 
 .sidebar-dark .nav-item .nav-link:active,
 .sidebar-dark .nav-item .nav-link:focus,
 .sidebar-dark .nav-item .nav-link:hover {
     color: #fff;
-    background-color: #626F47;
+    background-color: #626F47 !important;
 }
 
 .sidebar-dark .nav-item .nav-link:active i,
 .sidebar-dark .nav-item .nav-link:focus i,
 .sidebar-dark .nav-item .nav-link:hover i {
-    color: #fff
+    color: #fff;
+    background-color: #626F47 !important;
 }
 
 .sidebar-dark .nav-item .nav-link[data-toggle=collapse]::after {
@@ -11954,7 +11956,8 @@ a:focus {
 }
 
 .sidebar-dark .nav-item.active .nav-link {
-    color: #fff
+    color: #fff;
+    
 }
 
 .sidebar-dark .nav-item.active .nav-link i {

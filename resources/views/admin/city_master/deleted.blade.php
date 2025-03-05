@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="card shadow-sm  bg-body rounded">
-        <div class="card-header" style="background-color: #19aa5c">
+        <div class="card-header">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
                     <h2 class="mb-0">Deleted Cities</h2>

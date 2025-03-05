@@ -10,14 +10,12 @@
                     <h2 class="mb-0">All Citites</h2>
                 </div>
                 <div class="col" align="right">
-                    <a class="btn btn-danger" href="{{ Route('city_master.deleted') }}">Deleted City</a>
+                    <a class="btn btn-danger" href="{{ Route('city_master.deleted') }}">Deactive City</a>
 
                     <a href="{{ route('city_master.create') }}" class="btn btn-primary">Add City</a>
                 </div>
             </div>
         </div>
-
-
 
         <div class="mb-4 margin-bottom-30 m-4">
             <form action="{{ route('city_master.index') }}" method="GET" class="filter-form">
@@ -35,9 +33,9 @@
                         <select id="cityId" name="cityId" class="form-select">
                             <option value="" selected>Select City</option>
                             @foreach ($cities as $city)
-                                <option value="{{ $city->id }}" {{ request('cityId') == $city->id ? 'selected' : '' }}>
-                                    {{ $city->city_name_eng }}
-                                </option>
+                            <option value="{{ $city->id }}" {{ request('cityId') == $city->id ? 'selected' : '' }}>
+                                {{ $city->city_name_eng }}
+                            </option>
                             @endforeach
                         </select>
                     </div>
@@ -64,28 +62,31 @@
                     <th>Area (ENG)</th>
                     <th>Area (HIN)</th>
                     <th>Area (GUJ)</th>
-                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
+                
                 @foreach($data as $city)
-                    <tr>
-                        <td>{{ $city->id }}</td>
-                        <td>{{ $city->city_name_eng }}</td>
-                        <td>{{ $city->city_name_hin }}</td>
-                        <td>{{ $city->city_name_guj }}</td>
-                        <td>{{ $city->pincode }}</td>
-                        <td>{{ $city->area_eng }}</td>
-                        <td>{{ $city->area_hin }}</td>
-                        <td>{{ $city->area_guj }}</td>
-                        <td>{{ $city->status }}</td>
-                        <td>
-                            <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}"><i class="fas fa-edit"></i></a>
+                <tr>
+                    <td>{{ $city->id }}</td>
+                    <td>{{ $city->city_name_eng }}</td>
+                    <td>{{ $city->city_name_hin }}</td>
+                    <td>{{ $city->city_name_guj }}</td>
+                    <td>{{ $city->pincode }}</td>
+                    <td>{{ $city->area_eng }}</td>
+                    <td>{{ $city->area_hin }}</td>
+                    <td>{{ $city->area_guj }}</td>
 
-                            <a href="{{ route('city_master.deactive') }}/{{ $city->id }}" class="btn btn-danger">
-                                <i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
+                    <td>
+                        <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}"><i class="fas fa-edit"></i></a>
+
+                        <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                        onclick="openDeactiveModal('{{ route('city_master.deactive') }}/{{ $city->id }}')">
+                        <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
                 @endforeach
+
             </table>
         </div>
     </div>
