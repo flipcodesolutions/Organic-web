@@ -5,7 +5,7 @@ use App\Http\Controllers\admin\LandmarkMasterController;
 use App\Http\Controllers\admin\ContactController;
 
 
-use App\Http\Controllers\Admin\AdminReviewController;
+use App\Http\Controllers\admin\AdminReviewController;
 use App\Http\Controllers\vendor\VendorReviewController;
 
 
