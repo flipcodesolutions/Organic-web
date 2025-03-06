@@ -29,7 +29,7 @@ class ProductController extends Controller
             }
 
             if ($request->filled('categoryId')) {
-                $query->where('categoryID', $request->CategoryId);
+                $query->where('categoryID', $request->categoryId);
             }
             if ($request->filled('season')) {
                 $query->where('season', $request->season);
@@ -85,36 +85,36 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // return $request;
+        // return $request; 
         // dd($request->all());
 
-        $request->validate([
-            'product_name' => 'required',
-            'product_name_guj' => 'required',
-            'product_name_hin' => 'required',
-            'product_des' => 'required',
-            'product_des_guj' => 'required',
-            'product_des_hin' => 'required',
-            'unit_id' => 'required|array|min:1',
-            // 'unit_id.*' => 'required|exists:units,id',
-            'unit_det' => 'required|array|min:1',
-            'unit_det.*' => 'required|string',
-            'price' => 'required|array|min:1',
-            'price.*' => 'required|numeric|not_in:null',
-            'discount_per' => 'required|array|min:1',
-            'discount_per.*' => 'required|numeric',
-            'selling_price' => 'required|array|min:1',
-            'selling_price.*' => 'required|numeric',
-            'product_stock' => 'required',
-            'season' => 'required',
-            'category_id' => 'required',
-            // Ensure that either 'product_image' or 'video_link' is provided
-            'product_image' => 'nullable|array|min:1|required_without:video_link',
-            'video_link' => 'nullable|array|min:1|required_without:product_image',
-        ], [
-            'product_image.required_without' => 'You must provide either a product image or a video link.',
-            'video_link.required_without' => 'You must provide either a product image or a video link.',
-        ]);
+        // $request->validate([
+        //     'product_name' => 'required',
+        //     'product_name_guj' => 'required',
+        //     'product_name_hin' => 'required',
+        //     'product_des' => 'required',
+        //     'product_des_guj' => 'required',
+        //     'product_des_hin' => 'required',
+        //     'unit_id' => 'required|array|min:1',
+        //     // 'unit_id.*' => 'required|exists:units,id',
+        //     'unit_det' => 'required|array|min:1',
+        //     'unit_det.*' => 'required|string',
+        //     'price' => 'required|array|min:1',
+        //     'price.*' => 'required|numeric|not_in:null',
+        //     'discount_per' => 'required|array|min:1',
+        //     'discount_per.*' => 'required|numeric',
+        //     'selling_price' => 'required|array|min:1',
+        //     'selling_price.*' => 'required|numeric',
+        //     'product_stock' => 'required',
+        //     'season' => 'required',
+        //     'category_id' => 'required',
+        //     // Ensure that either 'product_image' or 'video_link' is provided
+        //     'product_image' => 'nullable|array|min:1|required_without:video_link',
+        //     'video_link' => 'nullable|array|min:1|required_without:product_image',
+        // ], [
+        //     'product_image.required_without' => 'You must provide either a product image or a video link.',
+        //     'video_link.required_without' => 'You must provide either a product image or a video link.',
+        // ]);
         // return $request;
 
         // $request->validate([

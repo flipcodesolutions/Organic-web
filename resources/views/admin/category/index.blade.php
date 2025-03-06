@@ -85,10 +85,15 @@
                                     </ul> --}}
                                 </td>
                                 <td>
+                                    @foreach ($categories as $perentdata)
+                                        @if ($perentdata->id == $categoryData->parent_category_id)
+                                            {{ $perentdata->categoryName }}
+                                        @endif
+                                    @endforeach
                                     {{-- @if ($categoryData->parent_id == 0)
                                         -
                                     @else --}}
-                                    {{ $categoryData->parent_category_id }}
+                                    {{-- {{ $categoryData->parent_category_id }} --}}
                                     {{-- @endif --}}
                                 </td>
                                 <td>

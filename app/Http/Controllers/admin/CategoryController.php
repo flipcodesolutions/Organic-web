@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         try {
-
+            
             $query = Category::query();
 
             if ($request->filled('global')) {

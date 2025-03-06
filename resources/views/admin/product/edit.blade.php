@@ -432,10 +432,10 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="form-floating" id="videoInput">
-                                        <input type="text" class="form-control" id="videoLink"
+                                        {{-- <input type="text" class="form-control" id="videoLink"
                                             name="new_video_link[]" placeholder="Enter video link">
-                                        <span id="videolinklist"> </span>
-                                        <label for="videoLink">Video Link</label>
+                                            <label for="videoLink">Video Link</label> --}}
+                                            <span id="videolinklist"> </span>
                                         <a class="btn btn-primary my-2" id="addVideo">+</a>
                                         <a class="btn btn-danger my-2" id="removeVideo">-</a>
                                     </div>
