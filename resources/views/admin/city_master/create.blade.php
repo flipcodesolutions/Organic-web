@@ -7,7 +7,7 @@
         <div class="card-header">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
-                    <h2 class="mb-0">Create New City</h2>
+                    <h6 class="mb-0">Create New City</h6>
                 </div>
                 <div class="col" align="right">
                     <a class="btn btn-primary" href="{{ Route('city_master.index') }}">Back</a>
@@ -17,7 +17,7 @@
 
         <div class="card-body">
 
-            <form action="{{ route('city_master.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('city_master.store') }}" method="post" enctype="multipart/form-data" class="form">
 
                 @csrf
                 {{-- City_Master --}}

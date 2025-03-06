@@ -59,11 +59,11 @@
 <body id="page-top">
 
     <!-- Page Wrapper -->
-    <div id="wrapper">
+    <div id="wrapper" class="overlay-menu">
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar"
-            style="background-color:  #81A263">
+            style="background-color:  #81A263; width: 10.5rem;">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center"

@@ -17,7 +17,7 @@
 
             <div class="card-body">
                 <form action="{{ route('category.update') }}/{{ $category->id }}" method="post"
-                    enctype="multipart/form-data">
+                    enctype="multipart/form-data" class="form">
                     @csrf
 
                     {{-- category name --}}
@@ -195,7 +195,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Parent Category:</strong>
-                            
+
                             <span id="parent_id_error" class="text-danger"></span>
                         </div>
                     </div>
@@ -264,7 +264,7 @@
                     success: function(response) {
                         if (response.success) {
                             // alert("Category created successfully!");
-                            window.location.href = "{{ route('category.index') }}"; 
+                            window.location.href = "{{ route('category.index') }}";
                         } else {
                             alert("Error: " + response.message);
                         }

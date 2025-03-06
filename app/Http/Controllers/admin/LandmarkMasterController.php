@@ -39,7 +39,9 @@ class LandmarkMasterController extends Controller
         $landmarkmasters = LandmarkMaster::where('status', 'active')->select('id', 'landmark_eng')->get();
 
         return view('admin.landmark_master.index', compact('data','landmarkmasters'));
- 
+
+        // $landmarkmasters = LandmarkMaster::with('CityMaster')->get();
+        // return view('admin.landmark_master.index', compact('landmarkmasters'));
     }
     /**
      * Show the form for creating a new resource.
@@ -48,7 +50,7 @@ class LandmarkMasterController extends Controller
     public function create()
     {
             $cities = CityMaster::all();
-            return View('admin.landmark_master.create',compact('cities'));  
+            return View('admin.landmark_master.create',compact('cities'));
     }
     /**
      *
@@ -76,17 +78,17 @@ class LandmarkMasterController extends Controller
             $landmarkmasters->longitude = $request->longitude;
 
             $landmarkmasters->save();
-            return redirect()->route('landmark.index')->with('success','stored');    
+            return redirect()->route('landmark.index')->with('success','stored');
     }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {   
+    {
             $cities = CityMaster::all();
 
-            $landmarkmasters = LandmarkMaster::find($id);
-            return view('admin.landmark_master.edit',compact('landmarkmasters','cities'));
+            $landmarkmaster = LandmarkMaster::find($id);
+            return view('admin.landmark_master.edit',compact('landmarkmaster','cities'));
     }
     /**
      * Update the specified resource in storage.
@@ -114,9 +116,9 @@ class LandmarkMasterController extends Controller
         try {
             $landmarkmasters = LandmarkMaster::find($id);
             $landmarkmasters->status = 'deactive';
-            $landmarkmasters->save(); 
+            $landmarkmasters->save();
             return redirect()->back()->with('success','successfully deleted');
-        } 
+        }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
@@ -128,7 +130,7 @@ class LandmarkMasterController extends Controller
             $landmarkmasters->status = 'active';
             $landmarkmasters->save();
             return redirect()->route('landmark.index');
-        } 
+        }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
@@ -138,7 +140,7 @@ class LandmarkMasterController extends Controller
         try {
             $landmarkmasters = LandmarkMaster::where('status', 'deactive')->paginate(10);
             return view('admin.landmark_master.deleted', compact('landmarkmasters'));
-        } 
+        }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
@@ -146,10 +148,10 @@ class LandmarkMasterController extends Controller
     public function destroy($id)
     {
         try {
-            $landmarkmasters = LandmarkMaster::find($id);   
+            $landmarkmasters = LandmarkMaster::find($id);
             $landmarkmasters->delete();
             return redirect()->route('landmark.index');
-        } 
+        }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }

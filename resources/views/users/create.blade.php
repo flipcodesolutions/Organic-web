@@ -14,7 +14,7 @@
             </div>
 
             <div class="card-body">
-                <form method="post" action="{{ Route('user.store') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ Route('user.store') }}" enctype="multipart/form-data" class="form">
                     @csrf
 
                     {{-- profile picture --}}

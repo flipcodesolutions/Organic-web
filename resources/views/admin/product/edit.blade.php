@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Edit Product</h6>
+                        <h6 class="mb-0">Update New Product</h6>
                     </div>
                     <div class="col" align="right">
                         <a href="{{ route('product.index') }}" class="btn btn-secondary" type="button"> Back </a>
@@ -16,7 +16,7 @@
 
             <div class="card-body">
                 <form id="productForm" action="{{ route('product.update', $product->id) }}" enctype="multipart/form-data"
-                    method="post">
+                    method="post" class="form">
                     @csrf
 
                     {{-- product --}}
@@ -327,7 +327,7 @@
                                         {{-- <td style="display: flex; gap:5px">
                                             <a class="btn btn-primary my-2" id="addUnit">+</a>
                                             <a class="btn btn-danger my-2" id="removeUnit">-</a>
-                                        </td> 
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td style="display: flex; gap:5px">
@@ -895,7 +895,7 @@
 
         $(document).ready(function () {
     $("#productForm").on("submit", function (e) {
-        e.preventDefault();  
+        e.preventDefault();
 
         // Clear previous errors
         $('#nameError').text('');
@@ -909,13 +909,13 @@
         let image = $('#image')[0].files[0];
 
         let isValid = true;
-        
+
         // Validate product name
         if (!name) {
             $('#nameError').text('Product Name is required.');
             isValid = false;
         }
-        
+
         // Validate category selection
         if (!category_id || category_id === "-- select category --") {
             $('#categoryIdError').text('Category is required.');
@@ -932,7 +932,7 @@
                 isValid = false;
             }
 
-            if (image.size > 2 * 1024 * 1024) { 
+            if (image.size > 2 * 1024 * 1024) {
                 $('#thumbnailError').text('Image size must be less than 2MB.');
                 isValid = false;
             }
@@ -940,11 +940,11 @@
 
         if (isValid) {
             $.ajax({
-                url: "{{ route('product.update', $product->id) }}", 
+                url: "{{ route('product.update', $product->id) }}",
                 method: "POST",
                 data: formData,
-                processData: false, 
-                contentType: false, 
+                processData: false,
+                contentType: false,
                 success: function (response) {
                     if (response.success) {
                         toastr.options = {
@@ -969,7 +969,7 @@
                         $('#productForm')[0].reset();
                         setTimeout(function() {
                             window.location.href = "{{ route('product.index') }}";
-                        }, 2000);                     
+                        }, 2000);
                     } else {
                         if (response.errors) {
                             $.each(response.errors, function(key, value) {
@@ -977,11 +977,11 @@
                             });
                         } else {
                             toastr.error('An error occurred. Please try again.');
-                        }               
+                        }
                     }
                 },
                 error: function (xhr, status, error) {
-                    toastr.error('An error occurred: ' + error); 
+                    toastr.error('An error occurred: ' + error);
                 }
             });
         }

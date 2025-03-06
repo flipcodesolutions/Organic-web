@@ -7,7 +7,7 @@
         <div class="card-header">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
-                    <h2 class="mb-0"> Landmark </h2>
+                    <h6 class="mb-0">Deactive Landmark</h6>
                 </div>
                 <div class="col" align="right">
                     <a class="btn btn-primary" href="{{ Route('landmark.index') }}">Back</a>

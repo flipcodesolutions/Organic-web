@@ -8,14 +8,14 @@
         <div class="card-header">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
-                    <h2 class="mb-0">Vendor Product Reviews</h2>
+                    <h6 class="mb-0">Vendor Product Reviews</h6>
                 </div>
             </div>
         </div>
         <div class="card-body table-responsive">
             <div class="loader"></div>
             <table class="table table-bordered mt-2">
-                
+
                     <tr>
                         <th>#</th>
                         <th>Review Date</th>
@@ -23,7 +23,7 @@
                         <th>Message</th>
                         <th>Rating</th>
                     </tr>
-                
+
                 <tbody>
                     @foreach($reviews as $key => $review)
                     <tr>

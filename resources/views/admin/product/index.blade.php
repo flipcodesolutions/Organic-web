@@ -5,17 +5,18 @@
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
-                <div class="row d-flex align-items-center">
-                    <div class="col text-white">
-                        <h6 class="mb-0">Products Management</h6>
-                    </div>
-                    <div class="col" align="right">
+            <div class="card-header d-flex">
+                <div class="col text-white mt-2">
+                    <h6 class="mb-0">Products Management</h6>
+                </div>
+                <div class="heading d-flex row align-items-center">
+                    <div class="col" align="right" style="gap: 3px">
                         <a class="btn btn-danger" href="{{ route('product.deactiveindex') }}">Deactive Products</a>
                         <a class="btn btn-primary" href="{{ route('product.create') }}">Add</a>
                     </div>
                 </div>
             </div>
+
 
             <div class="mb-4 margin-bottom-30 m-4">
                 <form action="{{ route('product.index') }}" method="GET" class="filter-form">
@@ -37,10 +38,10 @@
                                     <optgroup label="{{ $categorydata->categoryName }}">
                                         @foreach ($childcat as $childcatdata)
                                             @if ($childcatdata->parent_category_id == $categorydata->id)
-                                            <option value="{{ $childcatdata->id }}"
-                                                {{ request('categoryId') == $childcatdata->id ? 'selected' : '' }}>
-                                                {{ $childcatdata->categoryName }}
-                                            </option>
+                                                <option value="{{ $childcatdata->id }}"
+                                                    {{ request('categoryId') == $childcatdata->id ? 'selected' : '' }}>
+                                                    {{ $childcatdata->categoryName }}
+                                                </option>
                                             @endif
                                         @endforeach
                                     </optgroup>
@@ -53,9 +54,10 @@
                             <label for="season"><b>Session:</b></label>
                             <select name="season" id="season" class="form-select">
                                 <option value="" selected>Select Season</option>
-                                <option value="Winter"{{ request('season') == 'Winter' ? 'selected' : ''}}>Winter</option>
-                                <option value="Summer"{{ request('season') == 'Summer' ? 'selected' : ''}}>Summer</option>
-                                <option value="Monsoon"{{ request('season') == 'Monsoon' ? 'selected' : ''}}>Monsoon</option>
+                                <option value="Winter"{{ request('season') == 'Winter' ? 'selected' : '' }}>Winter</option>
+                                <option value="Summer"{{ request('season') == 'Summer' ? 'selected' : '' }}>Summer</option>
+                                <option value="Monsoon"{{ request('season') == 'Monsoon' ? 'selected' : '' }}>Monsoon
+                                </option>
                             </select>
                         </div>
 

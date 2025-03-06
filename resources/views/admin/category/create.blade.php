@@ -15,7 +15,7 @@
             </div>
 
             <div class="card-body">
-                <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data" class="form">
                     @csrf
                     {{-- Category --}}
                     <div class="row mb-3">
@@ -86,7 +86,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="category_des_guj" 
+                                <textarea class="ckeditor form-control" name="category_des_guj"
                                  placeholder="Category Description Gujarati" id="floatingTextarea">{{ old('category_des_guj') }}</textarea>
                                 {{-- <input type="text" name="category_des_guj" id="category_name"
                                     placeholder="Category Name" class="form-control">

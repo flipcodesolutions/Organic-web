@@ -14,7 +14,7 @@
             </div>
 
             <div class="card-body">
-                <form id="faq" method="post" action="{{ Route('faq.update', $faqs->id) }}">
+                <form id="faq" method="post" action="{{ Route('faq.update', $faqs->id) }}" class="form">
                     @csrf
                     {{-- Faq --}}
                     <div class="row mb-3">
