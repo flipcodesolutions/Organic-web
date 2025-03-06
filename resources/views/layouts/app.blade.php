@@ -62,229 +62,229 @@
     <div id="wrapper" class="overlay-menu">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar"
-            style="background-color:  #81A263; width: 10.5rem;">
+        <div class="sidebar">
+            <div class="sidebar-content">
+            <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar"
+                style="background-color:  #81A263; width: 10.5rem;">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                style="background-color: #365E32  !important;">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fa fa-shopping-cart"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3 ">Vegetable E-comm</div>
-            </a>
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center"
+                    style="background-color: #365E32  !important;">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fa fa-shopping-cart"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3 ">Vegetable E-comm</div>
+                </a>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item" >
-                <a class="nav-link" href="{{ route('home') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <li class="nav-item {{ request()->routeIs('category.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('category.index') }}">
-                    <i class="fa fa-list"></i>
-                    <span>Categories</span></a>
-            </li>
-
-            <li class="nav-item {{ request()->routeIs('product.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('product.index') }}">
-                    <i class="fa fa-carrot"></i>
-                    <span>Products</span></a>
-            </li>
-
-            <li class="nav-item {{ request()->routeIs('navigate.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('navigate.index') }}">
-                    <i class="fa fa-location-dot"></i>
-                    <span>Navigate</span></a>
-            </li>
-
-            <li class="nav-item {{ request()->routeIs('notification.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('notification.index') }}">
-                    <i class="fa fa-bell"></i>
-                    <span>Notification</span></a>
-            </li>
-             
-            <li class="nav-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('pointper.index') }}">
-                    <i class="fa fa-basket-shopping"></i>
-                    <span>Point Per</span></a>
-            </li>
-
-            {{-- <li class="nav-item"> --}}
-            {{--
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('module.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Modules</span></a>
-            </li> --}}
-
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="{{ route('image.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Images</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('product.price.index') }}">
-                    <i class="fa fa-university"></i>
-                    <span>Product-Price</span></a> --}}
-            {{--
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('module.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Modules</span></a>
-            </li> --}}
-
-            {{-- <li class="nav-item mb-0">
-                <a class="nav-link" href="{{ route('image.index') }}" title="Manage Images">
-                    <i class="fas fa-image"></i>
-                    <span style="font-size:20px">Images</span></a>
-            </li> --}}
-
-            {{-- <li class="nav-item mb-0">
-                <a class="nav-link" href="{{ route('product.price.index') }}" title="Manage Product Pricing">
-                    <i class="fas fa-tag"></i>
-                    <span style="font-size:20px">Product-Price</span></a>
-            </li>
-            --}}
-
-
-            <li class="nav-item {{ request()->routeIs('city_master.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('city_master.index') }}">
-                    <i class="fa fa-location-pin"></i>
-                    <span>Cities</span></a>
-            </li>
-
-            <li class="nav-item {{ request()->routeIs('landmark.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('landmark.index') }}">
-                    <i class="fa fa-street-view"></i>
-                    <span>Landmark</span></a>
-            </li>
-
-            {{-- @if (Auth::user()->role == 'Admin') --}}
-            <li class="nav-item {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('admin.reviews.index') }}">
-                        <i class="fa fa-comment"></i>
-                        <span>Admin Reviews</span></a>
+                <!-- Nav Item - Dashboard -->
+                
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ route('home') }}">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
                 </li>
-            {{-- @endif --}}
 
-            <li class="nav-item {{ request()->routeIs('vendor.reviews.*') ? 'active' : '' }}">
-                <a class="nav-link " href="{{ route('vendor.reviews.index') }}">
-                    <i class="fa fa-comment"></i>
-                    <span>Vendor Reviews</span></a>
-            </li>
+                <li class="nav-item {{ request()->routeIs('category.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('category.index') }}">
+                        <i class="fa fa-list"></i>
+                        <span>Categories</span></a>
+                </li>
 
-            <li class="nav-item {{ request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ Route('deliveryslot.index') }}">
-                    <i class="fa fa-truck"></i>
-                    <span>Delivery Slots</span></a>
-            </li>
+                <li class="nav-item {{ request()->routeIs('product.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('product.index') }}">
+                        <i class="fa fa-carrot"></i>
+                        <span>Products</span></a>
+                </li>
 
-            <li class="nav-item {{ request()->routeIs('cms_master.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ Route('cms_master.index') }}">
-                    <i class="fa fa-list-check"></i>
-                    <span>CMS Master</span></a>
-            </li>
+                <li class="nav-item {{ request()->routeIs('navigate.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('navigate.index') }}">
+                        <i class="fa fa-location-dot"></i>
+                        <span>Navigate</span></a>
+                </li>
 
-            <li class="nav-item {{ request()->routeIs('faq.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ Route('faq.index') }}">
-                    <i class="fa fa-person-circle-question"></i>
-                    <span>FAQs</span></a>
-            </li>
+                <li class="nav-item {{ request()->routeIs('notification.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('notification.index') }}">
+                        <i class="fa fa-bell"></i>
+                        <span>Notification</span></a>
+                </li>
+                
+                <li class="nav-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('pointper.index') }}">
+                        <i class="fa fa-basket-shopping"></i>
+                        <span>Point Per</span></a>
+                </li>
 
-            <li class="nav-item {{ request()->routeIs('unitmaster.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ Route('unitmaster.index') }}">
-                    <i class="fa fa-bookmark"></i>
-                    <span>Unit Master</span></a>
-            </li>
+                {{-- <li class="nav-item"> --}}
+                {{--
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('module.index') }}">
+                        <i class="fa fa-bookmark"></i>
+                        <span>Modules</span></a>
+                </li> --}}
 
-            <li class="nav-item {{ request()->routeIs('slider.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ Route('slider.index') }}">
-                    <i class="fa fa-photo-film"></i>
-                    <span>Slider</span></a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                {{-- <li class="nav-item">
+                    <a class="nav-link" href="{{ route('image.index') }}">
+                        <i class="fa fa-bookmark"></i>
+                        <span>Images</span></a>
+                </li>
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('product.price.index') }}">
+                        <i class="fa fa-university"></i>
+                        <span>Product-Price</span></a> --}}
+                {{--
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('module.index') }}">
+                        <i class="fa fa-bookmark"></i>
+                        <span>Modules</span></a>
+                </li> --}}
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>User Management</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('user.index') }}">User List</a>
-                    </div>
+                {{-- <li class="nav-item mb-0">
+                    <a class="nav-link" href="{{ route('image.index') }}" title="Manage Images">
+                        <i class="fas fa-image"></i>
+                        <span style="font-size:20px">Images</span></a>
+                </li> --}}
+
+                {{-- <li class="nav-item mb-0">
+                    <a class="nav-link" href="{{ route('product.price.index') }}" title="Manage Product Pricing">
+                        <i class="fas fa-tag"></i>
+                        <span style="font-size:20px">Product-Price</span></a>
+                </li>
+                --}}
+
+
+                <li class="nav-item {{ request()->routeIs('city_master.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('city_master.index') }}">
+                        <i class="fa fa-location-pin"></i>
+                        <span>Cities</span></a>
+                </li>
+
+                <li class="nav-item {{ request()->routeIs('landmark.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('landmark.index') }}">
+                        <i class="fa fa-street-view"></i>
+                        <span>Landmark</span></a>
+                </li>
+
+                {{-- @if (Auth::user()->role == 'Admin') --}}
+                <li class="nav-item {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.reviews.index') }}">
+                            <i class="fa fa-comment"></i>
+                            <span>Admin Reviews</span></a>
+                    </li>
+                {{-- @endif --}}
+
+                <li class="nav-item {{ request()->routeIs('vendor.reviews.*') ? 'active' : '' }}">
+                    <a class="nav-link " href="{{ route('vendor.reviews.index') }}">
+                        <i class="fa fa-comment"></i>
+                        <span>Vendor Reviews</span></a>
+                </li>
+
+                <li class="nav-item {{ request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ Route('deliveryslot.index') }}">
+                        <i class="fa fa-truck"></i>
+                        <span>Delivery Slots</span></a>
+                </li>
+
+                <li class="nav-item {{ request()->routeIs('cms_master.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ Route('cms_master.index') }}">
+                        <i class="fa fa-list-check"></i>
+                        <span>CMS Master</span></a>
+                </li>
+
+                <li class="nav-item {{ request()->routeIs('faq.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ Route('faq.index') }}">
+                        <i class="fa fa-person-circle-question"></i>
+                        <span>FAQs</span></a>
+                </li>
+
+                <li class="nav-item {{ request()->routeIs('unitmaster.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ Route('unitmaster.index') }}">
+                        <i class="fa fa-bookmark"></i>
+                        <span>Unit Master</span></a>
+                </li>
+
+                <li class="nav-item {{ request()->routeIs('slider.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ Route('slider.index') }}">
+                        <i class="fa fa-photo-film"></i>
+                        <span>Slider</span></a>
+                </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Interface
                 </div>
-            </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            {{-- <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Role Management</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('roles.index') }}">Role List</a>
-    </div>
-    </div>
-    </li> --}}
-
-
-
-
-
-            <!-- Reports -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
-                    aria-expanded="true" aria-controls="collapseFour">
-                    <i class="fa-solid fa-file"></i>
-                    <span>Reports</span>
-                </a>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('reports.purchaseReport') }}">Purchase Report</a>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                        aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>User Management</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ route('user.index') }}">User List</a>
+                        </div>
                     </div>
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        {{-- <a class="collapse-item" href="{{ route('reports.purchaseDateWise') }}">Purchase Date Wise
-                            Report</a> --}}
-                    </div>
+                </li>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                {{-- <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Role Management</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ route('roles.index') }}">Role List</a>
                 </div>
-            </li>
+                </div>
+                </li> --}}
+                <!-- Reports -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+                        aria-expanded="true" aria-controls="collapseFour">
+                        <i class="fa-solid fa-file"></i>
+                        <span>Reports</span>
+                    </a>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ route('reports.purchaseReport') }}">Purchase Report</a>
+                        </div>
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            {{-- <a class="collapse-item" href="{{ route('reports.purchaseDateWise') }}">Purchase Date Wise
+                                Report</a> --}}
+                        </div>
+                    </div>
+                </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
 
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
 
         </ul>
+    </div>
+</div>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->

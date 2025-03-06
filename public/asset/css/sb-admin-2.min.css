@@ -4488,14 +4488,13 @@ input[type=submit].btn-block {
     border-color: #dddfeb #dddfeb #fff
 }
 
-.nav-item.active
-{
+.nav-item.active {
     background-color: #365E32 !important;
 }
 
-a.nav-link[data-toggle=collapse].collapsed::after
-{
-    background-color: #365E32 !important;
+a.nav-link[data-toggle=collapse].collapsed::after {
+    margin-left: auto;
+    /* background-color: #365E32 !important; */
 }
 
 .nav-tabs .dropdown-menu {
@@ -10996,7 +10995,8 @@ a:focus {
 }
 
 #wrapper {
-    display: flex
+    display: flex;
+    height: 100vh;
 }
 
 #wrapper #content-wrapper {
@@ -11531,10 +11531,38 @@ a:focus {
     color: #858796
 }
 
-.sidebar {
-    width: 6.5rem;
-    min-height: 100vh
+.sidebar-content {
+    width: 13rem;
+    height: 100vh;
+    overflow-y: auto;
+    /* overflow-x: hidden; */
+    /* border-right: 1px grey;   */
 }
+
+/* Thin Scrollbar */
+
+/* Target the scrollbar */
+.sidebar-content::-webkit-scrollbar {
+    width: 4px;
+    /* Scrollbar width (vertical) */
+    height: 4px;
+    /* Scrollbar height (horizontal) */
+}
+
+/* Handle (the draggable part) */
+.sidebar-content::-webkit-scrollbar-thumb {
+    background: grey;
+    /* Color of the scrollbar */
+    border-radius: 10px;
+    /* Rounded corners */
+}
+
+/* Track (the background) */
+.sidebar-content::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    /* Background of scrollbar track */
+}
+    
 
 .sidebar .nav-item {
     position: relative
@@ -11557,7 +11585,6 @@ a:focus {
 
 .sidebar .nav-item.active .nav-link {
     font-weight: 700
-
 }
 
 .sidebar .nav-item .collapse {
@@ -11610,13 +11637,11 @@ a:focus {
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:hover,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover {
     background-color: #eaecf4
-    
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:active {
     background-color: #dddfeb
-    
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item.active,
@@ -11939,16 +11964,19 @@ a:focus {
 .sidebar-dark .nav-item .nav-link {
     /* color: rgba(255, 255, 255, .8) */
     color: var(--light);
-    font-weight:600;
+    font-weight: 600;
     display: flex;
     align-items: center;
 }
 
 .sidebar-dark .nav-item .nav-link i {
     color: rgba(255, 255, 255, .3);
-    margin-right: 20px;       /* Consistent space between icon and text */
-    width: 30px;              /* Set a fixed width for all icons */
-    text-align: center;       /* Ensure icon remains centered */
+    margin-right: 20px;
+    /* Consistent space between icon and text */
+    width: 30px;
+    /* Set a fixed width for all icons */
+    text-align: center;
+    /* Ensure icon remains centered */
 
 }
 
@@ -11968,12 +11996,12 @@ a:focus {
 
 .sidebar-dark .nav-item .nav-link[data-toggle=collapse]::after {
     color: rgba(255, 255, 255, .5);
-    
+
 }
 
 .sidebar-dark .nav-item.active .nav-link {
     color: #fff;
-    
+
 }
 
 .sidebar-dark .nav-item.active .nav-link i {

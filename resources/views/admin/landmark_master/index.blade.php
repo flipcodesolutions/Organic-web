@@ -84,8 +84,11 @@
                                 <div class="d-flex">
                                 <a class="btn btn-primary" href="{{ route('landmark.edit', $landmark->id) }}"><i
                                         class="fas fa-edit"></i></a>
-                                <a href="{{ route('landmark.deactive') }}/{{ $landmark->id }}" class="btn btn-danger">
-                                    <i class="fas fa-trash"></i></a>
+
+                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                    onclick="openDeactiveModal('{{ route('landmark.deactive') }}/{{ $landmark->id }}')">
+                                    <i class="fas fa-trash"></i>
+                                    </a>
                             </td>
                         </tr>
                     @endforeach

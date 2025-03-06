@@ -49,10 +49,12 @@
 
                     <td>
                         <div class="d-flex">
-                            <button  class="btn btn-primary"><i class="fas fa-undo"></i></button>
-
+                            <a href="{{ Route('landmark.active', $landmark->id) }}"
+                                class="btn btn-primary">
+                                <i class="fas fa-undo"></i>
+                            </a>
                             <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                            onclick="openDeleteModal('{{ Route('landmark.deleted', $landmark->id) }}')">
+                            onclick="openDeleteModal('{{ Route('landmark.destroy', $landmark->id) }}')">
                             <i class="fas fa-trash"></i>
                             </a>
                         </div
