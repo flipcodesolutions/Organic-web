@@ -12,8 +12,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    {{-- <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"> --}}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
     <!-- Toastr CSS and JS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
 
@@ -73,36 +78,37 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <li class="nav-item" >
                 <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item {{ request()->routeIs('category.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('category.index') }}">
                     <i class="fa fa-list"></i>
                     <span>Categories</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item {{ request()->routeIs('product.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('product.index') }}">
                     <i class="fa fa-carrot"></i>
                     <span>Products</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item {{ request()->routeIs('navigate.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('navigate.index') }}">
                     <i class="fa fa-location-dot"></i>
                     <span>Navigate</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item {{ request()->routeIs('notification.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('notification.index') }}">
                     <i class="fa fa-bell"></i>
                     <span>Notification</span></a>
             </li>
-            <li class="nav-item">
+             
+            <li class="nav-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('pointper.index') }}">
                     <i class="fa fa-basket-shopping"></i>
                     <span>Point Per</span></a>
@@ -147,53 +153,57 @@
             --}}
 
 
-            <li class="nav-item">
+            <li class="nav-item {{ request()->routeIs('city_master.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('city_master.index') }}">
                     <i class="fa fa-location-pin"></i>
                     <span>Cities</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item {{ request()->routeIs('landmark.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('landmark.index') }}">
                     <i class="fa fa-street-view"></i>
                     <span>Landmark</span></a>
             </li>
 
-            @if (Auth::user()->role == 'Admin')
-                <li class="nav-item">
+            {{-- @if (Auth::user()->role == 'Admin') --}}
+            <li class="nav-item {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.reviews.index') }}">
                         <i class="fa fa-comment"></i>
                         <span>Admin Reviews</span></a>
                 </li>
-            @endif
+            {{-- @endif --}}
 
-            <li class="nav-item">
+            <li class="nav-item {{ request()->routeIs('vendor.reviews.*') ? 'active' : '' }}">
                 <a class="nav-link " href="{{ route('vendor.reviews.index') }}">
                     <i class="fa fa-comment"></i>
                     <span>Vendor Reviews</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item {{ request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ Route('deliveryslot.index') }}">
                     <i class="fa fa-truck"></i>
-                    <span>DeliverySlot</span></a>
+                    <span>Delivery Slots</span></a>
             </li>
-            <li class="nav-item">
+
+            <li class="nav-item {{ request()->routeIs('cms_master.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ Route('cms_master.index') }}">
                     <i class="fa fa-list-check"></i>
-                    <span>CmsMaster</span></a>
+                    <span>CMS Master</span></a>
             </li>
-            <li class="nav-item">
+
+            <li class="nav-item {{ request()->routeIs('faq.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ Route('faq.index') }}">
                     <i class="fa fa-person-circle-question"></i>
-                    <span>Faq</span></a>
+                    <span>FAQs</span></a>
             </li>
-            <li class="nav-item">
+
+            <li class="nav-item {{ request()->routeIs('unitmaster.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ Route('unitmaster.index') }}">
                     <i class="fa fa-bookmark"></i>
-                    <span>UnitMaster</span></a>
+                    <span>Unit Master</span></a>
             </li>
-            <li class="nav-item">
+
+            <li class="nav-item {{ request()->routeIs('slider.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ Route('slider.index') }}">
                     <i class="fa fa-photo-film"></i>
                     <span>Slider</span></a>

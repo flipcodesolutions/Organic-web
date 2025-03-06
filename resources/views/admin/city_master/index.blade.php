@@ -64,7 +64,7 @@
                     <th>Area (GUJ)</th>
                     <th>Actions</th>
                 </tr>
-                
+
                 @foreach($data as $city)
                 <tr>
                     <td>{{ $city->id }}</td>
@@ -77,12 +77,13 @@
                     <td>{{ $city->area_guj }}</td>
 
                     <td>
-                        <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}"><i class="fas fa-edit"></i></a>
+                        <div class="d-flex">
+                            <a class="btn btn-primary" href="{{ route('city_master.edit')}}/ {{ $city->id }}"><i class="fas fa-edit"></i></a>
 
-                        <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                        onclick="openDeactiveModal('{{ route('city_master.deactive') }}/{{ $city->id }}')">
-                        <i class="fas fa-trash"></i>
-                        </a>
+                            <a href="javascript:void(0)" class="btn btn-danger ml-2" onclick="openDeactiveModal('{{ route('city_master.deactive') }}/{{ $city->id }}')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
                     </td>
                 </tr>
                 @endforeach

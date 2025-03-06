@@ -32,7 +32,7 @@
                                     {{ $data->per }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('pointper.edit') }}/{{ $data->id }}" class="btn btn-warning">
+                                    <a href="{{ route('pointper.edit') }}/{{ $data->id }}" class="btn btn-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     {{-- <a href="{{ route('navigate.deactive') }}/{{ $data->id }}"
