@@ -68,8 +68,6 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'otp' => 'required',
             'phone' => 'required|digits:10',
-            'latitude' => 'required',
-            'longitude' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -90,8 +88,11 @@ class UserController extends Controller
                 $user = new User();
                 $user->phone = $request->phone;
                 $user->is_verify_phone = 'yes';
-                $user->latitude = $request->latitude;
-                $user->longitude = $request->longitude;
+                if ($request->latitude && $request->longitude) {
+                    $user->latitude = $request->latitude;
+                    $user->longitude = $request->longitude;
+                }
+
                 $user->save();
             }
 
@@ -202,6 +203,8 @@ class UserController extends Controller
             'email' => 'required|email',
             'phone' => 'required',
             'pro_pic' => 'required',
+            'latitude'  => 'required',
+            'longitude'  => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -217,6 +220,8 @@ class UserController extends Controller
             $imageName = time() . '.' . $request->pro_pic->extension();
             $request->pro_pic->move(public_path('profile_pic'), $imageName);
             $user->pro_pic = 'profile_pic/' . $imageName;
+            $user->latitude = $request->latitude;
+            $user->longitude = $request->longitude;
             $user->save();
 
             return Util::getSuccessMessage('Profile Updated Successfully', $user);
