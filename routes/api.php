@@ -40,10 +40,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('editProfile', [UserController::class, 'editProfile']);
     Route::post('updateLanguage', [UserController::class, 'updateLanguage']);
     Route::post('updateFcmToken', [UserController::class, 'updateFcmToken']);
-    
-
-
-
 
     //sliders
     Route::get('sliders', [SliderController::class, 'sliders']);
