@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Create New Products</h6>
+                        <h6 class="mb-0" style="width: 200px">Create New Products</h6>
                     </div>
                     <div class="col" align="right">
                         <a href="{{ route('product.index') }}" class="btn btn-primary" type="button"> Back </a>
@@ -158,7 +158,7 @@
                                 </thead>
 
                                 <tbody id="unitTableBody">
-                                    <!-- Template Row (First row) -->
+                                <!-- Template Row (First row) -->
                                     <tr class="unitRow">
                                         <td>
                                             <select class="form-select form-select-lg mb-3" name="unit_id[]"
@@ -562,7 +562,7 @@
                         "Please enter a valid positive Number without decimals or special characters.";
                 }
             });
-            
+
             const disreg = /^(100|[1-9]?\d)$/;
             discount_per.forEach((d, index) => {
                 if (!d.value) {
@@ -1035,8 +1035,8 @@
             const unitCount = oldValues.unit_id.length;
             for (let i = 0; i < unitCount; i++) {
                 addNewRow(
-                    oldValues.unit_id[i], 
-                    oldValues.unit_det[i], 
+                    oldValues.unit_id[i],
+                    oldValues.unit_det[i],
                     oldValues.price[i],
                     oldValues.discount_per[i],
                     oldValues.selling_price[i]

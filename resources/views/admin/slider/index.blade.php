@@ -14,6 +14,38 @@
                     </div>
                 </div>
             </div>
+
+              {{-- filter --}}
+              <div class="mb-4 margin-bottom-30 m-4">
+                <form action="{{ Route('slider.index') }}" method="GET" class="filter-form">
+                    <div class="row align-items-end g-2">
+
+                        <!-- Global Search -->
+                        <div class="col">
+                            <label for="global" class="form-label"><b>Filter:</b></label>
+                            <input type="text" id="global" name="global" value="{{ request('global') }}"
+                                class="form-control" placeholder="Search by CityName">
+                        </div>
+
+                        <!--isavailable  Filter -->
+                        <div class="col">
+                            <label for="city_id" class="form-label"><b>CityName:</b></label>
+                            <select name="city_id" id="city_id" class="form-control">
+                                <option selected disabled>Select your CIty</option>
+                                @foreach ($cities as $cities)
+                                <option value="{{ $cities->id }}" {{ request('city_id') ==  $cities->id ? 'selected' : '' }}>{{$cities->city_name_eng}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Submit & Reset Buttons -->
+                        <div class="col-md-4 d-flex justify-content-end gap-2">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                            <a href="{{ Route('slider.index') }}" class="btn btn-danger">Reset</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="card-body table-responsive">
                 <table class="table table-bordered mt-2">
                     <tr>
@@ -28,8 +60,8 @@
                     @php
                         $index = 1;
                     @endphp
-                    @if (count($sliders) > 0)
-                        @foreach ($sliders as $sliders)
+                    @if (count($data) > 0)
+                        @foreach ($data as $sliders)
                             <tr>
                                 <td>{{ $index++ }}</td>
                                 <td>{{ $sliders->city->city_name_eng }}</td>

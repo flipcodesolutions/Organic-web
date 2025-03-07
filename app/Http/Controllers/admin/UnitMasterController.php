@@ -11,10 +11,19 @@ class UnitMasterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = UnitMaster::query();
+
+        if ($request->filled('global')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('unit', '=', $request->global); // Use exact match
+            });
+        }
+
+        $data = $query->where('status', 'active')->paginate(10);
         $unitmasters = UnitMaster::where('status', 'active')->get();
-        return view('admin.unitmaster.index', compact('unitmasters'));
+        return view('admin.unitmaster.index', compact('data', 'unitmasters'));
     }
 
     /**
@@ -22,6 +31,7 @@ class UnitMasterController extends Controller
      */
     public function create()
     {
+
         return view('admin.unitmaster.create');
     }
 
@@ -30,10 +40,21 @@ class UnitMasterController extends Controller
      */
     public function store(Request $request)
     {
+        //  validation
         $request->validate([
-            'unit' => 'required',
+            'unit' => [
+                'required',
+                'max:5',
+                'unique:unit_masters,unit',
+                'regex:/^[0-9]+[a-zA-Z]+$/',
+            ],
+        ], [
+            //  validation messages
+            'unit.required' => 'The unit name is required.',
+            'unit.max' => 'The unit name cannot exceed 5 characters.',
+            'unit.unique' => 'The unit name already exists in the system.',
+            'unit.regex' => 'The unit name must start with a number followed by letters (e.g., 10kg, 5g, 20lb).',
         ]);
-
         $unitmaster = new UnitMaster();
         $unitmaster->unit = $request->unit;
         $unitmaster->save();
@@ -63,8 +84,20 @@ class UnitMasterController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        //  validation
         $request->validate([
-            'unit' => 'required',
+            'unit' => [
+                'required',
+                'max:5',
+                'unique:unit_masters,unit',
+                'regex:/^[0-9]+[a-zA-Z]+$/',
+            ],
+        ], [
+            //  validation messages
+            'unit.required' => 'The unit name is required.',
+            'unit.max' => 'The unit name cannot exceed 5 characters.',
+            'unit.unique' => 'The unit name already exists in the system.',
+            'unit.regex' => 'The unit name must start with a number followed by letters (e.g., 10kg, 5g, 20lb).',
         ]);
 
         $unitmaster = UnitMaster::find($id);
@@ -80,15 +113,24 @@ class UnitMasterController extends Controller
     public function delete(string $id)
     {
         $unitmaster = UnitMaster::find($id);
-        $unitmaster->status ='deactive';
+        $unitmaster->status = 'deactive';
         $unitmaster->save();
 
         return redirect()->route('unitmaster.index')->with('msg', 'UnitMaster Deactivated Successfully');
     }
-    public function deactive()
+    public function deactive(Request $request)
     {
+        $query = UnitMaster::query();
+
+        if ($request->filled('global')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('unit', '=', $request->global);
+            });
+        }
+
+        $data = $query->where('status', 'deactive')->paginate(10);
         $unitmasters = UnitMaster::where('status', 'deactive')->get();
-        return view('admin.unitmaster.deactivedata', compact('unitmasters'));
+        return view('admin.unitmaster.deactivedata', compact('data', 'unitmasters'));
     }
     public function active($id)
     {
@@ -105,5 +147,4 @@ class UnitMasterController extends Controller
 
         return redirect()->route('unitmaster.index')->with('msg', 'UnitMaster Deleted Successfully');
     }
-
 }

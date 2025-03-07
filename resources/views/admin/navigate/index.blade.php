@@ -11,7 +11,7 @@
                 </div>
                 <div class="heading row align-items-center">
                     <div class="col d-flex align="right" style="gap: 3px">
-                        <a class="btn btn-danger" href="{{ route('navigate.deactiveindex') }}">Deactive Screens</a>
+                        <a class="b1 btn btn-danger" href="{{ route('navigate.deactiveindex') }}">Deactive Screens</a>
                         <a class="btn btn-primary" href="{{ route('navigate.create') }}">Add</a>
                     </div>
                 </div>

@@ -65,7 +65,7 @@
         <div class="sidebar">
             <div class="sidebar-content">
             <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar"
-                style="background-color:  #81A263; width: 10.5rem;">
+                style="background-color:  #81A263;">
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center"
@@ -73,14 +73,14 @@
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fa fa-shopping-cart"></i>
                     </div>
-                    <div class="sidebar-brand-text mx-3 ">Vegetable E-comm</div>
+                    <div class="sidebar-brand-text mx-3">Vegetable E-comm</div>
                 </a>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
-                
+
                 <li class="nav-item" >
                     <a class="nav-link" href="{{ route('home') }}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -110,7 +110,7 @@
                         <i class="fa fa-bell"></i>
                         <span>Notification</span></a>
                 </li>
-                
+
                 <li class="nav-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('pointper.index') }}">
                         <i class="fa fa-basket-shopping"></i>
@@ -125,17 +125,7 @@
                         <span>Modules</span></a>
                 </li> --}}
 
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="{{ route('image.index') }}">
-                        <i class="fa fa-bookmark"></i>
-                        <span>Images</span></a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('product.price.index') }}">
-                        <i class="fa fa-university"></i>
-                        <span>Product-Price</span></a> --}}
-                {{--
+              {{--
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('module.index') }}">
                         <i class="fa fa-bookmark"></i>

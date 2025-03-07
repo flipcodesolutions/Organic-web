@@ -10,8 +10,8 @@
                     <h6 class="mb-0">Products Management</h6>
                 </div>
                 <div class="heading d-flex row align-items-center">
-                    <div class="col" align="right" style="gap: 3px">
-                        <a class="btn btn-danger" href="{{ route('product.deactiveindex') }}">Deactive Products</a>
+                    <div class="col d-flex" align="right" style="gap: 3px">
+                        <a class="b1 btn btn-danger" href="{{ route('product.deactiveindex') }}">Deactive Products</a>
                         <a class="btn btn-primary" href="{{ route('product.create') }}">Add</a>
                     </div>
                 </div>

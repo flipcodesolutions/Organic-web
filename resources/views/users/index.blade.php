@@ -38,12 +38,14 @@
                             <td>{{ $user->role }}</td>
                             <td>{{ $user->default_language }}</td>
                             <td>
+                                <div class="d-flex">
                                 <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"
                                     onclick="openDeactiveModal('{{ route('user.deactive', $user->id) }}')">
                                     <i class="fa-solid fa-user-slash"></i>
                                 </a>
+                            </div>
                             </td>
                         </tr>
                     @endforeach
