@@ -11535,8 +11535,6 @@ a:focus {
     width: 13rem;
     height: 100vh;
     overflow-y: auto;
-    /* overflow-x: hidden; */
-    /* border-right: 1px grey;   */
 }
 
 /* Thin Scrollbar */
@@ -11551,7 +11549,7 @@ a:focus {
 
 /* Handle (the draggable part) */
 .sidebar-content::-webkit-scrollbar-thumb {
-    background: grey;
+    background: #365E32;
     /* Color of the scrollbar */
     border-radius: 10px;
     /* Rounded corners */
@@ -11563,7 +11561,6 @@ a:focus {
     /* Background of scrollbar track */
 }
     
-
 .sidebar .nav-item {
     position: relative
 }
@@ -11698,7 +11695,10 @@ a:focus {
     text-align: center;
     text-transform: uppercase;
     letter-spacing: .05rem;
-    z-index: 1
+    z-index: 1;
+    background-color: #365E32  !important;
+    color: white !important;
+
 }
 
 .sidebar .sidebar-brand .sidebar-brand-icon i {
