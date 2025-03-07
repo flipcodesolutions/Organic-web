@@ -156,7 +156,7 @@ class CityMasterController extends Controller
         try {
             $citymaster = CityMaster::find($id);
             $citymaster->delete();
-            return redirect()->route('city_master.index')->with('msg','Deleted Permenently');
+            return redirect()->route('city_master.index')->with('msg','Deleted Permanently');
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());

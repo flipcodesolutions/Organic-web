@@ -40,13 +40,13 @@
                         <td>{{ $city->status }}</td>
                         <td>
                             <div class="d-flex">
-                                <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure?')">
+                                <a href="{{ Route('city_master.active', $city->id) }}"
+                                    class="btn btn-primary">
                                     <i class="fas fa-undo"></i>
+                                </a>
 
-                                </button>
-                
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                onclick="openDeleteModal('{{ Route('city_master.index', $city->id) }}')">
+                                onclick="openDeleteModal('{{ Route('city_master.destroy', $city->id) }}')">
                                 <i class="fas fa-trash"></i>
                             </a>
 

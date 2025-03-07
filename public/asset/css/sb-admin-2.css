@@ -10723,6 +10723,7 @@ button.bg-dark:focus {
 .dropdown .dropdown-menu .dropdown-header,
 .sidebar .sidebar-heading {
   text-transform: uppercase !important;
+  
 }
 
 .text-capitalize {
@@ -12612,6 +12613,7 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 
+/* Sidebar scrollable */
 
 
 /* font css */
@@ -12662,3 +12664,6 @@ body.sidebar-toggled footer.sticky-footer {
   font-weight: 700;
   font-style: italic;
 }
+
+
+

@@ -39,7 +39,7 @@
                                     <a href="{{ Route('deliveryslot.active', $deliveryslots->id) }}"
                                         class="btn btn-primary">
                                         <i class="fas fa-undo"></i>
-                                    </a>
+                                    </a>  
                                     <a href="javascript:void(0)" class="btn btn-danger ml-2"
                                         onclick="openDeleteModal('{{ Route('deliveryslot.permdelete', $deliveryslots->id) }}')">
                                         <i class="fas fa-trash"></i>
