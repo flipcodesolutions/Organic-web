@@ -29,35 +29,39 @@
                                 <input type="text" name="product_name" id="product_name"
                                     value="{{ $product->productName }}" class="form-control">
                                 <label for="">English</label>
-                                <span>
+                                <span class="text-danger" id="productNameError"></span>
+                                {{-- <span>
                                     @error('product_name')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                </span>
+                                </span> --}}
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="product_name_guj" id="product_name"
+                                <input type="text" name="product_name_guj" id="product_name_guj"
                                     value="{{ $product->productNameGuj }}" class="form-control">
                                 <label for="">Gujarati</label>
-                                <span>
+                                <span class="text-danger" id="productNameGujError"></span>
+
+                                {{-- <span>
                                     @error('product_name_guj')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                </span>
+                                </span> --}}
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="product_name_hin" id="product_name"
+                                <input type="text" name="product_name_hin" id="product_name_hin"
                                     value="{{ $product->productNameHin }}" class="form-control">
                                 <label for="">Hindi</label>
-                                <span>
+                                <span class="text-danger" id="productNameHinError"></span>
+                                {{-- <span>
                                     @error('product_name_hin')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                </span>
+                                </span> --}}
                             </div>
                         </div>
                     </div>
@@ -70,15 +74,16 @@
                         <div class="col">
                             <div class="form-floating">
                                 <textarea class="ckeditor form-control" name="product_des" value="{{ old('product_des') }}" placeholder="product_des"
-                                    id="floatingTextarea">{{ $product->productDescription }}</textarea>
+                                    id="product_des">{{ $product->productDescription }}</textarea>
+                                <span class="text-danger" id="productDesError"></span>
                                 {{-- <input type="text" name="product_des" id="product_des"
                                     value="{{ $product->productDescription }}" class="form-control">
-                                <label for="">English</label> --}}
+                                <label for="">English</label>
                                 <span>
                                     @error('product_des')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                </span>
+                                </span> --}}
                             </div>
                         </div>
                     </div>
@@ -90,15 +95,16 @@
                         <div class="col">
                             <div class="form-floating">
                                 <textarea class="ckeditor form-control" name="product_des_guj" value="{{ old('product_des_guj') }}"
-                                    placeholder="product_des_guj" id="floatingTextarea">{{ $product->productDescriptionGuj }}</textarea>
+                                    placeholder="product_des_guj" id="product_des_guj">{{ $product->productDescriptionGuj }}</textarea>
+                                <span class="text-danger" id="productDesGujError"></span>
                                 {{-- <input type="text" name="product_des_guj" id="product_des"
                                     value="{{ $product->productDescriptionGuj }}" class="form-control">
-                                <label for="">Gujarati</label> --}}
+                                <label for="">Gujarati</label>
                                 <span>
                                     @error('product_des_guj')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                </span>
+                                </span> --}}
                             </div>
                         </div>
                     </div>
@@ -110,15 +116,16 @@
                         <div class="col">
                             <div class="form-floating">
                                 <textarea class="ckeditor form-control" name="product_des_hin" value="{{ old('product_des_hin') }}"
-                                    placeholder="product_des_hin" id="floatingTextarea">{{ $product->productDescriptionHin }}</textarea>
+                                    placeholder="product_des_hin" id="product_des_hin">{{ $product->productDescriptionHin }}</textarea>
+                                <span class="text-danger" id="productDesHinError"></span>
                                 {{-- <input type="text" name="product_des_hin" id="product_des"
                                     value="{{ $product->productDescriptionHin }}" class="form-control">
-                                <label for="">Hindi</label> --}}
+                                <label for="">Hindi</label>
                                 <span>
                                     @error('product_des_hin')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                </span>
+                                </span> --}}
                             </div>
                         </div>
                     </div>
@@ -157,7 +164,7 @@
                                 </thead>
                                 <tbody id="unitTableBody">
                                     <!-- Template Row (First row) -->
-                                    @foreach ($product->productUnit as $data)
+                                    @foreach ($product->productUnit as $index => $data)
                                         <input type="hidden" name="dataid[]" value="{{ $data->id }}">
                                         <tr>
                                             <td>
@@ -171,11 +178,12 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                                <span>
+                                                <span class="text-danger" id="unitIdError1"></span>
+                                                {{-- <span>
                                                     @error('unit_id')
                                                         <p class="text-danger">{{ $message }}</p>
                                                     @enderror
-                                                </span>
+                                                </span> --}}
                                             </td>
 
                                             <td>
@@ -184,53 +192,60 @@
                                                         placeholder="Unit Detail in Approx Weight" class="form-control"
                                                         value="{{ $data->detail }}">
                                                     <label for="">Approx Weight</label>
-                                                    <span>
+                                                    <span class="text-danger"
+                                                        id="unitDetError{{ $index + 1 }}"></span>
+                                                    {{-- <span>
                                                         @error('unit_det.*')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
-                                                    </span>
+                                                    </span> --}}
                                                 </div>
                                             </td>
 
                                             <td>
                                                 <div class="form-floating">
-                                                    <input type="number" name="product_price[]"
+                                                    <input type="text" name="product_price[]"
                                                         placeholder="Product Price" class="form-control"
                                                         value="{{ $data->price }}">
                                                     <label for="">Product Price</label>
-                                                    <span>
+                                                    <span class="text-danger"
+                                                        id="productPriceError{{ $index + 1 }}"></span>
+                                                    {{-- <span>
                                                         @error('product_price.*')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
-                                                    </span>
+                                                    </span> --}}
                                                 </div>
                                             </td>
 
                                             <td>
                                                 <div class="form-floating">
-                                                    <input type="number" name="discount_per[]"
+                                                    <input type="text" name="discount_per[]"
                                                         placeholder="Discount Percentage" class="form-control"
                                                         value="{{ $data->per }}">
                                                     <label for="">Discount Per</label>
-                                                    <span>
+                                                    <span class="text-danger" id="desPerError{{ $index + 1 }}"></span>
+                                                    {{-- <span>
                                                         @error('discount_per.*')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
-                                                    </span>
+                                                    </span> --}}
                                                 </div>
                                             </td>
 
                                             <td>
                                                 <div class="form-floating">
-                                                    <input type="number" name="selling_price[]"
+                                                    <input type="text" name="selling_price[]"
                                                         placeholder="Selling Price" class="form-control"
                                                         value="{{ $data->sell_price }}">
                                                     <label for="">Selling Price</label>
-                                                    <span>
+                                                    <span class="text-danger"
+                                                        id="sellPriceError{{ $index + 1 }}"></span>
+                                                    {{-- <span>
                                                         @error('selling_price.*')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
-                                                    </span>
+                                                    </span> --}}
                                                 </div>
                                             </td>
 
@@ -338,6 +353,7 @@
                                 </tbody> --}}
                                 {{-- <span id="unitTable"></span> --}}
                             </table>
+                            <span class="text-danger" id="unitError"></span>
                         </div>
                     </div>
 
@@ -348,14 +364,15 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="number" name="product_stock" id="product_stock"
+                                <input type="text" name="product_stock" id="product_stock"
                                     value="{{ $product->stock }}" class="form-control">
                                 <label for="">Stock</label>
-                                <span>
+                                <span class="text-danger" id="productStockError"></span>
+                                {{-- <span>
                                     @error('product_stock')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                </span>
+                                </span> --}}
                             </div>
                         </div>
                     </div>
@@ -374,7 +391,7 @@
                                             <div class="col">
                                                 <div class="image">
                                                     <img src="{{ asset('productImage/' . $image->url) }}" alt=""
-                                                        height="110px" width="100px" style="list-style-type:none">
+                                                      id="image"  height="110px" width="100px" style="list-style-type:none">
                                                 </div>
                                                 <div class="addimage" style="justify-content: center">
                                                     <a href="{{ route('productimage.delete', $image->id) }}"
@@ -396,10 +413,11 @@
                                     </div>
                                 </div>
                                 {{-- <div class="row p-0"> --}}
-                                    <div class="row">
-                                        <input type="file" class="form-control" id="photoUpload"
-                                            onchange="previewImages(event)" name="new_product_images[]" multiple>
-                                    </div>
+                                <div class="row">
+                                    <input type="file" class="form-control" id="photoUpload"
+                                        onchange="previewImages(event)" name="new_product_images[]" multiple>
+                                    <span class="text-danger" id="imageError"></span>
+                                </div>
                                 {{-- </div> --}}
                             </div>
                         </div>
@@ -417,8 +435,8 @@
                                     @if ($image->type == 'video')
                                         <div class="row my-1">
                                             <div class="col">
-                                                <input type="text" class="form-control" name="videolink"
-                                                    value="{{ $image->url }}" id="" readonly>
+                                                <input type="text" class="form-control" name="videolink[]"
+                                                    id="videolink" value="{{ $image->url }}" id="" readonly>
                                             </div>
                                             <div class="col-2">
                                                 <a href="{{ route('productimage.delete', $image->id) }}"
@@ -435,7 +453,10 @@
                                         {{-- <input type="text" class="form-control" id="videoLink"
                                             name="new_video_link[]" placeholder="Enter video link">
                                             <label for="videoLink">Video Link</label> --}}
-                                            <span id="videolinklist"> </span>
+                                        <span id="videolinklist"> </span>
+                                        <div>
+                                            <span class="text-danger" id="videoError"></span>
+                                        </div>
                                         <a class="btn btn-primary my-2" id="addVideo">+</a>
                                         <a class="btn btn-danger my-2" id="removeVideo">-</a>
                                     </div>
@@ -742,20 +763,29 @@
             const addVideoButton = document.getElementById("addVideo");
             const videoLinkInput = document.getElementById("videoLink");
 
-            document.getElementById('addVideo').addEventListener('click', function() {
+            function addVideoLink() {
 
                 const list = document.getElementById('videolinklist');
 
                 let newinput = document.createElement('input');
                 newinput.type = 'text';
                 newinput.classList.add('form-control', 'my-1');
-                newinput.id = 'videoLink';
+                newinput.id = 'newvideoLink';
                 newinput.name = 'new_video_link[]';
                 newinput.placeholder = 'Enter video link';
 
 
                 list.appendChild(newinput);
+            };
+
+            document.getElementById('addVideo').addEventListener('click', function() {
+                addVideoLink();
             });
+
+            const video = document.querySelectorAll('input#videolink');
+            if(video.length === 0){
+                addVideoLink();
+            }
 
             document.getElementById('removeVideo').addEventListener('click', function() {
                 const link = document.getElementById('videolinklist');
@@ -771,10 +801,14 @@
             const removeUnitBtn = document.getElementById("removeUnit");
             const unitTableBody = document.getElementById("unitTableBody");
 
-            addUnitBtn.addEventListener("click", function() {
+            let rowCounter = 0;
+
+            function addUnitRow() {
                 // Create a new row dynamically
                 const newRow = document.createElement("tr");
                 newRow.classList.add("unitRow");
+
+                rowCounter++;
 
                 newRow.innerHTML = `
                 <td>
@@ -784,48 +818,378 @@
                             <option value="{{ $data->id }}">{{ $data->unit }}</option>
                         @endforeach
                     </select>
-                    <span class="text-danger unitIdError"></span>
+                    <span class="text-danger" id="newUnitIdError${rowCounter}"></span>
                 </td>
                 <td>
                     <div class="form-floating">
                         <input type="text" name="new_unit_det[]" placeholder="Unit Detail in Approx Weight" class="form-control">
                         <label for="">Approx Weight</label>
-                        <span class="text-danger unitdetailError"></span>
+                    <span class="text-danger" id="newUnitDetError${rowCounter}"></span>
                     </div>
                 </td>
                 <td>
                     <div class="form-floating">
-                        <input type="number" name="new_product_price[].{{ $data->id }}" placeholder="Product Price" class="form-control" value="{{ $data->per }}">
+                        <input type="text" name="new_product_price[]" placeholder="Product Price" class="form-control" value="{{ $data->per }}">
                         <label for="">Product Price</label>
-                        <span class="text-danger productpriceError"></span>
+                    <span class="text-danger" id="newProductPriceError${rowCounter}"></span>
                     </div>
                 </td>
                 <td>
                     <div class="form-floating">
                         <input type="text" name="new_discount_per[]" placeholder="Discount Percentage" class="form-control">
                         <label for="">Discount Per</label>
-                        <span class="text-danger discountperError"></span>
+                    <span class="text-danger" id="newDisPerError${rowCounter}"></span>
                     </div>
                 </td>
                 <td>
                     <div class="form-floating">
                         <input type="text" name="new_selling_price[]" placeholder="Selling Price" class="form-control">
                         <label for="">Selling Price</label>
-                        <span class="text-danger sellingpriceError"></span>
+                    <span class="text-danger" id="newSellPriceError${rowCounter}"></span>
                     </div>
                 </td>
             `;
 
                 // Insert before the buttons row
                 unitTableBody.insertBefore(newRow, document.getElementById("unitButtonsRow"));
+            };
+
+            addUnitBtn.addEventListener("click", function(){
+                addUnitRow();
             });
 
             removeUnitBtn.addEventListener("click", function() {
                 const rows = document.querySelectorAll(".unitRow");
                 rows[rows.length - 1].remove(); // Remove the last added row
             });
+
+            const unit_id = document.querySelectorAll('select[name="unit_id[]"]');
+            if(unit_id.length === 0){
+                addUnitRow();
+            }
         });
     </script>
+
+    {{-- for validation --}}
+    <script>
+        function validateform() {
+            const errors = [];
+
+            const product_name = document.getElementById('product_name').value;
+            const product_name_guj = document.getElementById('product_name_guj').value;
+            const product_name_hin = document.getElementById('product_name_hin').value;
+
+            const product_des = document.getElementById('product_des').value;
+            const product_des_guj = document.getElementById('product_des_guj').value;
+            const product_des_hin = document.getElementById('product_des_hin').value;
+
+            const unit_id = document.querySelectorAll('select[name="unit_id[]"]');
+            const unit_det = document.querySelectorAll('input[name="unit_det[]"]');
+            const price = document.querySelectorAll('input[name="product_price[]"]');
+            const discount_per = document.querySelectorAll('input[name="discount_per[]"]');
+            const selling_price = document.querySelectorAll('input[name="selling_price[]"]');
+
+            const new_unit_id = document.querySelectorAll('select[name="new_unit_id[]"]');
+            const new_unit_det = document.querySelectorAll('input[name="new_unit_det[]"]');
+            const new_price = document.querySelectorAll('input[name="new_product_price[]"]');
+            const new_discount_per = document.querySelectorAll('input[name="new_discount_per[]"]');
+            const new_selling_price = document.querySelectorAll('input[name="new_selling_price[]"]');
+
+            const product_stock = document.getElementById('product_stock').value;
+
+            const images = document.querySelectorAll('img#image');
+            console.log(images);
+            const video = document.querySelectorAll('input#videolink');
+
+            const product_image = document.getElementById('photoUpload').files.length;
+            const newvideo = document.querySelectorAll('input#newvideoLink');
+
+            // Clear previous error messages
+            document.querySelectorAll('.text-danger').forEach(function(element) {
+                element.textContent = '';
+            });
+
+            if (!product_name) {
+                document.getElementById('productNameError').textContent = "Product name (English) is required.";
+            }
+
+            if (!product_name_guj) {
+                document.getElementById('productNameGujError').textContent = "Product name (Gujarati) is required.";
+            }
+
+            if (!product_name_hin) {
+                document.getElementById('productNameHinError').textContent = "Product name (Hindi) is required.";
+            }
+
+            // Validate product description
+            if (!product_des) {
+                document.getElementById('productDesError').textContent = "Product description (English) is required.";
+            }
+            if (!product_des_guj) {
+                document.getElementById('productDesGujError').textContent = "Product description (Gujarati) is required.";
+            }
+            if (!product_des_hin) {
+                document.getElementById('productDesHinError').textContent = "Product description (Hindi) is required.";
+            }
+
+            if (unit_id.length === 0 && new_unit_id.length === 0) {
+                document.getElementById('unitError').textContent = "You must provide at list one unit detail for product.";
+            }
+
+            unit_det.forEach((detail, index) => {
+                if (!detail.value) {
+                    document.getElementById(`unitDetError${index + 1}`).textContent = "Unit detail is required.";
+                }
+            });
+
+            // Validate price, discount, and selling price
+            const regex = /^[1-9]\d*$/;
+            price.forEach((p, index) => {
+                if (!p.value) {
+                    document.getElementById(`productPriceError${index + 1}`).textContent = "Price is required.";
+                } else if (!regex.test(p.value)) {
+                    document.getElementById(`productPriceError${index + 1}`).textContent =
+                        "Please enter a valid positive number without decimals or special characters.";
+                }
+            });
+
+            selling_price.forEach((s, index) => {
+                if (!s.value) {
+                    document.getElementById(`sellPriceError${index + 1}`).textContent =
+                        "Selling price is required.";
+                } else if (!regex.test(s.value)) {
+                    document.getElementById(`sellPriceError${index + 1}`).textContent =
+                        "Please enter a valid positive number without decimals or special characters.";
+                }
+            });
+
+            const disreg = /^(100|[1-9]?\d)$/;
+            discount_per.forEach((d, index) => {
+                if (!d.value) {
+                    document.getElementById(`disPerError${index + 1}`).textContent =
+                        "Discount percentage is required.";
+                } else if (!disreg.test(d.value)) {
+                    document.getElementById(`disPerError${index + 1}`).textContent =
+                        "Please enter a valid discount percentage between 1 to 100.";
+                }
+            });
+
+            new_unit_id.forEach((unit, index) => {
+                if (!unit.value || unit.value === "Select Unit") {
+                    document.getElementById(`newUnitIdError${index + 1}`).textContent = "Unit ID is required.";
+                }
+            });
+            new_unit_det.forEach((detail, index) => {
+                if (!detail.value) {
+                    document.getElementById(`newUnitDetError${index + 1}`).textContent = "Unit detail is required.";
+                }
+            });
+            new_price.forEach((p, index) => {
+                if (!p.value) {
+                    document.getElementById(`newProductPriceError${index + 1}`).textContent = "Price is required.";
+                } else if (!regex.test(p.value)) {
+                    document.getElementById(`newProductPriceError${index + 1}`).textContent =
+                        "Please enter a valid positive number without decimals or special characters.";
+                }
+            });
+            new_selling_price.forEach((s, index) => {
+                if (!s.value) {
+                    document.getElementById(`newSellPriceError${index + 1}`).textContent =
+                        "Selling price is required.";
+                } else if (!regex.test(s.value)) {
+                    document.getElementById(`newSellPriceError${index + 1}`).textContent =
+                        "Please enter a valid positive number without decimals or special characters.";
+                }
+            });
+            new_discount_per.forEach((d, index) => {
+                if (!d.value) {
+                    document.getElementById(`newDisPerError${index + 1}`).textContent =
+                        "Discount percentage is required.";
+                } else if (!disreg.test(d.value)) {
+                    document.getElementById(`newDisPerError${index + 1}`).textContent =
+                        "Please enter a valid discount percentage between 1 to 100.";
+                }
+            });
+
+            if (!product_stock || isNaN(product_stock)) {
+                document.getElementById('productStockError').textContent = "Product stock is required and must be numeric.";
+            }
+
+            if (images.length === 0 && video.length === 0 && product_image === 0 && newvideo.length === 0) {
+                document.getElementById("imageError").textContent =
+                    "You must provide at list one product image or a video link.";
+                document.getElementById("videoError").textContent =
+                    "You must provide at list one product image or a video link.";
+            }
+
+            // Check if there are any errors
+            const errorMessages = document.querySelectorAll('.text-danger');
+            for (let error of errorMessages) {
+                if (error.textContent.trim() !== '') {
+                    return false; // Prevent form submission if any error message exists
+                }
+            }
+
+            return true; // Allow form submission if no errors
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('productForm').onsubmit = function(event) {
+            if (!validateform()) {
+                event.preventDefault(); // Prevent form submission if validation fails
+            }
+        };
+    });
+
+        // document.getElementById('productForm').onsubmit = function(event) {
+        //     if (!validateForm()) {
+        //         event.preventDefault(); // Prevent form submission if validation fails
+        //     }
+        // };
+
+        // document.getElementById('productForm').onsubmit = function(event) {
+        //     if (!validateForm()) {
+        //         event.preventDefault(); // Prevent form submission if validation fails
+        //     }
+        // }
+    </script>
+
+    {{-- <script>
+        // Function to validate the form
+        // Function to validate the form
+        function validateForm() {
+            const errors = [];
+
+            // Get form values
+            const product_name = document.getElementById('product_name').value;
+            const product_name_guj = document.getElementById('product_name_guj').value;
+            const product_name_hin = document.getElementById('product_name_hin').value;
+            const product_des = document.getElementById('product_des').value;
+            const product_des_guj = document.getElementById('product_des_guj').value;
+            const product_des_hin = document.getElementById('product_des_hin').value;
+            const unit_id = document.querySelectorAll('select[name="unit_id[]"]');
+            const unit_det = document.querySelectorAll('input[name="unit_det[]"]');
+            const price = document.querySelectorAll('input[name="product_price[]"]');
+            const discount_per = document.querySelectorAll('input[name="discount_per[]"]');
+            const selling_price = document.querySelectorAll('input[name="selling_price[]"]');
+            const product_stock = document.getElementById('product_stock').value;
+            const season = document.querySelector('select[name="season"]').value;
+            const category_id = document.querySelector('select[name="category_id"]').value;
+            const product_image = document.getElementById('photoUpload').files.length;
+            const video_link = document.getElementById('videoLink').value;
+
+            // Clear previous error messages
+            document.querySelectorAll('.text-danger').forEach(function(element) {
+                element.textContent = '';
+            });
+
+            // Validate product name
+            if (!product_name) {
+                document.getElementById('productNameError').textContent = "Product name (English) is required.";
+            }
+
+            if (!product_name_guj) {
+                document.getElementById('productNameGujError').textContent = "Product name (Gujarati) is required.";
+            }
+
+            if (!product_name_hin) {
+                document.getElementById('productNameHinError').textContent = "Product name (Hindi) is required.";
+            }
+
+            // Validate product description
+            if (!product_des) {
+                document.getElementById('productDesError').textContent = "Product description (English) is required.";
+            }
+            if (!product_des_guj) {
+                document.getElementById('productDesGujError').textContent = "Product description (Gujarati) is required.";
+            }
+            if (!product_des_hin) {
+                document.getElementById('productDesHinError').textContent = "Product description (Hindi) is required.";
+            }
+
+            // Validate unit details
+            unit_id.forEach((unit, index) => {
+                if (!unit.value || unit.value === "Select Unit") {
+                    document.getElementById(`unitIdError${index + 1}`).textContent = "Unit ID is required.";
+                }
+            });
+            unit_det.forEach((detail, index) => {
+                if (!detail.value) {
+                    document.getElementById(`unitDetError${index + 1}`).textContent = "Unit detail is required.";
+                }
+            });
+
+            // Validate price, discount, and selling price
+            const regex = /^[1-9]\d*$/;
+            price.forEach((p, index) => {
+                if (!p.value) {
+                    document.getElementById(`productPriceError${index + 1}`).textContent = "Price is required.";
+                } else if (!regex.test(p.value)) {
+                    document.getElementById(`productPriceError${index + 1}`).textContent =
+                        "Please enter a valid positive number without decimals or special characters.";
+                }
+            });
+            selling_price.forEach((s, index) => {
+                if (!s.value) {
+                    document.getElementById(`sellPriceError${index + 1}`).textContent =
+                        "Selling price is required.";
+                } else if (!regex.test(s.value)) {
+                    document.getElementById(`sellPriceError${index + 1}`).textContent =
+                        "Please enter a valid positive number without decimals or special characters.";
+                }
+            });
+
+            const disreg = /^(100|[1-9]?\d)$/;
+            discount_per.forEach((d, index) => {
+                if (!d.value) {
+                    document.getElementById(`disPerError${index + 1}`).textContent =
+                        "Discount percentage is required.";
+                } else if (!disreg.test(d.value)) {
+                    document.getElementById(`disPerError${index + 1}`).textContent =
+                        "Please enter a valid discount percentage between 1 to 100.";
+                }
+            });
+
+            // Validate product stock
+            if (!product_stock || isNaN(product_stock)) {
+                document.getElementById('productStockError').textContent = "Product stock is required and must be numeric.";
+            }
+
+            // Validate season and category
+            if (!season || season === "Select Season") {
+                document.getElementById('seasonError').textContent = "Season is required.";
+            }
+
+            if (!category_id || category_id === "Select Category") {
+                document.getElementById('categoryError').textContent = "Category is required.";
+            }
+
+            // Validate image or video link (must provide at least one)
+            if (product_image === 0 && !video_link) {
+                document.getElementById("imageError").textContent =
+                    "You must provide either a product image or a video link.";
+                document.getElementById("videoError").textContent =
+                    "You must provide either a product image or a video link.";
+            }
+
+            // Check if there are any errors
+            const errorMessages = document.querySelectorAll('.text-danger');
+            for (let error of errorMessages) {
+                if (error.textContent.trim() !== '') {
+                    return false; // Prevent form submission if any error message exists
+                }
+            }
+
+            return true; // Allow form submission if no errors
+        }
+
+        // Attach validation function to form submit
+        document.getElementById('productForm').onsubmit = function(event) {
+            if (!validateForm()) {
+                event.preventDefault(); // Prevent form submission if validation fails
+            }
+        };
+    </script> --}}
 
 
     {{-- <script>
