@@ -15,7 +15,7 @@
             </div>
 
             <div class="card-body">
-                <form id="productForm" action="{{ route('pointper.update', $per->id ) }}" method="POST" class="form">
+                <form id="productForm" action="{{ route('pointper.update', $per->id) }}" method="POST" class="form">
                     @csrf
                     {{-- product stock --}}
                     <div class="row mb-3">
@@ -24,18 +24,20 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="number" name="pointpercentage" id="point_per"
-                                    placeholder="Point Percentage" class="form-control" value={{$per->per}}>
+                                <input type="text" name="pointpercentage" id="point_per" placeholder="Point Percentage"
+                                    class="form-control" value={{ $per->per }}>
                                 <label for="">Point Percentage</label>
-                                <span id="pointperError" class="text-danger"></span>
+                                @error('pointpercentage')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                     </div>
 
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i
-                                class="fa-solid fa-floppy-disk"></i> Submit</button>
+                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i class="fa-solid fa-floppy-disk"></i>
+                            Submit</button>
                     </div>
 
                 </form>

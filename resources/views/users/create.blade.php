@@ -35,12 +35,12 @@
                                             <input type="file" name="profilePic" id="profilePicInput"
                                                 placeholder="profile_pic" class="form-control"
                                                 onchange="previewImage(event)">
+                                            <span id="nameError" class="text-danger">
+                                                @error('profilepic')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
                                         </div>
-                                        <span id="nameError" class="text-danger">
-                                            @error('profilepic')
-                                                {{ $message }}
-                                            @enderror
-                                        </span>
                                         {{-- <input type="file" name="profilePic" placeholder="profile_pic" class="form-control"> --}}
                                     </div>
                                 </div>
@@ -54,18 +54,15 @@
                             Name<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="name" placeholder="Name" class="form-control">
-                                        <label for="floatingInput">Enter Name</label>
-                                        <span id="nameError" class="text-danger">
-                                            @error('name')
-                                                {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                </div>
+                            <div class="form-floating">
+                                <input type="text" name="name" placeholder="Name" class="form-control"
+                                    value="{{ old('name') }}">
+                                <label for="floatingInput">Enter Name</label>
+                                <span id="nameError" class="text-danger">
+                                    @error('name')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -76,18 +73,15 @@
                             Phone<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="number" name="phone" placeholder="Phone Number" class="form-control">
-                                        <label for="floatingInput">Enter Phone Number</label>
-                                        <span id="nameError" class="text-danger">
-                                            @error('phone')
-                                                {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                </div>
+                            <div class="form-floating">
+                                <input type="text" name="phone" placeholder="Phone Number" class="form-control"
+                                    value="{{ old('phone') }}">
+                                <label for="floatingInput">Enter Phone Number</label>
+                                <span id="nameError" class="text-danger">
+                                    @error('phone')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -98,18 +92,15 @@
                             Email<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="email" name="email" placeholder="Email" class="form-control">
-                                        <label for="floatingInput">Enter Email</label>
-                                        <span id="nameError" class="text-danger">
-                                            @error('email')
-                                                {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                </div>
+                            <div class="form-floating">
+                                <input type="email" name="email" placeholder="Email" class="form-control"
+                                    value="{{ old('email') }}">
+                                <label for="floatingInput">Enter Email</label>
+                                <span id="nameError" class="text-danger">
+                                    @error('email')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -120,18 +111,14 @@
                             Password<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="password" name="password" placeholder="Password" class="form-control">
-                                        <label for="floatingInput">Enter Password</label>
-                                        <span id="nameError" class="text-danger">
-                                            @error('password')
-                                                {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                </div>
+                            <div class="form-floating">
+                                <input type="password" name="password" placeholder="Password" class="form-control">
+                                <label for="floatingInput">Enter Password</label>
+                                <span id="nameError" class="text-danger">
+                                    @error('password')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -142,19 +129,15 @@
                             Confirm Password<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="password" name="confirm-password" placeholder="Confirm Password"
-                                            class="form-control">
-                                        <label for="floatingInput">Confirm Password</label>
-                                        <span id="nameError" class="text-danger">
-                                            @error('confirm-password')
-                                                {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                </div>
+                            <div class="form-floating">
+                                <input type="password" name="password_confirmation" placeholder="Confirm Password"
+                                    class="form-control">
+                                <label for="floatingInput">Confirm Password</label>
+                                <span id="nameError" class="text-danger">
+                                    @error('password_confirmation')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -168,10 +151,11 @@
                             <select class="form-select form-select-lg mb-3" name="role"
                                 aria-label="Large select example">
                                 <option selected disabled>--Select user role--</option>
-                                <option value="admin">Admin</option>
-                                <option value="manager">Manager</option>
-                                <option value="vendor">Vendor</option>
-                                <option value="customer">Customer</option>
+                                <option value="Admin"{{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="Manager"{{ old('role') == 'Manager' ? 'selected' : '' }}>Manager</option>
+                                <option value="Vendor"{{ old('role') == 'Vendor' ? 'selected' : '' }}>Vendor</option>
+                                <option value="Customer"{{ old('role') == 'Customer' ? 'selected' : '' }}>Customer
+                                </option>
                             </select>
                             <span id="nameError" class="text-danger">
                                 @error('role')
@@ -190,9 +174,12 @@
                             <select class="form-select form-select-lg mb-3" name="defaultLanguage"
                                 aria-label="Large select example">
                                 <option selected disabled>--Select Default Language--</option>
-                                <option value="english">English</option>
-                                <option value="gujarati">Gujarati</option>
-                                <option value="hindi">Hindi</option>
+                                <option value="English"{{ old('defaultLanguage') == 'English' ? 'selected' : '' }}>English
+                                </option>
+                                <option value="Gujarati"{{ old('defaultLanguage') == 'Gujarati' ? 'selected' : '' }}>
+                                    Gujarati</option>
+                                <option value="Hindi"{{ old('defaultLanguage') == 'Hindi' ? 'selected' : '' }}>Hindi
+                                </option>
                             </select>
                             <span id="nameError" class="text-danger">
                                 @error('defaultLanguage')

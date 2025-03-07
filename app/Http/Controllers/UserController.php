@@ -62,11 +62,13 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'phone' => 'required|numeric',
-            'email' => 'required',
+            'phone' => 'required|numeric|digits:10|unique:users,phone',
+            'email' => 'required|email|unique:users,email',
             'role' => 'required',
             'defaultLanguage' => 'required',
-            'profilepic' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'profilePic' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'password' => 'required|string|min:8|confirmed', // 'confirmed' will automatically validate if password and confirm-password match
+            'password_confirmation' => 'required|string|min:8'
         ]);
         // return $request;
         try {
@@ -141,20 +143,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id) //: RedirectResponse
     {
-        // return $request;
-        // $this->validate($request, [
-        //     'name' => 'required',
-        //     'email' => 'required|email|unique:users,email,' . $id,
-        //     'password' => 'same:confirm-password',
-        //     'roles' => 'required'
-        // ]);
         $request->validate([
             'name' => 'required',
-            'phone' => 'required|numeric',
-            'email' => 'required',
+            'phone' => 'required|numeric|digits:10',
+            'email' => 'required|email',
             'role' => 'required',
             'defaultLanguage' => 'required',
-            'profilepic' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'profilePic' => 'required|image|mimes:jpeg,png,jpg,gif'
         ]);
         try {
             $user = User::find($id);

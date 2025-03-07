@@ -909,16 +909,26 @@
                 element.textContent = '';
             });
 
+            let product_nameRegex = /^[A-Z][a-z]*$/;
             if (!product_name) {
                 document.getElementById('productNameError').textContent = "Product name (English) is required.";
+            } else if (!product_name || !product_nameRegex.test(product_name)) {
+                document.getElementById('productNameError').textContent =
+                    "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
             }
 
             if (!product_name_guj) {
                 document.getElementById('productNameGujError').textContent = "Product name (Gujarati) is required.";
+            } else if (!product_name_guj || !product_nameRegex.test(product_name_guj)) {
+                document.getElementById('productNameGujError').textContent =
+                    "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
             }
 
             if (!product_name_hin) {
                 document.getElementById('productNameHinError').textContent = "Product name (Hindi) is required.";
+            } else if (!product_name_hin || !product_nameRegex.test(product_name_hin)) {
+                document.getElementById('productNameHinError').textContent =
+                    "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
             }
 
             // Validate product description

@@ -127,7 +127,7 @@
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="navigate_screen"
                                 aria-label="Large select example">
-                                {{-- <option selected>Select Navigate Screen	</option> --}}
+                                <option selected disabled>Select Navigate Screen</option>
                                 @foreach ($screen as $data)
                                     <option value="{{ $data->screenname }}"
                                         {{ $notification->navigate_screen == $data->screenname ? 'selected' : '' }}>

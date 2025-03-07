@@ -85,93 +85,8 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // return $request; 
-        // dd($request->all());
-
-        // $request->validate([
-        //     'product_name' => 'required',
-        //     'product_name_guj' => 'required',
-        //     'product_name_hin' => 'required',
-        //     'product_des' => 'required',
-        //     'product_des_guj' => 'required',
-        //     'product_des_hin' => 'required',
-        //     'unit_id' => 'required|array|min:1',
-        //     // 'unit_id.*' => 'required|exists:units,id',
-        //     'unit_det' => 'required|array|min:1',
-        //     'unit_det.*' => 'required|string',
-        //     'price' => 'required|array|min:1',
-        //     'price.*' => 'required|numeric|not_in:null',
-        //     'discount_per' => 'required|array|min:1',
-        //     'discount_per.*' => 'required|numeric',
-        //     'selling_price' => 'required|array|min:1',
-        //     'selling_price.*' => 'required|numeric',
-        //     'product_stock' => 'required',
-        //     'season' => 'required',
-        //     'category_id' => 'required',
-        //     // Ensure that either 'product_image' or 'video_link' is provided
-        //     'product_image' => 'nullable|array|min:1|required_without:video_link',
-        //     'video_link' => 'nullable|array|min:1|required_without:product_image',
-        // ], [
-        //     'product_image.required_without' => 'You must provide either a product image or a video link.',
-        //     'video_link.required_without' => 'You must provide either a product image or a video link.',
-        // ]);
-        // return $request;
-
-        // $request->validate([
-        //     'product_name' => 'required',
-        //     'product_name_guj' => 'required',
-        //     'product_name_hin' => 'required',
-        //     'product_des' => 'required',
-        //     'product_des_guj' => 'required',
-        //     'product_des_hin' => 'required',
-        //     'unit_id' => 'required|array|min:1',
-        //     'unit_id.*' => 'required|exists:units,id', // No need for 'array' here
-        //     'unit_det' => 'required|array|min:1',
-        //     'unit_det.*' => 'required|string', // No need for 'array' here
-        //     'price' => 'required|array|min:1',
-        //     'price.*' => 'required|numeric|not_in:null', // No need for 'array' here
-        //     'discount_per' => 'required|array|min:1',
-        //     'discount_per.*' => 'required|numeric',
-        //     'selling_price' => 'required|array|min:1',
-        //     'selling_price.*' => 'required|numeric',
-        //     'product_stock' => 'required',
-        //     'season' => 'required',
-        //     'category_id' => 'required',
-        //     'product_image' => 'array|nullable|required_without:video_link',
-        //     'video_link' => 'array|nullable|required_without:product_image',
-        // ]);
-
-        // $validator = FacadesValidator::make($request->all(),[
-        //     'product_name' => 'required',
-        //     'product_name_guj' => 'required',
-        //     'product_name_hin' => 'required',
-        //     'product_des' => 'required',
-        //     'product_des_guj' => 'required',
-        //     'product_des_hin' => 'required',
-        //     'unit_id' => 'required|array|min:1',
-        //     'unit_id.*' => 'required|exists:units,id', // No need for 'array' here
-        //     'unit_det' => 'required|array|min:1',
-        //     'unit_det.*' => 'required|string', // No need for 'array' here
-        //     'price' => 'required|array|min:1',
-        //     'price.*' => 'required|numeric|not_in:null', // No need for 'array' here
-        //     'discount_per' => 'required|array|min:1',
-        //     'discount_per.*' => 'required|numeric',
-        //     'selling_price' => 'required|array|min:1',
-        //     'selling_price.*' => 'required|numeric',
-        //     'product_stock' => 'required',
-        //     'season' => 'required',
-        //     'category_id' => 'required',
-        //     'product_image' => 'array|nullable|required_without:video_link',
-        //     'video_link' => 'array|nullable|required_without:product_image',
-
-        // ]);
-
-        // if($validator->fails()){
-        //     return redirect()->back()->with('msg',$validator->errors());
-        // }
-
-        // return $request;
-        try {
+        try { 
+            // return $request->video_link[0];
             $product = new Product();
             $product->productName = $request->product_name;
             $product->productNameGuj = $request->product_name_guj;
@@ -208,7 +123,7 @@ class ProductController extends Controller
                 }
             }
 
-            if ($request->video_link !== null) {
+            if (isset($videoLink[0]) && $videoLink[0] !== null) {
                 foreach ($request->video_link as $data) {
                     ProductImage::create([
                         'productId' => $product->id,
@@ -276,57 +191,6 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         // return $request;
-        // $validator = FacadesValidator::make($request->all(), [
-        //     'product_name' => 'required',
-        //     'product_name_guj' => 'required',
-        //     'product_name_hin' => 'required',
-        //     'product_des' => 'required',
-        //     'product_des_guj' => 'required',
-        //     'product_des_hin' => 'required',
-        //     'unit_id' => 'required|array|min:1',
-        //     'unit_id.*' => 'required|exists:units,id', // No need for 'array' here
-        //     'unit_det' => 'required|array|min:1',
-        //     'unit_det.*' => 'required|string', // No need for 'array' here
-        //     'product_price' => 'required|array|min:1',
-        //     'product_price.*' => 'required|numeric|not_in:null', // No need for 'array' here
-        //     'discount_per' => 'required|array|min:1',
-        //     'discount_per.*' => 'required|numeric',
-        //     'selling_price' => 'required|array|min:1',
-        //     'selling_price.*' => 'required|numeric',
-        //     'product_stock' => 'required',
-        //     'season' => 'required',
-        //     'category_id' => 'required',
-        //     'product_image' => 'array|nullable|required_without:new_video_link', // Ensure "new_video_link" is correct
-        //     'new_video_link' => 'array|nullable|required_without:product_image',
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return redirect()->back()->with('msg', $validator->errors());
-        // }
-
-        // $request->validate([
-        //     'product_name' => 'required',
-        //     'product_name_guj' => 'required',
-        //     'product_name_hin' => 'required',
-        //     'product_des' => 'required',
-        //     'product_des_guj' => 'required',
-        //     'product_des_hin' => 'required',
-        //     'unit_id' => 'required|array|min:1',
-        //     'unit_id.*' => 'required|exists:units,id', // No need for 'array' here
-        //     'unit_det' => 'required|array|min:1',
-        //     'unit_det.*' => 'required|string', // No need for 'array' here
-        //     'price' => 'required|array|min:1',
-        //     'price.*' => 'required|numeric|not_in:null', // No need for 'array' here
-        //     'discount_per' => 'required|array|min:1',
-        //     'discount_per.*' => 'required|numeric',
-        //     'selling_price' => 'required|array|min:1',
-        //     'selling_price.*' => 'required|numeric',
-        //     'product_stock' => 'required',
-        //     'season' => 'required',
-        //     'category_id' => 'required',
-        //     // 'product_image' => 'array|nullable|required_without:video_link',
-        //     'video_link' => 'array|nullable|required_without:product_image',
-        // ]);
         try {
         // return $request;
         $product = Product::find($id);

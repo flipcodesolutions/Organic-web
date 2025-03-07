@@ -88,7 +88,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description<span class="text-danger">*</span>
+                            Description Gujarati<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating">
@@ -108,7 +108,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description<span class="text-danger">*</span>
+                            Description Hindi<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating">
@@ -159,8 +159,8 @@
                         <div class="col">
                             <select class="form-select ddCategory" name="parent_id" class="form-control">
                                 <option value="0" selected>-- select category --</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
+                                @foreach ($categories as $categorydata)
+                                    <option value="{{ $categorydata->id }}"{{ $categorydata->id == $category->parent_category_id ? 'selected' : '' }}>{{ $categorydata->categoryName }}</option>
                                 @endforeach
                             </select>
                             {{-- <select class="form-select ddCategory" name="parent_id" class="form-control">
