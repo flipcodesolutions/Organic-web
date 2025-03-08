@@ -64,7 +64,7 @@
                     {{-- Details --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Details<span class="text-danger">*</span>
+                            Details English<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating">
@@ -83,7 +83,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Details Guj<span class="text-danger">*</span>
+                            Details Gujarati<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating">
@@ -102,7 +102,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Details Hin<span class="text-danger">*</span>
+                            Details Hindi<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating">

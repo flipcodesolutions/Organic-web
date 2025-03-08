@@ -11,7 +11,7 @@
                 </div>
                 <div class="heading row align-items-center">
                     <div class="col d-flex align="right" style="gap: 3px">
-                        <a class="b1 btn btn-danger" href="{{ route('category.deactiveindex') }}">Deactive categories
+                        <a class="b1 btn btn-danger" href="{{ route('category.deactiveindex') }}">Deactive Categories
                         </a>
                         <a class="btn btn-primary" href="{{ route('category.create') }}">Add</a>
 
@@ -19,6 +19,7 @@
                 </div>
             </div>
 
+            {{-- filter --}}
             <div class="mb-4 margin-bottom-30 m-4">
                 <form action="{{ route('category.index') }}" method="GET" class="filter-form">
                     <div class="row align-items-end g-2">
@@ -36,8 +37,7 @@
                             <select id="parentCategoryId" name="parentCategoryId" class="form-select">
                                 <option value="" selected>Select Parent Category</option>
                                 @foreach ($categories as $categorydata)
-                                    <option value="{{ $categorydata->id }}"
-                                        {{ request('categoryId') == $categorydata->id ? 'selected' : '' }}>
+                                    <option value="{{ $categorydata->id }}"{{ request('parentCategoryId') == $categorydata->id ? 'selected' : '' }}>
                                         {{ $categorydata->categoryName }}
                                     </option>
                                 @endforeach
@@ -103,12 +103,12 @@
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{ route('category.edit') }}/{{ $categoryData->id }}"
-                                            class="btn btn-warning">
+                                            class="btn btn-primary">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="javascript:void(0)" class="btn btn-danger ml-2"
                                             onclick="openDeactiveModal('{{ route('category.deactive') }}/{{ $categoryData->id }}')">
-                                            <i class="fas fa-remove"></i>
+                                            <i class="fas fa-trash"></i>
                                         </a>
                                         {{-- <a href="{{ route('category.deactive') }}/{{ $categoryData->id }}" class="btn btn-danger">
                                         <i class="fas fa-remove"></i>

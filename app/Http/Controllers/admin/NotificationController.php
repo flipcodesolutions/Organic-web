@@ -12,10 +12,24 @@ class NotificationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $notification = Notification::where('status', 'active')->paginate(10);
-        return view('admin.notification.index', compact('notification'));
+        $query = Notification::query();
+
+        if ($request->filled('global')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->global . '%')
+                    ->orWhere('details', 'like', '%' . $request->global . '%');
+            });
+        }
+
+        if ($request->filled('navigateScreen')) {
+            $query->where('navigate_screen', $request->navigateScreen);
+        }
+
+        $data = $query->where('status', 'active')->paginate(10);
+        $screen = NavigateMaster::where('status', 'active')->get();
+        return view('admin.notification.index', compact('data', 'screen'));
     }
 
     /**
@@ -126,11 +140,25 @@ class NotificationController extends Controller
         return redirect()->route('notification.index')->with('msg', 'Notification Deactivated Successfully!');
     }
 
-    public function deactiveindex()
+    public function deactiveindex(Request $request)
     {
-        $notification = Notification::where('status', 'deactive')->paginate(10);
+        $query = Notification::query();
 
-        return view('admin.notification.deactiveindex', compact('notification'));
+        if ($request->filled('global')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->global . '%')
+                    ->orWhere('details', 'like', '%' . $request->global . '%');
+            });
+        }
+
+        if ($request->filled('navigateScreen')) {
+            $query->where('navigate_screen', $request->navigateScreen);
+        }
+
+        $data = $query->where('status', 'deactive')->paginate(10);
+        $screen = NavigateMaster::where('status', 'active')->get();
+
+        return view('admin.notification.deactiveindex', compact('data','screen'));
     }
 
     public function active($id)

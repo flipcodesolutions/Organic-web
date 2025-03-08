@@ -67,7 +67,7 @@
                     {{-- product description --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description Eng<span class="text-danger">*</span>
+                            Description English<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating">
@@ -86,7 +86,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description Guj<span class="text-danger">*</span>
+                            Description Gujarati<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating">
@@ -105,7 +105,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description Hin<span class="text-danger">*</span>
+                            Description Hindi<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating">
@@ -158,7 +158,7 @@
                                 </thead>
 
                                 <tbody id="unitTableBody">
-                                <!-- Template Row (First row) -->
+                                    <!-- Template Row (First row) -->
                                     <tr class="unitRow">
                                         <td>
                                             <select class="form-select form-select-lg mb-3" name="unit_id[]"
@@ -476,9 +476,12 @@
             const product_name = document.getElementById('product_name').value;
             const product_name_guj = document.getElementById('product_name_guj').value;
             const product_name_hin = document.getElementById('product_name_hin').value;
-            const product_des = document.getElementById('product_des').value;
-            const product_des_guj = document.getElementById('product_des_guj').value;
-            const product_des_hin = document.getElementById('product_des_hin').value;
+            const product_des = CKEDITOR.instances.product_des.getData();
+            const product_des_guj = CKEDITOR.instances.product_des_guj.getData();
+            const product_des_hin = CKEDITOR.instances.product_des_hin.getData();
+            // const product_des = document.getElementById('product_des').value;
+            // const product_des_guj = document.getElementById('product_des_guj').value;
+            // const product_des_hin = document.getElementById('product_des_hin').value;
             const unit_id = document.querySelectorAll('select[name="unit_id[]"]');
             const unit_det = document.querySelectorAll('input[name="unit_det[]"]');
             const price = document.querySelectorAll('input[name="price[]"]');
@@ -496,7 +499,7 @@
             });
 
             // Validate product name
-            let product_nameRegex = /^[A-Z][a-z]*$/;
+            let product_nameRegex = /^[A-Z][a-z]*(?: [A-Z][a-z]*)*$/;
             if (!product_name) {
                 document.getElementById('productNameError').textContent = "Product name (English) is required.";
             } else if (!product_name || !product_nameRegex.test(product_name)) {
@@ -544,7 +547,6 @@
             // Validate price, discount, and selling price
             const regex = /^[1-9]\d*$/;
             price.forEach((p, index) => {
-                console.log(p.value);
                 if (!p.value) {
                     document.getElementById(`productPriceError${index + 1}`).textContent = "Price is required.";
                 } else if (!regex.test(p.value)) {
@@ -553,7 +555,6 @@
                 }
             });
             selling_price.forEach((s, index) => {
-                console.log(s.value);
                 if (!s.value) {
                     document.getElementById(`sellPriceError${index + 1}`).textContent =
                         "Selling price is required.";
@@ -568,8 +569,9 @@
                 if (!d.value) {
                     document.getElementById(`disPerError${index + 1}`).textContent =
                         "Discount percentage is required.";
-                } else if (!disreg.test(d.value)){
-                    document.getElementById(`disPerError${index + 1}`).textContent = "Please enter a valid discount percentage between 1 to 100.";
+                } else if (!disreg.test(d.value)) {
+                    document.getElementById(`disPerError${index + 1}`).textContent =
+                        "Please enter a valid discount percentage between 1 to 100.";
                 }
             });
 

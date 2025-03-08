@@ -25,7 +25,21 @@ class UserController extends Controller
     public function index(Request $request) //: View
     {
         // $data = User::latest()->paginate(10);
-        $data = User::where('status', 'active')->paginate(10);
+        $query = User::query();
+
+        if ($request->filled('global')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->global . '%')
+                    ->orWhere('phone', 'like', '%' . $request->global . '%')
+                    ->orWhere('email', 'like', '%' . $request->global . '%');
+            });
+        }
+
+        if ($request->filled('role')) {
+            $query->where('role', $request->role);
+        }
+
+        $data = $query->where('status', 'active')->paginate(10);
 
         return view('users.index', compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -214,9 +228,23 @@ class UserController extends Controller
             ->with('msg', 'User deleted successfully');
     }
 
-    public function deactiveindex()
+    public function deactiveindex(Request $request)
     {
-        $data = User::where('status', 'deactive')->paginate(10);
+        $query = User::query();
+
+        if ($request->filled('global')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->global . '%')
+                    ->orWhere('phone', 'like', '%' . $request->global . '%')
+                    ->orWhere('email', 'like', '%' . $request->global . '%');
+            });
+        }
+
+        if ($request->filled('role')) {
+            $query->where('role', $request->role);
+        }
+
+        $data = $query->where('status', 'deactive')->paginate(10);
         return view('users.deactiveindex', compact('data'));
     }
 

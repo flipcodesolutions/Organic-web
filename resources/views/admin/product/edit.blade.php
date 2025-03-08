@@ -69,7 +69,7 @@
                     {{-- product description --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description Eng<span class="text-danger">*</span>
+                            Description English<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating">
@@ -90,7 +90,7 @@
 
                     <div class="row mb-2">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description Guj<span class="text-danger">*</span>
+                            Description Gujarati<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating">
@@ -111,7 +111,7 @@
 
                     <div class="row mb-2">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description Hin<span class="text-danger">*</span>
+                            Description Hindi<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating">
@@ -391,7 +391,8 @@
                                             <div class="col">
                                                 <div class="image">
                                                     <img src="{{ asset('productImage/' . $image->url) }}" alt=""
-                                                      id="image"  height="110px" width="100px" style="list-style-type:none">
+                                                        id="image" height="110px" width="100px"
+                                                        style="list-style-type:none">
                                                 </div>
                                                 <div class="addimage" style="justify-content: center">
                                                     <a href="{{ route('productimage.delete', $image->id) }}"
@@ -783,7 +784,7 @@
             });
 
             const video = document.querySelectorAll('input#videolink');
-            if(video.length === 0){
+            if (video.length === 0) {
                 addVideoLink();
             }
 
@@ -854,7 +855,7 @@
                 unitTableBody.insertBefore(newRow, document.getElementById("unitButtonsRow"));
             };
 
-            addUnitBtn.addEventListener("click", function(){
+            addUnitBtn.addEventListener("click", function() {
                 addUnitRow();
             });
 
@@ -864,7 +865,7 @@
             });
 
             const unit_id = document.querySelectorAll('select[name="unit_id[]"]');
-            if(unit_id.length === 0){
+            if (unit_id.length === 0) {
                 addUnitRow();
             }
         });
@@ -879,9 +880,13 @@
             const product_name_guj = document.getElementById('product_name_guj').value;
             const product_name_hin = document.getElementById('product_name_hin').value;
 
-            const product_des = document.getElementById('product_des').value;
-            const product_des_guj = document.getElementById('product_des_guj').value;
-            const product_des_hin = document.getElementById('product_des_hin').value;
+            const product_des = CKEDITOR.instances.product_des.getData();
+            const product_des_guj = CKEDITOR.instances.product_des_guj.getData();
+            const product_des_hin = CKEDITOR.instances.product_des_hin.getData();
+
+            // const product_des = document.getElementById('product_des').value;
+            // const product_des_guj = document.getElementById('product_des_guj').value;
+            // const product_des_hin = document.getElementById('product_des_hin').value;
 
             const unit_id = document.querySelectorAll('select[name="unit_id[]"]');
             const unit_det = document.querySelectorAll('input[name="unit_det[]"]');
@@ -898,7 +903,6 @@
             const product_stock = document.getElementById('product_stock').value;
 
             const images = document.querySelectorAll('img#image');
-            console.log(images);
             const video = document.querySelectorAll('input#videolink');
 
             const product_image = document.getElementById('photoUpload').files.length;
@@ -909,7 +913,7 @@
                 element.textContent = '';
             });
 
-            let product_nameRegex = /^[A-Z][a-z]*$/;
+            let product_nameRegex = /^[A-Z][a-z]*(?: [A-Z][a-z]*)*$/;
             if (!product_name) {
                 document.getElementById('productNameError').textContent = "Product name (English) is required.";
             } else if (!product_name || !product_nameRegex.test(product_name)) {
@@ -1044,12 +1048,12 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('productForm').onsubmit = function(event) {
-            if (!validateform()) {
-                event.preventDefault(); // Prevent form submission if validation fails
-            }
-        };
-    });
+            document.getElementById('productForm').onsubmit = function(event) {
+                if (!validateform()) {
+                    event.preventDefault(); // Prevent form submission if validation fails
+                }
+            };
+        });
 
         // document.getElementById('productForm').onsubmit = function(event) {
         //     if (!validateForm()) {

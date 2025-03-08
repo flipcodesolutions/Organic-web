@@ -34,7 +34,7 @@
                                 <option value="" selected>Select Parent Category</option>
                                 @foreach ($categories as $categorydata)
                                     <option value="{{ $categorydata->id }}"
-                                        {{ request('categoryId') == $categorydata->id ? 'selected' : '' }}>
+                                        {{ request('parentCategoryId') == $categorydata->id ? 'selected' : '' }}>
                                         {{ $categorydata->categoryName }}
                                     </option>
                                 @endforeach
@@ -91,8 +91,8 @@
                                 <td>
                                     <div class="d-flex">
                                     <a href="{{ route('category.active') }}/{{ $categoryData->id }}"
-                                        class="btn btn-warning">
-                                        <i class="fas fa-edit"></i>
+                                        class="btn btn-primary">
+                                        <i class="fas fa-undo"></i>
                                     </a>
                                     <a href="javascript:void(0)" class="btn btn-danger ml-2"
                                         onclick="openDeleteModal('{{ route('category.delete') }}/{{ $categoryData->id }}')">

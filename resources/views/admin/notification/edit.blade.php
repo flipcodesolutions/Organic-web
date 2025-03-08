@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0" style="width: 200px">Update New Notification</h6>
+                        <h6 class="mb-0" style="width: 200px">Update Notification</h6>
                     </div>
                     <div class="col" align="right">
                         <a href="{{ route('notification.index') }}" class="btn btn-primary" type="button"> Back </a>
@@ -15,7 +15,8 @@
             </div>
 
             <div class="card-body">
-                <form id="productForm" action="{{ route('notification.update') }}/{{ $notification->id }}" method="POST" class="form">
+                <form id="productForm" action="{{ route('notification.update') }}/{{ $notification->id }}" method="POST"
+                    class="form">
                     @csrf
 
                     {{-- title --}}
@@ -64,60 +65,63 @@
                     {{-- Details --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Details<span class="text-danger">*</span>
+                            Details English<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <textarea class="ckeditor form-control" name="details" value="{{ old('details') }}" placeholder="Details English"
-                                            id="floatingTextarea">{{ $notification->details }}</textarea>
-                                        {{-- <input type="text" name="details" id="details" placeholder="Details"
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="details" value="{{ old('details') }}" placeholder="Details English"
+                                    id="floatingTextarea">{{ $notification->details }}</textarea>
+                                {{-- <input type="text" name="details" id="details" placeholder="Details"
                                             class="form-control" value="{{ $notification->details }}">
                                         <label for="">English</label> --}}
-                                        <span>
-                                            @error('details')
-                                                <p class="text-danger">{{ $message }}</p>
-                                            @enderror
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <textarea class="ckeditor form-control" name="details_guj" value="{{ old('details_guj') }}"
-                                            placeholder="Details Gujarati" id="floatingTextarea">{{ $notification->detailsGuj }}</textarea>
-                                        {{-- <input type="text" name="details_guj" id="details"
-                                            placeholder="Details Gujarati" class="form-control"
-                                            value="{{ $notification->detailsGuj }}">
-                                        <label for="">Gujarati</label> --}}
-                                        <span>
-                                            @error('details_guj')
-                                                <p class="text-danger">{{ $message }}</p>
-                                            @enderror
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <textarea class="ckeditor form-control" name="details_hin" value="{{ old('details_hin') }}" placeholder="Details Hindi"
-                                            id="floatingTextarea">{{ $notification->detailsHin }}</textarea>
-                                        {{-- <input type="text" name="details_hin" id="details" placeholder="Details Hindi"
-                                            class="form-control" value="{{ $notification->detailsHin }}">
-                                        <label for="">Hindi</label> --}}
-                                        <span>
-                                            @error('details_hin')
-                                                <p class="text-danger">{{ $message }}</p>
-                                            @enderror
-                                        </span>
-                                    </div>
-                                </div>
+                                <span>
+                                    @error('details')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Details Gujarati<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="details_guj" value="{{ old('details_guj') }}"
+                                    placeholder="Details Gujarati" id="floatingTextarea">{{ $notification->detailsGuj }}</textarea>
+                                {{-- <input type="text" name="details_guj" id="details"
+                                            placeholder="Details Gujarati" class="form-control"
+                                            value="{{ $notification->detailsGuj }}">
+                                        <label for="">Gujarati</label> --}}
+                                <span>
+                                    @error('details_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Details Hindi<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="details_hin" value="{{ old('details_hin') }}" placeholder="Details Hindi"
+                                    id="floatingTextarea">{{ $notification->detailsHin }}</textarea>
+                                {{-- <input type="text" name="details_hin" id="details" placeholder="Details Hindi"
+                                            class="form-control" value="{{ $notification->detailsHin }}">
+                                        <label for="">Hindi</label> --}}
+                                <span>
+                                    @error('details_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
 
                     {{-- navigate screen --}}
                     <div class="row mb-3">

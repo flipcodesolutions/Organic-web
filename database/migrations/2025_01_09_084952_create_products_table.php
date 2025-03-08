@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('categoryId');
             $table->integer('userId');
             $table->string('stock');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('season');
             $table->enum('status', ['active', 'deactive'])->default('active');
             $table->timestamps();

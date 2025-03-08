@@ -151,10 +151,10 @@
                             <select class="form-select form-select-lg mb-3" name="role"
                                 aria-label="Large select example">
                                 <option selected disabled>--Select user role--</option>
-                                <option value="Admin"{{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="Manager"{{ old('role') == 'Manager' ? 'selected' : '' }}>Manager</option>
-                                <option value="Vendor"{{ old('role') == 'Vendor' ? 'selected' : '' }}>Vendor</option>
-                                <option value="Customer"{{ old('role') == 'Customer' ? 'selected' : '' }}>Customer
+                                <option value="admin"{{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="manager"{{ old('role') == 'manager' ? 'selected' : '' }}>Manager</option>
+                                <option value="vendor"{{ old('role') == 'vendor' ? 'selected' : '' }}>Vendor</option>
+                                <option value="customer"{{ old('role') == 'customer' ? 'selected' : '' }}>Customer
                                 </option>
                             </select>
                             <span id="nameError" class="text-danger">

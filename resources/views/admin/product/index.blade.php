@@ -170,12 +170,12 @@
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{ route('product.edit') }}/{{ $productData->id }}"
-                                            class="btn btn-warning">
+                                            class="btn btn-primary">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="javascript:void(0)" class="btn btn-danger ml-2"
                                             onclick="openDeactiveModal('{{ route('product.deactive') }}/{{ $productData->id }}')">
-                                            <i class="fa-regular fa-eye-slash"></i>
+                                            <i class="fas fa-trash"></i>
                                         </a>
                                         {{-- <a href="{{ route('product.deactive') }}/{{ $productData->id }}"
                                         class="btn btn-danger">
