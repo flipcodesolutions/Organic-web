@@ -111,7 +111,7 @@ class CityMasterController extends Controller
             return redirect()->route('city_master.index')->with('success', 'City updated successfully.');
         }
         catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
     }
     /**
@@ -144,8 +144,28 @@ class CityMasterController extends Controller
     public function deleted()
     {
         try {
-            $citymaster = CityMaster::where('status', 'deactive')->paginate(10);
-            return view('admin.city_master.deleted', compact('citymaster'))->with('msg','Deactivate The Data');
+            $query = CityMaster::query();
+
+            if ($request->filled('global')) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('city_name_eng', 'like', '%' . $request->global . '%');
+                    // ->orWhere('pincode', 'like', '%' . $request->global . '%');
+                });
+            }
+
+            if ($request->filled('cityId')) {
+                $query->where('id', $request->cityId);
+            }
+
+            $data = $query->where('status','deactive')->paginate(10);
+            $citymaster = CityMaster::where('status', 'deactive')->get();
+
+            return view('admin.city_master.deleted', compact('data','citymaster'));
+
+
+
+            // $citymaster = CityMaster::where('status', 'deactive')->paginate(10);
+            // return view('admin.city_master.deleted', compact('citymaster'))->with('msg','Deactivate The Data');
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
@@ -154,6 +174,7 @@ class CityMasterController extends Controller
     public function destroy($id)
     {
         try {
+
             $citymaster = CityMaster::find($id);
             $citymaster->delete();
             return redirect()->route('city_master.index')->with('msg','Deleted Permanently');
