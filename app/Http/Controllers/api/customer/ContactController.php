@@ -48,8 +48,15 @@ class ContactController extends Controller
     public function viewFaqs(Request $request)
     {
         try {
+            $language = Auth::user()->default_language;
+            $faqEnglishFields = ['*', 'question as displayQuestion', 'answer as displayAnswer'];
+            $faqGujaratiFields = ['*', 'questionGuj as displayQuestion', 'answerGuj as displayAnswer'];
+            $faqHindiFields = ['*', 'questionHin as displayQuestion', 'answerHin as displayAnswer'];
+
             $currentPage = $request->input('page', 1);
-            $faqs = Faq::paginate($request->input('limit', 10), ['*'], 'page', $currentPage);
+            $faqs = Faq::where('status', 'active')
+                ->select($language == 'Hindi' ? $faqHindiFields : ($language == 'Gujarati' ? $faqGujaratiFields : $faqEnglishFields))
+                ->paginate($request->input('limit', 10), ['*'], 'page', $currentPage);
 
             return Util::getSuccessMessage('Faqs', $faqs);
         } catch (Exception $e) {
@@ -63,9 +70,8 @@ class ContactController extends Controller
     public function review(Request $request)
     {
         try {
-            $reviews = Review::where('user_id', Auth::user()->id)
-                ->where('product_id', $request->product_id)
-                ->first();
+            $reviews = Review::where('product_id', $request->product_id)
+                ->get();
             return Util::getSuccessMessage('Reviews', $reviews);
         } catch (Exception $e) {
             return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);

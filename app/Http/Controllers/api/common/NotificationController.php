@@ -7,6 +7,7 @@ use App\Models\Notification;
 use App\Utils\Util;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
@@ -16,8 +17,16 @@ class NotificationController extends Controller
     public function notifications(Request $request)
     {
         try {
+            $language = Auth::user()->default_language;
             $currentPage = $request->input('page', 1);
-            $notifications = Notification::paginate($request->input('limit', 10), ['*'], 'page', $currentPage);
+
+            $notificationEnglishFields = ['*', 'title as displayTitle', 'details as displayDetails'];
+            $notificationGujaratiFields = ['*', 'titleGuj as displayTitle', 'detailsGuj as displayDetails'];
+            $notificationHindiFields = ['*', 'titleHin as displayTitle', 'detailsHin as displayDetails'];
+
+            $notifications = Notification::where('status', 'active')
+                ->select($language == 'Hindi' ? $notificationHindiFields : ($language == 'Gujarati' ? $notificationGujaratiFields : $notificationEnglishFields))
+                ->paginate($request->input('limit', 10), ['*'], 'page', $currentPage);
 
             return Util::getSuccessMessage('Notifications', $notifications);
         } catch (Exception $e) {

@@ -15,12 +15,11 @@ class CategoryController extends Controller
         try {
             $language = Auth::user()->default_language;
 
-            // Define category selection fields per language
+
             $categoriesEnglishFields = ['*', 'categoryName as displayName', 'categoryDescription as displayDescription'];
             $categoriesGujaratiFields = ['*', 'categoryNameGUj as displayName', 'categoryDescriptionGuj as displayDescription'];
             $categoriesHindiFields = ['*', 'categoryNameHin as displayName', 'categoryDescriptionHin as displayDescription'];
 
-            // Define child category selection fields per language
             $childEnglishFields = ['categories.*', 'categoryName as displayName', 'categoryDescription as displayDescription'];
             $childGujaratiFields = ['categories.*', 'categoryNameGUj as displayName', 'categoryDescriptionGuj as displayDescription'];
             $childHindiFields = ['categories.*', 'categoryNameHin as displayName', 'categoryDescriptionHin as displayDescription'];

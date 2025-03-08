@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Utils\Util;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -15,11 +16,17 @@ class ProductController extends Controller
     public function products(Request $request)
     {
         try {
+            $language = Auth::user()->default_language;
             $currentPage = $request->input('page', 1);
             $search = $request->input('search');
+            $productEnglishFields = ['*', 'productName as displayName', 'productDescription as displayDescription'];
+            $productGujaratiFields = ['*', 'productNameGUj as displayName', 'productDescriptionGuj as displayDescription'];
+            $productHindiFields = ['*', 'productNameHin as displayName', 'productDescriptionHin as displayDescription'];
 
             // Start query with relationships
-            $query = Product::with(['productImages', 'productUnit.unitMaster']);
+            $query = Product::with(['productImages', 'productUnit.unitMaster'])
+                ->where('status', 'active')
+                ->select($language == 'Hindi' ? $productHindiFields : ($language == 'Gujarati' ? $productGujaratiFields : $productEnglishFields));
 
             if (!empty($search)) {
                 $query->where(function ($q) use ($search) {

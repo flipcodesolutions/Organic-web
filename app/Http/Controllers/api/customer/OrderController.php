@@ -106,8 +106,26 @@ class OrderController extends Controller
     public function orderDetails($id)
     {
         try {
+            $language = Auth::user()->default_language;
+
+            $productEnglishFields = ['*', 'productName as displayName', 'productDescription as displayDescription'];
+            $productGujaratiFields = ['*', 'productNameGUj as displayName', 'productDescriptionGuj as displayDescription'];
+            $productHindiFields = ['*', 'productNameHin as displayName', 'productDescriptionHin as displayDescription'];
+
             $orderDetails = OrderDetail::where('id', $id)
-                ->with(['product.productImages'])
+                ->with([
+                    'product' => function ($query) use ($language, $productEnglishFields, $productGujaratiFields, $productHindiFields) {
+                        if ($language == 'Hindi') {
+                            $query->select($productHindiFields);
+                        } elseif ($language == 'Gujarati') {
+                            $query->select($productGujaratiFields);
+                        } else {
+                            $query->select($productEnglishFields);
+                        }
+                    },
+                    'product.productImages'
+                ])
+                ->where('status', 'active')
                 ->get();
             return Util::getSuccessMessage('Order Details', $orderDetails);
         } catch (Exception $e) {

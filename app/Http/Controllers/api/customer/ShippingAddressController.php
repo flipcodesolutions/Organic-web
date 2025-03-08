@@ -111,8 +111,16 @@ class ShippingAddressController extends Controller
     public function shippingWithLandmarkUser(Request $request)
     {
         try {
+            $language = Auth::user()->default_language;
             $currentPage = $request->input('page', 1);
-            $shippingAddress = Shipping_address::with('landmark')
+
+            $landmarkEnglishFields = ['*', 'landmark_eng as displayLandmark'];
+            $landmarkGujaratiFields = ['*', 'landmark_guj as displayLandmark'];
+            $landmarkHindiFields = ['*', 'landmark_hin as displayLandmark'];
+
+            $shippingAddress = Shipping_address::with(['landmark' => function ($query) use ($language, $landmarkEnglishFields, $landmarkGujaratiFields, $landmarkHindiFields) {
+                $query->select($language == 'Hindi' ? $landmarkHindiFields : ($language == 'Gujarati' ? $landmarkGujaratiFields : $landmarkEnglishFields));
+            }])
                 ->where('user_id', Auth::user()->id)
                 ->where('status', 'active')
                 ->paginate($request->input('limit', 10), ['*'], 'page', $currentPage);
