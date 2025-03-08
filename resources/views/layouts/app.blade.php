@@ -74,7 +74,7 @@
                     </div>
                     <div class="sidebar-brand-text mx-3">Vegetable E-comm</div>
                 </a>
-                
+
                 <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar"
                 style="background-color:  #81A263;">
 
@@ -83,7 +83,7 @@
 
                 <!-- Nav Item - Dashboard -->
 
-                <li class="nav-item" >
+                <li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}"">
                     <a class="nav-link" href="{{ route('home') }}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>

@@ -72,7 +72,7 @@
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{ Route('deliveryslot.edit', $deliveryslot->id) }}"
-                                            class="btn btn-primary">
+                                            class="btn btn-warning">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="javascript:void(0)" class="btn btn-danger ml-2"

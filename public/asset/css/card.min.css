@@ -51,3 +51,14 @@
 
 }
 
+@media screen and (max-width: 375px)
+{
+    .sidebar-content{
+        width: 7.5rem;
+    }
+    .container-fluid{
+       /* width: 250px; */
+       padding-left: 14px;
+       padding-right: 14px;
+    }
+}

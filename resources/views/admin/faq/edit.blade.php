@@ -5,7 +5,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Update New Faq</h6>
+                        <h6 class="mb-0">Update New Faqs</h6>
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-primary" href="{{ Route('faq.index') }}">Back</a>
