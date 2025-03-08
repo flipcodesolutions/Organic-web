@@ -6,11 +6,11 @@
 
         <div class="card shadow-sm  bg-body rounded">
             <div class="card-header d-flex">
-                <div class="col text-white mt-2">
+                <div class="col  text-white mt-2">
                     <h6 class="mb-0">Notification Management</h6>
                 </div>
                 <div class="heading row align-items-center">
-                    <div class="col d-flex align="right" style="gap: 3px">
+                    <div class="col d-flex align="right" style="gap: 3px; padding:0">
                         <a class="b1 btn btn-danger" href="{{ route('notification.deactiveindex') }}">Deactive Notifications </a>
                         <a class="btn btn-primary" href="{{ route('notification.create') }}">Add</a>
                     </div>
@@ -49,6 +49,7 @@
                             </td>
                             <td>{{ $data->navigate_screen }}</td>
                             <td>
+                                <div class="d-flex">
                                 <a href="{{ route('notification.edit') }}/{{ $data->id }}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
@@ -56,6 +57,7 @@
                                     onclick="openDeactiveModal('{{ route('notification.deactive') }}/{{ $data->id }}')">
                                     <i class="fas fa-remove"></i>
                                 </a>
+                            </div>
                                 {{-- <a href="{{ route('notification.deactive') }}/{{ $data->id }}" class="btn btn-danger">
                                         <i class="fas fa-remove"></i>
                                     </a> --}}

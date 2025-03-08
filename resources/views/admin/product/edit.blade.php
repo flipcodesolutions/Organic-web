@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Update New Product</h6>
+                        <h6 class="mb-0" style="width: 200px">Update New Product</h6>
                     </div>
                     <div class="col" align="right">
                         <a href="{{ route('product.index') }}" class="btn btn-secondary" type="button"> Back </a>

@@ -14,6 +14,40 @@
                     </div>
                 </div>
             </div>
+
+             {{-- filter --}}
+             <div class="mb-4 margin-bottom-30 m-4">
+                <form action="{{ Route('deliveryslot.deactive') }}" method="GET" class="filter-form">
+                    <div class="row align-items-end g-2">
+
+                        <!-- Global Search -->
+                        <div class="col">
+                            <label for="global" class="form-label"><b>Filter:</b></label>
+                            <input type="text" id="global" name="global" value="{{ request('global') }}"
+                                class="form-control" placeholder="Search by Time">
+                        </div>
+
+                        <!--isavailable  Filter -->
+                        <div class="col">
+                            <label for="isavailable" class="form-label"><b>isavailable:</b></label>
+                            <select name="isavailable" id="isavailable" class="form-control">
+                                <option selected disabled>Select your isavailable</option>
+                                <option value="Available" {{ request('isavailable') == 'Available' ? 'selected' : '' }}>
+                                    Available</option>
+                                <option value="NotAvailable"
+                                    {{ request('isavailable') == 'NotAvailable' ? 'selected' : '' }}>
+                                    NotAvailable</option>
+                            </select>
+                        </div>
+
+                        <!-- Submit & Reset Buttons -->
+                        <div class="col-md-4 d-flex justify-content-end gap-2">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                            <a href="{{ Route('deliveryslot.deactive') }}" class="btn btn-danger">Reset</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <adiv class="card-body table-responsive">
                 <div class="loader"></div>
                 <table class="table table-bordered mt-2">
@@ -27,8 +61,8 @@
                     @php
                         $index = 1;
                     @endphp
-                    @if (count($deliveryslots) > 0)
-                        @foreach ($deliveryslots as $deliveryslots)
+                    @if (count($data) > 0)
+                        @foreach ($data as $deliveryslots)
                             <tr>
                                 <td>{{ $index++ }}</td>
                                 <td>{{ $deliveryslots->startTime }}</td>
@@ -39,7 +73,7 @@
                                     <a href="{{ Route('deliveryslot.active', $deliveryslots->id) }}"
                                         class="btn btn-primary">
                                         <i class="fas fa-undo"></i>
-                                    </a>  
+                                    </a>
                                     <a href="javascript:void(0)" class="btn btn-danger ml-2"
                                         onclick="openDeleteModal('{{ Route('deliveryslot.permdelete', $deliveryslots->id) }}')">
                                         <i class="fas fa-trash"></i>

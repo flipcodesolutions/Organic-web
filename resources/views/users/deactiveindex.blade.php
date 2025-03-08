@@ -36,12 +36,14 @@
                                 {{ $user->role }}
                             </td>
                             <td>
+                                <div class="d-flex">
                                 <a href="{{ route('user.active', $user->id) }}" class="btn btn-primary">
                                     <i class="fa-solid fa-user"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"
                                     onclick="openDeleteModal('{{ route('user.delete', $user->id) }}')">
                                     <i class="fas fa-trash"></i>
                                 </a>
+                            </div>
                             </td>
                         </tr>
                     @endforeach
