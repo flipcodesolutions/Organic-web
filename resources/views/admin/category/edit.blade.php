@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Update New Category</h6>
+                        <h6 class="mb-0" style="width: 200px">Update New Category</h6>
                     </div>
                     <div class="col" align="right">
                         <a href="{{ route('category.index') }}" class="btn btn-primary" type="button"
@@ -17,7 +17,7 @@
 
             <div class="card-body">
                 <form action="{{ route('category.update') }}/{{ $category->id }}" method="post"
-                    enctype="multipart/form-data">
+                    enctype="multipart/form-data" class="form">
                     @csrf
 
                     {{-- category name --}}
@@ -88,7 +88,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description<span class="text-danger">*</span>
+                            Description Gujarati<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating">
@@ -108,7 +108,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description<span class="text-danger">*</span>
+                            Description Hindi<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating">
@@ -159,8 +159,8 @@
                         <div class="col">
                             <select class="form-select ddCategory" name="parent_id" class="form-control">
                                 <option value="0" selected>-- select category --</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
+                                @foreach ($categories as $categorydata)
+                                    <option value="{{ $categorydata->id }}"{{ $categorydata->id == $category->parent_category_id ? 'selected' : '' }}>{{ $categorydata->categoryName }}</option>
                                 @endforeach
                             </select>
                             {{-- <select class="form-select ddCategory" name="parent_id" class="form-control">
@@ -195,7 +195,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Parent Category:</strong>
-                            
+
                             <span id="parent_id_error" class="text-danger"></span>
                         </div>
                     </div>
@@ -264,7 +264,7 @@
                     success: function(response) {
                         if (response.success) {
                             // alert("Category created successfully!");
-                            window.location.href = "{{ route('category.index') }}"; 
+                            window.location.href = "{{ route('category.index') }}";
                         } else {
                             alert("Error: " + response.message);
                         }

@@ -5,7 +5,7 @@ use App\Http\Controllers\admin\LandmarkMasterController;
 use App\Http\Controllers\admin\ContactController;
 
 
-use App\Http\Controllers\Admin\AdminReviewController;
+use App\Http\Controllers\admin\AdminReviewController;
 use App\Http\Controllers\vendor\VendorReviewController;
 
 
@@ -20,8 +20,8 @@ Route::get('city/show/{id?}', [CityMasterController::class, 'show'])->name('city
 
 Route::get('city/deactive/{id?}', [CityMasterController::class, 'deactive'])->name('city_master.deactive');
 Route::get('city/deleted', [CityMasterController::class, 'deleted'])->name('city_master.deleted');
-Route::post('city/active/{id?}', [CityMasterController::class, 'active'])->name('city_master.active');
-Route::post('city/destroy/{id?}', [CityMasterController::class, 'destroy'])->name('city_master.destroy');
+Route::get('city/active/{id?}', [CityMasterController::class, 'active'])->name('city_master.active');
+Route::get('city/destroy/{id?}', [CityMasterController::class, 'destroy'])->name('city_master.destroy');
 
 
 
@@ -34,8 +34,8 @@ Route::get('landmark/show/{id?}', [LandmarkMasterController::class, 'show'])->na
 
 Route::get('landmark/deactive/{id?}', [LandmarkMasterController::class, 'deactive'])->name('landmark.deactive');
 Route::get('landmark/deleted', [LandmarkMasterController::class, 'deleted'])->name('landmark.deleted');
-Route::post('landmark/active/{id?}', [LandmarkMasterController::class, 'active'])->name('landmark.active');
-Route::post('landmark/destroy/{id?}', [LandmarkMasterController::class, 'destroy'])->name('landmark.destroy');
+Route::get('landmark/active/{id?}', [LandmarkMasterController::class, 'active'])->name('landmark.active');
+Route::get('landmark/destroy/{id?}', [LandmarkMasterController::class, 'destroy'])->name('landmark.destroy');
 
 
 

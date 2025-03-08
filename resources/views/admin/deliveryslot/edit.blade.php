@@ -14,7 +14,7 @@
             </div>
 
             <div class="card-body">
-                <form id="deliveryslotform" method="post" action="{{Route('deliveryslot.update',$deliveryslot->id)}}">
+                <form id="deliveryslotform" method="post" action="{{Route('deliveryslot.update',$deliveryslot->id)}}" class="form">
                     @csrf
                     {{-- deliveryslot --}}
                     {{--start time--}}

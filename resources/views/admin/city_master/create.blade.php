@@ -7,7 +7,7 @@
         <div class="card-header">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
-                    <h2 class="mb-0">Create New City</h2>
+                    <h6 class="mb-0">Create New City</h6>
                 </div>
                 <div class="col" align="right">
                     <a class="btn btn-primary" href="{{ Route('city_master.index') }}">Back</a>
@@ -17,7 +17,7 @@
 
         <div class="card-body">
 
-            <form action="{{ route('city_master.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('city_master.store') }}" method="post" enctype="multipart/form-data" class="form">
 
                 @csrf
                 {{-- City_Master --}}
@@ -31,27 +31,23 @@
                         <div class="form-floating">
                             <input type="text" name="city_name_eng" id="city_name_eng" placeholder="English" class="form-control">
                             <label for="city_name_eng">English</label>
+                            <span>
                             @error('city_name_eng')
-                            <span class="text-danger">{{ $message }}</span>
+                                <p class="text-danger">{{ $message }}</p>
                             @enderror
-                            <label for="city_name_eng">English</label>
-                            @error('city_name_eng')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                            <span id="nameError" class="text-danger"></span>
+                            </span>
+                            {{-- <span id="nameError" class="text-danger"></span> --}}
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-floating">
                             <input type="text" name="city_name_hin" id="city_name_hin" placeholder="Hindi" class="form-control">
+                            
                             <label for="city_name_hin">Hindi</label>
                             @error('city_name_hin')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
-                            <label for="city_name_hin">Hindi</label>
-                            @error('city_name_hin')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            
                             <span id="nameError" class="text-danger"></span>
                         </div>
                     </div>

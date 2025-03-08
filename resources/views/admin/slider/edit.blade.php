@@ -14,7 +14,7 @@
             </div>
 
             <div class="card-body">
-                <form id="slider" method="post" action="{{ Route('slider.update', $slider->id) }}" enctype="multipart/form-data">
+                <form id="slider" method="post" action="{{ Route('slider.update', $slider->id) }}" enctype="multipart/form-data" class="form">
                     @csrf
                     {{-- slider --}}
                     <div class="row mb-3">

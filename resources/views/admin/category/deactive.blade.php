@@ -8,7 +8,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Deactiveted Category</h6>
+                        <h6 class="mb-0">Deactive Category</h6>
                     </div>
                     <div class="col" align="right">
                         <a href="{{ route('category.index') }}" class="btn btn-primary" type="button"> Back </a>
@@ -89,6 +89,7 @@
                                         height="100px" width="150px">
                                 </td>
                                 <td>
+                                    <div class="d-flex">
                                     <a href="{{ route('category.active') }}/{{ $categoryData->id }}"
                                         class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
@@ -97,6 +98,7 @@
                                         onclick="openDeleteModal('{{ route('category.delete') }}/{{ $categoryData->id }}')">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                </div>
                                     {{-- <a href="{{ route('category.delete') }}/{{ $categoryData->id }}" class="btn btn-danger">
                                         <i class="fas fa-remove"></i>
                                     </a> --}}

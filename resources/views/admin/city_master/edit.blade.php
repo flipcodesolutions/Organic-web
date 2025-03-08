@@ -11,7 +11,7 @@
 
 <div class="card-body">
 
-    <form action="{{ route('city_master.update') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('city_master.update') }}" method="post" enctype="multipart/form-data" class="form">
 
         @csrf
         <input type="hidden" value="{{ $city_master->id }}" name="city_id">

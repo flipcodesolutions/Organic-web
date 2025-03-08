@@ -1,17 +1,14 @@
 @extends('layouts.app')
 @section('content')
-    @if (Session::has('msg'))
-        <p class="alert alert-info">{{ Session::get('msg') }}</p>
-    @endif
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
-                <div class="row d-flex align-items-center">
-                    <div class="col text-white">
-                        <h6 class="mb-0">Users Management</h6>
-                    </div>
-                    <div class="col" align="right">
+            <div class="card-header d-flex">
+                <div class="col text-white mt-2">
+                    <h6 class="mb-0">Users Management</h6>
+                </div>
+                <div class="heading row align-items-center">
+                    <div class="col d-flex align="right" style="gap: 3px">
                         <a class="btn btn-danger" href="{{ route('user.deactiveindex') }}">Deactive Users</a>
                         <a class="btn btn-primary" href="{{ route('user.create') }}">Add</a>
                     </div>
@@ -41,12 +38,14 @@
                             <td>{{ $user->role }}</td>
                             <td>{{ $user->default_language }}</td>
                             <td>
+                                <div class="d-flex">
                                 <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"
                                     onclick="openDeactiveModal('{{ route('user.deactive', $user->id) }}')">
-                                    <i class="fas fa-remove"></i>
+                                    <i class="fa-solid fa-user-slash"></i>
                                 </a>
+                            </div>
                             </td>
                         </tr>
                     @endforeach

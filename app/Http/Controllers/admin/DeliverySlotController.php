@@ -76,10 +76,26 @@ class DeliverySlotController extends Controller
         $deliveryslot->save();
         return redirect()->route('deliveryslot.index')->with('msg', 'DeliverySlot Deactivated Successfully');
     }
-    public function deactive()
+    public function deactive(Request $request)
     {
+        $query = DeliverySlot::query();
+
+        if($request->filled('global'))
+        {
+            $query->where(function ($q) use ($request){
+                // $q->where('startTime','like','%'.$request->global.'%');
+                $q->where('startTIme', '=', $request->global); // Use exact match
+            });
+        }
+
+        if($request->filled('isavailable'))
+        {
+            $query->where('isAvailable',$request->isavailable);
+        }
+
+        $data=$query->where('status','deactive')->paginate(10);
         $deliveryslots = DeliverySlot::where('status', 'deactive')->get();
-        return view('admin.deliveryslot.deactivedata', compact('deliveryslots'));
+        return view('admin.deliveryslot.deactivedata', compact('data','deliveryslots'));
     }
 
     public function active($id)

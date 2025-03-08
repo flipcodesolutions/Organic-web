@@ -3,16 +3,48 @@
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
-                <div class="row d-flex align-items-center">
-                    <div class="col text-white">
-                        <h6 class="mb-0">Slider Management</h6>
-                    </div>
-                    <div class="col" align="right">
+            <div class="card-header d-flex">
+                <div class="col text-white mt-2">
+                    <h6 class="mb-0">Slider Management</h6>
+                </div>
+                <div class="heading row align-items-center">
+                    <div class="col d-flex align="right" style="gap: 3px">
                         <a class="btn btn-danger" href="{{ Route('slider.deactive') }}">Deactive Slider</a>
                         <a class="btn btn-primary" href="{{ Route('slider.create') }}">Add</a>
                     </div>
                 </div>
+            </div>
+
+              {{-- filter --}}
+              <div class="mb-4 margin-bottom-30 m-4">
+                <form action="{{ Route('slider.index') }}" method="GET" class="filter-form">
+                    <div class="row align-items-end g-2">
+
+                        <!-- Global Search -->
+                        <div class="col">
+                            <label for="global" class="form-label"><b>Filter:</b></label>
+                            <input type="text" id="global" name="global" value="{{ request('global') }}"
+                                class="form-control" placeholder="Search by CityName">
+                        </div>
+
+                        <!--isavailable  Filter -->
+                        <div class="col">
+                            <label for="city_id" class="form-label"><b>CityName:</b></label>
+                            <select name="city_id" id="city_id" class="form-control">
+                                <option selected disabled>Select your CIty</option>
+                                @foreach ($cities as $cities)
+                                <option value="{{ $cities->id }}" {{ request('city_id') ==  $cities->id ? 'selected' : '' }}>{{$cities->city_name_eng}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Submit & Reset Buttons -->
+                        <div class="col-md-4 d-flex justify-content-end gap-2">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                            <a href="{{ Route('slider.index') }}" class="btn btn-danger">Reset</a>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="card-body table-responsive">
                 <table class="table table-bordered mt-2">
@@ -28,13 +60,14 @@
                     @php
                         $index = 1;
                     @endphp
-                    @if (count($sliders) > 0)
-                        @foreach ($sliders as $sliders)
+                    @if (count($data) > 0)
+                        @foreach ($data as $sliders)
                             <tr>
                                 <td>{{ $index++ }}</td>
                                 <td>{{ $sliders->city->city_name_eng }}</td>
                                 <td>
-                                    <img src="{{asset('sliderimage/'.$sliders->url)}}" alt="" width="180px" height="120px">
+                                    <img src="{{ asset('sliderimage/' . $sliders->url) }}" alt="" width="180px"
+                                        height="120px">
                                 </td>
                                 <td>{{ $sliders->slider_pos }}</td>
 
@@ -51,14 +84,14 @@
 
                                 <td>
                                     <div class="d-flex">
-                                    <a href="{{ Route('slider.edit', $sliders->id) }}" class="btn btn-primary">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                        onclick="openDeactiveModal('{{ Route('slider.delete', $sliders->id) }}')">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </div>
+                                        <a href="{{ Route('slider.edit', $sliders->id) }}" class="btn btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                            onclick="openDeactiveModal('{{ Route('slider.delete', $sliders->id) }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

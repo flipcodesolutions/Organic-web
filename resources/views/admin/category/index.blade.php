@@ -5,16 +5,16 @@
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
-                <div class="row d-flex align-items-center">
-                    <div class="col text-white">
-                        <h6 class="mb-0">Category Management</h6>
-                    </div>
-                    <div class="col" align="right">
-                        {{-- </div>
-                        <div class="col" align="right"> --}}
-                        <a class="btn btn-danger" href="{{ route('category.deactiveindex') }}">Deactive categories </a>
+            <div class="card-header d-flex">
+                <div class="col text-white mt-2">
+                    <h6 class="mb-0">Category Management</h6>
+                </div>
+                <div class="heading row align-items-center">
+                    <div class="col d-flex align="right" style="gap: 3px">
+                        <a class="b1 btn btn-danger" href="{{ route('category.deactiveindex') }}">Deactive categories
+                        </a>
                         <a class="btn btn-primary" href="{{ route('category.create') }}">Add</a>
+
                     </div>
                 </div>
             </div>
@@ -85,10 +85,15 @@
                                     </ul> --}}
                                 </td>
                                 <td>
+                                    @foreach ($categories as $perentdata)
+                                        @if ($perentdata->id == $categoryData->parent_category_id)
+                                            {{ $perentdata->categoryName }}
+                                        @endif
+                                    @endforeach
                                     {{-- @if ($categoryData->parent_id == 0)
                                         -
                                     @else --}}
-                                    {{ $categoryData->parent_category_id }}
+                                    {{-- {{ $categoryData->parent_category_id }} --}}
                                     {{-- @endif --}}
                                 </td>
                                 <td>

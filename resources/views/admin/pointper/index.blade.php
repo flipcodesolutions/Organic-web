@@ -8,7 +8,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Point Percentage Management</h6>
+                        <h6 class="mb-0" style="width: 230px">Point Percentage Management</h6>
                     </div>
                     <div class="col" align="right">
                         {{-- <a class="btn btn-primary" href="{{ route('navigate.create') }}">Add</a> --}}
@@ -32,7 +32,7 @@
                                     {{ $data->per }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('pointper.edit') }}/{{ $data->id }}" class="btn btn-warning">
+                                    <a href="{{ route('pointper.edit') }}/{{ $data->id }}" class="btn btn-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     {{-- <a href="{{ route('navigate.deactive') }}/{{ $data->id }}"

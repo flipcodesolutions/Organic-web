@@ -14,10 +14,28 @@ class SliderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $sliders = Slider::with('city', 'navigatemaster')->where('status', 'active')->get();
-        return view('admin.slider.index', compact('sliders'));
+        $query = Slider::query();
+
+        if($request->filled('global'))
+        {
+            $query->where(function ($q) use ($request){
+                $q->where('city_id','like','%'.$request->global.'%');
+            });
+        }
+
+        if($request->filled('city_id'))
+        {
+            $query->where('city_id',$request->city_id);
+        }
+
+        $data = $query->with('city', 'navigatemaster')->where('status', 'active')->paginate(10);
+        $cities = CityMaster::where('status','active')->get();
+        // return $cities;
+        // $sliders = Slider::with('city', 'navigatemaster')->where('status', 'active')->get();
+        // return $data;
+        return view('admin.slider.index', compact('data','cities'));
     }
 
     /**

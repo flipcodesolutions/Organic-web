@@ -5,7 +5,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Edit User Info</h6>
+                        <h6 class="mb-0">Update New UserInfo</h6>
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-primary" href="{{ Route('user.index') }}">Back</a>
@@ -14,7 +14,8 @@
             </div>
 
             <div class="card-body">
-                <form method="post" action="{{ route('user.update', $user->id) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('user.update', $user->id) }}" enctype="multipart/form-data"
+                    class="form">
                     @csrf
 
                     {{-- ptofile picture --}}
@@ -36,6 +37,11 @@
                                             <input type="file" name="profilePic" id="profilePicInput"
                                                 placeholder="profile_pic" class="form-control"
                                                 onchange="previewImage(event)">
+                                            <span id="nameError" class="text-danger">
+                                                @error('profilepic')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
                                         </div>
                                         {{-- <input type="file" name="profilePic" placeholder="profile_pic" class="form-control"> --}}
                                     </div>
@@ -50,14 +56,15 @@
                             Name<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="name" placeholder="Name" class="form-control"
-                                            value="{{ $user->name }}">
-                                        <label for="floatingInput">Enter Name</label>
-                                    </div>
-                                </div>
+                            <div class="form-floating">
+                                <input type="text" name="name" placeholder="Name" class="form-control"
+                                    value="{{ $user->name }}">
+                                <label for="floatingInput">Enter Name</label>
+                                <span id="nameError" class="text-danger">
+                                    @error('name')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -68,19 +75,15 @@
                             Phone<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="number" name="phone" placeholder="Phone Number" class="form-control"
-                                            value="{{ $user->phone }}">
-                                        <label for="floatingInput">Enter Phone Number</label>
-                                        <span id="nameError" class="text-danger">
-                                            @error('phone')
-                                                {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                </div>
+                            <div class="form-floating">
+                                <input type="number" name="phone" placeholder="Phone Number" class="form-control"
+                                    value="{{ $user->phone }}">
+                                <label for="floatingInput">Enter Phone Number</label>
+                                <span id="nameError" class="text-danger">
+                                    @error('phone')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -91,14 +94,15 @@
                             Email<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="email" name="email" placeholder="Email" class="form-control"
-                                            value="{{ $user->email }}">
-                                        <label for="floatingInput">Enter Email</label>
-                                    </div>
-                                </div>
+                            <div class="form-floating">
+                                <input type="email" name="email" placeholder="Email" class="form-control"
+                                    value="{{ $user->email }}">
+                                <label for="floatingInput">Enter Email</label>
+                                <span id="nameError" class="text-danger">
+                                    @error('email')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -149,8 +153,11 @@
                                 <option value="customer"{{ $user->role == 'customer' ? 'selected' : '' }}>Customer</option>
                             </select>
                         </div>
-                        <span id="roleError" class="text-danger"></span>
-                    </div>
+                        <span id="nameError" class="text-danger">
+                            @error('role')
+                                {{ $message }}
+                            @enderror
+                        </span>                    </div>
 
                     {{-- default language --}}
                     <div class="row mb-3">
@@ -161,11 +168,11 @@
                             <select class="form-select form-select-lg mb-3" name="defaultLanguage"
                                 aria-label="Large select example">
                                 <option selected disabled>--Select Default Language--</option>
-                                <option value="english"{{ $user->default_language == 'english' ? 'selected' : '' }}>English
+                                <option value="English"{{ $user->default_language == 'English' ? 'selected' : '' }}>English
                                 </option>
-                                <option value="gujarati"{{ $user->default_language == 'gujarati' ? 'selected' : '' }}>
+                                <option value="Gujarati"{{ $user->default_language == 'Eujarati' ? 'selected' : '' }}>
                                     Gujarati</option>
-                                <option value="hindi"{{ $user->default_language == 'hindi' ? 'selected' : '' }}>Hindi
+                                <option value="Hindi"{{ $user->default_language == 'Hindi' ? 'selected' : '' }}>Hindi
                                 </option>
                             </select>
                             <span id="nameError" class="text-danger">
