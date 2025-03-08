@@ -2699,7 +2699,7 @@ fieldset:disabled a.btn {
 
 .btn-primary:hover {
     color: #365E32;
-    background-color: #fff !important;
+    /* background-color: #fff !important; */
     border-color: #365E32 !important;
 }
 
@@ -11002,7 +11002,6 @@ a:focus {
 #wrapper #content-wrapper {
     background-color: #f8f9fc;
     width: 100%;
-    overflow-x: hidden
 }
 
 #wrapper #content-wrapper #content {
@@ -11531,36 +11530,30 @@ a:focus {
     color: #858796
 }
 
-.sidebar-content {
+/* .sidebar-content {
     width: 13rem;
     height: 100vh;
     overflow-y: auto;
-}
+} */
 
 /* Thin Scrollbar */
 
 /* Target the scrollbar */
-.sidebar-content::-webkit-scrollbar {
-    width: 4px;
-    /* Scrollbar width (vertical) */
+/* .sidebar-content::-webkit-scrollbar {
+    width: 4px;  
     height: 4px;
-    /* Scrollbar height (horizontal) */
+    
 }
 
-/* Handle (the draggable part) */
 .sidebar-content::-webkit-scrollbar-thumb {
     background: #365E32;
-    /* Color of the scrollbar */
     border-radius: 10px;
-    /* Rounded corners */
 }
 
-/* Track (the background) */
 .sidebar-content::-webkit-scrollbar-track {
     background: #f0f0f0;
-    /* Background of scrollbar track */
-}
-    
+} */
+
 .sidebar .nav-item {
     position: relative
 }
@@ -11696,7 +11689,7 @@ a:focus {
     text-transform: uppercase;
     letter-spacing: .05rem;
     z-index: 1;
-    background-color: #365E32  !important;
+    background-color: #365E32 !important;
     color: white !important;
 
 }

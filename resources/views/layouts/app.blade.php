@@ -62,8 +62,8 @@
     <div id="wrapper" class="overlay-menu">
 
         <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="sidebar-content">
+        {{-- <div class="sidebar">
+            <div class="sidebar-content"> --}}
             <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar"
                 style="background-color:  #81A263;">
 
@@ -75,8 +75,8 @@
                     <div class="sidebar-brand-text mx-3">Vegetable E-comm</div>
                 </a>
                 
-                <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar"
-                style="background-color:  #81A263;">
+                {{-- <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar"
+                style="background-color:  #81A263;"> --}}
 
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
@@ -118,35 +118,6 @@
                         <i class="fa fa-basket-shopping"></i>
                         <span>Point Per</span></a>
                 </li>
-
-                {{-- <li class="nav-item"> --}}
-                {{--
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('module.index') }}">
-                        <i class="fa fa-bookmark"></i>
-                        <span>Modules</span></a>
-                </li> --}}
-
-              {{--
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('module.index') }}">
-                        <i class="fa fa-bookmark"></i>
-                        <span>Modules</span></a>
-                </li> --}}
-
-                {{-- <li class="nav-item mb-0">
-                    <a class="nav-link" href="{{ route('image.index') }}" title="Manage Images">
-                        <i class="fas fa-image"></i>
-                        <span style="font-size:20px">Images</span></a>
-                </li> --}}
-
-                {{-- <li class="nav-item mb-0">
-                    <a class="nav-link" href="{{ route('product.price.index') }}" title="Manage Product Pricing">
-                        <i class="fas fa-tag"></i>
-                        <span style="font-size:20px">Product-Price</span></a>
-                </li>
-                --}}
-
 
                 <li class="nav-item {{ request()->routeIs('city_master.*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('city_master.index') }}">
@@ -275,8 +246,8 @@
                 </div>
 
         </ul>
-    </div>
-</div>
+    {{-- </div>
+</div> --}}
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->

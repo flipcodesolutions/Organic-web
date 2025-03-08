@@ -120,10 +120,10 @@ class CityMasterController extends Controller
     public function deactive($id)
     {
         try {
-            $city_master = CityMaster::find($id);
-            $city_master->status = 'deactive';
-            $city_master->save();
-            return redirect()->route('city_master.index')->with('msg', 'CityMaster Deactivated Successfully');
+            $citymaster = CityMaster::find($id);
+            $citymaster->status = 'deactive';
+            $citymaster->save();
+            return redirect()->route('city_master.index')->with('msg','City Deactivated Successfully');
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
@@ -141,31 +141,33 @@ class CityMasterController extends Controller
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
     }
-    public function deleted()
+    public function deleted(Request $request)
     {
         try {
-            $query = CityMaster::query();
-
-            if ($request->filled('global')) {
-                $query->where(function ($q) use ($request) {
-                    $q->where('city_name_eng', 'like', '%' . $request->global . '%');
-                    // ->orWhere('pincode', 'like', '%' . $request->global . '%');
-                });
-            }
-
-            if ($request->filled('cityId')) {
-                $query->where('id', $request->cityId);
-            }
-
-            $data = $query->where('status','deactive')->paginate(10);
-            $citymaster = CityMaster::where('status', 'deactive')->get();
-
-            return view('admin.city_master.deleted', compact('data','citymaster'));
-
-
 
             // $citymaster = CityMaster::where('status', 'deactive')->paginate(10);
             // return view('admin.city_master.deleted', compact('citymaster'))->with('msg','Deactivate The Data');
+
+            $query = CityMaster::query();
+
+            // Filter Logic
+            if ($request->filled('global')) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('city_name_eng', 'like', '%' . $request->global . '%')
+                      ->orWhere('pincode', 'like', '%' . $request->global . '%');
+                });
+            }
+    
+            if ($request->filled('cityId')) {
+                $query->where('id', $request->cityId);
+            }
+    
+            // Fetch Deactive Cities
+            $data = $query->where('status', 'deactive')->paginate(10);
+            $cities = CityMaster::where('status', 'deactive')->get();
+    
+            return view('admin.city_master.deactive', compact('data', 'cities'));
+
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
@@ -174,7 +176,6 @@ class CityMasterController extends Controller
     public function destroy($id)
     {
         try {
-
             $citymaster = CityMaster::find($id);
             $citymaster->delete();
             return redirect()->route('city_master.index')->with('msg','Deleted Permanently');
