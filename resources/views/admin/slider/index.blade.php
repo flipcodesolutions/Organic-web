@@ -15,8 +15,8 @@
                 </div>
             </div>
 
-              {{-- filter --}}
-              <div class="mb-4 margin-bottom-30 m-4">
+            {{-- filter --}}
+            <div class="mb-4 margin-bottom-30 m-4">
                 <form action="{{ Route('slider.index') }}" method="GET" class="filter-form">
                     <div class="row align-items-end g-2">
 
@@ -27,19 +27,33 @@
                                 class="form-control" placeholder="Search by CityName">
                         </div>
 
-                        <!--isavailable  Filter -->
+                        <!--cityname  Filter -->
                         <div class="col">
                             <label for="city_id" class="form-label"><b>CityName:</b></label>
                             <select name="city_id" id="city_id" class="form-control">
                                 <option selected disabled>Select your CIty</option>
                                 @foreach ($cities as $cities)
-                                <option value="{{ $cities->id }}" {{ request('city_id') ==  $cities->id ? 'selected' : '' }}>{{$cities->city_name_eng}}</option>
+                                    <option value="{{ $cities->id }}"
+                                        {{ request('city_id') == $cities->id ? 'selected' : '' }}>
+                                        {{ $cities->city_name_eng }}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <!--sliderpos  Filter -->
+                        <div class="col">
+                            <label for="slider_pos" class="form-label"><b>SliderPos:</b></label>
+                            <select name="slider_pos" id="slider_pos" class="form-control">
+                                <option selected disabled>Select your SliderPosition</option>
+                                <option value="top"{{ request('slider_pos') == 'top' ? 'selected' : '' }}>Top</option>
+                                <option value="bottom"{{ request('slider_pos') == 'bottom' ? 'selected' : '' }}>Bottom
+                                </option>
+                                <option value="middle"{{ request('slider_pos') == 'middle' ? 'selected' : '' }}>Middle
+                                </option>
                             </select>
                         </div>
 
                         <!-- Submit & Reset Buttons -->
-                        <div class="col-md-4 d-flex justify-content-end gap-2">
+                        <div class="col d-flex justify-content-end gap-2">
                             <button type="submit" class="btn btn-primary">Filter</button>
                             <a href="{{ Route('slider.index') }}" class="btn btn-danger">Reset</a>
                         </div>
@@ -84,7 +98,7 @@
 
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{ Route('slider.edit', $sliders->id) }}" class="btn btn-primary">
+                                        <a href="{{ Route('slider.edit', $sliders->id) }}" class="btn btn-warning">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="javascript:void(0)" class="btn btn-danger ml-2"

@@ -13,6 +13,53 @@
                     </div>
                 </div>
             </div>
+
+              {{-- filter --}}
+              <div class="mb-4 margin-bottom-30 m-4">
+                <form action="{{ Route('slider.deactive') }}" method="GET" class="filter-form">
+                    <div class="row align-items-end g-2">
+
+                        <!-- Global Search -->
+                        <div class="col">
+                            <label for="global" class="form-label"><b>Filter:</b></label>
+                            <input type="text" id="global" name="global" value="{{ request('global') }}"
+                                class="form-control" placeholder="Search by CityName">
+                        </div>
+
+                        <!--cityname  Filter -->
+                        <div class="col">
+                            <label for="city_id" class="form-label"><b>CityName:</b></label>
+                            <select name="city_id" id="city_id" class="form-control">
+                                <option selected disabled>Select your CIty</option>
+                                @foreach ($cities as $cities)
+                                    <option value="{{ $cities->id }}"
+                                        {{ request('city_id') == $cities->id ? 'selected' : '' }}>
+                                        {{ $cities->city_name_eng }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <!--sliderpos  Filter -->
+                        <div class="col">
+                            <label for="slider_pos" class="form-label"><b>SliderPos:</b></label>
+                            <select name="slider_pos" id="slider_pos" class="form-control">
+                                <option selected disabled>Select your SliderPosition</option>
+                                <option value="top"{{ request('slider_pos') == 'top' ? 'selected' : '' }}>Top</option>
+                                <option value="bottom"{{ request('slider_pos') == 'bottom' ? 'selected' : '' }}>Bottom
+                                </option>
+                                <option value="middle"{{ request('slider_pos') == 'middle' ? 'selected' : '' }}>Middle
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Submit & Reset Buttons -->
+                        <div class="col d-flex justify-content-end gap-2">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                            <a href="{{ Route('slider.deactive') }}" class="btn btn-danger">Reset</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
             <div class="card-body table-responsive">
                 <table class="table table-bordered mt-2">
                     <tr>
@@ -27,8 +74,8 @@
                     @php
                         $index = 1;
                     @endphp
-                    @if (count($sliders)>0)
-                    @foreach ($sliders as $sliders)
+                    @if (count($data)>0)
+                    @foreach ($data as $sliders)
                         <tr>
                             <td>{{ $index++ }}</td>
                             <td>{{ $sliders->city->city_name_eng }}</td>

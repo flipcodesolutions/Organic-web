@@ -20,8 +20,9 @@ class SliderController extends Controller
 
         if($request->filled('global'))
         {
-            $query->where(function ($q) use ($request){
-                $q->where('city_id','like','%'.$request->global.'%');
+
+            $query->whereHas('city', function ($q) use ($request) {
+                $q->where('city_name_eng', 'like', '%' . $request->global . '%');
             });
         }
 
@@ -29,11 +30,16 @@ class SliderController extends Controller
         {
             $query->where('city_id',$request->city_id);
         }
+        if($request->filled('slider_pos'))
+        {
+            $query->where('slider_pos',$request->slider_pos);
+
+        }
+
 
         $data = $query->with('city', 'navigatemaster')->where('status', 'active')->paginate(10);
         $cities = CityMaster::where('status','active')->get();
         // return $cities;
-        // $sliders = Slider::with('city', 'navigatemaster')->where('status', 'active')->get();
         // return $data;
         return view('admin.slider.index', compact('data','cities'));
     }
@@ -149,10 +155,34 @@ class SliderController extends Controller
 
         return redirect()->route('slider.index')->with('msg', 'Slider Deactivated Successfully');
     }
-    public function deactive()
+    public function deactive(Request $request)
     {
-        $sliders = Slider::where('status', 'deactive')->get();
-        return view('admin.slider.deactivedata', compact('sliders'));
+
+        $query = Slider::query();
+
+        if($request->filled('global'))
+        {
+            $query->whereHas('city',function ($q) use ($request){
+                $q->where('city_name_eng','like','%'.$request->global.'%');
+            });
+        }
+
+        if($request->filled('city_id'))
+        {
+            $query->where('city_id',$request->city_id);
+        }
+
+        if($request->filled('slider_pos'))
+        {
+            $query->where('slider_pos',$request->slider_pos);
+        }
+
+        $data = $query->with('city')->where('status', 'deactive')->paginate(10);
+        // return $data;
+        $cities = CityMaster::all();
+        // $sliders = Slider::where('status', 'deactive')->get();
+
+        return view('admin.slider.deactivedata', compact('data','cities'));
     }
     public function active($id)
     {
