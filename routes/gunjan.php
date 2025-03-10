@@ -18,7 +18,7 @@ Route::get('city/edit/{id?}', [CityMasterController::class, 'edit'])->name('city
 Route::post('city/update/{id?}', [CityMasterController::class, 'update'])->name('city_master.update');
 Route::get('city/show/{id?}', [CityMasterController::class, 'show'])->name('city_master.show');
 
-Route::get('city/deactive/{id?}', [CityMasterController::class, 'deactive'])->name('city_master.deactive');
+Route::get('city/deactive{id?}', [CityMasterController::class, 'deactive'])->name('city_master.deactive');
 Route::get('city/deleted', [CityMasterController::class, 'deleted'])->name('city_master.deleted');
 Route::get('city/active/{id?}', [CityMasterController::class, 'active'])->name('city_master.active');
 Route::get('city/destroy/{id?}', [CityMasterController::class, 'destroy'])->name('city_master.destroy');
@@ -40,9 +40,6 @@ Route::get('landmark/destroy/{id?}', [LandmarkMasterController::class, 'destroy'
 
 
 Route::get('contact',[ContactController::class,'index'])->name('contact.index');
-
-
-
 
 Route::get('/admin/reviews', [AdminReviewController::class, 'index'])->name('admin.reviews.index');
 

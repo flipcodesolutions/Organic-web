@@ -58,7 +58,7 @@
                             @error('city_name_guj')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
-                            <span id="nameError" class="text-danger"></span>
+                            
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                             @error('pincode')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
-                            <span id="nameError" class="text-danger"></span>
+                            
                         </div>
                     </div>
                 </div>
