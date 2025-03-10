@@ -17,7 +17,6 @@ class SliderController extends Controller
     {
         try {
             $language = Auth::user()->default_language;
-            $currentPage = $request->input('page', 1);
 
             $cityEnglishFields = ['*', 'city_name_eng as displayName', 'area_eng as displayArea'];
             $cityGujaratiFields = ['*', 'city_name_guj as displayName', 'area_guj as displayArea'];
@@ -27,8 +26,7 @@ class SliderController extends Controller
                 $q->select($language == 'Hindi' ? $cityHindiFields : ($language == 'Gujarati' ? $cityGujaratiFields : $cityEnglishFields));
             }, 'navigatemaster'])
                 ->where('status', 'active')
-                ->paginate($request->input('limit', 10), ['*'], 'page', $currentPage);
-
+                ->get();
             return Util::getSuccessMessage('Sliders', $sliders);
         } catch (\Exception $e) {
             return Util::getErrorMessage($e->getMessage());
