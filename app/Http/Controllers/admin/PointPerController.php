@@ -14,7 +14,7 @@ class PointPerController extends Controller
     public function index()
     {
         $per = PointPer::get();
-        return view('admin.pointper.index',compact('per'));
+        return view('admin.pointper.index', compact('per'));
     }
 
     /**
@@ -47,19 +47,22 @@ class PointPerController extends Controller
     public function edit(string $id)
     {
         $per = PointPer::find($id);
-        return view('admin.pointper.edit',compact('per'));
+        return view('admin.pointper.edit', compact('per'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'pointpercentage' => 'required|numeric'
+        ]);
         $per = Pointper::find($id);
         $per->per = $request->pointpercentage;
         $per->save();
 
-        return redirect()->route('pointper.index')->with('success','Percentage updated successfully!');
+        return redirect()->route('pointper.index')->with('msg', 'Percentage updated successfully!');
     }
 
     /**

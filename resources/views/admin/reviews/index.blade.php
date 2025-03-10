@@ -4,10 +4,10 @@
 
 <div class="container">
     <div class="card shadow-sm  bg-body rounded">
-        <div class="card-header" style="background-color: #19aa5c">
+        <div class="card-header">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
-                    <h2 class="mb-4">All Product Reviews</h2>
+                    <h6 class="mb-0">All Product Reviews</h6>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
                                 <th>User</th>
                                 <th>Message</th>
                                 <th>Rating</th>
-                                <th>Status</th>
+
                             </tr>
                         </thead>
                         <tbody>

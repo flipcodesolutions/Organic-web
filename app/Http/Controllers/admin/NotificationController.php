@@ -12,10 +12,24 @@ class NotificationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $notification = Notification::where('status','active')->paginate(10);
-        return view('admin.notification.index',compact('notification'));
+        $query = Notification::query();
+
+        if ($request->filled('global')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->global . '%')
+                    ->orWhere('details', 'like', '%' . $request->global . '%');
+            });
+        }
+
+        if ($request->filled('navigateScreen')) {
+            $query->where('navigate_screen', $request->navigateScreen);
+        }
+
+        $data = $query->where('status', 'active')->paginate(10);
+        $screen = NavigateMaster::where('status', 'active')->get();
+        return view('admin.notification.index', compact('data', 'screen'));
     }
 
     /**
@@ -23,8 +37,8 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        $screen = NavigateMaster::where('status','active')->get();
-        return view('admin.notification.create',compact('screen'));
+        $screen = NavigateMaster::where('status', 'active')->get();
+        return view('admin.notification.create', compact('screen'));
     }
 
     /**
@@ -32,18 +46,30 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
-        $newdata = new Notification();
-        $newdata->title = $request->title;
-        $newdata->titleGuj = $request->title_guj;
-        $newdata->titleHin = $request->title_hin;
-        $newdata->details = $request->details;
-        $newdata->detailsGuj = $request->details_guj;
-        $newdata->detailsHin = $request->details_hin;
-        $newdata->navigate_screen = $request->navigate_screen;
-        $newdata->save();
+        $request->validate([
+            'title' => 'required',
+            'title_guj' => 'required',
+            'title_hin' => 'required',
+            'details' => 'required',
+            'details_guj' => 'required',
+            'details_hin' => 'required',
+            'navigate_screen' => 'required',
+        ]);
+        try {
+            $newdata = new Notification();
+            $newdata->title = $request->title;
+            $newdata->titleGuj = $request->title_guj;
+            $newdata->titleHin = $request->title_hin;
+            $newdata->details = $request->details;
+            $newdata->detailsGuj = $request->details_guj;
+            $newdata->detailsHin = $request->details_hin;
+            $newdata->navigate_screen = $request->navigate_screen;
+            $newdata->save();
 
-        return redirect()->route('notification.index')->with('success','Notification created successfully!');
+            return redirect()->route('notification.index')->with('msg', 'Notification created successfully!');
+        } catch (\Exception $e) {
+            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        }
     }
 
     /**
@@ -60,27 +86,40 @@ class NotificationController extends Controller
     public function edit($id)
     {
         $notification = Notification::find($id);
-        $screen = NavigateMaster::where('status','active')->get();
-        return view('admin.notification.edit',compact('notification','screen'));
+        $screen = NavigateMaster::where('status', 'active')->get();
+        return view('admin.notification.edit', compact('notification', 'screen'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        // return $request; 
-        $notification = Notification::find($id);
-        $notification->title = $request->title;
-        $notification->titleGuj = $request->title_guj;
-        $notification->titleHin = $request->title_hin;
-        $notification->details = $request->details;
-        $notification->detailsGuj = $request->details_guj;
-        $notification->detailsHin = $request->details_hin;
-        $notification->navigate_screen = $request->navigate_screen;
-        $notification->save();
+        $request->validate([
+            'title' => 'required',
+            'title_guj' => 'required',
+            'title_hin' => 'required',
+            'details' => 'required',
+            'details_guj' => 'required',
+            'details_hin' => 'required',
+            'navigate_screen' => 'required',
+        ]);
+        try {
+            // return $request; 
+            $notification = Notification::find($id);
+            $notification->title = $request->title;
+            $notification->titleGuj = $request->title_guj;
+            $notification->titleHin = $request->title_hin;
+            $notification->details = $request->details;
+            $notification->detailsGuj = $request->details_guj;
+            $notification->detailsHin = $request->details_hin;
+            $notification->navigate_screen = $request->navigate_screen;
+            $notification->save();
 
-        return redirect()->route('notification.index')->with('success','Notification Updated successfully!');
+            return redirect()->route('notification.index')->with('msg', 'Notification Updated successfully!');
+        } catch (\Exception $e) {
+            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        }
     }
 
     /**
@@ -90,7 +129,7 @@ class NotificationController extends Controller
     {
         $notification = Notification::find($id);
         $notification->delete();
-        return redirect()->back()->with('success','Notification Deleted Successfully!');
+        return redirect()->back()->with('msg', 'Notification Deleted Successfully!');
     }
 
     public function deactive($id)
@@ -98,14 +137,28 @@ class NotificationController extends Controller
         $notification = Notification::find($id);
         $notification->status = 'deactive';
         $notification->save();
-        return redirect()->route('notification.index')->with('success','Notification Deactivated Successfully!');
+        return redirect()->route('notification.index')->with('msg', 'Notification Deactivated Successfully!');
     }
 
-    public function deactiveindex()
+    public function deactiveindex(Request $request)
     {
-        $notification = Notification::where('status','deactive')->paginate(10);
+        $query = Notification::query();
 
-        return view('admin.notification.deactiveindex',compact('notification'));
+        if ($request->filled('global')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->global . '%')
+                    ->orWhere('details', 'like', '%' . $request->global . '%');
+            });
+        }
+
+        if ($request->filled('navigateScreen')) {
+            $query->where('navigate_screen', $request->navigateScreen);
+        }
+
+        $data = $query->where('status', 'deactive')->paginate(10);
+        $screen = NavigateMaster::where('status', 'active')->get();
+
+        return view('admin.notification.deactiveindex', compact('data','screen'));
     }
 
     public function active($id)
@@ -114,6 +167,6 @@ class NotificationController extends Controller
         $notification->status = 'active';
         $notification->save();
 
-        return redirect()->route('notification.index')->with('success','Notification Activated Successfully');
+        return redirect()->route('notification.index')->with('msg', 'Notification Activated Successfully');
     }
 }

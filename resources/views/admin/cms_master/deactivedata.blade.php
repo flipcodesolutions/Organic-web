@@ -7,7 +7,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Cms_Master Management</h6>
+                        <h6 class="mb-0" style="width: 200px">Deactive CmsMaster</h6>
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-primary" href="{{ Route('cms_master.index') }}">Back</a>
@@ -41,20 +41,22 @@
                                 <td>{{ $cms_masters->slug }}</td>
                                 <td>
                                     <ul>
-                                        <li>{{ $cms_masters->description }}</li>
-                                        <li>{{ $cms_masters->descriptionGuj }}</li>
-                                        <li>{{ $cms_masters->descriptionHin }}</li>
+                                        <li>{!! $cms_masters->description !!}</li>
+                                        <li>{!! $cms_masters->descriptionGuj !!}</li>
+                                        <li>{!! $cms_masters->descriptionHin !!}</li>
                                     </ul>
                                 </td>
-                                <td class="d-flex">
-                                    <a href="{{ Route('cms_master.active', $cms_masters->id) }}" class="btn btn-primary">
-                                        <i class="fas fa-undo"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                        onclick="openDeleteModal('{{ Route('cms_master.permdelete', $cms_masters->id) }}')">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="{{ Route('cms_master.active', $cms_masters->id) }}"
+                                            class="btn btn-primary">
+                                            <i class="fas fa-undo"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                            onclick="openDeleteModal('{{ Route('cms_master.permdelete', $cms_masters->id) }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

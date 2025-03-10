@@ -22,7 +22,8 @@ class OrderMaster extends Model
 
     public function shippingAddress(){
         return $this->hasOne(Shipping_address::class,'user_id','userId');
-    }
+        }
+    
 }
 
 

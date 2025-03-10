@@ -5,17 +5,71 @@
     <div class="container">
 
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
-                <div class="row d-flex align-items-center">
-                    <div class="col text-white">
-                        <h6 class="mb-0">Products Management</h6>
-                    </div>
-                    <div class="col" align="right">
+            <div class="card-header d-flex">
+                <div class="col text-white mt-2">
+                    <h6 class="mb-0">Products Management</h6>
+                </div>
+                <div class="heading d-flex row align-items-center">
+                    <div class="col d-flex" align="right" style="gap: 3px">
+                        <a class="b1 btn btn-danger" href="{{ route('product.deactiveindex') }}">Deactive Products</a>
                         <a class="btn btn-primary" href="{{ route('product.create') }}">Add</a>
-                        <a class="btn btn-danger" href="{{ route('product.deactiveindex') }}">Deactive Products</a>
                     </div>
                 </div>
             </div>
+
+
+            <div class="mb-4 margin-bottom-30 m-4">
+                <form action="{{ route('product.index') }}" method="GET" class="filter-form">
+                    <div class="row align-items-end g-2">
+
+                        <!-- Global Search -->
+                        <div class="col">
+                            <label for="global" class="form-label"><b>Filter:</b></label>
+                            <input type="text" id="global" name="global" value="{{ request('global') }}"
+                                class="form-control" placeholder="Search by Product Name">
+                        </div>
+
+                        <!-- category Filter -->
+                        <div class="col">
+                            <label for="categoryId" class="form-label"><b>Category:</b></label>
+                            <select id="categoryId" name="categoryId" class="form-select">
+                                <option value="" selected>Select Category</option>
+                                @foreach ($categories as $categorydata)
+                                    <optgroup label="{{ $categorydata->categoryName }}">
+                                        @foreach ($childcat as $childcatdata)
+                                            @if ($childcatdata->parent_category_id == $categorydata->id)
+                                                <option value="{{ $childcatdata->id }}"
+                                                    {{ request('categoryId') == $childcatdata->id ? 'selected' : '' }}>
+                                                    {{ $childcatdata->categoryName }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </optgroup>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{-- session Filter --}}
+                        <div class="col">
+                            <label for="season"><b>Session:</b></label>
+                            <select name="season" id="season" class="form-select">
+                                <option value="" selected>Select Season</option>
+                                <option value="Winter"{{ request('season') == 'Winter' ? 'selected' : '' }}>Winter</option>
+                                <option value="Summer"{{ request('season') == 'Summer' ? 'selected' : '' }}>Summer</option>
+                                <option value="Monsoon"{{ request('season') == 'Monsoon' ? 'selected' : '' }}>Monsoon
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Submit & Reset Buttons -->
+                        <div class="col d-flex justify-content-end gap-2">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                            <a href="{{ route('product.index') }}" class="btn btn-danger">Reset</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
             <div class="card-body table-responsive">
                 <div class="loader"></div>
                 <table class="table table-bordered mt-2">
@@ -34,30 +88,33 @@
                         <th>Images</th>
                         <th>Action</th>
                     </tr>
-                    @if (count($products) > 0)
-                        @foreach ($products as $key => $productData)
+                    @if (count($data) > 0)
+                        @foreach ($data as $key => $productData)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>
-                                    <ul>
+                                    {{ $productData->categories->categoryName }}
+                                    {{-- <ul>
                                         <li>{{ $productData->categories->categoryName }}</li>
-                                        {{-- <li>{{ $productData->categories->categoryNameGuj }}</li>
-                                        <li>{{ $productData->categories->categoryNameHin }}</li> --}}
-                                    </ul>
+                                        <li>{{ $productData->categories->categoryNameGuj }}</li>
+                                        <li>{{ $productData->categories->categoryNameHin }}</li>
+                                    </ul> --}}
                                 </td>
                                 <td>
-                                    <ul>
+                                    {{ $productData->productName }}
+                                    {{-- <ul>
                                         <li>{{ $productData->productName }}</li>
-                                        {{-- <li>{{ $productData->productNameGuj }}</li>
-                                        <li>{{ $productData->productNameHin }}</li> --}}
-                                    </ul>
+                                        <li>{{ $productData->productNameGuj }}</li>
+                                        <li>{{ $productData->productNameHin }}</li>
+                                    </ul> --}}
                                 </td>
                                 <td>
-                                    <ul>
+                                    {!! $productData->productDescription !!}
+                                    {{-- <ul>
                                         <li>{{ $productData->productDescription }}</li>
-                                        {{-- <li>{{ $productData->productDescriptionGuj }}</li>
-                                        <li>{{ $productData->productDescriptionHin }}</li> --}}
-                                    </ul>
+                                        <li>{{ $productData->productDescriptionGuj }}</li>
+                                        <li>{{ $productData->productDescriptionHin }}</li>
+                                    </ul> --}}
                                 </td>
                                 <td>
                                     {{ $productData->productPrice }}
@@ -111,13 +168,20 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('product.edit') }}/{{ $productData->id }}" class="btn btn-warning">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="{{ route('product.deactive') }}/{{ $productData->id }}"
+                                    <div class="d-flex">
+                                        <a href="{{ route('product.edit') }}/{{ $productData->id }}"
+                                            class="btn btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                            onclick="openDeactiveModal('{{ route('product.deactive') }}/{{ $productData->id }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                        {{-- <a href="{{ route('product.deactive') }}/{{ $productData->id }}"
                                         class="btn btn-danger">
                                         <i class="fas fa-remove"></i>
-                                    </a>
+                                    </a> --}}
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -131,7 +195,7 @@
 
                 </table>
                 {{-- table end --}}
-                {!! $products->withQueryString()->links('pagination::bootstrap-5') !!}
+                {!! $data->withQueryString()->links('pagination::bootstrap-5') !!}
 
             </div>
         </div>

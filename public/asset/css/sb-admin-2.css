@@ -10723,6 +10723,7 @@ button.bg-dark:focus {
 .dropdown .dropdown-menu .dropdown-header,
 .sidebar .sidebar-heading {
   text-transform: uppercase !important;
+
 }
 
 .text-capitalize {
@@ -11927,7 +11928,7 @@ a:focus {
 
 .sidebar-dark .nav-item .nav-link i {
   /* color: rgba(255, 255, 255, 0.3); */
-  color : var(--light);
+  color: var(--light);
 }
 
 .sidebar-dark .nav-item .nav-link:active,
@@ -12610,3 +12611,59 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+
+/* Sidebar scrollable */
+
+
+/* font css */
+.ubuntu-light {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ubuntu-regular {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ubuntu-medium {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.ubuntu-bold {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.ubuntu-light-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.ubuntu-regular-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.ubuntu-medium-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.ubuntu-bold-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+

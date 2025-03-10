@@ -22,10 +22,11 @@ return new class extends Migration
             $table->enum('is_verfiy_email', ['yes', 'no'])->default('no')->nullable();
             $table->enum('is_verify_phone', ['yes', 'no'])->default('no')->nullable();
             $table->enum('status', ['active', 'deactive', 'deleted'])->default('active')->nullable();
-
-            $table->enum('is_special', ['yes', 'no'])->default('yes')->nullable();
-
+            $table->enum('is_special', ['yes', 'no'])->default('no')->nullable();
             $table->string('default_language')->nullable();
+            $table->string('fcm_token')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

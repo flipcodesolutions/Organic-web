@@ -5,7 +5,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Update New DeliverySlot</h6>
+                        <h6 class="mb-0" style="width: 200px">Update New DeliverySlot</h6>
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-primary" href="{{Route('deliveryslot.index')}}">Back</a>
@@ -14,13 +14,13 @@
             </div>
 
             <div class="card-body">
-                <form id="deliveryslotform" method="post" action="{{Route('deliveryslot.update',$deliveryslot->id)}}">
+                <form id="deliveryslotform" method="post" action="{{Route('deliveryslot.update',$deliveryslot->id)}}" class="form">
                     @csrf
                     {{-- deliveryslot --}}
                     {{--start time--}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            startTime<span class="text-danger">*</span>
+                            StartTime<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">
@@ -40,7 +40,7 @@
                     {{--end time--}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            endTime<span class="text-danger">*</span>
+                            EndTime<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">
@@ -60,13 +60,14 @@
                     {{--isavailable--}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            isAvailable<span class="text-danger">*</span>
+                            IsAvailable<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
                                         <select name="isavailable" id=""  class="form-control">
+                                            <option selected disabled>--Select your isavailable--</option>
                                             <option value="Available"{{$deliveryslot->isAvailable=='Available'?'selected':''}}>Available</option>
                                             <option value="NotAvailable"{{$deliveryslot->isAvailable=='NotAvailable'?'selected':''}}>NotAvailable</option>
                                         </select>

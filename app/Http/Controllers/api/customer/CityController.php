@@ -7,6 +7,7 @@ use App\Models\CityMaster;
 use App\Utils\Util;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CityController extends Controller
 {
@@ -16,8 +17,22 @@ class CityController extends Controller
     public function citiesWithLandmark(Request $request)
     {
         try {
+            $language = Auth::user()->default_language;
             $currentPage = $request->input('page', 1);
-            $cities = CityMaster::with('landmark')
+
+            $cityEnglishFields = ['*', 'city_name_eng as displayName', 'area_eng as displayArea'];
+            $cityGujaratiFields = ['*', 'city_name_guj as displayName', 'area_guj as displayArea'];
+            $cityHindiFields = ['*', 'city_name_hin as displayName', 'area_hin as displayArea'];
+
+            $landmarkEnglishFields = ['*', 'landmark_eng as displayLandmark'];
+            $landmarkGujaratiFields = ['*', 'landmark_guj as displayLandmark'];
+            $landmarkHindiFields = ['*', 'landmark_hin as displayLandmark'];
+
+            $cities = CityMaster::with(['landmark' => function ($query) use ($language, $landmarkEnglishFields, $landmarkGujaratiFields, $landmarkHindiFields) {
+                $query->select($language == 'Hindi' ? $landmarkHindiFields : ($language == 'Gujarati' ? $landmarkGujaratiFields : $landmarkEnglishFields));
+            }])
+                ->where('status', 'active')
+                ->select($language == 'Hindi' ? $cityHindiFields : ($language == 'Gujarati' ? $cityGujaratiFields : $cityEnglishFields))
                 ->paginate($request->input('limit', 10), ['*'], 'page', $currentPage);
             return Util::getSuccessMessage('Cities', $cities);
         } catch (Exception $e) {

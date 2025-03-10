@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
-
 class LandmarkMaster extends Model
 {
     use HasFactory;
@@ -19,6 +18,6 @@ class LandmarkMaster extends Model
 
     public function citymaster()
     {
-        return $this->belongsTo(CityMaster::class,'city_id');
+        return $this->belongsTo(CityMaster::class,'city_id','id');
     }
 }

@@ -5,7 +5,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Create New Cms_Master</h6>
+                        <h6 class="mb-0" style="width: 180px">Create New CmsMaster</h6>
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-primary" href="{{ Route('cms_master.index') }}">Back</a>
@@ -14,12 +14,12 @@
             </div>
 
             <div class="card-body">
-                <form id="cms_master" method="post" action="{{ Route('cms_master.store') }}">
+                <form id="cms_master" method="post" action="{{ Route('cms_master.store') }}" class="form">
                     @csrf
                     {{-- Cms_Master --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            title <span class="text-danger">*</span>
+                            Title <span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="form-floating mb-3">

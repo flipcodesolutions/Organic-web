@@ -1,15 +1,15 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container ">
 
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
-                <div class="row d-flex align-items-center">
-                    <div class="col text-white">
-                        <h6 class="mb-0">Cms_Master Management</h6>
-                    </div>
-                    <div class="col" align="right">
-                        <a class="btn btn-danger" href="{{ Route('cms_master.deactive') }}">Deactive-Data</a>
+            <div class="card-header d-flex">
+                <div class="col text-white mt-2">
+                    <h6 class="mb-0">CmsMaster Management</h6>
+                </div>
+                <div class="heading row align-items-center">
+                    <div class="col d-flex align="right" style="gap: 3px">
+                        <a class="b1 btn btn-danger" href="{{ Route('cms_master.deactive') }}">Deactive CmsMaster</a>
                         <a class="btn btn-primary" href="{{ Route('cms_master.create') }}">Add</a>
                     </div>
                 </div>
@@ -41,19 +41,21 @@
                                 <td>{{ $cms->slug }}</td>
                                 <td>
                                     <ul>
-                                        <li>{{ $cms->description }}</li>
-                                        <li>{{ $cms->descriptionGuj }}</li>
-                                        <li>{{ $cms->descriptionHin }}</li>
+                                        <li>{!! $cms->description !!}</li>
+                                        <li>{!! $cms->descriptionGuj !!}</li>
+                                        <li>{!! $cms->descriptionHin !!}</li>
                                     </ul>
                                 </td>
-                                <td class="d-flex">
-                                    <a href="{{ Route('cms_master.edit', $cms->id) }}" class="btn btn-primary">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                        onclick="openDeactiveModal('{{ Route('cms_master.delete', $cms->id) }}')">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="{{ Route('cms_master.edit', $cms->id) }}" class="btn btn-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                            onclick="openDeactiveModal('{{ Route('cms_master.delete', $cms->id) }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

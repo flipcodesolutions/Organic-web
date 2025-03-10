@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Create New Products</h6>
+                        <h6 class="mb-0" style="width: 200px">Create New Products</h6>
                     </div>
                     <div class="col" align="right">
                         <a href="{{ route('product.index') }}" class="btn btn-primary" type="button"> Back </a>
@@ -15,7 +15,8 @@
             </div>
 
             <div class="card-body">
-                <form id="productForm" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                <form id="productForm" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data"
+                    class="form">
                     @csrf
 
                     {{-- product --}}
@@ -25,26 +26,40 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="product_name" id="product_name" placeholder="product Name"
-                                    class="form-control">
+                                <input type="text" name="product_name" value="{{ old('product_name') }}"
+                                    id="product_name" placeholder="product Name" class="form-control">
                                 <label for="">English</label>
-                                <span id="nameError" class="text-danger"></span>
+                                <span class="text-danger" id="productNameError"></span>
+                                {{-- @error('product_name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror --}}
+                                </span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="product_name_guj" id="product_name"
-                                    placeholder="Product Name Gujarati" class="form-control">
+                                <input type="text" name="product_name_guj" value="{{ old('product_name_guj') }}"
+                                    id="product_name_guj" placeholder="Product Name Gujarati" class="form-control">
                                 <label for="">Gujarati</label>
-                                <span id="nameErrorGuj" class="text-danger"></span>
+                                <span class="text-danger" id="productNameGujError"></span>
+                                {{-- <span>
+                                    @error('product_name_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span> --}}
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="product_name_hin" id="product_name"
-                                    placeholder="Product Name Hindi" class="form-control">
+                                <input type="text" name="product_name_hin" value="{{ old('product_name_hin') }}"
+                                    id="product_name_hin" placeholder="Product Name Hindi" class="form-control">
                                 <label for="">Hindi</label>
-                                <span id="nameErrorHin" class="text-danger"></span>
+                                <span class="text-danger" id="productNameHinError"></span>
+                                {{-- <span>
+                                    @error('product_name_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span> --}}
                             </div>
                         </div>
                     </div>
@@ -52,41 +67,63 @@
                     {{-- product description --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Description<span class="text-danger">*</span>
+                            Description English<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="product_des" id="product_des"
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="product_des" placeholder="product_des" id="product_des">{{ old('product_des') }}</textarea>
+                                <span class="text-danger" id="productDesError"></span>
+                                {{-- <input type="text" name="product_des" id="product_des"
                                             placeholder="Product Description" class="form-control">
                                         <label for="">English</label>
-                                        <span id="descriptionError" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="product_des_guj" id="product_des"
-                                            placeholder="Product Description Gujarati" class="form-control">
-                                        <label for="">Gujarati</label>
-                                        <span id="descriptionErrorGuj" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="product_des_hin" id="product_des"
-                                            placeholder="Product Description Hindi" class="form-control">
-                                        <label for="">Hindi</label>
-                                        <span id="descriptionErrorHin" class="text-danger"></span>
-                                    </div>
-                                </div>
+                                <span>
+                                    @error('product_des')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span> --}}
                             </div>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Gujarati<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="product_des_guj" placeholder="product_des_guj" id="product_des_guj">{{ old('product_des_guj') }}</textarea>
+                                <span class="text-danger" id="productDesGujError"></span>
+                                {{-- <input type="text" name="product_des_guj" id="product_des_guj"
+                                            placeholder="Product Description Gujarati" class="form-control">
+                                        <label for="">Gujarati</label>
+                                <span>
+                                    @error('product_des_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Hindi<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="product_des_hin" placeholder="product_des_hin" id="product_des_hin">{{ old('product_des_hin') }}</textarea>
+                                <span class="text-danger" id="productDesHinError"></span>
+                                {{-- <input type="text" name="product_des_hin" id="product_des"
+                                            placeholder="Product Description Hindi" class="form-control">
+                                        <label for="">Hindi</label>
+                                <span>
+                                    @error('product_des_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span> --}}
+                            </div>
+                        </div>
+                    </div>
+                    {{-- </div>
+        </div> --}}
 
                     {{-- product price --}}
                     {{-- <div class="row mb-3">
@@ -108,8 +145,8 @@
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Unit<span class="text-danger">*</span>
                         </div>
-                        <div class="col">
-                            <table class="table table-bordered mt-2" id="unitTable">
+                        <div class="col p-0" style="overflow-x: scroll; margin: 0 12px 16px">
+                            <table class="table table-bordered mt-2" style="width: 1000px" id="unitTable">
                                 <thead>
                                     <tr>
                                         <th>Unit</th>
@@ -125,44 +162,72 @@
                                     <tr class="unitRow">
                                         <td>
                                             <select class="form-select form-select-lg mb-3" name="unit_id[]"
-                                                aria-label="Large select example">
-                                                <option disabled>Select Unit</option>
+                                                value="{{ old('unit_id.0') }}" aria-label="Large select example"
+                                                id="unit">
+                                                <option selected disabled>Select Unit</option>
                                                 @foreach ($units as $data)
                                                     <option value="{{ $data->id }}">{{ $data->unit }}</option>
                                                 @endforeach
                                             </select>
-                                            <span class="text-danger unitIdError"></span>
+                                            <span class="text-danger" id="unitIdError1"></span>
+                                            {{-- <span>
+                                                @error('unit_id')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @enderror
+                                            </span> --}}
                                         </td>
                                         <td>
                                             <div class="form-floating">
-                                                <input type="text" name="unit_det[]"
-                                                    placeholder="Unit Detail in Approx Weight" class="form-control">
+                                                <input type="text" name="unit_det[]" value="{{ old('unit_det.0') }}"
+                                                    id="unit_det" placeholder="Unit Detail in Approx Weight"
+                                                    class="form-control">
                                                 <label for="">Approx Weight</label>
-                                                <span class="text-danger unitdetailError"></span>
+                                                <span class="text-danger" id="unitDetError1"></span>
+                                                {{-- <span>
+                                                    @error('unit_det.*')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </span> --}}
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-floating">
-                                                <input type="number" name="price[]" placeholder="Product Price"
-                                                    class="form-control">
+                                                <input type="text" name="price[]" placeholder="Product Price"
+                                                    value="{{ old('price.0') }}" class="form-control">
                                                 <label for="">Product Price</label>
-                                                <span class="text-danger productpriceError"></span>
+                                                <span class="text-danger" id="productPriceError1"></span>
+                                                {{-- <span>
+                                                    @error('price.*')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </span> --}}
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-floating">
-                                                <input type="number" name="discount_per[]"
-                                                    placeholder="Discount Percentage" class="form-control">
+                                                <input type="text" name="discount_per[]"
+                                                    value="{{ old('discount_per.0') }}" placeholder="Discount Percentage"
+                                                    min="1" max="100" class="form-control">
                                                 <label for="">Discount Per</label>
-                                                <span class="text-danger discountperError"></span>
+                                                <span class="text-danger" id="disPerError1"></span>
+                                                {{-- <span>
+                                                    @error('discount_per.*')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </span> --}}
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-floating">
-                                                <input type="number" name="selling_price[]" placeholder="Selling Price"
-                                                    class="form-control">
+                                                <input type="text" name="selling_price[]" placeholder="Selling Price"
+                                                    value="{{ old('selling_price.0') }}" class="form-control">
                                                 <label for="">Selling Price</label>
-                                                <span class="text-danger sellingpriceError"></span>
+                                                <span class="text-danger" id="sellPriceError1"></span>
+                                                {{-- <span>
+                                                    @error('selling_price.*')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </span> --}}
                                             </div>
                                         </td>
                                     </tr>
@@ -226,10 +291,15 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="number" name="product_stock" id="product_stock"
-                                    placeholder="Product Stock" class="form-control">
+                                <input type="text" name="product_stock" value="{{ old('product_stock') }}"
+                                    id="product_stock" placeholder="Product Stock" class="form-control">
                                 <label for="">Stock</label>
-                                <span id="stockError" class="text-danger"></span>
+                                <span class="text-danger" id="productStockError"></span>
+                                {{-- <span>
+                                    @error('product_stock')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span> --}}
                             </div>
                         </div>
                     </div>
@@ -240,13 +310,24 @@
                             Images<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-
-                            <div id="photoInput">
-                                <label for="photoUpload" class="form-label">Upload Photo</label>
-                                <input type="file" class="form-control" id="photoUpload" name="product_image[]"
-                                    multiple>
+                            <div class="row">
+                                <div id="imagePreviewContainer" style="display: flex; flex-wrap: wrap;">
+                                    <!-- Image previews will be appended here -->
+                                </div>
                             </div>
-
+                            <div class="row">
+                                <div id="photoInput">
+                                    <label for="photoUpload" class="form-label">Upload Photo</label>
+                                    <input type="file" class="form-control" id="photoUpload" name="product_image[]"
+                                        onchange="previewImages(event)" accept="image/*" multiple>
+                                </div>
+                                <span class="text-danger" id="imageError"></span>
+                                {{-- <span>
+                                    @error('product_image[]')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span> --}}
+                            </div>
                             {{-- <div class="row"> --}}
                             {{-- <select class="form-select form-select-lg mb-3" name="image_and_video" id="image_and_video"
                                 aria-label="Large select example">
@@ -281,13 +362,31 @@
                             video<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="form-floating" id="videoInput">
-                                <input type="text" class="form-control" id="videoLink" name="video_link[]"
-                                    placeholder="Enter video link">
-                                <span id="videolinklist"> </span>
-                                <label for="videoLink">Video Link</label>
-                                <a class="btn btn-primary my-2" id="addVideo">+</a>
-                                <a class="btn btn-danger my-2" id="removeVideo">-</a>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-floating" id="videoInput">
+                                        <input type="text" class="form-control" id="videoLink" name="video_link[]"
+                                            placeholder="Enter video link">
+                                        <label for="videoLink">Video Link</label>
+                                        <span class="text-danger" id="videoError"></span>
+                                    </div>
+                                    {{-- <span>
+                                        @error('video_link.0')
+                                        <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </span> --}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <span id="videolinklist"> </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <a class="btn btn-primary my-2" id="addVideo">+</a>
+                                    <a class="btn btn-danger my-2" id="removeVideo">-</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -300,13 +399,19 @@
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="season"
                                 aria-label="Large select example">
-                                <option selected>Select Season</option>
+                                <option selected disabled>Select Season</option>
                                 <option value="Winter">Winter</option>
                                 <option value="Summer">Summer</option>
                                 <option value="Monsoon">Monsoon</option>
                             </select>
+                            <span class="text-danger" id="seasonError">
+
+                                {{-- <span>
+                                @error('season')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span> --}}
                         </div>
-                        <span id="seasonError" class="text-danger"></span>
                     </div>
 
                     {{-- Product Category --}}
@@ -317,19 +422,32 @@
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="category_id"
                                 aria-label="Large select example">
-                                <option selected>Select Category</option>
+                                <option selected disabled>Select Category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
+                                    <optgroup label="{{ $category->categoryName }}">
+                                        @foreach ($childcat as $childdata)
+                                            @if ($childdata->parent_category_id == $category->id)
+                                                <option value="{{ $childdata->id }}">{{ $childdata->categoryName }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </optgroup>
                                 @endforeach
                             </select>
-                            <span id="categoryIdError" class="text-danger"></span>
+                            <span class="text-danger" id="categoryError"></span>
+                            {{-- <span>
+                                @error('category_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span> --}}
                         </div>
                     </div>
 
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <button type="submit" class="btn btn-primary btn-sm mb-3"><i
-                                class="fa-solid fa-floppy-disk"></i> Submit</button>
+                                class="fa-solid fa-floppy-disk"></i>
+                            Submit</button>
                     </div>
 
                 </form>
@@ -340,6 +458,320 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
+    {{-- script for ck editor --}}
+    <script>
+        // Initialize CKEditor for each
+        CKEDITOR.replace('product_des');
+        CKEDITOR.replace('product_des_guj');
+        CKEDITOR.replace('product_des_hin');
+    </script>
+
+    {{-- script for validation  --}}
+    <script>
+        // Function to validate the form
+        function validateForm() {
+            const errors = [];
+
+            // Get form values
+            const product_name = document.getElementById('product_name').value;
+            const product_name_guj = document.getElementById('product_name_guj').value;
+            const product_name_hin = document.getElementById('product_name_hin').value;
+            const product_des = CKEDITOR.instances.product_des.getData();
+            const product_des_guj = CKEDITOR.instances.product_des_guj.getData();
+            const product_des_hin = CKEDITOR.instances.product_des_hin.getData();
+            // const product_des = document.getElementById('product_des').value;
+            // const product_des_guj = document.getElementById('product_des_guj').value;
+            // const product_des_hin = document.getElementById('product_des_hin').value;
+            const unit_id = document.querySelectorAll('select[name="unit_id[]"]');
+            const unit_det = document.querySelectorAll('input[name="unit_det[]"]');
+            const price = document.querySelectorAll('input[name="price[]"]');
+            const discount_per = document.querySelectorAll('input[name="discount_per[]"]');
+            const selling_price = document.querySelectorAll('input[name="selling_price[]"]');
+            const product_stock = document.getElementById('product_stock').value;
+            const season = document.querySelector('select[name="season"]').value;
+            const category_id = document.querySelector('select[name="category_id"]').value;
+            const product_image = document.getElementById('photoUpload').files.length;
+            const video_link = document.getElementById('videoLink').value;
+
+            // Clear previous error messages
+            document.querySelectorAll('.text-danger').forEach(function(element) {
+                element.textContent = '';
+            });
+
+            // Validate product name
+            let product_nameRegex = /^[A-Z][a-z]*(?: [A-Z][a-z]*)*$/;
+            if (!product_name) {
+                document.getElementById('productNameError').textContent = "Product name (English) is required.";
+            } else if (!product_name || !product_nameRegex.test(product_name)) {
+                document.getElementById('productNameError').textContent =
+                    "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
+            }
+
+            if (!product_name_guj) {
+                document.getElementById('productNameGujError').textContent = "Product name (Gujarati) is required.";
+            } else if (!product_name_guj || !product_nameRegex.test(product_name_guj)) {
+                document.getElementById('productNameGujError').textContent =
+                    "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
+            }
+
+            if (!product_name_hin) {
+                document.getElementById('productNameHinError').textContent = "Product name (Hindi) is required.";
+            } else if (!product_name_hin || !product_nameRegex.test(product_name_hin)) {
+                document.getElementById('productNameHinError').textContent =
+                    "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
+            }
+
+            // Validate product description
+            if (!product_des) {
+                document.getElementById('productDesError').textContent = "Product description (English) is required.";
+            }
+            if (!product_des_guj) {
+                document.getElementById('productDesGujError').textContent = "Product description (Gujarati) is required.";
+            }
+            if (!product_des_hin) {
+                document.getElementById('productDesHinError').textContent = "Product description (Hindi) is required.";
+            }
+
+            // Validate unit details
+            unit_id.forEach((unit, index) => {
+                if (!unit.value || unit.value === "Select Unit") {
+                    document.getElementById(`unitIdError${index + 1}`).textContent = "Unit ID is required.";
+                }
+            });
+            unit_det.forEach((detail, index) => {
+                if (!detail.value) {
+                    document.getElementById(`unitDetError${index + 1}`).textContent = "Unit detail is required.";
+                }
+            });
+
+            // Validate price, discount, and selling price
+            const regex = /^[1-9]\d*$/;
+            price.forEach((p, index) => {
+                if (!p.value) {
+                    document.getElementById(`productPriceError${index + 1}`).textContent = "Price is required.";
+                } else if (!regex.test(p.value)) {
+                    document.getElementById(`productPriceError${index + 1}`).textContent =
+                        "Please enter a valid positive Number without decimals or special characters.";
+                }
+            });
+            selling_price.forEach((s, index) => {
+                if (!s.value) {
+                    document.getElementById(`sellPriceError${index + 1}`).textContent =
+                        "Selling price is required.";
+                } else if (!regex.test(s.value)) {
+                    document.getElementById(`sellPriceError${index + 1}`).textContent =
+                        "Please enter a valid positive Number without decimals or special characters.";
+                }
+            });
+
+            const disreg = /^(100|[1-9]?\d)$/;
+            discount_per.forEach((d, index) => {
+                if (!d.value) {
+                    document.getElementById(`disPerError${index + 1}`).textContent =
+                        "Discount percentage is required.";
+                } else if (!disreg.test(d.value)) {
+                    document.getElementById(`disPerError${index + 1}`).textContent =
+                        "Please enter a valid discount percentage between 1 to 100.";
+                }
+            });
+
+            // Validate product stock
+            if (!product_stock || isNaN(product_stock)) {
+                document.getElementById('productStockError').textContent = "Product stock is required and must be numeric.";
+            }
+
+            // Validate season and category
+            if (!season || season === "Select Season") {
+                document.getElementById('seasonError').textContent = "Season is required.";
+            }
+
+            if (!category_id || category_id === "Select Category") {
+                document.getElementById('categoryError').textContent = "Category is required.";
+            }
+
+            // Validate image or video link (must provide at least one)
+            if (product_image === 0 && !video_link) {
+                document.getElementById("imageError").textContent =
+                    "You must provide either a product image or a video link.";
+                document.getElementById("videoError").textContent =
+                    "You must provide either a product image or a video link.";
+            }
+
+            // Check if there are any errors
+            const errorMessages = document.querySelectorAll('.text-danger');
+            for (let error of errorMessages) {
+                if (error.textContent.trim() !== '') {
+                    return false; // Prevent form submission if any error message exists
+                }
+            }
+
+            return true; // Allow form submission if no errors
+        }
+
+        // Attach validation function to form submit
+        document.getElementById('productForm').onsubmit = function(event) {
+            if (!validateForm()) {
+                event.preventDefault(); // Prevent form submission if validation fails
+            }
+        };
+    </script>
+
+    {{-- <script>
+        // Function to validate the form
+        function validateForm() {
+            const errors = [];
+
+            // Get form values
+            const product_name = document.getElementById('product_name').value;
+            const product_name_guj = document.getElementById('product_name_guj').value;
+            const product_name_hin = document.getElementById('product_name_hin').value;
+            const product_des = document.getElementById('product_des').value;
+            const product_des_guj = document.getElementById('product_des_guj').value;
+            const product_des_hin = document.getElementById('product_des_hin').value;
+            const unit_id = document.querySelectorAll('select[name="unit_id[]"]');
+            const unit_det = document.querySelectorAll('input[name="unit_det[]"]');
+            const price = document.querySelectorAll('input[name="price[]"]');
+            const discount_per = document.querySelectorAll('input[name="discount_per[]"]');
+            const selling_price = document.querySelectorAll('input[name="selling_price[]"]');
+            const product_stock = document.getElementById('product_stock').value;
+            const season = document.querySelector('select[name="season"]').value;
+            const category_id = document.querySelector('select[name="category_id"]').value;
+            const product_image = document.getElementById('photoUpload').files.length;
+            const video_link = document.getElementById('videoLink').value;
+
+            // Validate product name
+            if (!product_name) document.getElementById('productNameError').textContent =
+                "Product name (English) is required.";
+            if (!product_name) document.getElementById('productNameGujError').textContent =
+                "Product name (Gujarati) is required.";
+            if (!product_name) document.getElementById('productNameHinError').textContent =
+                "Product name (Hindi) is required.";
+            // if (!product_name_guj) errors.push("Product name (Gujarati) is required.");
+            // if (!product_name_hin) errors.push("Product name (Hindi) is required.");
+
+            // Validate product description
+            // if (!product_des) document.getElementById('productDesError').textContent =
+            //     "Product description (English) is required.";
+            // if (!product_des_guj) document.getElementById('productDesGujError').textContent =
+            //     "Product description (Gujarati) is required.";
+            // if (!product_des_hin) document.getElementById('productDesHinError').textContent =
+            //     "Product description (Hindi) is required.";
+            // if (!product_des_guj) errors.push("Product description (Gujarati) is required.");
+            // if (!product_des_hin) errors.push("Product description (Hindi) is required.");
+
+            // Validate unit details
+            unit_id.forEach((unit, index) => {
+                if (!unit.value || unit.value === "Select Unit") {
+                    document.getElementById(`unitIdError${index+1}`).textContent = "Unit ID is required.";
+                    // errors.push(`Unit ID for row ${index + 1} is required.`);
+                }
+            });
+            unit_det.forEach((detail, index) => {
+                if (!detail.value) {
+                    document.getElementById(`unitDetError${index+1}`).textContent = "Unit detail is required.";
+                    // errors.push(`Unit detail for row ${index + 1} is required.`);
+                }
+            });
+
+            // Validate price, discount, and selling price
+            price.forEach((p, index) => {
+                if (!p.value || isNaN(p.value)) {
+                    document.getElementById(`productPriceError${index+1}`).textContent = "Price is required.";
+                    // errors.push(`Price for row ${index + 1} is required and must be numeric.`);
+                }
+            });
+            discount_per.forEach((d, index) => {
+                if (!d.value || isNaN(d.value)) {
+                    document.getElementById(`disPerError${index+1}`).textContent =
+                        "Discount percentage is required.";
+                    // errors.push(`Discount percentage for row ${index + 1} is required and must be numeric.`);
+                }
+            });
+            selling_price.forEach((s, index) => {
+                if (!s.value || isNaN(s.value)) {
+                    document.getElementById(`sellPriceError${index+1}`).textContent = "Selling price is required.";
+                    // errors.push(`Selling price for row ${index + 1} is required and must be numeric.`);
+                }
+            });
+
+            // Validate product stock
+            if (!product_stock || isNaN(product_stock)) {
+                document.getElementById('productStockError').textContent = "Product stock is required and must be numeric.";
+                // errors.push("Product stock is required and must be numeric.");
+            }
+
+            // Validate season and category
+            // if (!season) document.getElementById('seasonError').textContent = "Season is required.";
+            // // if (!season) errors.push("Season is required.");
+            // if (!category_id) document.getElementById('categoryError').textContent = "Category is required.";
+
+            // Validate image or video link (must provide at least one)
+            if (product_image === 0 && !video_link) {
+                document.getElementById("imageError").textContent =
+                    "You must provide either a product image or a video link.";
+                document.getElementById("videoError").textContent =
+                    "You must provide either a product image or a video link.";
+                // errors.push("You must provide either a product image or a video link.");
+            }
+
+            if (!season || season === "Select Season") {
+                document.getElementById('seasonError').textContent = "Season is required.";
+            }
+
+            if (!category_id || category_id === "Select Category") {
+                document.getElementById('categoryError').textContent = "Category is required.";
+            }
+            // if (product_image > 0 && video_link) {
+            //     errors.push("You cannot provide both a product image and a video link.");
+            // }
+
+            // If there are errors, show them in an alert and prevent form submission
+            if (document.querySelectorAll('.text-danger').length > 0) {
+                return false; // Prevent form submission
+            } else {
+                return true; // Allow form submission if no errors
+            }
+        }
+
+        // Attach validation function to form submit
+        document.getElementById('productForm').onsubmit = function(event) {
+            if (!validateForm()) {
+                event.preventDefault(); // Prevent form submission if validation fails
+            }
+        };
+    </script> --}}
+
+    {{-- script for image preview --}}
+    <script>
+        function previewImages(event) {
+            const files = event.target.files;
+            const container = document.getElementById('imagePreviewContainer');
+            container.innerHTML = ''; // Clear previous previews
+
+            // Loop through the selected files
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = e.target.result;
+                    imgElement.style.width = '100px'; // Customize size
+                    imgElement.style.margin = '5px';
+
+                    // Append the image to the preview container
+                    container.appendChild(imgElement);
+                };
+
+                // Read the file as a Data URL (base64)
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+    </script>
+
+    {{-- script for add new video link --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('addVideo').addEventListener('click', function() {
@@ -364,7 +796,281 @@
         })
     </script>
 
+    {{-- script for add new row in unit table --}}
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const addUnitBtn = document.getElementById("addUnit");
+            const removeUnitBtn = document.getElementById("removeUnit");
+            const unitTableBody = document.getElementById("unitTableBody");
+
+            let firstRowAdded = false; // Track if the first row has been added
+
+            // Get all the old values from the Laravel session (use json to make it available in JS)
+            const oldValues = {
+                unit_id: @json(old('unit_id', [])),
+                unit_det: @json(old('unit_det', [])),
+                price: @json(old('price', [])),
+                discount_per: @json(old('discount_per', [])),
+                selling_price: @json(old('selling_price', []))
+            };
+
+            let rowCounter = 1;
+
+            // Function to create and add a new row
+            function addNewRow(unitIdValue = '', unitDetValue = '', priceValue = '', discountPerValue = '',
+                sellingPriceValue = '') {
+                const newRow = document.createElement("tr");
+                newRow.classList.add("unitRow");
+
+                rowCounter++;
+
+                newRow.innerHTML = `
+            <td>
+                <select class="form-select form-select-lg mb-3" name="unit_id[]"
+                aria-label="Large select example">
+                    <option selected disabled>Select Unit</option>
+                    @foreach ($units as $data)
+                        <option value="{{ $data->id }}" ${unitIdValue === '{{ $data->id }}' ? 'selected' : ''}>
+                            {{ $data->unit }}
+                        </option>
+                    @endforeach
+                </select>
+                <span class="text-danger" id="unitIdError${rowCounter}"></span>
+            </td>
+            <td>
+                <div class="form-floating">
+                    <input type="text" name="unit_det[]" value="${unitDetValue || ''}"
+                    placeholder="Unit Detail in Approx Weight" class="form-control">
+                    <label for="">Approx Weight</label>
+                    <span class="text-danger" id="unitDetError${rowCounter}"></span>
+                </div>
+            </td>
+            <td>
+                <div class="form-floating">
+                    <input type="number" name="price[]" value="${priceValue || ''}"
+                    placeholder="Product Price" class="form-control">
+                    <label for="">Product Price</label>
+                    <span class="text-danger" id="productPriceError${rowCounter}"></span>
+                </div>
+            </td>
+            <td>
+                <div class="form-floating">
+                    <input type="number" name="discount_per[]"
+                    value="${discountPerValue || ''}"
+                    placeholder="Discount Percentage" class="form-control">
+                    <label for="">Discount Per</label>
+                    <span class="text-danger" id="disPerError${rowCounter}"></span>
+                </div>
+            </td>
+            <td>
+                <div class="form-floating">
+                    <input type="number" name="selling_price[]" value="${sellingPriceValue || ''}"
+                    placeholder="Selling Price" class="form-control">
+                    <label for="">Selling Price</label>
+                    <span class="text-danger" id="sellPriceError${rowCounter}"></span>
+                </div>
+            </td>
+        `;
+
+                // Insert the new row before the buttons row
+                unitTableBody.insertBefore(newRow, document.getElementById("unitButtonsRow"));
+
+                // Mark that the first row has been added
+                // if (!firstRowAdded) {
+                //     firstRowAdded = true;
+                //     newRow.setAttribute('data-first-row', 'true'); // Add a special attribute to track it
+                // }
+            }
+
+
+            // Function to load all rows from the old input data
+            const unitCount = oldValues.unit_id.length;
+
+            function loadOldRows() {
+                // Loop through each index in the old data arrays and add rows accordingly
+                for (let i = 1; i < unitCount; i++) {
+                    addNewRow(
+                        oldValues.unit_id[i],
+                        oldValues.unit_det[i],
+                        oldValues.price[i],
+                        oldValues.discount_per[i],
+                        oldValues.selling_price[i]
+                    );
+                }
+            }
+
+            // Load old rows on page load (first row will be added automatically by this)
+            loadOldRows();
+            // window.framekiller = true;
+
+            // window.onload = function() {
+            //     if (window.framekiller) {
+            //         addNewRow();
+            //         window.framekiller = false; // Ensure the function runs only once
+            //     }
+            // };
+
+
+            // Event listener for adding a new row
+            addUnitBtn.addEventListener("click", function() {
+                // Add a new row with empty values for inputs
+                addNewRow();
+            });
+
+            // Event listener for removing the last row
+            removeUnitBtn.addEventListener("click", function() {
+                const rows = document.querySelectorAll(".unitRow");
+
+                // Only remove a row if there are more than one row
+                if (rows.length > 1) {
+                    const lastRow = rows[rows.length - 1];
+                    const isFirstRow = lastRow.getAttribute('data-first-row') === 'true';
+
+                    // Prevent removing the first row
+                    if (isFirstRow) {
+                        alert("The first row cannot be removed.");
+                    } else {
+                        lastRow.remove(); // Remove the last added row
+                    }
+                } else {
+                    alert("At least one row must remain.");
+                }
+            });
+        });
+    </script>
+
+
+    {{-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const addUnitBtn = document.getElementById("addUnit");
+        const removeUnitBtn = document.getElementById("removeUnit");
+        const unitTableBody = document.getElementById("unitTableBody");
+
+        const oldValues = {
+            unit_id: @json(old('unit_id', [])),
+            unit_det: @json(old('unit_det', [])),
+            price: @json(old('price', [])),
+            discount_per: @json(old('discount_per', [])),
+            selling_price: @json(old('selling_price', []))
+        };
+
+        // Function to create and add a new row
+        function addNewRow(unitIdValue = '', unitDetValue = '', priceValue = '', discountPerValue = '', sellingPriceValue = '') {
+            const newRow = document.createElement("tr");
+            newRow.classList.add("unitRow");
+
+            newRow.innerHTML = `
+                <td>
+                    <select class="form-select form-select-lg mb-3" name="unit_id[]"
+                    aria-label="Large select example">
+                        <option selected disabled>Select Unit</option>
+                        @foreach ($units as $data)
+                            <option value="{{ $data->id }}" ${unitIdValue === '{{ $data->id }}' ? 'selected' : ''}>
+                                {{ $data->unit }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <span>
+                        @error('unit_id.*')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </span>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="text" name="unit_det[]" value="${unitDetValue || ''}"
+                        placeholder="Unit Detail in Approx Weight" class="form-control">
+                        <label for="">Approx Weight</label>
+                        <span>
+                            @error('unit_det.*')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="number" name="price[]" value="${priceValue || ''}"
+                        placeholder="Product Price" class="form-control">
+                        <label for="">Product Price</label>
+                        <span>
+                            @error('price.*')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="number" name="discount_per[]"
+                        value="${discountPerValue || ''}"
+                        placeholder="Discount Percentage" class="form-control">
+                        <label for="">Discount Per</label>
+                        <span>
+                            @error('discount_per.*')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="number" name="selling_price[]" value="${sellingPriceValue || ''}"
+                        placeholder="Selling Price" class="form-control">
+                        <label for="">Selling Price</label>
+                        <span>
+                            @error('selling_price.*')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span>
+                    </div>
+                </td>
+            `;
+
+            // Insert the new row before the buttons row
+            unitTableBody.insertBefore(newRow, document.getElementById("unitButtonsRow"));
+        }
+
+        // Function to load all rows from the old input data
+        function loadOldRows() {
+            // Loop through each index in the old data arrays and add rows accordingly
+            const unitCount = oldValues.unit_id.length;
+            for (let i = 0; i < unitCount; i++) {
+                addNewRow(
+                    oldValues.unit_id[i],
+                    oldValues.unit_det[i],
+                    oldValues.price[i],
+                    oldValues.discount_per[i],
+                    oldValues.selling_price[i]
+                );
+            }
+        }
+
+        // Load old rows on page load
+        loadOldRows();
+
+        // Event listener for adding a new row
+        addUnitBtn.addEventListener("click", function() {
+            // Add a new row with empty values for inputs
+            addNewRow();
+        });
+
+        // Event listener for removing the last row
+        removeUnitBtn.addEventListener("click", function() {
+            const rows = document.querySelectorAll(".unitRow");
+
+            // Only remove a row if there are more than one row
+            if (rows.length > 1) {
+                const lastRow = rows[rows.length - 1];
+                lastRow.remove(); // Remove the last added row
+            } else {
+                alert("At least one row must remain.");
+            }
+        });
+    });
+    </script> --}
+
+    {{-- <script>
         function calculateSellingPrice() {
             $('#unitTableBody').on('input', 'input[name="price[]"], input[name="discount_per[]"]', function() {
                 // Find the row the input belongs to
@@ -382,7 +1088,7 @@
 
                 // Set the calculated selling price in the corresponding input field
                 row.find('input[name="selling_price[]"]').val(sellingPrice.toFixed(
-                2)); // Displaying with two decimals
+                    2)); // Displaying with two decimals
             });
         }
 
@@ -398,40 +1104,65 @@
 
                 newRow.innerHTML = `
             <td>
-                <select class="form-select form-select-lg mb-3" name="unit_id[]" aria-label="Large select example">
-                    <option selected>Select Unit</option>
-                    @foreach ($units as $data)
-                        <option value="{{ $data->id }}">{{ $data->unit }}</option>
-                    @endforeach
+                <select class="form-select form-select-lg mb-3" name="unit_id[]"
+                aria-label="Large select example">
+                    <option selected disabled>Select Unit</option>
+                        @foreach ($units as $data)
+                            <option value="{{ $data->id }}">{{ $data->unit }}</option>
+                                @endforeach
                 </select>
-                <span class="text-danger unitIdError"></span>
+                <span>
+                    @error('unit_id')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </span>
             </td>
             <td>
                 <div class="form-floating">
-                    <input type="text" name="unit_det[]" placeholder="Unit Detail in Approx Weight" class="form-control">
+                    <input type="text" name="unit_det[]" value="{{ old('unit_det[]') }}"
+                    placeholder="Unit Detail in Approx Weight" class="form-control">
                     <label for="">Approx Weight</label>
-                    <span class="text-danger unitdetailError"></span>
+                    <span>
+                        @error('unit_det.*')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </span>
                 </div>
             </td>
             <td>
                 <div class="form-floating">
-                    <input type="number" name="price[]" placeholder="Product Price" class="form-control">
+                    <input type="number" name="price[]" placeholder="Product Price"
+                    class="form-control">
                     <label for="">Product Price</label>
-                    <span class="text-danger productpriceError"></span>
-                </div> 
-            </td>
-            <td>
-                <div class="form-floating">
-                    <input type="text" name="discount_per[]" placeholder="Discount Percentage" class="form-control">
-                    <label for="">Discount Per</label>
-                    <span class="text-danger discountperError"></span>
+                    <span>
+                        @error('price.*')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </span>
                 </div>
             </td>
             <td>
                 <div class="form-floating">
-                    <input type="text" name="selling_price[]" placeholder="Selling Price" class="form-control">
+                    <input type="number" name="discount_per[]"
+                    placeholder="Discount Percentage" class="form-control">
+                    <label for="">Discount Per</label>
+                    <span>
+                        @error('discount_per.*')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </span>
+                </div>
+            </td>
+            <td>
+                <div class="form-floating">
+                    <input type="number" name="selling_price[]" placeholder="Selling Price"
+                    class="form-control">
                     <label for="">Selling Price</label>
-                    <span class="text-danger sellingpriceError"></span>
+                    <span>
+                        @error('selling_price.*')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </span>
                 </div>
             </td>
         `;
@@ -449,7 +1180,7 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 
     {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {

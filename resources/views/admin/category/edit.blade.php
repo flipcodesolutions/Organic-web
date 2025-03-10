@@ -6,18 +6,21 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Update New Category</h6>
+                        <h6 class="mb-0" style="width: 200px">Update New Category</h6>
                     </div>
                     <div class="col" align="right">
-                        <button class="btn btn-primary" type="button" onclick="javascript:history.go(-1)"> Back </button>
+                        <a href="{{ route('category.index') }}" class="btn btn-primary" type="button"
+                            onclick="javascript:history.go(-1)"> Back </a>
                     </div>
                 </div>
             </div>
 
             <div class="card-body">
-                <form id="categoryForm">
+                <form action="{{ route('category.update') }}/{{ $category->id }}" method="post"
+                    enctype="multipart/form-data" class="form">
                     @csrf
 
+                    {{-- category name --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Name <span class="text-danger">*</span>
@@ -27,7 +30,11 @@
                                 <input type="text" name="category_name" id="category_name" placeholder="Category Name"
                                     class="form-control" value="{{ $category->categoryName }}">
                                 <label for="">English</label>
-                                <span id="nameError" class="text-danger"></span>
+                                <span>
+                                    @error('category_name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
@@ -36,7 +43,11 @@
                                     placeholder="Category Name Gujarati" class="form-control"
                                     value="{{ $category->categoryNameGuj }}">
                                 <label for="">Gujarati</label>
-                                <span id="nameError" class="text-danger"></span>
+                                <span>
+                                    @error('category_name_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="col">
@@ -45,7 +56,11 @@
                                     placeholder="Category Name Hindi" class="form-control"
                                     value="{{ $category->categoryNameHin }}">
                                 <label for="">Hindi</label>
-                                <span id="nameError" class="text-danger"></span>
+                                <span>
+                                    @error('category_name_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -56,38 +71,58 @@
                             Description<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="category_des" id="category_name"
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="category_des" value="{{ old('product_des') }}"
+                                    placeholder="Category Description English" id="floatingTextarea">{{ $category->categoryDescription }}</textarea>
+                                {{-- <input type="text" name="category_des" id="category_name"
                                             placeholder="Category Name" class="form-control"
                                             value="{{ $category->categoryDescription }}">
-                                        <label for="">English</label>
-                                        <span id="nameError" class="text-danger"></span>
-                                    </div>
-                                </div>
+                                        <label for="">English</label> --}}
+                                <span>
+                                    @error('category_des')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="category_des_guj" id="category_name"
-                                            placeholder="Category Name" class="form-control"
-                                            value="{{ $category->categoryDescriptionGuj }}">
-                                        <label for="">Gujarati</label>
-                                        <span id="nameError" class="text-danger"></span>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Gujarati<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="category_des_guj" value="{{ old('product_des_guj') }}"
+                                    placeholder="Category Description Gujarati" id="floatingTextarea">{{ $category->categoryDescriptionGuj }}</textarea>
+                                {{-- <input type="text" name="category_des_guj" id="category_name"
+                                    placeholder="Category Name" class="form-control"
+                                    value="{{ $category->categoryDescriptionGuj }}">
+                                <label for="">Gujarati</label> --}}
+                                <span>
+                                    @error('category_des_guj')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <input type="text" name="category_des_hin" id="category_name"
-                                            placeholder="Category Name" class="form-control"
-                                            value="{{ $category->categoryDescriptionHin }}">
-                                        <label for="">Hindi</label>
-                                        <span id="nameError" class="text-danger"></span>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description Hindi<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea class="ckeditor form-control" name="category_des_hin" value="{{ old('product_des_hin') }}"
+                                    placeholder="Category Description Hindi" id="floatingTextarea">{{ $category->categoryDescriptionHin }}</textarea>
+                                {{-- <input type="text" name="category_des_hin" id="category_name"
+                                    placeholder="Category Name" class="form-control"
+                                    value="{{ $category->categoryDescriptionHin }}">
+                                <label for="">Hindi</label> --}}
+                                <span>
+                                    @error('category_des_hin')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -97,15 +132,20 @@
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Image <span class="text-danger">*</span>
                         </div>
-                        <div class="col-2">
-                            <img src="{{ asset('categoryImage/' . $category->cat_icon) }}" alt="" height="100px" width="150px">
+                        <div class="col-2" id="imagepreview">
+                            <img id="profilePicPreview" src="{{ asset('categoryImage/' . $category->cat_icon) }}" alt="" height="100px"
+                                width="150px">
                         </div>
                         <div class="col">
                             <div class="form">
-                                <input type="file" name="category_image" id="category_Image"
-                                    placeholder="Category Name" class="form-control">
+                                <input type="file" name="category_image" id="category_Image" placeholder="Category Name"
+                                    class="form-control" onchange="previewImage(event)">
                                 {{-- <label for="">Image</label> --}}
-                                <span id="nameError" class="text-danger"></span>
+                                <span>
+                                    @error('category_image')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -117,14 +157,15 @@
                             Parent Category<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            {{-- <select class="form-select ddCategory" name="parent_id[]" class="form-control">
-                            <option value="0" selected>-- select category --</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                            @endforeach
-                        </select> --}}
-                            <select class="form-select ddCategory" name="parent_id[]" class="form-control">
-                                <option value="0" {{ $category->parent_id == 0 ? 'selected' : '' }}>-- select category
+                            <select class="form-select ddCategory" name="parent_id" class="form-control">
+                                <option value="0" selected>-- select category --</option>
+                                @foreach ($categories as $categorydata)
+                                    <option value="{{ $categorydata->id }}"{{ $categorydata->id == $category->parent_category_id ? 'selected' : '' }}>{{ $categorydata->categoryName }}</option>
+                                @endforeach
+                            </select>
+                            {{-- <select class="form-select ddCategory" name="parent_id" class="form-control">
+                                <option value="0" {{ $category->parent_id == 0 ? 'selected' : '' }}>-- select
+                                    category
                                     --</option>
                                 @foreach ($categories as $categoryOption)
                                     <option value="{{ $categoryOption->id }}"
@@ -132,8 +173,12 @@
                                         {{ $categoryOption->category_name }}
                                     </option>
                                 @endforeach
-                            </select>
-                            <span id="parentIdError" class="text-danger"></span>
+                            </select> --}}
+                            <span>
+                                @error('parent_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span>
                         </div>
                         {{-- </div> --}}
                     </div>
@@ -150,7 +195,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Parent Category:</strong>
-                            
+
                             <span id="parent_id_error" class="text-danger"></span>
                         </div>
                     </div>
@@ -172,6 +217,32 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script>
+        // Initialize CKEditor for each
+        CKEDITOR.replace('category_des');
+        CKEDITOR.replace('category_des_guj');
+        CKEDITOR.replace('category_des_hin');
+    </script>
+
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                const output = document.getElementById('profilePicPreview');
+                const outputclass = document.getElementById('imagepreview');
+                output.src = reader.result;
+                // outputclass.style.display = 'flex';
+                // outputclass.style.justify-content = 'center'; // Show the image
+            };
+
+            if (file) {
+                reader.readAsDataURL(file); // Read the file as a Data URL
+            }
+        }
+    </script>
+
+    {{-- <script>
         $(document).ready(function() {
             $('#categoryForm').on('submit', function(e) {
                 e.preventDefault();
@@ -193,7 +264,7 @@
                     success: function(response) {
                         if (response.success) {
                             // alert("Category created successfully!");
-                            window.location.href = "{{ route('category.index') }}"; 
+                            window.location.href = "{{ route('category.index') }}";
                         } else {
                             alert("Error: " + response.message);
                         }
@@ -214,5 +285,5 @@
                 });
             });
         });
-    </script>
+    </script> --}}
 @endsection

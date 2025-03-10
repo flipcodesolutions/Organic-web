@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0">Create New Screen</h6>
+                        <h6 class="mb-0" style="width: 200px">Create New ScreenName</h6>
                     </div>
                     <div class="col" align="right">
                         <a href="{{ route('navigate.index') }}" class="btn btn-primary" type="button"> Back </a>
@@ -15,7 +15,7 @@
             </div>
 
             <div class="card-body">
-                <form id="productForm" action="{{ route('navigate.store') }}" method="POST">
+                <form id="productForm" action="{{ route('navigate.store') }}" method="POST" class="form">
                     @csrf
                     {{-- product stock --}}
                     <div class="row mb-3">
@@ -24,18 +24,22 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="screenName" id="screen_name"
-                                    placeholder="Screen Name" class="form-control">
+                                <input type="text" name="screenName" id="screen_name" placeholder="Screen Name"
+                                value="{{ old('screen_name') }}" class="form-control">
                                 <label for="">Screen Name</label>
-                                <span id="screenNameError" class="text-danger"></span>
+                                <span>
+                                    @error('screenName')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
 
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i
-                                class="fa-solid fa-floppy-disk"></i> Submit</button>
+                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i class="fa-solid fa-floppy-disk"></i>
+                            Submit</button>
                     </div>
 
                 </form>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\common;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cms_Master;
 use App\Models\User;
 use App\Utils\Util;
 use Exception;
@@ -66,7 +67,9 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'otp' => 'required',
-            'phone' => 'required|digits:10'
+            'phone' => 'required|digits:10',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -87,6 +90,8 @@ class UserController extends Controller
                 $user = new User();
                 $user->phone = $request->phone;
                 $user->is_verify_phone = 'yes';
+                $user->latitude = $request->latitude;
+                $user->longitude = $request->longitude;
                 $user->save();
             }
 
@@ -130,6 +135,65 @@ class UserController extends Controller
         }
     }
 
+    public function isVerified(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'is_verify_email' => $request->is_verify_phone ? '' : 'required|in:yes,no',
+            'is_verify_phone' => $request->is_verify_email ? '' : 'required|in:yes,no',
+        ]);
+
+        if ($validator->fails()) {
+            return Util::getErrorMessage('Validation Failed', $validator->errors());
+        }
+        try {
+            $user = Auth::user()->id;
+            $user = User::find($user);
+
+            $user->is_verfiy_email = $request->is_verify_email ?? $user->is_verfiy_email;
+
+            $user->is_verify_phone = $request->is_verify_phone ?? $user->is_verify_phone;
+
+            if ($request->is_verify_email || $request->is_verify_phone) {
+                $user->save();
+            }
+            return Util::getSuccessMessage(
+                'User Profile',
+                $user
+            );
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
+    public function createProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+        ]);
+
+        if ($validator->fails()) {
+            return Util::getErrorMessage('Validation Failed', $validator->errors());
+        }
+        try {
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            if ($request->pro_pic) {
+
+
+                $imageName = time() . '.' . $request->pro_pic->extension();
+                $request->pro_pic->move(public_path('profile_pic'), $imageName);
+                $user->pro_pic = 'profile_pic/' . $imageName;
+            }
+            $user->save();
+
+            return Util::getSuccessMessageWithToken('Profile Updated Successfully', $user, $user->createToken('my-app-token')->plainTextToken);
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
+
     public function editProfile(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -137,8 +201,6 @@ class UserController extends Controller
             'email' => 'required|email',
             'phone' => 'required',
             'pro_pic' => 'required',
-            'is_special' => 'required',
-            'default_language' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -151,9 +213,9 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->phone = $request->phone;
-            $user->pro_pic = $request->pro_pic;
-            $user->is_special = $request->is_special;
-            $user->default_language = $request->default_language;
+            $imageName = time() . '.' . $request->pro_pic->extension();
+            $request->pro_pic->move(public_path('profile_pic'), $imageName);
+            $user->pro_pic = 'profile_pic/' . $imageName;
             $user->save();
 
             return Util::getSuccessMessage('Profile Updated Successfully', $user);
@@ -233,32 +295,24 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function updateFcmToken(Request $request)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $validator = Validator::make($request->all(), [
+            'fcm_token' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return Util::getErrorMessage('Validation Failed', $validator->errors());
+        }
+        try {
+            $userId = Auth::user()->id;
+            $user = User::find($userId);
+            $user->fcm_token = $request->fcm_token;
+            $user->save();
+            return Util::getSuccessMessage('Fcm Token Updated Successfully', $user);
+        } catch (Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
     }
 }

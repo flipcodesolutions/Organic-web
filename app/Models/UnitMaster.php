@@ -9,9 +9,9 @@ class UnitMaster extends Model
 {
     use HasFactory;
 
-    
+
     public function unit()
     {
-        return $this->hasMany(Unit::class, 'unit');
+        return $this->hasMany(Unit::class, 'unit', 'id');
     }
 }

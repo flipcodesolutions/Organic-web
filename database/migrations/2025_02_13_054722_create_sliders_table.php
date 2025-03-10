@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sliders', function (Blueprint $table) {
             $table->id();
             $table->integer('city_id');
+            $table->string('url');
             $table->string('slider_pos');
             $table->boolean('is_navigate')->default(false);
             $table->string('navigatemaster_id')->nullable();
