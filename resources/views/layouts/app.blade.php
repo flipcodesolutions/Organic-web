@@ -249,7 +249,11 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('reports.purchaseReport') }}">Purchase Report</a>
                     </div>
-                    
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('reports.orderReport') }}">Order Report</a>
+                    </div>
                 </div>
             </li>
 

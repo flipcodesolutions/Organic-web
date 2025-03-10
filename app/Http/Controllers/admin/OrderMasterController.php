@@ -4,6 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\OrderMaster;
+use App\Models\OrderDetail;
 
 class OrderMasterController extends Controller
 {
@@ -61,5 +63,19 @@ class OrderMasterController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function orderReport()
+    {
+    
+    $data = OrderMaster::with(['user', 'orderDetails.product', 'shippingAddress'])
+                            ->get();
+       return view('admin.reports.orderReport',['data'=>$data]);
+      // return $data;
+    }
+
+    public function billgeneration($id){
+        $data = OrderMaster::find($id);
+        //  return $data;
+        return view('admin.reports.bill',['data'=>$data]);
     }
 }
