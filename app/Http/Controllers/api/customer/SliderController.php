@@ -27,6 +27,7 @@ class SliderController extends Controller
             }, 'navigatemaster'])
                 ->where('status', 'active')
                 ->get();
+
             return Util::getSuccessMessage('Sliders', $sliders);
         } catch (\Exception $e) {
             return Util::getErrorMessage($e->getMessage());
