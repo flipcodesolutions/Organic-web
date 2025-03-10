@@ -25,6 +25,8 @@ return new class extends Migration
             $table->enum('is_special', ['yes', 'no'])->default('no')->nullable();
             $table->string('default_language')->nullable();
             $table->string('fcm_token')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

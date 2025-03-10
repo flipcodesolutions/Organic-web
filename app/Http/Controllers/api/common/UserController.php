@@ -138,7 +138,6 @@ class UserController extends Controller
     public function isVerified(Request $request)
     {
         $validator = Validator::make($request->all(), [
-
             'is_verify_email' => $request->is_verify_phone ? '' : 'required|in:yes,no',
             'is_verify_phone' => $request->is_verify_email ? '' : 'required|in:yes,no',
         ]);

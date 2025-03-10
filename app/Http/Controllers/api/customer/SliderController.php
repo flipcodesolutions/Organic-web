@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Slider;
 use App\Utils\Util;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SliderController extends Controller
 {
@@ -15,8 +16,16 @@ class SliderController extends Controller
     public function sliders(Request $request)
     {
         try {
+            $language = Auth::user()->default_language;
             $currentPage = $request->input('page', 1);
-            $sliders = Slider::with('city', 'navigatemaster')
+
+            $cityEnglishFields = ['*', 'city_name_eng as displayName', 'area_eng as displayArea'];
+            $cityGujaratiFields = ['*', 'city_name_guj as displayName', 'area_guj as displayArea'];
+            $cityHindiFields = ['*', 'city_name_hin as displayName', 'area_hin as displayArea'];
+
+            $sliders = Slider::with(['city' => function ($q) use ($language, $cityEnglishFields, $cityGujaratiFields, $cityHindiFields) {
+                $q->select($language == 'Hindi' ? $cityHindiFields : ($language == 'Gujarati' ? $cityGujaratiFields : $cityEnglishFields));
+            }, 'navigatemaster'])
                 ->where('status', 'active')
                 ->paginate($request->input('limit', 10), ['*'], 'page', $currentPage);
 
