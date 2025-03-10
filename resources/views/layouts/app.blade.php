@@ -75,8 +75,8 @@
                     <div class="sidebar-brand-text mx-3">Vegetable E-comm</div>
                 </a>
                 
-                {{-- <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar"
-                style="background-color:  #81A263;"> --}}
+                <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar"
+                style="background-color:  #81A263;">
 
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
