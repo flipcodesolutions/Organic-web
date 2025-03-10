@@ -657,6 +657,28 @@
                         </div>
                     </div>
 
+                    {{-- Product Brand --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Brand<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <select class="form-select form-select-lg mb-3" name="brand_id"
+                                aria-label="Large select example">
+                                <option selected disabled>Select Brand</option>
+                                @foreach ($brands as $branddata)
+                                    <option value="{{ $branddata->id }}"{{ $product->brandId == $branddata->id ? 'selected' : ''}}>{{ $branddata->brand_name }}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger" id="brandError"></span>
+                            {{-- <span>
+                                @error('category_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span> --}}
+                        </div>
+                    </div>
+
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <button type="submit" class="btn btn-primary btn-sm mb-3"><i

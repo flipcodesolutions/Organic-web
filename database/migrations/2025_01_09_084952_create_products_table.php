@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('stock');
             $table->string('image')->nullable();
             $table->string('season');
+            $table->integer('brandId');
             $table->enum('status', ['active', 'deactive'])->default('active');
             $table->timestamps();
         });

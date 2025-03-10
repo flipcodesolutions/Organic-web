@@ -443,6 +443,28 @@
                         </div>
                     </div>
 
+                    {{-- Product Brand --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Brand<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <select class="form-select form-select-lg mb-3" name="brand_id"
+                                aria-label="Large select example">
+                                <option selected disabled>Select Brand</option>
+                                @foreach ($brands as $branddata)
+                                    <option value="{{ $branddata->id }}">{{ $branddata->brand_name }}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger" id="brandError"></span>
+                            {{-- <span>
+                                @error('category_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span> --}}
+                        </div>
+                    </div>                    
+
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <button type="submit" class="btn btn-primary btn-sm mb-3"><i
@@ -490,6 +512,7 @@
             const product_stock = document.getElementById('product_stock').value;
             const season = document.querySelector('select[name="season"]').value;
             const category_id = document.querySelector('select[name="category_id"]').value;
+            const brand_id = document.querySelector('select[name="brand_id"]').value;
             const product_image = document.getElementById('photoUpload').files.length;
             const video_link = document.getElementById('videoLink').value;
 
@@ -580,13 +603,17 @@
                 document.getElementById('productStockError').textContent = "Product stock is required and must be numeric.";
             }
 
-            // Validate season and category
+            // Validate season, category and brand
             if (!season || season === "Select Season") {
                 document.getElementById('seasonError').textContent = "Season is required.";
             }
 
             if (!category_id || category_id === "Select Category") {
                 document.getElementById('categoryError').textContent = "Category is required.";
+            }
+
+            if (!brand_id || brand_id === "Select Brand") {
+                document.getElementById('brandError').textContent = "Brand is required.";
             }
 
             // Validate image or video link (must provide at least one)

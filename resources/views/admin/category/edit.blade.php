@@ -133,8 +133,8 @@
                             Image <span class="text-danger">*</span>
                         </div>
                         <div class="col-2" id="imagepreview">
-                            <img id="profilePicPreview" src="{{ asset('categoryImage/' . $category->cat_icon) }}" alt="" height="100px"
-                                width="150px">
+                            <img id="profilePicPreview" src="{{ asset('categoryImage/' . $category->cat_icon) }}"
+                                alt="" height="100px" width="150px">
                         </div>
                         <div class="col">
                             <div class="form">
@@ -160,7 +160,11 @@
                             <select class="form-select ddCategory" name="parent_id" class="form-control">
                                 <option value="0" selected>-- select category --</option>
                                 @foreach ($categories as $categorydata)
-                                    <option value="{{ $categorydata->id }}"{{ $categorydata->id == $category->parent_category_id ? 'selected' : '' }}>{{ $categorydata->categoryName }}</option>
+                                    @if ($category->id != $categorydata->id)
+                                        <option
+                                            value="{{ $categorydata->id }}"{{ $categorydata->id == $category->parent_category_id ? 'selected' : '' }}>
+                                            {{ $categorydata->categoryName }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             {{-- <select class="form-select ddCategory" name="parent_id" class="form-control">

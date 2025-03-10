@@ -49,7 +49,18 @@
                             </select>
                         </div>
 
-                        {{-- session Filter --}}
+                        {{-- brand Filter --}}
+                        <div class="col">
+                            <label for="brand"><b>Brand:</b></label>
+                            <select name="brandId" id="brand" class="form-select">
+                                <option value="" selected>Select Brand</option>
+                                @foreach ($brands as $branddata)
+                                    <option value="{{ $branddata->id }}" {{ request('brandId') == $branddata->id }}>{{ $branddata->brand_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{-- seassion Filter --}}
                         <div class="col">
                             <label for="season"><b>Session:</b></label>
                             <select name="season" id="season" class="form-select">
@@ -85,6 +96,7 @@
                         <th>Sell Price</th> --}}
                         <th>Product Stock</th>
                         <th>Season</th>
+                        <th>Brand</th>
                         <th>Images</th>
                         <th>Action</th>
                     </tr>
@@ -156,6 +168,9 @@
                                 </td>
                                 <td>
                                     {{ $productData->season }}
+                                </td>
+                                <td>
+                                    {{ $productData->brand->brand_name }}
                                 </td>
                                 <td>
                                     @if (isset($productData->productImages) && $productData->productImages->isNotEmpty())
