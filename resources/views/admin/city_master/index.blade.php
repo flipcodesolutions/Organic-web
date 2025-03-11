@@ -77,11 +77,11 @@
                             <td>{{ $city->area_guj }}</td>
                             <td>
                                 <div class="d-flex">
-                                <a class="btn btn-primary" href="{{ route('city_master.edit')}}/{{ $city->id }}"><i
+                                <a class="btn btn-primary" href="{{ route('city_master.edit',$city->id)}}"><i
                                 class="fas fa-edit"></i></a>
 
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                onclick="openDeactiveModal('{{ route('city_master.deactive') }}/{{ $city->id }}')">
+                                onclick="openDeactiveModal('{{ route('city_master.deactive',$city->id) }}')">
                                 <i class="fas fa-trash"></i>
                                 </a>
                                 </div>

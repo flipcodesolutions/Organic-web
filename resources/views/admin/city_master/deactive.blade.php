@@ -18,7 +18,7 @@
 
 
         <div class="mb-4 margin-bottom-30 m-4">
-            <form action="{{ route('city_master.deactive') }}" method="GET" class="filter-form">
+            <form action="{{ route('city_master.deleted') }}" method="GET" class="filter-form">
                 <div class="row align-items-end g-2">
 
                     <!-- Global Search -->
@@ -33,7 +33,7 @@
                         <label for="cityId" class="form-label"><b>City:</b></label>
                         <select id="cityId" name="cityId" class="form-select">
                             <option value="" selected>Select City</option>
-                            @foreach ($cities as $city)
+                            @foreach ($citymaster as $city)
                                 <option value="{{ $city->id }}"
                                     {{ request('cityId') == $city->id ? 'selected' : '' }}>
                                     {{ $city->city_name_eng }}
@@ -45,7 +45,7 @@
                     <!-- Submit & Reset Buttons -->
                     <div class="col-md-4 d-flex justify-content-end gap-2">
                         <button type="submit" class="btn btn-primary">Filter</button>
-                        <a href="{{ route('city_master.deactive') }}" class="btn btn-danger">Reset</a>
+                        <a href="{{ route('city_master.deleted') }}" class="btn btn-danger">Reset</a>
                     </div>
                 </div>
             </form>

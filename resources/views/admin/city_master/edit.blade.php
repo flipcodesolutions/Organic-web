@@ -91,7 +91,7 @@
                     <div class="col">
                         <div class="form-floating">
                             <input type="text" value="{{ $citymaster->area_hin }}" name="area_hin" class="form-control" id="#">
-                            
+
                             <label for="area_hin">Hindi</label>
                             <span>
                                 @error('area_hin')
@@ -115,13 +115,13 @@
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary"> Update </button>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Submit </button>
                     </div>
                 </div>
 
             </form>
         </div>
-        
+
     </div>
 </div>
 @endsection

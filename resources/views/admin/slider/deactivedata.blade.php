@@ -43,11 +43,11 @@
                             <label for="slider_pos" class="form-label"><b>SliderPos:</b></label>
                             <select name="slider_pos" id="slider_pos" class="form-control">
                                 <option selected disabled>Select your SliderPosition</option>
-                                <option value="top"{{ request('slider_pos') == 'top' ? 'selected' : '' }}>Top</option>
-                                <option value="bottom"{{ request('slider_pos') == 'bottom' ? 'selected' : '' }}>Bottom
-                                </option>
-                                <option value="middle"{{ request('slider_pos') == 'middle' ? 'selected' : '' }}>Middle
-                                </option>
+
+                                @foreach ($data as $datas)
+
+                                <option value="{{ $datas->slider_pos }}"{{ request('slider_pos')==$datas->slider_pos?'selected':'' }}>{{$datas->slider_pos}}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -66,7 +66,7 @@
                         <th>No</th>
                         <th>CityName</th>
                         <th>Image</th>
-                        <th>SliderPos</th>
+                        <th>SliderPosition</th>
                         <th>IsNavigate</th>
                         <th>ScreenName</th>
                         <th>Action</th>

@@ -12,12 +12,12 @@ class DeliverySlotController extends Controller
     {
         $query = DeliverySlot::query();
 
-        if($request->filled('global'))
-        {
-            $query->where(function($q) use ($request){
-                $q->where('startTime','like','%'.$request->global.'%');
-            });
-        }
+        // if($request->filled('global'))
+        // {
+        //     $query->where(function($q) use ($request){
+        //         $q->where('startTime','like','%'.$request->global.'%');
+        //     });
+        // }
 
         if ($request->filled('isavailable')) {
             $query->where('isavailable', $request->isavailable);
@@ -80,13 +80,13 @@ class DeliverySlotController extends Controller
     {
         $query = DeliverySlot::query();
 
-        if($request->filled('global'))
-        {
-            $query->where(function ($q) use ($request){
-                // $q->where('startTime','like','%'.$request->global.'%');
-                $q->where('startTIme', '=', $request->global); // Use exact match
-            });
-        }
+        // if($request->filled('global'))
+        // {
+        //     $query->where(function ($q) use ($request){
+        //         // $q->where('startTime','like','%'.$request->global.'%');
+        //         $q->where('startTIme', '=', $request->global); // Use exact match
+        //     });
+        // }
 
         if($request->filled('isavailable'))
         {
@@ -94,8 +94,8 @@ class DeliverySlotController extends Controller
         }
 
         $data=$query->where('status','deactive')->paginate(10);
-        $deliveryslots = DeliverySlot::where('status', 'deactive')->get();
-        return view('admin.deliveryslot.deactivedata', compact('data','deliveryslots'));
+        // $deliveryslots = DeliverySlot::where('status', 'deactive')->get();
+        return view('admin.deliveryslot.deactivedata', compact('data'));
     }
 
     public function active($id)

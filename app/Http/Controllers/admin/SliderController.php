@@ -41,7 +41,7 @@ class SliderController extends Controller
         $cities = CityMaster::where('status','active')->get();
         // return $cities;
         // return $data;
-        return view('admin.slider.index', compact('data','cities'));
+    return view('admin.slider.index', compact('data','cities'));
     }
 
     /**
@@ -64,6 +64,10 @@ class SliderController extends Controller
             'slider_pos' => 'required',
             // 'image' => 'required|array',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ],
+        [
+            'city_id.required'=>'The cityName field is required.',
+            'slider_pos.required'=>'The slider position field is required.',
         ]);
 
         if ($request->file('image')) {
@@ -116,6 +120,10 @@ class SliderController extends Controller
             'slider_pos' => 'required',
             // 'image' => 'required|array',
             // 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ],
+        [
+            'city_id.required'=>'The cityName field is required.',
+            'slider_pos.required'=>'The slider position field is required.',
         ]);
 
         if ($request->hasFile('image')) {
@@ -179,7 +187,7 @@ class SliderController extends Controller
 
         $data = $query->with('city')->where('status', 'deactive')->paginate(10);
         // return $data;
-        $cities = CityMaster::all();
+        $cities = CityMaster::where('status','deactive')->get();
         // $sliders = Slider::where('status', 'deactive')->get();
 
         return view('admin.slider.deactivedata', compact('data','cities'));

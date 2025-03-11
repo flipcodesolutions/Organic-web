@@ -18,7 +18,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        try {
+        // try {
 
             $query = Product::query();
 
@@ -62,12 +62,12 @@ class ProductController extends Controller
             // })->with(['categories', 'productImages', 'productUnit.unitMaster'=> function($query){
             //     $query->where('status','active')->select('id','unit');
             // }])->paginate(10);
-            // return $products;  
+            // return $products;
             return view('admin.product.index', compact('data', 'categories', 'childcat', 'brands'));
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function create()
@@ -92,7 +92,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        try { 
+        try {
             // return $request;
             $product = new Product();
             $product->productName = $request->product_name;
