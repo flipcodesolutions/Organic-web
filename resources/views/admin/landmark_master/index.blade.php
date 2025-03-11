@@ -52,8 +52,6 @@
                 </form>
             </div>
 
-
-
             <div class="card-body table-responsive">
                 <div class="loader"></div>
                 <table class="table table-bordered">
@@ -62,9 +60,9 @@
                         <th>City name English</th>
                         <th>City name Hindi</th>
                         <th>City name Gujarati</th>
-                        <th>Landmark (ENG)</th>
-                        <th>Landmark (HIN)</th>
-                        <th>Landmark (GUJ)</th>
+                        <th>Landmark English</th>
+                        <th>Landmark Hindi</th>
+                        <th>Landmark Gujarati</th>
                         <th>Latitude</th>
                         <th>Longitude</th>
                         <th>Actions</th>
@@ -85,10 +83,10 @@
                                 <a class="btn btn-primary" href="{{ route('landmark.edit', $landmark->id) }}"><i
                                         class="fas fa-edit"></i></a>
 
-                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                <a href="javascript:void(0)" class="btn btn-danger ml-2"
                                     onclick="openDeactiveModal('{{ route('landmark.deactive') }}/{{ $landmark->id }}')">
                                     <i class="fas fa-trash"></i>
-                                    </a>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

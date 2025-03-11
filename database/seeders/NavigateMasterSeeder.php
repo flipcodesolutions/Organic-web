@@ -12,15 +12,18 @@ class NavigateMasterSeeder extends Seeder
      */
     public function run(): void
     {
-        ModelsNavigateMaster::create([
+        ModelsNavigateMaster::insert(
+            [
+            'id' => '1',
             'screenname'=>'Home',
             'status'=>'active',
-       ]);
+        ],
 
-       ModelsNavigateMaster::create([
+        [
+        'id' => '2',
         'screenname'=>'Vegetable',
         'status'=>'active',
-   ]);
+        ]);
        
     }
 } 
