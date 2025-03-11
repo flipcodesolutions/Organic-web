@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('city/index', [CityMasterController::class, 'index'])->name('city_master.index');
 Route::get('city/create', [CityMasterController::class, 'create'])->name('city_master.create');
 Route::post('city/store', [CityMasterController::class, 'store'])->name('city_master.store');
-Route::get('city/edit/{id}', [CityMasterController::class, 'edit'])->name('city_master.edit');
+Route::get('city/edit/{id?}', [CityMasterController::class, 'edit'])->name('city_master.edit');
 Route::post('city/update/{id}', [CityMasterController::class, 'update'])->name('city_master.update');
 Route::get('city/show/{id?}', [CityMasterController::class, 'show'])->name('city_master.show');
 
