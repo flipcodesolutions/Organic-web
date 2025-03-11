@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\common\CmsController;
 use App\Http\Controllers\api\common\NotificationController;
 use App\Http\Controllers\api\common\RegisterController;
 use App\Http\Controllers\api\common\UserController;
@@ -79,4 +80,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     //product 
     Route::get('products', [ProductController::class, 'products']);
+
+    //cms
+    Route::get('cms', [CmsController::class, 'cms']);
 });
