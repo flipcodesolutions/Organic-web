@@ -9,7 +9,7 @@
                 </div>
                 <div class="heading row align-items-center">
                     <div class="col d-flex align="right" style="gap: 3px">
-                        <a class="btn btn-danger" href="{{ Route('slider.deactive') }}">Deactive Slider</a>
+                        <a class="b1 btn btn-danger" href="{{ Route('slider.deactive') }}">Deactive Slider</a>
                         <a class="btn btn-primary" href="{{ Route('slider.create') }}">Add</a>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
 
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{ Route('slider.edit', $sliders->id) }}" class="btn btn-warning">
+                                        <a href="{{ Route('slider.edit', $sliders->id) }}" class="btn btn-primary">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="javascript:void(0)" class="btn btn-danger ml-2"
