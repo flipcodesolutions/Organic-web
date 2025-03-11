@@ -18,7 +18,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        try {
+        // try {
 
             $query = Product::query();
 
@@ -64,15 +64,15 @@ class ProductController extends Controller
             // }])->paginate(10);
             // return $products;  
             return view('admin.product.index', compact('data', 'categories', 'childcat', 'brands'));
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function create()
     {
-        try {
+        // try {
 
             $categories = Category::where([
                 ['status', '=', 'active'],
@@ -85,15 +85,14 @@ class ProductController extends Controller
             $units = UnitMaster::where('status', 'active')->get();
             $brands = Brand::where('status','active')->get();
             return view('admin.product.create', compact('categories', 'childcat', 'units', 'brands'));
-        } catch (\Exception $e) {
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        // } catch (\Exception $e) {
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function store(Request $request)
     {
-        try { 
-            // return $request;
+        // try { 
             $product = new Product();
             $product->productName = $request->product_name;
             $product->productNameGuj = $request->product_name_guj;
@@ -108,6 +107,13 @@ class ProductController extends Controller
             $product->brandId = $request->brand_id;
             $userId = Auth::user()->id;
             $product->userId = $userId;
+            if($request->has('is_on_home') && $request->is_on_home == 'true'){
+                $product->isOnHome = 'yes';
+            }
+            else{
+                $product->isOnHome = 'no';
+            }
+
             $product->save();
 
             if ($request->hasFile('product_image')) {
@@ -168,15 +174,15 @@ class ProductController extends Controller
             // ]);
 
             return redirect()->route('product.index')->with('msg', 'Product created successfully!');
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function edit($id)
     {
-        try {
+        // try {
             $product = Product::with('productImages')->with('productUnit.unitMaster')->find($id);
             // return $product;
             $categories = Category::where([
@@ -191,16 +197,16 @@ class ProductController extends Controller
             $brands = Brand::where('status','active')->get();
 
             return view('admin.product.edit', compact('product', 'categories', 'childcat', 'units', 'brands'));
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!')->with('exception_message', $e->getMessage());;
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!')->with('exception_message', $e->getMessage());;
+        // }
     }
 
     public function update(Request $request, $id)
     {
         // return $request;
-        try {
+        // try {
         // return $request;
         $product = Product::find($id);
         $product->productName = $request->product_name;
@@ -214,6 +220,12 @@ class ProductController extends Controller
         $product->season = $request->season;
         $product->categoryId = $request->category_id;
         $product->brandId = $request->brand_id;
+        if($request->has('is_on_home') && $request->is_on_home == 'true'){
+            $product->isOnHome = 'yes';
+        }
+        else{
+            $product->isOnHome = 'no';
+        }
         // $product->save();
 
         // for add new video
@@ -349,39 +361,16 @@ class ProductController extends Controller
         // ]);
 
         return redirect()->route('product.index')->with('msg', 'Product updated successfully!');
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
-        // try {
-        //     $product = Product::find($id);
-        //     $product->product_name = $request->product_name;
-        //     $product->category_id = $request->category_id;
-        //     if ($request->Thumbnail) {
-        //         $image = $request->file('Thumbnail');
-        //         $imageName = $image->getClientOriginalName();
-        //         $destinationPath = public_path('collection/product/productimage');
-        //         $image->move($destinationPath, $imageName);
-        //         $product->Thumbnail = $imageName;
-        //     }
-        //     $product->save();
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'Product updated successfully!',
-        //         'date' => $product,
-        //     ]);
-        // } catch (\Illuminate\Validation\ValidationException $e) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => $e->errors()
-        //     ]);
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
         // }
     }
 
 
     public function deactive($id)
     {
-        try {
+        // try {
             $product = Product::find($id);
             $product->status = 'deactive';
             $product->save();
@@ -390,15 +379,15 @@ class ProductController extends Controller
 
 
             return redirect()->back()->with('msg', 'Product deactivated successfully!');
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function deactiveindex(Request $request)
     {
-        try {
+        // try {
             $query = Product::query();
 
             if ($request->filled('global')) {
@@ -440,15 +429,15 @@ class ProductController extends Controller
             // $products = Product::where('status', 'deactive')->with(['categories', 'productImages', 'productUnit.unitMaster'])->paginate(10);
             // return $products;
             return view('admin.product.deactiveproduct', compact('products'));
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function active($id)
     {
-        try {
+        // try {
             $product = Product::find($id);
             $product->status = 'active';
             $product->save();
@@ -456,15 +445,15 @@ class ProductController extends Controller
             // $productimg = ProductImage::where('productId', $id)->update(['status' => 'active']);
 
             return redirect()->route('product.index')->with('msg', 'Product activated successfully!');
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function destroy($id)
     {
-        try {
+        // try {
             $productunit = Unit::where('product_id', $id)->get();
             // return $productunit;
 
@@ -487,15 +476,15 @@ class ProductController extends Controller
             $product->delete();
 
             return redirect()->back()->with('msg', 'Product deleted successfully!');
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function destroyimage($id)
     {
-        try {
+        // try {
 
             $image = ProductImage::find($id);
             $data = ProductImage::where('productId', $image->productId)->get();
@@ -514,15 +503,15 @@ class ProductController extends Controller
             // } else {
             //     return redirect()->back()->with('error', 'Please add new images/videos before deleting last image/video!');
             // }
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function destroyunit($id)
     {
-        try {
+        // try {
             $unit = Unit::find($id);
             $data = Unit::where('product_id', $unit->product_id)->get();
             // if (count($data) > 1) {
@@ -532,9 +521,9 @@ class ProductController extends Controller
             // } else {
             //     return redirect()->back()->with('error', 'Please add new units before deleting last unit!');
             // }
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 }

@@ -61,7 +61,7 @@
                         <th>Category Name</th>
                         <th>Category Description</th>
                         <th>Parent Category Name</th>
-                        <th>Category Icon</th>
+                        <th>Category Image</th>
                         <th>Action</th>
                     </tr>
                     @if (count($data) > 0)

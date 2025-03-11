@@ -163,7 +163,7 @@
                                         <td>
                                             <select class="form-select form-select-lg mb-3" name="unit_id[]"
                                                 value="{{ old('unit_id.0') }}" aria-label="Large select example"
-                                                id="unit">
+                                                id="unit" style="font-size: 16px; font-weight: 400;">
                                                 <option selected disabled>Select Unit</option>
                                                 @foreach ($units as $data)
                                                     <option value="{{ $data->id }}">{{ $data->unit }}</option>
@@ -398,7 +398,7 @@
                         </div>
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="season"
-                                aria-label="Large select example">
+                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                                 <option selected disabled>Select Season</option>
                                 <option value="Winter">Winter</option>
                                 <option value="Summer">Summer</option>
@@ -421,7 +421,7 @@
                         </div>
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="category_id"
-                                aria-label="Large select example">
+                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                                 <option selected disabled>Select Category</option>
                                 @foreach ($categories as $category)
                                     <optgroup label="{{ $category->categoryName }}">
@@ -450,7 +450,7 @@
                         </div>
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="brand_id"
-                                aria-label="Large select example">
+                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                                 <option selected disabled>Select Brand</option>
                                 @foreach ($brands as $branddata)
                                     <option value="{{ $branddata->id }}">{{ $branddata->brand_name }}</option>
@@ -463,7 +463,22 @@
                                 @enderror
                             </span> --}}
                         </div>
-                    </div>                    
+                    </div> 
+                    
+                    {{-- is on home --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Is on home
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" name="is_on_home" type="checkbox" value="true" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Make it on home
+                                </label>
+                              </div>
+                        </div>
+                    </div>
 
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">

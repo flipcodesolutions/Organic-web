@@ -157,7 +157,7 @@
                             Parent Category<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <select class="form-select ddCategory" name="parent_id" class="form-control">
+                            <select class="form-select ddCategory" name="parent_id" class="form-control" style="font-size: 16px; font-weight: 400;">
                                 <option value="0" selected>-- select category --</option>
                                 @foreach ($categories as $categorydata)
                                     @if ($category->id != $categorydata->id)

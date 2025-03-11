@@ -5,7 +5,7 @@
         <div class="card shadow-sm  bg-body rounded">
             <div class="card-header d-flex">
                 <div class="col text-white mt-2">
-                    <h6 class="mb-0">Users Management</h6>
+                    <h6 class="mb-0">User Management</h6>
                 </div>
                 <div class="heading row align-items-center">
                     <div class="col d-flex align="right" style="gap: 3px">
