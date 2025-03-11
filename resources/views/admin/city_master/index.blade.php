@@ -77,7 +77,7 @@
                             <td>{{ $city->area_guj }}</td>
                             <td>
                                 <div class="d-flex">
-                                <a class="btn btn-primary" href="{{ route('city_master.edit')}}/{{ $city->id }}"><i
+                                <a class="btn btn-primary" href="{{ route('city_master.edit',$city->id)}}"><i
                                 class="fas fa-edit"></i></a>
 
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"

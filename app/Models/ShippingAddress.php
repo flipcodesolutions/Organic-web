@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Shipping_address extends Model
+class ShippingAddress extends Model
 {
     public function landmark()
     {

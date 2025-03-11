@@ -142,7 +142,7 @@ class CityMasterController extends Controller
         try {
 
             $citymaster = CityMaster::where('status', 'deactive')->paginate(10);
-            return view('admin.city_master.deleted', compact('citymaster'))->with('msg','Deactivate The Data');
+            return view('admin.city_master.deactive', compact('citymaster'))->with('msg','Deactivate The Data');
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());

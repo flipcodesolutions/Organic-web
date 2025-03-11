@@ -31,7 +31,11 @@ class DatabaseSeeder extends Seeder
             // UnitSeeder::Class,
             // SliderSeeder::class,
             OrderMasterSeeder::class,
-            OrderDetailSeeder::class
+            OrderDetailSeeder::class,
+            InventorySeeder::class,
+            ShippingAddressSeeder::class,
+            ReviewSeeder::class,
+            BrandSeeder::class
 
         ]);
 
