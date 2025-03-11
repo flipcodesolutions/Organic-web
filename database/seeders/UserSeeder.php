@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
     {
         ModelsUser::insert([
             [
+                'id' => '1',
                 'name'=>'Admin',
                 'email'=>'admin@gmail.com',
                 'password'=>Hash::make(123456),
@@ -26,6 +27,7 @@ class UserSeeder extends Seeder
             ],
 
             [
+                'id' => '2',
                 'name'=>'Customer',
                 'email'=>'customer@gmail.com',
                 'password'=>Hash::make(123456),
@@ -37,6 +39,7 @@ class UserSeeder extends Seeder
             ],
 
             [
+                'id' => '3',
                 'name'=>'Vendor',
                 'email'=>'vendor@gmail.com',
                 'password'=>Hash::make(123456),
@@ -48,6 +51,7 @@ class UserSeeder extends Seeder
             ],
 
             [
+                'id' => '4',
                 'name'=>'Manager',
                 'email'=>'manager@gmail.com',
                 'password'=>Hash::make(123456),
@@ -56,7 +60,79 @@ class UserSeeder extends Seeder
                 'pro_pic'=>'ManagerImage.jpeg',
                 'status'=>'active',
                 'default_language'=>'English',
-            ]
+            ],
+
+            [
+                'id' => '5',
+                'name'=>'Rudrika',
+                'email'=>'rudrika@gmail.com',
+                'password'=>Hash::make(123456),
+                'phone'=>'7171717171',
+                'role'=>'customer',
+                'pro_pic'=>'CustomerImage.jpeg',
+                'status'=>'active',
+                'default_language'=>'English',
+            ],
+
+            [
+                'id' => '6',
+                'name'=>'Manager',
+                'email'=>'manager@gmail.com',
+                'password'=>Hash::make(123456),
+                'phone'=>'7272727272',
+                'role'=>'Manager',
+                'pro_pic'=>'CustomerImage.jpeg',
+                'status'=>'active',
+                'default_language'=>'English',
+            ],
+
+            [
+                'id' => '7',
+                'name'=>'Manager',
+                'email'=>'manager@gmail.com',
+                'password'=>Hash::make(123456),
+                'phone'=>'7272727272',
+                'role'=>'Manager',
+                'pro_pic'=>'CustomerImage.jpeg',
+                'status'=>'active',
+                'default_language'=>'English',
+            ],
+
+            [
+                'id' => '8',
+                'name'=>'Manager',
+                'email'=>'manager@gmail.com',
+                'password'=>Hash::make(123456),
+                'phone'=>'7272727272',
+                'role'=>'Manager',
+                'pro_pic'=>'CustomerImage.jpeg',
+                'status'=>'active',
+                'default_language'=>'English',
+            ],
+
+            [
+                'id' => '9',
+                'name'=>'Manager',
+                'email'=>'manager@gmail.com',
+                'password'=>Hash::make(123456),
+                'phone'=>'7272727272',
+                'role'=>'Manager',
+                'pro_pic'=>'CustomerImage.jpeg',
+                'status'=>'active',
+                'default_language'=>'English',
+            ],
+
+            [
+                'id' => '10',
+                'name'=>'Manager',
+                'email'=>'manager@gmail.com',
+                'password'=>Hash::make(123456),
+                'phone'=>'7272727272',
+                'role'=>'Manager',
+                'pro_pic'=>'CustomerImage.jpeg',
+                'status'=>'active',
+                'default_language'=>'English',
+            ],
         ]);
         
 

@@ -17,7 +17,7 @@
         <input type="hidden" value="{{ $landmarkmaster->id }}" name="landmark_id">
 
         <div class="mb-3">
-            <label for="exampleFormControlSelect1">City name</label>
+            <label for="exampleFormControlSelect1">City Name English</label>
                 <select class="form-control" name="city_name_eng" id="exampleFormControlSelect1">
                     <option value="">-- Select City --</option>
                     @foreach ($cities as $citymaster)
@@ -27,7 +27,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="exampleFormControlSelect1">City name</label>
+                <label for="exampleFormControlSelect1">City Name Hindi</label>
                     <select class="form-control" name="city_name_hin" id="exampleFormControlSelect1">
                         <option value="">-- Select City --</option>
                         @foreach ($cities as $citymaster)
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="exampleFormControlSelect1">City name</label>
+                    <label for="exampleFormControlSelect1">City Name Gujarati</label>
                         <select class="form-control" name="city_name_guj" id="exampleFormControlSelect1">
                             <option value="">-- Select City --</option>
                             @foreach ($cities as $citymaster)

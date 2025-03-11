@@ -33,31 +33,31 @@
                                 <option value="{{  $citymaster->id }}">{{ $citymaster->city_name_eng }}</option>
                             @endforeach
                         </select>
-                        {{--  @error('city_name_eng')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror  --}}
+                        <span>
+                            @error('city_name_eng')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </span> 
                     <span id="nameError" class="text-danger"></span>
                 </div>
             </div>
-
-            </div>
+        </div>
 
 
         <div class="row my-3">
             <div class="col-sm-12 col-lg-3 col-md-12">
                     Landmark Name : <span class="text-danger">*</span>
             </div>
-
-
             <div class="col">
                 <div class="form-floating">
                     <input type="text" name="landmark_eng" class="form-control" placeholder="English"
                     id="landmark_eng" aria-describedby="#">
                         <label for="landmark_eng">English</label>
-                        {{--  @error('landmark english')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror  --}}
-                        <span id="nameError" class="text-danger"></span>
+                        <span>
+                         @error('landmark english')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror 
+                        </span>
                 </div>
             </div>
 
@@ -65,9 +65,11 @@
                 <div class="form-floating">
                     <input type="text" name="landmark_hin" class="form-control" placeholder="Hindi" id="landmark_hin" aria-describedby="#">
                     <label for="landmark_hin">Hindi</label>
-                    {{--  @error('landmark_hin')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror  --}}
+                    <span>
+                     @error('landmark_hin')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror 
+                    </span>
                 </div>
             </div>
 
@@ -75,9 +77,11 @@
                 <div class="form-floating">
                     <input type="text" name="landmark_guj" class="form-control" id="landmark_guj" placeholder="Gujarati" aria-describedby="#">
                     <label for="landmark_guj">Gujarati</label>
-                    {{--  @error('landmark_guj')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror  --}}
+                    <span>
+                     @error('landmark_guj')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                    </span> 
                 </div>
             </div>
         </div>
@@ -90,9 +94,11 @@
                 <div class="form-floating">
                     <input type="text" name="latitude" class="form-control" id="latitude" placeholder="latitude" aria-describedby="#">
                     <label for="latitude">Latitude</label>
-                    {{--  @error('latitude')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror  --}}
+                    <span>
+                     @error('latitude')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror 
+                    </span>
                 </div>
         </div>
 
@@ -100,9 +106,11 @@
                 <div class="form-floating">
                     <input type="text" name="longitude" class="form-control" id="longitude" placeholder="longitude" aria-describedby="#">
                     <label for="longitude">Longitude</label>
-                    {{--  @error('longitude')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror  --}}
+                    <span>
+                     @error('longitude')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                    </span> 
                 </div>
         </div>
         </div>
