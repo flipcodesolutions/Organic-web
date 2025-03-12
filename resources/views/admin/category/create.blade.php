@@ -125,7 +125,7 @@
                             Image <span class="text-danger">*</span>
                         </div>
                         <div class="col-2" id="imagepreview">
-                            <img id="profilePicPreview" src="" alt="Category Image" height="100px"
+                            <img id="profilePicPreview" src="{{ asset('defaultimage/default4.jpg') }}" alt="Category Image" height="100px"
                                 width="150px" >
                         </div>
                         <div class="col">
@@ -146,10 +146,10 @@
                     <div class="row mb-3">
                         {{-- <div class="form-group"> --}}
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Parent Category<span class="text-danger">*</span>
+                            Parent Category
                         </div>
                         <div class="col">
-                            <select class="form-select ddCategory" name="parent_id" value="{{ old('parent_id') }}" class="form-control">
+                            <select class="form-select ddCategory" name="parent_id" value="{{ old('parent_id') }}" class="form-control" style="font-size: 16px; font-weight: 400;">
                                 <option value="0" selected>-- select category --</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
