@@ -23,13 +23,13 @@ class CityMasterController extends Controller
                     ->orWhere('pincode', 'like', '%' . $request->global . '%');
                 });
             }
-            if ($request->filled('cityId'))
-            {
-                $query->where('id', $request->cityId);
-            }
+            // if ($request->filled('cityId'))
+            // {
+            //     $query->where('id', $request->cityId);
+            // }
             $data = $query->where('status','active')->paginate(10);
-            $cities = CityMaster::where('status', 'active')->get();
-            return view('admin.city_master.index', compact('data','cities'));
+            // $cities = CityMaster::where('status', 'active')->get();
+            return view('admin.city_master.index', compact('data'));
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
@@ -119,7 +119,7 @@ class CityMasterController extends Controller
             $citymaster = CityMaster::find($id);
             $citymaster->status = 'deactive';
             $citymaster->save();
-            return redirect()->back()->with('msg', 'Category deactivated successfully!');
+            return redirect()->back()->with('msg', 'City deactivated successfully!');
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
@@ -131,7 +131,7 @@ class CityMasterController extends Controller
             $citymaster = CityMaster::find($id);
             $citymaster->status = 'active';
             $citymaster->save();
-            return redirect()->route('city_master.index')->with('msg','City Activated Successfully');
+            return redirect()->back()->with('msg','City Activated Successfully');
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
@@ -150,14 +150,14 @@ class CityMasterController extends Controller
                     ->orWhere('pincode', 'like', '%' . $request->global . '%');
                 });
             }
-            if ($request->filled('cityId'))
-            {
-                $query->where('id', $request->cityId);
-            }
+            // if ($request->filled('cityId'))
+            // {
+            //     $query->where('id', $request->cityId);
+            // }
             $data = $query->where('status','deactive')->paginate(10);
 
-            $citymaster = CityMaster::where('status', 'deactive')->paginate(10);
-            return view('admin.city_master.deactive', compact('data','citymaster'));
+            // $citymaster = CityMaster::where('status', 'deactive')->paginate(10);
+            return view('admin.city_master.deactive', compact('data'));
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
@@ -168,7 +168,7 @@ class CityMasterController extends Controller
         try {
             $citymaster = CityMaster::find($id);
             $citymaster->delete();
-            return redirect()->route('city_master.index')->with('msg','Deleted Permanently');
+            return redirect()->back()->with('msg','City deleted successfully!');
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());

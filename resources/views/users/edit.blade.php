@@ -145,7 +145,7 @@
                         </div>
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="role"
-                                aria-label="Large select example">
+                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                                 <option selected disabled>--Select user role--</option>
                                 <option value="admin"{{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
                                 <option value="manager"{{ $user->role == 'manager' ? 'selected' : '' }}>Manager</option>
@@ -166,7 +166,7 @@
                         </div>
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="defaultLanguage"
-                                aria-label="Large select example">
+                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                                 <option selected disabled>--Select Default Language--</option>
                                 <option value="English"{{ $user->default_language == 'English' ? 'selected' : '' }}>English
                                 </option>

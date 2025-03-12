@@ -59,8 +59,25 @@
                             </div>
                         </div>
                     </div>
-                    {{-- isavailable --}}
+
+
+                    {{-- is Available --}}
                     <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Is Available
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" name="isavailable" type="checkbox" value="true" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Make it available
+                                </label>
+                              </div>
+                        </div>
+                    </div>
+
+                    {{-- isavailable --}}
+                    {{-- <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             IsAvailable<span class="text-danger">*</span>
                         </div>
@@ -68,19 +85,10 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        {{-- @php
-                                            if (old('isavailable') == null) {
-                                                $option = old('isavailable');
-                                            } else {
-                                                $option = old('isavailable');
-                                            }
-                                        @endphp --}}
                                         <select name="isavailable" id="" class="form-control">
                                             <option selected disabled>--Select your isavailable--</option>
                                             <option value="Available" {{ old('isavailable') == 'Available' ? 'selected' : '' }}>Available</option>
                                             <option value="NotAvailable" {{ old('isavailable') == 'NotAvailable' ? 'selected' : '' }}>NotAvailable</option>
-                                            {{-- <option value="yes" {{ $option == 'yes' ? 'selected' : '' }}>Yes</option>
-                                            <option value="no" {{ $option == 'no' ? 'selected' : '' }}>No</option> --}}
                                         </select>
                                         <span id="nameError" class="text-danger">
                                             @error('isavailable')
@@ -91,7 +99,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
 
 

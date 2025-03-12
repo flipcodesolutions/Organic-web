@@ -93,6 +93,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // try { 
+            // return $request;
             $product = new Product();
             $product->productName = $request->product_name;
             $product->productNameGuj = $request->product_name_guj;
@@ -137,7 +138,8 @@ class ProductController extends Controller
                 }
             }
 
-            if (isset($videoLink[0]) && $videoLink[0] !== null) {
+            // return $request;
+            if (isset($request->video_link[0]) && $request->video_link[0] !== null) {
                 foreach ($request->video_link as $data) {
                     ProductImage::create([
                         'productId' => $product->id,
@@ -444,7 +446,7 @@ class ProductController extends Controller
 
             // $productimg = ProductImage::where('productId', $id)->update(['status' => 'active']);
 
-            return redirect()->route('product.index')->with('msg', 'Product activated successfully!');
+            return back()->with('msg', 'Product activated successfully!');
         // } catch (\Exception $e) {
 
         //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');

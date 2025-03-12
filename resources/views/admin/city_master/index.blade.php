@@ -24,11 +24,11 @@
                         <div class="col">
                             <label for="global" class="form-label"><b>Filter:</b></label>
                             <input type="text" id="global" name="global" value="{{ request('global') }}"
-                                class="form-control" placeholder="Search by City Name">
+                                class="form-control" placeholder="Search by City Name or Pin Code">
                         </div>
 
                         <!-- City Filter -->
-                        <div class="col">
+                        {{-- <div class="col">
                             <label for="cityId" class="form-label"><b>City:</b></label>
                             <select id="cityId" name="cityId" class="form-select">
                                 <option value="" selected>Select City</option>
@@ -39,7 +39,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
 
                         <!-- Submit & Reset Buttons -->
                         <div class="col-md-4 d-flex justify-content-end gap-2">
@@ -55,13 +55,13 @@
                 <table class="table table-bordered">
                     <tr>
                         <th>ID</th>
-                        <th>City Name (ENG)</th>
-                        <th>City Name (HIN)</th>
-                        <th>City Name (GUJ)</th>
+                        <th>City Name</th>
+                        {{-- <th>City Name (HIN)</th>
+                        <th>City Name (GUJ)</th> --}}
                         <th>Pincode</th>
-                        <th>Area (ENG)</th>
-                        <th>Area (HIN)</th>
-                        <th>Area (GUJ)</th>
+                        <th>Area</th>
+                        {{-- <th>Area (HIN)</th>
+                        <th>Area (GUJ)</th> --}}
                         <th>Actions</th>
                     </tr>
 
@@ -69,12 +69,12 @@
                         <tr>
                             <td>{{ $city->id }}</td>
                             <td>{{ $city->city_name_eng }}</td>
-                            <td>{{ $city->city_name_hin }}</td>
-                            <td>{{ $city->city_name_guj }}</td>
+                            {{-- <td>{{ $city->city_name_hin }}</td>
+                            <td>{{ $city->city_name_guj }}</td> --}}
                             <td>{{ $city->pincode }}</td>
                             <td>{{ $city->area_eng }}</td>
-                            <td>{{ $city->area_hin }}</td>
-                            <td>{{ $city->area_guj }}</td>
+                            {{-- <td>{{ $city->area_hin }}</td>
+                            <td>{{ $city->area_guj }}</td> --}}
                             <td>
                                 <div class="d-flex">
                                 <a class="btn btn-primary" href="{{ route('city_master.edit',$city->id)}}"><i
