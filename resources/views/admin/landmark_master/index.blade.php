@@ -58,8 +58,8 @@
                     <tr>
                         <th>ID</th>
                         <th>City name English</th>
-                        <th>City name Hindi</th>
-                        <th>City name Gujarati</th>
+                        {{-- <th>City name Hindi</th>
+                        <th>City name Gujarati</th> --}}
                         <th>Landmark English</th>
                         <th>Landmark Hindi</th>
                         <th>Landmark Gujarati</th>
@@ -71,8 +71,8 @@
                         <tr>
                             <td>{{ $landmark->id }}
                             <td>{{ $landmark->citymaster->city_name_eng }}</td>
-                            <td>{{ $landmark->citymaster->city_name_hin }}</td>
-                            <td>{{ $landmark->citymaster->city_name_guj }}</td>
+                            {{-- <td>{{ $landmark->citymaster->city_name_hin }}</td>
+                            <td>{{ $landmark->citymaster->city_name_guj }}</td> --}}
                             <td>{{ $landmark->landmark_eng }}</td>
                             <td>{{ $landmark->landmark_hin }}</td>
                             <td>{{ $landmark->landmark_guj }}</td>

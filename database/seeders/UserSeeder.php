@@ -28,12 +28,12 @@ class UserSeeder extends Seeder
 
             [
                 'id' => '2',
-                'name'=>'Customer',
-                'email'=>'customer@gmail.com',
+                'name'=>'Vendor',
+                'email'=>'vendor@gmail.com',
                 'password'=>Hash::make(123456),
                 'phone'=>'9494949494',
-                'role'=>'Customer',
-                'pro_pic'=>'CustomerImage.jpeg',
+                'role'=>'Vendor',
+                'pro_pic'=>'VendorImage.jpeg',
                 'status'=>'active',
                 'default_language'=>'English',
             ],
@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
             [
                 'id' => '3',
                 'name'=>'Vendor',
-                'email'=>'vendor@gmail.com',
+                'email'=>'vendor2@gmail.com',
                 'password'=>Hash::make(123456),
                 'phone'=>'7575757575',
                 'role'=>'Vendor',
@@ -76,11 +76,11 @@ class UserSeeder extends Seeder
 
             [
                 'id' => '6',
-                'name'=>'Manager',
-                'email'=>'manager@gmail.com',
+                'name'=>'Jinal',
+                'email'=>'jinal@gmail.com',
                 'password'=>Hash::make(123456),
                 'phone'=>'7272727272',
-                'role'=>'Manager',
+                'role'=>'customer',
                 'pro_pic'=>'CustomerImage.jpeg',
                 'status'=>'active',
                 'default_language'=>'English',
@@ -88,11 +88,11 @@ class UserSeeder extends Seeder
 
             [
                 'id' => '7',
-                'name'=>'Manager',
-                'email'=>'manager@gmail.com',
+                'name'=>'Priyanshi',
+                'email'=>'priyanshi@gmail.com',
                 'password'=>Hash::make(123456),
                 'phone'=>'7272727272',
-                'role'=>'Manager',
+                'role'=>'customer',
                 'pro_pic'=>'CustomerImage.jpeg',
                 'status'=>'active',
                 'default_language'=>'English',
@@ -100,11 +100,11 @@ class UserSeeder extends Seeder
 
             [
                 'id' => '8',
-                'name'=>'Manager',
-                'email'=>'manager@gmail.com',
+                'name'=>'Janki',
+                'email'=>'janki@gmail.com',
                 'password'=>Hash::make(123456),
                 'phone'=>'7272727272',
-                'role'=>'Manager',
+                'role'=>'customer',
                 'pro_pic'=>'CustomerImage.jpeg',
                 'status'=>'active',
                 'default_language'=>'English',
@@ -112,11 +112,11 @@ class UserSeeder extends Seeder
 
             [
                 'id' => '9',
-                'name'=>'Manager',
-                'email'=>'manager@gmail.com',
+                'name'=>'Khushi',
+                'email'=>'khushi@gmail.com',
                 'password'=>Hash::make(123456),
                 'phone'=>'7272727272',
-                'role'=>'Manager',
+                'role'=>'customer',
                 'pro_pic'=>'CustomerImage.jpeg',
                 'status'=>'active',
                 'default_language'=>'English',
@@ -124,11 +124,11 @@ class UserSeeder extends Seeder
 
             [
                 'id' => '10',
-                'name'=>'Manager',
-                'email'=>'manager@gmail.com',
+                'name'=>'Arpita',
+                'email'=>'arpita@gmail.com',
                 'password'=>Hash::make(123456),
                 'phone'=>'7272727272',
-                'role'=>'Manager',
+                'role'=>'customer',
                 'pro_pic'=>'CustomerImage.jpeg',
                 'status'=>'active',
                 'default_language'=>'English',
