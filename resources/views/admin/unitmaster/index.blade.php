@@ -51,7 +51,7 @@
                                 <td>{{ $index++ }}</td>
                                 <td>{{ $unitmasters->unit }}</td>
                                 <td>
-                                    <a href="{{ Route('unitmaster.edit', $unitmasters->id) }}" class="btn btn-warning">
+                                    <a href="{{ Route('unitmaster.edit', $unitmasters->id) }}" class="btn btn-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="javascript:void(0)" class="btn btn-danger ml-2"

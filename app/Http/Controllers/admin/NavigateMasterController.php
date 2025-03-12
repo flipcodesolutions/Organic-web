@@ -42,7 +42,7 @@ class NavigateMasterController extends Controller
         $request->validate([
             'screenName' => 'required'
         ]);
-        try {
+        // try {
             // return $request;
             $screen = new NavigateMaster();
 
@@ -50,9 +50,9 @@ class NavigateMasterController extends Controller
             $screen->save();
 
             return redirect()->route('navigate.index')->with('msg', 'New screen created successfully!');
-        } catch (\Exception $e) {
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        // } catch (\Exception $e) {
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     /**
@@ -70,7 +70,7 @@ class NavigateMasterController extends Controller
     {
         $screen = NavigateMaster::find($id);
 
-        return view('admin.Navigate.edit', compact('screen'));
+        return view('admin.navigate.edit', compact('screen'));
     }
 
     /**
@@ -81,15 +81,15 @@ class NavigateMasterController extends Controller
         $request->validate([
             'screenName' => 'required'
         ]);
-        try{
+        // try{
         $screen = NavigateMaster::find($id);
         $screen->screenname = $request->screenName;
         $screen->save();
 
         return redirect()->route('navigate.index')->with('msg', 'Screen updated successfully!');
-        }catch (\Exception $e) {
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        // }catch (\Exception $e) {
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     /**

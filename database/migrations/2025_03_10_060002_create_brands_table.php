@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('brand_name');
             $table->string('brand_icon');
+            $table->enum('status', ['active', 'deactive'])->default('active');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

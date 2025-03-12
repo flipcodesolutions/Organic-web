@@ -6,11 +6,11 @@
         <div class="card shadow-sm  bg-body rounded">
             <div class="card-header d-flex">
                 <div class="col text-white mt-2">
-                    <h6 class="mb-0">DeliverySlot Management</h6>
+                    <h6 class="mb-0">DeliverySlots Management</h6>
                 </div>
                 <div class="heading row align-items-center">
                     <div class="col d-flex align="right" style="gap: 3px">
-                        <a class="b1 btn btn-danger" href="{{ Route('deliveryslot.deactive') }}">Deactive DeliverySlot</a>
+                        <a class="b1 btn btn-danger" href="{{ Route('deliveryslot.deactive') }}">Deactive DeliverySlots</a>
                         <a class="btn btn-primary" href="{{ Route('deliveryslot.create') }}">Add</a>
                     </div>
                 </div>
@@ -21,12 +21,12 @@
                 <form action="{{ Route('deliveryslot.index') }}" method="GET" class="filter-form">
                     <div class="row align-items-end g-2">
 
-                        <!-- Global Search -->
+                        {{-- <!-- Global Search -->
                         <div class="col">
                             <label for="global" class="form-label"><b>Filter:</b></label>
                             <input type="text" id="global" name="global" value="{{ request('global') }}"
                                 class="form-control" placeholder="Search by Time">
-                        </div>
+                        </div> --}}
 
                         <!--isavailable  Filter -->
                         <div class="col">
@@ -72,7 +72,7 @@
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{ Route('deliveryslot.edit', $deliveryslot->id) }}"
-                                            class="btn btn-warning">
+                                            class="btn btn-primary">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="javascript:void(0)" class="btn btn-danger ml-2"

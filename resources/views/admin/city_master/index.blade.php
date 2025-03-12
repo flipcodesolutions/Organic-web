@@ -50,7 +50,6 @@
                 </form>
             </div>
 
-
             <div class="card-body table-responsive">
                 <div class="loader"></div>
                 <table class="table table-bordered">
@@ -76,21 +75,19 @@
                             <td>{{ $city->area_eng }}</td>
                             <td>{{ $city->area_hin }}</td>
                             <td>{{ $city->area_guj }}</td>
-
                             <td>
                                 <div class="d-flex">
-                                <a class="btn btn-primary" href="{{ route('city_master.edit') }}/ {{ $city->id }}"><i
-                                        class="fas fa-edit"></i></a>
+                                <a class="btn btn-primary" href="{{ route('city_master.edit',$city->id)}}"><i
+                                class="fas fa-edit"></i></a>
 
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                    onclick="openDeactiveModal('{{ route('city_master.deactive') }}/{{ $city->id }}')">
-                                    <i class="fas fa-trash"></i>
+                                onclick="openDeactiveModal('{{ route('city_master.deactive',$city->id) }}')">
+                                <i class="fas fa-trash"></i>
                                 </a>
                                 </div>
                             </td>
                         </tr>
                     @endforeach
-
                 </table>
             </div>
         </div>

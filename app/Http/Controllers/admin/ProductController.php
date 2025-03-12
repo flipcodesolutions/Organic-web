@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -17,7 +18,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        try {
+        // try {
 
             $query = Product::query();
 
@@ -31,14 +32,18 @@ class ProductController extends Controller
             if ($request->filled('categoryId')) {
                 $query->where('categoryID', $request->categoryId);
             }
+            if ($request->filled('brandId')) {
+                $query->where('brandId', $request->brandId);
+            }
             if ($request->filled('season')) {
                 $query->where('season', $request->season);
             }
 
             $data = $query->where('status', 'active')->whereHas('categories', function ($query) {
                 $query->where('status', 'active');
-            })->with(['categories', 'productImages'])->paginate(10);
-
+            })->whereHas('brand',function($query1){
+                $query1->where('status','active');
+            })->with(['categories', 'brand', 'productImages'])->paginate(10);
             // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
             //     $query->where('status', 'active');
             // })->with(['categories', 'productImages'])->paginate(10);
@@ -51,22 +56,23 @@ class ProductController extends Controller
                 ['status', '=', 'active'],
                 ['parent_category_id', '!=', 0]
             ])->get();
+            $brands = Brand::where('status','active')->get();
             // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
             //     $query->where('status', 'active');
             // })->with(['categories', 'productImages', 'productUnit.unitMaster'=> function($query){
             //     $query->where('status','active')->select('id','unit');
             // }])->paginate(10);
-            // return $products;  
-            return view('admin.product.index', compact('data', 'categories', 'childcat'));
-        } catch (\Exception $e) {
+            // return $products;
+            return view('admin.product.index', compact('data', 'categories', 'childcat', 'brands'));
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function create()
     {
-        try {
+        // try {
 
             $categories = Category::where([
                 ['status', '=', 'active'],
@@ -77,16 +83,16 @@ class ProductController extends Controller
                 ['parent_category_id', '!=', 0]
             ])->get();
             $units = UnitMaster::where('status', 'active')->get();
-            return view('admin.product.create', compact('categories', 'childcat', 'units'));
-        } catch (\Exception $e) {
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+            $brands = Brand::where('status','active')->get();
+            return view('admin.product.create', compact('categories', 'childcat', 'units', 'brands'));
+        // } catch (\Exception $e) {
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function store(Request $request)
     {
-        try { 
-            // return $request->video_link[0];
+        // try { 
             $product = new Product();
             $product->productName = $request->product_name;
             $product->productNameGuj = $request->product_name_guj;
@@ -98,8 +104,16 @@ class ProductController extends Controller
             $product->Stock = $request->product_stock;
             $product->season = $request->season;
             $product->categoryId = $request->category_id;
+            $product->brandId = $request->brand_id;
             $userId = Auth::user()->id;
             $product->userId = $userId;
+            if($request->has('is_on_home') && $request->is_on_home == 'true'){
+                $product->isOnHome = 'yes';
+            }
+            else{
+                $product->isOnHome = 'no';
+            }
+
             $product->save();
 
             if ($request->hasFile('product_image')) {
@@ -160,15 +174,15 @@ class ProductController extends Controller
             // ]);
 
             return redirect()->route('product.index')->with('msg', 'Product created successfully!');
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function edit($id)
     {
-        try {
+        // try {
             $product = Product::with('productImages')->with('productUnit.unitMaster')->find($id);
             // return $product;
             $categories = Category::where([
@@ -180,18 +194,19 @@ class ProductController extends Controller
                 ['parent_category_id', '!=', 0]
             ])->get();
             $units = UnitMaster::where('status', 'active')->get();
+            $brands = Brand::where('status','active')->get();
 
-            return view('admin.product.edit', compact('product', 'categories', 'childcat', 'units'));
-        } catch (\Exception $e) {
+            return view('admin.product.edit', compact('product', 'categories', 'childcat', 'units', 'brands'));
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!')->with('exception_message', $e->getMessage());;
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!')->with('exception_message', $e->getMessage());;
+        // }
     }
 
     public function update(Request $request, $id)
     {
         // return $request;
-        try {
+        // try {
         // return $request;
         $product = Product::find($id);
         $product->productName = $request->product_name;
@@ -204,6 +219,13 @@ class ProductController extends Controller
         $product->stock = $request->product_stock;
         $product->season = $request->season;
         $product->categoryId = $request->category_id;
+        $product->brandId = $request->brand_id;
+        if($request->has('is_on_home') && $request->is_on_home == 'true'){
+            $product->isOnHome = 'yes';
+        }
+        else{
+            $product->isOnHome = 'no';
+        }
         // $product->save();
 
         // for add new video
@@ -339,39 +361,16 @@ class ProductController extends Controller
         // ]);
 
         return redirect()->route('product.index')->with('msg', 'Product updated successfully!');
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
-        // try {
-        //     $product = Product::find($id);
-        //     $product->product_name = $request->product_name;
-        //     $product->category_id = $request->category_id;
-        //     if ($request->Thumbnail) {
-        //         $image = $request->file('Thumbnail');
-        //         $imageName = $image->getClientOriginalName();
-        //         $destinationPath = public_path('collection/product/productimage');
-        //         $image->move($destinationPath, $imageName);
-        //         $product->Thumbnail = $imageName;
-        //     }
-        //     $product->save();
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'Product updated successfully!',
-        //         'date' => $product,
-        //     ]);
-        // } catch (\Illuminate\Validation\ValidationException $e) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => $e->errors()
-        //     ]);
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
         // }
     }
 
 
     public function deactive($id)
     {
-        try {
+        // try {
             $product = Product::find($id);
             $product->status = 'deactive';
             $product->save();
@@ -380,15 +379,15 @@ class ProductController extends Controller
 
 
             return redirect()->back()->with('msg', 'Product deactivated successfully!');
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function deactiveindex(Request $request)
     {
-        try {
+        // try {
             $query = Product::query();
 
             if ($request->filled('global')) {
@@ -401,12 +400,19 @@ class ProductController extends Controller
             if ($request->filled('categoryId')) {
                 $query->where('categoryID', $request->categoryId);
             }
+
+            if ($request->filled('brandId')) {
+                $query->where('brandId', $request->brandId);
+            }
+
             if ($request->filled('season')) {
                 $query->where('season', $request->season);
             }
 
             $data = $query->where('status', 'deactive')->whereHas('categories', function ($query) {
                 $query->where('status', 'active');
+            })->whereHas('brand',function($query1){
+                $query1->where('status','active');
             })->with(['categories', 'productImages'])->paginate(10);
 
             $categories = Category::where([
@@ -417,20 +423,21 @@ class ProductController extends Controller
                 ['status', '=', 'active'],
                 ['parent_category_id', '!=', 0]
             ])->get();
+            $brands = Brand::where('status','active')->get();
 
-            return view('admin.product.deactiveproduct', compact('data', 'categories', 'childcat'));
+            return view('admin.product.deactiveproduct', compact('data', 'categories', 'childcat', 'brands'));
             // $products = Product::where('status', 'deactive')->with(['categories', 'productImages', 'productUnit.unitMaster'])->paginate(10);
             // return $products;
             return view('admin.product.deactiveproduct', compact('products'));
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function active($id)
     {
-        try {
+        // try {
             $product = Product::find($id);
             $product->status = 'active';
             $product->save();
@@ -438,15 +445,15 @@ class ProductController extends Controller
             // $productimg = ProductImage::where('productId', $id)->update(['status' => 'active']);
 
             return redirect()->route('product.index')->with('msg', 'Product activated successfully!');
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function destroy($id)
     {
-        try {
+        // try {
             $productunit = Unit::where('product_id', $id)->get();
             // return $productunit;
 
@@ -469,15 +476,15 @@ class ProductController extends Controller
             $product->delete();
 
             return redirect()->back()->with('msg', 'Product deleted successfully!');
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function destroyimage($id)
     {
-        try {
+        // try {
 
             $image = ProductImage::find($id);
             $data = ProductImage::where('productId', $image->productId)->get();
@@ -496,15 +503,15 @@ class ProductController extends Controller
             // } else {
             //     return redirect()->back()->with('error', 'Please add new images/videos before deleting last image/video!');
             // }
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     public function destroyunit($id)
     {
-        try {
+        // try {
             $unit = Unit::find($id);
             $data = Unit::where('product_id', $unit->product_id)->get();
             // if (count($data) > 1) {
@@ -514,9 +521,9 @@ class ProductController extends Controller
             // } else {
             //     return redirect()->back()->with('error', 'Please add new units before deleting last unit!');
             // }
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 }

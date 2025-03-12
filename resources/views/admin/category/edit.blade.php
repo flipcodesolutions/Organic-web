@@ -133,8 +133,8 @@
                             Image <span class="text-danger">*</span>
                         </div>
                         <div class="col-2" id="imagepreview">
-                            <img id="profilePicPreview" src="{{ asset('categoryImage/' . $category->cat_icon) }}" alt="" height="100px"
-                                width="150px">
+                            <img id="profilePicPreview" src="{{ asset('categoryImage/' . $category->cat_icon) }}"
+                                alt="" height="100px" width="150px">
                         </div>
                         <div class="col">
                             <div class="form">
@@ -157,10 +157,14 @@
                             Parent Category<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <select class="form-select ddCategory" name="parent_id" class="form-control">
+                            <select class="form-select ddCategory" name="parent_id" class="form-control" style="font-size: 16px; font-weight: 400;">
                                 <option value="0" selected>-- select category --</option>
                                 @foreach ($categories as $categorydata)
-                                    <option value="{{ $categorydata->id }}"{{ $categorydata->id == $category->parent_category_id ? 'selected' : '' }}>{{ $categorydata->categoryName }}</option>
+                                    @if ($category->id != $categorydata->id)
+                                        <option
+                                            value="{{ $categorydata->id }}"{{ $categorydata->id == $category->parent_category_id ? 'selected' : '' }}>
+                                            {{ $categorydata->categoryName }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             {{-- <select class="form-select ddCategory" name="parent_id" class="form-control">
@@ -186,8 +190,8 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary btn-sm mb-3"><i
-                                    class="fa-solid fa-floppy-disk"></i> Submit</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i>
+                                Submit</button>
                         </div>
                     </div>
 

@@ -610,8 +610,8 @@
                             Season<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <select class="form-control form-select-lg mb-3" name="season"
-                                aria-label="Large select example">
+                            <select class="form-select form-select-lg mb-3" name="season"
+                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                                 <option disabled>Select Season</option>
                                 <option value="Winter"{{ $product->season == 'Winter' ? 'selected' : '' }}>Winter
                                 </option>
@@ -634,8 +634,8 @@
                             Category<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <select class="form-control form-select-lg mb-3" name="category_id"
-                                aria-label="Large select example">
+                            <select class="form-select form-select-lg mb-3" name="category_id"
+                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                                 <option disabled>Select Category</option>
                                 @foreach ($categories as $category)
                                     <optgroup label="{{ $category->categoryName }}">
@@ -657,9 +657,47 @@
                         </div>
                     </div>
 
+                    {{-- Product Brand --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Brand<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <select class="form-select form-select-lg mb-3" name="brand_id"
+                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
+                                <option selected disabled>Select Brand</option>
+                                @foreach ($brands as $branddata)
+                                    <option value="{{ $branddata->id }}"{{ $product->brandId == $branddata->id ? 'selected' : ''}}>{{ $branddata->brand_name }}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger" id="brandError"></span>
+                            {{-- <span>
+                                @error('category_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span> --}}
+                        </div>
+                    </div>
+
+                    {{-- is on home --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Is on home
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" name="is_on_home" type="checkbox" value="true" id="flexCheckDefault" 
+                                @if($product->isOnHome == 'yes') checked @endif>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Make it on home
+                                </label>
+                              </div>
+                        </div>
+                    </div>
+
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i
+                        <button type="submit" class="btn btn-primary"><i
                                 class="fa-solid fa-floppy-disk"></i>
                             Submit</button>
                     </div>

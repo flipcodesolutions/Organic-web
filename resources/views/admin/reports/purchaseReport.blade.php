@@ -14,7 +14,7 @@
             </div>
         </div>
 
-    
+
     <table class="table">
         <tr>
             <th>ID</th>
@@ -23,7 +23,7 @@
             <th>Date</th>
             <th>Price</th>
             <th>Quantity</th>
-            <th>Status</th> 
+            <th>Status</th>
         </tr>
         @foreach($purchase as $data)
         <tr>
@@ -34,7 +34,7 @@
             <td>{{ $data->price }}</td>
             <td>{{ $data->qty }}</td>
             <td>{{ $data->status }}</td>
-                      
+
         </tr>
         @endforeach
     </table> -->
@@ -59,10 +59,10 @@
             <input type="date" class="form-control" name="start_date" id="start_date">
             @error('start_date')
             <span class="text-danger">{{ $message }}</span>
-            @enderror  
+            @enderror
          </div>
       </div>
-    </div>  
+    </div>
     <div class="row mb-3">
       <div class="col-sm-12 col-lg-3 col-md-12">
         End Date : <span class="text-danger">*</span>
@@ -72,17 +72,17 @@
             <input type="date" class="form-control" name="end_date" id="end_date">
             @error('end_date')
             <span class="text-danger">{{ $message }}</span>
-            @enderror  
+            @enderror
          </div>
       </div>
-    </div> 
+    </div>
       <div class="row mb-3">
          <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btn-primary btn-sm  mt-3 mb-3">
+            <button type="submit" class="btn btn-primary">
            Generate Report</button>
          </div>
       </div>
-  
+
 </div>
 
 @endsection

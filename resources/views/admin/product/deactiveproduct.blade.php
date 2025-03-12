@@ -47,9 +47,20 @@
                             </select>
                         </div>
 
+                        {{-- brand Filter --}}
+                        <div class="col">
+                            <label for="brand"><b>Brand:</b></label>
+                            <select name="brandId" id="brand" class="form-select">
+                                <option value="" selected>Select Brand</option>
+                                @foreach ($brands as $branddata)
+                                    <option value="{{ $branddata->id }}" {{ request('brandId') == $branddata->id }}>{{ $branddata->brand_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         {{-- session Filter --}}
                         <div class="col">
-                            <label for="season"><b>Session:</b></label>
+                            <label for="season"><b>Season:</b></label>
                             <select name="season" id="season" class="form-select">
                                 <option value="" selected>Select Season</option>
                                 <option value="Winter"{{ request('season') == 'Winter' ? 'selected' : '' }}>Winter</option>
@@ -83,6 +94,7 @@
                         <th>Sell Price</th> --}}
                         <th>Product Stock</th>
                         <th>Season</th>
+                        <th>brand</th>
                         <th>Images</th>
                         <th>Action</th>
                     </tr>
@@ -136,9 +148,12 @@
                                     {{ $productData->season }}
                                 </td>
                                 <td>
+                                    {{ $productData->brand->brand_name }}
+                                </td>
+                                <td>
 
-                                    @if (isset($productData->productImages) && $productData->productImages->isNotEmpty())
-                                        <img src="{{ asset('productImage/' . $productData->productImages->first()->url) }}"
+                                    @if (isset($productData->image) && !empty($productData->image))
+                                        <img src="{{ asset('productImage/' . $productData->image) }}"
                                             alt="" height="80px" width="50px" style="list-style-type:none">
                                         {{-- <img src="{{ asset('productImage/' . $productData->productImages->first()->url) }}"
                                     alt="Product Image" /> --}}

@@ -48,7 +48,7 @@
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{ Route('cms_master.edit', $cms->id) }}" class="btn btn-warning">
+                                        <a href="{{ Route('cms_master.edit', $cms->id) }}" class="btn btn-primary">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="javascript:void(0)" class="btn btn-danger ml-2"

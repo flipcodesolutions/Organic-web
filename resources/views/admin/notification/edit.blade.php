@@ -130,7 +130,7 @@
                         </div>
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="navigate_screen"
-                                aria-label="Large select example">
+                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                                 <option selected disabled>Select Navigate Screen</option>
                                 @foreach ($screen as $data)
                                     <option value="{{ $data->screenname }}"
@@ -148,7 +148,7 @@
 
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i class="fa-solid fa-floppy-disk"></i>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i>
                             Submit</button>
                     </div>
 

@@ -25,11 +25,22 @@ class CategoryController extends Controller
             $childHindiFields = ['categories.*', 'categoryNameHin as displayName', 'categoryDescriptionHin as displayDescription'];
 
 
-            $categoriesQuery = Category::with(['childs' => function ($query) use ($language, $childEnglishFields, $childGujaratiFields, $childHindiFields) {
-                $query->select($language == 'Hindi' ? $childHindiFields : ($language == 'Gujarati' ? $childGujaratiFields : $childEnglishFields));
-            }])
-                ->select($language == 'Hindi' ? $categoriesHindiFields : ($language == 'Gujarati' ? $categoriesGujaratiFields : $categoriesEnglishFields))
+            // $categoriesQuery = Category::with(['childs' => function ($query) use ($language, $childEnglishFields, $childGujaratiFields, $childHindiFields) {
+            //     $query->select($language == 'Hindi' ? $childHindiFields : ($language == 'Gujarati' ? $childGujaratiFields : $childEnglishFields));
+            //     $query->whereHas('products');
+            // }])
+            //     ->select($language == 'Hindi' ? $categoriesHindiFields : ($language == 'Gujarati' ? $categoriesGujaratiFields : $categoriesEnglishFields))
+            //     ->where('parent_category_id', 0)
+            //     ->whereHas('childs', function ($query) {
+            //         $query->whereHas('products'); // Ensures parent categories are retrieved only if at least one child has products
+            //     })
+            //     ->where('status', 'active')
+            //     ->orderBy('id', 'desc');
+            $categoriesQuery = Category::select($language == 'Hindi' ? $categoriesHindiFields : ($language == 'Gujarati' ? $categoriesGujaratiFields : $categoriesEnglishFields))
                 ->where('parent_category_id', 0)
+                ->whereHas('childs', function ($query) {
+                    $query->whereHas('products'); // Ensures parent categories are retrieved only if at least one child has products
+                })
                 ->where('status', 'active')
                 ->orderBy('id', 'desc');
 

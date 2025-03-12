@@ -10996,7 +10996,7 @@ a:focus {
 
 #wrapper {
     display: flex;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 #wrapper #content-wrapper {
@@ -11540,9 +11540,9 @@ a:focus {
 
 /* Target the scrollbar */
 /* .sidebar-content::-webkit-scrollbar {
-    width: 4px;  
+    width: 4px;
     height: 4px;
-    
+
 }
 
 .sidebar-content::-webkit-scrollbar-thumb {
@@ -11554,7 +11554,7 @@ a:focus {
     background: #f0f0f0;
     /* Background of scrollbar track */
 /* } */
-    
+
 .sidebar .nav-item {
     position: relative
 }
@@ -11744,7 +11744,8 @@ a:focus {
 
 @media (min-width:768px) {
     .sidebar {
-        width: 14rem !important
+        width: 14rem !important;
+        min-height: 100vh;
     }
 
     .sidebar .nav-item .collapse {

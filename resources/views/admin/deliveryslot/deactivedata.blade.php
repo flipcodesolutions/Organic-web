@@ -7,7 +7,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0" style="width: 180px">Deactive DilverySlot</h6>
+                        <h6 class="mb-0" style="width: 180px">Deactive DeliverySlots</h6>
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-primary" href="{{ Route('deliveryslot.index') }}">Back</a>
@@ -21,11 +21,11 @@
                     <div class="row align-items-end g-2">
 
                         <!-- Global Search -->
-                        <div class="col">
+                        {{-- <div class="col">
                             <label for="global" class="form-label"><b>Filter:</b></label>
                             <input type="text" id="global" name="global" value="{{ request('global') }}"
                                 class="form-control" placeholder="Search by Time">
-                        </div>
+                        </div> --}}
 
                         <!--isavailable  Filter -->
                         <div class="col">

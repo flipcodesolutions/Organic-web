@@ -163,7 +163,7 @@
                                         <td>
                                             <select class="form-select form-select-lg mb-3" name="unit_id[]"
                                                 value="{{ old('unit_id.0') }}" aria-label="Large select example"
-                                                id="unit">
+                                                id="unit" style="font-size: 16px; font-weight: 400;">
                                                 <option selected disabled>Select Unit</option>
                                                 @foreach ($units as $data)
                                                     <option value="{{ $data->id }}">{{ $data->unit }}</option>
@@ -398,7 +398,7 @@
                         </div>
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="season"
-                                aria-label="Large select example">
+                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                                 <option selected disabled>Select Season</option>
                                 <option value="Winter">Winter</option>
                                 <option value="Summer">Summer</option>
@@ -421,7 +421,7 @@
                         </div>
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="category_id"
-                                aria-label="Large select example">
+                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                                 <option selected disabled>Select Category</option>
                                 @foreach ($categories as $category)
                                     <optgroup label="{{ $category->categoryName }}">
@@ -443,9 +443,46 @@
                         </div>
                     </div>
 
+                    {{-- Product Brand --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Brand<span class="text-danger">*</span>
+                        </div>
+                        <div class="col">
+                            <select class="form-select form-select-lg mb-3" name="brand_id"
+                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
+                                <option selected disabled>Select Brand</option>
+                                @foreach ($brands as $branddata)
+                                    <option value="{{ $branddata->id }}">{{ $branddata->brand_name }}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger" id="brandError"></span>
+                            {{-- <span>
+                                @error('category_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </span> --}}
+                        </div>
+                    </div> 
+                    
+                    {{-- is on home --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Is on home
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" name="is_on_home" type="checkbox" value="true" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Make it on home
+                                </label>
+                              </div>
+                        </div>
+                    </div>
+
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i
+                        <button type="submit" class="btn btn-primary"><i
                                 class="fa-solid fa-floppy-disk"></i>
                             Submit</button>
                     </div>
@@ -490,6 +527,7 @@
             const product_stock = document.getElementById('product_stock').value;
             const season = document.querySelector('select[name="season"]').value;
             const category_id = document.querySelector('select[name="category_id"]').value;
+            const brand_id = document.querySelector('select[name="brand_id"]').value;
             const product_image = document.getElementById('photoUpload').files.length;
             const video_link = document.getElementById('videoLink').value;
 
@@ -580,13 +618,17 @@
                 document.getElementById('productStockError').textContent = "Product stock is required and must be numeric.";
             }
 
-            // Validate season and category
+            // Validate season, category and brand
             if (!season || season === "Select Season") {
                 document.getElementById('seasonError').textContent = "Season is required.";
             }
 
             if (!category_id || category_id === "Select Category") {
                 document.getElementById('categoryError').textContent = "Category is required.";
+            }
+
+            if (!brand_id || brand_id === "Select Brand") {
+                document.getElementById('brandError').textContent = "Brand is required.";
             }
 
             // Validate image or video link (must provide at least one)
