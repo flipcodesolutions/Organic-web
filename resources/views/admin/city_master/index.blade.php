@@ -81,7 +81,7 @@
                                 class="fas fa-edit"></i></a>
 
                                 <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                onclick="openDeactiveModal('{{ route('city_master.deactive') }}/{{ $city->id }}')">
+                                onclick="openDeactiveModal('{{ route('city_master.deactive',$city->id) }}')">
                                 <i class="fas fa-trash"></i>
                                 </a>
                                 </div>

@@ -78,37 +78,42 @@
                 </div>
         </div>
 
+
         <div class="row m-3">
-            <div class="col">
+
+        <div class="col">
                 <div class="form-floating">
                     <input type="text" name="latitude" class="form-control" id="latitude" placeholder="latitude" aria-describedby="#">
                     <label for="latitude">Latitude</label>
                     <span>
-                        @error('latitude')
+                     @error('latitude')
                         <p class="text-danger">{{ $message }}</p>
-                        @enderror
+                    @enderror 
                     </span>
                 </div>
-            </div>
-            <div class="col">
+        </div>
+
+        <div class="col">
                 <div class="form-floating">
                     <input type="text" name="longitude" class="form-control" id="longitude" placeholder="longitude" aria-describedby="#">
                     <label for="longitude">Longitude</label>
                     <span>
-                        @error('longitude')
+                     @error('longitude')
                         <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </span>
+                    @enderror
+                    </span> 
+                </div>
+        </div>
+        </div>
+        <div class="row mb-3">
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary btn-sm  mt-3 mb-3">
+                        <i class="fa-solid fa-floppy-disk"></i> Submit</button>
                 </div>
             </div>
         </div>
-        <div class="row mb-3">
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary btn-sm  mt-3 mb-3">
-                    <i class="fa-solid fa-floppy-disk"></i> Submit</button>
-            </div>
-        </div>
-    </div>
-    </form>
+
+
+        </form>
 </div>
 @endsection

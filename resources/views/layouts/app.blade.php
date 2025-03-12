@@ -495,7 +495,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid" style="background: ghostwhite;">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -885,13 +885,13 @@
         <script>
             var message =
                 '{{ session()->has('
-                                                        success ')
+                                                                            success ')
                     ? session()->get('
-                                                        success ')
+                                                                            success ')
                     : (session()->has('
-                                                        error ')
+                                                                            error ')
                         ? session()->get('
-                                                        error ')
+                                                                            error ')
                         : implode("\\n", $errors->all())) }}';
 
             // If there is a success message
@@ -978,6 +978,7 @@
         <
         !--Core plugin JavaScript-- >
         <
+        script
         script src = "{{ asset('asset/vendor/jquery-easing/jquery.easing.min.js') }}" >
     </script>
 

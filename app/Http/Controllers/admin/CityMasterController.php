@@ -52,7 +52,7 @@ class CityMasterController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {      
+    {
                 $request->validate([
                 'city_name_eng' => 'required',
                 'city_name_hin' => 'required',
@@ -63,7 +63,7 @@ class CityMasterController extends Controller
                 'area_guj' => 'required',
             ]);
             try{
-            
+
             $citymaster = new CityMaster();
             $citymaster->city_name_eng = $request->city_name_eng;
             $citymaster->city_name_hin = $request->city_name_hin;
@@ -137,12 +137,27 @@ class CityMasterController extends Controller
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
     }
-    public function deleted()
+    public function deleted(Request $request)
     {
         try {
 
+            $query = CityMaster::query();
+
+            if ($request->filled('global'))
+            {
+                $query->where(function ($q) use ($request) {
+                    $q->where('city_name_eng', 'like', '%' . $request->global . '%')
+                    ->orWhere('pincode', 'like', '%' . $request->global . '%');
+                });
+            }
+            if ($request->filled('cityId'))
+            {
+                $query->where('id', $request->cityId);
+            }
+            $data = $query->where('status','deactive')->paginate(10);
+
             $citymaster = CityMaster::where('status', 'deactive')->paginate(10);
-            return view('admin.city_master.deactive', compact('citymaster'))->with('msg','Deactivate The Data');
+            return view('admin.city_master.deactive', compact('data','citymaster'));
         }
         catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());

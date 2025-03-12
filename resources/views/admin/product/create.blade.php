@@ -463,11 +463,11 @@
                                 @enderror
                             </span> --}}
                         </div>
-                    </div>                    
+                    </div>
 
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i
+                        <button type="submit" class="btn btn-primary"><i
                                 class="fa-solid fa-floppy-disk"></i>
                             Submit</button>
                     </div>

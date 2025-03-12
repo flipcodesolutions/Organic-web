@@ -30,12 +30,17 @@ class LandmarkMasterController extends Controller
                 if ($request->filled('landmarkId')) {
                     $query->where('id', $request->landmarkId);
                 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 232c52a8521287caee8017c196537bd12a7d0922
                 $data = $query->where('status','active')->with('citymaster')->paginate(10);
-                
+
                 $landmarkmasters = LandmarkMaster::where('status', 'active')->select('id', 'landmark_eng')->get();
                 return view('admin.landmark_master.index', compact('data','landmarkmasters'));
             }
-            catch (Exception $e) 
+            catch (Exception $e)
             {
                 return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
             }
@@ -50,7 +55,7 @@ class LandmarkMasterController extends Controller
             $cities = CityMaster::all();
             return View('admin.landmark_master.create',compact('cities'));
         }
-        catch (Exception $e) 
+        catch (Exception $e)
         {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
@@ -84,7 +89,7 @@ class LandmarkMasterController extends Controller
             $landmarkmasters->save();
             return redirect()->route('landmark.index')->with('success','stored');
         }
-        catch (Exception $e) 
+        catch (Exception $e)
         {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
@@ -100,7 +105,7 @@ class LandmarkMasterController extends Controller
             $landmarkmaster = LandmarkMaster::find($id);
             return view('admin.landmark_master.edit',compact('landmarkmaster','cities'));
         }
-        catch (Exception $e) 
+        catch (Exception $e)
         {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
@@ -126,7 +131,7 @@ class LandmarkMasterController extends Controller
             $landmarkmasters->save();
             return redirect()->route('landmark.index');
         }
-        catch (Exception $e) 
+        catch (Exception $e)
         {
             return redirect()->back()->with('error', 'An error occurred: '.$e->getMessage());
         }
