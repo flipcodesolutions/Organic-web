@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('season');
             $table->integer('brandId');
+            $table->enum('isOnHome', ['yes', 'no'])->default('no');
             $table->enum('status', ['active', 'deactive'])->default('active');
             $table->timestamps();
         });

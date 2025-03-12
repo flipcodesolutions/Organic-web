@@ -80,6 +80,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     //product 
     Route::get('products', [ProductController::class, 'products']);
+    Route::get('homeProducts', [ProductController::class, 'homeProducts']);
 
     //cms
     Route::get('cms', [CmsController::class, 'cms']);
