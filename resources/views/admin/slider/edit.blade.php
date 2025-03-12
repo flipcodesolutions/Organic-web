@@ -14,7 +14,8 @@
             </div>
 
             <div class="card-body">
-                <form id="slider" method="post" action="{{ Route('slider.update', $slider->id) }}" enctype="multipart/form-data" class="form">
+                <form id="slider" method="post" action="{{ Route('slider.update', $slider->id) }}"
+                    enctype="multipart/form-data" class="form">
                     @csrf
                     {{-- slider --}}
                     <div class="row mb-3">
@@ -49,15 +50,17 @@
                     {{-- slider url --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            Url <span class="text-danger">*</span>
+                            Image <span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">
                                 <div class="col">
                                     <div class="form-floating mb-3">
                                         <div id="photoInput">
-                                            <img src="{{asset('sliderimage/'.$slider->url)}}" id="uploadPreview" style="gap: 10px; width:180px; height:100px; margin-bottom:8px">
-                                            <input type="file" class="form-control" id="uploadImage" name="image" onchange="PreviewImage();">
+                                            <img src="{{ asset('sliderimage/' . $slider->url) }}" id="uploadPreview"
+                                                style="gap: 10px; width:180px; height:100px; margin-bottom:8px">
+                                            <input type="file" class="form-control" id="uploadImage" name="image"
+                                                onchange="PreviewImage();">
                                         </div>
                                         {{-- <span>
                                             @error('image')
@@ -72,7 +75,7 @@
                     {{-- slider pos --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            SliderPos<span class="text-danger">*</span>
+                            SliderPosition<span class="text-danger">*</span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">
@@ -83,9 +86,11 @@
                                             <option selected disabled>--Select your position--</option>
                                             <option value="top"{{ $slider->slider_pos == 'top' ? 'selected' : '' }}>Top
                                             </option>
-                                            <option value="bottom"{{ $slider->slider_pos == 'bottom' ? 'selected' : '' }}>Bottom
+                                            <option value="bottom"{{ $slider->slider_pos == 'bottom' ? 'selected' : '' }}>
+                                                Bottom
                                             </option>
-                                            <option value="middle"{{ $slider->slider_pos == 'middle' ? 'selected' : '' }}>Middle
+                                            <option value="middle"{{ $slider->slider_pos == 'middle' ? 'selected' : '' }}>
+                                                Middle
                                             </option>
                                         </select>
                                         <label for="floatingInput">Enter position</label>
@@ -100,7 +105,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            IsNavigate<span class="text-danger">*</span>
+                            IsNavigate<span class="text-danger"></span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">
@@ -128,7 +133,7 @@
                     <div class="row mb-3" id="navigatemaster_field"
                         style="{{ $slider->is_navigate == 1 ? 'display: flex;' : 'display: none;' }}">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            ScreenName<span class="text-danger">*</span>
+                            ScreenName<span class="text-danger"></span>
                         </div>
                         <div class="col">
                             <div class="row mb-2">
@@ -158,8 +163,8 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary btn-sm mb-3"><i
-                                    class="fa-solid fa-floppy-disk"></i> Submit</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i>
+                                Submit</button>
                         </div>
                     </div>
                 </form>
@@ -168,7 +173,6 @@
     </div>
 
     <script>
-
         // JavaScript to toggle navigatemaster field based on checkbox
         document.getElementById('flexCheckDefault').addEventListener('change', function() {
             var navigatemasterField = document.getElementById('navigatemaster_field');
@@ -177,6 +181,8 @@
             if (this.checked) {
                 // Show navigatemaster field
                 navigatemasterField.style.display = 'flex';
+                // Reset the dropdown to show the placeholder
+                navigatemasterSelect.selectedIndex =  0; // This will select the first option, which is the placeholder
             } else {
                 // Hide navigatemaster field and reset its value
                 navigatemasterField.style.display = 'none';
@@ -184,7 +190,7 @@
             }
         });
     </script>
-     <script type="text/javascript">
+    <script type="text/javascript">
         // single image show
         function PreviewImage() {
             var oFReader = new FileReader();
@@ -192,9 +198,9 @@
             var previewContainer = document.getElementById("uploadPreview");
             previewContainer.innerHTML = ""; // Clear previous previews
 
-            oFReader.onload = function (oFREvent) {
+            oFReader.onload = function(oFREvent) {
                 document.getElementById("uploadPreview").src = oFREvent.target.result;
-                    previewContainer.style.display = 'flex';
+                previewContainer.style.display = 'flex';
             };
         };
     </script>

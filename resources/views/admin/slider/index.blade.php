@@ -66,7 +66,7 @@
                         <th>No</th>
                         <th>CityName</th>
                         <th>Image</th>
-                        <th>SliderPos</th>
+                        <th>SliderPosition</th>
                         <th>IsNavigate</th>
                         <th>ScreenName</th>
                         <th>Action</th>

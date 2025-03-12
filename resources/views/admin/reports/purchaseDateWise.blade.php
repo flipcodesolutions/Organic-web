@@ -40,7 +40,7 @@
     </div>
       <div class="row mb-3">
          <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btn-primary btn-sm  mt-3 mb-3">
+            <button type="submit" class="btn btn-primary">
            Generate Report</button>
          </div>
       </div>

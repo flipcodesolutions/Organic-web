@@ -6,11 +6,11 @@
         <div class="card shadow-sm  bg-body rounded">
             <div class="card-header d-flex">
                 <div class="col text-white mt-2">
-                    <h6 class="mb-0">Faqs Management</h6>
+                    <h6 class="mb-0">FAQs Management</h6>
                 </div>
                 <div class="heading row align-items-center">
                     <div class="col d-flex align="right" style="gap: 3px">
-                        <a class="btn btn-danger" href="{{ Route('faq.deactive') }}">Deactive Faqs</a>
+                        <a class="btn btn-danger" href="{{ Route('faq.deactive') }}">Deactive FAQs</a>
                         <a class="btn btn-primary" href="{{ Route('faq.create') }}">Add</a>
                     </div>
                 </div>

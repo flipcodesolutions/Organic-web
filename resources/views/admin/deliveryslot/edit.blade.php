@@ -5,7 +5,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
-                        <h6 class="mb-0" style="width: 200px">Update New DeliverySlot</h6>
+                        <h6 class="mb-0" style="width: 200px">Update New DeliverySlots</h6>
                     </div>
                     <div class="col" align="right">
                         <a class="btn btn-primary" href="{{Route('deliveryslot.index')}}">Back</a>
@@ -86,7 +86,7 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary btn-sm mb-3"><i
+                            <button type="submit" class="btn btn-primary"><i
                                     class="fa-solid fa-floppy-disk"></i> Submit</button>
                         </div>
                     </div>

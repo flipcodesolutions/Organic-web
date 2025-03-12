@@ -62,7 +62,7 @@ class ProductController extends Controller
             // })->with(['categories', 'productImages', 'productUnit.unitMaster'=> function($query){
             //     $query->where('status','active')->select('id','unit');
             // }])->paginate(10);
-            // return $products;  
+            // return $products;
             return view('admin.product.index', compact('data', 'categories', 'childcat', 'brands'));
         // } catch (\Exception $e) {
 
