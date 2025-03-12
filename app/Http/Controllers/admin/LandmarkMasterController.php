@@ -30,11 +30,7 @@ class LandmarkMasterController extends Controller
                 if ($request->filled('landmarkId')) {
                     $query->where('id', $request->landmarkId);
                 }
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 232c52a8521287caee8017c196537bd12a7d0922
                 $data = $query->where('status','active')->with('citymaster')->paginate(10);
 
                 $landmarkmasters = LandmarkMaster::where('status', 'active')->select('id', 'landmark_eng')->get();

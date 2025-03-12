@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
                 'role'=>'admin',
                 'pro_pic'=>'adminImage.png',
                 'status'=>'active',
-                'default_language'=>'gujarati',
+                'default_language'=>'Gujarati',
             ],
 
             [
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
                 'role'=>'Vendor',
                 'pro_pic'=>'VendorImage.jpeg',
                 'status'=>'active',
-                'default_language'=>'english',
+                'default_language'=>'English',
             ],
 
             [
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
                 'role'=>'Vendor',
                 'pro_pic'=>'VendorImage.jpeg',
                 'status'=>'active',
-                'default_language'=>'gujarati',
+                'default_language'=>'Gujarati',
             ],
 
             [

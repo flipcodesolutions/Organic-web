@@ -55,7 +55,7 @@ class NotificationController extends Controller
             'details_hin' => 'required',
             'navigate_screen' => 'required',
         ]);
-        try {
+        // try {
             $newdata = new Notification();
             $newdata->title = $request->title;
             $newdata->titleGuj = $request->title_guj;
@@ -67,9 +67,9 @@ class NotificationController extends Controller
             $newdata->save();
 
             return redirect()->route('notification.index')->with('msg', 'Notification created successfully!');
-        } catch (\Exception $e) {
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        // } catch (\Exception $e) {
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     /**
@@ -104,7 +104,7 @@ class NotificationController extends Controller
             'details_hin' => 'required',
             'navigate_screen' => 'required',
         ]);
-        try {
+        // try {
             // return $request; 
             $notification = Notification::find($id);
             $notification->title = $request->title;
@@ -117,9 +117,9 @@ class NotificationController extends Controller
             $notification->save();
 
             return redirect()->route('notification.index')->with('msg', 'Notification Updated successfully!');
-        } catch (\Exception $e) {
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        // } catch (\Exception $e) {
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
     }
 
     /**

@@ -21,7 +21,7 @@ class CategorySeeder extends Seeder
                 'categoryDescription' => 'Various types of vegetables.',
                 'categoryDescriptionGuj' => 'વિવિધ પ્રકારની શાકભાજી',
                 'categoryDescriptionHin' => ' विभिन्न प्रकार की सब्ज़ियाँ',
-                'cat_icon' => '',
+                'cat_icon' => 'veggi.jpeg',
                 'parent_category_id' => '0',
             ],
             [
@@ -32,7 +32,7 @@ class CategorySeeder extends Seeder
                 'categoryDescription' => 'All sorts of fresh fruits.',
                 'categoryDescriptionGuj' => 'તમામ પ્રકારના તાજા ફળ.',
                 'categoryDescriptionHin' => 'सभी प्रकार के ताजे फल.',
-                'cat_icon' => '',
+                'cat_icon' => 'fruits.jpeg',
                 'parent_category_id' => '0',
             ],
             [
@@ -43,7 +43,7 @@ class CategorySeeder extends Seeder
                 'categoryDescription' => 'A sub-category of vegetables related to potatoes and onions.',
                 'categoryDescriptionGuj' => 'બટાકા અને ડુંગળી સાથે સંબંધિત શાકભાજીની પેટા શ્રેણી.',
                 'categoryDescriptionHin' => 'आलू और प्याज से संबंधित सब्जियों की उप-श्रेणी।',
-                'cat_icon' => '',
+                'cat_icon' => 'onion.jfif',
                 'parent_category_id' => '0',
             ],
             [
@@ -54,7 +54,7 @@ class CategorySeeder extends Seeder
                 'categoryDescription' => 'A sub-category of vegetables related to bitter melon.',
                 'categoryDescriptionGuj' => 'કારેલા સાથે સંબંધિત શાકભાજીની પેટા શ્રેણી.',
                 'categoryDescriptionHin' => 'करेला से संबंधित सब्जियों की उप-श्रेणी।',
-                'cat_icon' => '',
+                'cat_icon' => 'karela.jpeg',
                 'parent_category_id' => '1'
             ],
             [
@@ -65,7 +65,7 @@ class CategorySeeder extends Seeder
                 'categoryDescription' => 'A juicy and sweet tropical fruit known as the king of fruits.',
                 'categoryDescriptionGuj' => 'એક રસદાર અને મીઠો ઉષ્ણકટિબંધીય ફળ, જેને ફળોનો રાજા કહેવામાં આવે છે.',
                 'categoryDescriptionHin' => 'एक रसीला और मीठा उष्णकटिबंधीय फल, जिसे फलों का राजा कहा जाता है।',
-                'cat_icon' => '',
+                'cat_icon' => 'mango.jpeg',
                 'parent_category_id' => '2',
             ],
             [
@@ -76,7 +76,7 @@ class CategorySeeder extends Seeder
                 'categoryDescription' => 'A sub-category of vegetables related to potatoes',
                 'categoryDescriptionGuj' => 'બટાકા સંબંધિત શાકભાજીની પેટા શ્રેણી.',
                 'categoryDescriptionHin' => 'आलू संबंधित सब्जियों की उप-श्रेणी।',
-                'cat_icon' => '',
+                'cat_icon' => 'potato.jpg',
                 'parent_category_id' => '3',
             ],
            

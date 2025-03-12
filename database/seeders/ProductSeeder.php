@@ -22,8 +22,10 @@ class ProductSeeder extends Seeder
                 'categoryId' => '1',
                 'userId' => '1',
                 'stock' => '20',
-                'image' => 'carrot.jpg',
+                'image' => 'carrot.jpeg',
                 'season' => 'winter',
+                'brandId' => '1',
+                'isOnHome' => 'yes',
                 'status' => 'active',
             ],
             [
@@ -38,8 +40,10 @@ class ProductSeeder extends Seeder
                 'categoryId' => '2',
                 'userId' => '1',
                 'stock' => '30',
-                'image' => 'mango.jpg',
+                'image' => 'mango.jpeg',
                 'season' => 'summer',
+                'brandId' => '2',
+                'isOnHome' => 'no',
                 'status' => 'active',
             ],
             [
@@ -56,6 +60,8 @@ class ProductSeeder extends Seeder
                 'stock' => '25',
                 'image' => 'spinach.jpg',
                 'season' => 'monsoon',
+                'brandId' => '3',
+                'isOnHome' => 'yes',
                 'status' => 'active',
             ],
             [
@@ -70,8 +76,10 @@ class ProductSeeder extends Seeder
                 'categoryId' => '2',
                 'userId' => '1',
                 'stock' => '15',
-                'image' => 'apple.jpg',
+                'image' => 'apple.jpeg',
                 'season' => 'winter',
+                'brandId' => '4',
+                'isOnHome' => 'no',
                 'status' => 'active',
             ],
             [
@@ -86,8 +94,10 @@ class ProductSeeder extends Seeder
                 'categoryId' => '1',
                 'userId' => '1',
                 'stock' => '40',
-                'image' => 'cucumber.jpg',
+                'image' => 'cucumber.jpeg',
                 'season' => 'summer',
+                'brandId' => '5',
+                'isOnHome' => 'yes',
                 'status' => 'active',
             ],
             [
@@ -104,6 +114,8 @@ class ProductSeeder extends Seeder
                 'stock' => '35',
                 'image' => 'potato.jpg',
                 'season' => 'all',
+                'brandId' => '6',
+                'isOnHome' => 'no',
                 'status' => 'active',
             ],
             [
@@ -118,8 +130,10 @@ class ProductSeeder extends Seeder
                 'categoryId' => '1',
                 'userId' => '1',
                 'stock' => '45',
-                'image' => 'onion.jpg',
+                'image' => 'onion.jfif',
                 'season' => 'all',
+                'brandId' => '7',
+                'isOnHome' => 'yes',
                 'status' => 'active',
             ]
         ]);

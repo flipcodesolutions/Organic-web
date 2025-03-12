@@ -84,8 +84,8 @@ class UserController extends Controller
             'password' => 'required|string|min:8|confirmed', // 'confirmed' will automatically validate if password and confirm-password match
             'password_confirmation' => 'required|string|min:8'
         ]);
-        // return $request;
-        try {
+
+        // try {
             $user = new User();
             $user->name = $request->name;
             $user->phone = $request->phone;
@@ -105,9 +105,9 @@ class UserController extends Controller
             $user->save();
 
             return redirect()->route('user.index')->with('msg', 'User created successfully!');
-        } catch (\Exception $e) {
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+        // } catch (\Exception $e) {
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
 
         // $input = $request->all();
         // $input['password'] = Hash::make($input['password']);
@@ -165,7 +165,7 @@ class UserController extends Controller
             'defaultLanguage' => 'required',
             'profilePic' => 'required|image|mimes:jpeg,png,jpg,gif'
         ]);
-        try {
+        // try {
             $user = User::find($id);
             $user->name = $request->name;
             $user->phone = $request->phone;
@@ -188,10 +188,10 @@ class UserController extends Controller
 
             $user->save();
 
-            return redirect()->route('user.index')->with('msg', 'User created successfully!');
-        } catch (\Exception $e) {
-            return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        }
+            return redirect()->route('user.index')->with('msg', 'User updated successfully!');
+        // } catch (\Exception $e) {
+        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+        // }
 
         // $input = $request->all();
         // if(!empty($input['password'])){ 

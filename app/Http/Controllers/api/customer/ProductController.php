@@ -89,4 +89,42 @@ class ProductController extends Controller
         }
     }
 
+    public function homeProducts()
+    {
+        try {
+            // Get user's preferred language
+            $language = Auth::user()->default_language;
+
+            // Define language-based field selections
+            $languageFields = [
+                'English' => ['*', 'productName as displayName', 'productDescription as displayDescription'],
+                'Gujarati' => ['*', 'productNameGUj as displayName', 'productDescriptionGuj as displayDescription'],
+                'Hindi' => ['*', 'productNameHin as displayName', 'productDescriptionHin as displayDescription'],
+            ];
+
+            // Select fields based on user language (default to English)
+            $productFields = $languageFields[$language] ?? $languageFields['English'];
+
+            // Fetch home products with relationships
+            $productsQuery = Product::where('status', 'active')
+                ->where('isOnHome', 'yes')
+                ->with(['productImages', 'productUnit.unitMaster'])
+                ->select($productFields)
+                ->get();
+
+            // Transform productUnit to remove unitMaster and extract only the unit value
+            $productsQuery->transform(function ($product) {
+                $product->productUnit->transform(function ($unit) {
+                    $unit->unit = optional($unit->unitMaster)->unit; // Avoids undefined property error
+                    unset($unit->unitMaster);
+                    return $unit;
+                });
+                return $product;
+            });
+
+            return Util::getSuccessMessage('Products', ['products' => $productsQuery]);
+        } catch (\Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
 }
