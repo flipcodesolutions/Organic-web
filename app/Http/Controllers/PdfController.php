@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Purchase;
+use App\Models\OrderMaster;
+use App\Models\OrderDetail;
 
 
 use Illuminate\Http\Request;
@@ -41,5 +43,17 @@ class PdfController extends Controller
 ];
         $pdf = Pdf::loadView('admin.reports.purchaseDateWisePDF',$data)->setPaper('a4', 'potrait');
         return $pdf->download('purchaseReport.pdf');
+    }
+
+    public function billPDF(){
+        $orderid=session('orderid');
+        // return $orderid;
+       // $data = OrderMaster::with(['user', 'orderDetails.product', 'shippingAddress'])->find($orderid);
+        
+       $data = OrderMaster::find($orderid);
+       $data=['data'=>$data];
+        // return $data;
+        $pdf = Pdf::loadView('admin.reports.billPDF', $data)->setPaper('a4', 'potrait');
+        return $pdf->download('Bill.pdf');
     }
 }

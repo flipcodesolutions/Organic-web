@@ -44,9 +44,18 @@
             <td>{{$data->total}}</td>
         </tr>
         @endforeach
+        <tr>
+            <td colspan=3>Total</td>
+            <td>500</td>
+        </tr>
+        <tr>
+            <td colspan="4" align="center">
+                <a class="btn btn-primary" href="{{ Route('reports.billPDF') }}">Download PDF</a>
+            </td>
+        </tr>
     </table>
    
-</div>
+</div>  
 </div>
 </div>
     

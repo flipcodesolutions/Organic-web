@@ -17,5 +17,6 @@ Route::get('reports/purchaseReport', [PurchaseController::class, 'purchaseReport
 Route::get('reports/orderReport', [OrderMasterController::class, 'orderReport'])->name('reports.orderReport');
 
 Route::get('reports/bill/{id?}', [OrderMasterController::class, 'billgeneration'])->name('reports.bill');
+Route::get('reports/billPDF/{id?}', [PdfController::class, 'billPDF'])->name('reports.billPDF');
 ?>
 

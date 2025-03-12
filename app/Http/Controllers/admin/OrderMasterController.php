@@ -70,11 +70,12 @@ class OrderMasterController extends Controller
     $data = OrderMaster::with(['user', 'orderDetails.product', 'shippingAddress'])
                             ->get();
        return view('admin.reports.orderReport',['data'=>$data]);
-      // return $data;
+    //   return $data;
     }
 
-    public function billgeneration($id){
+    public function billgeneration(Request $request,$id){
         $data = OrderMaster::find($id);
+        $request->session()->put('orderid',$id);
         //  return $data;
         return view('admin.reports.bill',['data'=>$data]);
     }
