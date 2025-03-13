@@ -15,7 +15,6 @@ class CategoryController extends Controller
         try {
             $language = Auth::user()->default_language;
 
-
             $categoriesEnglishFields = ['*', 'categoryName as displayName', 'categoryDescription as displayDescription'];
             $categoriesGujaratiFields = ['*', 'categoryNameGUj as displayName', 'categoryDescriptionGuj as displayDescription'];
             $categoriesHindiFields = ['*', 'categoryNameHin as displayName', 'categoryDescriptionHin as displayDescription'];
@@ -39,11 +38,10 @@ class CategoryController extends Controller
             $categoriesQuery = Category::select($language == 'Hindi' ? $categoriesHindiFields : ($language == 'Gujarati' ? $categoriesGujaratiFields : $categoriesEnglishFields))
                 ->where('parent_category_id', 0)
                 ->whereHas('childs', function ($query) {
-                    $query->whereHas('products'); // Ensures parent categories are retrieved only if at least one child has products
+                    $query->whereHas('products');
                 })
                 ->where('status', 'active')
                 ->orderBy('id', 'desc');
-
 
 
             if ($request->has('category_id')) {
