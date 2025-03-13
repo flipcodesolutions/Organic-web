@@ -86,25 +86,25 @@ class UserController extends Controller
         ]);
 
         // try {
-            $user = new User();
-            $user->name = $request->name;
-            $user->phone = $request->phone;
-            $user->email = $request->email;
-            $user->password = $request->password;
-            $user->role = $request->role;
-            $user->default_language = $request->defaultLanguage;
+        $user = new User();
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->role = $request->role;
+        $user->default_language = $request->defaultLanguage;
 
-            if ($request->hasFile('profilePic')) {
-                $image = $request->profilePic;
-                // return $image;
-                $profilepic = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                $user->pro_pic = $profilepic;
-                $image->move(public_path('user_profile/'), $profilepic);
-            }
+        if ($request->hasFile('profilePic')) {
+            $image = $request->profilePic;
+            // return $image;
+            $profilepic = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $user->pro_pic = $profilepic;
+            $image->move(public_path('user_profile/'), $profilepic);
+        }
 
-            $user->save();
+        $user->save();
 
-            return redirect()->route('user.index')->with('msg', 'User created successfully!');
+        return redirect()->route('user.index')->with('msg', 'User created successfully!');
         // } catch (\Exception $e) {
         //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
         // }
@@ -166,29 +166,29 @@ class UserController extends Controller
             'profilePic' => 'required|image|mimes:jpeg,png,jpg,gif'
         ]);
         // try {
-            $user = User::find($id);
-            $user->name = $request->name;
-            $user->phone = $request->phone;
-            $user->email = $request->email;
-            $user->role = $request->role;
-            $user->default_language = $request->defaultLanguage;
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->role = $request->role;
+        $user->default_language = $request->defaultLanguage;
 
 
-            if ($request->hasFile('profilePic')) {
-                $image = $request->profilePic;
-                // return $image;
-                $profilepic = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                $currentimagepath = public_path('user_Profile/' . $user->pro_pic);
-                $user->pro_pic = $profilepic;
-                if (file_exists($currentimagepath)) {
-                    unlink($currentimagepath);
-                }
-                $image->move(public_path('user_profile/'), $profilepic);
+        if ($request->hasFile('profilePic')) {
+            $image = $request->profilePic;
+            // return $image;
+            $profilepic = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $currentimagepath = public_path('user_Profile/' . $user->pro_pic);
+            $user->pro_pic = $profilepic;
+            if (file_exists($currentimagepath)) {
+                unlink($currentimagepath);
             }
+            $image->move(public_path('user_profile/'), $profilepic);
+        }
 
-            $user->save();
+        $user->save();
 
-            return redirect()->route('user.index')->with('msg', 'User updated successfully!');
+        return redirect()->route('user.index')->with('msg', 'User updated successfully!');
         // } catch (\Exception $e) {
         //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
         // }
@@ -224,8 +224,7 @@ class UserController extends Controller
             unlink($profilepic);
         }
         $user->delete();
-        return redirect()->route('user.index')
-            ->with('msg', 'User deleted successfully');
+        return back()->with('msg', 'User deleted successfully');
     }
 
     public function deactiveindex(Request $request)
@@ -263,6 +262,6 @@ class UserController extends Controller
         $data->status = 'active';
         $data->save();
 
-        return redirect()->route('user.index')->with('msg', 'User activated successfully!');
+        return back()->with('msg', 'User activated successfully!');
     }
 }

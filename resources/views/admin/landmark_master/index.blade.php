@@ -17,7 +17,7 @@
                 </div>
             </div>
 
-
+            {{-- filter --}}
             <div class="mb-4 margin-bottom-30 m-4">
                 <form action="{{ route('landmark.index') }}" method="GET" class="filter-form">
                     <div class="row align-items-end g-2">
@@ -31,13 +31,13 @@
 
                         <!-- City Filter -->
                         <div class="col">
-                            <label for="landamrkId" class="form-label"><b>Landmark:</b></label>
-                            <select id="landmarkId" name="landmarkId" class="form-select">
-                                <option value="" selected> Select Landamrk </option>
-                                @foreach ($landmarkmasters as $landmark)
-                                    <option value="{{ $landmark->id }}"
-                                        {{ request('landmarkId') == $landmark->id ? 'selected' : '' }}>
-                                        {{ $landmark->landmark_eng }}
+                            <label for="cityId" class="form-label"><b>city:</b></label>
+                            <select id="cityId" name="cityId" class="form-select">
+                                <option value="" selected> Select city </option>
+                                @foreach ($cities as $citydata)
+                                    <option value="{{ $citydata->id }}"
+                                        {{ request('cityId') == $citydata->id ? 'selected' : '' }}>
+                                        {{ $citydata->city_name_eng }}
                                     </option>
                                 @endforeach
                             </select>

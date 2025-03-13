@@ -33,11 +33,11 @@
                             <label for="isavailable" class="form-label"><b>isavailable:</b></label>
                             <select name="isavailable" id="isavailable" class="form-control">
                                 <option selected disabled>Select your isavailable</option>
-                                <option value="Available" {{ request('isavailable') == 'Available' ? 'selected' : '' }}>
-                                    Available</option>
-                                <option value="NotAvailable"
-                                    {{ request('isavailable') == 'NotAvailable' ? 'selected' : '' }}>
-                                    NotAvailable</option>
+                                <option value="yes" {{ request('isavailable') == 'yes' ? 'selected' : '' }}>
+                                    Yes</option>
+                                <option value="no"
+                                    {{ request('isavailable') == 'no' ? 'selected' : '' }}>
+                                    No</option>
                             </select>
                         </div>
 

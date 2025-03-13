@@ -37,14 +37,19 @@ class DeliverySlotController extends Controller
         $request->validate([
             'starttime' => 'required',
             'endtime' => 'required',
-            'isavailable' => 'required',
+            // 'isavailable' => 'required',
         ]);
 
         //create the delivery slot
         $deliveryslot = new DeliverySlot();
         $deliveryslot->startTime=$request->starttime;
         $deliveryslot->endTime=$request->endtime;
-        $deliveryslot->isAvailable=$request->isavailable;
+        if($request->has('isavailable') && $request->isavailable == 'true'){
+            $deliveryslot->isAvailable= 'yes';
+        }
+        else{
+            $deliveryslot->isAvailable= 'no';
+        }
         $deliveryslot->save();
 
         return redirect()->route('deliveryslot.index')->with('msg', 'DeliverySlot Created Successfully');
@@ -59,12 +64,17 @@ class DeliverySlotController extends Controller
         $request->validate([
             'starttime' => 'required',
             'endtime' => 'required',
-            'isavailable' => 'required',
+            // 'isavailable' => 'required',
         ]);
         $deliveryslot = DeliverySlot::find($id);
         $deliveryslot->startTime=$request->starttime;
         $deliveryslot->endTime=$request->endtime;
-        $deliveryslot->isAvailable=$request->isavailable;
+        if($request->has('isavailable') && $request->isavailable == 'true'){
+            $deliveryslot->isAvailable= 'yes';
+        }
+        else{
+            $deliveryslot->isAvailable= 'no';
+        }
         $deliveryslot->save();
 
         return redirect()->route('deliveryslot.index')->with('msg', 'DeliverySlot Updated Successfully');

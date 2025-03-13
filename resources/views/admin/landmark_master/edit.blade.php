@@ -28,9 +28,9 @@
                     <div class="col">
                         <div class="form-floating">
                             <select class="form-control" name="city_id" id="exampleFormControlSelect1">
-                                <option value="">-- Select City --</option>
+                                <option value="" selected disabled>-- Select City --</option>
                                 @foreach ($cities as $citymaster)
-                                <option value="{{  $citymaster->id }}">{{ $citymaster->city_name_eng }}</option>
+                                <option value="{{  $citymaster->id }}"{{ $citymaster->id == $landmarkmaster->city_id ? 'selected' : '' }}>{{ $citymaster->city_name_eng }}</option>
                                 @endforeach
                             </select>
                             <span>

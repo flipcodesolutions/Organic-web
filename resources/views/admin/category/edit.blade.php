@@ -150,14 +150,31 @@
                         </div>
                     </div>
 
-                    {{-- Parent Category --}}
+                    {{-- make it parent --}}
                     <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Is Parent
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" name="isparent" type="checkbox" value="0"
+                                    id="flexCheckDefault" @if ($category->parent_category_id == 0) checked @endif>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Make it parent
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Parent Category --}}
+                    <div class="row mb-3" id="parentCat">
                         {{-- <div class="form-group"> --}}
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Parent Category<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <select class="form-select ddCategory" name="parent_id" class="form-control" style="font-size: 16px; font-weight: 400;">
+                            <select class="form-select ddCategory" name="parent_id" class="form-control" id="parent_id"
+                                style="font-size: 16px; font-weight: 400;">
                                 <option value="0" selected>-- select category --</option>
                                 @foreach ($categories as $categorydata)
                                     @if ($category->id != $categorydata->id)
@@ -220,6 +237,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+    {{-- for ck editor  --}}
     <script>
         // Initialize CKEditor for each
         CKEDITOR.replace('category_des');
@@ -227,6 +245,7 @@
         CKEDITOR.replace('category_des_hin');
     </script>
 
+    {{-- for image preview --}}
     <script>
         function previewImage(event) {
             const file = event.target.files[0];
@@ -244,6 +263,28 @@
                 reader.readAsDataURL(file); // Read the file as a Data URL
             }
         }
+    </script>
+
+    {{-- for is parent --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const checkbox = document.getElementById('flexCheckDefault');
+            const select = document.getElementById('parent_id');
+
+            function toggleSelect() {
+                if (checkbox.checked) {
+                    select.disabled = true; 
+                } else {
+                    select.disabled = false; 
+                }
+            }
+
+            // Initial call to set the state of the select dropdown on page load
+            toggleSelect();
+
+            // Add an event listener for checkbox change to toggle the disabled state
+            checkbox.addEventListener('change', toggleSelect);
+        });
     </script>
 
     {{-- <script>
