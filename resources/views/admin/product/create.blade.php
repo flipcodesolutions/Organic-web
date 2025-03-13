@@ -403,6 +403,7 @@
                                 <option value="Winter">Winter</option>
                                 <option value="Summer">Summer</option>
                                 <option value="Monsoon">Monsoon</option>
+                                <option value="All">All</option>
                             </select>
                             <span class="text-danger" id="seasonError">
 

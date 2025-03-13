@@ -97,7 +97,7 @@
                                     {{-- @endif --}}
                                 </td>
                                 <td>
-                                    <img src="{{ asset('categoryImage/' . $categoryData->cat_icon) }}" alt=""
+                                    <img src="{{ asset($categoryData->cat_icon) }}" alt=""
                                         height="100px" width="150px">
                                 </td>
                                 <td>

@@ -69,6 +69,7 @@
                                 <option value="Summer"{{ request('season') == 'Summer' ? 'selected' : '' }}>Summer</option>
                                 <option value="Monsoon"{{ request('season') == 'Monsoon' ? 'selected' : '' }}>Monsoon
                                 </option>
+                                <option value="All"{{ request('season') == 'All' ? 'selected' : '' }}>All</option>
                             </select>
                         </div>
 
@@ -174,7 +175,7 @@
                                 </td>
                                 <td>
                                     @if (isset($productData->image) && !empty($productData->image))
-                                        <img src="{{ asset('productImage/' . $productData->image) }}"
+                                        <img src="{{ asset( $productData->image) }}"
                                             alt="" height="80px" width="50px" style="list-style-type:none">
                                         {{-- <img src="{{ asset('productImage/' . $productData->productImages->first()->url) }}"
                                     alt="Product Image" /> --}}

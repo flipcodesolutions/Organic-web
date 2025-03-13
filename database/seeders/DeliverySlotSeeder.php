@@ -16,32 +16,32 @@ class DeliverySlotSeeder extends Seeder
             [
                 'startTime' => '9:30',
                 'endTime' => '6:30',
-                'isAvailable' => 'Available',
+                'isAvailable' => 'yes',
             ],
             [
                 'startTime' => '9:30',
                 'endTime' => '6:30',
-                'isAvailable' => 'NotAvailable',
+                'isAvailable' => 'no',
             ],
             [
                 'startTime' => '7:00',
                 'endTime' => '3:00',
-                'isAvailable' => 'Available',
+                'isAvailable' => 'yes',
             ],
             [
                 'startTime' => '8:00',
                 'endTime' => '5:00',
-                'isAvailable' => 'NotAvailable',
+                'isAvailable' => 'no',
             ],
             [
                 'startTime' => '10:00',
                 'endTime' => '4:00',
-                'isAvailable' => 'Available',
+                'isAvailable' => 'yes',
             ],
             [
                 'startTime' => '11:00',
                 'endTime' => '7:00',
-                'isAvailable' => 'NotAvailable',
+                'isAvailable' => 'no',
             ]
         ]);
         

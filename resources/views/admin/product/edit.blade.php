@@ -390,7 +390,7 @@
                                         @if ($image->type == 'photo')
                                             <div class="col">
                                                 <div class="image">
-                                                    <img src="{{ asset('productImage/' . $image->url) }}" alt=""
+                                                    <img src="{{ asset( $image->url) }}" alt=""
                                                         id="image" height="110px" width="100px"
                                                         style="list-style-type:none">
                                                 </div>
@@ -618,6 +618,8 @@
                                 <option value="Summer"{{ $product->season == 'Summer' ? 'selected' : '' }}>Summer
                                 </option>
                                 <option value="Monsoon"{{ $product->season == 'Monsoon' ? 'selected' : '' }}>Monsoon
+                                </option>
+                                <option value="All"{{ $product->season == 'All' ? 'selected' : '' }}>All
                                 </option>
                             </select>
                         </div>

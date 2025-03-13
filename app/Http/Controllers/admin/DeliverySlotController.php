@@ -113,13 +113,13 @@ class DeliverySlotController extends Controller
         $deliveryslot = DeliverySlot::find($id);
         $deliveryslot->status = 'active';
         $deliveryslot->save();
-        return redirect()->route('deliveryslot.index')->with('msg', 'DeliverySlot Activated Successfully');
+        return back()->with('msg', 'DeliverySlot Activated Successfully');
     }
 
     public function permdelete($id)
     {
         $deliveryslot =DeliverySlot::find($id);
         $deliveryslot->delete();
-        return redirect()->route('deliveryslot.index')->with('msg', 'DeliverySlot Deleted Successfully');
+        return back()->with('msg', 'DeliverySlot Deleted Successfully');
     }
 }

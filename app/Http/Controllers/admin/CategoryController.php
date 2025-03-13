@@ -74,7 +74,7 @@ class CategoryController extends Controller
             // 'parent_id' => 'required'
         ]);
         // try {
-        // return $request;
+        return $request;
         $category = new Category();
         $category->categoryName = $request->category_name;
         $category->categoryNameGUj = $request->category_name_guj;
@@ -93,10 +93,10 @@ class CategoryController extends Controller
 
         if ($request->hasFile('category_image')) {
             $image = $request->file('category_image');
-            $path = 'categoryImage/';
+            $path = 'categoryImages/';
             $imagename = time() . '.' . $image->getClientOriginalExtension();
             $image->move($path, $imagename);
-            $category->cat_icon = $imagename;
+            $category->cat_icon = 'categoryImages/' . $imagename;
         }
 
         $category->save();
@@ -161,14 +161,14 @@ class CategoryController extends Controller
 
         if ($request->hasFile('category_image')) {
             $image = $request->file('category_image');
-            $path = 'categoryImage/';
+            $path = 'categoryImages/';
             $imagename = time() . '.' . $image->getClientOriginalExtension();
-            $currentimagepath = public_path('categoryImage/' . $category->cat_icon);
+            $currentimagepath = public_path($category->cat_icon);
             if (file_exists($currentimagepath)) {
                 unlink($currentimagepath);
             }
             $image->move($path, $imagename);
-            $category->cat_icon = $imagename;
+            $category->cat_icon = 'categoryImages/'.$imagename;
         }
 
         $category->save();
@@ -241,7 +241,7 @@ class CategoryController extends Controller
         foreach ($product as $productdata) {
             $productimage = ProductImage::where('productId', $productdata->id)->get();
             foreach ($productimage as $imagedata) {
-                $currentimagepath = public_path('productImage/' . $imagedata->url);
+                $currentimagepath = public_path($imagedata->url);
                 if (file_exists($currentimagepath)) {
                     unlink($currentimagepath);
                 }
@@ -257,7 +257,7 @@ class CategoryController extends Controller
         }
 
         $category = Category::find($id);
-        $categoryimagepath = public_path('categoryImage/' . $category->cat_icon);
+        $categoryimagepath = public_path($category->cat_icon);
         if (file_exists($categoryimagepath)) {
             unlink($categoryimagepath);
         }

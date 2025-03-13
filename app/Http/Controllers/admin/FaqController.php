@@ -110,13 +110,13 @@ class FaqController extends Controller
         $faq =Faq::find($id);
         $faq->status = 'active';
         $faq->save();
-        return redirect()->route('faq.index')->with('msg', 'Faq Activated Successfully');
+        return back()->with('msg', 'Faq Activated Successfully');
     }
     public function permdelete(string $id)
     {
         $faq = Faq::find($id);
         $faq->delete();
-        return redirect()->route('faq.index')->with('msg', 'Faq Deleted Successfully');
+        return back()->with('msg', 'Faq Deleted Successfully');
     }
 }
 

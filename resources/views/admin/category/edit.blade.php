@@ -133,7 +133,7 @@
                             Image <span class="text-danger">*</span>
                         </div>
                         <div class="col-2" id="imagepreview">
-                            <img id="profilePicPreview" src="{{ asset('categoryImage/' . $category->cat_icon) }}"
+                            <img id="profilePicPreview" src="{{ asset($category->cat_icon) }}"
                                 alt="" height="100px" width="150px">
                         </div>
                         <div class="col">

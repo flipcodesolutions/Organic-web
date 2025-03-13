@@ -198,7 +198,7 @@ class SliderController extends Controller
         $slider->status = 'active';
         $slider->save();
 
-        return redirect()->route('slider.index')->with('msg', 'Slider Activated Successfully');
+        return back()->with('msg', 'Slider Activated Successfully');
     }
     public function permdelete($id)
     {
@@ -206,6 +206,6 @@ class SliderController extends Controller
         $slider->delete();
         unlink(public_path('sliderimage/'.$slider->url));
 
-        return redirect()->route('slider.index')->with('msg', 'Slider Deleted Successfully');
+        return back()->with('msg', 'Slider Deleted Successfully');
     }
 }

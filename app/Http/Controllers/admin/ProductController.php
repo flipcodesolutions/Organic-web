@@ -39,10 +39,10 @@ class ProductController extends Controller
                 $query->where('season', $request->season);
             }
 
-            $data = $query->where('status', 'active')->whereHas('categories', function ($query) {
-                $query->where('status', 'active');
-            })->whereHas('brand',function($query1){
-                $query1->where('status','active');
+            $data = $query->where('status', 'active')->whereHas('categories', function ($query1) {
+                $query1->where('status', 'active');
+            })->whereHas('brand',function($query2){
+                $query2->where('status','active');
             })->with(['categories', 'brand', 'productImages'])->paginate(10);
             // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
             //     $query->where('status', 'active');
@@ -127,11 +127,11 @@ class ProductController extends Controller
                 foreach ($request->file('product_image') as $imgdata) {
                     if ($imgdata->isValid()) {
                         $imageName = time() . '_' . uniqid() . '.' . $imgdata->getClientOriginalExtension();
-                        $imgdata->move(public_path('productImage/'), $imageName);
+                        $imgdata->move(public_path('productImages/'), $imageName);
 
                         ProductImage::create([
                             'productId' => $product->id,
-                            'url' => $imageName,
+                            'url' => 'productImages/' . $imageName,
                             'type' => 'photo'
                         ]);
                     }
@@ -248,11 +248,11 @@ class ProductController extends Controller
             foreach ($request->file('new_product_images') as $imgdata) {
                 if ($imgdata->isValid()) {
                     $imageName = time() . '_' . uniqid() . '.' . $imgdata->getClientOriginalExtension();
-                    $imgdata->move(public_path('productImage/'), $imageName);
+                    $imgdata->move(public_path('productImages/'), $imageName);
 
                     ProductImage::create([
                         'productId' => $id,
-                        'url' => $imageName,
+                        'url' => 'productImages/' . $imageName,
                         'type' => 'photo'
                     ]);
                 }
@@ -463,7 +463,7 @@ class ProductController extends Controller
 
             $productimg = ProductImage::where('productId', $id)->get();
             foreach ($productimg as $data) {
-                $currentimagepath = public_path('productImage/' . $data->url);
+                $currentimagepath = public_path( $data->url );
                 if (file_exists($currentimagepath)) {
                     unlink($currentimagepath);
                 }
@@ -492,7 +492,7 @@ class ProductController extends Controller
             $data = ProductImage::where('productId', $image->productId)->get();
             // if (count($data) > 1) {
             if ($image->type == 'photo') {
-                $currentimagepath = public_path('productImage/' . $image->url);
+                $currentimagepath = public_path($image->url);
                 if (file_exists($currentimagepath)) {
                     unlink($currentimagepath);
                 }

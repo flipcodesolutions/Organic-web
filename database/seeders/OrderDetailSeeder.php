@@ -14,123 +14,25 @@ class OrderDetailSeeder extends Seeder
     {
        ModelsOrderDetail::insert([
             'id' => '1',
-            'orderMasterId' => '',
-            'productId' => '',
-            'qty' => '',
-            'price' => '',
-            'unit' => '',
-            'total' => '',
-            'status' => ''
+            'orderMasterId' => '1',
+            'productId' => '1',
+            'qty' => '3',
+            'price' => '294',
+            'unit' => '1',
+            'total' => '882',
+            'status' => 'active'
         ],
     
         [
             'id' => '2',
-            'orderMasterId' => '',
-            'productId' => '',
-            'qty' => '',
-            'price' => '',
-            'unit' => '',
-            'total' => '',
-            'status' => ''
-        ],
-
-        [
-            'id' => '3',
-            'orderMasterId' => '',
-            'productId' => '',
-            'qty' => '',
-            'price' => '',
-            'unit' => '',
-            'total' => '',
-            'status' => ''
-        ],
-
-        [
-            'id' => '4',
-            'orderMasterId' => '',
-            'productId' => '',
-            'qty' => '',
-            'price' => '',
-            'unit' => '',
-            'total' => '',
-            'status' => ''
-        ],
-
-        [
-            'id' => '5',
-            'orderMasterId' => '',
-            'productId' => '',
-            'qty' => '',
-            'price' => '',
-            'unit' => '',
-            'total' => '',
-            'status' => ''
-        ],
-    
-        [
-            'id' => '6',
-            'orderMasterId' => '',
-            'productId' => '',
-            'qty' => '',
-            'price' => '',
-            'unit' => '',
-            'total' => '',
-            'status' => ''
-        ],
-    
-        [
-            'id' => '7',
-            'orderMasterId' => '',
-            'productId' => '',
-            'qty' => '',
-            'price' => '',
-            'unit' => '',
-            'total' => '',
-            'status' => ''
-        ],
-    
-        [
-            'id' => '8',
-            'orderMasterId' => '',
-            'productId' => '',
-            'qty' => '',
-            'price' => '',
-            'unit' => '',
-            'total' => '',
-            'status' => ''
-        ],
-
-        [
-            'id' => '9',
-            'orderMasterId' => '',
-            'productId' => '',
-            'qty' => '',
-            'price' => '',
-            'unit' => '',
-            'total' => '',
-            'status' => ''
-        ],
-
-        [
-            'id' => '10',
-            'orderMasterId' => '',
-            'productId' => '',
-            'qty' => '',
-            'price' => '',
-            'unit' => '',
-            'total' => '',
-            'status' => ''
-        ],
-    
-        [
-            'id' => '11',
-            'orderMasterId' => '',
-            'productId' => '',
-            'qty' => '',
-            'price' => '',
-            'unit' => '',
-            'total' => '',
-            'status' => ''
+            'orderMasterId' => '2',
+            'productId' => '2',
+            'qty' => '2',
+            'price' => '560',
+            'unit' => '2',
+            'total' => '1120',
+            'status' => 'active'
+        
         ]);
     }
 }

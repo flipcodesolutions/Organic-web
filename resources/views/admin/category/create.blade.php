@@ -127,7 +127,7 @@
                             Image <span class="text-danger">*</span>
                         </div>
                         <div class="col-2" id="imagepreview">
-                            <img id="profilePicPreview" src="{{ asset('defaultimage/default4.jpg') }}" alt="Category Image"
+                            <img id="categoryImagePreview" src="{{ asset('defaultimage/default4.jpg') }}" alt="Category Image"
                                 height="100px" width="150px">
                         </div>
                         <div class="col">
@@ -222,7 +222,7 @@
             const reader = new FileReader();
 
             reader.onload = function() {
-                const output = document.getElementById('profilePicPreview');
+                const output = document.getElementById('categoryImagePreview');
                 const outputclass = document.getElementById('imagepreview');
                 output.src = reader.result;
                 // outputclass.style.display = 'flex';

@@ -97,6 +97,12 @@
                                 <span>Categories</span></a>
                         </li>
 
+                        <li class="nav-item {{ request()->routeIs('brand.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('brand.index') }}">
+                                <i class="fa-brands fa-fort-awesome"></i>
+                                 <span>Brands</span></a>
+                        </li>
+
                         <li class="nav-item {{ request()->routeIs('product.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('product.index') }}">
                                 <i class="fa fa-carrot"></i>
@@ -885,13 +891,13 @@
         <script>
             var message =
                 '{{ session()->has('
-                                                                            success ')
+                                                                                            success ')
                     ? session()->get('
-                                                                            success ')
+                                                                                            success ')
                     : (session()->has('
-                                                                            error ')
+                                                                                            error ')
                         ? session()->get('
-                                                                            error ')
+                                                                                            error ')
                         : implode("\\n", $errors->all())) }}';
 
             // If there is a success message

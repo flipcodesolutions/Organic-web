@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ImagesController;
 use App\Http\Controllers\admin\NavigateMasterController;
@@ -82,5 +83,18 @@ Route::controller(PointPerController::class)->group(function(){
     Route::get('pointper/index','index')->name('pointper.index');
     Route::get('pointper/edit/{id?}','edit')->name('pointper.edit');
     Route::post('pointper/update/{id?}','update')->name('pointper.update');
+});
+
+//brand 
+Route::controller(BrandController::class)->group(function(){
+    Route::get('brand/index','index')->name('brand.index');
+    Route::get('brand/create','create')->name('brand.create');
+    Route::post('brand/store','store')->name('brand.store');
+    Route::get('brand/edit/{id?}','edit')->name('brand.edit');
+    Route::post('brand/update/{id?}','update')->name('brand.update');
+    Route::get('brand/deactive/{id?}','deactive')->name('brand.deactive');
+    Route::get('brand/deactiveindex','deactiveindex')->name('brand.deactiveindex');
+    Route::get('brand/active/{id?}','active')->name('brand.active');
+    Route::get('brand/delete/{id?}','destroy')->name('brand.delete');
 });
 
