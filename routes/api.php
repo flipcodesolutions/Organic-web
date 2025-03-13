@@ -34,7 +34,7 @@ Route::post('createProfile', [UserController::class, 'createProfile']);
 Route::group(['middleware' => 'auth:sanctum'], function () {
     //category
     Route::get('allCategories', [CategoryController::class, 'allCategories']);
-
+    Route::get('idWiseCategory', [CategoryController::class, 'idWiseCategory']);
     //user
     Route::post('isVerified', [UserController::class, 'isVerified']);
     Route::get('userProfile', [UserController::class, 'userProfile']);

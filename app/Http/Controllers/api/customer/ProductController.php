@@ -35,72 +35,48 @@ class ProductController extends Controller
             $productGujaratiFields = ['*', 'productNameGUj as displayName', 'productDescriptionGuj as displayDescription'];
             $productHindiFields = ['*', 'productNameHin as displayName', 'productDescriptionHin as displayDescription'];
 
-            $categoriesEnglishFields = ['*', 'categoryName as displayName', 'categoryDescription as displayDescription'];
-            $categoriesGujaratiFields = ['*', 'categoryNameGUj as displayName', 'categoryDescriptionGuj as displayDescription'];
-            $categoriesHindiFields = ['*', 'categoryNameHin as displayName', 'categoryDescriptionHin as displayDescription'];
-
-            $childEnglishFields = ['categories.*', 'categoryName as displayName', 'categoryDescription as displayDescription'];
-            $childGujaratiFields = ['categories.*', 'categoryNameGUj as displayName', 'categoryDescriptionGuj as displayDescription'];
-            $childHindiFields = ['categories.*', 'categoryNameHin as displayName', 'categoryDescriptionHin as displayDescription'];
 
 
-            // $categories = Category::where('id', $request->category_id)
-            //     ->with('childs', function ($query) use ($language, $childEnglishFields, $childGujaratiFields, $childHindiFields) {
-            //         $query->select($language == 'Hindi' ? $childHindiFields : ($language == 'Gujarati' ? $childGujaratiFields : $childEnglishFields));
-            //     })
-            //     ->whereHas('childs.products')
-            //     ->select($language == 'Hindi' ? $categoriesHindiFields : ($language == 'Gujarati' ? $categoriesGujaratiFields : $categoriesEnglishFields))
-            //     ->first();
 
             $categories = Category::where('id', $request->category_id)
-                ->with('childs', function ($query) use ($language, $childEnglishFields, $childGujaratiFields, $childHindiFields) {
-                    $query->select($language == 'Hindi' ? $childHindiFields : ($language == 'Gujarati' ? $childGujaratiFields : $childEnglishFields));
-                    $query->whereHas('products', function ($q) {
-                        $q->where('status', 'active');
-                    });
-                })
-                ->select($language == 'Hindi' ? $categoriesHindiFields : ($language == 'Gujarati' ? $categoriesGujaratiFields : $categoriesEnglishFields))
+                ->with('childs')
                 ->first();
+            if ($categories->parent_category_id == 0) {
+                $childCategoryIds = $categories->childs->pluck('id')->toArray();
 
-            if ($categories) {
-                if ($categories->parent_category_id == 0) {
-                    $childCategoryIds = $categories->childs->pluck('id')->toArray();
-
-                    $query = Product::with(['productImages', 'productUnit.unitMaster'])
-                        ->where('status', 'active')
-                        ->whereIn('categoryId', $childCategoryIds)
-                        ->select($language == 'Hindi' ? $productHindiFields : ($language == 'Gujarati' ? $productGujaratiFields : $productEnglishFields));
-                } else {
-                    $query = Product::with(['productImages', 'productUnit.unitMaster'])
-                        ->where('status', 'active')
-                        ->where('categoryId', $request->category_id)
-                        ->select($language == 'Hindi' ? $productHindiFields : ($language == 'Gujarati' ? $productGujaratiFields : $productEnglishFields));
-                }
-
-
-
-                if (!empty($search)) {
-                    $query->where(function ($q) use ($search) {
-                        $q->where('productName', 'LIKE', "%{$search}%");
-                    });
-                }
-
-                $productsQuery = $query->paginate(10, ['*'], 'page', $currentPage);
-
-                $productsQuery->getCollection()->transform(function ($product) {
-                    $product->productUnit->transform(function ($unit) {
-                        if (!isset($unit->unitMaster)) return $unit;
-                        $unit->unit = $unit->unitMaster->unit;
-                        unset($unit->unitMaster);
-                        return $unit;
-                    });
-                    return $product;
-                });
+                $query = Product::with(['productImages', 'productUnit.unitMaster'])
+                    ->where('status', 'active')
+                    ->whereIn('categoryId', $childCategoryIds)
+                    ->select($language == 'Hindi' ? $productHindiFields : ($language == 'Gujarati' ? $productGujaratiFields : $productEnglishFields));
             } else {
-                $productsQuery = [];
+                $query = Product::with(['productImages', 'productUnit.unitMaster'])
+                    ->where('status', 'active')
+                    ->where('categoryId', $request->category_id)
+                    ->select($language == 'Hindi' ? $productHindiFields : ($language == 'Gujarati' ? $productGujaratiFields : $productEnglishFields));
             }
 
-            return Util::getSuccessMessage('Products', ['categories' => $categories, 'products' => $productsQuery]);
+
+
+            if (!empty($search)) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('productName', 'LIKE', "%{$search}%");
+                });
+            }
+
+            $productsQuery = $query->paginate(10, ['*'], 'page', $currentPage);
+
+            $productsQuery->getCollection()->transform(function ($product) {
+                $product->productUnit->transform(function ($unit) {
+                    if (!isset($unit->unitMaster)) return $unit;
+                    $unit->unit = $unit->unitMaster->unit;
+                    unset($unit->unitMaster);
+                    return $unit;
+                });
+                return $product;
+            });
+
+
+            return Util::getSuccessMessage('Products', ['products' => $productsQuery]);
         } catch (\Exception $e) {
             return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
         }
