@@ -9,7 +9,7 @@
                 </div>
                 <div class="heading row align-items-center">
                     <div class="col d-flex align="right" style="gap: 3px">
-                        <a class="btn btn-danger" href="{{ Route('city_master.deleted') }}">Deactive City</a>
+                        <a class="btn btn-danger" href="{{ Route('city_master.deleted') }}">Deactivated Cities</a>
 
                         <a href="{{ route('city_master.create') }}" class="btn btn-primary">Add</a>
                     </div>
@@ -43,8 +43,8 @@
 
                         <!-- Submit & Reset Buttons -->
                         <div class="col-md-4 d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                            <a href="{{ route('city_master.index') }}" class="btn btn-danger">Reset</a>
+                            <button type="submit" class="filter btn">Filter</button>
+                            <a href="{{ route('city_master.index') }}" class="reset btn">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -77,10 +77,10 @@
                             <td>{{ $city->area_guj }}</td> --}}
                             <td>
                                 <div class="d-flex">
-                                <a class="btn btn-primary" href="{{ route('city_master.edit',$city->id)}}"><i
+                                <a class="edit btn" href="{{ route('city_master.edit',$city->id)}}"><i
                                 class="fas fa-edit"></i></a>
 
-                                <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                <a href="javascript:void(0)" class="delete btn ml-2"
                                 onclick="openDeactiveModal('{{ route('city_master.deactive',$city->id) }}')">
                                 <i class="fas fa-trash"></i>
                                 </a>

@@ -668,7 +668,7 @@
 
 .fa-bell:before {
     content: "\f0f3";
-    color : lightyellow;
+    /* color : lightyellow; */
 }
 
 .fa-bell-slash:before {
@@ -1045,7 +1045,7 @@
 
 .fa-carrot:before {
     content: "\f787";
-    color : lightyellow;
+    /* color : lightyellow; */
 }
 
 .fa-cart-arrow-down:before {
@@ -1370,7 +1370,7 @@
 
 .fa-cog:before {
     content: "\f013";
-    color : lightyellow;
+    /* color : lightyellow; */
 }
 
 .fa-cogs:before {
@@ -1387,7 +1387,7 @@
 
 .fa-comment:before {
     content: "\f075";
-    color : lightyellow;
+    /* color : lightyellow; */
 }
 
 .fa-comment-alt:before {
@@ -2084,7 +2084,7 @@
 
 .fa-file:before {
     content: "\f15b";
-    color : lightyellow;
+    /* color : lightyellow; */
 }
 
 .fa-file-alt:before {
@@ -3349,7 +3349,7 @@
 
 .fa-list:before {
     content: "\f03a";
-    color : lightyellow;
+    /* color : lightyellow; */
 }
 
 .fa-list-alt:before {
@@ -5050,7 +5050,7 @@
 
 .fa-street-view:before {
     content: "\f21d";
-    color : lightyellow;
+    /* color : lightyellow; */
 }
 
 .fa-strikethrough:before {
@@ -5179,7 +5179,7 @@
 
 .fa-tachometer-alt:before {
     content: "\f3fd";
-    color : lightyellow;
+    /* color : lightyellow; */
     
 }
 
@@ -5457,7 +5457,7 @@
 
 .fa-truck:before {
     content: "\f0d1";
-    color : lightyellow;
+    /* color : lightyellow; */
 }
 
 .fa-truck-loading:before {
@@ -6014,7 +6014,7 @@
 
 .fa-wrench:before {
     content: "\f0ad";
-    color : lightyellow;
+    /* color : lightyellow; */
 }
 
 .fa-x-ray:before {
@@ -6085,7 +6085,7 @@
     content: "\f63f"
 }
 
-.fa-basket-shopping:before, .fa-shopping-basket:before{
+/* .fa-basket-shopping:before, .fa-shopping-basket:before{
     color : lightyellow;
 }
 
@@ -6107,7 +6107,7 @@
 
 .fa-photo-film:before, .fa-photo-video:before{
     color : lightyellow;
-}
+} */
 
 .sr-only {
     border: 0;

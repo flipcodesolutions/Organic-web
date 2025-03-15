@@ -9,7 +9,7 @@
                 </div>
                 <div class="heading row align-items-center">
                     <div class="col d-flex align="right" style="gap: 3px">
-                        <a class="b1 btn btn-danger" href="{{ Route('slider.deactive') }}">Deactive Slider</a>
+                        <a class="b1 btn btn-danger" href="{{ Route('slider.deactive') }}">Deactivated Sliders</a>
                         <a class="btn btn-primary" href="{{ Route('slider.create') }}">Add</a>
                     </div>
                 </div>
@@ -54,8 +54,8 @@
 
                         <!-- Submit & Reset Buttons -->
                         <div class="col d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                            <a href="{{ Route('slider.index') }}" class="btn btn-danger">Reset</a>
+                            <button type="submit" class="filter btn">Filter</button>
+                            <a href="{{ Route('slider.index') }}" class="reset btn">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -98,10 +98,10 @@
 
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{ Route('slider.edit', $sliders->id) }}" class="btn btn-primary">
+                                        <a href="{{ Route('slider.edit', $sliders->id) }}" class="edit btn">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        <a href="javascript:void(0)" class="delete btn ml-2"
                                             onclick="openDeactiveModal('{{ Route('slider.delete', $sliders->id) }}')">
                                             <i class="fas fa-trash"></i>
                                         </a>

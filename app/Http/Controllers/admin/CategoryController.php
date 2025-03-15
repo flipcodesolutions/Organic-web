@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\NavigateMaster;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Unit;
@@ -74,7 +75,7 @@ class CategoryController extends Controller
             // 'parent_id' => 'required'
         ]);
         // try {
-        return $request;
+        // return $request;
         $category = new Category();
         $category->categoryName = $request->category_name;
         $category->categoryNameGUj = $request->category_name_guj;
@@ -101,6 +102,12 @@ class CategoryController extends Controller
 
         $category->save();
 
+        if ($request->has('is_navigate') && $request->is_navigate == 'true') {
+            $navigate = new NavigateMaster();
+            $navigate->screenname = 'product_screen/category/' . $category->id;
+            $navigate->save();
+        }
+
         return redirect()->route('category.index')->with('msg', 'Category Created Successfully!');
 
         // return response()->json([
@@ -121,7 +128,9 @@ class CategoryController extends Controller
             ['status', '=', 'active'],
             ['parent_category_id', '=', 0]
         ])->get();
-        return view('admin.category.edit', compact('category', 'categories'));
+        $navigate = NavigateMaster::where('screenname', 'product_screen/category/' . $id)->first();
+
+        return view('admin.category.edit', compact('category', 'categories', 'navigate'));
         // } catch (\Exception $e) {
 
         //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
@@ -168,7 +177,21 @@ class CategoryController extends Controller
                 unlink($currentimagepath);
             }
             $image->move($path, $imagename);
-            $category->cat_icon = 'categoryImages/'.$imagename;
+            $category->cat_icon = 'categoryImages/' . $imagename;
+        }
+
+        // for navigation
+        $navigate = NavigateMaster::where('screenname', 'product_screen/category/' . $id)->first();
+        if ($request->has('is_navigate') && $request->is_navigate == 'true') {
+            if (!$navigate) {
+                $newnavigate = new NavigateMaster();
+                $newnavigate->screenname = 'product_screen/category/' . $id;
+                $newnavigate->save();
+            }
+        } else {
+            if ($navigate) {
+                $navigate->delete();
+            }
         }
 
         $category->save();
@@ -238,31 +261,42 @@ class CategoryController extends Controller
         // try {
         $product = Product::where('categoryId', $id)->get();
 
-        foreach ($product as $productdata) {
-            $productimage = ProductImage::where('productId', $productdata->id)->get();
-            foreach ($productimage as $imagedata) {
-                $currentimagepath = public_path($imagedata->url);
-                if (file_exists($currentimagepath)) {
-                    unlink($currentimagepath);
-                }
-                $imagedata->delete();
+        // foreach ($product as $productdata) {
+        //     $productimage = ProductImage::where('productId', $productdata->id)->get();
+        //     foreach ($productimage as $imagedata) {
+        //         $currentimagepath = public_path($imagedata->url);
+        //         if (file_exists($currentimagepath)) {
+        //             unlink($currentimagepath);
+        //         }
+        //         $imagedata->delete();
+        //     }
+
+        //     $unit = Unit::where('product_id', $productdata->id)->get();
+        //     foreach ($unit as $unitdata) {
+        //         $unitdata->delete();
+        //     }
+
+        //     $productdata->delete();
+        // }
+        if ($product->count()>0) {
+            return back()->with('warning','First you need to delete the products registered with this category after that you can delete this category!');
+        } else {
+            $category = Category::find($id);
+
+            $categoryimagepath = public_path($category->cat_icon);
+            if (file_exists($categoryimagepath)) {
+                unlink($categoryimagepath);
             }
 
-            $unit = Unit::where('product_id', $productdata->id)->get();
-            foreach ($unit as $unitdata) {
-                $unitdata->delete();
+            $navigate = NavigateMaster::where('screenname','product_screen/category/'.$id)->first(); 
+            if($navigate){
+                // return $navigate;
+                $navigate->delete();
             }
 
-            $productdata->delete();
+            $category->delete();
+            return redirect()->route('category.deactiveindex')->with('msg', 'Category deleted successfully!');
         }
-
-        $category = Category::find($id);
-        $categoryimagepath = public_path($category->cat_icon);
-        if (file_exists($categoryimagepath)) {
-            unlink($categoryimagepath);
-        }
-        $category->delete();
-        return redirect()->route('category.deactiveindex')->with('msg', 'Category deleted successfully!');
         // } catch (\Exception $e) {
 
         //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');

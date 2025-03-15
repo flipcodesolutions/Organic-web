@@ -29,8 +29,8 @@
                         </div>
                         <!-- Submit & Reset Buttons -->
                         <div class="col d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                            <a href="{{ route('navigate.deactiveindex') }}" class="btn btn-danger">Reset</a>
+                            <button type="submit" class="filter btn">Filter</button>
+                            <a href="{{ route('navigate.deactiveindex') }}" class="reset btn">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -52,10 +52,10 @@
                                     {{ $data->screenname }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('navigate.active') }}/{{ $data->id }}" class="btn btn-primary">
+                                    <a href="{{ route('navigate.active') }}/{{ $data->id }}" class="edit btn">
                                         <i class="fas fa-undo"></i>
                                     </a>
-                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                    <a href="javascript:void(0)" class="delete btn ml-2"
                                         onclick="openDeleteModal('{{ route('navigate.delete') }}/{{ $data->id }}')">
                                         <i class="fas fa-trash"></i>
                                     </a>

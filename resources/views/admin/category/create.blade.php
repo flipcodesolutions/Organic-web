@@ -145,6 +145,21 @@
                         </div>
                     </div>
 
+                    {{-- is navigate --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Is Navigate
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" name="is_navigate" type="checkbox" value="true" id="navigate">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Make Navigation
+                                </label>
+                              </div>
+                        </div>
+                    </div>
+
                     {{-- make it parent --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">

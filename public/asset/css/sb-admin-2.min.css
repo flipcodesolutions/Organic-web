@@ -2697,6 +2697,69 @@ fieldset:disabled a.btn {
     border-color: #A4B465 !important;
 }
 
+.update {
+    width: 150px;
+    color: #fff;
+    background-color: #A4B465 !important;
+    border-color: #A4B465 !important;
+}
+
+.update:hover {
+    color: #fff;
+    background-color: #365E32 !important;
+    border-color: #365E32 !important;
+}
+
+.edit {
+    color: #A4B465;
+    background-color: #fff !important;
+    border-color: #A4B465 !important;
+}
+
+.edit:hover{
+    color: #fff;
+    background-color: #365E32 !important;
+    border-color: #365E32 !important;
+}
+
+.delete {
+    color: #e74a3b;
+    background-color: #fff !important;
+    border-color: #e74a3b !important;
+}
+
+.delete:hover{
+    color: #fff;
+    background-color: #e74a3b !important;
+    border-color: #e74a3b !important;
+}
+
+.filter {
+    color: #365E32;
+    background-color: #fff !important;
+    border-color: #365E32 !important;
+}
+
+.filter:hover{
+    color: #fff;
+    background-color: #365E32 !important;
+    border-color: #365E32 !important;
+}
+
+.reset {
+    color: #e74a3b;
+    background-color: #fff !important;
+    border-color: #e74a3b !important;
+}
+
+.reset:hover{
+    color: #fff;
+    background-color: #e74a3b !important;
+    border-color: #e74a3b !important;
+}
+
+
+
 .btn-primary:hover {
     color: #365E32;
     /* background-color: #fff !important; */

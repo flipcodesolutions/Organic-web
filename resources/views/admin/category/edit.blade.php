@@ -150,6 +150,22 @@
                         </div>
                     </div>
 
+                    {{-- is navigate --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Is Navigate
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" name="is_navigate" type="checkbox" value="true" id="navigate" 
+                                @if($navigate && $navigate->screenname == 'product_screen/category/'.$category->id) checked @endif>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Make Navigation
+                                </label>
+                              </div>
+                        </div>
+                    </div>
+
                     {{-- make it parent --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
@@ -207,8 +223,8 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i>
-                                Submit</button>
+                            <button type="submit" class="update btn" id="Update"><i class="fa-solid fa-floppy-disk"></i>
+                                Update</button>
                         </div>
                     </div>
 

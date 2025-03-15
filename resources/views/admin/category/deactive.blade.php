@@ -43,8 +43,8 @@
 
                         <!-- Submit & Reset Buttons -->
                         <div class="col d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                            <a href="{{ route('category.deactiveindex') }}" class="btn btn-danger">Reset</a>
+                            <button type="submit" class="filter btn">Filter</button>
+                            <a href="{{ route('category.deactiveindex') }}" class="reset btn">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -66,7 +66,7 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>
-                                    {{ $categoryData->categoryName}}
+                                    {{ $categoryData->categoryName }}
                                     {{-- <ul>
                                         <li> {{ $categoryData->categoryName }} </li>
                                         <li> {{ $categoryData->categoryNameGuj }} </li>
@@ -82,23 +82,28 @@
                                     </ul> --}}
                                 </td>
                                 <td>
-                                        {{ $categoryData->parent_category_id }}
+                                    @foreach ($categories as $perentdata)
+                                        @if ($perentdata->id == $categoryData->parent_category_id)
+                                            {{ $perentdata->categoryName }}
+                                        @endif
+                                    @endforeach
+                                    {{-- {{ $categoryData->parent_category_id }} --}}
                                 </td>
                                 <td>
-                                    <img src="{{ asset($categoryData->cat_icon) }}" alt=""
-                                        height="100px" width="150px">
+                                    <img src="{{ asset($categoryData->cat_icon) }}" alt="" height="100px"
+                                        width="150px">
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                    <a href="{{ route('category.active') }}/{{ $categoryData->id }}"
-                                        class="btn btn-primary">
-                                        <i class="fas fa-undo"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                        onclick="openDeleteModal('{{ route('category.delete') }}/{{ $categoryData->id }}')">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </div>
+                                        <a href="{{ route('category.active') }}/{{ $categoryData->id }}"
+                                            class="edit btn">
+                                            <i class="fas fa-undo"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="delete btn ml-2"
+                                            onclick="openDeleteModal('{{ route('category.delete') }}/{{ $categoryData->id }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
                                     {{-- <a href="{{ route('category.delete') }}/{{ $categoryData->id }}" class="btn btn-danger">
                                         <i class="fas fa-remove"></i>
                                     </a> --}}
