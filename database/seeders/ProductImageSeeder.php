@@ -14,65 +14,65 @@ class ProductimageSeeder extends Seeder
             [
                 'id' => '1',
                 'productid' => '1',
-                'url' => 'AshirvaadAata.jpeg',
+                'url' => 'productImages/AashirvaadAtta.jpeg',
                 'type' => 'photo',
                 
             ],
             [
                 'id' => '2',
                 'productid' => '2',
-                'url' => 'DaawatRozanaBasmatiRice.jpeg',
+                'url' => 'productImages/DaawatRozanaBasmatiRice.jpeg',
                 'type' => 'photo',
             ],
             [
                 'id' => '3',
                 'productid' => '3',
-                'url' => 'FORTUNEXpertProImmunityBlendedOil.jpeg',
+                'url' => 'productImages/FORTUNEXpertProImmunityBlendedOil.jpeg',
                 'type' => 'photo',
             ],
             [
                 'id' => '4',
                 'productid' => '4',
-                'url' => 'AashirvaadSvastiPureCowGhee.jpeg',
+                'url' => 'productImages/AashirvaadSvastiPureCowGhee.jpeg',
                 'type' => 'photo',
             ],
             [
                 'id' => '5',
                 'productid' => '5',
-                'url' => 'IndiaGateClassicBasmatiRice.jpeg',
+                'url' => 'productImages/IndiaGateClassicBasmatiRice.jpeg',
                 'type' => 'photo',
             ],
             [
                 'id' => '6',
                 'productid' => '6',
-                'url' => 'PatanjaliCowGhee.jpeg',
+                'url' => 'productImages/PatanjaliCowGhee.jpeg',
                 'type' => 'photo',
             ],
             [
                 'id' => '7',
                 'productid' => '7',
-                'url' => 'FORTUNEMustardOil.jpeg',
+                'url' => 'productImages/FORTUNEMustardOil.jpeg',
                 'type' => 'photo',
             ],
 
             [
                 'id' => '8',
                 'productid' => '8',
-                'url' => 'AmulBuffaloGhee.jpeg',
+                'url' => 'productImages/AmulBuffaloGhee.jpeg',
                 'type' => 'photo',
             ],
 
             [
                 'id' => '9',
                 'productid' => '9',
-                'url' => 'TataSampanChanaDalFineBesan.jpeg',
+                'url' => 'productImages/TataSampanChanaDalFineBesan.jpeg',
                 'type' => 'photo',
             ],
 
             [
                 'id' => '10',
                 'productid' => '10',
-                'url' => 'BrownRiceOrganicIndia.jpeg',
+                'url' => 'productImages/BrownRiceOrganicIndia.jpeg',
                 'type' => 'photo',
             ],
         ]);

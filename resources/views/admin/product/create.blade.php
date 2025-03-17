@@ -150,7 +150,7 @@
                                 <thead>
                                     <tr>
                                         <th>Unit</th>
-                                        <th>Detail (aprox Weight)</th>
+                                        <th>Detail (approx Weight)</th>
                                         <th>Price</th>
                                         <th>Discount Percentage</th>
                                         <th>Sell Price</th>
@@ -359,7 +359,7 @@
                     {{-- video --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
-                            video<span class="text-danger">*</span>
+                            video
                         </div>
                         <div class="col">
                             <div class="row">
@@ -403,6 +403,7 @@
                                 <option value="Winter">Winter</option>
                                 <option value="Summer">Summer</option>
                                 <option value="Monsoon">Monsoon</option>
+                                <option value="All">All</option>
                             </select>
                             <span class="text-danger" id="seasonError">
 
@@ -480,6 +481,21 @@
                         </div>
                     </div>
 
+                    {{-- is navigate --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Is Navigate
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" name="is_navigate" type="checkbox" value="true" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Make Navigation
+                                </label>
+                              </div>
+                        </div>
+                    </div>
+
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <button type="submit" class="btn btn-primary"><i
@@ -537,27 +553,30 @@
             });
 
             // Validate product name
-            let product_nameRegex = /^[A-Z][a-z]*(?: [A-Z][a-z]*)*$/;
+            // let product_nameRegex = /^[A-Z][a-z]*(?: [A-Z][a-z]*)*$/;
             if (!product_name) {
                 document.getElementById('productNameError').textContent = "Product name (English) is required.";
-            } else if (!product_name || !product_nameRegex.test(product_name)) {
-                document.getElementById('productNameError').textContent =
-                    "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
-            }
+            } 
+            // else if (!product_name || !product_nameRegex.test(product_name)) {
+            //     document.getElementById('productNameError').textContent =
+            //         "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
+            // }
 
             if (!product_name_guj) {
                 document.getElementById('productNameGujError').textContent = "Product name (Gujarati) is required.";
-            } else if (!product_name_guj || !product_nameRegex.test(product_name_guj)) {
-                document.getElementById('productNameGujError').textContent =
-                    "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
             }
+            //  else if (!product_name_guj || !product_nameRegex.test(product_name_guj)) {
+            //     document.getElementById('productNameGujError').textContent =
+            //         "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
+            // }
 
             if (!product_name_hin) {
                 document.getElementById('productNameHinError').textContent = "Product name (Hindi) is required.";
-            } else if (!product_name_hin || !product_nameRegex.test(product_name_hin)) {
-                document.getElementById('productNameHinError').textContent =
-                    "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
-            }
+            } 
+            // else if (!product_name_hin || !product_nameRegex.test(product_name_hin)) {
+            //     document.getElementById('productNameHinError').textContent =
+            //         "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
+            // }
 
             // Validate product description
             if (!product_des) {

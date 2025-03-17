@@ -122,7 +122,7 @@ class CategorySeeder extends Seeder
                 'categoryDescription' => 'Brown rice is whole-grain rice with the outer bran layer intact, known for its high fiber and nutritional value.',
                 'categoryDescriptionGuj' => 'બ્રાઉન ચોખા આખા અનાજથી બનેલા છે, જેમાં બહારની ચોખાની પટલી રહે છે. તે ફાઈબર અને પોષક તત્વોથી ભરપૂર છે.',
                 'categoryDescriptionHin' => ' ब्राउन चावल साबुत अनाज है जिसमें बाहरी चोकर की परत बनी रहती है। यह उच्च फाइबर और पोषण से भरपूर होता है।',
-                'cat_icon' => 'categoryImages/BorwnRice.jpeg',
+                'cat_icon' => 'categoryImages/BrownRice.jpeg',
                 'parent_category_id' => '2',
                 'status' => 'active'
             ],

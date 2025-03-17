@@ -49,10 +49,10 @@
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{ Route('cms_master.active', $cms_masters->id) }}"
-                                            class="btn btn-primary">
+                                            class="edit btn">
                                             <i class="fas fa-undo"></i>
                                         </a>
-                                        <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        <a href="javascript:void(0)" class="delete btn ml-2"
                                             onclick="openDeleteModal('{{ Route('cms_master.permdelete', $cms_masters->id) }}')">
                                             <i class="fas fa-trash"></i>
                                         </a>

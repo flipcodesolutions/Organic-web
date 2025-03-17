@@ -6,45 +6,35 @@
 
         <div class="card shadow-sm  bg-body rounded">
             <div class="card-header d-flex">
-                <div class="col  text-white mt-2">
-                    <h6 class="mb-0 notificationh6">Notification Management</h6>
+                <div class="col text-white mt-2">
+                    <h6 class="mb-0">Brand Management</h6>
                 </div>
                 <div class="heading row align-items-center">
-                    <div class="col d-flex align="right" style="gap: 3px; padding:0">
-                        <a class="b1 btn btn-danger" href="{{ route('notification.deactiveindex') }}">Deactivated Notifications
+                    <div class="col d-flex align="right" style="gap: 3px">
+                        <a class="b1 btn btn-danger" href="{{ route('brand.deactiveindex') }}">Deactivated Brands
                         </a>
-                        <a class="btn btn-primary" href="{{ route('notification.create') }}">Add</a>
+                        <a class="btn btn-primary" href="{{ route('brand.create') }}">Add</a>
+
                     </div>
                 </div>
             </div>
 
             {{-- filter --}}
             <div class="mb-4 margin-bottom-30 m-4">
-                <form action="{{ route('notification.index') }}" method="GET" class="filter-form">
+                <form action="{{ route('brand.index') }}" method="GET" class="filter-form">
                     <div class="row align-items-end g-2">
 
                         <!-- Global Search -->
                         <div class="col">
                             <label for="global" class="form-label"><b>Filter:</b></label>
                             <input type="text" id="global" name="global" value="{{ request('global') }}"
-                                class="form-control" placeholder="Search by Title or Description">
-                        </div>
-
-                        <!-- naviget screen Filter -->
-                        <div class="col">
-                            <label for="navigateScreen" class="form-label"><b>Navigate Screen:</b></label>
-                            <select id="navigateScreen" name="navigateScreen" class="form-select">
-                                <option value="" selected>Select Navigate Screen</option>
-                                @foreach ($screen as $screendata)
-                                    <option value="{{ $screendata->screenname }}"{{ request('navigateScreen') == $screendata->screenname ? 'selected' : '' }}>{{ $screendata->screenname }}</option>
-                                @endforeach
-                            </select>
+                                class="form-control" placeholder="Search by Brand Name">
                         </div>
 
                         <!-- Submit & Reset Buttons -->
                         <div class="col d-flex justify-content-end gap-2">
                             <button type="submit" class="filter btn">Filter</button>
-                            <a href="{{ route('notification.index') }}" class="reset btn">Reset</a>
+                            <a href="{{ route('brand.index') }}" class="reset btn">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -55,46 +45,40 @@
                 <table class="table table-bordered mt-2">
                     <tr>
                         <th>No</th>
-                        <th>Title</th>
-                        <th>Details Description</th>
-                        <th>Navigate Screen</th>
+                        <th>Brand Name</th>
+                        <th>Brand Image</th>
                         <th>Action</th>
                     </tr>
                     @if (count($data) > 0)
-                        @foreach ($data as $key => $data)
+                        @foreach ($data as $key => $brandData)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>
-                                    {{ $data->title }}
+                                    {{ $brandData->brand_name }}
                                     {{-- <ul>
-                                        <li> {{ $data->title }} </li>
-                                        <li> {{ $data->titleGuj }} </li>
-                                        <li> {{ $data->titleHin }} </li>
+                                        <li> {{ $categoryData->categoryName }} </li>
+                                        <li> {{ $categoryData->categoryNameGuj }} </li>
+                                        <li> {{ $categoryData->categoryNameHin }} </li>
                                     </ul> --}}
                                 </td>
                                 <td>
-                                    {!! $data->details !!}
-                                    {{-- <ul>
-                                        <li> {{ $data->details }} </li>
-                                        <li> {{ $data->detailsGuj }} </li>
-                                        <li> {{ $data->detailsHin }} </li>
-                                    </ul> --}}
+                                    <img src="{{ asset($brandData->brand_icon) }}" alt=""
+                                        height="100px" width="150px">
                                 </td>
-                                <td>{{ $data->navigate_screen }}</td>
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{ route('notification.edit') }}/{{ $data->id }}"
+                                        <a href="{{ route('brand.edit') }}/{{ $brandData->id }}"
                                             class="edit btn">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="javascript:void(0)" class="delete btn ml-2"
-                                            onclick="openDeactiveModal('{{ route('notification.deactive') }}/{{ $data->id }}')">
+                                            onclick="openDeactiveModal('{{ route('brand.deactive') }}/{{ $brandData->id }}')">
                                             <i class="fas fa-trash"></i>
                                         </a>
-                                    </div>
-                                    {{-- <a href="{{ route('notification.deactive') }}/{{ $data->id }}" class="btn btn-danger">
+                                        {{-- <a href="{{ route('category.deactive') }}/{{ $categoryData->id }}" class="btn btn-danger">
                                         <i class="fas fa-remove"></i>
                                     </a> --}}
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -107,7 +91,7 @@
                     @endif
                 </table>
                 {{-- table end --}}
-                {{-- {!! $categories->links('pagination::bootstrap-5') !!} --}}
+                {!! $data->links('pagination::bootstrap-5') !!}
 
             </div>
         </div>

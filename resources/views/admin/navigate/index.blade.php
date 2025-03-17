@@ -11,7 +11,7 @@
                 </div>
                 <div class="heading row align-items-center">
                     <div class="col d-flex align="right" style="gap: 3px">
-                        <a class="b1 btn btn-danger" href="{{ route('navigate.deactiveindex') }}">Deactive Screens</a>
+                        <a class="b1 btn btn-danger" href="{{ route('navigate.deactiveindex') }}">Deactivated Navigations</a>
                         <a class="btn btn-primary" href="{{ route('navigate.create') }}">Add</a>
                     </div>
                 </div>
@@ -30,8 +30,8 @@
                         </div>
                         <!-- Submit & Reset Buttons -->
                         <div class="col d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                            <a href="{{ route('navigate.index') }}" class="btn btn-danger">Reset</a>
+                            <button type="submit" class="filter btn">Filter</button>
+                            <a href="{{ route('navigate.index') }}" class="reset btn">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -53,10 +53,10 @@
                                     {{ $data->screenname }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('navigate.edit') }}/{{ $data->id }}" class="btn btn-primary">
+                                    <a href="{{ route('navigate.edit') }}/{{ $data->id }}" class="edit btn">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                    <a href="javascript:void(0)" class="delete btn ml-2"
                                         onclick="openDeactiveModal('{{ route('navigate.deactive') }}/{{ $data->id }}')">
                                         <i class="fas fa-trash"></i>
                                     </a>

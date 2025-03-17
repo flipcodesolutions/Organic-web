@@ -12,7 +12,7 @@ class BrandSeeder extends Seeder
      */
     public function run(): void
     {
-        ModelsBrand::insert(
+        ModelsBrand::insert([
             [
                 'id' => '1',
                 'brand_name' => 'Ramdev', 
@@ -173,6 +173,6 @@ class BrandSeeder extends Seeder
                 'brand_icon' => 'brandImages/OrganicIndia.png', 
                 'status' => 'active'
             ],
-        );
+        ]);
     }
 }

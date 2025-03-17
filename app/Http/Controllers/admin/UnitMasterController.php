@@ -138,13 +138,13 @@ class UnitMasterController extends Controller
         $unitmaster->status = 'active';
         $unitmaster->save();
 
-        return redirect()->route('unitmaster.index')->with('msg', 'UnitMaster Activated Successfully');
+        return back()->with('msg', 'UnitMaster Activated Successfully');
     }
     public function permdelete($id)
     {
         $unitmaster = UnitMaster::find($id);
         $unitmaster->delete();
 
-        return redirect()->route('unitmaster.index')->with('msg', 'UnitMaster Deleted Successfully');
+        return back()->with('msg', 'UnitMaster Deleted Successfully');
     }
 }

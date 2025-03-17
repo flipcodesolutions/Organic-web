@@ -129,7 +129,7 @@ class NotificationController extends Controller
     {
         $notification = Notification::find($id);
         $notification->delete();
-        return redirect()->back()->with('msg', 'Notification Deleted Successfully!');
+        return back()->with('msg', 'Notification Deleted Successfully!');
     }
 
     public function deactive($id)
@@ -167,6 +167,6 @@ class NotificationController extends Controller
         $notification->status = 'active';
         $notification->save();
 
-        return redirect()->route('notification.index')->with('msg', 'Notification Activated Successfully');
+        return back()->with('msg', 'Notification Activated Successfully');
     }
 }

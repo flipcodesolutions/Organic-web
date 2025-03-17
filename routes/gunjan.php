@@ -33,7 +33,7 @@ Route::get('landmark/edit/{id?}', [LandmarkMasterController::class, 'edit'])->na
 Route::post('landmark/update/{id?}', [LandmarkMasterController::class, 'update'])->name('landmark.update');
 Route::get('landmark/show/{id?}', [LandmarkMasterController::class, 'show'])->name('landmark.show');
 
-Route::get('landmark/deactive', [LandmarkMasterController::class, 'deactive'])->name('landmark.deactive');
+Route::get('landmark/deactive/{id?}', [LandmarkMasterController::class, 'deactive'])->name('landmark.deactive');
 Route::get('landmark/deleted', [LandmarkMasterController::class, 'deleted'])->name('landmark.deleted');
 Route::get('landmark/active/{id?}', [LandmarkMasterController::class, 'active'])->name('landmark.active');
 Route::get('landmark/destroy/{id?}', [LandmarkMasterController::class, 'destroy'])->name('landmark.destroy');

@@ -90,6 +90,24 @@ class UnitSeeder extends Seeder
                 'detail' => '1L',
                 'per'=>'10',
                 'sell_price'=>'549',
+            ],
+            [
+                'id' => '9',
+                'unit' => '9',
+                'product_id' => '9',
+                'price' => '500',
+                'detail' => '500',
+                'per'=>'50',
+                'sell_price'=>'500',
+            ],
+            [
+                'id' => '10',
+                'unit' => '10',
+                'product_id' => '10',
+                'price' => '750',
+                'detail' => '750',
+                'per'=>'70',
+                'sell_price'=>'750',
             ]
            
         ]);

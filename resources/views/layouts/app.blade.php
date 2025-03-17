@@ -38,7 +38,7 @@
     <title>Vegitable e-comm</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('asset/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('asset/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -91,61 +91,182 @@
                                 <span>Dashboard</span></a>
                         </li>
 
-                        <li class="nav-item {{ request()->routeIs('category.*') ? 'active' : '' }}">
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                                data-target="#collapseUtilities1" aria-expanded="true" aria-controls="collapseUtilities">
+                                {{-- <i class="fas fa-fw fa-wrench"></i> --}}
+                                <i class="fa-solid fa-server"></i>
+                                <span>Master</span>
+                            </a>
+                            <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtilities"
+                                data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    {{-- city --}}
+                                    <a class="collapse-item" href="{{ route('city_master.index') }}">
+                                        <i class="fa fa-location-pin"></i>
+                                        <span>Cities</span></a>
+
+                                    {{-- landmark --}}
+                                    <a class="collapse-item" href="{{ route('landmark.index') }}">
+                                        <i class="fa fa-street-view"></i>
+                                        <span>Landmark</span></a>
+
+                                    {{-- unit master --}}
+                                    <a class="collapse-item" href="{{ Route('unitmaster.index') }}">
+                                        <i class="fa fa-bookmark"></i>
+                                        <span>Unit Master</span></a>
+
+                                    {{-- faq --}}
+                                    <a class="collapse-item" href="{{ Route('faq.index') }}">
+                                        <i class="fa fa-person-circle-question"></i>
+                                        <span>FAQs</span></a>
+
+                                    {{-- cms master --}}
+                                    <a class="collapse-item" href="{{ Route('cms_master.index') }}">
+                                        <i class="fa fa-list-check"></i>
+                                        <span>CMS Master</span></a>
+
+                                    {{-- point per --}}
+                                    <a class="collapse-item" href="{{ route('pointper.index') }}">
+                                        <i class="fa fa-basket-shopping"></i>
+                                        <span>Point Per</span></a>
+
+                                </div>
+                            </div>
+                            {{-- <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                                data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <a class="collapse-item" href="{{ route('user.index') }}">User List</a>
+                                </div>
+                            </div> --}}
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                                data-target="#collapseUtilities2" aria-expanded="true"
+                                aria-controls="collapseUtilities">
+                                {{-- <i class="fas fa-fw fa-wrench"></i> --}}
+                                <i class="fa-solid fa-warehouse"></i>
+                                <span>Product</span>
+                            </a>
+
+                            <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities"
+                                data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    {{-- category --}}
+                                    <a class="collapse-item" href="{{ route('category.index') }}">
+                                        <i class="fa fa-list"></i>
+                                        <span>Categories</span></a>
+
+                                    {{-- brand --}}
+                                    <a class="collapse-item" href="{{ route('brand.index') }}">
+                                        <i class="fa-brands fa-fort-awesome"></i>
+                                        <span>Brands</span></a>
+
+                                    {{-- product --}}
+                                    <a class="collapse-item" href="{{ route('product.index') }}">
+                                        <i class="fa fa-carrot"></i>
+                                        <span>Products</span></a>
+
+                                    {{-- review --}}
+                                    <a class="collapse-item" href="{{ route('vendor.reviews.index') }}">
+                                        <i class="fa fa-comment"></i>
+                                        <span>Vendor Reviews</span></a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                                data-target="#collapseUtilities3" aria-expanded="true"
+                                aria-controls="collapseUtilities">
+                                <i class="fa-solid fa-gears"></i> <span>Setting</span>
+                            </a>
+
+                            <div id="collapseUtilities3" class="collapse" aria-labelledby="headingUtilities"
+                                data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    {{-- navigation --}}
+                                    <a class="collapse-item" href="{{ route('navigate.index') }}">
+                                        <i class="fa fa-location-dot"></i>
+                                        <span>Navigate</span></a>
+
+                                    {{-- slider --}}
+                                    <a class="collapse-item" href="{{ Route('slider.index') }}">
+                                        <i class="fa fa-photo-film"></i>
+                                        <span>Slider</span></a>
+
+                                    {{-- notification --}}
+                                    <a class="collapse-item" href="{{ route('notification.index') }}">
+                                        <i class="fa fa-bell"></i>
+                                        <span>Notification</span></a>
+                                </div>
+                            </div>
+
+                        </li>
+
+                        {{-- <li class="nav-item {{ request()->routeIs('category.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('category.index') }}">
                                 <i class="fa fa-list"></i>
                                 <span>Categories</span></a>
-                        </li>
+                        </li> --}}
 
-                        <li class="nav-item {{ request()->routeIs('product.*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->routeIs('brand.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('brand.index') }}">
+                                <i class="fa-brands fa-fort-awesome"></i>
+                                <span>Brands</span></a>
+                        </li> --}}
+
+                        {{-- <li class="nav-item {{ request()->routeIs('product.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('product.index') }}">
                                 <i class="fa fa-carrot"></i>
                                 <span>Products</span></a>
-                        </li>
+                        </li> --}}
 
-                        <li class="nav-item {{ request()->routeIs('navigate.*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->routeIs('navigate.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('navigate.index') }}">
                                 <i class="fa fa-location-dot"></i>
                                 <span>Navigate</span></a>
-                        </li>
+                        </li> --}}
 
-                        <li class="nav-item {{ request()->routeIs('notification.*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->routeIs('notification.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('notification.index') }}">
                                 <i class="fa fa-bell"></i>
                                 <span>Notification</span></a>
-                        </li>
+                        </li> --}}
 
-                        <li class="nav-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('pointper.index') }}">
                                 <i class="fa fa-basket-shopping"></i>
                                 <span>Point Per</span></a>
-                        </li>
+                        </li> --}}
 
-                        <li class="nav-item {{ request()->routeIs('city_master.*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->routeIs('city_master.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('city_master.index') }}">
                                 <i class="fa fa-location-pin"></i>
                                 <span>Cities</span></a>
-                        </li>
+                        </li> --}}
 
-                        <li class="nav-item {{ request()->routeIs('landmark.*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->routeIs('landmark.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('landmark.index') }}">
                                 <i class="fa fa-street-view"></i>
                                 <span>Landmark</span></a>
-                        </li>
+                        </li> --}}
 
                         {{-- @if (Auth::user()->role == 'Admin') --}}
-                        <li class="nav-item {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('admin.reviews.index') }}">
                                 <i class="fa fa-comment"></i>
                                 <span>Admin Reviews</span></a>
-                        </li>
+                        </li> --}}
                         {{-- @endif --}}
 
-                        <li class="nav-item {{ request()->routeIs('vendor.reviews.*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->routeIs('vendor.reviews.*') ? 'active' : '' }}">
                             <a class="nav-link " href="{{ route('vendor.reviews.index') }}">
                                 <i class="fa fa-comment"></i>
                                 <span>Vendor Reviews</span></a>
-                        </li>
+                        </li> --}}
 
                         <li class="nav-item {{ request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ Route('deliveryslot.index') }}">
@@ -153,29 +274,29 @@
                                 <span>Delivery Slots</span></a>
                         </li>
 
-                        <li class="nav-item {{ request()->routeIs('cms_master.*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->routeIs('cms_master.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ Route('cms_master.index') }}">
                                 <i class="fa fa-list-check"></i>
                                 <span>CMS Master</span></a>
-                        </li>
+                        </li> --}}
 
-                        <li class="nav-item {{ request()->routeIs('faq.*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->routeIs('faq.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ Route('faq.index') }}">
                                 <i class="fa fa-person-circle-question"></i>
                                 <span>FAQs</span></a>
-                        </li>
+                        </li> --}}
 
-                        <li class="nav-item {{ request()->routeIs('unitmaster.*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->routeIs('unitmaster.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ Route('unitmaster.index') }}">
                                 <i class="fa fa-bookmark"></i>
                                 <span>Unit Master</span></a>
-                        </li>
+                        </li> --}}
 
-                        <li class="nav-item {{ request()->routeIs('slider.*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->routeIs('slider.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ Route('slider.index') }}">
                                 <i class="fa fa-photo-film"></i>
                                 <span>Slider</span></a>
-                        </li>
+                        </li> --}}
                         <!-- Divider -->
                         <hr class="sidebar-divider">
 
@@ -188,7 +309,8 @@
                             <a class="nav-link collapsed" href="#" data-toggle="collapse"
                                 data-target="#collapseUtilities" aria-expanded="true"
                                 aria-controls="collapseUtilities">
-                                <i class="fas fa-fw fa-wrench"></i>
+                                {{-- <i class="fas fa-fw fa-wrench"></i> --}}
+                                <i class="fa-solid fa-users"></i>
                                 <span>User Management</span>
                             </a>
                             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -452,7 +574,7 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                             <img class="img-profile rounded-circle"
-                                src="{{ asset('asset/img/undraw_profile.svg') }}">
+                                src="{{ asset('user_profile/' . Auth::user()->pro_pic) }}">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -476,7 +598,8 @@
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {{ 'Logout' }}
                             </a>
-
+                            <a class="dropdown-item" href=""><i
+                                    class="fa-solid fa-unlock-keyhole mr-2 text-gray-400"></i>Change Password</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -885,13 +1008,13 @@
         <script>
             var message =
                 '{{ session()->has('
-                                                                            success ')
+                                                                                                                            success ')
                     ? session()->get('
-                                                                            success ')
+                                                                                                                            success ')
                     : (session()->has('
-                                                                            error ')
+                                                                                                                            error ')
                         ? session()->get('
-                                                                            error ')
+                                                                                                                            error ')
                         : implode("\\n", $errors->all())) }}';
 
             // If there is a success message
@@ -960,7 +1083,24 @@
         }
     </script>
 
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    @if (Session::has('warning'))
+        <script>
+            Swal.fire({
+                title: 'Action Required!',
+                text: "{{ Session::get('warning') }}", // Get the warning message from the session
+                icon: 'warning',
+                // showCancelButton: true,
+                // confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                // confirmButtonText: 'Proceed to Products',
+                // cancelButtonText: 'Cancel',
+                // reverseButtons: true,
+            });
+        </script>
+    @endif
 
     {{-- <script>
         var type =

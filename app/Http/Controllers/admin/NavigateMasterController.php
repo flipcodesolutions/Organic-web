@@ -100,7 +100,7 @@ class NavigateMasterController extends Controller
         $screen = NavigateMaster::find($id);
         $screen->delete();
 
-        return redirect()->back()->with('msg', 'Screen deleted successfully! ');
+        return back()->with('msg', 'Screen deleted successfully! ');
     }
 
     public function deactive($id)
@@ -134,6 +134,6 @@ class NavigateMasterController extends Controller
         $screen->status = 'active';
         $screen->save();
 
-        return redirect()->route('navigate.index')->with('msg', 'Screen activated Successfully!');
+        return back()->with('msg', 'Screen activated Successfully!');
     }
 }
