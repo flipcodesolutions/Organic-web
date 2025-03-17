@@ -3,10 +3,11 @@
 use App\Http\Controllers\admin\CityMasterController;
 use App\Http\Controllers\admin\LandmarkMasterController;
 use App\Http\Controllers\admin\ContactController;
-
-
 use App\Http\Controllers\admin\AdminReviewController;
 use App\Http\Controllers\vendor\VendorReviewController;
+
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -37,10 +38,13 @@ Route::get('landmark/deleted', [LandmarkMasterController::class, 'deleted'])->na
 Route::get('landmark/active/{id?}', [LandmarkMasterController::class, 'active'])->name('landmark.active');
 Route::get('landmark/destroy/{id?}', [LandmarkMasterController::class, 'destroy'])->name('landmark.destroy');
 
-
-
 Route::get('contact',[ContactController::class,'index'])->name('contact.index');
 
 Route::get('/admin/reviews', [AdminReviewController::class, 'index'])->name('admin.reviews.index');
 
 Route::get('/vendor/reviews', [VendorReviewController::class, 'index'])->name('vendor.reviews.index');
+
+
+
+// Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+// Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
