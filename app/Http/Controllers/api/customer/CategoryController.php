@@ -76,7 +76,7 @@ class CategoryController extends Controller
                     });
                 })
                 ->select($language == 'Hindi' ? $categoriesHindiFields : ($language == 'Gujarati' ? $categoriesGujaratiFields : $categoriesEnglishFields))
-                ->get();
+                ->first();
 
             return Util::getSuccessMessage('Categories', $categories);
         } catch (Exception $e) {
