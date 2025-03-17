@@ -68,8 +68,6 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'otp' => 'required',
             'phone' => 'required|digits:10',
-            'latitude' => 'required',
-            'longitude' => 'required',
         ]);
 
         if ($validator->fails()) {
