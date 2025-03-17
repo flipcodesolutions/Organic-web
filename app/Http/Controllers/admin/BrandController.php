@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -46,16 +47,16 @@ class BrandController extends Controller
 
         $newbrand = new Brand();
         $newbrand->brand_name = $request->brandName;
-        if($request->has('brand_image')){
+        if ($request->has('brand_image')) {
             $image = $request->file('brand_image');
             $path = 'brandImages/';
             $imagename = time() . '.' . $image->getClientOriginalExtension();
-            $image->move($path,$imagename);
-            $newbrand->brand_icon = 'brandImages/'.$imagename;
+            $image->move($path, $imagename);
+            $newbrand->brand_icon = 'brandImages/' . $imagename;
         }
         $newbrand->save();
 
-        return redirect()->route('brand.index')->with('msg','Brand Created Successfully!');
+        return redirect()->route('brand.index')->with('msg', 'Brand Created Successfully!');
     }
 
     /**
@@ -87,7 +88,7 @@ class BrandController extends Controller
 
         $newbrand = Brand::find($id);
         $newbrand->brand_name = $request->brandName;
-        if($request->has('brand_image')){
+        if ($request->has('brand_image')) {
             $image = $request->file('brand_image');
             $path = 'brandImages/';
             $imagename = time() . '.' . $image->getClientOriginalExtension();
@@ -95,13 +96,13 @@ class BrandController extends Controller
             if (file_exists($currentimagepath)) {
                 unlink($currentimagepath);
             }
-            $image->move($path,$imagename);
-            $newbrand->brand_icon = 'brandImages/'.$imagename;
+            $image->move($path, $imagename);
+            $newbrand->brand_icon = 'brandImages/' . $imagename;
         }
 
         $newbrand->save();
 
-        return redirect()->route('brand.index')->with('msg','Brand Updated Successfully!');
+        return redirect()->route('brand.index')->with('msg', 'Brand Updated Successfully!');
     }
 
     /**
@@ -109,14 +110,20 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        $brand = Brand::find($id);
-        $currentimagepath = public_path($brand->brand_icon);
-        if (file_exists($currentimagepath)) {
-            unlink($currentimagepath);
-        }
-        $brand->delete();
+        $product = Product::where('brandId', $id)->get();
 
-        return back()->with('msg','Brand Deleted Successfully!');
+        if ($product->count() > 0) {
+            return back()->with('warning', 'First you need to delete the products registered with this brand after that you can delete this brand!');
+        } else {
+            $brand = Brand::find($id);
+            $currentimagepath = public_path($brand->brand_icon);
+            if (file_exists($currentimagepath)) {
+                unlink($currentimagepath);
+            }
+            $brand->delete();
+            return back()->with('msg', 'Brand Deleted Successfully!');
+        }
+
     }
 
     public function deactive($id)
@@ -125,7 +132,7 @@ class BrandController extends Controller
         $brand->status = 'deactive';
         $brand->save();
 
-        return back()->with('msg','Brand Deactivated Successfully!');
+        return back()->with('msg', 'Brand Deactivated Successfully!');
     }
 
     public function deactiveindex(Request $request)
@@ -149,6 +156,6 @@ class BrandController extends Controller
         $brand->status = 'active';
         $brand->save();
 
-        return back()->with('msg','Brand Activated Successfully!');
+        return back()->with('msg', 'Brand Activated Successfully!');
     }
 }

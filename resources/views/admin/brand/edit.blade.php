@@ -61,8 +61,8 @@
 
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i>
-                            Submit</button>
+                        <button type="submit" class="update btn" id="Update"><i class="fa-solid fa-floppy-disk"></i>
+                            Update</button>
                     </div>
 
                 </form>

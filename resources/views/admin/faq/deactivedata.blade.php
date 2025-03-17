@@ -46,10 +46,10 @@
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                    <a href="{{ Route('faq.active', $faqs->id) }}" class="btn btn-primary">
+                                    <a href="{{ Route('faq.active', $faqs->id) }}" class="edit btn">
                                         <i class="fas fa-undo"></i>
                                     </a>
-                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                    <a href="javascript:void(0)" class="delete btn ml-2"
                                         onclick="openDeleteModal('{{ Route('faq.permdelete', $faqs->id) }}')">
                                         <i class="fas fa-trash"></i>
                                     </a>

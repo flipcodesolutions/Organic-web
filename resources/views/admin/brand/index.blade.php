@@ -11,7 +11,7 @@
                 </div>
                 <div class="heading row align-items-center">
                     <div class="col d-flex align="right" style="gap: 3px">
-                        <a class="b1 btn btn-danger" href="{{ route('brand.deactiveindex') }}">Deactive Brands
+                        <a class="b1 btn btn-danger" href="{{ route('brand.deactiveindex') }}">Deactivated Brands
                         </a>
                         <a class="btn btn-primary" href="{{ route('brand.create') }}">Add</a>
 
@@ -33,8 +33,8 @@
 
                         <!-- Submit & Reset Buttons -->
                         <div class="col d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                            <a href="{{ route('brand.index') }}" class="btn btn-danger">Reset</a>
+                            <button type="submit" class="filter btn">Filter</button>
+                            <a href="{{ route('brand.index') }}" class="reset btn">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -68,10 +68,10 @@
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{ route('brand.edit') }}/{{ $brandData->id }}"
-                                            class="btn btn-primary">
+                                            class="edit btn">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        <a href="javascript:void(0)" class="delete btn ml-2"
                                             onclick="openDeactiveModal('{{ route('brand.deactive') }}/{{ $brandData->id }}')">
                                             <i class="fas fa-trash"></i>
                                         </a>

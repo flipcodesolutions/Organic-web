@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
                 'categoryId' => '5',
                 'userId' => '1',
                 'stock' => '500',
-                'image' => 'productImages/AshirvaadAata.jpeg',
+                'image' => 'productImages/AashirvaadAtta.jpeg',
                 'season' => 'All',
                 'brandId' => '7',
                 'isOnHome' => 'yes',

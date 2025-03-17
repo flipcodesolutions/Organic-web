@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\NavigateMaster;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Unit;
@@ -37,6 +38,9 @@ class ProductController extends Controller
             }
             if ($request->filled('season')) {
                 $query->where('season', $request->season);
+            }
+            if ($request->filled('is_on_home')) {
+                $query->where('isOnHome', $request->is_on_home);
             }
 
             $data = $query->where('status', 'active')->whereHas('categories', function ($query1) {
@@ -108,14 +112,21 @@ class ProductController extends Controller
             $product->brandId = $request->brand_id;
             $userId = Auth::user()->id;
             $product->userId = $userId;
+
             if($request->has('is_on_home') && $request->is_on_home == 'true'){
                 $product->isOnHome = 'yes';
             }
             else{
                 $product->isOnHome = 'no';
             }
-
+            
             $product->save();
+
+            if($request->has('is_navigate') && $request->is_navigate == 'true'){
+                $navigate = new NavigateMaster();
+                $navigate->screenname = 'product_screen/product/'.$product->id;
+                $navigate->save();
+            }
 
             if ($request->hasFile('product_image')) {
                 $productimg = $request->file('product_image')[0];
@@ -197,8 +208,9 @@ class ProductController extends Controller
             ])->get();
             $units = UnitMaster::where('status', 'active')->get();
             $brands = Brand::where('status','active')->get();
+            $navigate = NavigateMaster::where('screenname','product_screen/product/'.$id)->first();
 
-            return view('admin.product.edit', compact('product', 'categories', 'childcat', 'units', 'brands'));
+            return view('admin.product.edit', compact('product', 'categories', 'childcat', 'units', 'brands','navigate'));
         // } catch (\Exception $e) {
 
         //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!')->with('exception_message', $e->getMessage());;
@@ -229,6 +241,21 @@ class ProductController extends Controller
             $product->isOnHome = 'no';
         }
         // $product->save();
+
+        // for navigation
+        $navigate = NavigateMaster::where('screenname','product_screen/product/'.$id)->first(); 
+        if($request->has('is_navigate') && $request->is_navigate == 'true'){
+            if (!$navigate) {
+                $newnavigate = new NavigateMaster();
+                $newnavigate->screenname = 'product_screen/product/'.$id;
+                $newnavigate->save();
+            }
+        } 
+        else {
+            if($navigate){
+                $navigate->delete();
+            }
+        }
 
         // for add new video
         if ($request->has('new_video_link')) {
@@ -411,6 +438,10 @@ class ProductController extends Controller
                 $query->where('season', $request->season);
             }
 
+            if ($request->filled('is_on_home')) {
+                $query->where('isOnHome', $request->is_on_home);
+            }
+
             $data = $query->where('status', 'deactive')->whereHas('categories', function ($query) {
                 $query->where('status', 'active');
             })->whereHas('brand',function($query1){
@@ -473,6 +504,11 @@ class ProductController extends Controller
             foreach ($productunit as $data) {
 
                 $data->delete();
+            }
+
+            $navigate = NavigateMaster::where('screenname','product_screen/product/'.$id)->first(); 
+            if($navigate){
+                $navigate->delete();
             }
 
             $product->delete();
