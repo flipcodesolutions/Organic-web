@@ -31,8 +31,8 @@
                         <!--isavailable  Filter -->
                         <div class="col">
                             <label for="isavailable" class="form-label"><b>isavailable:</b></label>
-                            <select name="isavailable" id="isavailable" class="form-control">
-                                <option selected disabled>Select your isavailable</option>
+                            <select name="isavailable" id="isavailable" class="form-select">
+                                <option selected>Select your isavailable</option>
                                 <option value="yes" {{ request('isavailable') == 'yes' ? 'selected' : '' }}>
                                     Yes</option>
                                 <option value="no"

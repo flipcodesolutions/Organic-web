@@ -11690,7 +11690,10 @@ a:focus {
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:hover,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover {
-    background-color: #eaecf4
+    color: #fff;
+    font-weight: 700;
+    background-color: #365E32;
+    /* background-color: #eaecf4 */
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
@@ -11700,7 +11703,7 @@ a:focus {
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item.active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
-    color: #4e73df;
+    color: #fff;
     font-weight: 700;
     background-color: #365E32;
 }
@@ -12028,7 +12031,7 @@ a:focus {
 }
 
 .sidebar-dark .nav-item .nav-link i {
-    color: rgba(255, 255, 255, .3);
+    color: #fff;
     margin-right: 20px;
     /* Consistent space between icon and text */
     width: 30px;

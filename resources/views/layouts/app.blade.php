@@ -91,44 +91,53 @@
                                 <span>Dashboard</span></a>
                         </li>
 
+                        {{-- master --}}
                         <li class="nav-item">
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                                data-target="#collapseUtilities1" aria-expanded="true" aria-controls="collapseUtilities">
+                            <a class="nav-link {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? '' : 'collapsed' }}"
+                                href="#" data-toggle="collapse" data-target="#collapseUtilities1"
+                                aria-expanded="true" aria-controls="collapseUtilities">
                                 {{-- <i class="fas fa-fw fa-wrench"></i> --}}
                                 <i class="fa-solid fa-server"></i>
                                 <span>Master</span>
                             </a>
-                            <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtilities"
-                                data-parent="#accordionSidebar">
+                            <div id="collapseUtilities1"
+                                class="collapse {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? 'show' : '' }}"
+                                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     {{-- city --}}
-                                    <a class="collapse-item" href="{{ route('city_master.index') }}">
-                                        <i class="fa fa-location-pin"></i>
+                                    <a class="collapse-item {{ request()->routeIs('city_master.*') ? 'active' : '' }}"
+                                        href="{{ route('city_master.index') }}">
+                                        <i class="fa fa-location-pin mr-2"></i>
                                         <span>Cities</span></a>
 
                                     {{-- landmark --}}
-                                    <a class="collapse-item" href="{{ route('landmark.index') }}">
-                                        <i class="fa fa-street-view"></i>
+                                    <a class="collapse-item {{ request()->routeIs('landmark.*') ? 'active' : '' }}"
+                                        href="{{ route('landmark.index') }}">
+                                        <i class="fa fa-street-view mr-2"></i>
                                         <span>Landmark</span></a>
 
                                     {{-- unit master --}}
-                                    <a class="collapse-item" href="{{ Route('unitmaster.index') }}">
-                                        <i class="fa fa-bookmark"></i>
+                                    <a class="collapse-item {{ request()->routeIs('unitmaster.*') ? 'active' : '' }}"
+                                        href="{{ Route('unitmaster.index') }}">
+                                        <i class="fa fa-bookmark mr-2"></i>
                                         <span>Unit Master</span></a>
 
                                     {{-- faq --}}
-                                    <a class="collapse-item" href="{{ Route('faq.index') }}">
-                                        <i class="fa fa-person-circle-question"></i>
+                                    <a class="collapse-item {{ request()->routeIs('faq.*') ? 'active' : '' }}"
+                                        href="{{ Route('faq.index') }}">
+                                        <i class="fa fa-person-circle-question mr-2"></i>
                                         <span>FAQs</span></a>
 
                                     {{-- cms master --}}
-                                    <a class="collapse-item" href="{{ Route('cms_master.index') }}">
-                                        <i class="fa fa-list-check"></i>
+                                    <a class="collapse-item {{ request()->routeIs('cms_master.*') ? 'active' : '' }}"
+                                        href="{{ Route('cms_master.index') }}">
+                                        <i class="fa fa-list-check mr-2"></i>
                                         <span>CMS Master</span></a>
 
                                     {{-- point per --}}
-                                    <a class="collapse-item" href="{{ route('pointper.index') }}">
-                                        <i class="fa fa-basket-shopping"></i>
+                                    <a class="collapse-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}"
+                                        href="{{ route('pointper.index') }}">
+                                        <i class="fa fa-basket-shopping mr-2"></i>
                                         <span>Point Per</span></a>
 
                                 </div>
@@ -141,66 +150,82 @@
                             </div> --}}
                         </li>
 
-
+                        {{-- product --}}
                         <li class="nav-item">
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                                data-target="#collapseUtilities2" aria-expanded="true"
-                                aria-controls="collapseUtilities">
+                            <a class="nav-link {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') ? '' : 'collapsed' }}"
+                                href="#" data-toggle="collapse" data-target="#collapseUtilities2"
+                                aria-expanded="true" aria-controls="collapseUtilities">
                                 {{-- <i class="fas fa-fw fa-wrench"></i> --}}
                                 <i class="fa-solid fa-warehouse"></i>
                                 <span>Product</span>
                             </a>
 
-                            <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities"
-                                data-parent="#accordionSidebar">
+                            <div id="collapseUtilities2"
+                                class="collapse {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') ? 'show' : '' }}"
+                                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     {{-- category --}}
-                                    <a class="collapse-item" href="{{ route('category.index') }}">
-                                        <i class="fa fa-list"></i>
+                                    <a class="collapse-item {{ request()->routeIs('category.*') ? 'active' : '' }}"
+                                        href="{{ route('category.index') }}">
+                                        <i class="fa fa-list mr-2"></i>
                                         <span>Categories</span></a>
 
                                     {{-- brand --}}
-                                    <a class="collapse-item" href="{{ route('brand.index') }}">
-                                        <i class="fa-brands fa-fort-awesome"></i>
+                                    <a class="collapse-item {{ request()->routeIs('brand.*') ? 'active' : '' }}"
+                                        href="{{ route('brand.index') }}">
+                                        <i class="fa-brands fa-fort-awesome mr-2"></i>
                                         <span>Brands</span></a>
 
                                     {{-- product --}}
-                                    <a class="collapse-item" href="{{ route('product.index') }}">
-                                        <i class="fa fa-carrot"></i>
+                                    <a class="collapse-item {{ request()->routeIs('product.*') ? 'active' : '' }}"
+                                        href="{{ route('product.index') }}">
+                                        <i class="fa fa-carrot mr-2"></i>
                                         <span>Products</span></a>
 
                                     {{-- review --}}
-                                    <a class="collapse-item" href="{{ route('vendor.reviews.index') }}">
-                                        <i class="fa fa-comment"></i>
+                                    <a class="collapse-item {{ request()->routeIs('vendor.*') ? 'active' : '' }}"
+                                        href="{{ route('vendor.reviews.index') }}">
+                                        <i class="fa fa-comment mr-2"></i>
                                         <span>Vendor Reviews</span></a>
                                 </div>
                             </div>
                         </li>
 
+                        {{-- setting --}}
                         <li class="nav-item">
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                                data-target="#collapseUtilities3" aria-expanded="true"
-                                aria-controls="collapseUtilities">
+                            <a class="nav-link {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? '' : 'collapsed' }}"
+                                href="#" data-toggle="collapse" data-target="#collapseUtilities3"
+                                aria-expanded="true" aria-controls="collapseUtilities">
                                 <i class="fa-solid fa-gears"></i> <span>Setting</span>
                             </a>
 
-                            <div id="collapseUtilities3" class="collapse" aria-labelledby="headingUtilities"
-                                data-parent="#accordionSidebar">
+                            <div id="collapseUtilities3"
+                                class="collapse {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'show' : '' }}"
+                                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     {{-- navigation --}}
-                                    <a class="collapse-item" href="{{ route('navigate.index') }}">
-                                        <i class="fa fa-location-dot"></i>
+                                    <a class="collapse-item {{ request()->routeIs('navigate.*') ? 'active' : '' }}"
+                                        href="{{ route('navigate.index') }}">
+                                        <i class="fa fa-location-dot mr-2"></i>
                                         <span>Navigate</span></a>
 
                                     {{-- slider --}}
-                                    <a class="collapse-item" href="{{ Route('slider.index') }}">
-                                        <i class="fa fa-photo-film"></i>
+                                    <a class="collapse-item {{ request()->routeIs('slider.*') ? 'active' : '' }}"
+                                        href="{{ Route('slider.index') }}">
+                                        <i class="fa fa-photo-film mr-2"></i>
                                         <span>Slider</span></a>
 
                                     {{-- notification --}}
-                                    <a class="collapse-item" href="{{ route('notification.index') }}">
-                                        <i class="fa fa-bell"></i>
+                                    <a class="collapse-item {{ request()->routeIs('notification.*') ? 'active' : '' }}"
+                                        href="{{ route('notification.index') }}">
+                                        <i class="fa fa-bell mr-2"></i>
                                         <span>Notification</span></a>
+
+                                    {{-- delivery slots --}}
+                                    <a class="collapse-item {{ request()->routeIs('deliveryslot.*') ? 'active' : '' }}"
+                                        href="{{ Route('deliveryslot.index') }}">
+                                        <i class="fa fa-truck mr-2"></i>
+                                        <span>Delivery Slots</span></a>
                                 </div>
                             </div>
 
@@ -268,11 +293,11 @@
                                 <span>Vendor Reviews</span></a>
                         </li> --}}
 
-                        <li class="nav-item {{ request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ Route('deliveryslot.index') }}">
                                 <i class="fa fa-truck"></i>
                                 <span>Delivery Slots</span></a>
-                        </li>
+                        </li> --}}
 
                         {{-- <li class="nav-item {{ request()->routeIs('cms_master.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ Route('cms_master.index') }}">
@@ -306,17 +331,19 @@
                         </div>
 
                         <li class="nav-item">
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                                data-target="#collapseUtilities" aria-expanded="true"
+                            <a class="nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}" href="#"
+                                data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true"
                                 aria-controls="collapseUtilities">
                                 {{-- <i class="fas fa-fw fa-wrench"></i> --}}
                                 <i class="fa-solid fa-users"></i>
                                 <span>User Management</span>
                             </a>
-                            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                                data-parent="#accordionSidebar">
+                            <div id="collapseUtilities"
+                                class="collapse {{ request()->routeIs('user.*') ? 'show' : '' }}"
+                                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                    <a class="collapse-item" href="{{ route('user.index') }}">User List</a>
+                                    <a class="collapse-item {{ request()->routeIs('user.*') ? 'active' : '' }}"
+                                        href="{{ route('user.index') }}">User List</a>
                                 </div>
                             </div>
                         </li>
@@ -336,15 +363,18 @@
                 </li> --}}
                         <!-- Reports -->
                         <li class="nav-item">
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                                data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                            <a class="nav-link {{ request()->routeIs('reports.*') ? '' : 'collapsed' }}"
+                                href="#" data-toggle="collapse" data-target="#collapseFour"
+                                aria-expanded="true" aria-controls="collapseFour">
                                 <i class="fa-solid fa-file"></i>
                                 <span>Reports</span>
                             </a>
-                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
-                                data-parent="#accordionSidebar">
+                            <div id="collapseFour"
+                                class="collapse {{ request()->routeIs('reports.*') ? 'show' : '' }}"
+                                aria-labelledby="headingFour" data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                    <a class="collapse-item" href="{{ route('reports.purchaseReport') }}">Purchase
+                                    <a class="collapse-item {{ request()->routeIs('reports.*') ? 'active' : '' }}"
+                                        href="{{ route('reports.purchaseReport') }}">Purchase
                                         Report</a>
                                 </div>
                                 {{-- <div class="bg-white py-2 collapse-inner rounded"> --}}
@@ -592,14 +622,17 @@
                                     Activity Log
                                 </a> --}}
                             <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" href="{{ route('change.password') }}"><i
+                                    class="fa-solid fa-unlock-keyhole mr-2 text-gray-400"></i>Change Password</a>
+
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {{ 'Logout' }}
                             </a>
-                            <a class="dropdown-item" href=""><i
-                                    class="fa-solid fa-unlock-keyhole mr-2 text-gray-400"></i>Change Password</a>
+                            
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -621,16 +654,16 @@
                 <div class="container-fluid" style="background: ghostwhite;">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        {{-- <h1 class="h3 mb-0 text-gray-800">Dashboard</h1> --}}
-                        {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
-                    </div>
+                    {{-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    </div> --}}
 
                     <!-- Content Row -->
-                    <div class="card-body">
+                    {{-- <div class="card-body p-0"> --}}
                         @yield('content')
-                    </div>
+                    {{-- </div> --}}
                     {{-- <div class="row">
 
                         <!-- Earnings (Monthly) Card Example -->
@@ -1008,13 +1041,13 @@
         <script>
             var message =
                 '{{ session()->has('
-                                                                                                                            success ')
+                                                                                                                                                            success ')
                     ? session()->get('
-                                                                                                                            success ')
+                                                                                                                                                            success ')
                     : (session()->has('
-                                                                                                                            error ')
+                                                                                                                                                            error ')
                         ? session()->get('
-                                                                                                                            error ')
+                                                                                                                                                            error ')
                         : implode("\\n", $errors->all())) }}';
 
             // If there is a success message

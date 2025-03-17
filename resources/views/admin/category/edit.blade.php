@@ -1,9 +1,18 @@
 @extends('layouts.app')
 @section('header', 'Category Create')
 @section('content')
-    <div class="container">
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col">
+            <h1 class="h3 mb-0 text-gray-800">Update New Category</h1>
+        </div>
+        <a href="{{ route('category.index') }}" class="btn btn-primary" type="button" onclick="javascript:history.go(-1)"> Back
+        </a>
+    </div>
+
+    <div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0" style="width: 200px">Update New Category</h6>
@@ -13,7 +22,7 @@
                             onclick="javascript:history.go(-1)"> Back </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="card-body">
                 <form action="{{ route('category.update') }}/{{ $category->id }}" method="post"
@@ -133,13 +142,13 @@
                             Image <span class="text-danger">*</span>
                         </div>
                         <div class="col-2" id="imagepreview">
-                            <img id="profilePicPreview" src="{{ asset($category->cat_icon) }}"
-                                alt="" height="100px" width="150px">
+                            <img id="profilePicPreview" src="{{ asset($category->cat_icon) }}" alt=""
+                                height="100px" width="150px">
                         </div>
                         <div class="col">
                             <div class="form">
-                                <input type="file" name="category_image" id="category_Image" placeholder="Category Name"
-                                    class="form-control" onchange="previewImage(event)">
+                                <input type="file" name="category_image" id="category_Image"
+                                    placeholder="Category Name" class="form-control" onchange="previewImage(event)">
                                 {{-- <label for="">Image</label> --}}
                                 <span>
                                     @error('category_image')
@@ -157,12 +166,12 @@
                         </div>
                         <div class="col">
                             <div class="form-check">
-                                <input class="form-check-input" name="is_navigate" type="checkbox" value="true" id="navigate" 
-                                @if($navigate && $navigate->screenname == 'product_screen/category/'.$category->id) checked @endif>
+                                <input class="form-check-input" name="is_navigate" type="checkbox" value="true"
+                                    id="navigate" @if ($navigate && $navigate->screenname == 'product_screen/category/' . $category->id) checked @endif>
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Make Navigation
                                 </label>
-                              </div>
+                            </div>
                         </div>
                     </div>
 
@@ -223,7 +232,8 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="update btn" id="Update"><i class="fa-solid fa-floppy-disk"></i>
+                            <button type="submit" class="update btn" id="Update"><i
+                                    class="fa-solid fa-floppy-disk"></i>
                                 Update</button>
                         </div>
                     </div>
@@ -289,9 +299,9 @@
 
             function toggleSelect() {
                 if (checkbox.checked) {
-                    select.disabled = true; 
+                    select.disabled = true;
                 } else {
-                    select.disabled = false; 
+                    select.disabled = false;
                 }
             }
 

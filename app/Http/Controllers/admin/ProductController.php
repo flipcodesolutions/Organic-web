@@ -55,12 +55,12 @@ class ProductController extends Controller
             $categories = Category::where([
                 ['status', '=', 'active'],
                 ['parent_category_id', '=', 0]
-            ])->get();
+            ])->orderBy('categoryName', 'asc')->get();
             $childcat = Category::where([
                 ['status', '=', 'active'],
                 ['parent_category_id', '!=', 0]
-            ])->get();
-            $brands = Brand::where('status','active')->get();
+            ])->orderBy('categoryName', 'asc')->get();
+            $brands = Brand::where('status','active')->orderBy('brand_name', 'asc')->get();
             // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
             //     $query->where('status', 'active');
             // })->with(['categories', 'productImages', 'productUnit.unitMaster'=> function($query){
@@ -451,12 +451,12 @@ class ProductController extends Controller
             $categories = Category::where([
                 ['status', '=', 'active'],
                 ['parent_category_id', '=', 0]
-            ])->get();
+            ])->orderBy('categoryName', 'asc')->get();
             $childcat = Category::where([
                 ['status', '=', 'active'],
                 ['parent_category_id', '!=', 0]
-            ])->get();
-            $brands = Brand::where('status','active')->get();
+            ])->orderBy('categoryName', 'asc')->get();
+            $brands = Brand::where('status','active')->orderBy('brand_name', 'asc')->get();
 
             return view('admin.product.deactiveproduct', compact('data', 'categories', 'childcat', 'brands'));
             // $products = Product::where('status', 'deactive')->with(['categories', 'productImages', 'productUnit.unitMaster'])->paginate(10);

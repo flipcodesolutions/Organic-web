@@ -22,6 +22,8 @@ Route::controller(UserController::class)->group(function(){
     Route::get('user/active/{id?}','active')->name('user.active');
     Route::get('user/deactiveindex','deactiveindex')->name('user.deactiveindex');
     Route::get('user/delete/{id?}','destroy')->name('user.delete');
+    Route::get('user/changepassword','changepassword')->name('change.password');
+    Route::post('user/updatepassword','updatepassword')->name('update.password');
 });
 
 // category route

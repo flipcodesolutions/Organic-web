@@ -31,11 +31,10 @@
                             <label for="role" class="form-label"><b>Role:</b></label>
                             <select id="role" name="role" class="form-select">
                                 <option value="" selected>Select Role</option>
-                                <option value="admin"{{ request('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="manager"{{ request('role') == 'manager' ? 'selected' : '' }}>Manager</option>
-                                <option value="vendor"{{ request('role') == 'vendor' ? 'selected' : '' }}>Vendor</option>
-                                <option value="customer"{{ request('role') == 'customer' ? 'selected' : '' }}>Customer
-                                </option>
+                                <option value="Admin"{{ request('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="Customer"{{ request('role') == 'Customer' ? 'selected' : '' }}>Customer</option>
+                                <option value="Manager"{{ request('role') == 'Manager' ? 'selected' : '' }}>Manager</option>
+                                <option value="Vendor"{{ request('role') == 'Vendor' ? 'selected' : '' }}>Vendor</option>
                             </select>
                         </div>
 

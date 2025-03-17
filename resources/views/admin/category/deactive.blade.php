@@ -2,10 +2,17 @@
 @section('header', 'Category')
 @section('content')
 
-    <div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col">
+            <h1 class="h3 mb-0 text-gray-800">Deactive Category</h1>
+        </div>
+        <a href="{{ route('category.index') }}" class="btn btn-primary" type="button"> Back </a>
+    </div>
+
+    <div class="card-body p-0">
 
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0">Deactive Category</h6>
@@ -14,7 +21,7 @@
                         <a href="{{ route('category.index') }}" class="btn btn-primary" type="button"> Back </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="mb-4 margin-bottom-30 m-4">
                 <form action="{{ route('category.deactiveindex') }}" method="GET" class="filter-form">
@@ -95,8 +102,7 @@
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{ route('category.active') }}/{{ $categoryData->id }}"
-                                            class="edit btn">
+                                        <a href="{{ route('category.active') }}/{{ $categoryData->id }}" class="edit btn">
                                             <i class="fas fa-undo"></i>
                                         </a>
                                         <a href="javascript:void(0)" class="delete btn ml-2"
