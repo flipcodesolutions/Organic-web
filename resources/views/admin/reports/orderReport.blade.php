@@ -23,10 +23,10 @@
         </tr>
         @foreach($data as $data)
         <tr>
-            <td>{{$data['id']}}
-            <td>{{$data['orderDate']}}
-            <td>{{$data['user']['name']}}
-            <td><a class="btn btn-primary" href="{{ route('reports.bill',$data['id'])}}"><i class="fa-solid fa-eye"></i></a>
+            <td>{{$data->id}}
+            <td>{{$data->orderDate}}
+            <td>{{$data->user->name}}
+            <td><a class="btn btn-primary" href="{{ route('reports.bill',$data->id)}}"><i class="fa-solid fa-eye"></i></a>
         </tr>
         @endforeach
         
