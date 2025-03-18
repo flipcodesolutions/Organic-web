@@ -1,8 +1,16 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Create New Slider</h1>
+    </div>
+    <a class="btn btn-primary" href="{{ Route('slider.index') }}">Back</a>
+</div>
+
+<div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0">Create New Slider</h6>
@@ -11,7 +19,7 @@
                         <a class="btn btn-primary" href="{{ Route('slider.index') }}">Back</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="card-body">
                 <form id="slider" action="{{ Route('slider.store') }}" method="post" enctype="multipart/form-data"
@@ -159,7 +167,7 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i>
+                            <button type="submit" class="submit btn"><i class="fa-solid fa-floppy-disk"></i>
                                 Submit</button>
                         </div>
                     </div>

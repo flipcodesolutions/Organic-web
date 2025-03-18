@@ -3,7 +3,7 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <div class="col">
-        <h1 class="h3 mb-0 text-gray-800">Update City</h1>
+        <h1 class="h3 mb-0 text-gray-800">Edit City</h1>
     </div>
     <a class="btn btn-primary" href="{{ route('city_master.index') }}" role="button" >Back </a>
 </div>

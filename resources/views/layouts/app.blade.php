@@ -63,11 +63,10 @@
     <!-- Page Wrapper -->
     <div id="wrapper" class="overlay-menu">
 
-        <!-- Sidebar -->
+                <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-content">
-                <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar"
-                    style="background-color:  #81A263;">
+                <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
 
                     <!-- Sidebar - Brand -->
                     <a class="sidebar-brand d-flex align-items-center justify-content-center">
@@ -77,8 +76,7 @@
                         <div class="sidebar-brand-text mx-3">Vegetable E-comm</div>
                     </a>
 
-                    <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar"
-                        style="background-color:  #81A263;">
+                    <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
 
                         <!-- Divider -->
                         <hr class="sidebar-divider my-0">
@@ -92,7 +90,7 @@
                         </li>
 
                         {{-- master --}}
-                        <li class="nav-item">
+                        <li class="nav-item {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? 'active' : '' }}">
                             <a class="nav-link {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? '' : 'collapsed' }}"
                                 href="#" data-toggle="collapse" data-target="#collapseUtilities1"
                                 aria-expanded="true" aria-controls="collapseUtilities">
@@ -151,7 +149,7 @@
                         </li>
 
                         {{-- product --}}
-                        <li class="nav-item">
+                        <li class="nav-item {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') ? 'active' : '' }}">
                             <a class="nav-link {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') ? '' : 'collapsed' }}"
                                 href="#" data-toggle="collapse" data-target="#collapseUtilities2"
                                 aria-expanded="true" aria-controls="collapseUtilities">
@@ -192,7 +190,7 @@
                         </li>
 
                         {{-- setting --}}
-                        <li class="nav-item">
+                        <li class="nav-item {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
                             <a class="nav-link {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? '' : 'collapsed' }}"
                                 href="#" data-toggle="collapse" data-target="#collapseUtilities3"
                                 aria-expanded="true" aria-controls="collapseUtilities">
@@ -330,7 +328,7 @@
                             Interface
                         </div>
 
-                        <li class="nav-item">
+                        <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
                             <a class="nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}" href="#"
                                 data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true"
                                 aria-controls="collapseUtilities">
@@ -343,7 +341,10 @@
                                 aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     <a class="collapse-item {{ request()->routeIs('user.*') ? 'active' : '' }}"
-                                        href="{{ route('user.index') }}">User List</a>
+                                        href="{{ route('user.index') }}">
+                                        <i class="fa-solid fa-user"></i>
+                                        <span>User List</span>
+                                    </a>
                                 </div>
                             </div>
                         </li>
@@ -362,7 +363,7 @@
                 </div>
                 </li> --}}
                         <!-- Reports -->
-                        <li class="nav-item">
+                        <li class="nav-item {{ request()->routeIs('reports.*') ? 'active' : '' }}">
                             <a class="nav-link {{ request()->routeIs('reports.*') ? '' : 'collapsed' }}"
                                 href="#" data-toggle="collapse" data-target="#collapseFour"
                                 aria-expanded="true" aria-controls="collapseFour">
@@ -405,7 +406,6 @@
             </div>
         </div>
         <!-- End of Sidebar -->
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 

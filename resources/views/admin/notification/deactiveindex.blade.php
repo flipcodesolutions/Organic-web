@@ -2,10 +2,16 @@
 @section('header', 'Category')
 @section('content')
 
-    <div class="container">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Deactivated Notifications</h1>
+    </div>
+    <a class="btn btn-primary" href="{{ route('notification.index') }}">Back</a>
+</div>
 
+<div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0"  style="width: 200px">Deactive Notifications</h6>
@@ -14,7 +20,7 @@
                         <a class="btn btn-primary" href="{{ route('notification.index') }}">Back</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- filter --}}
             <div class="mb-4 margin-bottom-30 m-4">
