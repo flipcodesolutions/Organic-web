@@ -20,15 +20,15 @@
                     <div class="row align-items-end g-2">
 
                         <!-- Global Search -->
-                        <div class="col">
+                        {{-- <div class="col">
                             <label for="global" class="form-label"><b>Filter:</b></label>
                             <input type="text" id="global" name="global" value="{{ request('global') }}"
                                 class="form-control" placeholder="Search by CityName">
-                        </div>
+                        </div> --}}
 
                         <!--cityname  Filter -->
                         <div class="col">
-                            <label for="city_id" class="form-label"><b>CityName:</b></label>
+                            <label for="city_id" class="form-label"><b>City Name:</b></label>
                             <select name="city_id" id="city_id" class="form-control">
                                 <option selected disabled>Select your CIty</option>
                                 @foreach ($cities as $cities)
@@ -40,7 +40,7 @@
                         </div>
                         <!--sliderpos  Filter -->
                         <div class="col">
-                            <label for="slider_pos" class="form-label"><b>SliderPos:</b></label>
+                            <label for="slider_pos" class="form-label"><b>Slider Position:</b></label>
                             <select name="slider_pos" id="slider_pos" class="form-control">
                                 <option selected disabled>Select your SliderPosition</option>
 
@@ -53,8 +53,8 @@
 
                         <!-- Submit & Reset Buttons -->
                         <div class="col d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                            <a href="{{ Route('slider.deactive') }}" class="btn btn-danger">Reset</a>
+                            <button type="submit" class="filter btn">Filter</button>
+                            <a href="{{ Route('slider.deactive') }}" class="reset btn">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -96,10 +96,10 @@
 
                             <td>
                                 <div class="d-flex">
-                                <a href="{{Route('slider.active',$sliders->id)}}" class="btn btn-primary">
+                                <a href="{{Route('slider.active',$sliders->id)}}" class="edit btn">
                                     <i class="fas fa-undo"></i>
                                 </a>
-                                <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                <a href="javascript:void(0)" class="delete btn ml-2"
                                     onclick="openDeleteModal('{{Route('slider.permdelete',$sliders->id)}}')">
                                     <i class="fas fa-trash"></i>
                                 </a>

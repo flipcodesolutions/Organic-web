@@ -16,7 +16,7 @@ class SliderSeeder extends Seeder
         ModelsSlider::insert([
             'id' => '1',
             'city_id'=> '1',
-            'url' => 'spinach.jpeg',
+            'url' => 'productImages/AshirvaadAata.jpeg',
             'slider_pos' => 'top',
             'is_navigate' => '1',
             'navigatemaster_id' => '1',
@@ -26,41 +26,22 @@ class SliderSeeder extends Seeder
         [
             'id' => '2',
             'city_id'=> '1',
-            'url' => 'apple.jpeg',
+            'url' => 'categoryImages/ATTA.jpeg',
             'slider_pos' => 'bottom',
             'is_navigate' => '0',
-            'navigatemaster_id' => '1',
+            'navigatemaster_id' => '2',
             'status' => 'active'
         ],
 
         [
             'id' => '3',
             'city_id'=> '1',
-            'url' => 'carrot.jpeg',
-            'slider_pos' => 'top',
+            'url' => '',
+            'slider_pos' => 'Middle',
             'is_navigate' => '1',
-            'navigatemaster_id' => '1',
+            'navigatemaster_id' => '3',
             'status' => 'active'
-        ],
-
-        [
-            'id' => '4',
-            'city_id'=> '1',
-            'url' => 'cucumber.jpeg',
-            'slider_pos' => 'top',
-            'is_navigate' => '1',
-            'navigatemaster_id' => '1',
-            'status' => 'active'
-        ],
-
-        [
-            'id' => '5',
-            'city_id'=> '1',
-            'url' => 'mango.jpeg',
-            'slider_pos' => 'bottom',
-            'is_navigate' => '0',
-            'navigatemaster_id' => '2',
-            'status' => 'active'
+        
         ]);
 
     }

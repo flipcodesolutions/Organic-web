@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use function PHPUnit\Framework\fileExists;
 
@@ -81,30 +83,30 @@ class UserController extends Controller
             'role' => 'required',
             'defaultLanguage' => 'required',
             'profilePic' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'password' => 'required|string|min:8|confirmed', // 'confirmed' will automatically validate if password and confirm-password match
-            'password_confirmation' => 'required|string|min:8'
+            'password' => 'required|string|confirmed', // 'confirmed' will automatically validate if password and confirm-password match
+            'password_confirmation' => 'required|string'
         ]);
 
         // try {
-            $user = new User();
-            $user->name = $request->name;
-            $user->phone = $request->phone;
-            $user->email = $request->email;
-            $user->password = $request->password;
-            $user->role = $request->role;
-            $user->default_language = $request->defaultLanguage;
+        $user = new User();
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->role = $request->role;
+        $user->default_language = $request->defaultLanguage;
 
-            if ($request->hasFile('profilePic')) {
-                $image = $request->profilePic;
-                // return $image;
-                $profilepic = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                $user->pro_pic = $profilepic;
-                $image->move(public_path('user_profile/'), $profilepic);
-            }
+        if ($request->hasFile('profilePic')) {
+            $image = $request->profilePic;
+            // return $image;
+            $profilepic = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $user->pro_pic = $profilepic;
+            $image->move(public_path('user_profile/'), $profilepic);
+        }
 
-            $user->save();
+        $user->save();
 
-            return redirect()->route('user.index')->with('msg', 'User created successfully!');
+        return redirect()->route('user.index')->with('msg', 'User created successfully!');
         // } catch (\Exception $e) {
         //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
         // }
@@ -166,29 +168,29 @@ class UserController extends Controller
             'profilePic' => 'required|image|mimes:jpeg,png,jpg,gif'
         ]);
         // try {
-            $user = User::find($id);
-            $user->name = $request->name;
-            $user->phone = $request->phone;
-            $user->email = $request->email;
-            $user->role = $request->role;
-            $user->default_language = $request->defaultLanguage;
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->role = $request->role;
+        $user->default_language = $request->defaultLanguage;
 
 
-            if ($request->hasFile('profilePic')) {
-                $image = $request->profilePic;
-                // return $image;
-                $profilepic = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                $currentimagepath = public_path('user_Profile/' . $user->pro_pic);
-                $user->pro_pic = $profilepic;
-                if (file_exists($currentimagepath)) {
-                    unlink($currentimagepath);
-                }
-                $image->move(public_path('user_profile/'), $profilepic);
+        if ($request->hasFile('profilePic')) {
+            $image = $request->profilePic;
+            // return $image;
+            $profilepic = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $currentimagepath = public_path('user_Profile/' . $user->pro_pic);
+            $user->pro_pic = $profilepic;
+            if (file_exists($currentimagepath)) {
+                unlink($currentimagepath);
             }
+            $image->move(public_path('user_profile/'), $profilepic);
+        }
 
-            $user->save();
+        $user->save();
 
-            return redirect()->route('user.index')->with('msg', 'User updated successfully!');
+        return redirect()->route('user.index')->with('msg', 'User updated successfully!');
         // } catch (\Exception $e) {
         //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
         // }
@@ -224,8 +226,7 @@ class UserController extends Controller
             unlink($profilepic);
         }
         $user->delete();
-        return redirect()->route('user.index')
-            ->with('msg', 'User deleted successfully');
+        return back()->with('msg', 'User deleted successfully');
     }
 
     public function deactiveindex(Request $request)
@@ -263,6 +264,31 @@ class UserController extends Controller
         $data->status = 'active';
         $data->save();
 
-        return redirect()->route('user.index')->with('msg', 'User activated successfully!');
+        return back()->with('msg', 'User activated successfully!');
+    }
+
+    public function changepassword()
+    {
+        return view('users.changepassword');
+    }
+
+    public function updatepassword(Request $request)
+    {
+        $request->validate([
+            'currentPassword' => 'required|string',
+            'password' => 'required|string|confirmed',
+            'password_confirmation' => 'required|string'
+        ]);
+    
+        $user = User::find(Auth::user()->id);
+    
+        if (!Hash::check($request->currentPassword, $user->password)) {
+            return back()->withErrors(['currentPassword' => 'The current password is incorrect.']);
+        }
+    
+        $user->password = Hash::make($request->password);
+        $user->save();
+    
+        return redirect()->route('home')->with('msg', 'Password Changed Successfully!');
     }
 }

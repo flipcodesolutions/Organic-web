@@ -1,9 +1,16 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Update City</h1>
+    </div>
+    <a class="btn btn-primary" href="{{ route('city_master.index') }}" role="button" >Back </a>
+</div>
+
+<div class="card-body p-0">
     <div class="card shadow-sm bg-body rounded">
-        <div class="card-header">
+        {{-- <div class="card-header">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
                     <h6 class="mb-0">Update City</h6>
@@ -12,7 +19,7 @@
                     <a class="btn btn-primary" href="{{ route('city_master.index') }}" role="button" >Back </a>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="card-body">
             <form action="{{ route('city_master.update',$citymaster->id) }}" method="post" enctype="multipart/form-data" class="form">
                 @csrf
@@ -115,7 +122,7 @@
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Submit </button>
+                        <button type="submit" class="update btn" id="Update"><i class="fa-solid fa-floppy-disk"></i> Update </button>
                     </div>
                 </div>
 

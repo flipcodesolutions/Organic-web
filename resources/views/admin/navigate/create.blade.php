@@ -1,9 +1,16 @@
 @extends('layouts.app')
 @section('header', 'Products Create')
 @section('content')
-    <div class="container">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Create New ScreenName</h1>
+    </div>
+    <a href="{{ route('navigate.index') }}" class="btn btn-primary" type="button"> Back </a>
+</div>
+
+<div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0" style="width: 200px">Create New ScreenName</h6>
@@ -12,7 +19,7 @@
                         <a href="{{ route('navigate.index') }}" class="btn btn-primary" type="button"> Back </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="card-body">
                 <form id="productForm" action="{{ route('navigate.store') }}" method="POST" class="form">

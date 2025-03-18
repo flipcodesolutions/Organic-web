@@ -2,10 +2,17 @@
 @section('header', 'Category')
 @section('content')
 
-    <div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col">
+            <h1 class="h3 mb-0 text-gray-800">Deactive Category</h1>
+        </div>
+        <a href="{{ route('category.index') }}" class="btn btn-primary" type="button"> Back </a>
+    </div>
+
+    <div class="card-body p-0">
 
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0">Deactive Category</h6>
@@ -14,7 +21,7 @@
                         <a href="{{ route('category.index') }}" class="btn btn-primary" type="button"> Back </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="mb-4 margin-bottom-30 m-4">
                 <form action="{{ route('category.deactiveindex') }}" method="GET" class="filter-form">
@@ -43,8 +50,8 @@
 
                         <!-- Submit & Reset Buttons -->
                         <div class="col d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                            <a href="{{ route('category.deactiveindex') }}" class="btn btn-danger">Reset</a>
+                            <button type="submit" class="filter btn">Filter</button>
+                            <a href="{{ route('category.deactiveindex') }}" class="reset btn">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -66,7 +73,7 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>
-                                    {{ $categoryData->categoryName}}
+                                    {{ $categoryData->categoryName }}
                                     {{-- <ul>
                                         <li> {{ $categoryData->categoryName }} </li>
                                         <li> {{ $categoryData->categoryNameGuj }} </li>
@@ -82,23 +89,27 @@
                                     </ul> --}}
                                 </td>
                                 <td>
-                                        {{ $categoryData->parent_category_id }}
+                                    @foreach ($categories as $perentdata)
+                                        @if ($perentdata->id == $categoryData->parent_category_id)
+                                            {{ $perentdata->categoryName }}
+                                        @endif
+                                    @endforeach
+                                    {{-- {{ $categoryData->parent_category_id }} --}}
                                 </td>
                                 <td>
-                                    <img src="{{ asset('categoryImage/' . $categoryData->cat_icon) }}" alt=""
-                                        height="100px" width="150px">
+                                    <img src="{{ asset($categoryData->cat_icon) }}" alt="" height="100px"
+                                        width="150px">
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                    <a href="{{ route('category.active') }}/{{ $categoryData->id }}"
-                                        class="btn btn-primary">
-                                        <i class="fas fa-undo"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
-                                        onclick="openDeleteModal('{{ route('category.delete') }}/{{ $categoryData->id }}')">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </div>
+                                        <a href="{{ route('category.active') }}/{{ $categoryData->id }}" class="edit btn">
+                                            <i class="fas fa-undo"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="delete btn ml-2"
+                                            onclick="openDeleteModal('{{ route('category.delete') }}/{{ $categoryData->id }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
                                     {{-- <a href="{{ route('category.delete') }}/{{ $categoryData->id }}" class="btn btn-danger">
                                         <i class="fas fa-remove"></i>
                                     </a> --}}

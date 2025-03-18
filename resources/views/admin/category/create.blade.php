@@ -1,9 +1,16 @@
 @extends('layouts.app')
 @section('header', 'Category Create')
 @section('content')
-    <div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col">
+            <h1 class="h3 mb-0 text-gray-800">Create New Category</h1>
+        </div>
+        <a href="{{ route('category.index') }}" class="btn btn-primary" type="button"> Back </a>
+    </div>
+
+    <div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0" style="width: 180px">Create New Category</h6>
@@ -12,7 +19,7 @@
                         <a href="{{ route('category.index') }}" class="btn btn-primary" type="button"> Back </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="card-body">
                 <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data" class="form">
@@ -25,7 +32,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="category_name" id="category_name" placeholder="Category Name"
-                                value="{{ old('category_name') }}" class="form-control">
+                                    value="{{ old('category_name') }}" class="form-control">
                                 <label for="">English</label>
                                 <span>
                                     @error('category_name')
@@ -37,7 +44,8 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="category_name_guj" id="category_name"
-                                value="{{ old('category_name_guj') }}" placeholder="Category Name Gujarati" class="form-control">
+                                    value="{{ old('category_name_guj') }}" placeholder="Category Name Gujarati"
+                                    class="form-control">
                                 <label for="">Gujarati</label>
                                 <span>
                                     @error('category_name_guj')
@@ -49,7 +57,8 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="category_name_hin" id="category_name"
-                                value="{{ old('category_name_hin') }}"  placeholder="Category Name Hindi" class="form-control">
+                                    value="{{ old('category_name_hin') }}" placeholder="Category Name Hindi"
+                                    class="form-control">
                                 <label for="">Hindi</label>
                                 <span>
                                     @error('category_name_hin')
@@ -67,8 +76,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="category_des"
-                                 placeholder="Category Description English" id="floatingTextarea">{{ old('category_des') }}</textarea>
+                                <textarea class="ckeditor form-control" name="category_des" placeholder="Category Description English"
+                                    id="floatingTextarea">{{ old('category_des') }}</textarea>
                                 {{-- <input type="text" name="category_des" id="category_name"
                                             placeholder="Category Name" class="form-control">
                                         <label for="">English</label> --}}
@@ -86,8 +95,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="category_des_guj"
-                                 placeholder="Category Description Gujarati" id="floatingTextarea">{{ old('category_des_guj') }}</textarea>
+                                <textarea class="ckeditor form-control" name="category_des_guj" placeholder="Category Description Gujarati"
+                                    id="floatingTextarea">{{ old('category_des_guj') }}</textarea>
                                 {{-- <input type="text" name="category_des_guj" id="category_name"
                                     placeholder="Category Name" class="form-control">
                                 <label for="">Gujarati</label> --}}
@@ -105,8 +114,8 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="category_des_hin"
-                                 placeholder="Category Description Hindi" id="floatingTextarea">{{ old('category_des_hin') }}</textarea>
+                                <textarea class="ckeditor form-control" name="category_des_hin" placeholder="Category Description Hindi"
+                                    id="floatingTextarea">{{ old('category_des_hin') }}</textarea>
                                 {{-- <input type="text" name="category_des_hin" id="category_name"
                                     placeholder="Category Name" class="form-control">
                                 <label for="">Hindi</label> --}}
@@ -125,13 +134,14 @@
                             Image <span class="text-danger">*</span>
                         </div>
                         <div class="col-2" id="imagepreview">
-                            <img id="profilePicPreview" src="{{ asset('defaultimage/default4.jpg') }}" alt="Category Image" height="100px"
-                                width="150px" >
+                            <img id="categoryImagePreview" src="{{ asset('defaultimage/default4.jpg') }}"
+                                alt="Category Image" height="100px" width="150px">
                         </div>
                         <div class="col">
                             <div class="form">
                                 <input type="file" name="category_image" id="category_Image" placeholder="Category Name"
-                                value="{{ old('category_image') }}" class="form-control" onchange="previewImage(event)">
+                                    value="{{ old('category_image') }}" class="form-control"
+                                    onchange="previewImage(event)">
                                 {{-- <label for="">Image</label> --}}
                                 <span>
                                     @error('category_image')
@@ -142,15 +152,48 @@
                         </div>
                     </div>
 
-                    {{-- Parent Category --}}
+                    {{-- is navigate --}}
                     <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Is Navigate
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" name="is_navigate" type="checkbox" value="true"
+                                    id="navigate">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Make Navigation
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- make it parent --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Is Parent
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" name="isparent" type="checkbox" value="0"
+                                    id="flexCheckDefault" checked>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Make it parent
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Parent Category --}}
+                    <div class="row mb-3" id="parentCat" style="display: none">
                         {{-- <div class="form-group"> --}}
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Parent Category
                         </div>
                         <div class="col">
-                            <select class="form-select ddCategory" name="parent_id" value="{{ old('parent_id') }}" class="form-control" style="font-size: 16px; font-weight: 400;">
-                                <option value="0" selected>-- select category --</option>
+                            <select class="form-select ddCategory" name="parent_id" value="{{ old('parent_id') }}"
+                                class="form-control" style="font-size: 16px; font-weight: 400;">
+                                <option value=" " selected disabled>-- select category --</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
                                 @endforeach
@@ -176,8 +219,8 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary"><i
-                                    class="fa-solid fa-floppy-disk"></i> Submit</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i>
+                                Submit</button>
                         </div>
                     </div>
 
@@ -202,7 +245,7 @@
             const reader = new FileReader();
 
             reader.onload = function() {
-                const output = document.getElementById('profilePicPreview');
+                const output = document.getElementById('categoryImagePreview');
                 const outputclass = document.getElementById('imagepreview');
                 output.src = reader.result;
                 // outputclass.style.display = 'flex';
@@ -213,6 +256,22 @@
                 reader.readAsDataURL(file); // Read the file as a Data URL
             }
         }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('flexCheckDefault').addEventListener('change', function() {
+                var parentCat = document.getElementById('parentCat');
+
+                if (!this.checked) {
+                    // If the checkbox is unchecked, show the parentCat element
+                    parentCat.style.display = 'flex';
+                } else {
+                    // If the checkbox is checked, hide the parentCat element
+                    parentCat.style.display = 'none';
+                }
+            });
+        })
     </script>
 
     {{-- <script>

@@ -2,20 +2,27 @@
 @section('header', 'Products')
 @section('content')
 
-    <div class="container">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Products Management</h1>
+    </div>
+    <a class="b1 btn btn-danger mr-1" href="{{ route('product.deactiveindex') }}">Deactivated Products</a>
+    <a class="btn btn-primary" href="{{ route('product.create') }}">Add</a></div>
+
+<div class="card-body p-0">
 
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header d-flex">
+            {{-- <div class="card-header d-flex">
                 <div class="col text-white mt-2">
                     <h6 class="mb-0">Products Management</h6>
                 </div>
                 <div class="heading d-flex row align-items-center">
                     <div class="col d-flex" align="right" style="gap: 3px">
-                        <a class="b1 btn btn-danger" href="{{ route('product.deactiveindex') }}">Deactive Products</a>
+                        <a class="b1 btn btn-danger" href="{{ route('product.deactiveindex') }}">Deactivated Products</a>
                         <a class="btn btn-primary" href="{{ route('product.create') }}">Add</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
 
             <div class="mb-4 margin-bottom-30 m-4">
@@ -69,13 +76,24 @@
                                 <option value="Summer"{{ request('season') == 'Summer' ? 'selected' : '' }}>Summer</option>
                                 <option value="Monsoon"{{ request('season') == 'Monsoon' ? 'selected' : '' }}>Monsoon
                                 </option>
+                                <option value="All"{{ request('season') == 'All' ? 'selected' : '' }}>All</option>
+                            </select>
+                        </div>
+
+                        {{-- is on home --}}
+                        <div class="col">
+                            <label for="season"><b>Is On Home:</b></label>
+                            <select name="is_on_home" id="isOnHome" class="form-select">
+                                <option value="" selected>Select</option>
+                                <option value="yes"{{ request('is_on_home') == 'yes' ? 'selected' : '' }}>Yes</option>
+                                <option value="no"{{ request('is_on_home') == 'no' ? 'selected' : '' }}>No</option>
                             </select>
                         </div>
 
                         <!-- Submit & Reset Buttons -->
                         <div class="col d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                            <a href="{{ route('product.index') }}" class="btn btn-danger">Reset</a>
+                            <button type="submit" class="filter btn">Filter</button>
+                            <a href="{{ route('product.index') }}" class="reset btn">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -174,7 +192,7 @@
                                 </td>
                                 <td>
                                     @if (isset($productData->image) && !empty($productData->image))
-                                        <img src="{{ asset('productImage/' . $productData->image) }}"
+                                        <img src="{{ asset( $productData->image) }}"
                                             alt="" height="80px" width="50px" style="list-style-type:none">
                                         {{-- <img src="{{ asset('productImage/' . $productData->productImages->first()->url) }}"
                                     alt="Product Image" /> --}}
@@ -185,10 +203,10 @@
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{ route('product.edit') }}/{{ $productData->id }}"
-                                            class="btn btn-primary">
+                                            class="edit btn">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        <a href="javascript:void(0)" class="delete btn ml-2"
                                             onclick="openDeactiveModal('{{ route('product.deactive') }}/{{ $productData->id }}')">
                                             <i class="fas fa-trash"></i>
                                         </a>

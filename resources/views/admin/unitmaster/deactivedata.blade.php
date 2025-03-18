@@ -1,10 +1,16 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col">
+            <h1 class="h3 mb-0 text-gray-800">Deactive Units</h1>
+        </div>
+        <a class="btn btn-primary" href="{{ Route('unitmaster.index') }}">Back</a>
+    </div>
 
+    <div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0" style="width: 180px">Deactive Units</h6>
@@ -13,7 +19,7 @@
                         <a class="btn btn-primary" href="{{ Route('unitmaster.index') }}">Back</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- filter --}}
             <div class="mb-4 margin-bottom-30 m-4">
@@ -29,8 +35,8 @@
 
                         <!-- Submit & Reset Buttons -->
                         <div class="col-md-4 d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                            <a href="{{ Route('unitmaster.deactive') }}" class="btn btn-danger">Reset</a>
+                            <button type="submit" class="filter btn">Filter</button>
+                            <a href="{{ Route('unitmaster.deactive') }}" class="reset btn">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -47,15 +53,15 @@
                         $index = 1;
                     @endphp
                     @if (count($data) > 0)
-                        @foreach ($data  as $unitmasters)
+                        @foreach ($data as $unitmasters)
                             <tr>
                                 <td>{{ $index++ }}</td>
                                 <td>{{ $unitmasters->unit }}</td>
                                 <td>
-                                    <a href="{{ Route('unitmaster.active', $unitmasters->id) }}" class="btn btn-primary">
+                                    <a href="{{ Route('unitmaster.active', $unitmasters->id) }}" class="edit btn">
                                         <i class="fas fa-undo"></i>
                                     </a>
-                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                    <a href="javascript:void(0)" class="delete btn ml-2"
                                         onclick="openDeleteModal('{{ Route('unitmaster.permdelete', $unitmasters->id) }}')">
                                         <i class="fas fa-trash"></i>
                                     </a>

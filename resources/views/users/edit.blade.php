@@ -144,20 +144,21 @@
                             Role<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <select class="form-select form-select-lg mb-3" name="role"
-                                aria-label="Large select example">
+                            <select class="form-select form-select-lg mb-3" name="role" aria-label="Large select example"
+                                style="font-size: 16px; font-weight: 400;">
                                 <option selected disabled>--Select user role--</option>
-                                <option value="admin"{{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="manager"{{ $user->role == 'manager' ? 'selected' : '' }}>Manager</option>
-                                <option value="vendor"{{ $user->role == 'vendor' ? 'selected' : '' }}>Vendor</option>
-                                <option value="customer"{{ $user->role == 'customer' ? 'selected' : '' }}>Customer</option>
+                                <option value="Admin"{{ $user->role == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="Customer"{{ $user->role == 'Customer' ? 'selected' : '' }}>Customer</option>
+                                <option value="Manager"{{ $user->role == 'Manager' ? 'selected' : '' }}>Manager</option>
+                                <option value="Vendor"{{ $user->role == 'Vendor' ? 'selected' : '' }}>Vendor</option>
                             </select>
                         </div>
                         <span id="nameError" class="text-danger">
                             @error('role')
                                 {{ $message }}
                             @enderror
-                        </span>                    </div>
+                        </span>
+                    </div>
 
                     {{-- default language --}}
                     <div class="row mb-3">
@@ -166,11 +167,11 @@
                         </div>
                         <div class="col">
                             <select class="form-select form-select-lg mb-3" name="defaultLanguage"
-                                aria-label="Large select example">
+                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                                 <option selected disabled>--Select Default Language--</option>
                                 <option value="English"{{ $user->default_language == 'English' ? 'selected' : '' }}>English
                                 </option>
-                                <option value="Gujarati"{{ $user->default_language == 'Eujarati' ? 'selected' : '' }}>
+                                <option value="Gujarati"{{ $user->default_language == 'Gujarati' ? 'selected' : '' }}>
                                     Gujarati</option>
                                 <option value="Hindi"{{ $user->default_language == 'Hindi' ? 'selected' : '' }}>Hindi
                                 </option>
@@ -186,8 +187,8 @@
                     {{-- submit --}}
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary"><i
-                                    class="fa-solid fa-floppy-disk"></i> Submit</button>
+                            <button type="submit" class="update btn" id="Update"><i
+                                    class="fa-solid fa-floppy-disk"></i> Update</button>
                         </div>
                     </div>
                 </form>

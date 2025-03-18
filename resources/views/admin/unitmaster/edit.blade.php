@@ -1,8 +1,16 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Update New Unit</h1>
+    </div>
+    <a class="btn btn-primary" href="{{ Route('unitmaster.index') }}">Back</a>
+</div>
+
+<div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0" style="width: 180px">Update New Unit</h6>
@@ -11,7 +19,7 @@
                         <a class="btn btn-primary" href="{{ Route('unitmaster.index') }}">Back</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="card-body">
                 <form id="deliveryslotform" method="post" action="{{Route('unitmaster.update',$unitmasters->id)}}" class="form">
@@ -41,8 +49,8 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary"><i
-                                    class="fa-solid fa-floppy-disk"></i> Submit</button>
+                            <button type="submit" class="update btn" id="Update"><i
+                                    class="fa-solid fa-floppy-disk"></i> Update</button>
                         </div>
                     </div>
                 </form>

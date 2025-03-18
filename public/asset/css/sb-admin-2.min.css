@@ -2697,6 +2697,69 @@ fieldset:disabled a.btn {
     border-color: #A4B465 !important;
 }
 
+.update {
+    width: 150px;
+    color: #fff;
+    background-color: #A4B465 !important;
+    border-color: #A4B465 !important;
+}
+
+.update:hover {
+    color: #fff;
+    background-color: #365E32 !important;
+    border-color: #365E32 !important;
+}
+
+.edit {
+    color: #A4B465;
+    background-color: #fff !important;
+    border-color: #A4B465 !important;
+}
+
+.edit:hover{
+    color: #fff;
+    background-color: #365E32 !important;
+    border-color: #365E32 !important;
+}
+
+.delete {
+    color: #e74a3b;
+    background-color: #fff !important;
+    border-color: #e74a3b !important;
+}
+
+.delete:hover{
+    color: #fff;
+    background-color: #e74a3b !important;
+    border-color: #e74a3b !important;
+}
+
+.filter {
+    color: #365E32;
+    background-color: #fff !important;
+    border-color: #365E32 !important;
+}
+
+.filter:hover{
+    color: #fff;
+    background-color: #365E32 !important;
+    border-color: #365E32 !important;
+}
+
+.reset {
+    color: #e74a3b;
+    background-color: #fff !important;
+    border-color: #e74a3b !important;
+}
+
+.reset:hover{
+    color: #fff;
+    background-color: #e74a3b !important;
+    border-color: #e74a3b !important;
+}
+
+
+
 .btn-primary:hover {
     color: #365E32;
     /* background-color: #fff !important; */
@@ -11627,7 +11690,10 @@ a:focus {
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:hover,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover {
-    background-color: #eaecf4
+    color: #fff;
+    font-weight: 700;
+    background-color: #365E32;
+    /* background-color: #eaecf4 */
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
@@ -11637,7 +11703,7 @@ a:focus {
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item.active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
-    color: #4e73df;
+    color: #fff;
     font-weight: 700;
     background-color: #365E32;
 }
@@ -11965,7 +12031,7 @@ a:focus {
 }
 
 .sidebar-dark .nav-item .nav-link i {
-    color: rgba(255, 255, 255, .3);
+    color: #fff;
     margin-right: 20px;
     /* Consistent space between icon and text */
     width: 30px;

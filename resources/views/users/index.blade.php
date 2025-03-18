@@ -9,7 +9,7 @@
                 </div>
                 <div class="heading row align-items-center">
                     <div class="col d-flex align="right" style="gap: 3px">
-                        <a class="btn btn-danger" href="{{ route('user.deactiveindex') }}">Deactive Users</a>
+                        <a class="btn btn-danger" href="{{ route('user.deactiveindex') }}">Deactivated Users</a>
                         <a class="btn btn-primary" href="{{ route('user.create') }}">Add</a>
                     </div>
                 </div>
@@ -32,18 +32,17 @@
                             <label for="role" class="form-label"><b>Role:</b></label>
                             <select id="role" name="role" class="form-select">
                                 <option value="" selected>Select Role</option>
-                                <option value="admin"{{ request('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="manager"{{ request('role') == 'manager' ? 'selected' : '' }}>Manager</option>
-                                <option value="vendor"{{ request('role') == 'vendor' ? 'selected' : '' }}>Vendor</option>
-                                <option value="customer"{{ request('role') == 'customer' ? 'selected' : '' }}>Customer
-                                </option>
+                                <option value="Admin"{{ request('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="Customer"{{ request('role') == 'Customer' ? 'selected' : '' }}>Customer</option>
+                                <option value="Manager"{{ request('role') == 'Manager' ? 'selected' : '' }}>Manager</option>
+                                <option value="Vendor"{{ request('role') == 'Vendor' ? 'selected' : '' }}>Vendor</option>
                             </select>
                         </div>
 
                         <!-- Submit & Reset Buttons -->
                         <div class="col d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                            <a href="{{ route('user.index') }}" class="btn btn-danger">Reset</a>
+                            <button type="submit" class="filter btn">Filter</button>
+                            <a href="{{ route('user.index') }}" class="reset btn">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -75,9 +74,9 @@
                                 <td>{{ $user->default_language }}</td>
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">
+                                        <a href="{{ route('user.edit', $user->id) }}" class="edit btn">
                                             <i class="fas fa-edit"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                        <a href="javascript:void(0)" class="delete btn ml-2"
                                             onclick="openDeactiveModal('{{ route('user.deactive', $user->id) }}')">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>

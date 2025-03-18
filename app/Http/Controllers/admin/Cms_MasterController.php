@@ -117,13 +117,13 @@ class Cms_MasterController extends Controller
         $cms_master->status = 'active';
         $cms_master->save();
 
-        return redirect()->route('cms_master.index')->with('msg', 'CmsMaster Activated Successfully');
+        return back()->with('msg', 'CmsMaster Activated Successfully');
     }
     public function permdelete(string $id)
     {
         $cms_master = Cms_Master::find($id);
         $cms_master->delete();
-        return redirect()->route('cms_master.index')->with('msg', 'CmsMaster Deleted Successfully');
+        return back()->with('msg', 'CmsMaster Deleted Successfully');
     }
 
 }

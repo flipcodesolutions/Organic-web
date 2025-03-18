@@ -14,34 +14,40 @@ class DeliverySlotSeeder extends Seeder
     {
         ModelsDeliverySlot::insert([
             [
+                'id' => '1',
                 'startTime' => '9:30',
                 'endTime' => '6:30',
-                'isAvailable' => 'Available',
+                'isAvailable' => 'yes',
             ],
             [
+                'id' => '2',
                 'startTime' => '9:30',
                 'endTime' => '6:30',
-                'isAvailable' => 'NotAvailable',
+                'isAvailable' => 'no',
             ],
             [
+                'id' => '3',
                 'startTime' => '7:00',
                 'endTime' => '3:00',
-                'isAvailable' => 'Available',
+                'isAvailable' => 'yes',
             ],
             [
+                'id' => '4',
                 'startTime' => '8:00',
                 'endTime' => '5:00',
-                'isAvailable' => 'NotAvailable',
+                'isAvailable' => 'no',
             ],
             [
+                'id' => '5',
                 'startTime' => '10:00',
                 'endTime' => '4:00',
-                'isAvailable' => 'Available',
+                'isAvailable' => 'yes',
             ],
             [
+                'id' => '6',
                 'startTime' => '11:00',
                 'endTime' => '7:00',
-                'isAvailable' => 'NotAvailable',
+                'isAvailable' => 'no',
             ]
         ]);
         

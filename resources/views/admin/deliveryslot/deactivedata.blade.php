@@ -30,20 +30,20 @@
                         <!--isavailable  Filter -->
                         <div class="col">
                             <label for="isavailable" class="form-label"><b>isavailable:</b></label>
-                            <select name="isavailable" id="isavailable" class="form-control">
-                                <option selected disabled>Select your isavailable</option>
-                                <option value="Available" {{ request('isavailable') == 'Available' ? 'selected' : '' }}>
-                                    Available</option>
-                                <option value="NotAvailable"
-                                    {{ request('isavailable') == 'NotAvailable' ? 'selected' : '' }}>
-                                    NotAvailable</option>
+                            <select name="isavailable" id="isavailable" class="form-select">
+                                <option selected>Select your isavailable</option>
+                                <option value="yes" {{ request('isavailable') == 'yes' ? 'selected' : '' }}>
+                                    Yes</option>
+                                <option value="no"
+                                    {{ request('isavailable') == 'no' ? 'selected' : '' }}>
+                                    No</option>
                             </select>
                         </div>
 
                         <!-- Submit & Reset Buttons -->
                         <div class="col-md-4 d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                            <a href="{{ Route('deliveryslot.deactive') }}" class="btn btn-danger">Reset</a>
+                            <button type="submit" class="filter btn">Filter</button>
+                            <a href="{{ Route('deliveryslot.deactive') }}" class="reset btn">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -71,10 +71,10 @@
                                 <td>
                                     <div class="d-flex">
                                     <a href="{{ Route('deliveryslot.active', $deliveryslots->id) }}"
-                                        class="btn btn-primary">
+                                        class="edit btn">
                                         <i class="fas fa-undo"></i>
                                     </a>
-                                    <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                    <a href="javascript:void(0)" class="delete btn ml-2"
                                         onclick="openDeleteModal('{{ Route('deliveryslot.permdelete', $deliveryslots->id) }}')">
                                         <i class="fas fa-trash"></i>
                                     </a>

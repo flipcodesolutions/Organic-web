@@ -2,10 +2,16 @@
 
 @section('content')
 
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Deactive City</h1>
+    </div>
+    <a class="btn btn-primary" href="{{ Route('city_master.index') }}">Back</a>
+</div>
 
-<div class="container">
+<div class="card-body p-0">
     <div class="card shadow-sm  bg-body rounded">
-        <div class="card-header">
+        {{-- <div class="card-header">
             <div class="row d-flex align-items-center">
                 <div class="col text-white">
                     <h6 class="mb-0">Deactive City</h6>
@@ -14,7 +20,7 @@
                     <a class="btn btn-primary" href="{{ Route('city_master.index') }}">Back</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
         <div class="mb-4 margin-bottom-30 m-4">
@@ -29,7 +35,7 @@
                     </div>
 
                     <!-- City Filter -->
-                    <div class="col">
+                    {{-- <div class="col">
                         <label for="cityId" class="form-label"><b>City:</b></label>
                         <select id="cityId" name="cityId" class="form-select">
                             <option value="" selected>Select City</option>
@@ -40,12 +46,12 @@
                                 </option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
 
                     <!-- Submit & Reset Buttons -->
                     <div class="col-md-4 d-flex justify-content-end gap-2">
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                        <a href="{{ route('city_master.deleted') }}" class="btn btn-danger">Reset</a>
+                        <button type="submit" class="filter btn">Filter</button>
+                        <a href="{{ route('city_master.deleted') }}" class="reset btn">Reset</a>
                     </div>
                 </div>
             </form>
@@ -58,11 +64,11 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>City Name (English)</th>
+                        <th>City Name</th>
                         <th>Pincode</th>
-                        <th>Area (English)</th>
-                        <th>Area (Hindi)</th>
-                        <th>Area (Gujarati)</th>
+                        <th>Area</th>
+                        {{-- <th>Area (Hindi)</th>
+                        <th>Area (Gujarati)</th> --}}
                         <th>Status</td>
                         <th>Actions</th>
                     </tr>
@@ -73,17 +79,17 @@
                         <td>{{ $city->city_name_eng }}</td>
                         <td>{{ $city->pincode }}</td>
                         <td>{{ $city->area_eng }}</td>
-                        <td>{{ $city->area_hin }}</td>
-                        <td>{{ $city->area_guj }}</td>
+                        {{-- <td>{{ $city->area_hin }}</td>
+                        <td>{{ $city->area_guj }}</td> --}}
                         <td>{{ $city->status }}</td>
                         <td>
                             <div class="d-flex">
                                 <a href="{{ Route('city_master.active', $city->id) }}"
-                                    class="btn btn-primary">
+                                    class="edit btn">
                                     <i class="fas fa-undo"></i>
                                 </a>
 
-                                <a href="javascript:void(0)" class="btn btn-danger ml-2"
+                                <a href="javascript:void(0)" class="delete btn ml-2"
                                 onclick="openDeleteModal('{{ Route('city_master.destroy', $city->id) }}')">
                                 <i class="fas fa-trash"></i>
                             </a>
