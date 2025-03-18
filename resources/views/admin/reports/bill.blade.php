@@ -40,15 +40,15 @@
             $qty_count=0;
             $item_count=0;
         ?>
-        @foreach ($data->orderDetails as $data)
+        @foreach ($data->orderDetails as $product)
         <tr>
-            <td>{{$data->product->productName}}</td>
-            <td>{{$data->price}}</td>
-            <td>{{$data->qty}}</td>
-            <td>{{$data->total}}</td>
+            <td>{{$product->product->productName}}</td>
+            <td>{{$product->price}}</td>
+            <td>{{$product->qty}}</td>
+            <td>{{$product->total}}</td>
             <?php
                 $item_count++;
-                $qty_count=$qty_count+$data->qty;
+                $qty_count=$qty_count+$product->qty;
             ?>
         </tr>
         <tr>
@@ -59,8 +59,15 @@
         </tr>
         @endforeach
         <tr>
-            <td colspan=3>Total</td>
+            <td colspan=3>Total order Amount</td>
             <td>{{$data->total_order_amt}}</td>
+        </tr><tr>
+            <td colspan=3>Discount</td>
+            <td>{{$data->dis_amt_point}}</td>
+        </tr>
+        <tr>
+            <td colspan=3>Total Bill Amount</td>
+            <td>{{$data->total_bill_amt}}</td>
         </tr>
         <tr>
             <td colspan="4" align="center">

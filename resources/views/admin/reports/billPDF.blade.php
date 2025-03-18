@@ -42,15 +42,25 @@
             <th>Quantity</th>
             <th>Amount</th>
         </tr>
-        @foreach ($data->orderDetails as $data)
+        @foreach ($data->orderDetails as $product)
         <tr>
-            <td>{{$data->product->productName}}</td>
-            <td>{{$data->price}}</td>
-            <td>{{$data->qty}}</td>
-            <td>{{$data->total}}</td>
+            <td>{{$product->product->productName}}</td>
+            <td>{{$product->price}}</td>
+            <td>{{$product->qty}}</td>
+            <td>{{$product->total}}</td>
         </tr>
         @endforeach
-        
+        <tr>
+            <td colspan=3>Total order Amount</td>
+            <td>{{$data->total_order_amt}}</td>
+        </tr><tr>
+            <td colspan=3>Discount</td>
+            <td>{{$data->dis_amt_point}}</td>
+        </tr>
+        <tr>
+            <td colspan=3>Total Bill Amount</td>
+            <td>{{$data->total_bill_amt}}</td>
+        </tr>
     </table>
 
 </body>
