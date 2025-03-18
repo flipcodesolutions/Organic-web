@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('password')->nullable();
             $table->string('phone')->nullable();
-            $table->enum('role', ['admin', 'customer', 'vendor', 'manager'])->default('customer')->nullable();
+            $table->enum('role', ['Admin', 'Customer', 'Manager', 'vendor'])->default('Customer')->nullable();
             $table->string('pro_pic')->nullable();
             $table->enum('is_verfiy_email', ['yes', 'no'])->default('no')->nullable();
             $table->enum('is_verify_phone', ['yes', 'no'])->default('no')->nullable();

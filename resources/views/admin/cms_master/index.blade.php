@@ -1,9 +1,17 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container ">
 
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">CmsMaster Management</h1>
+    </div>
+    <a class="b1 btn btn-danger mr-1" href="{{ Route('cms_master.deactive') }}">Deactivated CmsMasters</a>
+    <a class="btn btn-primary" href="{{ Route('cms_master.create') }}">Add</a>
+</div>
+
+<div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header d-flex">
+            {{-- <div class="card-header d-flex">
                 <div class="col text-white mt-2">
                     <h6 class="mb-0">CmsMaster Management</h6>
                 </div>
@@ -13,8 +21,8 @@
                         <a class="btn btn-primary" href="{{ Route('cms_master.create') }}">Add</a>
                     </div>
                 </div>
-            </div>
-            <adiv class="card-body table-responsive">
+            </div> --}}
+            <div class="card-body table-responsive">
                 <div class="loader"></div>
                 <table class="table table-bordered mt-2">
                     <tr>

@@ -1,21 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header d-flex">
-                {{-- <div class="row d-flex align-items-center"> --}}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Landmark Management</h1>
+    </div>
+    <a class="b1 btn btn-danger mr-1" href="{{ Route('landmark.deleted') }}">Deactivated Landmarks</a>
+    <a href="{{ route('landmark.create') }}" class="btn btn-primary">Add</a>
+</div>
+
+<div class="card-body p-0">
+    <div class="card shadow-sm  bg-body rounded">
+            {{-- <div class="card-header d-flex">
                 <div class="col text-white mt-2">
                     <h6 class="mb-0">Landmark Management</h6>
                 </div>
                 <div class="heading row align-items-center">
                     <div class="col d-flex align="right" style="gap: 3px">
                         <a class="b1 btn btn-danger" href="{{ Route('landmark.deleted') }}">Deactivated Landmarks</a>
-
                         <a href="{{ route('landmark.create') }}" class="btn btn-primary">Add</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- filter --}}
             <div class="mb-4 margin-bottom-30 m-4">

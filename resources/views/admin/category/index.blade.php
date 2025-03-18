@@ -2,10 +2,20 @@
 @section('header', 'Category')
 @section('content')
 
-    <div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col">
+            <h1 class="h3 mb-0 text-gray-800">Category Management</h1>
+        </div>
+        <a class="b1 btn btn-danger mr-1" href="{{ route('category.deactiveindex') }}">Deactivated Categories
+        </a>
+        <a class="btn btn-primary" href="{{ route('category.create') }}">Add</a>
+    </div>
+
+    {{-- <div class="container"> --}}    <div class="card-body p-0">
+
 
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header d-flex">
+            {{-- <div class="card-header d-flex">
                 <div class="col text-white mt-2">
                     <h6 class="mb-0">Category Management</h6>
                 </div>
@@ -17,7 +27,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- filter --}}
             <div class="mb-4 margin-bottom-30 m-4">
@@ -37,7 +47,8 @@
                             <select id="parentCategoryId" name="parentCategoryId" class="form-select">
                                 <option value="" selected>Select Parent Category</option>
                                 @foreach ($categories as $categorydata)
-                                    <option value="{{ $categorydata->id }}"{{ request('parentCategoryId') == $categorydata->id ? 'selected' : '' }}>
+                                    <option
+                                        value="{{ $categorydata->id }}"{{ request('parentCategoryId') == $categorydata->id ? 'selected' : '' }}>
                                         {{ $categorydata->categoryName }}
                                     </option>
                                 @endforeach
@@ -97,13 +108,12 @@
                                     {{-- @endif --}}
                                 </td>
                                 <td>
-                                    <img src="{{ asset($categoryData->cat_icon) }}" alt=""
-                                        height="100px" width="150px">
+                                    <img src="{{ asset($categoryData->cat_icon) }}" alt="" height="100px"
+                                        width="150px">
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{ route('category.edit') }}/{{ $categoryData->id }}"
-                                            class="edit btn">
+                                        <a href="{{ route('category.edit') }}/{{ $categoryData->id }}" class="edit btn">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="javascript:void(0)" class="delete btn ml-2"

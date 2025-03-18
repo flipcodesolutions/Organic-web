@@ -35,7 +35,7 @@ class LandmarkMasterController extends Controller
 
 
             $data = $query->where('status', 'active')->with('citymaster')->paginate(10);
-            $cities = CityMaster::where('status', 'active')->get();
+            $cities = CityMaster::where('status', 'active')->orderBy('city_name_eng', 'asc')->get();
             // $landmarkmasters = LandmarkMaster::where('status', 'active')->select('id', 'landmark_eng')->get();
             return view('admin.landmark_master.index', compact('data', 'cities'));
         } catch (Exception $e) {
@@ -178,7 +178,7 @@ class LandmarkMasterController extends Controller
             }
 
             $data = $query->where('status', 'deactive')->with('citymaster')->paginate(10);
-            $cities = CityMaster::where('status', 'active')->get();
+            $cities = CityMaster::where('status', 'active')->orderBy('city_name_eng', 'asc')->get();
 
             // $landmarkmasters = LandmarkMaster::where('status', 'deactive')->paginate(10);
             return view('admin.landmark_master.deleted', compact('data','cities'))->with('msg', 'Landmark Deleted Successfully');

@@ -30,7 +30,7 @@ class CategoryController extends Controller
         }
 
         $data = $query->where('status', 'active')->paginate(10);
-        $categories = Category::where([['status', '=', 'active'], ['parent_category_id', '=', 0]])->get();
+        $categories = Category::where([['status', '=', 'active'], ['parent_category_id', '=', 0]])->orderBy('categoryName', 'asc')->get();
         return view('admin.category.index', compact('data', 'categories'));
         // } catch (\Exception $e) {
 
@@ -248,7 +248,7 @@ class CategoryController extends Controller
         }
 
         $data = $query->where('status', 'deactive')->paginate(10);
-        $categories = Category::where([['status', '=', 'active'], ['parent_category_id', '=', 0]])->get();
+        $categories = Category::where([['status', '=', 'active'], ['parent_category_id', '=', 0]])->orderBy('categoryName', 'asc')->get();
         return view('admin.category.deactive', compact('data', 'categories'));
         // } catch (\Exception $e) {
 

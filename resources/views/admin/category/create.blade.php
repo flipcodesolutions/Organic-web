@@ -1,9 +1,16 @@
 @extends('layouts.app')
 @section('header', 'Category Create')
 @section('content')
-    <div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col">
+            <h1 class="h3 mb-0 text-gray-800">Create New Category</h1>
+        </div>
+        <a href="{{ route('category.index') }}" class="btn btn-primary" type="button"> Back </a>
+    </div>
+
+    <div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0" style="width: 180px">Create New Category</h6>
@@ -12,7 +19,7 @@
                         <a href="{{ route('category.index') }}" class="btn btn-primary" type="button"> Back </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="card-body">
                 <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data" class="form">
@@ -127,8 +134,8 @@
                             Image <span class="text-danger">*</span>
                         </div>
                         <div class="col-2" id="imagepreview">
-                            <img id="categoryImagePreview" src="{{ asset('defaultimage/default4.jpg') }}" alt="Category Image"
-                                height="100px" width="150px">
+                            <img id="categoryImagePreview" src="{{ asset('defaultimage/default4.jpg') }}"
+                                alt="Category Image" height="100px" width="150px">
                         </div>
                         <div class="col">
                             <div class="form">
@@ -152,11 +159,12 @@
                         </div>
                         <div class="col">
                             <div class="form-check">
-                                <input class="form-check-input" name="is_navigate" type="checkbox" value="true" id="navigate">
+                                <input class="form-check-input" name="is_navigate" type="checkbox" value="true"
+                                    id="navigate">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Make Navigation
                                 </label>
-                              </div>
+                            </div>
                         </div>
                     </div>
 
