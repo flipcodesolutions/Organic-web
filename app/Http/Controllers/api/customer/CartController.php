@@ -63,9 +63,16 @@ class CartController extends Controller
     public function cartList(Request $request)
     {
         try {
+            $language = Auth::user()->default_language;
+            $productEnglishFields = ['*', 'productName as displayName', 'productDescription as displayDescription'];
+            $productGujaratiFields = ['*', 'productNameGUj as displayName', 'productDescriptionGuj as displayDescription'];
+            $productHindiFields = ['*', 'productNameHin as displayName', 'productDescriptionHin as displayDescription'];
+
             // $currentPage = $request->input('page', 1);
             $carts = AddToCart::where('userId', Auth::user()->id)
-                ->with('products')
+                ->with('products', function ($query) use ($productEnglishFields, $productGujaratiFields, $productHindiFields, $language) {
+                    $query->select($language == 'Hindi' ? $productHindiFields : ($language == 'Gujarati' ? $productGujaratiFields : $productEnglishFields));
+                })
                 ->get();
             return Util::getSuccessMessage('Cart List', $carts);
         } catch (Exception $e) {
