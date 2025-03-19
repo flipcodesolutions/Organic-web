@@ -63,10 +63,10 @@ class CartController extends Controller
     public function cartList(Request $request)
     {
         try {
-            $currentPage = $request->input('page', 1);
+            // $currentPage = $request->input('page', 1);
             $carts = AddToCart::where('userId', Auth::user()->id)
                 ->with('products')
-                ->paginate($request->input('limit', 10), ['*'], 'page', $currentPage);
+                ->get();
             return Util::getSuccessMessage('Cart List', $carts);
         } catch (Exception $e) {
             return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
