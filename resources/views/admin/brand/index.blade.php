@@ -2,22 +2,28 @@
 @section('header', 'Category')
 @section('content')
 
-    <div class="container">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Brand Management</h1>
+    </div>
+    <a class="b1 btn btn-danger mr-1" href="{{ route('brand.deactiveindex') }}">Deactivated Brands</a>
+    <a class="btn btn-primary" href="{{ route('brand.create') }}">Add</a>
+</div>
 
+<div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header d-flex">
+            {{-- <div class="card-header d-flex">
                 <div class="col text-white mt-2">
                     <h6 class="mb-0">Brand Management</h6>
                 </div>
                 <div class="heading row align-items-center">
                     <div class="col d-flex align="right" style="gap: 3px">
-                        <a class="b1 btn btn-danger" href="{{ route('brand.deactiveindex') }}">Deactivated Brands
-                        </a>
+                        <a class="b1 btn btn-danger" href="{{ route('brand.deactiveindex') }}">Deactivated Brands</a>
                         <a class="btn btn-primary" href="{{ route('brand.create') }}">Add</a>
 
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- filter --}}
             <div class="mb-4 margin-bottom-30 m-4">

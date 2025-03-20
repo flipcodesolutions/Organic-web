@@ -1,10 +1,18 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="container">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">FAQs Management</h1>
+    </div>
+    <a class="btn btn-danger mr-1" href="{{ Route('faq.deactive') }}">Deactivated FAQs</a>
+    <a class="btn btn-primary" href="{{ Route('faq.create') }}">Add</a>
+</div>
+
+<div class="card-body p-0">
 
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header d-flex">
+            {{-- <div class="card-header d-flex">
                 <div class="col text-white mt-2">
                     <h6 class="mb-0">FAQs Management</h6>
                 </div>
@@ -14,7 +22,7 @@
                         <a class="btn btn-primary" href="{{ Route('faq.create') }}">Add</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <adiv class="card-body table-responsive">
                 <div class="loader"></div>
                 <table class="table table-bordered mt-2">

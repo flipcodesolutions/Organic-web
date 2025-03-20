@@ -1,10 +1,17 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="container">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">DeliverySlots Management</h1>
+    </div>
+    <a class="b1 btn btn-danger mr-1" href="{{ Route('deliveryslot.deactive') }}">Deactivated DeliverySlots</a>
+    <a class="btn btn-primary" href="{{ Route('deliveryslot.create') }}">Add</a>
+</div>
 
+<div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header d-flex">
+            {{-- <div class="card-header d-flex">
                 <div class="col text-white mt-2">
                     <h6 class="mb-0">DeliverySlots Management</h6>
                 </div>
@@ -14,7 +21,7 @@
                         <a class="btn btn-primary" href="{{ Route('deliveryslot.create') }}">Add</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- filter --}}
             <div class="mb-4 margin-bottom-30 m-4">
@@ -31,8 +38,8 @@
                         <!--isavailable  Filter -->
                         <div class="col">
                             <label for="isavailable" class="form-label"><b>isavailable:</b></label>
-                            <select name="isavailable" id="isavailable" class="form-control">
-                                <option selected disabled>Select your isavailable</option>
+                            <select name="isavailable" id="isavailable" class="form-select">
+                                <option selected>Select your isavailable</option>
                                 <option value="yes" {{ request('isavailable') == 'yes' ? 'selected' : '' }}>
                                     Yes</option>
                                 <option value="no"

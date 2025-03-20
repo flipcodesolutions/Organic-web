@@ -1,8 +1,16 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Create New User</h1>
+    </div>
+    <a class="btn btn-primary" href="{{ Route('user.index') }}">Back</a>
+</div>
+
+<div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0">Create New User</h6>
@@ -11,7 +19,7 @@
                         <a class="btn btn-primary" href="{{ Route('user.index') }}">Back</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="card-body">
                 <form method="post" action="{{ Route('user.store') }}" enctype="multipart/form-data" class="form">
@@ -151,11 +159,10 @@
                             <select class="form-select form-select-lg mb-3" name="role"
                                 aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                                 <option selected disabled>--Select user role--</option>
-                                <option value="admin"{{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="manager"{{ old('role') == 'manager' ? 'selected' : '' }}>Manager</option>
-                                <option value="vendor"{{ old('role') == 'vendor' ? 'selected' : '' }}>Vendor</option>
-                                <option value="customer"{{ old('role') == 'customer' ? 'selected' : '' }}>Customer
-                                </option>
+                                <option value="Admin"{{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="Customer"{{ old('role') == 'Customer' ? 'selected' : '' }}>Customer</option>
+                                <option value="Manager"{{ old('role') == 'Manager' ? 'selected' : '' }}>Manager</option>
+                                <option value="Vendor"{{ old('role') == 'Vendor' ? 'selected' : '' }}>Vendor</option>
                             </select>
                             <span id="nameError" class="text-danger">
                                 @error('role')
@@ -191,7 +198,7 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary"><i
+                            <button type="submit" class="submit btn"><i
                                     class="fa-solid fa-floppy-disk"></i> Submit</button>
                         </div>
                     </div>

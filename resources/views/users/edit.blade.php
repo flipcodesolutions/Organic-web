@@ -1,8 +1,16 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Edit UserInfo</h1>
+    </div>
+    <a class="btn btn-primary" href="{{ Route('user.index') }}">Back</a>
+</div>
+
+<div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0">Update New UserInfo</h6>
@@ -11,7 +19,7 @@
                         <a class="btn btn-primary" href="{{ Route('user.index') }}">Back</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="card-body">
                 <form method="post" action="{{ route('user.update', $user->id) }}" enctype="multipart/form-data"
@@ -144,20 +152,21 @@
                             Role<span class="text-danger">*</span>
                         </div>
                         <div class="col">
-                            <select class="form-select form-select-lg mb-3" name="role"
-                                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
+                            <select class="form-select form-select-lg mb-3" name="role" aria-label="Large select example"
+                                style="font-size: 16px; font-weight: 400;">
                                 <option selected disabled>--Select user role--</option>
-                                <option value="admin"{{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="manager"{{ $user->role == 'manager' ? 'selected' : '' }}>Manager</option>
-                                <option value="vendor"{{ $user->role == 'vendor' ? 'selected' : '' }}>Vendor</option>
-                                <option value="customer"{{ $user->role == 'customer' ? 'selected' : '' }}>Customer</option>
+                                <option value="Admin"{{ $user->role == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="Customer"{{ $user->role == 'Customer' ? 'selected' : '' }}>Customer</option>
+                                <option value="Manager"{{ $user->role == 'Manager' ? 'selected' : '' }}>Manager</option>
+                                <option value="Vendor"{{ $user->role == 'Vendor' ? 'selected' : '' }}>Vendor</option>
                             </select>
                         </div>
                         <span id="nameError" class="text-danger">
                             @error('role')
                                 {{ $message }}
                             @enderror
-                        </span>                    </div>
+                        </span>
+                    </div>
 
                     {{-- default language --}}
                     <div class="row mb-3">
@@ -170,7 +179,7 @@
                                 <option selected disabled>--Select Default Language--</option>
                                 <option value="English"{{ $user->default_language == 'English' ? 'selected' : '' }}>English
                                 </option>
-                                <option value="Gujarati"{{ $user->default_language == 'Eujarati' ? 'selected' : '' }}>
+                                <option value="Gujarati"{{ $user->default_language == 'Gujarati' ? 'selected' : '' }}>
                                     Gujarati</option>
                                 <option value="Hindi"{{ $user->default_language == 'Hindi' ? 'selected' : '' }}>Hindi
                                 </option>

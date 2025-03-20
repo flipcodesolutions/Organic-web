@@ -1,9 +1,16 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
 
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Deactivated Users</h1>
+    </div>
+    <a class="btn btn-primary" href="{{ Route('user.index') }}">Back</a>
+</div>
+
+<div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0">Deactive Users</h6>
@@ -12,7 +19,7 @@
                         <a class="btn btn-primary" href="{{ Route('user.index') }}">Back</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- filter --}}
             <div class="mb-4 margin-bottom-30 m-4">
@@ -31,11 +38,10 @@
                             <label for="role" class="form-label"><b>Role:</b></label>
                             <select id="role" name="role" class="form-select">
                                 <option value="" selected>Select Role</option>
-                                <option value="admin"{{ request('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="manager"{{ request('role') == 'manager' ? 'selected' : '' }}>Manager</option>
-                                <option value="vendor"{{ request('role') == 'vendor' ? 'selected' : '' }}>Vendor</option>
-                                <option value="customer"{{ request('role') == 'customer' ? 'selected' : '' }}>Customer
-                                </option>
+                                <option value="Admin"{{ request('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="Customer"{{ request('role') == 'Customer' ? 'selected' : '' }}>Customer</option>
+                                <option value="Manager"{{ request('role') == 'Manager' ? 'selected' : '' }}>Manager</option>
+                                <option value="Vendor"{{ request('role') == 'Vendor' ? 'selected' : '' }}>Vendor</option>
                             </select>
                         </div>
 

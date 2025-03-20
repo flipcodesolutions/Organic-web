@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use function PHPUnit\Framework\fileExists;
 
@@ -81,8 +83,8 @@ class UserController extends Controller
             'role' => 'required',
             'defaultLanguage' => 'required',
             'profilePic' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'password' => 'required|string|min:8|confirmed', // 'confirmed' will automatically validate if password and confirm-password match
-            'password_confirmation' => 'required|string|min:8'
+            'password' => 'required|string|confirmed', // 'confirmed' will automatically validate if password and confirm-password match
+            'password_confirmation' => 'required|string'
         ]);
 
         // try {
@@ -263,5 +265,30 @@ class UserController extends Controller
         $data->save();
 
         return back()->with('msg', 'User activated successfully!');
+    }
+
+    public function changepassword()
+    {
+        return view('users.changepassword');
+    }
+
+    public function updatepassword(Request $request)
+    {
+        $request->validate([
+            'currentPassword' => 'required|string',
+            'password' => 'required|string|confirmed',
+            'password_confirmation' => 'required|string'
+        ]);
+    
+        $user = User::find(Auth::user()->id);
+    
+        if (!Hash::check($request->currentPassword, $user->password)) {
+            return back()->withErrors(['currentPassword' => 'The current password is incorrect.']);
+        }
+    
+        $user->password = Hash::make($request->password);
+        $user->save();
+    
+        return redirect()->route('home')->with('msg', 'Password Changed Successfully!');
     }
 }

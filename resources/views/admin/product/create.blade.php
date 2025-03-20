@@ -1,9 +1,17 @@
 @extends('layouts.app')
 @section('header', 'Products Create')
 @section('content')
-    <div class="container">
-        <div class="card shadow-sm  bg-body rounded">
-            <div class="card-header">
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Create New Products</h1>
+    </div>
+    <a href="{{ route('product.index') }}" class="btn btn-primary" type="button"> Back </a>
+</div>
+
+<div class="card-body p-0">
+    <div class="card shadow-sm  bg-body rounded">
+            {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
                         <h6 class="mb-0" style="width: 200px">Create New Products</h6>
@@ -12,7 +20,7 @@
                         <a href="{{ route('product.index') }}" class="btn btn-primary" type="button"> Back </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="card-body">
                 <form id="productForm" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data"
@@ -194,6 +202,8 @@
                                             <div class="form-floating">
                                                 <input type="text" name="price[]" placeholder="Product Price"
                                                     value="{{ old('price.0') }}" class="form-control">
+                                                    <i class="fa-solid fa-indian-rupee-sign position-absolute"
+                                                    style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                                                 <label for="">Product Price</label>
                                                 <span class="text-danger" id="productPriceError1"></span>
                                                 {{-- <span>
@@ -208,6 +218,8 @@
                                                 <input type="text" name="discount_per[]"
                                                     value="{{ old('discount_per.0') }}" placeholder="Discount Percentage"
                                                     min="1" max="100" class="form-control">
+                                                    <i class="fa-solid fa-percent position-absolute"
+                                                    style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                                                 <label for="">Discount Per</label>
                                                 <span class="text-danger" id="disPerError1"></span>
                                                 {{-- <span>
@@ -221,6 +233,8 @@
                                             <div class="form-floating">
                                                 <input type="text" name="selling_price[]" placeholder="Selling Price"
                                                     value="{{ old('selling_price.0') }}" class="form-control">
+                                                    <i class="fa-solid fa-indian-rupee-sign position-absolute"
+                                                    style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                                                 <label for="">Selling Price</label>
                                                 <span class="text-danger" id="sellPriceError1"></span>
                                                 {{-- <span>
@@ -498,7 +512,7 @@
 
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary"><i
+                        <button type="submit" class="submit btn"><i
                                 class="fa-solid fa-floppy-disk"></i>
                             Submit</button>
                     </div>
@@ -888,7 +902,7 @@
                 newRow.innerHTML = `
             <td>
                 <select class="form-select form-select-lg mb-3" name="unit_id[]"
-                aria-label="Large select example">
+                aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                     <option selected disabled>Select Unit</option>
                     @foreach ($units as $data)
                         <option value="{{ $data->id }}" ${unitIdValue === '{{ $data->id }}' ? 'selected' : ''}>
@@ -910,6 +924,8 @@
                 <div class="form-floating">
                     <input type="number" name="price[]" value="${priceValue || ''}"
                     placeholder="Product Price" class="form-control">
+                    <i class="fa-solid fa-indian-rupee-sign position-absolute"
+                    style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                     <label for="">Product Price</label>
                     <span class="text-danger" id="productPriceError${rowCounter}"></span>
                 </div>
@@ -919,6 +935,8 @@
                     <input type="number" name="discount_per[]"
                     value="${discountPerValue || ''}"
                     placeholder="Discount Percentage" class="form-control">
+                    <i class="fa-solid fa-percent position-absolute"
+                    style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                     <label for="">Discount Per</label>
                     <span class="text-danger" id="disPerError${rowCounter}"></span>
                 </div>
@@ -927,6 +945,8 @@
                 <div class="form-floating">
                     <input type="number" name="selling_price[]" value="${sellingPriceValue || ''}"
                     placeholder="Selling Price" class="form-control">
+                    <i class="fa-solid fa-indian-rupee-sign position-absolute"
+                    style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                     <label for="">Selling Price</label>
                     <span class="text-danger" id="sellPriceError${rowCounter}"></span>
                 </div>
