@@ -60,11 +60,6 @@
                             <td>{{ $key + 1 }}</td>
                             <td>
                                 {{ $unitData->unitMaster->unit }}
-                                {{-- <ul>
-                                    <li> {{ $categoryData->categoryName }} </li>
-                                    <li> {{ $categoryData->categoryNameGuj }} </li>
-                                    <li> {{ $categoryData->categoryNameHin }} </li>
-                                </ul> --}}
                             </td>
                             <td>{{ $unitData->price }}</td>
                             <td>{{ $unitData->detail }}</td>
@@ -76,13 +71,10 @@
                                         class="edit btn">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    {{-- <a href="javascript:void(0)" class="delete btn ml-2"
+                                    <a href="javascript:void(0)" class="delete btn ml-2"
                                         onclick="openDeactiveModal('{{ route('unit.delete') }}/{{ $unitData->id }}')">
                                         <i class="fas fa-trash"></i>
-                                    </a> --}}
-                                    {{-- <a href="{{ route('category.deactive') }}/{{ $categoryData->id }}" class="btn btn-danger">
-                                    <i class="fas fa-remove"></i>
-                                </a> --}}
+                                    </a>
                                 </div>
                             </td>
                         </tr>

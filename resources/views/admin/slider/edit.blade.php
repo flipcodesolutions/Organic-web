@@ -1,14 +1,13 @@
 @extends('layouts.app')
 @section('content')
-
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <div class="col">
-        <h1 class="h3 mb-0 text-gray-800">Edit Slider</h1>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col">
+            <h1 class="h3 mb-0 text-gray-800">Edit Slider</h1>
+        </div>
+        <a class="btn btn-primary" href="{{ Route('slider.index') }}">Back</a>
     </div>
-    <a class="btn btn-primary" href="{{ Route('slider.index') }}">Back</a>
-</div>
 
-<div class="card-body p-0">
+    <div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
             {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
@@ -123,7 +122,7 @@
                                             {{ $slider->is_navigate == 1 ? 'checked' : '' }} name="is_navigate"
                                             id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
-
+                                            Make Navigation
                                         </label>
                                         {{-- <span>
                                             @error('is_navigate')
@@ -190,7 +189,8 @@
                 // Show navigatemaster field
                 navigatemasterField.style.display = 'flex';
                 // Reset the dropdown to show the placeholder
-                navigatemasterSelect.selectedIndex =  0; // This will select the first option, which is the placeholder
+                navigatemasterSelect.selectedIndex =
+                0; // This will select the first option, which is the placeholder
             } else {
                 // Hide navigatemaster field and reset its value
                 navigatemasterField.style.display = 'none';

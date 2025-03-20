@@ -156,9 +156,9 @@
 
                 // Calculate the selling price based on the price and discount percentage
                 let sellingValue = price - (price * discountPercentage) / 100;
-
+                sellingValue = Math.round(sellingValue);
                 // Set the calculated value as the value of the selling price input field
-                sellPrice.value = sellingValue.toFixed(2); // Display result with 2 decimal places
+                sellPrice.value = sellingValue; // Display result with 2 decimal places
             }
 
             // Attach event listeners to the price and discount percentage inputs to trigger the calculation

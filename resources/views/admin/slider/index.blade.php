@@ -53,9 +53,9 @@
                             <select name="slider_pos" id="slider_pos" class="form-control">
                                 <option selected disabled>Select your SliderPosition</option>
                                 <option value="top"{{ request('slider_pos') == 'top' ? 'selected' : '' }}>Top</option>
-                                <option value="bottom"{{ request('slider_pos') == 'bottom' ? 'selected' : '' }}>Bottom
-                                </option>
                                 <option value="middle"{{ request('slider_pos') == 'middle' ? 'selected' : '' }}>Middle
+                                </option>
+                                <option value="bottom"{{ request('slider_pos') == 'bottom' ? 'selected' : '' }}>Bottom
                                 </option>
                             </select>
                         </div>

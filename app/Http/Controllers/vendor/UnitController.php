@@ -70,6 +70,12 @@ class UnitController extends Controller
     public function update(Request $request, string $id)
     {
         // return $request;
+        $request->validate([
+            'price' => 'required|numeric',
+            'unitDetails' => 'required',
+            'desPer' => 'required|numeric|between:1,100',
+            'sellingPrice' => 'required|numeric'
+        ]);
         $unit = Unit::find($id);
         $unit->price = $request->price;
         $unit->detail = $request->unitDetails;

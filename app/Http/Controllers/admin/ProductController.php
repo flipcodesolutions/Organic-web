@@ -564,4 +564,30 @@ class ProductController extends Controller
         //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
         // }
     }
+
+    public function stockindex(Request $request)
+    {
+        $query= Product::query();
+        $data = collect();
+
+        if ($request->filled('productId')) {
+            $query->where('id', $request->productId);
+            $data = $query->get();
+        }
+
+        $product = Product::where('status','active')->get();
+        return view('admin.product.stockindex',compact('product','data'));
+    }
+
+    public function stockupdate(Request $request,$id)
+    {
+        $request->validate([
+            'product_stock' => 'required'
+        ]);
+        $stock = Product::find($id);
+        $stock->stock = $request->product_stock;
+        $stock->save();
+
+        return redirect()->route('stock.index')->with('msg','Product Stock Updated Successfully!');
+    }
 }

@@ -53,6 +53,9 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('product/delete/{id?}','destroy')->name('product.delete');
     Route::get('product/image/delete/{id?}','destroyimage')->name('productimage.delete');
     Route::get('product/unit/delete/{id?}','destroyunit')->name('productunit.delete');
+    // for stock update
+    Route::get('stock/index','stockindex')->name('stock.index');
+    Route::post('stock/update/{id?}','stockupdate')->name('stock.update');
 });
 
 // Navigate route
