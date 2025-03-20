@@ -169,6 +169,11 @@
                                         <i class="fa fa-carrot"></i>
                                         <span>Products</span></a>
 
+                                    {{-- purchase --}}
+                                    <a class="collapse-item" href="{{ route('purchases.index') }}">
+                                        <i class="fa fa-purchase"></i>
+                                        <span>Purchases</span></a>
+
                                     {{-- review --}}
                                     <a class="collapse-item" href="{{ route('vendor.reviews.index') }}">
                                         <i class="fa fa-comment"></i>

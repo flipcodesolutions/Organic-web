@@ -14,7 +14,8 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        //
+        $purchases = Purchase::where('status', '!=', 'deleted')->get();
+        return view('vendor.purchases.index', compact('purchases'));
     }
 
     /**
@@ -22,7 +23,7 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        //
+        return view('vendor.purchases.create');
     }
 
     /**
@@ -30,7 +31,15 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'product_id' => 'required|integer',
+            'date' => 'required|date',
+            'price' => 'required|integer',
+            'qty' => 'required|integer',
+        ]);
+
+        Purchase::create($request->all());
+        return redirect()->route('purchases.index')->with('msg', 'Purchase added successfully.');
     }
 
     /**
@@ -38,7 +47,7 @@ class PurchaseController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
@@ -46,7 +55,8 @@ class PurchaseController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $purchase = Purchase::findOrFail($id);
+        return view('vendor.purchases.edit', compact('purchase'));
     }
 
     /**
@@ -54,7 +64,16 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'product_id' => 'required|integer',
+            'date' => 'required|date',
+            'price' => 'required|integer',
+            'qty' => 'required|integer',
+        ]);
+
+        $purchase = Purchase::findOrFail($id);
+        $purchase->update($request->all());
+        return redirect()->route('purchases.index')->with('msg', 'Purchase updated successfully.');
     }
 
     /**
@@ -62,8 +81,14 @@ class PurchaseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $purchase = Purchase::findOrFail($id);
+        $purchase->update(['status' => 'deleted']);
+        return redirect()->route('purchases.index')->with('msg', 'Purchase deleted successfully.');
     }
+
+
+
+
     public function purchaseDateWIse(){
         return view('admin.reports.purchaseDateWise');
     }

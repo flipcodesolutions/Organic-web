@@ -9,6 +9,7 @@ use App\Http\Controllers\vendor\VendorReviewController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
+use App\Http\Controllers\vendor\PurchaseController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -46,5 +47,19 @@ Route::get('/vendor/reviews', [VendorReviewController::class, 'index'])->name('v
 
 
 
-// Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
-// Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+
+
+Route::get('purchase/index', [PurchaseController::class, 'index'])->name('purchases.index');
+Route::get('purchase/create', [PurchaseController::class, 'create'])->name('purchases.create');
+Route::post('purchase/store', [PurchaseController::class, 'store'])->name('purchases.store');
+Route::get('purchase/edit/{id?}', [PurchaseController::class, 'edit'])->name('purchases.edit');
+Route::post('purchase/update/{id?}', [PurchaseController::class, 'update'])->name('purchases.update');
+Route::get('purchase/show/{id?}', [PurchaseController::class, 'show'])->name('purchases.show');
+Route::get('purchase/destroy/{id?}', [PurchaseController::class, 'destroy'])->name('purchases.destroy');
+
+
+
+

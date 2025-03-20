@@ -36,7 +36,9 @@ class DatabaseSeeder extends Seeder
             ShippingAddressSeeder::class,
             ReviewSeeder::class,
             BrandSeeder::class,
-            FaqSeeder::class
+            FaqSeeder::class,
+            OrderDetail::Class,
+            OrderMaster::class
         ]);
 
        

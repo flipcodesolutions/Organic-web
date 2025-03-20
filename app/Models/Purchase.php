@@ -9,7 +9,8 @@ class Purchase extends Model
 {
     //
     use HasFactory;
-    public function productData(){
+    public function productData()
+    {
         return $this->belongsTo(Product::class,'product_id');
     }
 }

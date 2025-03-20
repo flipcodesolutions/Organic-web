@@ -17,11 +17,10 @@ return new class extends Migration
             $table->timestamp('date');
             $table->integer('price');
             $table->integer('qty');
-            $table->enum('status', ['active', 'deactive','deleted'])->default('active');
+            $table->enum('status', ['active','deactive','deleted'])->default('active');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
