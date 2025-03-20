@@ -63,7 +63,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper" class="overlay-menu">
 
-                <!-- Sidebar -->
+        <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-content">
                 <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -90,7 +90,8 @@
                         </li>
 
                         {{-- master --}}
-                        <li class="nav-item {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? 'active' : '' }}">
+                        <li
+                            class="nav-item {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? 'active' : '' }}">
                             <a class="nav-link {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? '' : 'collapsed' }}"
                                 href="#" data-toggle="collapse" data-target="#collapseUtilities1"
                                 aria-expanded="true" aria-controls="collapseUtilities">
@@ -149,8 +150,9 @@
                         </li>
 
                         {{-- product --}}
-                        <li class="nav-item {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') ? '' : 'collapsed' }}"
+                        <li
+                            class="nav-item {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') ? '' : 'collapsed' }}"
                                 href="#" data-toggle="collapse" data-target="#collapseUtilities2"
                                 aria-expanded="true" aria-controls="collapseUtilities">
                                 {{-- <i class="fas fa-fw fa-wrench"></i> --}}
@@ -159,7 +161,7 @@
                             </a>
 
                             <div id="collapseUtilities2"
-                                class="collapse {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') ? 'show' : '' }}"
+                                class="collapse {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') ? 'show' : '' }}"
                                 aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     {{-- category --}}
@@ -180,6 +182,12 @@
                                         <i class="fa fa-carrot mr-2"></i>
                                         <span>Products</span></a>
 
+                                    {{-- price --}}
+                                    <a class="collapse-item {{ request()->routeIs('unit.*') ? 'active' : '' }}"
+                                        href="{{ route('unit.index') }}">
+                                        <i class="fa-solid fa-tags mr-2"></i>
+                                        <span>Price Update</span></a>
+
                                     {{-- review --}}
                                     <a class="collapse-item {{ request()->routeIs('vendor.*') ? 'active' : '' }}"
                                         href="{{ route('vendor.reviews.index') }}">
@@ -190,7 +198,8 @@
                         </li>
 
                         {{-- setting --}}
-                        <li class="nav-item {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
+                        <li
+                            class="nav-item {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
                             <a class="nav-link {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? '' : 'collapsed' }}"
                                 href="#" data-toggle="collapse" data-target="#collapseUtilities3"
                                 aria-expanded="true" aria-controls="collapseUtilities">
@@ -632,7 +641,7 @@
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {{ 'Logout' }}
                             </a>
-                            
+
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -662,7 +671,7 @@
 
                     <!-- Content Row -->
                     {{-- <div class="card-body p-0"> --}}
-                        @yield('content')
+                    @yield('content')
                     {{-- </div> --}}
                     {{-- <div class="row">
 
@@ -1041,13 +1050,13 @@
         <script>
             var message =
                 '{{ session()->has('
-                                                                                                                                                            success ')
+                                                                                                                                                                            success ')
                     ? session()->get('
-                                                                                                                                                            success ')
+                                                                                                                                                                            success ')
                     : (session()->has('
-                                                                                                                                                            error ')
+                                                                                                                                                                            error ')
                         ? session()->get('
-                                                                                                                                                            error ')
+                                                                                                                                                                            error ')
                         : implode("\\n", $errors->all())) }}';
 
             // If there is a success message

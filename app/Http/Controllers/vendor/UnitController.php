@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\vendor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class UnitController extends Controller
@@ -10,9 +12,23 @@ class UnitController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query= Product::query();
+
+        if ($request->filled('global')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('productName', 'like', '%' . $request->global . '%');
+            })->get();
+            // return $query;
+        }
+
+        // if ($request->filled('productId')) {
+            $data = Unit::where('product_id',$request->productId)->with('unitMaster')->get();
+        // }
+
+        $product = Product::where('status','active')->orderBy('productName', 'asc')->get();
+        return view('admin.unit.index',compact('product','data'));
     }
 
     /**
@@ -44,7 +60,8 @@ class UnitController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $unit = Unit::with('unitmaster')->find($id);
+        return view('admin.unit.edit',compact('unit'));
     }
 
     /**
@@ -52,7 +69,15 @@ class UnitController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // return $request;
+        $unit = Unit::find($id);
+        $unit->price = $request->price;
+        $unit->detail = $request->unitDetails;
+        $unit->per = $request->desPer;
+        $unit->sell_price = $request->sellingPrice;
+        $unit->save();
+
+        return redirect()->route('unit.index')->with('msg','Unit Updated Successfully!');
     }
 
     /**
@@ -60,6 +85,9 @@ class UnitController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $unit = Unit::find($id);
+        $unit->delete();
+
+        return redirect()->route('unit.index')->with('msg','Unit Deleted Successfully!');
     }
 }
