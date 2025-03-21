@@ -81,6 +81,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     //product 
     Route::get('products', [ProductController::class, 'products']);
     Route::get('homeProducts', [ProductController::class, 'homeProducts']);
+    Route::get('allProducts', [ProductController::class, 'allProducts']);
 
     //cms
     Route::get('cms', [CmsController::class, 'cms']);

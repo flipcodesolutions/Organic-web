@@ -198,9 +198,9 @@
                                             <td>
                                                 <div class="form-floating">
                                                     <input type="text" name="unit_det[]"
-                                                        placeholder="Unit Detail in Approx Weight" class="form-control"
+                                                        placeholder="Unit Detail" class="form-control"
                                                         value="{{ $data->detail }}">
-                                                    <label for="">Approx Weight</label>
+                                                    <label for="">Detail</label>
                                                     <span class="text-danger"
                                                         id="unitDetError{{ $index + 1 }}"></span>
                                                     {{-- <span>
@@ -250,7 +250,7 @@
                                                 <div class="form-floating">
                                                     <input type="text" name="selling_price[]"
                                                         placeholder="Selling Price" class="form-control"
-                                                        value="{{ $data->sell_price }}">
+                                                        value="{{ $data->sell_price }}" readonly>
                                                     <i class="fa-solid fa-indian-rupee-sign position-absolute"
                                                         style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                                                     <label for="">Selling Price</label>
@@ -799,6 +799,7 @@
         CKEDITOR.replace('product_des_hin');
     </script>
 
+    {{-- for image privew  --}}
     <script>
         function previewImages(event) {
             const files = event.target.files;
@@ -866,7 +867,7 @@
         })
     </script>
 
-    {{-- for add and remove new units --}}
+    {{-- new js for add and remove units and count seeling price --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const addUnitBtn = document.getElementById("addUnit");
@@ -875,69 +876,99 @@
 
             let rowCounter = 0;
 
+            // Function to add a new row
             function addUnitRow() {
-                // Create a new row dynamically
                 const newRow = document.createElement("tr");
                 newRow.classList.add("unitRow");
 
                 rowCounter++;
 
                 newRow.innerHTML = `
-                <td>
-                    <select class="form-select form-select-lg mb-3" name="new_unit_id[]" aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
-                        <option selected>Select Unit</option>
-                        @foreach ($units as $data)
-                            <option value="{{ $data->id }}">{{ $data->unit }}</option>
-                        @endforeach
-                    </select>
-                    <span class="text-danger" id="newUnitIdError${rowCounter}"></span>
-                </td>
-                <td>
-                    <div class="form-floating">
-                        <input type="text" name="new_unit_det[]" placeholder="Unit Detail in Approx Weight" class="form-control">
-                        <label for="">Approx Weight</label>
+            <td>
+                <select class="form-select form-select-lg mb-3" name="new_unit_id[]" aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
+                    <option selected>Select Unit</option>
+                    @foreach ($units as $data)
+                        <option value="{{ $data->id }}">{{ $data->unit }}</option>
+                    @endforeach
+                </select>
+                <span class="text-danger" id="newUnitIdError${rowCounter}"></span>
+            </td>
+            <td>
+                <div class="form-floating">
+                    <input type="text" name="new_unit_det[]" placeholder="Unit Detail" class="form-control">
+                    <label for="">Detail</label>
                     <span class="text-danger" id="newUnitDetError${rowCounter}"></span>
-                    </div>
-                </td>
-                <td>
-                    <div class="form-floating">
-                        <input type="text" name="new_product_price[]" placeholder="Product Price" class="form-control" value="{{ $data->per }}">
-                        <i class="fa-solid fa-indian-rupee-sign position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
-                        <label for="">Product Price</label>
+                </div>
+            </td>
+            <td>
+                <div class="form-floating">
+                    <input type="text" name="new_product_price[]" placeholder="Product Price" class="form-control">
+                    <i class="fa-solid fa-indian-rupee-sign position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
+                    <label for="">Product Price</label>
                     <span class="text-danger" id="newProductPriceError${rowCounter}"></span>
-                    </div>
-                </td>
-                <td>
-                    <div class="form-floating">
-                        <input type="text" name="new_discount_per[]" placeholder="Discount Percentage" class="form-control">
-                        <i class="fa-solid fa-percent position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
-                        <label for="">Discount Per</label>
+                </div>
+            </td>
+            <td>
+                <div class="form-floating">
+                    <input type="text" name="new_discount_per[]" placeholder="Discount Percentage" class="form-control">
+                    <i class="fa-solid fa-percent position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
+                    <label for="">Discount Per</label>
                     <span class="text-danger" id="newDisPerError${rowCounter}"></span>
-                    </div>
-                </td>
-                <td>
-                    <div class="form-floating">
-                        <input type="text" name="new_selling_price[]" placeholder="Selling Price" class="form-control">
-                        <i class="fa-solid fa-indian-rupee-sign position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
-                        <label for="">Selling Price</label>
+                </div>
+            </td>
+            <td>
+                <div class="form-floating">
+                    <input type="text" name="new_selling_price[]" placeholder="Selling Price" class="form-control" readonly>
+                    <i class="fa-solid fa-indian-rupee-sign position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
+                    <label for="">Selling Price</label>
                     <span class="text-danger" id="newSellPriceError${rowCounter}"></span>
-                    </div>
-                </td>
-            `;
+                </div>
+            </td>
+        `;
 
                 // Insert before the buttons row
                 unitTableBody.insertBefore(newRow, document.getElementById("unitButtonsRow"));
-            };
+            }
 
+            // Function to calculate the selling price based on product price and discount percentage
+            function calculateSellingPrice(productPrice, discountPercentage) {
+                let discountedPrice = productPrice - (productPrice * discountPercentage / 100);
+                return Math.round(discountedPrice); // Round to nearest whole number
+            }
+
+            // Event listener to handle the calculation of selling price
+            unitTableBody.addEventListener('input', function(event) {
+                // Check if the changed field is product_price or discount_per
+                if (event.target.name && (event.target.name.includes('product_price') || event.target.name
+                        .includes('discount_per'))) {
+                    const row = event.target.closest('tr');
+                    const productPrice = parseFloat(row.querySelector('[name*="product_price"]').value) ||
+                    0;
+                    const discountPercentage = parseFloat(row.querySelector('[name*="discount_per"]')
+                        .value) || 0;
+
+                    const sellingPriceInput = row.querySelector('[name*="selling_price"]');
+                    if (productPrice && discountPercentage !== undefined) {
+                        const sellingPrice = calculateSellingPrice(productPrice, discountPercentage);
+                        sellingPriceInput.value = sellingPrice;
+                    }
+                }
+            });
+
+            // Add Unit button functionality
             addUnitBtn.addEventListener("click", function() {
                 addUnitRow();
             });
 
+            // Remove Unit button functionality
             removeUnitBtn.addEventListener("click", function() {
                 const rows = document.querySelectorAll(".unitRow");
-                rows[rows.length - 1].remove(); // Remove the last added row
+                if (rows.length > 0) {
+                    rows[rows.length - 1].remove(); // Remove the last added row
+                }
             });
 
+            // Initial check to add the first row if none exist
             const unit_id = document.querySelectorAll('select[name="unit_id[]"]');
             if (unit_id.length === 0) {
                 addUnitRow();
@@ -1145,6 +1176,85 @@
         // }
     </script>
 
+    {{--old working js for add and remove new units --}}
+    {{-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const addUnitBtn = document.getElementById("addUnit");
+            const removeUnitBtn = document.getElementById("removeUnit");
+            const unitTableBody = document.getElementById("unitTableBody");
+
+            let rowCounter = 0;
+
+            function addUnitRow() {
+                // Create a new row dynamically
+                const newRow = document.createElement("tr");
+                newRow.classList.add("unitRow");
+
+                rowCounter++;
+
+                newRow.innerHTML = `
+                <td>
+                    <select class="form-select form-select-lg mb-3" name="new_unit_id[]" aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
+                        <option selected>Select Unit</option>
+                        @foreach ($units as $data)
+                            <option value="{{ $data->id }}">{{ $data->unit }}</option>
+                        @endforeach
+                    </select>
+                    <span class="text-danger" id="newUnitIdError${rowCounter}"></span>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="text" name="new_unit_det[]" placeholder="Unit Detail in Approx Weight" class="form-control">
+                        <label for="">Approx Weight</label>
+                    <span class="text-danger" id="newUnitDetError${rowCounter}"></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="text" name="new_product_price[]" placeholder="Product Price" class="form-control" value="{{ $data->per }}">
+                        <i class="fa-solid fa-indian-rupee-sign position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
+                        <label for="">Product Price</label>
+                    <span class="text-danger" id="newProductPriceError${rowCounter}"></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="text" name="new_discount_per[]" placeholder="Discount Percentage" class="form-control">
+                        <i class="fa-solid fa-percent position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
+                        <label for="">Discount Per</label>
+                    <span class="text-danger" id="newDisPerError${rowCounter}"></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="text" name="new_selling_price[]" placeholder="Selling Price" class="form-control">
+                        <i class="fa-solid fa-indian-rupee-sign position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
+                        <label for="">Selling Price</label>
+                    <span class="text-danger" id="newSellPriceError${rowCounter}"></span>
+                    </div>
+                </td>
+            `;
+
+                // Insert before the buttons row
+                unitTableBody.insertBefore(newRow, document.getElementById("unitButtonsRow"));
+            };
+
+            addUnitBtn.addEventListener("click", function() {
+                addUnitRow();
+            });
+
+            removeUnitBtn.addEventListener("click", function() {
+                const rows = document.querySelectorAll(".unitRow");
+                rows[rows.length - 1].remove(); // Remove the last added row
+            });
+
+            const unit_id = document.querySelectorAll('select[name="unit_id[]"]');
+            if (unit_id.length === 0) {
+                addUnitRow();
+            }
+        });
+    </script> --}}
+
     {{-- <script>
         // Function to validate the form
         // Function to validate the form
@@ -1282,7 +1392,6 @@
         };
     </script> --}}
 
-
     {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
 
@@ -1335,114 +1444,5 @@
             });
         });
     </script> --}}
-
-
-    {{-- <script>
-    function readURL(input, tgt) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    document.querySelector(tgt).setAttribute("src", e.target.result);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $(document).ready(function () {
-    $("#productForm").on("submit", function (e) {
-        e.preventDefault();
-
-        // Clear previous errors
-        $('#nameError').text('');
-        $('#categoryIdError').text('');
-        $('#thumbnailError').text('');
-
-        let formData = new FormData(this);
-
-        let name = $('#product_name').val();
-        let category_id = $('#category_id').val();
-        let image = $('#image')[0].files[0];
-
-        let isValid = true;
-
-        // Validate product name
-        if (!name) {
-            $('#nameError').text('Product Name is required.');
-            isValid = false;
-        }
-
-        // Validate category selection
-        if (!category_id || category_id === "-- select category --") {
-            $('#categoryIdError').text('Category is required.');
-            isValid = false;
-        }
-
-        // Validate image file if provided
-        if (image) {
-            let fileType = image.type.split('/')[1].toLowerCase();
-            let allowedTypes = ['jpeg', 'jpg', 'png'];
-
-            if (!allowedTypes.includes(fileType)) {
-                $('#thumbnailError').text('Only JPG, JPEG, and PNG are allowed.');
-                isValid = false;
-            }
-
-            if (image.size > 2 * 1024 * 1024) {
-                $('#thumbnailError').text('Image size must be less than 2MB.');
-                isValid = false;
-            }
-        }
-
-        if (isValid) {
-            $.ajax({
-                url: "{{ route('product.update', $product->id) }}",
-                method: "POST",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    if (response.success) {
-                        toastr.options = {
-                            "closeButton": true,
-                            "debug": false,
-                            "newestOnTop": false,
-                            "progressBar": true,
-                            "positionClass": "toast-top-right",
-                            "preventDuplicates": false,
-                            "onclick": null,
-                            "showDuration": "300",
-                            "hideDuration": "1000",
-                            "timeOut": "2000",
-                            "extendedTimeOut": "1000",
-                            "showEasing": "swing",
-                            "hideEasing": "linear",
-                            "showMethod": "fadeIn",
-                            "hideMethod": "fadeOut"
-                        };
-                        toastr.success(response.message);
-                        $('button[type="submit"]').text('Submitted').prop('disabled', true);
-                        $('#productForm')[0].reset();
-                        setTimeout(function() {
-                            window.location.href = "{{ route('product.index') }}";
-                        }, 2000);
-                    } else {
-                        if (response.errors) {
-                            $.each(response.errors, function(key, value) {
-                                toastr.error(value[0]);
-                            });
-                        } else {
-                            toastr.error('An error occurred. Please try again.');
-                        }
-                    }
-                },
-                error: function (xhr, status, error) {
-                    toastr.error('An error occurred: ' + error);
-                }
-            });
-        }
-    });
-});
-
-</script> --}}
 
 @endsection

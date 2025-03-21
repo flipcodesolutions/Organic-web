@@ -15,29 +15,38 @@
             </div>
 
             <div class="card-body">
-                <form id="productForm" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data"
+                <form id="productForm" action="{{ route('purchases.store') }}" method="POST" enctype="multipart/form-data"
                     class="form">
                     @csrf
 
 
                     <div class="mb-3">
-                        <label>Product ID</label>
-                        <input type="number" name="product_id" class="form-control" required>
+                        <label>Product Name</label>
+                        <select class="form-control" name="product_id" id="exampleFormControlSelect1">
+                            <option value="">-- Select Product --</option>
+                            @foreach ($products as $products)
+                                <option value="{{ $products->id }}">{{ $products->productName }}</option>
+                            @endforeach
+                        </select>
                     </div>
-            
-                    <div class="mb-3">
-                        <label>Date</label>
-                        <input type="date" name="date" class="form-control" required>
+                    <div class="row ">
+                        <div class="col mb-3">
+                            <label>Date</label></div>
+                            <div class="col mb-3">
+                            <input type="date" name="date" class="form-control" required>
+                        </div>
                     </div>
+
+                    <div class="row my-3">
+                        <div class="col mb-3">
+                            <label>Price</label>
+                            <input type="" name="price" class="form-control" required>
+                        </div>
             
-                    <div class="mb-3">
-                        <label>Price</label>
-                        <input type="number" name="price" class="form-control" required>
-                    </div>
-            
-                    <div class="mb-3">
-                        <label>Quantity</label>
-                        <input type="number" name="qty" class="form-control" required>
+                        <div class="col mb-3">
+                            <label>Quantity</label>
+                            <input type="" name="qty" class="form-control" required>
+                        </div>
                     </div>
             
                     <div class="row">

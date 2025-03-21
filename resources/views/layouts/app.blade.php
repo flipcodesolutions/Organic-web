@@ -17,9 +17,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
     <!-- Toastr CSS and JS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
@@ -39,9 +37,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('asset/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('asset/css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -90,52 +86,41 @@
                         </li>
 
                         {{-- master --}}
-                        <li
-                            class="nav-item {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? '' : 'collapsed' }}"
-                                href="#" data-toggle="collapse" data-target="#collapseUtilities1"
-                                aria-expanded="true" aria-controls="collapseUtilities">
+                        <li class="nav-item {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseUtilities1" aria-expanded="true" aria-controls="collapseUtilities">
                                 {{-- <i class="fas fa-fw fa-wrench"></i> --}}
                                 <i class="fa-solid fa-server"></i>
                                 <span>Master</span>
                             </a>
-                            <div id="collapseUtilities1"
-                                class="collapse {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? 'show' : '' }}"
-                                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                            <div id="collapseUtilities1" class="collapse {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? 'show' : '' }}" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     {{-- city --}}
-                                    <a class="collapse-item {{ request()->routeIs('city_master.*') ? 'active' : '' }}"
-                                        href="{{ route('city_master.index') }}">
+                                    <a class="collapse-item {{ request()->routeIs('city_master.*') ? 'active' : '' }}" href="{{ route('city_master.index') }}">
                                         <i class="fa fa-location-pin mr-2"></i>
                                         <span>Cities</span></a>
 
                                     {{-- landmark --}}
-                                    <a class="collapse-item {{ request()->routeIs('landmark.*') ? 'active' : '' }}"
-                                        href="{{ route('landmark.index') }}">
+                                    <a class="collapse-item {{ request()->routeIs('landmark.*') ? 'active' : '' }}" href="{{ route('landmark.index') }}">
                                         <i class="fa fa-street-view mr-2"></i>
                                         <span>Landmark</span></a>
 
                                     {{-- unit master --}}
-                                    <a class="collapse-item {{ request()->routeIs('unitmaster.*') ? 'active' : '' }}"
-                                        href="{{ Route('unitmaster.index') }}">
+                                    <a class="collapse-item {{ request()->routeIs('unitmaster.*') ? 'active' : '' }}" href="{{ Route('unitmaster.index') }}">
                                         <i class="fa fa-bookmark mr-2"></i>
                                         <span>Unit Master</span></a>
 
                                     {{-- faq --}}
-                                    <a class="collapse-item {{ request()->routeIs('faq.*') ? 'active' : '' }}"
-                                        href="{{ Route('faq.index') }}">
+                                    <a class="collapse-item {{ request()->routeIs('faq.*') ? 'active' : '' }}" href="{{ Route('faq.index') }}">
                                         <i class="fa fa-person-circle-question mr-2"></i>
                                         <span>FAQs</span></a>
 
                                     {{-- cms master --}}
-                                    <a class="collapse-item {{ request()->routeIs('cms_master.*') ? 'active' : '' }}"
-                                        href="{{ Route('cms_master.index') }}">
+                                    <a class="collapse-item {{ request()->routeIs('cms_master.*') ? 'active' : '' }}" href="{{ Route('cms_master.index') }}">
                                         <i class="fa fa-list-check mr-2"></i>
                                         <span>CMS Master</span></a>
 
                                     {{-- point per --}}
-                                    <a class="collapse-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}"
-                                        href="{{ route('pointper.index') }}">
+                                    <a class="collapse-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}" href="{{ route('pointper.index') }}">
                                         <i class="fa fa-basket-shopping mr-2"></i>
                                         <span>Point Per</span></a>
 
@@ -145,225 +130,206 @@
                                 data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     <a class="collapse-item" href="{{ route('user.index') }}">User List</a>
-                                </div>
-                            </div> --}}
-                        </li>
+            </div>
+        </div> --}}
+        </li>
 
-                        {{-- product --}}
-                        <li
-                            class="nav-item {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') ? '' : 'collapsed' }}"
-                                href="#" data-toggle="collapse" data-target="#collapseUtilities2"
-                                aria-expanded="true" aria-controls="collapseUtilities">
-                                {{-- <i class="fas fa-fw fa-wrench"></i> --}}
-                                <i class="fa-solid fa-warehouse"></i>
-                                <span>Product</span>
-                            </a>
+        {{-- product --}}
+        <li class="nav-item {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') || request()->routeIs('stock.*') ? 'active' : '' }}">
+            <a class="nav-link {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') || request()->routeIs('stock.*') ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseUtilities2" aria-expanded="true" aria-controls="collapseUtilities">
+                {{-- <i class="fas fa-fw fa-wrench"></i> --}}
+                <i class="fa-solid fa-warehouse"></i>
+                <span>Product</span>
+            </a>
 
-                            <div id="collapseUtilities2"
-                                class="collapse {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') ? 'show' : '' }}"
-                                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                                <div class="bg-white py-2 collapse-inner rounded">
-                                    {{-- category --}}
-                                    <a class="collapse-item {{ request()->routeIs('category.*') ? 'active' : '' }}"
-                                        href="{{ route('category.index') }}">
-                                        <i class="fa fa-list mr-2"></i>
-                                        <span>Categories</span></a>
+            <div id="collapseUtilities2" class="collapse {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') || request()->routeIs('stock.*') ? 'show' : '' }}" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    {{-- category --}}
+                    <a class="collapse-item {{ request()->routeIs('category.*') ? 'active' : '' }}" href="{{ route('category.index') }}">
+                        <i class="fa fa-list mr-2"></i>
+                        <span>Categories</span></a>
 
-                                    {{-- brand --}}
-                                    <a class="collapse-item {{ request()->routeIs('brand.*') ? 'active' : '' }}"
-                                        href="{{ route('brand.index') }}">
-                                        <i class="fa-brands fa-fort-awesome mr-2"></i>
-                                        <span>Brands</span></a>
+                    {{-- brand --}}
+                    <a class="collapse-item {{ request()->routeIs('brand.*') ? 'active' : '' }}" href="{{ route('brand.index') }}">
+                        <i class="fa-brands fa-fort-awesome mr-2"></i>
+                        <span>Brands</span></a>
 
-                                    {{-- product --}}
-                                    <a class="collapse-item {{ request()->routeIs('product.*') ? 'active' : '' }}"
-                                        href="{{ route('product.index') }}">
-                                        <i class="fa fa-carrot mr-2"></i>
-                                        <span>Products</span></a>
+                    {{-- product --}}
+                    <a class="collapse-item {{ request()->routeIs('product.*') ? 'active' : '' }}" href="{{ route('product.index') }}">
+                        <i class="fa fa-carrot mr-2"></i>
+                        <span>Products</span></a>
 
-                                    {{-- purchase --}}
-                                    <a class="collapse-item" href="{{ route('purchases.index') }}">
-                                        <i class="fa fa-purchase"></i>
-                                        <span>Purchases</span></a>
-                                    {{-- price --}}
-                                    <a class="collapse-item {{ request()->routeIs('unit.*') ? 'active' : '' }}"
-                                        href="{{ route('unit.index') }}">
-                                        <i class="fa-solid fa-tags mr-2"></i>
-                                        <span>Price Update</span></a>
+                    {{-- purchase --}}
+                    <a class="collapse-item" href="{{ route('purchases.index') }}">
+                        <i class="fa fa-purchase"></i>
+                        <span>Purchases</span></a>
+                    {{-- price --}}
+                    <a class="collapse-item {{ request()->routeIs('unit.*') ? 'active' : '' }}" href="{{ route('unit.index') }}">
+                        <i class="fa-solid fa-tags mr-2"></i>
+                        <span>Price Update</span></a>
 
-                                    {{-- review --}}
-                                    <a class="collapse-item {{ request()->routeIs('vendor.*') ? 'active' : '' }}"
-                                        href="{{ route('vendor.reviews.index') }}">
-                                        <i class="fa fa-comment mr-2"></i>
-                                        <span>Vendor Reviews</span></a>
-                                </div>
-                            </div>
-                        </li>
+                    {{-- stock update --}}
+                    <a class="collapse-item {{ request()->routeIs('stock.*') ? 'active' : '' }}" href="{{ route('stock.index') }}">
+                        <i class="fa-solid fa-cubes-stacked mr-2"></i>
+                        <span>Stock Update</span></a>
 
-                        {{-- setting --}}
-                        <li
-                            class="nav-item {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? '' : 'collapsed' }}"
-                                href="#" data-toggle="collapse" data-target="#collapseUtilities3"
-                                aria-expanded="true" aria-controls="collapseUtilities">
-                                <i class="fa-solid fa-gears"></i> <span>Setting</span>
-                            </a>
+                    {{-- review --}}
+                    <a class="collapse-item {{ request()->routeIs('vendor.*') ? 'active' : '' }}" href="{{ route('vendor.reviews.index') }}">
+                        <i class="fa fa-comment mr-2"></i>
+                        <span>Vendor Reviews</span></a>
+                </div>
+            </div>
+        </li>
 
-                            <div id="collapseUtilities3"
-                                class="collapse {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'show' : '' }}"
-                                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                                <div class="bg-white py-2 collapse-inner rounded">
-                                    {{-- navigation --}}
-                                    <a class="collapse-item {{ request()->routeIs('navigate.*') ? 'active' : '' }}"
-                                        href="{{ route('navigate.index') }}">
-                                        <i class="fa fa-location-dot mr-2"></i>
-                                        <span>Navigate</span></a>
+        {{-- setting --}}
+        <li class="nav-item {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
+            <a class="nav-link {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseUtilities3" aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fa-solid fa-gears"></i> <span>Setting</span>
+            </a>
 
-                                    {{-- slider --}}
-                                    <a class="collapse-item {{ request()->routeIs('slider.*') ? 'active' : '' }}"
-                                        href="{{ Route('slider.index') }}">
-                                        <i class="fa fa-photo-film mr-2"></i>
-                                        <span>Slider</span></a>
+            <div id="collapseUtilities3" class="collapse {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'show' : '' }}" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    {{-- navigation --}}
+                    <a class="collapse-item {{ request()->routeIs('navigate.*') ? 'active' : '' }}" href="{{ route('navigate.index') }}">
+                        <i class="fa fa-location-dot mr-2"></i>
+                        <span>Navigate</span></a>
 
-                                    {{-- notification --}}
-                                    <a class="collapse-item {{ request()->routeIs('notification.*') ? 'active' : '' }}"
-                                        href="{{ route('notification.index') }}">
-                                        <i class="fa fa-bell mr-2"></i>
-                                        <span>Notification</span></a>
+                    {{-- slider --}}
+                    <a class="collapse-item {{ request()->routeIs('slider.*') ? 'active' : '' }}" href="{{ Route('slider.index') }}">
+                        <i class="fa fa-photo-film mr-2"></i>
+                        <span>Slider</span></a>
 
-                                    {{-- delivery slots --}}
-                                    <a class="collapse-item {{ request()->routeIs('deliveryslot.*') ? 'active' : '' }}"
-                                        href="{{ Route('deliveryslot.index') }}">
-                                        <i class="fa fa-truck mr-2"></i>
-                                        <span>Delivery Slots</span></a>
-                                </div>
-                            </div>
+                    {{-- notification --}}
+                    <a class="collapse-item {{ request()->routeIs('notification.*') ? 'active' : '' }}" href="{{ route('notification.index') }}">
+                        <i class="fa fa-bell mr-2"></i>
+                        <span>Notification</span></a>
 
-                        </li>
+                    {{-- delivery slots --}}
+                    <a class="collapse-item {{ request()->routeIs('deliveryslot.*') ? 'active' : '' }}" href="{{ Route('deliveryslot.index') }}">
+                        <i class="fa fa-truck mr-2"></i>
+                        <span>Delivery Slots</span></a>
+                </div>
+            </div>
 
-                        {{-- <li class="nav-item {{ request()->routeIs('category.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('category.index') }}">
-                                <i class="fa fa-list"></i>
-                                <span>Categories</span></a>
-                        </li> --}}
+        </li>
 
-                        {{-- <li class="nav-item {{ request()->routeIs('brand.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('brand.index') }}">
-                                <i class="fa-brands fa-fort-awesome"></i>
-                                <span>Brands</span></a>
-                        </li> --}}
+        {{-- <li class="nav-item {{ request()->routeIs('category.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('category.index') }}">
+            <i class="fa fa-list"></i>
+            <span>Categories</span></a>
+        </li> --}}
 
-                        {{-- <li class="nav-item {{ request()->routeIs('product.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('product.index') }}">
-                                <i class="fa fa-carrot"></i>
-                                <span>Products</span></a>
-                        </li> --}}
+        {{-- <li class="nav-item {{ request()->routeIs('brand.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('brand.index') }}">
+            <i class="fa-brands fa-fort-awesome"></i>
+            <span>Brands</span></a>
+        </li> --}}
 
-                        {{-- <li class="nav-item {{ request()->routeIs('navigate.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('navigate.index') }}">
-                                <i class="fa fa-location-dot"></i>
-                                <span>Navigate</span></a>
-                        </li> --}}
+        {{-- <li class="nav-item {{ request()->routeIs('product.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('product.index') }}">
+            <i class="fa fa-carrot"></i>
+            <span>Products</span></a>
+        </li> --}}
 
-                        {{-- <li class="nav-item {{ request()->routeIs('notification.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('notification.index') }}">
-                                <i class="fa fa-bell"></i>
-                                <span>Notification</span></a>
-                        </li> --}}
+        {{-- <li class="nav-item {{ request()->routeIs('navigate.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('navigate.index') }}">
+            <i class="fa fa-location-dot"></i>
+            <span>Navigate</span></a>
+        </li> --}}
 
-                        {{-- <li class="nav-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('pointper.index') }}">
-                                <i class="fa fa-basket-shopping"></i>
-                                <span>Point Per</span></a>
-                        </li> --}}
+        {{-- <li class="nav-item {{ request()->routeIs('notification.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('notification.index') }}">
+            <i class="fa fa-bell"></i>
+            <span>Notification</span></a>
+        </li> --}}
 
-                        {{-- <li class="nav-item {{ request()->routeIs('city_master.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('city_master.index') }}">
-                                <i class="fa fa-location-pin"></i>
-                                <span>Cities</span></a>
-                        </li> --}}
+        {{-- <li class="nav-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pointper.index') }}">
+            <i class="fa fa-basket-shopping"></i>
+            <span>Point Per</span></a>
+        </li> --}}
 
-                        {{-- <li class="nav-item {{ request()->routeIs('landmark.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('landmark.index') }}">
-                                <i class="fa fa-street-view"></i>
-                                <span>Landmark</span></a>
-                        </li> --}}
+        {{-- <li class="nav-item {{ request()->routeIs('city_master.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('city_master.index') }}">
+            <i class="fa fa-location-pin"></i>
+            <span>Cities</span></a>
+        </li> --}}
 
-                        {{-- @if (Auth::user()->role == 'Admin') --}}
-                        {{-- <li class="nav-item {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('admin.reviews.index') }}">
-                                <i class="fa fa-comment"></i>
-                                <span>Admin Reviews</span></a>
-                        </li> --}}
-                        {{-- @endif --}}
+        {{-- <li class="nav-item {{ request()->routeIs('landmark.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('landmark.index') }}">
+            <i class="fa fa-street-view"></i>
+            <span>Landmark</span></a>
+        </li> --}}
 
-                        {{-- <li class="nav-item {{ request()->routeIs('vendor.reviews.*') ? 'active' : '' }}">
-                            <a class="nav-link " href="{{ route('vendor.reviews.index') }}">
-                                <i class="fa fa-comment"></i>
-                                <span>Vendor Reviews</span></a>
-                        </li> --}}
+        {{-- @if (Auth::user()->role == 'Admin') --}}
+        {{-- <li class="nav-item {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.reviews.index') }}">
+            <i class="fa fa-comment"></i>
+            <span>Admin Reviews</span></a>
+        </li> --}}
+        {{-- @endif --}}
 
-                        {{-- <li class="nav-item {{ request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ Route('deliveryslot.index') }}">
-                                <i class="fa fa-truck"></i>
-                                <span>Delivery Slots</span></a>
-                        </li> --}}
+        {{-- <li class="nav-item {{ request()->routeIs('vendor.reviews.*') ? 'active' : '' }}">
+        <a class="nav-link " href="{{ route('vendor.reviews.index') }}">
+            <i class="fa fa-comment"></i>
+            <span>Vendor Reviews</span></a>
+        </li> --}}
 
-                        {{-- <li class="nav-item {{ request()->routeIs('cms_master.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ Route('cms_master.index') }}">
-                                <i class="fa fa-list-check"></i>
-                                <span>CMS Master</span></a>
-                        </li> --}}
+        {{-- <li class="nav-item {{ request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ Route('deliveryslot.index') }}">
+            <i class="fa fa-truck"></i>
+            <span>Delivery Slots</span></a>
+        </li> --}}
 
-                        {{-- <li class="nav-item {{ request()->routeIs('faq.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ Route('faq.index') }}">
-                                <i class="fa fa-person-circle-question"></i>
-                                <span>FAQs</span></a>
-                        </li> --}}
+        {{-- <li class="nav-item {{ request()->routeIs('cms_master.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ Route('cms_master.index') }}">
+            <i class="fa fa-list-check"></i>
+            <span>CMS Master</span></a>
+        </li> --}}
 
-                        {{-- <li class="nav-item {{ request()->routeIs('unitmaster.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ Route('unitmaster.index') }}">
-                                <i class="fa fa-bookmark"></i>
-                                <span>Unit Master</span></a>
-                        </li> --}}
+        {{-- <li class="nav-item {{ request()->routeIs('faq.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ Route('faq.index') }}">
+            <i class="fa fa-person-circle-question"></i>
+            <span>FAQs</span></a>
+        </li> --}}
 
-                        {{-- <li class="nav-item {{ request()->routeIs('slider.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ Route('slider.index') }}">
-                                <i class="fa fa-photo-film"></i>
-                                <span>Slider</span></a>
-                        </li> --}}
-                        <!-- Divider -->
-                        <hr class="sidebar-divider">
+        {{-- <li class="nav-item {{ request()->routeIs('unitmaster.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ Route('unitmaster.index') }}">
+            <i class="fa fa-bookmark"></i>
+            <span>Unit Master</span></a>
+        </li> --}}
 
-                        <!-- Heading -->
-                        <div class="sidebar-heading">
-                            Interface
-                        </div>
+        {{-- <li class="nav-item {{ request()->routeIs('slider.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ Route('slider.index') }}">
+            <i class="fa fa-photo-film"></i>
+            <span>Slider</span></a>
+        </li> --}}
+        <!-- Divider -->
+        <hr class="sidebar-divider">
 
-                        <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}" href="#"
-                                data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true"
-                                aria-controls="collapseUtilities">
-                                {{-- <i class="fas fa-fw fa-wrench"></i> --}}
-                                <i class="fa-solid fa-users"></i>
-                                <span>User Management</span>
-                            </a>
-                            <div id="collapseUtilities"
-                                class="collapse {{ request()->routeIs('user.*') ? 'show' : '' }}"
-                                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                                <div class="bg-white py-2 collapse-inner rounded">
-                                    <a class="collapse-item {{ request()->routeIs('user.*') ? 'active' : '' }}"
-                                        href="{{ route('user.index') }}">
-                                        <i class="fa-solid fa-user"></i>
-                                        <span>User List</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Interface
+        </div>
 
-                        <!-- Nav Item - Pages Collapse Menu -->
-                        {{-- <li class="nav-item">
+        <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
+            <a class="nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                {{-- <i class="fas fa-fw fa-wrench"></i> --}}
+                <i class="fa-solid fa-users"></i>
+                <span>User Management</span>
+            </a>
+            <div id="collapseUtilities" class="collapse {{ request()->routeIs('user.*') ? 'show' : '' }}" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item {{ request()->routeIs('user.*') ? 'active' : '' }}" href="{{ route('user.index') }}">
+                        <i class="fa-solid fa-user"></i>
+                        <span>User List</span>
+                    </a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        {{-- <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fas fa-fw fa-cog"></i>
@@ -372,68 +338,63 @@
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="{{ route('roles.index') }}">Role List</a>
-                </div>
-                </div>
-                </li> --}}
-                        <!-- Reports -->
-                        <li class="nav-item {{ request()->routeIs('reports.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('reports.*') ? '' : 'collapsed' }}"
-                                href="#" data-toggle="collapse" data-target="#collapseFour"
-                                aria-expanded="true" aria-controls="collapseFour">
-                                <i class="fa-solid fa-file"></i>
-                                <span>Reports</span>
-                            </a>
-                            <div id="collapseFour"
-                                class="collapse {{ request()->routeIs('reports.*') ? 'show' : '' }}"
-                                aria-labelledby="headingFour" data-parent="#accordionSidebar">
-                                <div class="bg-white py-2 collapse-inner rounded">
-                                    <a class="collapse-item {{ request()->routeIs('reports.*') ? 'active' : '' }}"
-                                        href="{{ route('reports.purchaseReport') }}">Purchase
-                                        Report</a>
-                                </div>
-                                {{-- <div class="bg-white py-2 collapse-inner rounded"> --}}
-                                {{-- <a class="collapse-item" href="{{ route('reports.purchaseDateWise') }}">Purchase Date Wise
-                                Report</a> --}}
-                                {{-- </div> --}}
-                            </div>
-                        </li>
-
-                        <!-- Divider -->
-                        <hr class="sidebar-divider">
-
-
-
-                        <!-- Divider -->
-                        <hr class="sidebar-divider">
-
-
-                        <!-- Divider -->
-                        <hr class="sidebar-divider d-none d-md-block">
-
-                        <!-- Sidebar Toggler (Sidebar) -->
-                        <div class="text-center d-none d-md-inline">
-                            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                        </div>
-
-                    </ul>
+    </div>
+    </div>
+    </li> --}}
+    <!-- Reports -->
+    <li class="nav-item {{ request()->routeIs('reports.*') ? 'active' : '' }}">
+        <a class="nav-link {{ request()->routeIs('reports.*') ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+            <i class="fa-solid fa-file"></i>
+            <span>Reports</span>
+        </a>
+        <div id="collapseFour" class="collapse {{ request()->routeIs('reports.*') ? 'show' : '' }}" aria-labelledby="headingFour" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item {{ request()->routeIs('reports.*') ? 'active' : '' }}" href="{{ route('reports.purchaseReport') }}">Purchase
+                    Report</a>
             </div>
+            {{-- <div class="bg-white py-2 collapse-inner rounded"> --}}
+            {{-- <a class="collapse-item" href="{{ route('reports.purchaseDateWise') }}">Purchase Date Wise
+            Report</a> --}}
+            {{-- </div> --}}
         </div>
-        <!-- End of Sidebar -->
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    </li>
 
-            <!-- Main Content -->
-            <div id="content">
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
 
-                    {{--
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+    </ul>
+    </div>
+    </div>
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                {{--
                     <!-- Topbar Search -->
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -448,8 +409,8 @@
                         </div>
                     </form> --}}
 
-                    <!-- Topbar Navbar -->
-                    {{-- <ul class="navbar-nav ml-auto">
+                <!-- Topbar Navbar -->
+                {{-- <ul class="navbar-nav ml-auto">
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
@@ -475,8 +436,8 @@
                             </div>
                         </li> --}}
 
-                    <!-- Nav Item - Alerts -->
-                    {{-- <li class="nav-item dropdown no-arrow mx-1">
+                <!-- Nav Item - Alerts -->
+                {{-- <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
@@ -609,20 +570,17 @@
                             </div>
                         </li> --}}
 
-                    <div class="topbar-divider d-none d-sm-block ml-auto"></div>
+                <div class="topbar-divider d-none d-sm-block ml-auto"></div>
 
-                    <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow mb-4">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                            <img class="img-profile rounded-circle"
-                                src="{{ asset('user_profile/' . Auth::user()->pro_pic) }}">
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                            aria-labelledby="userDropdown">
-                            {{-- <a class="dropdown-item" href="#">
+                <!-- Nav Item - User Information -->
+                <li class="nav-item dropdown no-arrow mb-4">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name ?? '-'}}</span>
+                        {{-- <img class="img-profile rounded-circle" src="{{ asset('user_profile/' . Auth::user()->pro_pic ?? '') }}"> --}}
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                        {{-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -634,50 +592,48 @@
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
                                 </a> --}}
-                            <div class="dropdown-divider"></div>
+                        <div class="dropdown-divider"></div>
 
-                            <a class="dropdown-item" href="{{ route('change.password') }}"><i
-                                    class="fa-solid fa-unlock-keyhole mr-2 text-gray-400"></i>Change Password</a>
+                        <a class="dropdown-item" href="{{ route('change.password') }}"><i class="fa-solid fa-unlock-keyhole mr-2 text-gray-400"></i>Change Password</a>
 
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ 'Logout' }}
-                            </a>
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            {{ 'Logout' }}
+                        </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
 
-                            {{--
+                        {{--
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a> --}}
-                        </div>
-                    </li>
+                    </div>
+                </li>
 
-                    </ul>
+                </ul>
 
-                </nav>
-                <!-- End of Topbar -->
+            </nav>
+            <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid" style="background: ghostwhite;">
+            <!-- Begin Page Content -->
+            <div class="container-fluid" style="background: ghostwhite;">
 
-                    <!-- Page Heading -->
-                    {{-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <!-- Page Heading -->
+                {{-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div> --}}
 
-                    <!-- Content Row -->
-                    {{-- <div class="card-body p-0"> --}}
-                    @yield('content')
-                    {{-- </div> --}}
-                    {{-- <div class="row">
+                <!-- Content Row -->
+                {{-- <div class="card-body p-0"> --}}
+                @yield('content')
+                {{-- </div> --}}
+                {{-- <div class="row">
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
@@ -763,12 +719,12 @@
                         </div>
                     </div> --}}
 
-                    <!-- Page level custom scripts -->
-                    <script src="{{ asset('asset/js/demo/chart-area-demo.js') }}"></script>
-                    <script src="{{ asset('asset/js/demo/chart-pie-demo.js') }}"></script>
-                    <!-- Content Row -->
+                <!-- Page level custom scripts -->
+                <script src="{{ asset('asset/js/demo/chart-area-demo.js') }}"></script>
+                <script src="{{ asset('asset/js/demo/chart-pie-demo.js') }}"></script>
+                <!-- Content Row -->
 
-                    {{-- <div class="row">
+                {{-- <div class="row">
 
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
@@ -844,8 +800,8 @@
                         </div>
                     </div> --}}
 
-                    <!-- Content Row -->
-                    {{-- <div class="row">
+                <!-- Content Row -->
+                {{-- <div class="row">
 
                         <!-- Content Column -->
                         <div class="col-lg-6 mb-4">
@@ -997,24 +953,24 @@
                         </div>
                     </div> --}}
 
-                </div>
-                <!-- /.container-fluid -->
-
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2025</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2025</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
@@ -1025,8 +981,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1051,41 +1006,41 @@
 
 
     @if (session()->has('success'))
-        <script>
-            var message =
-                '{{ session()->has('
-                                                                                                                                                                            success ')
-                    ? session()->get('
-                                                                                                                                                                            success ')
-                    : (session()->has('
-                                                                                                                                                                            error ')
-                        ? session()->get('
-                                                                                                                                                                            error ')
-                        : implode("\\n", $errors->all())) }}';
+    <script>
+        var message =
+            '{{ session()->has('
+        success ') ? session()->get('
+        success ') : (session()->has('
+        error ') ? session()->get('
+        error ') : implode("\\n", $errors->all())) }}';
 
-            // If there is a success message
-            if (message) {
-                toastr.success(message, 'Success', {
-                    timeOut: 5000
-                });
-            }
-        </script>
+        // If there is a message
+        if (message) {
+            // Show success or error message using Toastr
+            toastr.success(message, 'Success', {
+                timeOut: 5000
+            });
+        }
+
+    </script>
+
     @endif
 
 
     {{-- SweetAlert2 toast notification code --}}
     @if (Session::has('msg'))
-        <script>
-            Swal.fire({
-                icon: "{{ Session::get('msg_type') ?? 'success' }}", // You can pass 'msg_type' to change the icon dynamically
-                title: "{{ Session::get('msg') }}",
-                toast: true,
-                position: 'top-right',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true
-            });
-        </script>
+    <script>
+        Swal.fire({
+            icon: "{{ Session::get('msg_type') ?? 'success' }}", // You can pass 'msg_type' to change the icon dynamically
+            title: "{{ Session::get('msg') }}"
+            , toast: true
+            , position: 'top-right'
+            , showConfirmButton: false
+            , timer: 3000
+            , timerProgressBar: true
+        });
+
+    </script>
     @endif
 
 
@@ -1093,59 +1048,62 @@
     <script>
         function openDeactiveModal(url) {
             Swal.fire({
-                title: 'Are you sure you want to deactive it?',
-                text: "You will be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
+                title: 'Are you sure you want to deactive it?'
+                , text: "You will be able to revert this!"
+                , icon: 'warning'
+                , showCancelButton: true,
                 // confirmButtonColor: '#d33',
                 // cancelButtonColor: '#6e7881',
-                confirmButtonText: 'Yes, Deactive it!',
-            }).then((result) => {
+                confirmButtonText: 'Yes, Deactive it!'
+            , }).then((result) => {
                 if (result.isConfirmed) {
                     // Redirect to the delete route
                     window.location.href = url;
                 }
             });
         }
+
     </script>
 
     {{-- sweet alert delete code --}}
     <script>
         function openDeleteModal(url) {
             Swal.fire({
-                title: 'Are you sure you want to delete it?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#6e7881',
-                confirmButtonText: 'Yes, Delete it!',
-            }).then((result) => {
+                title: 'Are you sure you want to delete it?'
+                , text: "You won't be able to revert this!"
+                , icon: 'warning'
+                , showCancelButton: true
+                , confirmButtonColor: '#d33'
+                , cancelButtonColor: '#6e7881'
+                , confirmButtonText: 'Yes, Delete it!'
+            , }).then((result) => {
                 if (result.isConfirmed) {
                     // Redirect to the delete route
                     window.location.href = url;
                 }
             });
         }
+
     </script>
 
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @if (Session::has('warning'))
-        <script>
-            Swal.fire({
-                title: 'Action Required!',
-                text: "{{ Session::get('warning') }}", // Get the warning message from the session
-                icon: 'warning',
-                // showCancelButton: true,
-                // confirmButtonColor: '#3085d6',
-                // cancelButtonColor: '#d33',
-                // confirmButtonText: 'Proceed to Products',
-                // cancelButtonText: 'Cancel',
-                // reverseButtons: true,
-            });
-        </script>
+    <script>
+        Swal.fire({
+            title: 'Action Required!'
+            , text: "{{ Session::get('warning') }}", // Get the warning message from the session
+            icon: 'warning',
+            // showCancelButton: true,
+            // confirmButtonColor: '#3085d6',
+            // cancelButtonColor: '#d33',
+            // confirmButtonText: 'Proceed to Products',
+            // cancelButtonText: 'Cancel',
+            // reverseButtons: true,
+        });
+
+    </script>
     @endif
 
     {{-- <script>
@@ -1166,6 +1124,7 @@
         <
         script
         script src = "{{ asset('asset/vendor/jquery-easing/jquery.easing.min.js') }}" >
+
     </script>
 
     <!-- Custom scripts for all pages-->
@@ -1221,9 +1180,7 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Laravel 11 User Roles and Permissions Tutorial - ItSolutionStuff.com
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -1255,8 +1212,7 @@
                         <li><a class="nav-link" href="{{ route('citymaster.index') }}">Manage cities</a></li>
 
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 

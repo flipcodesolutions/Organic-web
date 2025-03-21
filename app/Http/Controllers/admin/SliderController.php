@@ -38,7 +38,7 @@ class SliderController extends Controller
 
 
         $data = $query->with('city', 'navigatemaster')->where('status', 'active')->paginate(10);
-        $cities = CityMaster::where('status','active')->get();
+        $cities = CityMaster::where('status','active')->orderBy('city_name_eng', 'asc')->get();
         // return $cities;
         // return $data;
     return view('admin.slider.index', compact('data','cities'));
@@ -187,7 +187,7 @@ class SliderController extends Controller
 
         $data = $query->with('city')->where('status', 'deactive')->paginate(10);
         // return $data;
-        $cities = CityMaster::where('status','deactive')->get();
+        $cities = CityMaster::where('status','active')->orderBy('city_name_eng', 'asc')->get();
         // $sliders = Slider::where('status', 'deactive')->get();
 
         return view('admin.slider.deactivedata', compact('data','cities'));

@@ -120,4 +120,46 @@ class ProductController extends Controller
             return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
         }
     }
+    public function allProducts(Request $request)
+    {
+        try {
+            // Get user's preferred language
+            $language = Auth::user()->default_language;
+            $currentPage = $request->input('page', 1);
+            $search = $request->input('search');
+
+            $productEnglishFields = ['*', 'productName as displayName', 'productDescription as displayDescription'];
+            $productGujaratiFields = ['*', 'productNameGUj as displayName', 'productDescriptionGuj as displayDescription'];
+            $productHindiFields = ['*', 'productNameHin as displayName', 'productDescriptionHin as displayDescription'];
+
+            $query = Product::with(['productImages', 'productUnit.unitMaster'])
+                ->where('status', 'active')
+                ->select($language == 'Hindi' ? $productHindiFields : ($language == 'Gujarati' ? $productGujaratiFields : $productEnglishFields));
+
+            if (!empty($search)) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('productName', 'LIKE', "%{$search}%");
+                });
+            }
+            if ($request->has('product_id')) {
+                $query->where('id', $request->product_id);
+            }
+
+            $productsQuery = $query->paginate(10, ['*'], 'page', $currentPage);
+
+            $productsQuery->getCollection()->transform(function ($product) {
+                $product->productUnit->transform(function ($unit) {
+                    if (!isset($unit->unitMaster)) return $unit;
+                    $unit->unit = $unit->unitMaster->unit;
+                    unset($unit->unitMaster);
+                    return $unit;
+                });
+                return $product;
+            });
+
+            return Util::getSuccessMessage('Products', ['products' => $productsQuery]);
+        } catch (\Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
 }

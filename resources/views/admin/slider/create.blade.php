@@ -120,9 +120,9 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" name="is_navigate"
                                             id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-
-                                        </label>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Make Navigation
+                                            </label>
                                         {{-- <span>
                                             @error('is_navigate')
                                                 <p class="text-danger">{{ $message }}</p>

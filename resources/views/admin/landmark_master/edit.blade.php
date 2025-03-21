@@ -28,6 +28,7 @@
 
                 @csrf
                 <input type="hidden" value="{{ $landmarkmaster->id }}" name="landmark_id">
+                
                 <div class="row mb-3">
                     <div class="col-sm-12 col-lg-3 col-md-12">
                         City Name :

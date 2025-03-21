@@ -47,9 +47,8 @@ Route::get('/vendor/reviews', [VendorReviewController::class, 'index'])->name('v
 
 
 
-Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
-Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
-
+// Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+// Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 
 Route::get('purchase/index', [PurchaseController::class, 'index'])->name('purchases.index');
@@ -58,6 +57,10 @@ Route::post('purchase/store', [PurchaseController::class, 'store'])->name('purch
 Route::get('purchase/edit/{id?}', [PurchaseController::class, 'edit'])->name('purchases.edit');
 Route::post('purchase/update/{id?}', [PurchaseController::class, 'update'])->name('purchases.update');
 Route::get('purchase/show/{id?}', [PurchaseController::class, 'show'])->name('purchases.show');
+
+Route::get('purchase/deactive/{id?}', [PurchaseController::class, 'deactive'])->name('purchases.deactive');
+Route::get('purchase/deleted', [PurchaseController::class, 'deleted'])->name('purchases.deleted');
+Route::get('purchase/active/{id?}', [PurchaseController::class, 'active'])->name('purchases.active');
 Route::get('purchase/destroy/{id?}', [PurchaseController::class, 'destroy'])->name('purchases.destroy');
 
 

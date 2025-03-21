@@ -2,15 +2,15 @@
 @section('header', 'Products Create')
 @section('content')
 
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <div class="col">
-        <h1 class="h3 mb-0 text-gray-800">Create New Products</h1>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col">
+            <h1 class="h3 mb-0 text-gray-800">Create New Products</h1>
+        </div>
+        <a href="{{ route('product.index') }}" class="btn btn-primary" type="button"> Back </a>
     </div>
-    <a href="{{ route('product.index') }}" class="btn btn-primary" type="button"> Back </a>
-</div>
 
-<div class="card-body p-0">
-    <div class="card shadow-sm  bg-body rounded">
+    <div class="card-body p-0">
+        <div class="card shadow-sm  bg-body rounded">
             {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
@@ -32,7 +32,7 @@
                         <div class="col-sm-12 col-lg-3 col-md-12">
                             Name <span class="text-danger">*</span>
                         </div>
-                        <div class="col">
+                    TT    <div class="col">
                             <div class="form-floating">
                                 <input type="text" name="product_name" value="{{ old('product_name') }}"
                                     id="product_name" placeholder="product Name" class="form-control">
@@ -158,7 +158,7 @@
                                 <thead>
                                     <tr>
                                         <th>Unit</th>
-                                        <th>Detail (approx Weight)</th>
+                                        <th>Detail</th>
                                         <th>Price</th>
                                         <th>Discount Percentage</th>
                                         <th>Sell Price</th>
@@ -189,7 +189,7 @@
                                                 <input type="text" name="unit_det[]" value="{{ old('unit_det.0') }}"
                                                     id="unit_det" placeholder="Unit Detail in Approx Weight"
                                                     class="form-control">
-                                                <label for="">Approx Weight</label>
+                                                <label for="">Detail</label>
                                                 <span class="text-danger" id="unitDetError1"></span>
                                                 {{-- <span>
                                                     @error('unit_det.*')
@@ -202,7 +202,7 @@
                                             <div class="form-floating">
                                                 <input type="text" name="price[]" placeholder="Product Price"
                                                     value="{{ old('price.0') }}" class="form-control">
-                                                    <i class="fa-solid fa-indian-rupee-sign position-absolute"
+                                                <i class="fa-solid fa-indian-rupee-sign position-absolute"
                                                     style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                                                 <label for="">Product Price</label>
                                                 <span class="text-danger" id="productPriceError1"></span>
@@ -218,7 +218,7 @@
                                                 <input type="text" name="discount_per[]"
                                                     value="{{ old('discount_per.0') }}" placeholder="Discount Percentage"
                                                     min="1" max="100" class="form-control">
-                                                    <i class="fa-solid fa-percent position-absolute"
+                                                <i class="fa-solid fa-percent position-absolute"
                                                     style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                                                 <label for="">Discount Per</label>
                                                 <span class="text-danger" id="disPerError1"></span>
@@ -232,8 +232,8 @@
                                         <td>
                                             <div class="form-floating">
                                                 <input type="text" name="selling_price[]" placeholder="Selling Price"
-                                                    value="{{ old('selling_price.0') }}" class="form-control">
-                                                    <i class="fa-solid fa-indian-rupee-sign position-absolute"
+                                                    value="{{ old('selling_price.0') }}" class="form-control" readonly>
+                                                <i class="fa-solid fa-indian-rupee-sign position-absolute"
                                                     style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                                                 <label for="">Selling Price</label>
                                                 <span class="text-danger" id="sellPriceError1"></span>
@@ -478,8 +478,8 @@
                                 @enderror
                             </span> --}}
                         </div>
-                    </div> 
-                    
+                    </div>
+
                     {{-- is on home --}}
                     <div class="row mb-3">
                         <div class="col-sm-12 col-lg-3 col-md-12">
@@ -487,11 +487,12 @@
                         </div>
                         <div class="col">
                             <div class="form-check">
-                                <input class="form-check-input" name="is_on_home" type="checkbox" value="true" id="flexCheckDefault">
+                                <input class="form-check-input" name="is_on_home" type="checkbox" value="true"
+                                    id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Make it on home
                                 </label>
-                              </div>
+                            </div>
                         </div>
                     </div>
 
@@ -502,18 +503,18 @@
                         </div>
                         <div class="col">
                             <div class="form-check">
-                                <input class="form-check-input" name="is_navigate" type="checkbox" value="true" id="flexCheckDefault">
+                                <input class="form-check-input" name="is_navigate" type="checkbox" value="true"
+                                    id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Make Navigation
                                 </label>
-                              </div>
+                            </div>
                         </div>
                     </div>
 
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="submit btn"><i
-                                class="fa-solid fa-floppy-disk"></i>
+                        <button type="submit" class="submit btn"><i class="fa-solid fa-floppy-disk"></i>
                             Submit</button>
                     </div>
 
@@ -570,7 +571,7 @@
             // let product_nameRegex = /^[A-Z][a-z]*(?: [A-Z][a-z]*)*$/;
             if (!product_name) {
                 document.getElementById('productNameError').textContent = "Product name (English) is required.";
-            } 
+            }
             // else if (!product_name || !product_nameRegex.test(product_name)) {
             //     document.getElementById('productNameError').textContent =
             //         "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
@@ -586,7 +587,7 @@
 
             if (!product_name_hin) {
                 document.getElementById('productNameHinError').textContent = "Product name (Hindi) is required.";
-            } 
+            }
             // else if (!product_name_hin || !product_nameRegex.test(product_name_hin)) {
             //     document.getElementById('productNameHinError').textContent =
             //         "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";
@@ -944,7 +945,7 @@
             <td>
                 <div class="form-floating">
                     <input type="number" name="selling_price[]" value="${sellingPriceValue || ''}"
-                    placeholder="Selling Price" class="form-control">
+                    placeholder="Selling Price" class="form-control" readonly>
                     <i class="fa-solid fa-indian-rupee-sign position-absolute"
                     style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                     <label for="">Selling Price</label>
@@ -1019,6 +1020,117 @@
             });
         });
     </script>
+
+    {{-- script for calculate sellprice --}}
+    <script>
+        // Function to calculate selling price
+        function calculateSellingPrice(row) {
+            const price = parseFloat(row.querySelector('[name="price[]"]').value) || 0;
+            const discountPer = parseFloat(row.querySelector('[name="discount_per[]"]').value) || 0;
+
+            if (price && discountPer) {
+                const discountAmount = (price * discountPer) / 100;
+                let sellingPrice = price - discountAmount;
+
+                // Round the selling price to the nearest whole number
+                sellingPrice = Math.round(sellingPrice); // Round to nearest integer
+
+                row.querySelector('[name="selling_price[]"]').value = sellingPrice; // Update selling price field
+            } else {
+                row.querySelector('[name="selling_price[]"]').value = ''; // Clear selling price if input is invalid
+            }
+        }
+
+        // Add event listener to calculate selling price when price or discount is updated
+        document.addEventListener('input', function(event) {
+            const row = event.target.closest('tr');
+
+            // Check if the input changed is either price or discount percentage
+            if (row && (event.target.name === 'price[]' || event.target.name === 'discount_per[]')) {
+                calculateSellingPrice(row);
+            }
+        });
+
+        // Optional: Initialize selling price for the first row on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstRow = document.querySelector('.unitRow');
+            if (firstRow) {
+                calculateSellingPrice(firstRow);
+            }
+        });
+
+        // Handling dynamically added rows (when adding/removing rows)
+        document.getElementById('addUnit').addEventListener('click', function() {
+            // Wait for the new row to be added dynamically
+            setTimeout(function() {
+                const newRow = document.querySelector('.unitRow:last-child');
+                calculateSellingPrice(newRow); // Calculate selling price for new row
+            }, 100); // Short delay to ensure the row is added first
+        });
+
+        document.getElementById('removeUnit').addEventListener('click', function() {
+            // Recalculate selling price when row is removed (if needed)
+            setTimeout(function() {
+                const remainingRows = document.querySelectorAll('.unitRow');
+                remainingRows.forEach(row => calculateSellingPrice(row));
+            }, 100); // Short delay
+        });
+    </script>
+
+    {{-- <script>
+        // Function to calculate selling price
+        function calculateSellingPrice(row) {
+            const price = parseFloat(row.querySelector('[name="price[]"]').value) || 0;
+            const discountPer = parseFloat(row.querySelector('[name="discount_per[]"]').value) || 0;
+
+            if (price && discountPer) {
+                const discountAmount = (price * discountPer) / 100;
+                const sellingPrice = price - discountAmount;
+
+                // Round the selling price to the nearest whole number
+                // sellingPrice = Math.round(sellingPrice);
+                row.querySelector('[name="selling_price[]"]').value = sellingPrice.toFixed(2); // Update selling price field
+            } else {
+                row.querySelector('[name="selling_price[]"]').value = ''; // Clear selling price if input is invalid
+            }
+        }
+
+        // Add event listener to calculate selling price when price or discount is updated
+        document.addEventListener('input', function(event) {
+            const row = event.target.closest('tr');
+
+            // Check if the input changed is either price or discount percentage
+            if (row && (event.target.name === 'price[]' || event.target.name === 'discount_per[]')) {
+                calculateSellingPrice(row);
+            }
+        });
+
+        // Optional: Initialize selling price for the first row on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstRow = document.querySelector('.unitRow');
+            if (firstRow) {
+                calculateSellingPrice(firstRow);
+            }
+        });
+
+        // Handling dynamically added rows (when adding/removing rows)
+        document.getElementById('addUnit').addEventListener('click', function() {
+            // Wait for the new row to be added dynamically
+            setTimeout(function() {
+                const newRow = document.querySelector('.unitRow:last-child');
+                calculateSellingPrice(newRow); // Calculate selling price for new row
+            }, 100); // Short delay to ensure the row is added first
+        });
+
+        document.getElementById('removeUnit').addEventListener('click', function() {
+            // Recalculate selling price when row is removed (if needed)
+            setTimeout(function() {
+                const remainingRows = document.querySelectorAll('.unitRow');
+                remainingRows.forEach(row => calculateSellingPrice(row));
+            }, 100); // Short delay
+        });
+    </script> --}}
+
 
 
     {{-- <script>
