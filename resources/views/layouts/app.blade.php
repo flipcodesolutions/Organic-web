@@ -151,8 +151,8 @@
 
                         {{-- product --}}
                         <li
-                            class="nav-item {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') ? '' : 'collapsed' }}"
+                            class="nav-item {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') || request()->routeIs('stock.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') || request()->routeIs('stock.*') ? '' : 'collapsed' }}"
                                 href="#" data-toggle="collapse" data-target="#collapseUtilities2"
                                 aria-expanded="true" aria-controls="collapseUtilities">
                                 {{-- <i class="fas fa-fw fa-wrench"></i> --}}
@@ -161,7 +161,7 @@
                             </a>
 
                             <div id="collapseUtilities2"
-                                class="collapse {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') ? 'show' : '' }}"
+                                class="collapse {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') || request()->routeIs('stock.*') ? 'show' : '' }}"
                                 aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     {{-- category --}}
@@ -187,6 +187,12 @@
                                         href="{{ route('unit.index') }}">
                                         <i class="fa-solid fa-tags mr-2"></i>
                                         <span>Price Update</span></a>
+
+                                    {{-- stock update --}}
+                                    <a class="collapse-item {{ request()->routeIs('stock.*') ? 'active' : '' }}"
+                                        href="{{ route('stock.index') }}">
+                                        <i class="fa-solid fa-cubes-stacked mr-2"></i> 
+                                        <span>Stock Update</span></a>
 
                                     {{-- review --}}
                                     <a class="collapse-item {{ request()->routeIs('vendor.*') ? 'active' : '' }}"
@@ -1050,13 +1056,13 @@
         <script>
             var message =
                 '{{ session()->has('
-                                                                                                                                                                            success ')
+                                                                                                                                                                                            success ')
                     ? session()->get('
-                                                                                                                                                                            success ')
+                                                                                                                                                                                            success ')
                     : (session()->has('
-                                                                                                                                                                            error ')
+                                                                                                                                                                                            error ')
                         ? session()->get('
-                                                                                                                                                                            error ')
+                                                                                                                                                                                            error ')
                         : implode("\\n", $errors->all())) }}';
 
             // If there is a success message

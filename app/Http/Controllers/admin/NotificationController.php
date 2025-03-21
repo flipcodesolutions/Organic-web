@@ -28,7 +28,7 @@ class NotificationController extends Controller
         }
 
         $data = $query->where('status', 'active')->paginate(10);
-        $screen = NavigateMaster::where('status', 'active')->get();
+        $screen = NavigateMaster::where('status', 'active')->orderBy('screenname', 'asc')->get();
         return view('admin.notification.index', compact('data', 'screen'));
     }
 
@@ -156,7 +156,7 @@ class NotificationController extends Controller
         }
 
         $data = $query->where('status', 'deactive')->paginate(10);
-        $screen = NavigateMaster::where('status', 'active')->get();
+        $screen = NavigateMaster::where('status', 'active')->orderBy('screenname', 'asc')->get();
 
         return view('admin.notification.deactiveindex', compact('data','screen'));
     }
