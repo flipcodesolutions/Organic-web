@@ -216,6 +216,161 @@
                         {{-- </div> --}}
                     </div>
 
+                    {{-- add meta propertys --}}
+                    <hr class="sidebar-divider my-4">
+
+                    <div class="row mb-4">
+                        <h6 class="h5 mb-2 text-gray-800">Add Meta Propertys for Category</h6>
+                    </div>
+
+                    {{-- og titles --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Og Title
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogTitleEng" placeholder="English Title"
+                                    name="ogTitleEng" value="{{ old('ogTitleEng') }}">
+                                <label for="">English</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogTitleGuj" placeholder="Gujrati Title"
+                                    name="ogTitleGuj" value="{{ old('ogTitleGuj') }}">
+                                <label for="">Gujarati</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogTitleHin" placeholder="Hindi Title"
+                                    name="ogTitleHin" value="{{ old('ogTitleHin') }}">
+                                <label for="">Hindi</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- og Description --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Og Description
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogDescriptionEng"
+                                    placeholder="English Description" name="ogDescriptionEng"
+                                    value="{{ old('ogDescriptionEng') }}">
+                                <label for="">English</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogDescriptionGuj"
+                                    placeholder="Gujrati Description" name="ogDescriptionGuj"
+                                    value="{{ old('ogDescriptionGuj') }}">
+                                <label for="">Gujarati</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogDescriptionHin"
+                                    placeholder="Hindi Description" name="ogDescriptionHin"
+                                    value="{{ old('ogDescriptionHin') }}">
+                                <label for="">Hindi</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- og image --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Og Image
+                        </div>
+                        <div class="col-2" id="imagepreview">
+                            <img id="ogImagePreview" src="{{ asset('defaultimage/default4.jpg') }}" alt="Og Image"
+                                height="100px" width="150px">
+                        </div>
+                        <div class="col">
+                            <div class="form">
+                                <label>Upload Image</label>
+                                <input type="file" class="form-control" id="ogImage" placeholder=""
+                                    name="ogImage">
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- og url --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Og Url
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogUrl" placeholder="" name="ogUrl"
+                                    value="{{ old('ogUrl') }}">
+                                <label for="">Url</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- description --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="description" placeholder=""
+                                    name="description" value="{{ old('description') }}">
+                                <label for="">description</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- keyword --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Keyword
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="keywords" placeholder=""
+                                    name="keywords" value="{{ old('keywords') }}">
+                                <label for="">keywords</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- author --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Author
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="author" placeholder="" name="author"
+                                    value="{{ old('author') }}">
+                                <label for="">author</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- tages --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Tages
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="tages" placeholder="Hindi Title"
+                                    name="tages" value="{{ old('tages') }}">
+                                <label for="">tages</label>
+                            </div>
+                        </div>
+                    </div>
+
+
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -272,6 +427,22 @@
                 }
             });
         })
+    </script>
+
+    {{-- for og image preview --}}
+    <script>
+        document.getElementById("ogImage").addEventListener("change", function(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                // When file is loaded, update the src of the image
+                document.getElementById("ogImagePreview").src = reader.result;
+            }
+
+            // Only read the file if it's not empty
+            if (event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        });
     </script>
 
     {{-- <script>

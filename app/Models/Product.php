@@ -27,9 +27,16 @@ class Product extends Model
         return $this->hasMany(Unit::class, 'product_id');
     }
 
+    // relation for brand
     public function brand()
     {
         return $this->belongsTo(Brand::class, 'brandId');
+    }
+
+    // relation for metaproperty
+    public function metaproperty()
+    {
+        return $this->hasOne(MetaPropertyProduct::class, 'productId');
     }
     
 }

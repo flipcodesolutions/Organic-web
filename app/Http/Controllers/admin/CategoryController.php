@@ -4,6 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\MetaPropertyCategory;
+use App\Models\MetaPropertyCategoy;
 use App\Models\NavigateMaster;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -108,6 +110,33 @@ class CategoryController extends Controller
             $navigate->save();
         }
 
+        if ($request->ogTitleEng !== null || $request->ogTitleGuj !== null || $request->ogTitleHin !== null || $request->ogDescriptionEng !== null || $request->ogDescriptionGuj !== null || $request->ogDescriptionHin !== null || $request->ogUrl !== null || $request->description !== null || $request->keywords !== null || $request->author !== null || $request->tages !== null || $request->hasFile('ogImage')) {
+            $metaProperty = new MetaPropertyCategory();
+            $metaProperty->categoryId = $category->id;
+            $metaProperty->ogTitleEng = $request->ogTitleEng;
+            $metaProperty->ogTitleGuj = $request->ogTitleGuj;
+            $metaProperty->ogTitleHin = $request->ogTitleHin;
+            $metaProperty->ogDescriptionEng = $request->ogDescriptionEng;
+            $metaProperty->ogDescriptionGuj = $request->ogDescriptionGuj;
+            $metaProperty->ogDescriptionHin = $request->ogDescriptionHin;
+            $metaProperty->ogUrl = $request->ogUrl;
+            $metaProperty->description = $request->description;
+            $metaProperty->keywords = $request->keywords;
+            $metaProperty->author = $request->author;
+            $metaProperty->tages = $request->tages;
+            $metaProperty->status = $request->status;
+
+            if ($request->hasFile('ogImage')) {
+                $image = $request->file('ogImage');
+                $path = 'categoryOgImages/';
+                $imagename = time() . '.' . $image->getClientOriginalExtension();
+                $image->move($path, $imagename);
+                $metaProperty->ogImage = 'categoryOgImages/' . $imagename;
+            }
+
+            $metaProperty->save();
+        }
+
         return redirect()->route('category.index')->with('msg', 'Category Created Successfully!');
 
         // return response()->json([
@@ -123,7 +152,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         // try {
-        $category = Category::find($id);
+        $category = Category::with('metaproperty')->find($id);
         $categories = Category::where([
             ['status', '=', 'active'],
             ['parent_category_id', '=', 0]
@@ -195,6 +224,40 @@ class CategoryController extends Controller
         }
 
         $category->save();
+
+        if ($request->ogTitleEng !== null || $request->ogTitleGuj !== null || $request->ogTitleHin !== null || $request->ogDescriptionEng !== null || $request->ogDescriptionGuj !== null || $request->ogDescriptionHin !== null || $request->ogUrl !== null || $request->description !== null || $request->keywords !== null || $request->author !== null || $request->tages !== null || $request->hasFile('ogImage')) {
+
+            $metaProperty = MetaPropertyCategory::find($request->metaPropertyId);
+            $metaProperty->categoryId = $category->id;
+            $metaProperty->ogTitleEng = $request->ogTitleEng;
+            $metaProperty->ogTitleGuj = $request->ogTitleGuj;
+            $metaProperty->ogTitleHin = $request->ogTitleHin;
+            $metaProperty->ogDescriptionEng = $request->ogDescriptionEng;
+            $metaProperty->ogDescriptionGuj = $request->ogDescriptionGuj;
+            $metaProperty->ogDescriptionHin = $request->ogDescriptionHin;
+            $metaProperty->ogUrl = $request->ogUrl;
+            $metaProperty->description = $request->description;
+            $metaProperty->keywords = $request->keywords;
+            $metaProperty->author = $request->author;
+            $metaProperty->tages = $request->tages;
+            $metaProperty->status = $request->status;
+
+            if ($request->hasFile('ogImage')) {
+                $currentimagepath = public_path($metaProperty->ogImage);
+                if (file_exists($currentimagepath)) {
+                    unlink($currentimagepath);
+                }
+                $image = $request->file('ogImage');
+                $path = 'categoryOgImages/';
+                $imagename = time() . '.' . $image->getClientOriginalExtension();
+                $image->move($path, $imagename);
+                $metaProperty->ogImage = 'categoryOgImages/' . $imagename;
+            }
+
+            $metaProperty->save();
+        }
+
+
         return redirect()->route('category.index')->with('msg', 'Category Updated Successfully!');
         // } catch (\Exception $e) {
         //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
@@ -278,8 +341,8 @@ class CategoryController extends Controller
 
         //     $productdata->delete();
         // }
-        if ($product->count()>0) {
-            return back()->with('warning','First you need to delete the products registered with this category after that you can delete this category!');
+        if ($product->count() > 0) {
+            return back()->with('warning', 'First you need to delete the products registered with this category after that you can delete this category!');
         } else {
             $category = Category::find($id);
 
@@ -288,8 +351,8 @@ class CategoryController extends Controller
                 unlink($categoryimagepath);
             }
 
-            $navigate = NavigateMaster::where('screenname','product_screen/category/'.$id)->first(); 
-            if($navigate){
+            $navigate = NavigateMaster::where('screenname', 'product_screen/category/' . $id)->first();
+            if ($navigate) {
                 // return $navigate;
                 $navigate->delete();
             }

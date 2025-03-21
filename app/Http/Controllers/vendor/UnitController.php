@@ -5,6 +5,7 @@ namespace App\Http\Controllers\vendor;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Unit;
+use App\Models\UnitMaster;
 use Illuminate\Http\Request;
 
 class UnitController extends Controller
@@ -28,7 +29,8 @@ class UnitController extends Controller
         // }
 
         $product = Product::where('status','active')->orderBy('productName', 'asc')->get();
-        return view('admin.unit.index',compact('product','data'));
+        $units = UnitMaster::where('status','active')->get();
+        return view('admin.unit.index',compact('product','data','units'));
     }
 
     /**
@@ -44,7 +46,24 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'unit' => 'required',
+            'productId' => 'required',
+            'price' => 'required|numeric',
+            'unitDetails' => 'required',
+            'desPer' => 'required|numeric|between:1,100',
+            'sellingPrice' => 'required|numeric'
+        ]);
+        $unit = new Unit();
+        $unit->unit = $request->unit;
+        $unit->product_id = $request->productId;
+        $unit->price = $request->price;
+        $unit->detail = $request->unitDetails;
+        $unit->per = $request->desPer;
+        $unit->sell_price = $request->sellingPrice;
+        $unit->save();
+
+        return redirect()->back()->with('msg','New unit Added Successfully!');
     }
 
     /**

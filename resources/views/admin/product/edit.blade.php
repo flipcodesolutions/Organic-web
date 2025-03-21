@@ -197,9 +197,8 @@
 
                                             <td>
                                                 <div class="form-floating">
-                                                    <input type="text" name="unit_det[]"
-                                                        placeholder="Unit Detail" class="form-control"
-                                                        value="{{ $data->detail }}">
+                                                    <input type="text" name="unit_det[]" placeholder="Unit Detail"
+                                                        class="form-control" value="{{ $data->detail }}">
                                                     <label for="">Detail</label>
                                                     <span class="text-danger"
                                                         id="unitDetError{{ $index + 1 }}"></span>
@@ -312,7 +311,7 @@
 
                                     <!-- Buttons Row -->
                                     <tr id="unitButtonsRow">
-                                        <td colspan="4" style="display: flex; gap: 5px">
+                                        <td colspan="6">
                                             <button type="button" class="btn btn-primary my-2" id="addUnit">+</button>
                                             <button type="button" class="btn btn-danger my-2" id="removeUnit">-</button>
                                         </td>
@@ -729,6 +728,167 @@
                         </div>
                     </div>
 
+                    {{-- add meta propertys --}}
+                    <hr class="sidebar-divider my-4">
+
+                    <div class="row mb-4">
+                        <h6 class="h5 mb-2 text-gray-800">Edit Meta Propertys</h6>
+                        <input type="hidden" value="{{ $product->metaproperty->id }}" name="metaPropertyId">
+                    </div>
+
+                    {{-- og titles --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Og Title
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogTitleEng" placeholder="English Title"
+                                    name="ogTitleEng" value="{{ $product->metaproperty->ogTitleEng }}">
+                                <label for="">English</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogTitleGuj" placeholder="Gujrati Title"
+                                    name="ogTitleGuj" value="{{ $product->metaproperty->ogTitleGuj }}">
+                                <label for="">Gujarati</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogTitleHin" placeholder="Hindi Title"
+                                    name="ogTitleHin" value="{{ $product->metaproperty->ogTitleHin }}">
+                                <label for="">Hindi</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- og Description --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Og Description
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogDescriptionEng"
+                                    placeholder="English Description" name="ogDescriptionEng"
+                                    value="{{ $product->metaproperty->ogDescriptionEng }}">
+                                <label for="">English</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogDescriptionGuj"
+                                    placeholder="Gujrati Description" name="ogDescriptionGuj"
+                                    value="{{ $product->metaproperty->ogDescriptionGuj }}">
+                                <label for="">Gujarati</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogDescriptionHin"
+                                    placeholder="Hindi Description" name="ogDescriptionHin"
+                                    value="{{ $product->metaproperty->ogDescriptionHin }}">
+                                <label for="">Hindi</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- og image --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Og Image
+                        </div>
+                        <div class="col-2" id="imagepreview">
+                            @if ($product->metaproperty->ogImage)
+                                <img id="ogImagePreview" src="{{ asset($product->metaproperty->ogImage) }}"
+                                    alt="Og Image" height="100px" width="150px">
+                            @else
+                                <img id="ogImagePreview" src="{{ asset('defaultimage/default4.jpg') }}" alt="Og Image"
+                                    height="100px" width="150px">
+                            @endif
+                        </div>
+                        <div class="col">
+                            <div class="form">
+                                <label>Upload Image</label>
+                                <input type="file" class="form-control" id="ogImage" placeholder=""
+                                    name="ogImage">
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- og url --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Og Url
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogUrl" placeholder="" name="ogUrl"
+                                    value="{{ $product->metaproperty->ogUrl }}">
+                                <label for="">Url</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- description --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="description" placeholder=""
+                                    name="description" value="{{ $product->metaproperty->description }}">
+                                <label for="">description</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- keyword --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Keyword
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="keywords" placeholder=""
+                                    name="keywords" value="{{ $product->metaproperty->keywords }}">
+                                <label for="">keywords</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- author --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Author
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="author" placeholder="" name="author"
+                                    value="{{ $product->metaproperty->author }}">
+                                <label for="">author</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- tages --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Tages
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="tages" placeholder="Hindi Title"
+                                    name="tages" value="{{ $product->metaproperty->tages }}">
+                                <label for="">tages</label>
+                            </div>
+                        </div>
+                    </div>
+
+
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <button type="submit" class="update btn" id="Update"><i class="fa-solid fa-floppy-disk"></i>
@@ -943,7 +1103,7 @@
                         .includes('discount_per'))) {
                     const row = event.target.closest('tr');
                     const productPrice = parseFloat(row.querySelector('[name*="product_price"]').value) ||
-                    0;
+                        0;
                     const discountPercentage = parseFloat(row.querySelector('[name*="discount_per"]')
                         .value) || 0;
 
@@ -1176,7 +1336,23 @@
         // }
     </script>
 
-    {{--old working js for add and remove new units --}}
+    {{-- for og image preview --}}
+    <script>
+        document.getElementById("ogImage").addEventListener("change", function(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                // When file is loaded, update the src of the image
+                document.getElementById("ogImagePreview").src = reader.result;
+            }
+
+            // Only read the file if it's not empty
+            if (event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        });
+    </script>
+
+    {{-- old working js for add and remove new units --}}
     {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             const addUnitBtn = document.getElementById("addUnit");
