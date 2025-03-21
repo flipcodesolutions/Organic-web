@@ -1,16 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
-    <h2>Edit Purchase</h2>
 
-    @if(session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
-    @endif
-
-    <form action="{{ route('purchases.update', $purchase->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+    <div class="card shadow-sm  bg-body rounded">
+        <div class="card-header d-flex">
+            <div class="col text-white mt-2">
+                <h6 class="mb-0">Edit Purchase</h6>
+            </div>
+            <div class="heading d-flex row align-items-center">
+                <div class="col d-flex" align="right" style="gap: 3px">
+                    {{-- <a class="b1 btn btn-danger" href="{{ route('product.deactiveindex') }}">Deactivated Purchase</a> --}}
+                    <a class="btn btn-primary" href="{{ route('purchases.index') }}">Back</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form id="productForm" action="{{ route('product.update', $purchase->id) }}" method="post" enctype="multipart/form-data"
+                class="form">
+                @csrf
 
         <div class="mb-3">
             <label>Product ID</label>
@@ -35,7 +44,7 @@
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="update btn" id="Update"><i class="fa-solid fa-floppy-disk"></i> Update </button>
+                <button type="submit" class="update btn" id="Update"> Update </button>
             </div>
         </div>
         
