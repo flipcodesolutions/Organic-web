@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Purchase;
 use App\Models\Product;
+use App\Models\orderDetail;
+use Illuminate\Support\Facades\DB;
+
 
 class PurchaseController extends Controller
 {
@@ -87,4 +90,18 @@ class PurchaseController extends Controller
         //  return view('admin.reports.purchaseReport',['purchase'=>$purchase]); 
          return view('admin.reports.purchaseDateWise'); 
     }
+
+
+    public function topSelling(){
+        $topselling=orderDetail:: select('productId', DB::raw('SUM(qty) as total_sold'))
+        ->groupBy('productId')
+        ->orderByDesc('total_sold')
+        ->limit(5)
+        ->get();
+        // return $topselling;
+        return view('admin.reports.topSelling',['data'=>$topselling]);
+    }
+
+       
+    
 }

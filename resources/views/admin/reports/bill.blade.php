@@ -36,28 +36,29 @@
             <th>Quantity</th>
             <th>Amount</th>
         </tr>
-        <?php
+        @php
             $qty_count=0;
             $item_count=0;
-        ?>
+        @endphp
         @foreach ($data->orderDetails as $product)
         <tr>
             <td>{{$product->product->productName}}</td>
             <td>{{$product->price}}</td>
             <td>{{$product->qty}}</td>
             <td>{{$product->total}}</td>
-            <?php
+            @php
                 $item_count++;
                 $qty_count=$qty_count+$product->qty;
-            ?>
+            @endphp
         </tr>
+        
+        @endforeach
         <tr>
             <td>Total Items {{$item_count}}</td>
             <td></td>
-            <td>Total Quantity{{$qty_count}}</td>
+            <td>Total Quantity {{$qty_count}}</td>
             <td></td>
         </tr>
-        @endforeach
         <tr>
             <td colspan=3>Total order Amount</td>
             <td>{{$data->total_order_amt}}</td>
