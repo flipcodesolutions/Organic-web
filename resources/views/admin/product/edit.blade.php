@@ -733,7 +733,9 @@
 
                     <div class="row mb-4">
                         <h6 class="h5 mb-2 text-gray-800">Edit Meta Propertys</h6>
+                        @if ($product->metaproperty && $product->metaproperty->id)
                         <input type="hidden" value="{{ $product->metaproperty->id }}" name="metaPropertyId">
+                        @endif
                     </div>
 
                     {{-- og titles --}}
@@ -744,21 +746,21 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogTitleEng" placeholder="English Title"
-                                    name="ogTitleEng" value="{{ $product->metaproperty->ogTitleEng }}">
+                                    name="ogTitleEng" @if ($product->metaproperty) value="{{ $product->metaproperty->ogTitleEng }} " @endif>
                                 <label for="">English</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogTitleGuj" placeholder="Gujrati Title"
-                                    name="ogTitleGuj" value="{{ $product->metaproperty->ogTitleGuj }}">
+                                    name="ogTitleGuj" @if ($product->metaproperty) value="{{ $product->metaproperty->ogTitleGuj }}" @endif>
                                 <label for="">Gujarati</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogTitleHin" placeholder="Hindi Title"
-                                    name="ogTitleHin" value="{{ $product->metaproperty->ogTitleHin }}">
+                                    name="ogTitleHin" @if ($product->metaproperty) value="{{ $product->metaproperty->ogTitleHin }}" @endif>
                                 <label for="">Hindi</label>
                             </div>
                         </div>
@@ -773,7 +775,7 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogDescriptionEng"
                                     placeholder="English Description" name="ogDescriptionEng"
-                                    value="{{ $product->metaproperty->ogDescriptionEng }}">
+                                    @if ($product->metaproperty) value="{{ $product->metaproperty->ogDescriptionEng }}" @endif>
                                 <label for="">English</label>
                             </div>
                         </div>
@@ -781,7 +783,7 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogDescriptionGuj"
                                     placeholder="Gujrati Description" name="ogDescriptionGuj"
-                                    value="{{ $product->metaproperty->ogDescriptionGuj }}">
+                                    @if ($product->metaproperty) value="{{ $product->metaproperty->ogDescriptionGuj }}" @endif>
                                 <label for="">Gujarati</label>
                             </div>
                         </div>
@@ -789,7 +791,7 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogDescriptionHin"
                                     placeholder="Hindi Description" name="ogDescriptionHin"
-                                    value="{{ $product->metaproperty->ogDescriptionHin }}">
+                                    @if ($product->metaproperty) value="{{ $product->metaproperty->ogDescriptionHin }}" @endif>
                                 <label for="">Hindi</label>
                             </div>
                         </div>
@@ -801,7 +803,7 @@
                             Og Image
                         </div>
                         <div class="col-2" id="imagepreview">
-                            @if ($product->metaproperty->ogImage)
+                            @if ($product->metaproperty && $product->metaproperty->ogImage)
                                 <img id="ogImagePreview" src="{{ asset($product->metaproperty->ogImage) }}"
                                     alt="Og Image" height="100px" width="150px">
                             @else
@@ -826,7 +828,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogUrl" placeholder="" name="ogUrl"
-                                    value="{{ $product->metaproperty->ogUrl }}">
+                                @if ($product->metaproperty) value="{{ $product->metaproperty->ogUrl }}" @endif>
                                 <label for="">Url</label>
                             </div>
                         </div>
@@ -840,7 +842,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="description" placeholder=""
-                                    name="description" value="{{ $product->metaproperty->description }}">
+                                    name="description" @if ($product->metaproperty) value="{{ $product->metaproperty->description }}" @endif>
                                 <label for="">description</label>
                             </div>
                         </div>
@@ -854,7 +856,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="keywords" placeholder=""
-                                    name="keywords" value="{{ $product->metaproperty->keywords }}">
+                                    name="keywords" @if ($product->metaproperty) value="{{ $product->metaproperty->keywords }}" @endif>
                                 <label for="">keywords</label>
                             </div>
                         </div>
@@ -868,7 +870,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="author" placeholder="" name="author"
-                                    value="{{ $product->metaproperty->author }}">
+                                @if ($product->metaproperty) value="{{ $product->metaproperty->author }}" @endif>
                                 <label for="">author</label>
                             </div>
                         </div>
@@ -882,7 +884,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="tages" placeholder="Hindi Title"
-                                    name="tages" value="{{ $product->metaproperty->tages }}">
+                                    name="tages" @if ($product->metaproperty) value="{{ $product->metaproperty->tages }}" @endif>
                                 <label for="">tages</label>
                             </div>
                         </div>

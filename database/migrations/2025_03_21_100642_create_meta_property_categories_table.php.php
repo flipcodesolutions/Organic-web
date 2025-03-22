@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('keywords')->nullable();
             $table->string('author')->nullable();
             $table->string('tages')->nullable();
-            $table->enum('status', ['Yes', 'No']);
             $table->timestamps();
         });
     }

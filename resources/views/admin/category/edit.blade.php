@@ -234,7 +234,9 @@
 
                     <div class="row mb-4">
                         <h6 class="h5 mb-2 text-gray-800">Edit Meta Propertys</h6>
-                        <input type="hidden" value="{{ $category->metaproperty->id }}" name="metaPropertyId">
+                        @if ($category->metaproperty && $category->metaproperty->id)
+                            <input type="hidden" value="{{ $category->metaproperty->id }}" name="metaPropertyId">
+                        @endif
                     </div>
 
                     {{-- og titles --}}
@@ -245,21 +247,24 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogTitleEng" placeholder="English Title"
-                                    name="ogTitleEng" value="{{ $category->metaproperty->ogTitleEng }}">
+                                    name="ogTitleEng"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogTitleEng }}" @endif>
                                 <label for="">English</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogTitleGuj" placeholder="Gujrati Title"
-                                    name="ogTitleGuj" value="{{ $category->metaproperty->ogTitleGuj }}">
+                                    name="ogTitleGuj"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogTitleGuj }}" @endif>
                                 <label for="">Gujarati</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogTitleHin" placeholder="Hindi Title"
-                                    name="ogTitleHin" value="{{ $category->metaproperty->ogTitleHin }}">
+                                    name="ogTitleHin"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogTitleHin }}" @endif>
                                 <label for="">Hindi</label>
                             </div>
                         </div>
@@ -274,7 +279,7 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogDescriptionEng"
                                     placeholder="English Description" name="ogDescriptionEng"
-                                    value="{{ $category->metaproperty->ogDescriptionEng }}">
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogDescriptionEng }}" @endif>
                                 <label for="">English</label>
                             </div>
                         </div>
@@ -282,7 +287,7 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogDescriptionGuj"
                                     placeholder="Gujrati Description" name="ogDescriptionGuj"
-                                    value="{{ $category->metaproperty->ogDescriptionGuj }}">
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogDescriptionGuj }}" @endif>
                                 <label for="">Gujarati</label>
                             </div>
                         </div>
@@ -290,7 +295,7 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogDescriptionHin"
                                     placeholder="Hindi Description" name="ogDescriptionHin"
-                                    value="{{ $category->metaproperty->ogDescriptionHin }}">
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogDescriptionHin }}" @endif>
                                 <label for="">Hindi</label>
                             </div>
                         </div>
@@ -302,7 +307,7 @@
                             Og Image
                         </div>
                         <div class="col-2" id="imagepreview">
-                            @if ($category->metaproperty->ogImage)
+                            @if ($category->metaproperty && $category->metaproperty->ogImage)
                                 <img id="ogImagePreview" src="{{ asset($category->metaproperty->ogImage) }}"
                                     alt="Og Image" height="100px" width="150px">
                             @else
@@ -327,7 +332,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="ogUrl" placeholder="" name="ogUrl"
-                                    value="{{ $category->metaproperty->ogUrl }}">
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogUrl }}" @endif>
                                 <label for="">Url</label>
                             </div>
                         </div>
@@ -341,7 +346,8 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="description" placeholder=""
-                                    name="description" value="{{ $category->metaproperty->description }}">
+                                    name="description"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->description }}" @endif>
                                 <label for="">description</label>
                             </div>
                         </div>
@@ -355,7 +361,8 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="keywords" placeholder=""
-                                    name="keywords" value="{{ $category->metaproperty->keywords }}">
+                                    name="keywords"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->keywords }}" @endif>
                                 <label for="">keywords</label>
                             </div>
                         </div>
@@ -369,7 +376,7 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="author" placeholder="" name="author"
-                                    value="{{ $category->metaproperty->author }}">
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->author }}" @endif>
                                 <label for="">author</label>
                             </div>
                         </div>
@@ -383,7 +390,8 @@
                         <div class="col">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="tages" placeholder="Hindi Title"
-                                    name="tages" value="{{ $category->metaproperty->tages }}">
+                                    name="tages"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->tages }}" @endif>
                                 <label for="">tages</label>
                             </div>
                         </div>
@@ -470,6 +478,22 @@
 
             // Add an event listener for checkbox change to toggle the disabled state
             checkbox.addEventListener('change', toggleSelect);
+        });
+    </script>
+
+    {{-- for og image preview --}}
+    <script>
+        document.getElementById("ogImage").addEventListener("change", function(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                // When file is loaded, update the src of the image
+                document.getElementById("ogImagePreview").src = reader.result;
+            }
+
+            // Only read the file if it's not empty
+            if (event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
         });
     </script>
 
