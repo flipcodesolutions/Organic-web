@@ -42,7 +42,7 @@
                             <select id="cityId" name="cityId" class="form-select">
                                 <option value="" selected> Select city </option>
                                 @foreach ($cities as $citydata)
-                                    <option value="{{ $citydata->id }}"
+                                     <option value="{{ $citydata->id }}"
                                         {{ request('cityId') == $citydata->id ? 'selected' : '' }}>
                                         {{ $citydata->city_name_eng }}
                                     </option>

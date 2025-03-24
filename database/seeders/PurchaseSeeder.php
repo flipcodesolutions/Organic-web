@@ -16,7 +16,7 @@ class PurchaseSeeder extends Seeder
         
         ModelsPurchase::insert([
             'id' => '1',
-            'product_id' => '2',
+            'product_id' => '1',
             'date' => '2025-03-13',
             'price' => '560',
             'qty' => '1',
