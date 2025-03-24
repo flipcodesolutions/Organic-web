@@ -121,7 +121,7 @@
                     @if (count($data) > 0)
                         @foreach ($data as $key => $productData)
                             <tr>
-                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $data->firstItem() + $key  }}</td>
                                 <td>
                                     {{ $productData->categories->categoryName }}
                                     {{-- <ul>

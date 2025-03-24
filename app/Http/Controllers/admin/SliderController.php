@@ -49,8 +49,8 @@ class SliderController extends Controller
      */
     public function create()
     {
-        $cities = CityMaster::all();
-        $navigatemasters = NavigateMaster::all();
+        $cities = CityMaster::orderBy('city_name_eng', 'asc')->get();
+        $navigatemasters = NavigateMaster::orderBy('screenname', 'asc')->get();
         return view('admin.slider.create', compact('cities', 'navigatemasters'));
     }
 
@@ -103,8 +103,8 @@ class SliderController extends Controller
     public function edit(string $id)
     {
         $slider = Slider::find($id);
-        $cities = CityMaster::all();
-        $navigatemasters = NavigateMaster::all();
+        $cities = CityMaster::orderBy('city_name_eng', 'asc')->get();
+        $navigatemasters = NavigateMaster::orderBy('screenname', 'asc')->get();
         return view('admin.slider.edit', compact('slider', 'cities', 'navigatemasters'));
     }
 
@@ -163,6 +163,7 @@ class SliderController extends Controller
 
         return redirect()->route('slider.index')->with('msg', 'Slider Deactivated Successfully');
     }
+    
     public function deactive(Request $request)
     {
 
@@ -192,6 +193,7 @@ class SliderController extends Controller
 
         return view('admin.slider.deactivedata', compact('data','cities'));
     }
+
     public function active($id)
     {
         $slider = Slider::find($id);
@@ -200,6 +202,7 @@ class SliderController extends Controller
 
         return back()->with('msg', 'Slider Activated Successfully');
     }
+
     public function permdelete($id)
     {
         $slider = Slider::find($id);

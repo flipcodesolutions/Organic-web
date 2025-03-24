@@ -81,7 +81,7 @@
 
                         <li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('home') }}">
-                                <i class="fas fa-fw fa-tachometer-alt"></i>
+                                <i class="fas fa-tachometer-alt"></i>
                                 <span>Dashboard</span></a>
                         </li>
 

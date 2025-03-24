@@ -5178,9 +5178,10 @@
 }
 
 .fa-tachometer-alt:before {
-    content: "\f3fd";
-    /* color : lightyellow; */
-    
+    /* color: black;
+    border: 2px solid #d5dae0;
+    border-radius: 8px; */
+    /* padding: 10px; */
 }
 
 .fa-tag:before {
@@ -5869,7 +5870,8 @@
 }
 
 .fa-warehouse:before {
-    content: "\f494"
+    content: "\f494";
+
 }
 
 .fa-watchman-monitoring:before {

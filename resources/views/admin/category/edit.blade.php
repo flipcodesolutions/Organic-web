@@ -81,7 +81,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="category_des" value="{{ old('product_des') }}"
+                                <textarea class="ckeditor form-control" name="category_des" value="{{ old('category_des') }}"
                                     placeholder="Category Description English" id="floatingTextarea">{{ $category->categoryDescription }}</textarea>
                                 {{-- <input type="text" name="category_des" id="category_name"
                                             placeholder="Category Name" class="form-control"
@@ -101,7 +101,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="category_des_guj" value="{{ old('product_des_guj') }}"
+                                <textarea class="ckeditor form-control" name="category_des_guj" value="{{ old('category_des_guj') }}"
                                     placeholder="Category Description Gujarati" id="floatingTextarea">{{ $category->categoryDescriptionGuj }}</textarea>
                                 {{-- <input type="text" name="category_des_guj" id="category_name"
                                     placeholder="Category Name" class="form-control"
@@ -121,7 +121,7 @@
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <textarea class="ckeditor form-control" name="category_des_hin" value="{{ old('product_des_hin') }}"
+                                <textarea class="ckeditor form-control" name="category_des_hin" value="{{ old('category_des_hin') }}"
                                     placeholder="Category Description Hindi" id="floatingTextarea">{{ $category->categoryDescriptionHin }}</textarea>
                                 {{-- <input type="text" name="category_des_hin" id="category_name"
                                     placeholder="Category Name" class="form-control"
@@ -147,8 +147,8 @@
                         </div>
                         <div class="col">
                             <div class="form">
-                                <input type="file" name="category_image" id="category_Image"
-                                    placeholder="Category Name" class="form-control" onchange="previewImage(event)">
+                                <input type="file" name="category_image" id="category_Image" placeholder="Category Name"
+                                    class="form-control" onchange="previewImage(event)">
                                 {{-- <label for="">Image</label> --}}
                                 <span>
                                     @error('category_image')
@@ -167,7 +167,7 @@
                         <div class="col">
                             <div class="form-check">
                                 <input class="form-check-input" name="is_navigate" type="checkbox" value="true"
-                                    id="navigate" @if ($navigate && $navigate->screenname == 'product_screen/category/' . $category->id) checked @endif>
+                                    id="navigate" @if ($navigate && $navigate->screenname == 'category_screen/category/' . $category->id) checked @endif>
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Make Navigation
                                 </label>
@@ -227,6 +227,174 @@
                             </span>
                         </div>
                         {{-- </div> --}}
+                    </div>
+
+                    {{-- add meta propertys --}}
+                    <hr class="sidebar-divider my-4">
+
+                    <div class="row mb-4">
+                        <h6 class="h5 mb-2 text-gray-800">Edit Meta Propertys</h6>
+                        @if ($category->metaproperty && $category->metaproperty->id)
+                            <input type="hidden" value="{{ $category->metaproperty->id }}" name="metaPropertyId">
+                        @endif
+                    </div>
+
+                    {{-- og titles --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Og Title
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogTitleEng" placeholder="English Title"
+                                    name="ogTitleEng"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogTitleEng }}" @endif>
+                                <label for="">English</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogTitleGuj" placeholder="Gujrati Title"
+                                    name="ogTitleGuj"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogTitleGuj }}" @endif>
+                                <label for="">Gujarati</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogTitleHin" placeholder="Hindi Title"
+                                    name="ogTitleHin"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogTitleHin }}" @endif>
+                                <label for="">Hindi</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- og Description --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Og Description
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogDescriptionEng"
+                                    placeholder="English Description" name="ogDescriptionEng"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogDescriptionEng }}" @endif>
+                                <label for="">English</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogDescriptionGuj"
+                                    placeholder="Gujrati Description" name="ogDescriptionGuj"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogDescriptionGuj }}" @endif>
+                                <label for="">Gujarati</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogDescriptionHin"
+                                    placeholder="Hindi Description" name="ogDescriptionHin"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogDescriptionHin }}" @endif>
+                                <label for="">Hindi</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- og image --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Og Image
+                        </div>
+                        <div class="col-2" id="imagepreview">
+                            @if ($category->metaproperty && $category->metaproperty->ogImage)
+                                <img id="ogImagePreview" src="{{ asset($category->metaproperty->ogImage) }}"
+                                    alt="Og Image" height="100px" width="150px">
+                            @else
+                                <img id="ogImagePreview" src="{{ asset('defaultimage/default4.jpg') }}" alt="Og Image"
+                                    height="100px" width="150px">
+                            @endif
+                        </div>
+                        <div class="col">
+                            <div class="form">
+                                <label>Upload Image</label>
+                                <input type="file" class="form-control" id="ogImage" placeholder=""
+                                    name="ogImage">
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- og url --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Og Url
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="ogUrl" placeholder="" name="ogUrl"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->ogUrl }}" @endif>
+                                <label for="">Url</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- description --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Description
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="description" placeholder=""
+                                    name="description"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->description }}" @endif>
+                                <label for="">description</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- keyword --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Keyword
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="keywords" placeholder=""
+                                    name="keywords"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->keywords }}" @endif>
+                                <label for="">keywords</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- author --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Author
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="author" placeholder="" name="author"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->author }}" @endif>
+                                <label for="">author</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- tages --}}
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-lg-3 col-md-12">
+                            Tages
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="tages" placeholder="Hindi Title"
+                                    name="tages"
+                                    @if ($category->metaproperty) value="{{ $category->metaproperty->tages }}" @endif>
+                                <label for="">tages</label>
+                            </div>
+                        </div>
                     </div>
 
 
@@ -310,6 +478,22 @@
 
             // Add an event listener for checkbox change to toggle the disabled state
             checkbox.addEventListener('change', toggleSelect);
+        });
+    </script>
+
+    {{-- for og image preview --}}
+    <script>
+        document.getElementById("ogImage").addEventListener("change", function(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                // When file is loaded, update the src of the image
+                document.getElementById("ogImagePreview").src = reader.result;
+            }
+
+            // Only read the file if it's not empty
+            if (event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
         });
     </script>
 

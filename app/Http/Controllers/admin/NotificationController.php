@@ -37,7 +37,7 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        $screen = NavigateMaster::where('status', 'active')->get();
+        $screen = NavigateMaster::where('status', 'active')->orderBy('screenname', 'asc')->get();
         return view('admin.notification.create', compact('screen'));
     }
 
@@ -86,7 +86,7 @@ class NotificationController extends Controller
     public function edit($id)
     {
         $notification = Notification::find($id);
-        $screen = NavigateMaster::where('status', 'active')->get();
+        $screen = NavigateMaster::where('status', 'active')->orderBy('screenname', 'asc')->get();
         return view('admin.notification.edit', compact('notification', 'screen'));
     }
 

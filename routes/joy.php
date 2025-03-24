@@ -109,5 +109,6 @@ Route::controller(UnitController::class)->group(function(){
     Route::get('unit/edit/{id?}','edit')->name('unit.edit');
     Route::post('unit/update/{id?}','update')->name('unit.update');
     Route::get('unit/delete/{id?}','destroy')->name('unit.delete');
+    Route::post('unit/store','store')->name('unit.store');
 });
 
