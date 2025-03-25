@@ -66,6 +66,10 @@
             <th>Status</th>
             <th>Actions</th>
         </tr>
+        @php
+        $index = 1;
+        @endphp
+    @if (count($data) > 0)
         @foreach($data as $purchases)
         <tr>
             <td>{{ $purchases->id }}
@@ -87,6 +91,13 @@
 
         </tr>
         @endforeach
+        @else
+            <tr>
+                <td colspan="8" align="center" style="color: red;">
+                    <h5>No Data Record Found</h5>
+                </td>
+            </tr>
+            @endif
     </table>
 </div>
 </div>

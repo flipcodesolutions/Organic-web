@@ -160,8 +160,8 @@
                         <span>Products</span></a>
 
                     {{-- purchase --}}
-                    <a class="collapse-item" href="{{ route('purchases.index') }}">
-                        <i class="fa fa-purchase"></i>
+                    <a class="collapse-item {{ request()->routeIs('purchase.*')? 'active' : '' }}" href="{{ route('purchases.index') }}">
+                        <i class="fa fa-shopping-cart mr-2"></i>
                         <span>Purchases</span></a>
                     {{-- price --}}
                     <a class="collapse-item {{ request()->routeIs('unit.*') ? 'active' : '' }}" href="{{ route('unit.index') }}">

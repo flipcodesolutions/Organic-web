@@ -82,7 +82,7 @@
                 <td>{{ ($purchase->status) }}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="{{ route('purchases.edit', $purchase->id) }}" class="btn btn-primary">
+                        <a class="edit btn" href="{{ route('purchases.edit', $purchase->id) }}" class="btn btn-primary">
                             <i class="fas fa-edit"></i>
                         </a>
                         <a href="javascript:void(0)" class="delete btn ml-2" onclick="openDeactiveModal('{{ route('purchases.deactive', $purchase->id) }}')">

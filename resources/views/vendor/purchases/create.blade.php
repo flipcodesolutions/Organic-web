@@ -1,7 +1,19 @@
 @extends('layouts.app')
 @section('header', 'Products Create')
 @section('content')
-    <div class="container">
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col">
+            <h1 class="h3 mb-0 text-gray-800">Create New Purchase</h1>
+        </div>
+        <a class="btn btn-primary" href="{{ route('purchases.index') }}" role="button">Back </a>
+    </div>
+
+    <div class="card-body p-0">
+        <div class="card shadow-sm  bg-body rounded">
+
+
+    {{-- <div class="container">
         <div class="card shadow-sm  bg-body rounded">
             <div class="card-header">
                 <div class="row d-flex align-items-center">
@@ -12,7 +24,7 @@
                         <a href="{{ route('purchases.index') }}" class="btn btn-primary" type="button"> Back </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="card-body">
                 <form id="productForm" action="{{ route('purchases.store') }}" method="POST" enctype="multipart/form-data"

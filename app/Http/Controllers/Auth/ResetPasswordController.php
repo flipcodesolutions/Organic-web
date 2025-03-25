@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use App\Http\Controllers\Password;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request; 
 
 class ResetPasswordController extends Controller
 {
@@ -28,10 +30,6 @@ class ResetPasswordController extends Controller
             ? response()->json(['message' => 'Password reset successfully.'])
             : response()->json(['error' => 'Password reset failed.'], 400);
     }
-
-
-
-
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -42,9 +40,7 @@ class ResetPasswordController extends Controller
     | explore this trait and override any methods you wish to tweak.
     |
     */
-
     use ResetsPasswords;
-
     /**
      * Where to redirect users after resetting their password.
      *

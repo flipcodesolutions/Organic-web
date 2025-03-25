@@ -32,7 +32,7 @@
                         <th>Action</th>
                     </tr>
                     @php
-                        $index = 1;
+                    $index = 1;
                     @endphp
                     @if (count($cms_masters) > 0)
                         @foreach ($cms_masters as $cms_masters)
