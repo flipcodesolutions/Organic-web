@@ -132,7 +132,7 @@ class ProductController extends Controller
             $productGujaratiFields = ['*', 'productNameGUj as displayName', 'productDescriptionGuj as displayDescription'];
             $productHindiFields = ['*', 'productNameHin as displayName', 'productDescriptionHin as displayDescription'];
 
-            $query = Product::with(['productImages', 'productUnit.unitMaster'])
+            $query = Product::with(['productImages', 'productUnit.unitMaster', 'reviews'])
                 ->where('status', 'active')
                 ->select($language == 'Hindi' ? $productHindiFields : ($language == 'Gujarati' ? $productGujaratiFields : $productEnglishFields));
 
@@ -142,6 +142,18 @@ class ProductController extends Controller
                 });
             }
             if ($request->has('product_id')) {
+                $relatedProducts = Product::where('status', 'active')
+                    ->where('id', $request->product_id)
+                    ->first();
+                $category_id =  $relatedProducts->categoryId;
+
+                $relatedProducts = Product::where('status', 'active')
+                    ->where('categoryId', $category_id)
+                    ->where('id', '!=', $request->product_id)
+                    ->select($language == 'Hindi' ? $productHindiFields : ($language == 'Gujarati' ? $productGujaratiFields : $productEnglishFields))
+
+                    ->get();
+
                 $query->where('id', $request->product_id);
             }
 
@@ -156,8 +168,11 @@ class ProductController extends Controller
                 });
                 return $product;
             });
-
-            return Util::getSuccessMessage('Products', ['products' => $productsQuery]);
+            if ($request->has('product_id')) {
+                return Util::getSuccessMessage('Products', ['relatedProducts' => $relatedProducts, 'products' => $productsQuery]);
+            } else {
+                return Util::getSuccessMessage('Products', ['products' => $productsQuery]);
+            }
         } catch (\Exception $e) {
             return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
         }
