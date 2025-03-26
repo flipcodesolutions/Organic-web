@@ -132,7 +132,7 @@ class ProductController extends Controller
             $productGujaratiFields = ['*', 'productNameGUj as displayName', 'productDescriptionGuj as displayDescription'];
             $productHindiFields = ['*', 'productNameHin as displayName', 'productDescriptionHin as displayDescription'];
 
-            $query = Product::with(['productImages', 'productUnit.unitMaster', 'reviews'])
+            $query = Product::with(['productImages', 'productUnit.unitMaster', 'reviews.user'])
                 ->where('status', 'active')
                 ->select($language == 'Hindi' ? $productHindiFields : ($language == 'Gujarati' ? $productGujaratiFields : $productEnglishFields));
 
