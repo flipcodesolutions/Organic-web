@@ -28,8 +28,11 @@
                         <th>Message</th>
                         <th>Rating</th>
                     </tr>
-
                 <tbody>
+                @php
+                $index = 1;
+                @endphp
+                @if (count($reviews) > 0)
                     @foreach($reviews as $key => $review)
                     <tr>
                         <td>{{ $key + 1 }}</td>
@@ -39,6 +42,13 @@
                         <td>⭐ {{ $review->star }}/5</td>
                     </tr>
                     @endforeach
+                @else
+                <tr>
+                <td colspan="8" align="center" style="color: red;">
+                    <h5>No Data Record Found</h5>
+                </td>
+                </tr>
+                @endif
                 </tbody>
             </table>
         {{ $reviews->links() }}

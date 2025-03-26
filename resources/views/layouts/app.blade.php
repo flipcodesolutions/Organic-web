@@ -1021,7 +1021,6 @@
                 timeOut: 5000
             });
         }
-
     </script>
 
     @endif
@@ -1039,7 +1038,6 @@
             , timer: 3000
             , timerProgressBar: true
         });
-
     </script>
     @endif
 
@@ -1102,7 +1100,6 @@
             // cancelButtonText: 'Cancel',
             // reverseButtons: true,
         });
-
     </script>
     @endif
 
@@ -1118,7 +1115,6 @@
     {{-- javascript cdn --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js">
         < /scrip>
-
         <
         !--Core plugin JavaScript-- >
         <
