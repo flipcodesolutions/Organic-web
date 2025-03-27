@@ -169,6 +169,7 @@ class ProductController extends Controller
                 return $product;
             });
             if ($request->has('product_id')) {
+                $productsQuery = $productsQuery->first();
                 return Util::getSuccessMessage('Products', ['relatedProducts' => $relatedProducts, 'products' => $productsQuery]);
             } else {
                 return Util::getSuccessMessage('Products', ['products' => $productsQuery]);
