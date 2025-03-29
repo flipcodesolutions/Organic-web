@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('categoryName');
             $table->string('categoryNameGuj');
             $table->string('categoryNameHin');
-            $table->string('categoryDescription');
-            $table->string('categoryDescriptionGuj');
-            $table->string('categoryDescriptionHin');
+            $table->mediumtext('categoryDescription');
+            $table->mediumtext('categoryDescriptionGuj');
+            $table->mediumtext('categoryDescriptionHin');
             $table->string('cat_icon');
             $table->string('parent_category_id');
             $table->enum('status', ['active', 'deactive'])->default('active');

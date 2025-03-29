@@ -20,10 +20,10 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id');
     }
 
-    public function prodcuts()
-    {
-        return $this->hasMany(Product::class, 'categoryId');
-    }
+    // public function product()
+    // {
+    //     return $this->hasMany(Product::class, 'categoryId');
+    // }
 
     public function products()
     {

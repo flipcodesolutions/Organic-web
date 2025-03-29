@@ -38,5 +38,11 @@ class Product extends Model
     {
         return $this->hasOne(MetaPropertyProduct::class, 'productId');
     }
+
+    // relation for reviews
+    public function reviews()
+    {
+        return $this->hasMany(Review::class,'product_id');
+    }
     
 }
