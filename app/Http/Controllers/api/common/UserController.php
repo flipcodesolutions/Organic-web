@@ -182,8 +182,8 @@ class UserController extends Controller
 
 
                 $imageName = time() . '.' . $request->pro_pic->extension();
-                $request->pro_pic->move(public_path('profile_pic'), $imageName);
-                $user->pro_pic = 'profile_pic/' . $imageName;
+                $request->pro_pic->move(public_path('user_profile'), $imageName);
+                $user->pro_pic =  $imageName;
             }
             $user->save();
 
@@ -197,7 +197,7 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,id,' . Auth::user()->id,
             'phone' => 'unique:users,id,' . Auth::user()->id,
             'pro_pic' => 'required',
         ]);
@@ -213,8 +213,8 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->phone = $request->phone;
             $imageName = time() . '.' . $request->pro_pic->extension();
-            $request->pro_pic->move(public_path('profile_pic'), $imageName);
-            $user->pro_pic = 'profile_pic/' . $imageName;
+            $request->pro_pic->move(public_path('user_profile'), $imageName);
+            $user->pro_pic =  $imageName;
             $user->save();
 
             return Util::getSuccessMessage('Profile Updated Successfully', $user);
