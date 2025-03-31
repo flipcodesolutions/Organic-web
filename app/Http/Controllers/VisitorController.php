@@ -20,14 +20,24 @@ class VisitorController extends Controller
         return view('visitor.index',compact('slider','category','product'));
     }
 
-    public function category($id)
+    public function category(Request $request, $id)
     {
         $category = Category::where('status','active')->orderby('categoryName','asc')->get();
-        $childCategory = Category::where([['status', '=', 'active'],['parent_category_id', '=', $id]])->with('products')->orderby('categoryName','asc')->get();
+        $childcategory = Category::where([['status', '=', 'active'],['parent_category_id', '=', $id]])->with('products')->orderby('categoryName','asc')->get();
 
-        // return $childCategory;
+        $query = Product::query();
 
-        return view('visitor.category',compact('category','childCategory'));
+        if ($request->filled('categoryId')) {
+            $query->where([['categoryId', '=', $request->categoryId],['status', '=', 'active']]);
+        }
+        else
+        {
+            $childCategoryIds = $childcategory->pluck('id')->toArray();
+            $query->where('status', 'active')->whereIn('categoryId', $childCategoryIds);
+        }
+        $product = $query->with(['productImages', 'productUnit.unitMaster'])->get();
+
+        return view('visitor.category',compact('category','childcategory','product'));
     }
 
     public function product($id)

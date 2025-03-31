@@ -24,6 +24,11 @@
             background-color: #fff;
         }
 
+        .categoryCarousel,
+        .productCarousel {
+            background: rgb(244, 246, 251);
+        }
+
         /* General Styling for Images */
         .categoryCarousel img,
         .productCarousel img {

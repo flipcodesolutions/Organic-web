@@ -151,20 +151,22 @@
                 <div id="productCarousel" class="productCarousel carousel">
                     <div class="product-carousel-inner">
                         @foreach ($similarproduct as $productData)
-                            <a href="{{ route('home.product') }}/{{ $productData->id }}"
-                                class="productlink col-lg-3 col-sm-12">
-                                <div class="product-carousel-item active">
-                                    <div class="catcard card p-2">
-                                        <img src="{{ asset($productData->productImages->first()->url) }}"
-                                            class="card-img-top" alt="..." height="280px">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ $productData->productName }}</h5>
-                                            <p>{{ $productData->productUnit->first()->unitMaster->unit }}</p>
-                                            <p>₹{{ $productData->productPrice }}</p>
+                            @if ($productData->id != request()->route('id'))
+                                <a href="{{ route('home.product') }}/{{ $productData->id }}"
+                                    class="productlink col-lg-3 col-sm-12">
+                                    <div class="product-carousel-item active">
+                                        <div class="catcard card p-2">
+                                            <img src="{{ asset($productData->productImages->first()->url) }}"
+                                                class="card-img-top" alt="..." height="280px">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ $productData->productName }}</h5>
+                                                <p>{{ $productData->productUnit->first()->unitMaster->unit }}</p>
+                                                <p>₹{{ $productData->productPrice }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            @endif
                         @endforeach
                     </div>
                     <button class="product-carousel-control-prev carousel-control-prev" type="button"
