@@ -85,6 +85,10 @@
                         <a href="#" class="p-2 mx-1">
                             hello, login
                         </a>
+
+                        <a href="{{ route('home.cart') }}">
+                            cart
+                        </a>
                     <!-- </li>
                     <li>
                         <a href="#" class="p-2 mx-1">

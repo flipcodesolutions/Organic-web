@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\AddToCart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\Unit;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 
 class VisitorController extends Controller
@@ -47,5 +50,32 @@ class VisitorController extends Controller
         $similarproduct = Product::where([['status', '=', 'active'],['categoryId', '=', $product->categoryId]])->get();
         // return $similerproduct;
         return view('visitor.product',compact('product','category','similarproduct'));
+    }
+
+    public function addtocart(Request $request)
+    {
+        $cart = new AddToCart();
+        $cart->userId = 1;
+        $cart->productId = $request->unit_id['product_id'];
+        $cart->qty = $request->quantity;
+        $cart->price = $request->total_amount;
+        $cart->unit = $request->unit_id['id'];
+        $cart->save();
+
+        return response()->json([
+            "status" => true,
+            "message" => "Product added succesfully to cart"
+        ]);
+    }
+
+    public function cartindex()
+    {
+        $category = Category::where('status','active')->orderby('categoryName','asc')->get();
+        $cart = AddToCart::where('userId',1)->with('products.productImages','units.unitMaster')->get();
+
+        // return $cart;
+
+
+        return view('visitor.cart',compact('category','cart'));
     }
 }

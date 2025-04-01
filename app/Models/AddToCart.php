@@ -10,4 +10,9 @@ class AddToCart extends Model
     {
         return $this->belongsTo(Product::class, 'productId');
     }
+
+    public function units()
+    {
+        return $this->belongsTo(Unit::class,'unit');
+    }
 }

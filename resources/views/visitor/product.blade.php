@@ -61,7 +61,7 @@
                         <h5 class="mb-1">Select Unit</h5>
                         <div class="unit-section d-flex" style="gap: 6px">
                             @foreach ($product->productUnit as $unitData)
-                                <div class="card">
+                                <div class="card" id="selectedunit" onclick="selectedunit({{ json_encode($unitData) }})">
                                     <div class="card-body p-2">
                                         <h6>{{ $unitData->unitMaster->unit }}</h6>
                                         <p>₹ {{ $unitData->sell_price }} <span
@@ -75,27 +75,30 @@
 
                     <!-- Price Section -->
                     <div class="price-section mb-2 d-flex">
-                        <div class="col-2">
-                            <div class="input-group" style="width: 100px;">
+                        <div class="col-2 me-2">
+                            <div class="input-group">
                                 <!-- Decrement Button -->
-                                <button class="btn btn-outline-secondary" type="button" id="decrement-btn">
+                                <button class="btn btn-outline-secondary" type="button" onclick="decrementquentity()"
+                                    id="decrement-btn">
                                     -
                                 </button>
                                 <!-- Quantity Display -->
-                                <input type="text" class="form-control text-center" id="quantity" value="1"
+                                <input type="text" class="form-control text-center px-0" id="quantity" value="1"
                                     readonly aria-label="Quantity" aria-describedby="quantity">
                                 <!-- Increment Button -->
-                                <button class="btn btn-outline-secondary" type="button" id="increment-btn">
+                                <button class="btn btn-outline-secondary" type="button" onclick="incrementquentity()"
+                                    id="increment-btn">
                                     +
                                 </button>
                             </div>
                         </div>
-                        <span style="font-size: 1.2rem; font-weight: bold;">₹ 50</span>
+                        <span id='totalAmount' style="font-size: 1.2rem; font-weight: bold;">₹ 50</span>
                     </div>
 
                     <!-- Add to Cart / Buy Now Buttons -->
                     <div class="action-buttons">
-                        <button class="btn btn-primary" style="padding: 10px 20px; font-size: 1rem; margin-right: 10px;">Add
+                        <button class="btn btn-primary" type="submit" id="addtocart"
+                            style="padding: 10px 20px; font-size: 1rem; margin-right: 10px;">Add
                             to Cart</button>
                         <button class="btn btn-success" style="padding: 10px 20px; font-size: 1rem;">Buy Now</button>
                     </div>
@@ -103,6 +106,7 @@
             </div>
         </div>
 
+        {{-- product review --}}
         <div class="row px-3">
             <div class="row mb-3">
                 <h3>Product Review</h3>
@@ -183,4 +187,120 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        let globalSellPrice = 0;
+        let unitdata = {};
+
+        // for selecting unit
+        function selectedunit(data) {
+            $(".card").on("click", function() {
+                $(".card").css("border", "1px solid #dee2e6");
+
+                $(this).css("border", "2px solid red");
+
+                $("#quantity").val(1);
+            });
+
+            $('#totalAmount').text('₹' + data.sell_price);
+            globalSellPrice = data.sell_price;
+            unitdata = data;
+        }
+
+        // for incries quentity
+        function incrementquentity() {
+            let quantityField = $("#quantity");
+            let currentValue = parseInt(quantityField.val(), 10);
+            quantityField.val(currentValue + 1);
+
+            let totalamount = (currentValue + 1) * globalSellPrice;
+
+            $('#totalAmount').text('₹' + totalamount);
+
+        }
+
+        // for decries quentity
+        function decrementquentity() {
+            let quantityField = $("#quantity");
+            let currentValue = parseInt(quantityField.val(), 10);
+            if (currentValue > 1) {
+                quantityField.val(currentValue - 1);
+                let totalamount = (currentValue - 1) * globalSellPrice;
+                $('#totalAmount').text('₹' + totalamount);
+            }
+        }
+
+        // for select first unit on page loade 
+        document.addEventListener('DOMContentLoaded', function() {
+            var firstUnit = @json($product->productUnit->first()); // Get the first unit from your PHP variable
+            selectedunit(firstUnit); // Call the function with first unit data
+
+            $(".card:first").trigger("click");
+
+        });
+
+        // $(document).ready(function() {
+        //     $('#addtocart').on('click', function(unitdata) {
+        //         console.log(unitdata);
+
+        //         let quantityField = $("#quantity");
+        //         let currentValue = parseInt(quantityField.val(), 10);
+
+        //         $.ajax({
+        //             url: '/addtocart',
+        //             method: 'POST',
+        //             headers: {
+        //                 "X-CSRF-TOKEN": "{{ csrf_token() }}" // CSRF Token for security
+        //             },
+        //             data: {
+        //                 unit: unitdata.id,
+        //                 quantity: currentValue
+        //             },
+        //             success: function(response) {
+        //                 console.log("Added to Cart:", response);
+        //                 alert("Item added to cart successfully!");
+        //             },
+        //         })
+        //     });
+        // });
+
+        // for add to cart
+        $(document).ready(function() {
+            $("#addtocart").on("click", function() {
+                let quantityField = $("#quantity");
+                let currentValue = parseInt(quantityField.val(), 10);
+
+                let totalamount = $('#totalAmount').text().replace(/[^\d.]/g, '');
+
+                if (!unitdata || !unitdata.id) {
+                    alert("Please select a unit first!");
+                    return;
+                }
+
+                $.ajax({
+                    url: "{{ route('home.addtocart') }}",
+                    type: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    data: {
+                        unit_id: unitdata,
+                        quantity: currentValue,
+                        total_amount: totalamount
+                    },
+                    success: function(response) {
+                        console.log("Added to Cart:", response.message);
+                        alert(response.message);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error:", error);
+                        alert("Failed to add item to cart.");
+                    }
+                });
+            });
+        });
+    </script>
+
 @endsection
