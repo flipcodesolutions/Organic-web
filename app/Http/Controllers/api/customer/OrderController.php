@@ -67,6 +67,12 @@ class OrderController extends Controller
                 $orderDetail->total = $orderDetails['total'];
                 $orderDetail->save();
             }
+            foreach ($request->order['orderDetails'] as $orderDetails) {
+                if ($orderDetails['cart_id']) {
+                    AddToCart::where('id', $orderDetails['cart_id'])->delete();
+                }
+            }
+
             DB::commit();
 
             return Util::getSuccessMessage(
