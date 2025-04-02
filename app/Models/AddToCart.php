@@ -15,4 +15,9 @@ class AddToCart extends Model
     {
         return $this->belongsTo(Unit::class,'unit');
     }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
 }

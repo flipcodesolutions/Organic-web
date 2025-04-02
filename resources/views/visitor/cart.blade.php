@@ -4,7 +4,7 @@
         <div class="row justify-content-between">
             {{-- left column --}}
             <div class="col-lg-9 col-sm-12 p-3">
-                @foreach ($cart as $cartData)
+                @foreach ($cart as $key => $cartData)
                     <div class="card mb-3">
                         <div class="row g-0">
                             <div class="col-md-2 d-flex justify-content-center py-3">
@@ -18,7 +18,9 @@
                                         <p> {{ $cartData->units->unitMaster->unit }} </p>
                                     </div>
                                     <div class="price">
-                                        <h5 class="card-title" id='totalAmount'>{{ $cartData->price }}</h5>
+                                        <h5 class="card-title productTotalAmount"
+                                            id='productTotalAmount.{{ $key }}'>₹
+                                            {{ $cartData->price }}</h5>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -27,22 +29,24 @@
                                             <div class="input-group">
                                                 <!-- Decrement Button -->
                                                 <button class="btn btn-outline-secondary" type="button"
-                                                    onclick="decrementquentity()" id="decrement-btn">
+                                                    onclick="decrementQuantity({{ $key }})" id="decrement-btn">
                                                     -
                                                 </button>
+                                                <input type="hidden" id="sellprice.{{ $key }}"
+                                                    value={{ $cartData->units->sell_price }}>
                                                 <!-- Quantity Display -->
-                                                <input type="text" class="form-control text-center px-0" id="quantity"
-                                                    value="{{ $cartData->qty }}" readonly aria-label="Quantity"
-                                                    aria-describedby="quantity">
+                                                <input type="text" class="form-control text-center px-0"
+                                                    id="quantity.{{ $key }}" value="{{ $cartData->qty }}" readonly
+                                                    aria-label="Quantity" aria-describedby="quantity">
                                                 <!-- Increment Button -->
                                                 <button class="btn btn-outline-secondary" type="button"
-                                                    onclick="incrementquentity()" id="increment-btn">
+                                                    onclick="incrementQuantity({{ $key }})" id="increment-btn">
                                                     +
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="col-lg-1 col-sm-1">
-                                            <a href=""> delete </a>
+                                            <a href="{{ route('home.deletecart') }}/{{ $cartData->id }}">delete</a>
                                         </div>
                                         {{-- <span id='totalAmount' style="font-size: 1.2rem; font-weight: bold;">₹ 50</span> --}}
                                     </div>
@@ -65,17 +69,38 @@
                     </div>
                     <div class="card-body">
                         <div class="price d-flex justify-content-between">
-                            <p> Price (1 item) </p>
-                            <p> 500 </p>
+                            <p> Price (<span id="totalProduct"></span> item) </p>
+                            <p id="totalPrice"> ₹ 500 </p>
                         </div>
                         <div class="dellivercharges d-flex justify-content-between">
                             <p> Delivery Charges </p>
-                            <p> 50 </p>
+                            <p id="delivercharges"> ₹ 50 </p>
                         </div>
                         <div class="totalamount d-flex justify-content-between py-3" style="border-top: 1px dashed #e0e0e0">
                             <h6> Total Amount </h6>
-                            <h6> 500 </h6>
+                            <h6 id="totalBillAmmount"> ₹ 500 </h6>
                         </div>
+
+                        <div class="address py-3" style="border-top: 1px dashed #e0e0e0;">
+                            <h6>Select Delivery address</h6>
+                            @foreach ($address as $addressData)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="{{ $addressData->id }}"
+                                        name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+
+                                        {{-- <input class="form-check-input" type="checkbox" value="{{ $addressData->id }}"
+                                        id="flexCheckChecked.{{ $addressData->id }}">
+                                    <label class="form-check-label" for="flexCheckChecked.{{ $addressData->id }}"> --}}
+                                        <span>{{ $addressData->address_line1 }}</span>,
+                                        <span>{{ $addressData->address_line2 }}</span>,
+                                        <span>{{ $addressData->landmark->landmark_eng }}</span>,
+                                        <span>{{ $addressData->pincode }}</span>.
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+
                         <div class="paymentmethod">
                             <select name="paymentmethod" class="form-select " aria-label="Large select example"
                                 id="">
@@ -208,4 +233,82 @@
                 </div>
             </div> --}}
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+            function incrementQuantity(key) {
+                let quantityField = document.getElementById(`quantity.${key}`);
+                let sellprice = document.getElementById(`sellprice.${key}`).value;
+                let totalAmountField = document.getElementById(`productTotalAmount.${key}`);
+
+                let currentValue = parseInt(quantityField.value, 10);
+                let newValue = currentValue + 1;
+                quantityField.value = newValue;
+
+                let totalAmount = newValue * sellprice;
+
+                totalAmountField.textContent = '₹ ' + totalAmount;
+
+                totalAmmount();
+            }
+
+            function decrementQuantity(key) {
+                let quantityField = document.getElementById(`quantity.${key}`);
+                let sellprice = document.getElementById(`sellprice.${key}`).value;
+                let totalAmountField = document.getElementById(`productTotalAmount.${key}`);
+
+                let currentValue = parseInt(quantityField.value, 10);
+                if (currentValue > 1) {
+                    let newValue = currentValue - 1;
+                    quantityField.value = newValue;
+
+                    let totalAmount = newValue * sellprice;
+                    totalAmountField.textContent = '₹ ' + totalAmount;
+
+                    totalAmmount();
+                }
+            }
+
+            function totalAmmount() {
+                let total = 0;
+                let productTotal = document.querySelectorAll('.productTotalAmount');
+                let deliverchargeText = document.getElementById('delivercharges').textContent.trim();
+                let delivercharge = parseFloat(deliverchargeText.replace(/₹/g, '').replace(/,/g, ''));
+                let productCount = productTotal.length;
+
+                productTotal.forEach((element) => {
+                    let priceText = element.textContent.trim();
+                    let numericValue = parseFloat(priceText.replace(/₹/g, '').replace(/,/g,
+                        '')); // Remove ₹ and commas, convert to number
+
+                    if (!isNaN(numericValue)) { // Check if it's a valid number
+                        total += numericValue;
+                    }
+                });
+
+                document.getElementById('totalProduct').textContent = productCount;
+                document.getElementById('totalPrice').textContent = "₹" + total;
+                document.getElementById('totalBillAmmount').textContent = '₹' + (total + delivercharge);
+            }
+
+            // function removeFromCart(cartId) {
+            //     $.ajax({
+            //         url: `deletecart/${cartId}`,
+            //         method: "GET",
+            //         success: function(response) {
+            //             console.log("Remove from Cart:", response.message);
+            //             alert(response.message);
+            //         },
+            //         error: function(xhr, status, error) {
+            //             console.error("Error:", error);
+            //             alert("Failed to remove item from cart.");
+            //         }
+            //     });
+            // }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                totalAmmount();
+            });
+        </script>
     @endsection

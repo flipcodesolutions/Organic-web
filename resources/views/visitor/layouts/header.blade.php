@@ -2,10 +2,12 @@
     <div class="container-fluid">
         <div class="row py-3 border-bottom">
 
-            <div class="col-sm-4 col-lg-3 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
+            <div
+                class="col-sm-4 col-lg-3 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
                 <div class="d-flex align-items-center my-3 my-sm-0">
                     <a href="{{ route('visitor.index') }}">
-                        <img src="{{asset('visitor/images/logo.svg')}}" alt="logo" class="img-fluid" height="100px" width="100px">
+                        <img src="{{ asset('visitor/images/logo.svg') }}" alt="logo" class="img-fluid" height="100px"
+                            width="100px">
                     </a>
                 </div>
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
@@ -29,8 +31,8 @@
                     <div class="col-md-4 d-none d-md-block">
                         <select class="form-select border-0 bg-transparent">
                             <option>All Categories</option>
-                            @foreach ($category as $allCategoryData )
-                            <option><a href="">{{$allCategoryData->categoryName}}</a></option>
+                            @foreach ($category as $allCategoryData)
+                                <option><a href="">{{ $allCategoryData->categoryName }}</a></option>
                             @endforeach
                             {{-- <option>Drinks</option>
                             <option>Chocolates</option> --}}
@@ -79,17 +81,25 @@
                 </ul>
             </div>
 
-            <div class="col-sm-8 col-lg-1 d-flex gap-5 align-items-center justify-content-center justify-content-sm-end">
-                <!-- <ul class="d-flex justify-content-end list-unstyled m-0">
-                    <li> -->
-                        <a href="#" class="p-2 mx-1">
+            <div
+                class="col-sm-8 col-lg-1 d-flex gap-5 align-items-center justify-content-center justify-content-sm-end">
+
+                <ul class="d-flex justify-content-end list-unstyled m-0">
+                    <li>
+                        <a href="{{ route('visitor.loginindex') }}" class="btn btn-secondary dropdown-toggle"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             hello, login
                         </a>
+                    </li>
 
+                    <li>
                         <a href="{{ route('home.cart') }}">
                             cart
                         </a>
-                    <!-- </li>
+                    </li>
+                </ul>
+
+                <!-- </li>
                     <li>
                         <a href="#" class="p-2 mx-1">
                             <svg width="24" height="24">
