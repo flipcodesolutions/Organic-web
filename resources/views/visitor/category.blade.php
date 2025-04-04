@@ -67,7 +67,6 @@
             <div class="col mb-3">
                 <h1>Products</h1>
             </div>
-
             <div class="childcategoryTable" style="display: grid;   grid-template-columns: auto auto auto auto; gap: 50px;">
                 @foreach ($product as $productData)
                     <a href="{{ route('home.product') }}/{{ $productData->id }}"

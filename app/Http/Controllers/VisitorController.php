@@ -36,22 +36,31 @@ class VisitorController extends Controller
 
     public function visitorauthenticate(Request $request)
     {
-        // return $request;
         $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-
+    
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 'active'])) {
+            $user = User::where('email', $request->email)->first();
+            Auth::loginUsingId($user->id);
+        
             $request->session()->regenerate();
-
-            return redirect()->intended('/');
+            session(['user_id' => Auth::id()]);
+        
+            dd(session()->all()); // Debug session data
         }
-
+    
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
+    
+
+    // public function visitorlogout()
+    // {
+
+    // }
 
     public function category(Request $request, $id)
     {
@@ -118,10 +127,16 @@ class VisitorController extends Controller
     public function cartindex()
     {
         $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
-        $cart = AddToCart::where('userId', Auth::user()->id)->with('products.productImages', 'units.unitMaster')->get();
-        $address = ShippingAddress::where('user_id', Auth::user()->id)->with('landmark')->get();
+        if (Auth::user() &&  Auth::user() != null) {
+            $cart = AddToCart::where('userId', Auth::user()->id)->with('products.productImages', 'units.unitMaster')->get();
+            $address = ShippingAddress::where('user_id', Auth::user()->id)->with('landmark')->get();
 
-        return view('visitor.cart', compact('category', 'cart', 'address'));
+            return view('visitor.cart', compact('category', 'cart', 'address'));
+        }
+        else
+        {
+            return view('visitor.cart',compact('category'));
+        }
     }
 
     public function deletecart($id)

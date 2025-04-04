@@ -1,18 +1,23 @@
 <header class="header">
+    <style>
+        .dropdown-toggle::after {
+            display: none !important;
+        }
+    </style>
     <div class="container-fluid">
         <div class="row py-3 border-bottom">
 
             <div
-                class="col-sm-4 col-lg-3 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
+                class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
                 <div class="d-flex align-items-center my-3 my-sm-0">
                     <a href="{{ route('visitor.index') }}">
                         <img src="{{ asset('visitor/images/logo.svg') }}" alt="logo" class="img-fluid" height="100px"
                             width="100px">
                     </a>
                 </div>
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                {{-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body
-                    scrolling</button>
+                    scrolling</button> --}}
                 <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
                     id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                     <div class="offcanvas-header">
@@ -81,42 +86,59 @@
                 </ul>
             </div>
 
-            <div
-                class="col-sm-8 col-lg-1 d-flex gap-5 align-items-center justify-content-center justify-content-sm-end">
+            <div class="col-sm-8 col-lg-1 d-flex align-items-center justify-content-lg-center justify-content-sm-end ">
 
-                <ul class="d-flex justify-content-end list-unstyled m-0">
-                    <li>
-                        <a href="{{ route('visitor.loginindex') }}" class="btn btn-secondary dropdown-toggle"
-                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            hello, login
-                        </a>
-                    </li>
+                {{-- <ul class="d-flex justify-content-end list-unstyled m-0">
+                    <li class="nav-item dropdown no-arrow mb-4"> --}}
+                <a href=" " class="btn  dropdown-toggle p-0" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    
+                    <div class="userimage">
+                        @if (Auth::user() && Auth::user() != null)
+                            <img class="img-profile rounded-circle"
+                                src="{{ asset('user_profile/' . Auth::user()->pro_pic) }}" style="max-height: 40px">
+                        @else
+                            <img class="img-profile rounded-circle"
+                                src="{{ asset('user_profile/1741682175_67cff5ff1ede5.png') }}" style="max-height: 40px">
+                        @endif
+                    </div>
+                    <div class="username text-truncate" style="max-width: 100px;">
+                        hello, @if (Auth::user() && Auth::user() != null)
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                        @endif
+                    </div>
+                </a>
+{{-- {{Auth::user()}} --}}
+{{-- @dd(session()->getId()); --}}
 
-                    <li>
-                        <a href="{{ route('home.cart') }}">
-                            cart
-                        </a>
-                    </li>
+                <ul class="dropdown-menu">
+                    @if (!Auth::user() && Auth::user() == null)
+                        <li><a class="dropdown-item" href="{{ route('visitor.loginindex') }}">Log in</a></li>
+                        <li><a class="dropdown-item" href="">Sign Up</a></li>
+                    @else
+                        <li><a class="dropdown-item" href=""><i
+                                    class="fa-solid fa-unlock-keyhole mr-2 text-gray-400 me-2"></i>Change Password</a>
+                        </li>
+                        <li><a class="dropdown-item" href="{{ Auth::logout() }}"> <i
+                                    class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Log out</a></li>
+                    @endif
+
                 </ul>
+                {{-- </li>
 
-                <!-- </li>
-                    <li>
-                        <a href="#" class="p-2 mx-1">
-                            <svg width="24" height="24">
-                                <use xlink:href="#wishlist"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                            aria-controls="offcanvasCart">
-                            <svg width="24" height="24">
-                                <use xlink:href="#shopping-bag"></use>
-                            </svg>
-                        </a>
-                    </li>
-                </ul> -->
+                    <li> --}}
+                {{-- </li>
+                    </ul> --}}
             </div>
+            <div class="col-1">
+                <a href="{{ route('home.cart') }}" class="btn btn-success d-flex justify-content-between">
+                    <img src="{{ asset('visitor/images/ShoppingCart.svg') }}" alt="" class="img-fluid"
+                        style="max-width: 50%">
+                    <h6>cart</h6>
+                </a>
+            </div>
+
 
         </div>
         <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">

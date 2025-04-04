@@ -4,64 +4,68 @@
         <div class="row justify-content-between">
             {{-- left column --}}
             <div class="col-lg-9 col-sm-12 p-3">
-                @foreach ($cart as $key => $cartData)
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-2 d-flex justify-content-center py-3">
-                                <img src="{{ asset($cartData->products->image) }}" class="img-fluid rounded-start"
-                                    alt="...">
-                            </div>
-                            <div class="col-md-10">
-                                <div class="card-header d-flex justify-content-between">
-                                    <div class="productdetail">
-                                        <h5 class="card-title">{{ $cartData->products->productName }}</h5>
-                                        <p> {{ $cartData->units->unitMaster->unit }} </p>
-                                    </div>
-                                    <div class="price">
-                                        <h5 class="card-title productTotalAmount"
-                                            id='productTotalAmount.{{ $key }}'>₹
-                                            {{ $cartData->price }}</h5>
-                                    </div>
+                @if (Auth::user() && Auth::user() != null)
+                    @foreach ($cart as $key => $cartData)
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-2 d-flex justify-content-center py-3">
+                                    <img src="{{ asset($cartData->products->image) }}" class="img-fluid rounded-start"
+                                        alt="...">
                                 </div>
-                                <div class="card-body">
-                                    <div class="price-section mb-2 d-flex ">
-                                        <div class="col-lg-2 col-sm-2 me-2">
-                                            <div class="input-group">
-                                                <!-- Decrement Button -->
-                                                <button class="btn btn-outline-secondary" type="button"
-                                                    onclick="decrementQuantity({{ $key }})" id="decrement-btn">
-                                                    -
-                                                </button>
-                                                <input type="hidden" id="sellprice.{{ $key }}"
-                                                    value={{ $cartData->units->sell_price }}>
-                                                <!-- Quantity Display -->
-                                                <input type="text" class="form-control text-center px-0"
-                                                    id="quantity.{{ $key }}" value="{{ $cartData->qty }}" readonly
-                                                    aria-label="Quantity" aria-describedby="quantity">
-                                                <!-- Increment Button -->
-                                                <button class="btn btn-outline-secondary" type="button"
-                                                    onclick="incrementQuantity({{ $key }})" id="increment-btn">
-                                                    +
-                                                </button>
-                                            </div>
+                                <div class="col-md-10">
+                                    <div class="card-header d-flex justify-content-between">
+                                        <div class="productdetail">
+                                            <h5 class="card-title">{{ $cartData->products->productName }}</h5>
+                                            <p> {{ $cartData->units->unitMaster->unit }} </p>
                                         </div>
-                                        <div class="col-lg-1 col-sm-1">
-                                            <a href="{{ route('home.deletecart') }}/{{ $cartData->id }}">delete</a>
+                                        <div class="price">
+                                            <h5 class="card-title productTotalAmount"
+                                                id='productTotalAmount.{{ $key }}'>₹
+                                                {{ $cartData->price }}</h5>
                                         </div>
-                                        {{-- <span id='totalAmount' style="font-size: 1.2rem; font-weight: bold;">₹ 50</span> --}}
                                     </div>
+                                    <div class="card-body">
+                                        <div class="price-section mb-2 d-flex ">
+                                            <div class="col-lg-2 col-sm-2 me-2">
+                                                <div class="input-group">
+                                                    <!-- Decrement Button -->
+                                                    <button class="btn btn-outline-secondary" type="button"
+                                                        onclick="decrementQuantity({{ $key }})" id="decrement-btn">
+                                                        -
+                                                    </button>
+                                                    <input type="hidden" id="sellprice.{{ $key }}"
+                                                        value={{ $cartData->units->sell_price }}>
+                                                    <!-- Quantity Display -->
+                                                    <input type="text" class="form-control text-center px-0"
+                                                        id="quantity.{{ $key }}" value="{{ $cartData->qty }}"
+                                                        readonly aria-label="Quantity" aria-describedby="quantity">
+                                                    <!-- Increment Button -->
+                                                    <button class="btn btn-outline-secondary" type="button"
+                                                        onclick="incrementQuantity({{ $key }})"
+                                                        id="increment-btn">
+                                                        +
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1 col-sm-1">
+                                                <a href="{{ route('home.deletecart') }}/{{ $cartData->id }}">delete</a>
+                                            </div>
+                                            {{-- <span id='totalAmount' style="font-size: 1.2rem; font-weight: bold;">₹ 50</span> --}}
+                                        </div>
 
 
-                                    {{-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                                        {{-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
                                     additional content. This content is a little bit longer.</p>
                                 <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
 
+            @if(Auth::user() && Auth::user() != null)
             <div class="col-lg-3 col-sm-12 p-3">
                 <div class="card">
                     <div class="card-header">
@@ -112,6 +116,7 @@
                     </div>
                 </div>
             </div>
+            @endif
 
             {{-- <div class="col-lg-9 col-sm-12">
                 <div class="card my-3">
