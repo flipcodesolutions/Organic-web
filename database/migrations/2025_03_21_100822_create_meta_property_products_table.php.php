@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('ogTitleEng')->nullable();
             $table->string('ogTitleGuj')->nullable();
             $table->string('ogTitleHin')->nullable();
-            $table->string('ogDescriptionEng')->nullable();
-            $table->string('ogDescriptionGuj')->nullable();
-            $table->string('ogDescriptionHin')->nullable();
+            $table->mediumtext('ogDescriptionEng')->nullable();
+            $table->mediumtext('ogDescriptionGuj')->nullable();
+            $table->mediumtext('ogDescriptionHin')->nullable();
             $table->string('ogImage')->nullable();
             $table->string('ogUrl')->nullable();
-            $table->string('description')->nullable();
+            $table->mediumtext('description')->nullable();
             $table->string('keywords')->nullable();
             $table->string('author')->nullable();
             $table->string('tages')->nullable();

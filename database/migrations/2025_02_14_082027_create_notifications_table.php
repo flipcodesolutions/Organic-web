@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('titleGuj');
             $table->string('titleHin');
-            $table->string('details');
-            $table->string('detailsGuj');
-            $table->string('detailsHin');
+            $table->mediumtext('details');
+            $table->mediumtext('detailsGuj');
+            $table->mediumtext('detailsHin');
             $table->string('navigate_screen');
             $table->enum('status', ['active', 'deactive'])->default('active');
             $table->timestamps();

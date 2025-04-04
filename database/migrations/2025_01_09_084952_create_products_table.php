@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('productName');
             $table->string('productNameGuj');
             $table->string('productNameHin');
-            $table->string('productDescription');
-            $table->string('productDescriptionGuj');
-            $table->string('productDescriptionHin');
+            $table->mediumtext('productDescription');
+            $table->mediumtext('productDescriptionGuj');
+            $table->mediumtext('productDescriptionHin');
             $table->string('productPrice');
             $table->integer('categoryId');
             $table->integer('userId');

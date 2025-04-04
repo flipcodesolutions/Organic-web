@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('titleGuj');
             $table->string('titleHin');
             $table->string('slug');
-            $table->string('description');
-            $table->string('descriptionGuj');
-            $table->string('descriptionHin');
+            $table->mediumtext('description');
+            $table->mediumtext('descriptionGuj');
+            $table->mediumtext('descriptionHin');
             $table->enum('status', ['active', 'deactive','deleted'])->default('active');
             $table->timestamps();
         });

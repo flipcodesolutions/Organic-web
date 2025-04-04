@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamp('rev_date');
             $table->integer('product_id');
             $table->integer('user_id');
-            $table->string('message');
+            $table->mediumtext('message');
             $table->integer('star');
             $table->enum('status', ['active', 'deactive','deleted'])->default('active');
             $table->timestamps();
