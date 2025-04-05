@@ -6,7 +6,6 @@
     </style>
     <div class="container-fluid">
         <div class="row py-3 border-bottom">
-
             <div
                 class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
                 <div class="d-flex align-items-center my-3 my-sm-0">
@@ -62,7 +61,7 @@
             <div class="col-lg-2">
                 <ul
                     class="navbar-nav list-unstyled d-flex flex-row gap-3 gap-lg-5 justify-content-center flex-wrap align-items-center mb-0 fw-bold text-uppercase text-dark">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a href="{{ route('visitor.index') }}" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item dropdown">
@@ -92,47 +91,45 @@
                     <li class="nav-item dropdown no-arrow mb-4"> --}}
                 <a href=" " class="btn  dropdown-toggle p-0" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    
+
                     <div class="userimage">
-                        @if (Auth::user() && Auth::user() != null)
-                            <img class="img-profile rounded-circle"
-                                src="{{ asset('user_profile/' . Auth::user()->pro_pic) }}" style="max-height: 40px">
+                        @if (session()->has('user'))
+                        <img class="img-profile rounded-circle"
+                                src="{{ asset('user_profile/' . session('user')->pro_pic) }}" style="max-height: 40px">
                         @else
                             <img class="img-profile rounded-circle"
                                 src="{{ asset('user_profile/1741682175_67cff5ff1ede5.png') }}" style="max-height: 40px">
                         @endif
                     </div>
                     <div class="username text-truncate" style="max-width: 100px;">
-                        hello, @if (Auth::user() && Auth::user() != null)
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                        @endif
+                        hello,
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                            @if (session()->has('user'))
+                                {{ session('user')->name }}
+                            @endif
+                        </span>
+
                     </div>
                 </a>
-{{-- {{Auth::user()}} --}}
-{{-- @dd(session()->getId()); --}}
+
 
                 <ul class="dropdown-menu">
-                    @if (!Auth::user() && Auth::user() == null)
-                        <li><a class="dropdown-item" href="{{ route('visitor.loginindex') }}">Log in</a></li>
-                        <li><a class="dropdown-item" href="">Sign Up</a></li>
-                    @else
+                    @if (session()->has('user'))
                         <li><a class="dropdown-item" href=""><i
                                     class="fa-solid fa-unlock-keyhole mr-2 text-gray-400 me-2"></i>Change Password</a>
                         </li>
-                        <li><a class="dropdown-item" href="{{ Auth::logout() }}"> <i
+                        <li><a class="dropdown-item" href="{{ route('visitor.logout') }}"> <i
                                     class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Log out</a></li>
+                    @else
+                        <li><a class="dropdown-item" href="{{ route('visitor.loginindex') }}">Log in</a></li>
+                        <li><a class="dropdown-item" href="">Sign Up</a></li>
                     @endif
 
                 </ul>
-                {{-- </li>
-
-                    <li> --}}
-                {{-- </li>
-                    </ul> --}}
             </div>
             <div class="col-1">
-                <a href="{{ route('home.cart') }}" class="btn btn-success d-flex justify-content-between">
+                <a @if(session()->has('user')) href="{{ route('home.cart') }}" @else href="{{ route('visitor.loginindex') }}" @endif class="btn btn-success d-flex justify-content-between align-items-center">
                     <img src="{{ asset('visitor/images/ShoppingCart.svg') }}" alt="" class="img-fluid"
                         style="max-width: 50%">
                     <h6>cart</h6>
