@@ -21,12 +21,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <style>
-        .header {
+        /* .header {
             position: sticky;
             z-index: 1000;
             top: 0;
             background-color: #fff;
-        }
+        } */
 
         .categoryCarousel,
         .productCarousel {

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\AddToCart;
 use App\Models\Category;
 use App\Models\DeliverySlot;
+use App\Models\OrderDetail;
+use App\Models\OrderMaster;
 use App\Models\PointPer;
 use App\Models\Product;
 use App\Models\Shipping_address;
@@ -20,7 +22,7 @@ use Illuminate\Http\Request;
 class VisitorController extends Controller
 {
     public function index()
-    { 
+    {
         $slider = Slider::where('status', 'active')->with('navigatemaster')->get();
         $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
         $product = Product::where('status', 'active')->with('productUnit.unitMaster', 'productImages')->orderby('productName', 'asc')->get();
@@ -42,23 +44,23 @@ class VisitorController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-    
+
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 'active'])) {
             $user = User::where('email', $request->email)->first();
 
             Auth::loginUsingId($user->id);
-        
+
             session(['user' => $user]);
             session(['user_id' => $user->id]);
 
             return redirect()->route('visitor.index');
         }
-    
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
-    
+
 
     public function visitorlogout()
     {
@@ -95,8 +97,7 @@ class VisitorController extends Controller
 
     public function addtocart(Request $request)
     {
-        if (session()->has('user'))
-        {
+        if (session()->has('user')) {
             $existingCartItem = AddToCart::where('userId', session('user')->id)
                 ->where('productId', $request->unit_id['product_id'])
                 ->where('unit', $request->unit_id['id'])
@@ -132,18 +133,16 @@ class VisitorController extends Controller
     public function cartindex()
     {
         $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
-        if (session()->has('user'))
-        {
-        $cart = AddToCart::where('userId', session('user')->id)->with('products.productImages', 'units.unitMaster')->get();
-        $address = ShippingAddress::where('user_id', session('user')->id)->with('landmark')->get();
-        $pointper = PointPer::first();
-        $deliveryslot = DeliverySlot::where('status','active')->get();
+        if (session()->has('user')) {
+            $cart = AddToCart::where('userId', session('user')->id)->with('products.productImages', 'units.unitMaster')->get();
+            $address = ShippingAddress::where('user_id', session('user')->id)->with('landmark')->get();
+            $pointper = PointPer::first();
+            // return $cart;
+            $deliveryslot = DeliverySlot::where('status', 'active')->get();
 
-            return view('visitor.cart', compact('category', 'cart', 'address','deliveryslot','pointper'));
-        }
-        else
-        {
-            return view('visitor.cart',compact('category'));
+            return view('visitor.cart', compact('category', 'cart', 'address', 'deliveryslot', 'pointper'));
+        } else {
+            return view('visitor.cart', compact('category'));
         }
     }
 
@@ -157,5 +156,35 @@ class VisitorController extends Controller
         //     "status" => true,
         //     "message" => "Product removed succesfully from cart"
         // ]);
+    }
+
+    public function order(Request $request)
+    {
+        $order = new OrderMaster();
+        $order->userId = $request->userId;
+        $order->total_order_amt = $request->totalPrice;
+        $order->dis_amt_point = $request->pointper;
+        $order->total_bill_amt = $request->totalBillAmmount;
+        $order->delivery_slot_id = $request->addressId;
+        $order->shipping_id = 1;
+        if ($request->paymentmethod == 1) {
+            $order->payment_mode = 'cash';
+        } else {
+            $order->payment_mode = 'online';
+        }
+        $order->save();
+
+        for ($i = 0; $i < count($request->productId); $i++) {
+            $oredrDetails = new OrderDetail();
+            $oredrDetails->Ordermasterid = $order->id;
+            $oredrDetails->productId = $request->productId[$i];
+            $oredrDetails->qty = $request->productQty[$i];
+            $oredrDetails->price = $request->productPrice[$i];
+            $oredrDetails->unit = $request->productUnit[$i];
+            $oredrDetails->total = $request->productPrice[$i] * $request->productQty[$i];
+            $oredrDetails->save();
+        }
+
+        return redirect()->back();
     }
 }

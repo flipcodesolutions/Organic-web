@@ -13,6 +13,7 @@ Route::controller(VisitorController::class)->group(function(){
     Route::post('addtocart','addtocart')->name('home.addtocart');
     Route::get('cart', 'cartindex')->name('home.cart');
     Route::get('deletecart/{id?}', 'deletecart')->name('home.deletecart');
+    Route::post('order','order')->name('home.order');
 });
 
 ?>

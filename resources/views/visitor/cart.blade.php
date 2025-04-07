@@ -2,9 +2,9 @@
 @section('content')
     <div class="container-fluid" style="background-color: #EAEDED;">
         <div class="row justify-content-between">
-            {{-- left column --}}
-            <div class="col-lg-9 col-sm-12 p-3">
-                @if (session()->has('user'))
+            @if (session()->has('user'))
+                {{-- left column --}}
+                <div class="col-lg-9 col-sm-12 p-3">
                     @foreach ($cart as $key => $cartData)
                         <div class="card mb-3">
                             <div class="row g-0">
@@ -20,7 +20,9 @@
                                         </div>
                                         <div class="price">
                                             <h5 class="card-title productTotalAmount">₹
-                                               <span id='productTotalAmount.{{ $key }}'> {{ $cartData->price }} </span></h5>
+                                                <span id='productTotalAmount.{{ $key }}'> {{ $cartData->price }}
+                                                </span>
+                                            </h5>
                                         </div>
                                     </div>
                                     <div class="card-body">
@@ -35,12 +37,13 @@
                                                     <input type="hidden" id="sellprice.{{ $key }}"
                                                         value={{ $cartData->units->sell_price }}>
                                                     <!-- Quantity Display -->
-                                                    <input type="text" class="form-control text-center px-0"
+                                                    <input type="text" class="form-control text-center px-0 quantity"
                                                         id="quantity.{{ $key }}" value="{{ $cartData->qty }}"
                                                         readonly aria-label="Quantity" aria-describedby="quantity">
                                                     <!-- Increment Button -->
                                                     <button class="btn btn-outline-secondary" type="button"
-                                                        onclick="incrementQuantity({{ $key }})" id="increment-btn">
+                                                        onclick="incrementQuantity({{ $key }})"
+                                                        id="increment-btn">
                                                         +
                                                     </button>
                                                 </div>
@@ -54,51 +57,64 @@
                             </div>
                         </div>
                     @endforeach
-                @endif
-            </div>
+                </div>
 
-            @if (session()->has('user'))
+                {{-- right column --}}
                 <div class="col-lg-3 col-sm-12 p-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h6>Price Details</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="price d-flex justify-content-between">
-                                <p> Price (<span id="totalProduct"></span> item) </p>
-                                <p> ₹ <span id="totalPrice"></span> </p>
-                            </div>
-                            <div class="discountpoint d-flex justify-content-between">
-                                <p>Discount Point</p>
-                                <p> <span id="pointper"> {{ $pointper->per }} </span> % </p>
-                            </div>
-                            <div class="dellivercharges d-flex justify-content-between">
-                                <p> Delivery Charges </p>
-                                <p> ₹ <span id="delivercharges"> 50 </span></p>
-                            </div>
-                            <div class="totalamount d-flex justify-content-between py-3"
-                                style="border-top: 1px dashed #e0e0e0">
-                                <h6> Total Amount </h6>
-                                <h6> ₹ <span id="totalBillAmmount"> </span></h6>
-                            </div>
+                    <form action="{{ route('home.order') }}" method="post">
+                        @csrf
 
-                            <div class="address py-3" style="border-top: 1px dashed #e0e0e0;">
-                                <h6>Select Delivery address</h6>
-                                @foreach ($address as $addressData)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="{{ $addressData->id }}"
-                                            name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            <span>{{ $addressData->address_line1 }}</span>,
-                                            <span>{{ $addressData->address_line2 }}</span>,
-                                            <span>{{ $addressData->landmark->landmark_eng }}</span>,
-                                            <span>{{ $addressData->pincode }}</span>.
-                                        </label>
-                                    </div>
-                                @endforeach
+                        <input type="hidden" name="userId" value="{{ session('user')->id }}">
+                        @foreach ($cart as $key => $cartData)
+                            <input type="hidden" name="productId[]" value="{{ $cartData->productId }}">
+                            <input type="hidden" name="productQty[]" id="productQuantity.{{ $key }}">
+                            <input type="hidden" name="productPrice[]" value="{{ $cartData->price }}">
+                            <input type="hidden" name="productUnit[]" value="{{ $cartData->unit }}">
+                        @endforeach
+                        <div class="card">
+                            <div class="card-header">
+                                <h6>Price Details</h6>
                             </div>
+                            <div class="card-body">
+                                <div class="price d-flex justify-content-between">
+                                    <p> Price (<span id="totalProduct"></span> item) </p>
+                                    <p> ₹ <span id="totalPrice"></span> </p>
+                                    <input type="hidden" name="totalPrice" id='totalPriceInput'>
+                                </div>
+                                <div class="discountpoint d-flex justify-content-between">
+                                    <p>Discount Point</p>
+                                    <p> <span id="pointper"> {{ $pointper->per }} </span> % </p>
+                                    <input type="hidden" id='pointperInput' name="pointper"
+                                        value=" {{ $pointper->per }} ">
+                                </div>
+                                <div class="dellivercharges d-flex justify-content-between">
+                                    <p> Delivery Charges </p>
+                                    <p> ₹ <span id="delivercharges"> 50 </span></p>
+                                </div>
+                                <div class="totalamount d-flex justify-content-between py-3"
+                                    style="border-top: 1px dashed #e0e0e0">
+                                    <h6> Total Amount </h6>
+                                    <h6> ₹ <span id="totalBillAmmount"> </span></h6>
+                                    <input type="hidden" name="totalBillAmmount" id='totalBillAmmountInput'>
+                                </div>
 
-                            {{-- <div class="deliveryslot">
+                                <div class="address py-3" style="border-top: 1px dashed #e0e0e0;">
+                                    <h6>Select Delivery address</h6>
+                                    @foreach ($address as $addressData)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="{{ $addressData->id }}"
+                                                name="addressId" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                <span>{{ $addressData->address_line1 }}</span>,
+                                                <span>{{ $addressData->address_line2 }}</span>,
+                                                <span>{{ $addressData->landmark->landmark_eng }}</span>,
+                                                <span>{{ $addressData->pincode }}</span>.
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                {{-- <div class="deliveryslot">
                                 <h6>Select Delivery slot</h6>
                                 <select name="deliveryslot" class="form-select mb-3" aria-label="Large select example"
                                     id="">
@@ -110,17 +126,22 @@
                                 </select>
                             </div> --}}
 
-                            <div class="paymentmethod">
-                                <h6>Select payment method</h6>
-                                <select name="paymentmethod" class="form-select " aria-label="Large select example"
-                                    id="">
-                                    <option value="" disabled selected>Select Payment Method</option>
-                                    <option value="">Case On Delevery</option>
-                                    <option value="">Pay Online</option>
-                                </select>
+                                <div class="paymentmethod mb-3">
+                                    <h6>Select payment method</h6>
+                                    <select name="paymentmethod" class="form-select " aria-label="Large select example"
+                                        id="">
+                                        <option value="" disabled selected>Select Payment Method</option>
+                                        <option value="1">Case On Delevery</option>
+                                        <option value="2">Pay Online</option>
+                                    </select>
+                                </div>
+
+                                <div class="placeorder">
+                                    <button class="btn btn-success" type="submit"> Place Order </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             @endif
 
@@ -256,10 +277,11 @@
                 let currentValue = parseInt(quantityField.value, 10);
                 let newValue = currentValue + 1;
                 quantityField.value = newValue;
+                document.getElementById(`productQuantity.${key}`).value = newValue;
 
                 let totalAmount = newValue * sellprice;
 
-                totalAmountField.textContent =  totalAmount;
+                totalAmountField.textContent = totalAmount;
 
                 totalAmmount();
             }
@@ -275,7 +297,7 @@
                     quantityField.value = newValue;
 
                     let totalAmount = newValue * sellprice;
-                    totalAmountField.textContent =  totalAmount;
+                    totalAmountField.textContent = totalAmount;
 
                     totalAmmount();
                 }
@@ -299,6 +321,7 @@
                 });
 
                 document.getElementById('totalPrice').textContent = total;
+                document.getElementById('totalPriceInput').value = total;
 
                 if (pointper != 0 && pointper != null) {
                     total = (total * pointper) / 100;
@@ -306,12 +329,23 @@
 
                 document.getElementById('totalProduct').textContent = productCount;
                 document.getElementById('totalBillAmmount').textContent = total + delivercharge;
+                document.getElementById('totalBillAmmountInput').value = total + delivercharge;
+
+                // for final quentity of each product
+                let productQuantity = document.querySelectorAll('.quantity');
+                productQuantity.forEach((element, index) => {
+                    let quantityValue = element.value;
+                    let hiddenInput = document.getElementById(`productQuantity.${index}`);
+
+                    if (hiddenInput) {
+                        hiddenInput.value = quantityValue;
+                    }
+                });
+
             }
 
             document.addEventListener('DOMContentLoaded', function() {
                 totalAmmount();
             });
-
-
         </script>
     @endsection
