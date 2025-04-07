@@ -296,7 +296,7 @@
                     },
                     error: function(xhr, status, error) {
                         console.error("Error:", error);
-                        alert("Failed to add item to cart.");
+                        alert(response.message);
                     }
                 });
             });

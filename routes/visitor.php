@@ -7,6 +7,7 @@ Route::controller(VisitorController::class)->group(function(){
     Route::get('/','index')->name('visitor.index'); 
     Route::get('visitor/loginindex','visitorlogin')->name('visitor.loginindex');
     Route::post('visitor/login','visitorauthenticate')->name('visitor.login');
+    Route::get('visitor/logout','visitorlogout')->name('visitor.logout');
     Route::get('category/{id?}','category')->name('home.category');
     Route::get('product/{id?}','product')->name('home.product');
     Route::post('addtocart','addtocart')->name('home.addtocart');

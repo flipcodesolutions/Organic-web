@@ -1,18 +1,22 @@
 <header class="header">
+    <style>
+        .dropdown-toggle::after {
+            display: none !important;
+        }
+    </style>
     <div class="container-fluid">
         <div class="row py-3 border-bottom">
-
             <div
-                class="col-sm-4 col-lg-3 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
+                class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
                 <div class="d-flex align-items-center my-3 my-sm-0">
                     <a href="{{ route('visitor.index') }}">
                         <img src="{{ asset('visitor/images/logo.svg') }}" alt="logo" class="img-fluid" height="100px"
                             width="100px">
                     </a>
                 </div>
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                {{-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body
-                    scrolling</button>
+                    scrolling</button> --}}
                 <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
                     id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                     <div class="offcanvas-header">
@@ -57,7 +61,7 @@
             <div class="col-lg-2">
                 <ul
                     class="navbar-nav list-unstyled d-flex flex-row gap-3 gap-lg-5 justify-content-center flex-wrap align-items-center mb-0 fw-bold text-uppercase text-dark">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a href="{{ route('visitor.index') }}" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item dropdown">
@@ -81,42 +85,57 @@
                 </ul>
             </div>
 
-            <div
-                class="col-sm-8 col-lg-1 d-flex gap-5 align-items-center justify-content-center justify-content-sm-end">
+            <div class="col-sm-8 col-lg-1 d-flex align-items-center justify-content-lg-center justify-content-sm-end ">
 
-                <ul class="d-flex justify-content-end list-unstyled m-0">
-                    <li>
-                        <a href="{{ route('visitor.loginindex') }}" class="btn btn-secondary dropdown-toggle"
-                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            hello, login
-                        </a>
-                    </li>
+                {{-- <ul class="d-flex justify-content-end list-unstyled m-0">
+                    <li class="nav-item dropdown no-arrow mb-4"> --}}
+                <a href=" " class="btn  dropdown-toggle p-0" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
 
-                    <li>
-                        <a href="{{ route('home.cart') }}">
-                            cart
-                        </a>
-                    </li>
+                    <div class="userimage">
+                        @if (session()->has('user'))
+                        <img class="img-profile rounded-circle"
+                                src="{{ asset('user_profile/' . session('user')->pro_pic) }}" style="max-height: 40px">
+                        @else
+                            <img class="img-profile rounded-circle"
+                                src="{{ asset('user_profile/1741682175_67cff5ff1ede5.png') }}" style="max-height: 40px">
+                        @endif
+                    </div>
+                    <div class="username text-truncate" style="max-width: 100px;">
+                        hello,
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                            @if (session()->has('user'))
+                                {{ session('user')->name }}
+                            @endif
+                        </span>
+
+                    </div>
+                </a>
+
+
+                <ul class="dropdown-menu">
+                    @if (session()->has('user'))
+                        <li><a class="dropdown-item" href=""><i
+                                    class="fa-solid fa-unlock-keyhole mr-2 text-gray-400 me-2"></i>Change Password</a>
+                        </li>
+                        <li><a class="dropdown-item" href="{{ route('visitor.logout') }}"> <i
+                                    class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Log out</a></li>
+                    @else
+                        <li><a class="dropdown-item" href="{{ route('visitor.loginindex') }}">Log in</a></li>
+                        <li><a class="dropdown-item" href="">Sign Up</a></li>
+                    @endif
+
                 </ul>
-
-                <!-- </li>
-                    <li>
-                        <a href="#" class="p-2 mx-1">
-                            <svg width="24" height="24">
-                                <use xlink:href="#wishlist"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                            aria-controls="offcanvasCart">
-                            <svg width="24" height="24">
-                                <use xlink:href="#shopping-bag"></use>
-                            </svg>
-                        </a>
-                    </li>
-                </ul> -->
             </div>
+            <div class="col-1">
+                <a @if(session()->has('user')) href="{{ route('home.cart') }}" @else href="{{ route('visitor.loginindex') }}" @endif class="btn btn-success d-flex justify-content-between align-items-center">
+                    <img src="{{ asset('visitor/images/ShoppingCart.svg') }}" alt="" class="img-fluid"
+                        style="max-width: 50%">
+                    <h6>cart</h6>
+                </a>
+            </div>
+
 
         </div>
         <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
