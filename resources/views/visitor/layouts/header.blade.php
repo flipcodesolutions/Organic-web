@@ -159,7 +159,7 @@
             </div>
 
             <div class="col-3 d-none d-lg-flex justify-content-between">
-                <div class="col-4 dropdown">
+                <div class="col-4 pt-2 dropdown">
 
                     <a href=" " class="btn  dropdown-toggle p-0" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -204,8 +204,11 @@
                     </ul>
                 </div>
 
-                <div class="col-4">
-                    order list
+                <div class="col-4 py-3">
+                    <a @if (session()->has('user')) href="{{ route('home.orderindex') }}" @else href="{{ route('visitor.loginindex') }}" @endif
+                        class="btn btn-success d-flex w-auto justify-content-between align-items-center py-2">
+                        <i class="fa-solid fa-receipt text-body-secondary fa-lg"></i> your orders
+                    </a>
                 </div>
 
                 <div class="col-4 p-3">

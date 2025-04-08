@@ -158,7 +158,7 @@ class VisitorController extends Controller
         // ]);
     }
 
-    public function order(Request $request)
+    public function placeorder(Request $request)
     {
         $order = new OrderMaster();
         $order->userId = $request->userId;
@@ -186,5 +186,26 @@ class VisitorController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function orderindex()
+    {
+        $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
+        if (session()->has('user')) {
+            $order = OrderMaster::where('userId', session('user')->id)->with('orderDetails', 'orderDetails.product', 'orderDetails.unit')->get();
+
+            return view('visitor.order', compact('category', 'order'));
+        } else {
+            return view('visitor.order', compact('category'));
+        }
+    }
+
+    public function orderdetail($id)
+    {
+        $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
+        $order = OrderMaster::with('shippingadd.landmark','orderDetails','orderDetails.product','orderDetails.unit','orderDetails.unit.unitMaster')->find($id);
+        // return $order;
+
+        return view('visitor.orderdetails',compact('category','order'));
     }
 }

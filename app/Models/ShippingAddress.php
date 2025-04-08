@@ -10,4 +10,9 @@ class ShippingAddress extends Model
     {
         return $this->belongsTo(LandmarkMaster::class);
     }
+
+    public function ordermaster()
+    {
+        return $this->hasMany(OrderMaster::class,'shipping_id');
+    }
 }

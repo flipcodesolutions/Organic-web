@@ -10,7 +10,7 @@
                             <div class="row g-0">
                                 <div class="col-md-2 d-flex justify-content-center py-3">
                                     <img src="{{ asset($cartData->products->image) }}" class="img-fluid rounded-start"
-                                        alt="...">
+                                        alt="..." style="max-height: 185px;">
                                 </div>
                                 <div class="col-md-10">
                                     <div class="card-header d-flex justify-content-between">
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="dellivercharges d-flex justify-content-between">
                                     <p> Delivery Charges </p>
-                                    <p> ₹ <span id="delivercharges"> 50 </span></p>
+                                    <p> ₹ <span id="delivercharges"> 00 </span></p>
                                 </div>
                                 <div class="totalamount d-flex justify-content-between py-3"
                                     style="border-top: 1px dashed #e0e0e0">
@@ -265,87 +265,87 @@
                 </div>
             </div> --}}
         </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function incrementQuantity(key) {
+            let quantityField = document.getElementById(`quantity.${key}`);
+            let sellprice = document.getElementById(`sellprice.${key}`).value;
+            let totalAmountField = document.getElementById(`productTotalAmount.${key}`);
 
-        <script>
-            function incrementQuantity(key) {
-                let quantityField = document.getElementById(`quantity.${key}`);
-                let sellprice = document.getElementById(`sellprice.${key}`).value;
-                let totalAmountField = document.getElementById(`productTotalAmount.${key}`);
+            let currentValue = parseInt(quantityField.value, 10);
+            let newValue = currentValue + 1;
+            quantityField.value = newValue;
+            document.getElementById(`productQuantity.${key}`).value = newValue;
 
-                let currentValue = parseInt(quantityField.value, 10);
-                let newValue = currentValue + 1;
+            let totalAmount = newValue * sellprice;
+
+            totalAmountField.textContent = totalAmount;
+
+            totalAmmount();
+        }
+
+        function decrementQuantity(key) {
+            let quantityField = document.getElementById(`quantity.${key}`);
+            let sellprice = document.getElementById(`sellprice.${key}`).value;
+            let totalAmountField = document.getElementById(`productTotalAmount.${key}`);
+
+            let currentValue = parseInt(quantityField.value, 10);
+            if (currentValue > 1) {
+                let newValue = currentValue - 1;
                 quantityField.value = newValue;
-                document.getElementById(`productQuantity.${key}`).value = newValue;
 
                 let totalAmount = newValue * sellprice;
-
                 totalAmountField.textContent = totalAmount;
 
                 totalAmmount();
             }
+        }
 
-            function decrementQuantity(key) {
-                let quantityField = document.getElementById(`quantity.${key}`);
-                let sellprice = document.getElementById(`sellprice.${key}`).value;
-                let totalAmountField = document.getElementById(`productTotalAmount.${key}`);
+        function totalAmmount() {
+            let total = 0;
+            let productTotal = document.querySelectorAll('.productTotalAmount');
+            let delivercharge = parseFloat(document.getElementById('delivercharges').textContent);
+            let pointper = parseFloat(document.getElementById('pointper').textContent);
+            let productCount = productTotal.length;
 
-                let currentValue = parseInt(quantityField.value, 10);
-                if (currentValue > 1) {
-                    let newValue = currentValue - 1;
-                    quantityField.value = newValue;
+            productTotal.forEach((element) => {
+                let priceText = element.textContent.trim();
+                let numericValue = parseFloat(priceText.replace(/₹/g, '').replace(/,/g,
+                    '')); // Remove ₹ and commas, convert to number
 
-                    let totalAmount = newValue * sellprice;
-                    totalAmountField.textContent = totalAmount;
-
-                    totalAmmount();
+                if (!isNaN(numericValue)) { // Check if it's a valid number
+                    total += numericValue;
                 }
-            }
-
-            function totalAmmount() {
-                let total = 0;
-                let productTotal = document.querySelectorAll('.productTotalAmount');
-                let delivercharge = parseFloat(document.getElementById('delivercharges').textContent);
-                let pointper = parseFloat(document.getElementById('pointper').textContent);
-                let productCount = productTotal.length;
-
-                productTotal.forEach((element) => {
-                    let priceText = element.textContent.trim();
-                    let numericValue = parseFloat(priceText.replace(/₹/g, '').replace(/,/g,
-                        '')); // Remove ₹ and commas, convert to number
-
-                    if (!isNaN(numericValue)) { // Check if it's a valid number
-                        total += numericValue;
-                    }
-                });
-
-                document.getElementById('totalPrice').textContent = total;
-                document.getElementById('totalPriceInput').value = total;
-
-                if (pointper != 0 && pointper != null) {
-                    total = (total * pointper) / 100;
-                }
-
-                document.getElementById('totalProduct').textContent = productCount;
-                document.getElementById('totalBillAmmount').textContent = total + delivercharge;
-                document.getElementById('totalBillAmmountInput').value = total + delivercharge;
-
-                // for final quentity of each product
-                let productQuantity = document.querySelectorAll('.quantity');
-                productQuantity.forEach((element, index) => {
-                    let quantityValue = element.value;
-                    let hiddenInput = document.getElementById(`productQuantity.${index}`);
-
-                    if (hiddenInput) {
-                        hiddenInput.value = quantityValue;
-                    }
-                });
-
-            }
-
-            document.addEventListener('DOMContentLoaded', function() {
-                totalAmmount();
             });
-        </script>
-    @endsection
+
+            document.getElementById('totalPrice').textContent = total;
+            document.getElementById('totalPriceInput').value = total;
+
+            if (pointper != 0 && pointper != null) {
+                total = (total * pointper) / 100;
+            }
+
+            document.getElementById('totalProduct').textContent = productCount;
+            document.getElementById('totalBillAmmount').textContent = total + delivercharge;
+            document.getElementById('totalBillAmmountInput').value = total + delivercharge;
+
+            // for final quentity of each product
+            let productQuantity = document.querySelectorAll('.quantity');
+            productQuantity.forEach((element, index) => {
+                let quantityValue = element.value;
+                let hiddenInput = document.getElementById(`productQuantity.${index}`);
+
+                if (hiddenInput) {
+                    hiddenInput.value = quantityValue;
+                }
+            });
+
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            totalAmmount();
+        });
+    </script>
+@endsection
