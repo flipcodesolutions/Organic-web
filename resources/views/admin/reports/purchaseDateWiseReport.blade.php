@@ -9,9 +9,9 @@
                 <div class="col text-white">
                     <h6>Purchase Report </h6>
                 </div>
-                <div class="col" align="right">
-                    <a class="btn btn-primary" href="{{ Route('reports.purchaseReport') }}">Back</a>
-                </div>
+                <!-- <div class="col" align="right">
+                    <a class="btn btn-primary" href="{{ Route('reports.purchaseDateWise') }}">Back</a>
+                </div> -->
             </div>
         </div>
 

@@ -2,15 +2,15 @@
 @section('header', 'Edit Product')
 @section('content')
 
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <div class="col">
-        <h1 class="h3 mb-0 text-gray-800">Update New Product</h1>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col">
+            <h1 class="h3 mb-0 text-gray-800">Edit Product</h1>
+        </div>
+        <a href="{{ route('product.index') }}" class="btn btn-primary" type="button"> Back </a>
     </div>
-    <a href="{{ route('product.index') }}" class="btn btn-primary" type="button"> Back </a>
-</div>
 
-<div class="card-body p-0">
-    <div class="card shadow-sm  bg-body rounded">
+    <div class="card-body p-0">
+        <div class="card shadow-sm  bg-body rounded">
             {{-- <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col text-white">
@@ -177,7 +177,8 @@
                                         <tr>
                                             <td>
                                                 <select class="form-select form-select-lg mb-3" name="unit_id[]"
-                                                    aria-label="Large select example">
+                                                    aria-label="Large select example"
+                                                    style="font-size: 16px; font-weight: 400;">
                                                     <option disabled>Select Unit</option>
                                                     @foreach ($units as $unitdata)
                                                         <option
@@ -215,6 +216,8 @@
                                                     <input type="text" name="product_price[]"
                                                         placeholder="Product Price" class="form-control"
                                                         value="{{ $data->price }}">
+                                                    <i class="fa-solid fa-indian-rupee-sign position-absolute"
+                                                        style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                                                     <label for="">Product Price</label>
                                                     <span class="text-danger"
                                                         id="productPriceError{{ $index + 1 }}"></span>
@@ -231,6 +234,8 @@
                                                     <input type="text" name="discount_per[]"
                                                         placeholder="Discount Percentage" class="form-control"
                                                         value="{{ $data->per }}">
+                                                    <i class="fa-solid fa-percent position-absolute"
+                                                        style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                                                     <label for="">Discount Per</label>
                                                     <span class="text-danger" id="desPerError{{ $index + 1 }}"></span>
                                                     {{-- <span>
@@ -246,6 +251,8 @@
                                                     <input type="text" name="selling_price[]"
                                                         placeholder="Selling Price" class="form-control"
                                                         value="{{ $data->sell_price }}">
+                                                    <i class="fa-solid fa-indian-rupee-sign position-absolute"
+                                                        style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                                                     <label for="">Selling Price</label>
                                                     <span class="text-danger"
                                                         id="sellPriceError{{ $index + 1 }}"></span>
@@ -398,9 +405,8 @@
                                         @if ($image->type == 'photo')
                                             <div class="col">
                                                 <div class="image">
-                                                    <img src="{{ asset( $image->url) }}" alt=""
-                                                        id="image" height="110px" width="100px"
-                                                        style="list-style-type:none">
+                                                    <img src="{{ asset($image->url) }}" alt="" id="image"
+                                                        height="110px" width="100px" style="list-style-type:none">
                                                 </div>
                                                 <div class="addimage" style="justify-content: center">
                                                     <a href="{{ route('productimage.delete', $image->id) }}"
@@ -677,7 +683,9 @@
                                 aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                                 <option selected disabled>Select Brand</option>
                                 @foreach ($brands as $branddata)
-                                    <option value="{{ $branddata->id }}"{{ $product->brandId == $branddata->id ? 'selected' : ''}}>{{ $branddata->brand_name }}</option>
+                                    <option
+                                        value="{{ $branddata->id }}"{{ $product->brandId == $branddata->id ? 'selected' : '' }}>
+                                        {{ $branddata->brand_name }}</option>
                                 @endforeach
                             </select>
                             <span class="text-danger" id="brandError"></span>
@@ -696,12 +704,12 @@
                         </div>
                         <div class="col">
                             <div class="form-check">
-                                <input class="form-check-input" name="is_on_home" type="checkbox" value="true" id="flexCheckDefault" 
-                                @if($product->isOnHome == 'yes') checked @endif>
+                                <input class="form-check-input" name="is_on_home" type="checkbox" value="true"
+                                    id="flexCheckDefault" @if ($product->isOnHome == 'yes') checked @endif>
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Make it on home
                                 </label>
-                              </div>
+                            </div>
                         </div>
                     </div>
 
@@ -712,20 +720,19 @@
                         </div>
                         <div class="col">
                             <div class="form-check">
-                                <input class="form-check-input" name="is_navigate" type="checkbox" value="true" id="flexCheckDefault" 
-                                @if($navigate && $navigate->screenname == 'product_screen/product/'.$product->id) checked @endif>
+                                <input class="form-check-input" name="is_navigate" type="checkbox" value="true"
+                                    id="flexCheckDefault" @if ($navigate && $navigate->screenname == 'product_screen/product/' . $product->id) checked @endif>
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Make Navigation
                                 </label>
-                              </div>
+                            </div>
                         </div>
                     </div>
 
                     {{-- submit --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="update btn" id="Update"><i
-                                class="fa-solid fa-floppy-disk"></i>
-                                Update</button>
+                        <button type="submit" class="update btn" id="Update"><i class="fa-solid fa-floppy-disk"></i>
+                            Update</button>
                     </div>
 
                     {{-- <div class="row">
@@ -877,7 +884,7 @@
 
                 newRow.innerHTML = `
                 <td>
-                    <select class="form-select form-select-lg mb-3" name="new_unit_id[]" aria-label="Large select example">
+                    <select class="form-select form-select-lg mb-3" name="new_unit_id[]" aria-label="Large select example" style="font-size: 16px; font-weight: 400;">
                         <option selected>Select Unit</option>
                         @foreach ($units as $data)
                             <option value="{{ $data->id }}">{{ $data->unit }}</option>
@@ -895,6 +902,7 @@
                 <td>
                     <div class="form-floating">
                         <input type="text" name="new_product_price[]" placeholder="Product Price" class="form-control" value="{{ $data->per }}">
+                        <i class="fa-solid fa-indian-rupee-sign position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                         <label for="">Product Price</label>
                     <span class="text-danger" id="newProductPriceError${rowCounter}"></span>
                     </div>
@@ -902,6 +910,7 @@
                 <td>
                     <div class="form-floating">
                         <input type="text" name="new_discount_per[]" placeholder="Discount Percentage" class="form-control">
+                        <i class="fa-solid fa-percent position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                         <label for="">Discount Per</label>
                     <span class="text-danger" id="newDisPerError${rowCounter}"></span>
                     </div>
@@ -909,6 +918,7 @@
                 <td>
                     <div class="form-floating">
                         <input type="text" name="new_selling_price[]" placeholder="Selling Price" class="form-control">
+                        <i class="fa-solid fa-indian-rupee-sign position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
                         <label for="">Selling Price</label>
                     <span class="text-danger" id="newSellPriceError${rowCounter}"></span>
                     </div>
@@ -980,7 +990,7 @@
             // let product_nameRegex = /^[A-Z][a-z]*(?: [A-Z][a-z]*)*$/;
             if (!product_name) {
                 document.getElementById('productNameError').textContent = "Product name (English) is required.";
-            } 
+            }
             // else if (!product_name || !product_nameRegex.test(product_name)) {
             //     document.getElementById('productNameError').textContent =
             //         "Invalid Product Name. Productname must start with a upper case letter. Allowed characters are a-z (only upper and lower case).Do not enter any numbers or spacial characters";

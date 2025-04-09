@@ -3,7 +3,7 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <div class="col">
-        <h1 class="h3 mb-0 text-gray-800">Deactive CmsMaster</h1>
+        <h1 class="h3 mb-0 text-gray-800">Deactivated CmsMaster</h1>
     </div>
     <a class="btn btn-primary" href="{{ Route('cms_master.index') }}">Back</a>
 </div>

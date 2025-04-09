@@ -4,7 +4,7 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <div class="col">
-        <h1 class="h3 mb-0 text-gray-800">Deactive Products</h1>
+        <h1 class="h3 mb-0 text-gray-800">Deactivated Products</h1>
     </div>
     <a class="btn btn-primary" href="{{ route('product.index') }}">Back</a>
 </div>

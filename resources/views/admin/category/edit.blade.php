@@ -4,7 +4,7 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <div class="col">
-            <h1 class="h3 mb-0 text-gray-800">Update New Category</h1>
+            <h1 class="h3 mb-0 text-gray-800">Edit Category</h1>
         </div>
         <a href="{{ route('category.index') }}" class="btn btn-primary" type="button" onclick="javascript:history.go(-1)"> Back
         </a>

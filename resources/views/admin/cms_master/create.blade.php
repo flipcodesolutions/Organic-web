@@ -142,7 +142,7 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary"><i
+                            <button type="submit" class="submit btn"><i
                                     class="fa-solid fa-floppy-disk"></i>
                                 Submit</button>
                         </div>

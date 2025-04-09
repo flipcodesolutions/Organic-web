@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\NotificationController;
 use App\Http\Controllers\admin\PointPerController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductPriceController;
+use App\Http\Controllers\vendor\UnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -98,5 +99,12 @@ Route::controller(BrandController::class)->group(function(){
     Route::get('brand/deactiveindex','deactiveindex')->name('brand.deactiveindex');
     Route::get('brand/active/{id?}','active')->name('brand.active');
     Route::get('brand/delete/{id?}','destroy')->name('brand.delete');
+});
+
+Route::controller(UnitController::class)->group(function(){
+    Route::get('unit/index','index')->name('unit.index');
+    Route::get('unit/edit/{id?}','edit')->name('unit.edit');
+    Route::post('unit/update/{id?}','update')->name('unit.update');
+    Route::get('unit/delete/{id?}','destroy')->name('unit.delete');
 });
 

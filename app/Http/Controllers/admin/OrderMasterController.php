@@ -64,13 +64,28 @@ class OrderMasterController extends Controller
     {
         //
     }
-    public function orderReport()
+    public function orderReport(Request $request)
     {
+        // return "hello";
     
+        $data = [];
+        // $request->validate([
+        //     'start_date' => 'required|date|before:end_date',
+        //     'end_date' => 'required|date|after_or_equal:start_date',
+        // ]);
+      
+       
+   if($request->start_date ){
+          $request->session()->put('order_start_date',$request->start_date);
+        $request->session()->put('order_end_date',$request->end_date);
     $data = OrderMaster::with(['user', 'orderDetails.product', 'shippingAddress'])
-                            ->get();
-       return view('admin.reports.orderReport',['data'=>$data]);
+                        ->whereDate('orderDate', '>=', $request->start_date)
+                        ->whereDate('orderDate', '<=', $request->end_date)
+                        ->get();
+          
     //   return $data;
+     }
+     return view('admin.reports.orderReport',['data'=>$data]);
     }
 
     public function billgeneration(Request $request,$id){

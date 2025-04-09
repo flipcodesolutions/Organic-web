@@ -3,7 +3,7 @@
 @section('content')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <div class="col">
-        <h1 class="h3 mb-0 text-gray-800">Update New ScreenName</h1>
+        <h1 class="h3 mb-0 text-gray-800">Edit ScreenName</h1>
     </div>
     <a href="{{ route('navigate.index') }}" class="btn btn-primary" type="button"> Back </a>
 </div>

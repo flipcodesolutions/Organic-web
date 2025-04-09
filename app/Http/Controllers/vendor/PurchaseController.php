@@ -67,8 +67,18 @@ class PurchaseController extends Controller
     {
         //
     }
-    public function purchaseDateWIse(){
-        return view('admin.reports.purchaseDateWise');
+    public function purchaseDateWIse(Request $request){
+        $request->validate([
+            'start_date' => 'required|date|before:end_date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+        $request->session()->put('start_date',$request->start_date);
+        $request->session()->put('end_date',$request->end_date);
+        $data=Purchase::with("productData")->whereDate('date', '>=', $request->start_date)
+                ->whereDate('date', '<=', $request->end_date)
+                ->get();
+           return view('admin.reports.purchaseDateWise',['data'=>$data]);
+        // return view('admin.reports.purchaseDateWise');
     }
     public function purchaseDateWiseReport(Request $request){
         $request->validate([
