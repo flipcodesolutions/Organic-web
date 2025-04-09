@@ -6,6 +6,18 @@
 
         @if (!empty($order))
             @foreach ($order as $orderData)
+                {{-- filter --}}
+
+                <div class="filter my-3">
+                    <form action="" method="get" class="filter-form d-flex gap-2">
+                        {{-- <h5>Orders of</h5>
+                        <input type="month" name="date"> --}}
+                        <label for="monthYear">Select Month and Year</label>
+                        <input type="text" name="filter_date" id="datepicker" class="form-control" placeholder="mm/yyyy"
+                            autocomplete="off">
+                    </form>
+                </div>
+
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="d-flex gap-3 justify-content-start">
@@ -21,7 +33,8 @@
                         <div class="d-flex justify-content-end">
                             <div class="order-id">
                                 <p class="my-0"> ORDER # {{ $orderData->id }} </p>
-                                <a href="{{ route('home.orderdetail')}}/{{ $orderData->id }}" class="text-body-secondary">Order Details</a>
+                                <a href="{{ route('home.orderdetail') }}/{{ $orderData->id }}"
+                                    class="text-body-secondary">Order Details</a>
                             </div>
                         </div>
                     </div>
@@ -38,7 +51,8 @@
                                         <p>{!! $orderDetailData->product->productDescription !!}</p>
                                     </div>
                                     <div class="mt-auto">
-                                       <button class="">order again</button> 
+                                        <a href="{{ route('home.product') }}/{{ $orderDetailData->product->id }}"
+                                            class="btn btn-success">Order Again</a>
                                     </div>
                                 </div>
                             </div>
@@ -50,4 +64,16 @@
             <h3>hello</h3>
         @endif
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#datepicker').datepicker({
+                format: "mm/yyyy",
+                startView: "months",
+                minViewMode: "months",
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+    </script>
 @endsection

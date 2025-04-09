@@ -165,8 +165,8 @@ class VisitorController extends Controller
         $order->total_order_amt = $request->totalPrice;
         $order->dis_amt_point = $request->pointper;
         $order->total_bill_amt = $request->totalBillAmmount;
-        $order->delivery_slot_id = $request->addressId;
-        $order->shipping_id = 1;
+        $order->delivery_slot_id = 1;
+        $order->shipping_id = $request->addressId;
         if ($request->paymentmethod == 1) {
             $order->payment_mode = 'cash';
         } else {
@@ -183,7 +183,10 @@ class VisitorController extends Controller
             $oredrDetails->unit = $request->productUnit[$i];
             $oredrDetails->total = $request->productPrice[$i] * $request->productQty[$i];
             $oredrDetails->save();
+
+            $cart = AddToCart::where([['userId', '=', $request->userId],['productId', '=', $request->productId[$i]]])->delete();
         }
+
 
         return redirect()->back();
     }
