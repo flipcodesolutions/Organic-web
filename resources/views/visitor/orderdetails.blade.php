@@ -1,13 +1,28 @@
 @extends('visitor.layouts.app')
 @section('content')
-    {{-- <style>
-        .product-card-body {
-            height: 710px;
-            overflow: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+    <style>
+        .star-rating {
+            direction: rtl;
+            display: inline-flex;
+            font-size: 2rem;
         }
-    </style> --}}
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star-rating input:checked~label,
+        .star-rating label:hover,
+        .star-rating label:hover~label {
+            color: gold;
+        }
+    </style>
 
     <div class="order-details-container container">
         @if (session('user'))
@@ -76,14 +91,73 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <a href="">Write Product Review</a>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="productid({{ $orderData->product->id }})">Write Product
+                                    Review</a>
                             </div>
                         </div>
                     @endforeach
+                </div>
+            </div>
+
+            {{-- model for prodeuct review --}}
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Rate your experience</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('home.productreview') }}" method="post">
+                            @csrf
+
+                            <div class="modal-body">
+                                <input type="hidden" name="userId" value="{{ session('user')->id }}">
+                                <input type="hidden" name="productId" id="productReview">
+                                <textarea class="form-control" name="review" placeholder="Write your feedback here" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <label for="star-rating" class="me-2">Give Stare Rating</label>
+                                <div class="star-rating">
+                                    <input type="radio" id="star5" name="rating" value="5"><label
+                                        for="star5">★</label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label
+                                        for="star4">★</label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label
+                                        for="star3">★</label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label
+                                        for="star2">★</label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label
+                                        for="star1">★</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">submit</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         @else
             <h1>Hello</h1>
         @endif
     </div>
+
+    <script>
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const reviewButtons = document.querySelectorAll('.write-review-btn');
+
+        //     reviewButtons.forEach(button => {
+        //         button.addEventListener('click', function() {
+        //             const productId = this.getAttribute('data-product-id');
+        //             console.log(productId);
+                    
+        //             document.getElementById('productReview').value = productId;
+        //         });
+        //     });
+        // });
+
+        function productid(id){
+           document.getElementById('productReview').value = id;
+        }
+    </script>
 @endsection

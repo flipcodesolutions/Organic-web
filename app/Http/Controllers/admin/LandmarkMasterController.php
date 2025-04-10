@@ -68,6 +68,10 @@ class LandmarkMasterController extends Controller
             'landmark_guj' => 'required|string',
             'latitude' => 'required|numeric|between:-90,90',
             'longitude' => 'required|numeric|between:-180,180'
+        ],[
+            'landmark_eng.required' => 'The landmark english field is required.',
+            'landmark_guj.required' => 'The landmark gujarati field is required.',
+            'landmark_hin.required' => 'The landmark hindi field is required.',
         ]);
         try {
 
@@ -115,6 +119,10 @@ class LandmarkMasterController extends Controller
             'landmark_guj' => 'required|string',
             'latitude' => 'required|numeric|between:-90,90',
             'longitude' => 'required|numeric|between:-180,180'
+        ],[
+            'landmark_eng.required' => 'The landmark english field is required.',
+            'landmark_guj.required' => 'The landmark gujarati field is required.',
+            'landmark_hin.required' => 'The landmark hindi field is required.',
         ]);
         try {
             $landmarkmasters = LandmarkMaster::find($request->landmark_id);

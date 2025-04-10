@@ -38,6 +38,11 @@ class Cms_MasterController extends Controller
             'description' => 'required',
             'descriptionguj' => 'required',
             'descriptionhin' => 'required',
+        ],[
+            'titleguj.required' => 'The title gujarati field is required.',
+            'titlehin.required' => 'The title hindi field is required.',
+            'descriptionguj.required' => 'The description gujarati field is required.',
+            'descriptionhin.required' => 'The description hindi field is required.',
         ]);
         $cms_master = new Cms_Master();
         $cms_master->title=$request->title;
@@ -82,6 +87,11 @@ class Cms_MasterController extends Controller
             'description' => 'required',
             'descriptionguj' => 'required',
             'descriptionhin' => 'required',
+        ],[
+            'titleguj.required' => 'The title gujarati field is required.',
+            'titlehin.required' => 'The title hindi field is required.',
+            'descriptionguj.required' => 'The description gujarati field is required.',
+            'descriptionhin.required' => 'The description hindi field is required.',
         ]);
         $cms_master = Cms_Master::find($id);
         $cms_master->title=$request->title;

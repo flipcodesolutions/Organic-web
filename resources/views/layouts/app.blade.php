@@ -191,7 +191,7 @@
                                     {{-- stock update --}}
                                     <a class="collapse-item {{ request()->routeIs('stock.*') ? 'active' : '' }}"
                                         href="{{ route('stock.index') }}">
-                                        <i class="fa-solid fa-cubes-stacked mr-2"></i> 
+                                        <i class="fa-solid fa-cubes-stacked mr-2"></i>
                                         <span>Stock Update</span></a>
 
                                     {{-- review --}}
@@ -242,6 +242,11 @@
                                 </div>
                             </div>
 
+                        </li>
+
+                        <li
+                            class="nav-item {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
+                            <a class="nav-link" href=""><i class="fa-solid fa-truck"></i> <span>Order Management</span></a>
                         </li>
 
                         {{-- <li class="nav-item {{ request()->routeIs('category.*') ? 'active' : '' }}">
@@ -1047,13 +1052,13 @@
         <script>
             var message =
                 '{{ session()->has('
-                                                                                                                                                                                            success ')
+                                                                                                                                                                                                            success ')
                     ? session()->get('
-                                                                                                                                                                                            success ')
+                                                                                                                                                                                                            success ')
                     : (session()->has('
-                                                                                                                                                                                            error ')
+                                                                                                                                                                                                            error ')
                         ? session()->get('
-                                                                                                                                                                                            error ')
+                                                                                                                                                                                                            error ')
                         : implode("\\n", $errors->all())) }}';
 
             // If there is a success message

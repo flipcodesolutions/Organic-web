@@ -100,7 +100,7 @@
                         <button class="btn btn-primary" type="submit" id="addtocart"
                             style="padding: 10px 20px; font-size: 1rem; margin-right: 10px;">Add
                             to Cart</button>
-                        <button class="btn btn-success" style="padding: 10px 20px; font-size: 1rem;">Buy Now</button>
+                        <button class="btn btn-success" {{ session()->has('user') ? '' : 'disabled' }} style="padding: 10px 20px; font-size: 1rem;" >Buy Now</button>
                     </div>
                 </div>
             </div>

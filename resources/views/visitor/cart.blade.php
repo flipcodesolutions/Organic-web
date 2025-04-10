@@ -6,56 +6,63 @@
                 {{-- left column --}}
                 <div class="col-lg-9 col-sm-12 p-3">
                     @foreach ($cart as $key => $cartData)
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-2 d-flex justify-content-center py-3">
-                                    <img src="{{ asset($cartData->products->image) }}" class="img-fluid rounded-start"
-                                        alt="..." style="max-height: 185px;">
-                                </div>
-                                <div class="col-md-10">
-                                    <div class="card-header d-flex justify-content-between">
-                                        <div class="productdetail">
-                                            <h5 class="card-title">{{ $cartData->products->productName }}</h5>
-                                            <p> {{ $cartData->units->unitMaster->unit }} </p>
-                                        </div>
-                                        <div class="price">
-                                            <h5 class="card-title productTotalAmount">₹
-                                                <span id='productTotalAmount.{{ $key }}'> {{ $cartData->price }}
-                                                </span>
-                                            </h5>
-                                        </div>
+                        @if ($cartData->products && $cartData->units)
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-2 d-flex justify-content-center py-3">
+                                        <img src="{{ asset($cartData->products->image) }}" class="img-fluid rounded-start"
+                                            alt="..." style="max-height: 185px;">
                                     </div>
-                                    <div class="card-body">
-                                        <div class="price-section mb-2 d-flex ">
-                                            <div class="col-lg-2 col-sm-2 me-2">
-                                                <div class="input-group">
-                                                    <!-- Decrement Button -->
-                                                    <button class="btn btn-outline-secondary" type="button"
-                                                        onclick="decrementQuantity({{ $key }})" id="decrement-btn">
-                                                        -
-                                                    </button>
-                                                    <input type="hidden" id="sellprice.{{ $key }}"
-                                                        value={{ $cartData->units->sell_price }}>
-                                                    <!-- Quantity Display -->
-                                                    <input type="text" class="form-control text-center px-0 quantity"
-                                                        id="quantity.{{ $key }}" value="{{ $cartData->qty }}"
-                                                        readonly aria-label="Quantity" aria-describedby="quantity">
-                                                    <!-- Increment Button -->
-                                                    <button class="btn btn-outline-secondary" type="button"
-                                                        onclick="incrementQuantity({{ $key }})"
-                                                        id="increment-btn">
-                                                        +
-                                                    </button>
-                                                </div>
+                                    <div class="col-md-10">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <div class="productdetail">
+                                                <h5 class="card-title">{{ $cartData->products->productName }}</h5>
+                                                <p> {{ $cartData->units->unitMaster->unit }} </p>
                                             </div>
-                                            <div class="col-lg-1 col-sm-1">
-                                                <a href="{{ route('home.deletecart') }}/{{ $cartData->id }}">delete</a>
+                                            <div class="price">
+                                                <h5 class="card-title productTotalAmount">₹
+                                                    <span id='productTotalAmount.{{ $key }}'>
+                                                        {{ $cartData->units->sell_price }}
+                                                    </span>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="price-section mb-2 d-flex ">
+                                                <div class="col-lg-2 col-sm-2 me-2">
+                                                    <div class="input-group">
+                                                        <!-- Decrement Button -->
+                                                        <button class="btn btn-outline-secondary" type="button"
+                                                            onclick="decrementQuantity({{ $key }})"
+                                                            id="decrement-btn">
+                                                            -
+                                                        </button>
+                                                        <input type="hidden" id="sellprice.{{ $key }}"
+                                                            value={{ $cartData->units->sell_price }}>
+                                                        <!-- Quantity Display -->
+                                                        <input type="text" class="form-control text-center px-0 quantity"
+                                                            id="quantity.{{ $key }}" value="{{ $cartData->qty }}"
+                                                            readonly aria-label="Quantity" aria-describedby="quantity">
+                                                        <!-- Increment Button -->
+                                                        <button class="btn btn-outline-secondary" type="button"
+                                                            onclick="incrementQuantity({{ $key }})"
+                                                            id="increment-btn">
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-1 col-sm-1">
+                                                    <a
+                                                        href="{{ route('home.deletecart') }}/{{ $cartData->id }}">delete</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @else
+                            Product not Avalible in your cart
+                        @endif
                     @endforeach
                 </div>
 
@@ -66,10 +73,12 @@
 
                         <input type="hidden" name="userId" value="{{ session('user')->id }}">
                         @foreach ($cart as $key => $cartData)
-                            <input type="hidden" name="productId[]" value="{{ $cartData->productId }}">
-                            <input type="hidden" name="productQty[]" id="productQuantity.{{ $key }}">
-                            <input type="hidden" name="productPrice[]" value="{{ $cartData->price }}">
-                            <input type="hidden" name="productUnit[]" value="{{ $cartData->unit }}">
+                            @if ($cartData->products && $cartData->units)
+                                <input type="hidden" name="productId[]" value="{{ $cartData->productId }}">
+                                <input type="hidden" name="productQty[]" id="productQuantity.{{ $key }}">
+                                <input type="hidden" name="productPrice[]" value="{{ $cartData->units->sell_price }}">
+                                <input type="hidden" name="productUnit[]" value="{{ $cartData->unit }}">
+                            @endif
                         @endforeach
                         <div class="card">
                             <div class="card-header">

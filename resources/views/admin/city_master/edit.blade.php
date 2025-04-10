@@ -42,21 +42,21 @@
                     </div>
                     <div class="col">
                         <div class="form-floating">
-                            <input type="text" value="{{ $citymaster->city_name_hin }}" name="city_name_hin" class="form-control" id="#" aria-describedby="#">
-                            <label for="city_name_hin">Hindi</label>
+                            <input type="text" value="{{ $citymaster->city_name_guj }}" name="city_name_guj" class="form-control" id="#" aria-describedby="#">
+                            <label for="city_name_guj">Gujarati</label>
                             <span>
-                                @error('city_name_hindi')
-                                    <p class="text-danger">{{ $message }}</p>
+                                @error('city_name_guj')
+                                <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-floating">
-                            <input type="text" value="{{ $citymaster->city_name_guj }}" name="city_name_guj" class="form-control" id="#" aria-describedby="#">
-                            <label for="city_name_guj">Gujarati</label>
+                            <input type="text" value="{{ $citymaster->city_name_hin }}" name="city_name_hin" class="form-control" id="#" aria-describedby="#">
+                            <label for="city_name_hin">Hindi</label>
                             <span>
-                                @error('city_name_guj')
+                                @error('city_name_hin')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </span>
@@ -97,22 +97,22 @@
                     </div>
                     <div class="col">
                         <div class="form-floating">
-                            <input type="text" value="{{ $citymaster->area_hin }}" name="area_hin" class="form-control" id="#">
-
-                            <label for="area_hin">Hindi</label>
+                            <input type="text" value="{{ $citymaster->area_guj }}" name="area_guj" class="form-control" id="#">
+                            <label for="area_guj">Gujarati</label>
                             <span>
-                                @error('area_hin')
-                                    <p class="text-danger">{{ $message }}</p>
+                                @error('area_guj')
+                                <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-floating">
-                            <input type="text" value="{{ $citymaster->area_guj }}" name="area_guj" class="form-control" id="#">
-                            <label for="area_guj">Gujarati</label>
+                            <input type="text" value="{{ $citymaster->area_hin }}" name="area_hin" class="form-control" id="#">
+
+                            <label for="area_hin">Hindi</label>
                             <span>
-                                @error('area_guj')
+                                @error('area_hin')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </span>

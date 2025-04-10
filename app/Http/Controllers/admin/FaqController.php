@@ -37,6 +37,11 @@ class FaqController extends Controller
             'answer' => 'required',
             'answerguj' => 'required',
             'answerhin' => 'required',
+        ],[
+            'questionguj.required' => 'The question gujarati field is required.',
+            'questionhin.required' => 'The question hindi field is required.',
+            'answerguj.required' => 'The answer gujarati field is required.',
+            'answerhin.required' => 'The answer hindi field is required.',
         ]);
         $faq = new Faq();
         $faq->question = $request->question;
@@ -78,6 +83,11 @@ class FaqController extends Controller
             'answer' => 'required',
             'answerguj' => 'required',
             'answerhin' => 'required',
+        ],[
+            'questionguj.required' => 'The question gujarati field is required.',
+            'questionhin.required' => 'The question hindi field is required.',
+            'answerguj.required' => 'The answer gujarati field is required.',
+            'answerhin.required' => 'The answer hindi field is required.',
         ]);
         $faq = Faq::find($id);
         $faq->question = $request->question;

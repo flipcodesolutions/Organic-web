@@ -5,20 +5,18 @@
         <h2>Your Orders</h2>
 
         @if (!empty($order))
+            {{-- filter --}}
+            <div class="filter mt-3">
+                <form action="" method="get" class="filter-form d-flex gap-2">
+                    {{-- <h5>Orders of</h5>
+                <input type="month" name="date"> --}}
+                    <label for="monthYear">Select Month and Year</label>
+                    <input type="text" name="filter_date" id="datepicker" class="form-control" placeholder="mm/yyyy"
+                        autocomplete="off">
+                </form>
+            </div>
             @foreach ($order as $orderData)
-                {{-- filter --}}
-
-                <div class="filter my-3">
-                    <form action="" method="get" class="filter-form d-flex gap-2">
-                        {{-- <h5>Orders of</h5>
-                        <input type="month" name="date"> --}}
-                        <label for="monthYear">Select Month and Year</label>
-                        <input type="text" name="filter_date" id="datepicker" class="form-control" placeholder="mm/yyyy"
-                            autocomplete="off">
-                    </form>
-                </div>
-
-                <div class="card">
+                <div class="card my-3">
                     <div class="card-header d-flex justify-content-between">
                         <div class="d-flex gap-3 justify-content-start">
                             <div class="">

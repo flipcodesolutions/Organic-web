@@ -54,6 +54,11 @@ class NotificationController extends Controller
             'details_guj' => 'required',
             'details_hin' => 'required',
             'navigate_screen' => 'required',
+        ],[
+            'title_guj.required' => 'The title gujarati field is required.',
+            'title_hin.required' => 'The title hindi field is required.',
+            'details_guj.required' => 'The details gujarati field is required.',
+            'details_hin.required' => 'The details hindi field is required.',
         ]);
         // try {
             $newdata = new Notification();
@@ -103,6 +108,11 @@ class NotificationController extends Controller
             'details_guj' => 'required',
             'details_hin' => 'required',
             'navigate_screen' => 'required',
+        ],[
+            'title_guj.required' => 'The title gujarati field is required.',
+            'title_hin.required' => 'The title hindi field is required.',
+            'details_guj.required' => 'The details gujarati field is required.',
+            'details_hin.required' => 'The details hindi field is required.',
         ]);
         // try {
             // return $request; 

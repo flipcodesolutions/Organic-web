@@ -55,12 +55,19 @@ class CityMasterController extends Controller
     {
                 $request->validate([
                 'city_name_eng' => 'required',
-                'city_name_hin' => 'required',
                 'city_name_guj' => 'required',
+                'city_name_hin' => 'required',
                 'pincode' => 'required|string|max:10',
                 'area_eng' => 'required',
-                'area_hin' => 'required',
                 'area_guj' => 'required',
+                'area_hin' => 'required',
+            ],[
+                'city_name_eng.required' => 'The city name english field is required.',
+                'city_name_guj.required' => 'The city name gujarati field is required.',
+                'city_name_hin.required' => 'The city name hindi field is required.',
+                'area_eng.required' => 'The area english field is required.',
+                'area_guj.required' => 'The area gujarati field is required.',
+                'area_hin.required' => 'The area hindi field is required.',
             ]);
             try{
 
@@ -94,6 +101,22 @@ class CityMasterController extends Controller
      */
     public function update(Request $request, CityMaster $cityMaster)
     {
+        $request->validate([
+            'city_name_eng' => 'required',
+            'city_name_guj' => 'required',
+            'city_name_hin' => 'required',
+            'pincode' => 'required|string|max:10',
+            'area_eng' => 'required',
+            'area_guj' => 'required',
+            'area_hin' => 'required',
+        ],[
+            'city_name_eng.required' => 'The city name english field is required.',
+            'city_name_guj.required' => 'The city name gujarati field is required.',
+            'city_name_hin.required' => 'The city name hindi field is required.',
+            'area_eng.required' => 'The area english field is required.',
+            'area_guj.required' => 'The area gujarati field is required.',
+            'area_hin.required' => 'The area hindi field is required.',
+        ]);
         try{
             $citymaster=CityMaster::find($request->city_id);
             $citymaster->city_name_eng = $request->city_name_eng;

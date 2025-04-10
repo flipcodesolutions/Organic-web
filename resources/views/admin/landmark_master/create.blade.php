@@ -68,12 +68,12 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" name="landmark_hin" class="form-control" placeholder="Hindi"
-                                        id="landmark_hin" aria-describedby="#" value='{{ old('landmark_hin') }}'>
-                                    <label for="landmark_hin">Hindi</label>
+                                    <input type="text" name="landmark_guj" class="form-control" id="landmark_guj"
+                                    placeholder="Gujarati" aria-describedby="#" value='{{ old('landmark_guj') }}'>
+                                    <label for="landmark_guj">Gujarati</label>
                                     <span>
-                                        @error('landmark_hin')
-                                            <p class="text-danger">{{ $message }}</p>
+                                        @error('landmark_guj')
+                                        <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </span>
                                 </div>
@@ -81,11 +81,11 @@
 
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" name="landmark_guj" class="form-control" id="landmark_guj"
-                                        placeholder="Gujarati" aria-describedby="#" value='{{ old('landmark_guj') }}'>
-                                    <label for="landmark_guj">Gujarati</label>
+                                    <input type="text" name="landmark_hin" class="form-control" placeholder="Hindi"
+                                        id="landmark_hin" aria-describedby="#" value='{{ old('landmark_hin') }}'>
+                                    <label for="landmark_hin">Hindi</label>
                                     <span>
-                                        @error('landmark_guj')
+                                        @error('landmark_hin')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </span>

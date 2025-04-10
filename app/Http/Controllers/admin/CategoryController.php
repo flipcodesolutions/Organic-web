@@ -75,6 +75,12 @@ class CategoryController extends Controller
             'isparent' => 'required_without:parent_id',
             'parent_id' => 'required_without:isparent|exists:categories,id',
             // 'parent_id' => 'required'
+        ],[
+            'category_name_guj.required' => 'The category name gujarati field is required.',
+            'category_name_hin.required' => 'The category name hindi field is required.',
+            'category_des.required' => 'The category description field is required.',
+            'category_des_guj.required' => 'The category description gujarati field is required.',
+            'category_des_hin.required' => 'The category description hindi field is required.',
         ]);
         // try {
         // return $request;
@@ -179,6 +185,12 @@ class CategoryController extends Controller
             // 'parent_id' => 'required'
             'isparent' => 'required_without:parent_id',
             'parent_id' => 'required_without:isparent|exists:categories,id',
+        ],[
+            'category_name_guj.required' => 'The category name gujarati field is required.',
+            'category_name_hin.required' => 'The category name hindi field is required.',
+            'category_des.required' => 'The category description field is required.',
+            'category_des_guj.required' => 'The category description gujarati field is required.',
+            'category_des_hin.required' => 'The category description hindi field is required.',
         ]);
         // try {
         $category = Category::find($id);

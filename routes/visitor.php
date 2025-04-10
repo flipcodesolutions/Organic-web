@@ -17,6 +17,7 @@ Route::controller(VisitorController::class)->group(function(){
     Route::post('order','placeorder')->name('home.order');
     Route::get('orderindex','orderindex')->name('home.orderindex');
     Route::get('orderdetail/{id?}','orderdetail')->name('home.orderdetail');
+    Route::post('productreview','productreview')->name('home.productreview');
 });
 
 Route::get('invoicepdf/{id?}',[PdfController::class,'invoicePDF'])->name('home.invoice');

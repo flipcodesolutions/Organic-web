@@ -10,6 +10,7 @@ use App\Models\OrderDetail;
 use App\Models\OrderMaster;
 use App\Models\PointPer;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\Shipping_address;
 use App\Models\ShippingAddress;
 use App\Models\Slider;
@@ -134,10 +135,15 @@ class VisitorController extends Controller
     {
         $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
         if (session()->has('user')) {
-            $cart = AddToCart::where('userId', session('user')->id)->with('products.productImages', 'units.unitMaster')->get();
+            $cart = AddToCart::where('userId', session('user')->id)->with(['products'=> function($query){
+                $query->where('status', 'active')->with('productImages');
+            } , 'units'=>function($query1){
+                $query1->where('status','active')->with('unitMaster');
+            }])->get();
             $address = ShippingAddress::where('user_id', session('user')->id)->with('landmark')->get();
             $pointper = PointPer::first();
-            // return $cart;
+
+
             $deliveryslot = DeliverySlot::where('status', 'active')->get();
 
             return view('visitor.cart', compact('category', 'cart', 'address', 'deliveryslot', 'pointper'));
@@ -184,8 +190,8 @@ class VisitorController extends Controller
             $oredrDetails->total = $request->productPrice[$i] * $request->productQty[$i];
             $oredrDetails->save();
 
-            $cart = AddToCart::where([['userId', '=', $request->userId],['productId', '=', $request->productId[$i]]])->delete();
         }
+        $cart = AddToCart::where('userId',$request->userId)->delete();
 
 
         return redirect()->back();
@@ -196,7 +202,7 @@ class VisitorController extends Controller
         $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
         if (session()->has('user')) {
             $order = OrderMaster::where('userId', session('user')->id)->with('orderDetails', 'orderDetails.product', 'orderDetails.unit')->get();
-
+            
             return view('visitor.order', compact('category', 'order'));
         } else {
             return view('visitor.order', compact('category'));
@@ -207,8 +213,19 @@ class VisitorController extends Controller
     {
         $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
         $order = OrderMaster::with('shippingadd.landmark','orderDetails','orderDetails.product','orderDetails.unit','orderDetails.unit.unitMaster')->find($id);
-        // return $order;
 
         return view('visitor.orderdetails',compact('category','order'));
+    }
+
+    public function productreview(Request $request)
+    {
+        $review = new Review();
+        $review->product_id = $request->productId;
+        $review->user_id = $request->userId;
+        $review->message = $request->review;
+        $review->star = $request->rating;
+        $review->save();
+
+        return redirect()->back();
     }
 }
