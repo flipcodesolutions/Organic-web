@@ -30,6 +30,7 @@ class OrderController extends Controller
             'order.delivery_slot_id' => 'required',
             'order.shipping_id' => 'required',
             'order.payment_mode' => 'required',
+            'order.order_status' => 'required',
 
             'order.orderDetails' => 'required|array',
             'order.orderDetails.*.product_id' => 'required',
@@ -54,7 +55,7 @@ class OrderController extends Controller
             $order->delivery_slot_id = $request->order['delivery_slot_id'];
             $order->shipping_id = $request->order['shipping_id'];
             $order->payment_mode = $request->order['payment_mode'];
-            $order->order_status = 'Confirmed';
+            $order->order_status = $request->order['order_status'];
             $order->save();
 
             foreach ($request->order['orderDetails'] as $orderDetails) {
