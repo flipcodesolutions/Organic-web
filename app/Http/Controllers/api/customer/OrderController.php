@@ -58,6 +58,7 @@ class OrderController extends Controller
             $order->order_status = $request->order['order_status'];
             $order->save();
 
+            $orderDetailsData = [];
             foreach ($request->order['orderDetails'] as $orderDetails) {
                 $orderDetail = new OrderDetail();
                 $orderDetail->orderMasterId = $order->id;
@@ -67,9 +68,11 @@ class OrderController extends Controller
                 $orderDetail->unit = $orderDetails['unit'];
                 $orderDetail->total = $orderDetails['total'];
                 $orderDetail->save();
+                $orderDetailsData[] = $orderDetail;
             }
+            // return $orderDetail;
             foreach ($request->order['orderDetails'] as $orderDetails) {
-                if ($orderDetails['cart_id']) {
+                if (array_key_exists('cart_id', $orderDetails) && $orderDetails['cart_id']) {
                     AddToCart::where('id', $orderDetails['cart_id'])->delete();
                 }
             }
@@ -78,7 +81,7 @@ class OrderController extends Controller
 
             return Util::getSuccessMessage(
                 'Order Placed Successfully',
-                ['order' => $order, 'orderDetails' => $orderDetail]
+                ['order' => $order, 'orderDetails' => $orderDetailsData]
             );
         } catch (Exception $e) {
             DB::rollBack();
