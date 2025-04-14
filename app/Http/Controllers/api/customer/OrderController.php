@@ -98,9 +98,20 @@ class OrderController extends Controller
     public function myOrders(Request $request)
     {
         try {
+            $language = Auth::user()->default_language;
             $currentPage = $request->input('page', 1);
             $orders = OrderMaster::where('userId', Auth::user()->id)
-                ->with('orderDetails')
+                ->with('orderDetails', function ($query) use ($language) {
+                    $query->with(['product' => function ($query) use ($language) {
+                        if ($language == 'Hindi') {
+                            $query->select('*', 'id', 'productNameHin as displayName', 'productDescriptionHin as displayDescription');
+                        } else if ($language == 'Gujarati') {
+                            $query->select('*', 'id', 'productNameGUj as displayName', 'productDescriptionGuj as displayDescription');
+                        } else {
+                            $query->select('*', 'id', 'productName as displayName', 'productDescription as displayDescription');
+                        }
+                    }]);
+                })
                 ->paginate($request->input('limit', 10), ['*'], 'page', $currentPage);
 
             return Util::getSuccessMessage('My Orders', $orders);
