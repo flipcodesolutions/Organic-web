@@ -20,8 +20,13 @@ return new class extends Migration
             $table->integer('total_bill_amt');
             $table->integer('delivery_slot_id');
             $table->enum('order_status',['pending','confirm','out for delivery','delivered'])->default('pending');
-            $table->integer('shipping_id');
             $table->enum('payment_mode',['cash','online'])->default('online');
+            $table->string('addressLine1');
+            $table->string('addressLine2');
+            $table->string('landmark');
+            $table->string('area');
+            $table->string('city');
+            $table->integer('pincode');
             $table->enum('status', ['active', 'deactive','deleted'])->default('active');
             $table->timestamps();
         });

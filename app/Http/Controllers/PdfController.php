@@ -51,7 +51,7 @@ class PdfController extends Controller
     public function invoicePDF($id)
     {
         $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
-        $order = OrderMaster::with('shippingadd.landmark', 'shippingadd.landmark.citymaster', 'orderDetails', 'orderDetails.product', 'orderDetails.unit', 'orderDetails.unit.unitMaster')->find($id);
+        $order = OrderMaster::with('orderDetails', 'orderDetails.product', 'orderDetails.unit', 'orderDetails.unit.unitMaster')->find($id);
         // return $order;
         // return view('visitor.invoicePDF', compact('order'));
         // $users = User::get();

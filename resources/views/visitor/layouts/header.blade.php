@@ -189,12 +189,15 @@
 
                     <ul class="dropdown-menu">
                         @if (session()->has('user'))
-                            <li><a class="dropdown-item" href=""><i
-                                        class="fa-solid fa-unlock-keyhole mr-2 text-gray-400 me-2"></i>Change
-                                    Password</a>
+                            <li><a class="dropdown-item" href="{{ route('visitor.profile') }}"><i
+                                        class="fa-solid fa-user text-gray-400 me-2"></i>Profile
+                                </a>
+                            </li>
+                            <li><a class="dropdown-item" href="{{ route('visitor.addressindex') }}">
+                                    <i class="fa-solid fa-location-dot text-gray-400 me-2"></i> Address</a>
                             </li>
                             <li><a class="dropdown-item" href="{{ route('visitor.logout') }}"> <i
-                                        class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        class="fas fa-sign-out-alt fa-sm fa-fw text-gray-400 me-2"></i>
                                     Log out</a></li>
                         @else
                             <li><a class="dropdown-item" href="{{ route('visitor.loginindex') }}">Log in</a></li>
@@ -259,16 +262,15 @@
                     </div>
                     <div class="offcanvas-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"> address </li>
-                            <li class="list-group-item"> Your Orders </li>
-                            <li class="list-group-item"> Policies </li>
-                            <li class="list-group-item"> FAQ </li>
-                            <li class="list-group-item"> Contact us </li>
                             @if (session()->has('user'))
-                                <li class="list-group-item"> <a class="btn p-0" href="">
-                                        <i class="fa-solid fa-unlock-keyhole mr-2 text-gray-400 me-2"></i> Change
-                                        Password </a>
-                                </li>
+                                <li class="list-group-item"><a href="{{ route('visitor.profile') }}"
+                                        class="text-decoration-none text-black">Profile</a></li>
+                                <li class="list-group-item"><a href="{{ route('visitor.addressindex') }}"
+                                        class="text-decoration-none text-black">Address</a></li>
+                                <li class="list-group-item"> Your Orders </li>
+                                <li class="list-group-item"> Policies </li>
+                                <li class="list-group-item"> FAQ </li>
+                                <li class="list-group-item"> Contact us </li>
                                 <li class="list-group-item"> <a class="btn p-0"
                                         href="{{ route('visitor.logout') }}"> <i
                                             class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
