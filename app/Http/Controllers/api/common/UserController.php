@@ -44,66 +44,45 @@ class UserController extends Controller
         }
     }
 
-    public function sendOtp(Request $request)
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'phone' => 'required',
-            ]);
-            if ($validator->fails()) {
-                Util::getErrorMessage('Validation Failed', $validator->errors());
-            }
-            // $otp = rand(1000, 9999);
-            $this->twilioService->sendOtp($request->phone);
-
-
-            return  Util::getSuccessMessage('OTP sent successfully');
-        } catch (Exception $e) {
-            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
-        }
-    }
-
     public function verifyOtp(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'otp' => 'required',
             'phone' => 'required|digits:10',
+            'otp' => 'required|digits:4',
+            'latitude' => 'nullable',
+            'longitude' => 'nullable',
         ]);
 
         if ($validator->fails()) {
             return Util::getErrorMessage("Validation failed", $validator->errors());
         }
+
         try {
+            $user = User::where('phone', $request->phone)->first();
 
-            $verification = $this->twilioService->verifyOtp($request->phone, $request->otp);
-
-            if ($verification->status !== 'approved') {
+            if (!$user || $user->otp != $request->otp) {
                 return Util::getErrorMessage("Invalid OTP. Please try again.");
             }
 
-            // Check if user already exists
-            $user = User::where('phone', $request->phone)->first();
+            // OTP verified, update phone status
+            $user->is_verify_phone = 'yes';
+            $user->latitude = $request->latitude;
+            $user->longitude = $request->longitude;
+            $user->otp = null; // optional: clear OTP after use
+            $user->save();
 
-            if (!$user) {
-                $user = new User();
-                $user->phone = $request->phone;
-                $user->is_verify_phone = 'yes';
-                $user->latitude = $request->latitude;
-                $user->longitude = $request->longitude;
-                $user->save();
-            }
-
-            // Generate authentication token
+            // Create token
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return Util::getSuccessMessage('User logged in successfully', [
                 'token' => $token,
-                'user' => $user
+                'user' => $user,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
         }
     }
+
     /**
      * Display a listing of the resource.
      */
