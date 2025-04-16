@@ -10,11 +10,11 @@
     </style>
 
     <div class="container-fluid">
-        <div class="row px-3 my-3 mx-5">
+        <div class="row px-3 my-3 ">
             <!-- Left Column (Product Image) -->
             {{-- <div class="col-md-6 d-flex justify-content-center align-items-center"
                 style="position: relative; border-top: 1px solid rgb(242, 242, 242);
-                   border-right: 1px solid rgb(242, 242, 242); 
+                   border-right: 1px solid rgb(242, 242, 242);
                    border-bottom: 1px solid rgb(242, 242, 242); height: 500px;"> --}}
             <div class="col-md-6 d-flex justify-content-center align-items-center">
 
@@ -22,7 +22,7 @@
                     <div class="carousel-inner">
                         @foreach ($product->productImages as $productImage)
                             <div class="carousel-item active">
-                                <img src="{{ asset($productImage->url) }}" alt="Product Image" height="499px" width="683">
+                                <img src="{{ asset($productImage->url) }}" alt="Product Image" height="499px" width="100%">
                             </div>
                         @endforeach
                     </div>
@@ -46,9 +46,9 @@
 
             <!-- Right Column (Product Details) -->
             <div class="col-md-6 d-flex flex-column"
-                style="border-top: 1px solid rgb(242, 242, 242); 
-                   border-left: 1px solid rgb(242, 242, 242); 
-                   border-bottom: 1px solid rgb(242, 242, 242); 
+                style="border-top: 1px solid rgb(242, 242, 242);
+                   border-left: 1px solid rgb(242, 242, 242);
+                   border-bottom: 1px solid rgb(242, 242, 242);
                    padding: 20px;">
                 <h2 style="font-size: 1.5rem; font-weight: bold;">{{ $product->productName }}</h2>
 
@@ -74,17 +74,16 @@
                     </div>
 
                     <!-- Price Section -->
-                    <div class="price-section mb-2 d-flex">
-                        <div class="col-2 me-2">
-                            <div class="input-group">
+                    <div class="price-section mb-2 d-flex ">
+                        <div class="col-lg-2  me-2 ">
+                            <div class="input-group input-group-sm ">
                                 <!-- Decrement Button -->
-                                <button class="btn btn-outline-secondary" type="button" onclick="decrementquentity()"
+                                <button class="btn btn-outline-secondary " type="button" onclick="decrementquentity()"
                                     id="decrement-btn">
                                     -
                                 </button>
                                 <!-- Quantity Display -->
-                                <input type="text" class="form-control text-center px-0" id="quantity" value="1"
-                                    readonly aria-label="Quantity" aria-describedby="quantity">
+                                <input type="text" class="form-control form-control-sm text-center" id="quantity" value="1" readonly aria-label="Quantity" aria-describedby="quantity">
                                 <!-- Increment Button -->
                                 <button class="btn btn-outline-secondary" type="button" onclick="incrementquentity()"
                                     id="increment-btn">
@@ -92,7 +91,7 @@
                                 </button>
                             </div>
                         </div>
-                        <span id='totalAmount' style="font-size: 1.2rem; font-weight: bold;">₹ 50</span>
+                        <span id='totalAmount' style="font-size: 1.2rem; font-weight: bold;"></span>
                     </div>
 
                     <!-- Add to Cart / Buy Now Buttons -->
@@ -116,15 +115,17 @@
                 @if ($product->reviews && $product->reviews->isNotEmpty())
                     @foreach ($product->reviews as $reviewData)
                         <div class="row mb-2">
-                            <div class="col-11 d-flex">
+                            <div class="col-11 d-flex ">
                                 <img src="{{ asset('user_profile/' . $reviewData->user->pro_pic) }}"
                                     class="review-user-image" alt="">
 
                                 <h6>{{ $reviewData->user->name }}</h6>
                             </div>
-                            <div class="col-1 text-end">
-                                <p>{{ $reviewData->star }} <span><img src="{{ asset('visitor/images/star.svg') }}"
-                                            alt=""></span> </p>
+                            <div class="col-1    d-flex align-items-center text-end ">
+                                {{-- <p>{{ $reviewData->star }} <span ><img src="{{ asset('visitor/images/star.svg') }}"
+                                            alt=""></span> </p> --}}
+                                            <span class="me-1 text-end">{{ $reviewData->star }}</span>
+                                            <img class="text-end" src="{{ asset('visitor/images/star.svg') }}" alt="">
                             </div>
                         </div>
 
@@ -232,7 +233,7 @@
             }
         }
 
-        // for select first unit on page loade 
+        // for select first unit on page loade
         document.addEventListener('DOMContentLoaded', function() {
             var firstUnit = @json($product->productUnit->first()); // Get the first unit from your PHP variable
             selectedunit(firstUnit); // Call the function with first unit data

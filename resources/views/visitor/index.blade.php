@@ -75,13 +75,13 @@
             /* margin-right: 1rem; */
             overflow: hidden;
         }
-    
+
         /* General Carousel Inner Styling */
         .category-carousel-inner,
         .product-carousel-inner {
             padding: 1em;
         }
-    
+
         /* For screens with a minimum width of 576px */
         @media screen and (min-width: 576px) {
             .category-carousel-inner,
@@ -92,7 +92,7 @@
                 padding: 1em 0;
                 overflow: hidden;
             }
-    
+
             /* 2 items per row for both category and product carousels */
             .category-carousel-item,
             .product-carousel-item {
@@ -101,7 +101,7 @@
                 flex: 0 0 18%;
             }
         }
-    
+
         /* For screens with a minimum width of 768px */
         @media screen and (min-width: 768px) {
             /* 5 items per row for both category and product carousels */
@@ -112,7 +112,7 @@
                 flex: 0 0 calc(100% / 5);
             }
         }
-    
+
         /* General Card Styling for both category and product carousels */
         .categoryCarousel .card,
         .productCarousel .card {
@@ -121,7 +121,7 @@
             border: 0;
             transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
         }
-    
+
         /* Carousel Control Styling */
         .category-carousel-control-prev,
         .category-carousel-control-next,
@@ -134,23 +134,23 @@
             top: 50%;
             transform: translateY(-50%);
         }
-    
+
         /* Link Styling */
         .categorylink,
         .productlink {
             text-decoration: none;
         }
-    
+
         /* Hover Effect on Cards for Category and Product Carousels */
         .category-carousel-item:hover .card,
         .product-carousel-item:hover .card {
             box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
-                        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+                        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
                         rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
         }
     </style> --}}
-    
+
 
 {{-- <style>
     .productCarousel img {
@@ -252,7 +252,7 @@
             <h1>Category</h1>
         </div>
         {{-- category slider --}}
-        <div id="categoryCarousel" class="categoryCarousel carousel">
+        <div id="categoryCarousel" class="categoryCarousel carousel" data-bs-ride="carousel">
             <div class="category-carousel-inner">
                 @foreach ($category as $catData)
                     @if ($catData->parent_category_id == 0)
@@ -377,24 +377,24 @@
         </div>
     </div>
 
-    
+
 
     {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             const multipleItemCarousel = document.querySelector("#categoryCarousel");
             const carouselInner = $(".category-carousel-inner");
-            
+
             // This function will handle the custom scroll behavior for larger screens
             function handleLargeScreenCarousel() {
                 const carouselWidth = carouselInner[0].scrollWidth;
                 const cardWidth = $(".category-carousel-item").outerWidth(true);  // including margin
                 let scrollPosition = 0;
-    
+
                 // Initialize Bootstrap carousel for larger screens (without auto sliding)
                 const carousel = new bootstrap.Carousel(multipleItemCarousel, {
                     interval: false
                 });
-    
+
                 // Next button logic (scroll to the next item)
                 $(".category-carousel-control-next").on("click", function() {
                     if (scrollPosition < carouselWidth - cardWidth * 3) {
@@ -404,7 +404,7 @@
                         }, 800);
                     }
                 });
-    
+
                 // Prev button logic (scroll to the previous item)
                 $(".category-carousel-control-prev").on("click", function() {
                     if (scrollPosition > 0) {
@@ -414,38 +414,38 @@
                         }, 800);
                     }
                 });
-    
+
                 // Recalculate carouselWidth and cardWidth on window resize
                 $(window).resize(function() {
                     carouselWidth = carouselInner[0].scrollWidth;
                     cardWidth = $(".category-carousel-item").outerWidth(true);
                 });
             }
-    
+
             // This function will initialize Bootstrap carousel sliding behavior for smaller screens
             function handleSmallScreenCarousel() {
                 const carousel = new bootstrap.Carousel(multipleItemCarousel, {
                     interval: 5000,  // For small screens, auto slide at 5 seconds interval
                     ride: 'carousel'
                 });
-    
+
                 // Ensure we can manually slide as well on smaller screens
                 $(".category-carousel-control-next").on("click", function() {
                     carousel.next();
                 });
-    
+
                 $(".category-carousel-control-prev").on("click", function() {
                     carousel.prev();
                 });
             }
-    
+
             // Check screen size and apply the appropriate behavior
             if (window.matchMedia("(min-width: 576px)").matches) {
                 handleLargeScreenCarousel();  // For large screens
             } else {
                 handleSmallScreenCarousel();  // For small screens
             }
-    
+
             // Handle screen resizing
             $(window).resize(function() {
                 if (window.matchMedia("(min-width: 576px)").matches) {
