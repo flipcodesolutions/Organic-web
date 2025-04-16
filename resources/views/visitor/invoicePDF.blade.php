@@ -118,11 +118,10 @@
                 <td valign="top" width="50%" align="right" style="max-width: 250px; word-wrap: break-word; overflow-wrap: break-word;">
                     <h6>Shipping Address:</h6>
                     <p class="m-0">{{ session('user')->name }}</p>
-                    <p class="m-0">{{ $order->shippingadd->address_line1 }}</p>
-                    <p class="m-0">{{ $order->shippingadd->address_line2 }}</p>
-                    <p class="m-0">{{ $order->shippingadd->landmark->landmark_eng }}</p>
-                    <p class="m-0">{{ $order->shippingadd->landmark->citymaster->city_name_eng }},
-                        {{ $order->shippingadd->pincode }}</p>
+                    <p class="m-0">{{ $order->addressLine1 }}</p>
+                    <p class="m-0">{{ $order->addressLine2 }}</p>
+                    <p class="m-0">{{ $order->landmark }} | {{ $order->area }}</p>
+                    <p class="m-0">{{ $order->city }} {{ $order->pincode }}</p>
                 </td>
             </tr>
         </table>

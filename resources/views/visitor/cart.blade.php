@@ -120,6 +120,9 @@
                                                 <span>{{ $addressData->pincode }}</span>.
                                             </label>
                                         </div>
+                                        <div class="ps-4 mb-2">
+                                            <a href="{{ route('visitor.editaddress') }}/{{ $addressData->id }}">Edit address</a>
+                                        </div>
                                     @endforeach
                                 </div>
 

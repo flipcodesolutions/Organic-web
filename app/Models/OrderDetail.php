@@ -23,4 +23,9 @@ class OrderDetail extends Model
     {
         return $this->belongsTo(Unit::class, 'unit');
     }
+
+    public function trackorder()
+    {
+        return $this->hasone(TrackOrder::class,'orderDetailId');
+    }
 }
