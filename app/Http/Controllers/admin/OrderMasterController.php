@@ -14,7 +14,21 @@ class OrderMasterController extends Controller
      */
     public function index()
     {
-        //
+        // $order = OrderMaster::where('status','active')->with('user','orderDetails.product','orderDetails.unit.unitMaster','orderDetails.trackorder')->orderBy('id','desc')->get();
+        $order = OrderMaster::where('status', 'active')
+            ->whereHas('orderDetails.trackorder', function ($query) {
+                $query->where('orderStatus', 'pending');
+            })
+            ->with([
+                'user',
+                'orderDetails.product',
+                'orderDetails.unit.unitMaster',
+                'orderDetails.trackorder'
+            ])
+            ->orderBy('id', 'desc')
+            ->get();
+        return $order;
+        return view('admin.order_master.index', compact('order'));
     }
 
     /**
@@ -66,16 +80,17 @@ class OrderMasterController extends Controller
     }
     public function orderReport()
     {
-    
-    $data = OrderMaster::with(['user', 'orderDetails.product', 'shippingAddress'])
-                            ->get();
-       return view('admin.reports.orderReport',['data'=>$data]);
-      // return $data;
+
+        $data = OrderMaster::with(['user', 'orderDetails.product', 'shippingAddress'])
+            ->get();
+        return view('admin.reports.orderReport', ['data' => $data]);
+        // return $data;
     }
 
-    public function billgeneration($id){
+    public function billgeneration($id)
+    {
         $data = OrderMaster::find($id);
         //  return $data;
-        return view('admin.reports.bill',['data'=>$data]);
+        return view('admin.reports.bill', ['data' => $data]);
     }
 }

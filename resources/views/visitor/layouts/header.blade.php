@@ -201,6 +201,8 @@
                                     Log out</a></li>
                         @else
                             <li><a class="dropdown-item" href="{{ route('visitor.loginindex') }}">Log in</a></li>
+                            {{-- <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#authModal">Login</a>
+                            </li> --}}
                             <li><a class="dropdown-item" href="">Sign Up</a></li>
                         @endif
 
