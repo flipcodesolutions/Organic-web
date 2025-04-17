@@ -1,132 +1,135 @@
 @extends('visitor.layouts.app')
 @section('content')
-    <div class="container-fluid" style="background-color: #EAEDED;">
-        <div class="row justify-content-between">
-            @if (session()->has('user'))
-                {{-- left column --}}
-                <div class="col-lg-9 col-sm-12 p-3">
-                    @foreach ($cart as $key => $cartData)
-                        @if ($cartData->products && $cartData->units)
-                            <div class="card mb-3">
-                                <div class="row g-0">
-                                    <div class="col-md-2 d-flex justify-content-center py-3">
-                                        <img src="{{ asset($cartData->products->image) }}" class="img-fluid rounded-start"
-                                            alt="..." style="max-height: 185px;">
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-header d-flex justify-content-between">
-                                            <div class="productdetail">
-                                                <h5 class="card-title">{{ $cartData->products->productName }}</h5>
-                                                <p> {{ $cartData->units->unitMaster->unit }} </p>
-                                            </div>
-                                            <div class="price">
-                                                <h5 class="card-title productTotalAmount">₹
-                                                    <span id='productTotalAmount.{{ $key }}'>
-                                                        {{ $cartData->units->sell_price }}
-                                                    </span>
-                                                </h5>
-                                            </div>
+    <div class="container-fluid d-flex justify-content-center" style="background-color: #EAEDED; min-height: 640px;">
+        @if (session()->has('user'))
+            @if (count($cart) > 0)
+                <div class="row justify-content-between w-100">
+
+                    {{-- left column --}}
+                    <div class="col-lg-9 col-sm-12 p-3">
+                        @foreach ($cart as $key => $cartData)
+                            @if ($cartData->products != null && $cartData->units != null)
+                                <div class="card mb-3">
+                                    <div class="row g-0">
+                                        <div class="col-md-2 d-flex justify-content-center py-3">
+                                            <img src="{{ asset($cartData->products->image) }}" class="img-fluid rounded-start"
+                                                alt="..." style="max-height: 185px;">
                                         </div>
-                                        <div class="card-body">
-                                            <div class="price-section mb-2 d-flex ">
-                                                <div class="col-lg-2 col-sm-2 me-2">
-                                                    <div class="input-group">
-                                                        <!-- Decrement Button -->
-                                                        <button class="btn btn-outline-secondary" type="button"
-                                                            onclick="decrementQuantity({{ $key }})"
-                                                            id="decrement-btn">
-                                                            -
-                                                        </button>
-                                                        <input type="hidden" id="sellprice.{{ $key }}"
-                                                            value={{ $cartData->units->sell_price }}>
-                                                        <!-- Quantity Display -->
-                                                        <input type="text" class="form-control text-center px-0 quantity"
-                                                            id="quantity.{{ $key }}" value="{{ $cartData->qty }}"
-                                                            readonly aria-label="Quantity" aria-describedby="quantity">
-                                                        <!-- Increment Button -->
-                                                        <button class="btn btn-outline-secondary" type="button"
-                                                            onclick="incrementQuantity({{ $key }})"
-                                                            id="increment-btn">
-                                                            +
-                                                        </button>
+                                        <div class="col-md-10">
+                                            <div class="card-header d-flex justify-content-between">
+                                                <div class="productdetail">
+                                                    <h5 class="card-title">{{ $cartData->products->productName }}</h5>
+                                                    <p> {{ $cartData->units->unitMaster->unit }} </p>
+                                                </div>
+                                                <div class="price">
+                                                    <h5 class="card-title productTotalAmount">₹
+                                                        <span id='productTotalAmount.{{ $key }}'>
+                                                            {{ $cartData->units->sell_price }}
+                                                        </span>
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="price-section mb-2 d-flex ">
+                                                    <div class="col-lg-2 col-sm-2 me-2">
+                                                        <div class="input-group">
+                                                            <!-- Decrement Button -->
+                                                            <button class="btn btn-outline-secondary" type="button"
+                                                                onclick="decrementQuantity({{ $key }})"
+                                                                id="decrement-btn">
+                                                                -
+                                                            </button>
+                                                            <input type="hidden" id="sellprice.{{ $key }}"
+                                                                value={{ $cartData->units->sell_price }}>
+                                                            <!-- Quantity Display -->
+                                                            <input type="text"
+                                                                class="form-control text-center px-0 quantity"
+                                                                id="quantity.{{ $key }}"
+                                                                value="{{ $cartData->qty }}" readonly aria-label="Quantity"
+                                                                aria-describedby="quantity">
+                                                            <!-- Increment Button -->
+                                                            <button class="btn btn-outline-secondary" type="button"
+                                                                onclick="incrementQuantity({{ $key }})"
+                                                                id="increment-btn">
+                                                                +
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-1 col-sm-1">
+                                                        <a
+                                                            href="{{ route('home.deletecart') }}/{{ $cartData->id }}">delete</a>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-1 col-sm-1">
-                                                    <a
-                                                        href="{{ route('home.deletecart') }}/{{ $cartData->id }}">delete</a>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @else
-                            Product not Avalible in your cart
-                        @endif
-                    @endforeach
-                </div>
-
-                {{-- right column --}}
-                <div class="col-lg-3 col-sm-12 p-3">
-                    <form action="{{ route('home.order') }}" method="post">
-                        @csrf
-
-                        <input type="hidden" name="userId" value="{{ session('user')->id }}">
-                        @foreach ($cart as $key => $cartData)
-                            @if ($cartData->products && $cartData->units)
-                                <input type="hidden" name="productId[]" value="{{ $cartData->productId }}">
-                                <input type="hidden" name="productQty[]" id="productQuantity.{{ $key }}">
-                                <input type="hidden" name="productPrice[]" value="{{ $cartData->units->sell_price }}">
-                                <input type="hidden" name="productUnit[]" value="{{ $cartData->unit }}">
                             @endif
                         @endforeach
-                        <div class="card">
-                            <div class="card-header">
-                                <h6>Price Details</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="price d-flex justify-content-between">
-                                    <p> Price (<span id="totalProduct"></span> item) </p>
-                                    <p> ₹ <span id="totalPrice"></span> </p>
-                                    <input type="hidden" name="totalPrice" id='totalPriceInput'>
-                                </div>
-                                <div class="discountpoint d-flex justify-content-between">
-                                    <p>Discount Point</p>
-                                    <p> <span id="pointper"> {{ $pointper->per }} </span> % </p>
-                                    <input type="hidden" id='pointperInput' name="pointper"
-                                        value=" {{ $pointper->per }} ">
-                                </div>
-                                <div class="dellivercharges d-flex justify-content-between">
-                                    <p> Delivery Charges </p>
-                                    <p> ₹ <span id="delivercharges"> 00 </span></p>
-                                </div>
-                                <div class="totalamount d-flex justify-content-between py-3"
-                                    style="border-top: 1px dashed #e0e0e0">
-                                    <h6> Total Amount </h6>
-                                    <h6> ₹ <span id="totalBillAmmount"> </span></h6>
-                                    <input type="hidden" name="totalBillAmmount" id='totalBillAmmountInput'>
-                                </div>
+                    </div>
 
-                                <div class="address py-3" style="border-top: 1px dashed #e0e0e0;">
-                                    <h6>Select Delivery address</h6>
-                                    @foreach ($address as $addressData)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="{{ $addressData->id }}"
-                                                name="addressId" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                <span>{{ $addressData->address_line1 }}</span>,
-                                                <span>{{ $addressData->address_line2 }}</span>,
-                                                <span>{{ $addressData->landmark->landmark_eng }}</span>,
-                                                <span>{{ $addressData->pincode }}</span>.
-                                            </label>
-                                        </div>
-                                        <div class="ps-4 mb-2">
-                                            <a href="{{ route('visitor.editaddress') }}/{{ $addressData->id }}">Edit address</a>
-                                        </div>
-                                    @endforeach
-                                </div>
+                    {{-- right column --}}
+                    <div class="col-lg-3 col-sm-12 p-3">
+                        <form action="{{ route('home.order') }}" method="post">
+                            @csrf
 
-                                {{-- <div class="deliveryslot">
+                            <input type="hidden" name="userId" value="{{ session('user')->id }}">
+                            @foreach ($cart as $key => $cartData)
+                                @if ($cartData->products && $cartData->units)
+                                    <input type="hidden" name="productId[]" value="{{ $cartData->productId }}">
+                                    <input type="hidden" name="productQty[]" id="productQuantity.{{ $key }}">
+                                    <input type="hidden" name="productPrice[]" value="{{ $cartData->units->sell_price }}">
+                                    <input type="hidden" name="productUnit[]" value="{{ $cartData->unit }}">
+                                @endif
+                            @endforeach
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6>Price Details</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="price d-flex justify-content-between">
+                                        <p> Price (<span id="totalProduct"></span> item) </p>
+                                        <p> ₹ <span id="totalPrice"></span> </p>
+                                        <input type="hidden" name="totalPrice" id='totalPriceInput'>
+                                    </div>
+                                    <div class="discountpoint d-flex justify-content-between">
+                                        <p>Discount Point</p>
+                                        <p> <span id="pointper"> {{ $pointper->per }} </span> % </p>
+                                        <input type="hidden" id='pointperInput' name="pointper"
+                                            value=" {{ $pointper->per }} ">
+                                    </div>
+                                    <div class="dellivercharges d-flex justify-content-between">
+                                        <p> Delivery Charges </p>
+                                        <p> ₹ <span id="delivercharges"> 00 </span></p>
+                                    </div>
+                                    <div class="totalamount d-flex justify-content-between py-3"
+                                        style="border-top: 1px dashed #e0e0e0">
+                                        <h6> Total Amount </h6>
+                                        <h6> ₹ <span id="totalBillAmmount"> </span></h6>
+                                        <input type="hidden" name="totalBillAmmount" id='totalBillAmmountInput'>
+                                    </div>
+
+                                    <div class="address py-3" style="border-top: 1px dashed #e0e0e0;">
+                                        <h6>Select Delivery address</h6>
+                                        @foreach ($address as $addressData)
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio"
+                                                    value="{{ $addressData->id }}" name="addressId" id="flexRadioDefault1">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    <span>{{ $addressData->address_line1 }}</span>,
+                                                    <span>{{ $addressData->address_line2 }}</span>,
+                                                    <span>{{ $addressData->landmark->landmark_eng }}</span>,
+                                                    <span>{{ $addressData->pincode }}</span>.
+                                                </label>
+                                            </div>
+                                            <div class="ps-4 mb-2">
+                                                <a href="{{ route('visitor.editaddress') }}/{{ $addressData->id }}">Edit
+                                                    address</a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+
+                                    {{-- <div class="deliveryslot">
                                 <h6>Select Delivery slot</h6>
                                 <select name="deliveryslot" class="form-select mb-3" aria-label="Large select example"
                                     id="">
@@ -138,26 +141,26 @@
                                 </select>
                             </div> --}}
 
-                                <div class="paymentmethod mb-3">
-                                    <h6>Select payment method</h6>
-                                    <select name="paymentmethod" class="form-select " aria-label="Large select example"
-                                        id="">
-                                        <option value="" disabled selected>Select Payment Method</option>
-                                        <option value="1">Case On Delevery</option>
-                                        <option value="2">Pay Online</option>
-                                    </select>
-                                </div>
+                                    <div class="paymentmethod mb-3">
+                                        <h6>Select payment method</h6>
+                                        <select name="paymentmethod" class="form-select " aria-label="Large select example"
+                                            id="">
+                                            <option value="" disabled selected>Select Payment Method</option>
+                                            <option value="1">Case On Delevery</option>
+                                            <option value="2">Pay Online</option>
+                                        </select>
+                                    </div>
 
-                                <div class="placeorder">
-                                    <button class="btn btn-success" type="submit"> Place Order </button>
+                                    <div class="placeorder">
+                                        <button class="btn btn-success" type="submit"> Place Order </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-            @endif
+                        </form>
+                    </div>
 
-            {{-- <div class="col-lg-9 col-sm-12">
+
+                    {{-- <div class="col-lg-9 col-sm-12">
                 <div class="card my-3">
                     <div class="card-body">
                         <div class="row">
@@ -276,7 +279,14 @@
                     </div>
                 </div>
             </div> --}}
-        </div>
+                </div>
+            @else
+                <div class="d-flex gap-1 align-items-center">
+                    <span> Your cart is empty whould you like to <a href="{{ route('visitor.index') }}">continue
+                            shopping</a></span>
+                </div>
+            @endif
+        @endif
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
