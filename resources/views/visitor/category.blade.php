@@ -87,80 +87,80 @@
 
 
 
-    <div class="container-fluid p-0">
-        <div class="row gx-0">
-            <div class="sidenav bg-white border-end  col-lg-3 col-xl-3">
-                <ul class="list-group list-group-flush py-3">
-                    <li
-                        class="list-group-item px-0 {{ request()->has('categoryId') ? '' : 'active bg-body-tertiary border-light' }} ">
+    <div class="container-fluid d-flex p-0">
 
-                        <a href="{{ route('home.category', ['id' => request()->route('id')]) }}" class="childcategory d-flex">
-                            @foreach ($category as $categoryData)
-                                @if ($categoryData->id == request()->route('id'))
-                                    <div class="card category-card w-100">
-                                        <div class="row g-0">
-                                            <div class="col-4 d-flex align-item-center">
-                                                <img src="{{ asset($categoryData->cat_icon) }}" alt=""
-                                                    class="img-thumbnail p-0 category-image">
-                                            </div>
-                                            <div class="col-8">
-                                                <div class="card-body  px-2 d-flex align-items-center text-truncate">
-                                                    <h5 class="card-title mb-0">All</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
-                            @endforeach
-                        </a>
-                    </li>
+        <div class="sidebar col-lg-2 sidenav border-end">
+            <ul class="list-group list-group-flush py-3">
+                <li
+                    class="list-group-item px-0 {{ request()->has('categoryId') ? '' : 'active bg-body-tertiary border-light' }} ">
 
-
-                    @foreach ($childcategory as $catData)
-                        <li
-                            class="list-group-item px-0 {{ request('categoryId') == $catData->id ? 'active bg-body-tertiary border-light' : '' }}">
-                            <a href="{{ route('home.category', ['id' => request()->route('id')]) }}?categoryId={{ $catData->id }}"
-                                class="childcategory d-flex ">
+                    <a href="{{ route('home.category', ['id' => request()->route('id')]) }}" class="childcategory d-flex">
+                        @foreach ($category as $categoryData)
+                            @if ($categoryData->id == request()->route('id'))
                                 <div class="card category-card w-100">
                                     <div class="row g-0">
-                                        <div class="col-4 d-flex align-item-center">
-                                            <img src="{{ asset($catData->cat_icon) }}" alt=""
+                                        <div class="col-md-4 d-flex align-item-center">
+                                            <img src="{{ asset($categoryData->cat_icon) }}" alt=""
                                                 class="img-thumbnail p-0 category-image">
                                         </div>
-                                        <div class="col-8">
-                                            <div class="card-body px-2 d-flex align-items-center text-truncate">
-                                                <p class="card-title mb-0">{{ $catData->categoryName }}</p>
+                                        <div class="col-md-8">
+                                            <div class="card-body  px-2 d-flex align-items-center text-truncate">
+                                                <h5 class="card-title mb-0">All</h5>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+                            @endif
+                        @endforeach
+                    </a>
+                </li>
 
 
-            <div class="content-area col-12 col-md-8 col-lg-9 col-xl-9 p-3 bg-body-secondary">
-                <div class="col-mb-3">
-                    <h4>Products</h4>
-                </div>
-                <div class="childcategoryTable row ">
-                    @foreach ($product as $productData)
-                        <a href="{{ route('home.product') }}/{{ $productData->id }}"
-                            class="col-6 col-lg-3 col-md-4 col-xl-2 d-flex align-items-stretch mb-3">
-                            <div class="card product-card w-100 h-100 text-center p-1">
-                                <img src="{{ asset($productData->image) }}" alt="" class="img-fluid"
-                                    style="max-height: 177px; object-fit: contain;">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $productData->productName }}</h5>
+                @foreach ($childcategory as $catData)
+                    <li
+                        class="list-group-item px-0 {{ request('categoryId') == $catData->id ? 'active bg-body-tertiary border-light' : '' }}">
+                        <a href="{{ route('home.category', ['id' => request()->route('id')]) }}?categoryId={{ $catData->id }}"
+                            class="childcategory d-flex ">
+                            <div class="card category-card w-100">
+                                <div class="row g-0">
+                                    <div class="col-md-4 d-flex align-item-center">
+                                        <img src="{{ asset($catData->cat_icon) }}" alt=""
+                                            class="img-thumbnail p-0 category-image">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body px-2 d-flex align-items-center text-truncate">
+                                            <p class="card-title ">{{ $catData->categoryName }}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </a>
-                    @endforeach
-                </div>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+
+
+        <div class="content col-lg-10 p-3 bg-body-secondary">
+            <div class="col-mb-3">
+                <h4>Products</h4>
+            </div>
+            <div class="childcategoryTable row mh-75 ">
+                @foreach ($product as $productData)
+                    <a href="{{ route('home.product') }}/{{ $productData->id }}"
+                        class="col-lg-2 col-md-6 col-sm-12 d-flex align-items-stretch mb-3">
+                        <div class="card product-card w-100 h-auto text-center p-1">
+                            <img src="{{ asset($productData->image) }}" alt="" class="img-fluid"
+                                style="max-height: 177px">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $productData->productName }}</h5>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
             </div>
         </div>
+
     </div>
 
 
