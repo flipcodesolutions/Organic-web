@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ImagesController;
 use App\Http\Controllers\admin\NavigateMasterController;
 use App\Http\Controllers\admin\NotificationController;
+use App\Http\Controllers\admin\OrderMasterController;
 use App\Http\Controllers\admin\PointPerController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductPriceController;
@@ -112,3 +113,6 @@ Route::controller(UnitController::class)->group(function(){
     Route::post('unit/store','store')->name('unit.store');
 });
 
+Route::controller(OrderMasterController::class)->group(function(){
+    Route::get('order/index','index')->name('order.index');
+});

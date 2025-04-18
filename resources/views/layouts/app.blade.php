@@ -246,7 +246,7 @@
 
                         <li
                             class="nav-item {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
-                            <a class="nav-link" href=""><i class="fa-solid fa-truck"></i> <span>Order Management</span></a>
+                            <a class="nav-link" href="{{ route('order.index') }}"><i class="fa-solid fa-truck"></i> <span>Order Management</span></a>
                         </li>
 
                         {{-- <li class="nav-item {{ request()->routeIs('category.*') ? 'active' : '' }}">
