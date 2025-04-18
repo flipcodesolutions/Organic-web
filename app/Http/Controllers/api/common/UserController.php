@@ -44,6 +44,30 @@ class UserController extends Controller
         }
     }
 
+    public function sendOtp(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|digits:10',
+        ]);
+
+        if ($validator->fails()) {
+            return Util::getErrorMessage("Validation failed", $validator->errors());
+        }
+
+
+        try {
+            $user = User::where('phone', $request->phone)->first();
+            $otp = rand(1000, 9999);
+            if ($user) {
+                return Util::getSuccessMessage('OTP sent successfully', ['isNewUser' => false, 'user' => $user, 'otp' => $otp]);
+            } else {
+                return Util::getErrorMessage('User not registered', ['isNewUser' => true, 'otp' => $otp]);
+            }
+        } catch (\Exception $e) {
+            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+        }
+    }
+
     public function verifyOtp(Request $request)
     {
         $validator = Validator::make($request->all(), [
