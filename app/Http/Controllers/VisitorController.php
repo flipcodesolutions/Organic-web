@@ -22,6 +22,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+
 
 class VisitorController extends Controller
 {
@@ -42,27 +44,65 @@ class VisitorController extends Controller
         return view('visitor.login', compact('category'));
     }
 
-    public function visitorauthenticate(Request $request)
+    public function sendotp(Request $request)
     {
-        $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        $apiurl = "https://vegi.psolution.in/api/sendOtp";
+
+        $apiresponse = Http::post($apiurl, [
+            'phone' => $request->phone
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 'active'])) {
-            $user = User::where('email', $request->email)->first();
+        if ($apiresponse->successful()) {
+            $data = $apiresponse->json();
+            $nestedData = $data['data'] ?? [];
 
-            Auth::loginUsingId($user->id);
+            // session([
+            //     'phone' => $request->phone,
+            //     'otp' => $nestedData['otp'] ?? null,
+            //     'isnew' => $nestedData['isNewUser'] ?? null,
+            // ]);
 
-            session(['user' => $user]);
-            session(['user_id' => $user->id]);
+            return response()->json(['status' => true, 'otp' => $nestedData['otp']], 200);
+        } else {
+            return response()->json(['status' => false, 'message' => 'OTP sending failed'], 500);
+        }
+    }
 
-            return redirect()->route('visitor.index');
+    public function verifyotp(Request $request)
+    {
+        $apiurl = "https://vegi.psolution.in/api/verifyOtp";
+
+        $apiresponse = Http::post($apiurl, [
+            'phone' => $request->phone,
+            'otp' => $request->otp
+        ]);
+
+        if ($apiresponse->successful()) {
+            $data = $apiresponse->json();
+            if ($data['success'] == true) {
+                $user = User::where('phone', $request->phone)->first();
+                session(['user' => $user]);
+                return response()->json(['success' => true], 200);
+            }
+            else{
+                return response()->json($data);
+            }
+        }
+        else{
+            return response()->json(['status' => false, 'message' => 'OTP vreification failed'], 500);
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        // if ($request->phone == session('phone') && $request->otp == session('otp')) {
+        //     if (session('isnew') == true) {
+        //         return 'hyy';
+        //     } else {
+        //         $user = User::where('phone', $request->phone)->first();
+        //         session(['user' => $user]);
+        //         return response()->json(['success' => true], 200);
+        //     }
+        // } else {
+        //     return response()->json(['otpverificationsuccess' => false], 200);
+        // }
     }
 
 

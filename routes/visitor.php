@@ -11,7 +11,8 @@ Route::controller(VisitorController::class)->group(function(){
 
     // user login / log out
     Route::get('visitor/loginindex','visitorlogin')->name('visitor.loginindex');
-    Route::post('visitor/login','visitorauthenticate')->name('visitor.login');
+    Route::post('visitor/sendotp','sendotp')->name('visitor.sendotp');
+    Route::post('visitor/verifyotp','verifyotp')->name('visitor.verifyotp');
     Route::get('visitor/logout','visitorlogout')->name('visitor.logout');
 
     // user profile

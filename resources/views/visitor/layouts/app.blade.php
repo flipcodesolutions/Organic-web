@@ -127,7 +127,7 @@
     @include('visitor.layouts.loginmodel')
     @yield('content')
     @include('visitor.layouts.footer')
-
+ 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- bootstrap js -->
@@ -244,6 +244,10 @@
             }
         });
     </script>
+
+    @yield("scripts")
+
+
 </body>
 
 </html>
