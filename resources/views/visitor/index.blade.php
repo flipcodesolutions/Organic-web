@@ -334,11 +334,11 @@
                     @endforeach
                 </div>
                 @if ($topCategories->count() > 4)
-                    <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarouselLg" data-bs-slide="prev">
+                    <button class="product-carousel-control-next carousel-control-prev" type="button" data-bs-target="#categoryCarouselLg" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#categoryCarouselLg" data-bs-slide="next">
+                    <button class="product-carousel-control-next carousel-control-next" type="button" data-bs-target="#categoryCarouselLg" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -355,7 +355,7 @@
                                     <img src="{{ asset($catData->cat_icon) }}" class="card-img-top"
                                         style="height: 280px; object-fit: contain;" alt="Category">
                                     <div class="card-body text-center">
-                                        <h5 class="card-title">{{ $catData->categoryName }}</h5>
+                                        <h5 class="card-title text-truncate">{{ $catData->categoryName }}</h5>
                                     </div>
                                 </div>
                             </a>
@@ -363,11 +363,11 @@
                     @endforeach
                 </div>
                 @if ($topCategories->count() > 1)
-                    <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarouselSm" data-bs-slide="prev">
+                    <button class="product-carousel-control-next carousel-control-prev" type="button" data-bs-target="#categoryCarouselSm" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#categoryCarouselSm" data-bs-slide="next">
+                    <button class="product-carousel-control-next carousel-control-next" type="button" data-bs-target="#categoryCarouselSm" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -492,14 +492,14 @@
                         @endif
 
                         {{-- Display product card --}}
-                        <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="col-lg-3 col-md-6  mb-3 d-flex ">
                             <a href="{{ route('home.product', $productData->id) }}" class="productlink d-block w-100">
-                                <div class="catcard card p-2 h-100">
+                                <div class="catcard card p-2 h-100  d-flex flex-column">
                                     <img src="{{ asset($productData->productImages->first()->url) }}" class="card-img-top" alt="Product" style="height: 280px; object-fit: contain;">
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title">{{ $productData->productName }}</h5>
-                                        <p>{{ $productData->productUnit->first()->unitMaster->unit }}</p>
-                                        <p>₹{{ $productData->productPrice }}</p>
+                                    <div class="card-body text-center d-flex flex-column justify-content-between ">
+                                        <h5 class="card-title ">{{ $productData->productName }}</h5>
+                                        <p class="mb-0">{{ $productData->productUnit->first()->unitMaster->unit }}</p>
+                                        <p class="mb-0 ">₹{{ $productData->productPrice }}</p>
                                     </div>
                                 </div>
                             </a>
@@ -516,10 +516,10 @@
                     @endforeach
                 </div>
                 @if ($product->count() > 4)
-                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarouselLg" data-bs-slide="prev">
+                    <button class="product-carousel-control-prev carousel-control-prev" type="button" data-bs-target="#productCarouselLg" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#productCarouselLg" data-bs-slide="next">
+                    <button class="product-carousel-control-next carousel-control-next" type="button" data-bs-target="#productCarouselLg" data-bs-slide="next">
                         <span class="carousel-control-next-icon"></span>
                     </button>
                 @endif
@@ -531,14 +531,14 @@
                     @foreach ($product as $index => $productData)
                         <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                             <div class="row justify-content-center">
-                                <div class="col-12">
-                                    <a href="{{ route('home.product', $productData->id) }}" class="productlink d-block w-100">
-                                        <div class="catcard card p-2">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3 d-flex">
+                                    <a href="{{ route('home.product', $productData->id) }}" class="productlink d-block w-100 text-decoration-none">
+                                        <div class="card h-100 d-flex flex-column justify-content-between">
                                             <img src="{{ asset($productData->productImages->first()->url) }}" class="card-img-top" alt="Product" style="height: 280px; object-fit: contain;">
                                             <div class="card-body text-center">
-                                                <h5 class="card-title">{{ $productData->productName }}</h5>
-                                                <p>{{ $productData->productUnit->first()->unitMaster->unit }}</p>
-                                                <p>₹{{ $productData->productPrice }}</p>
+                                                <h5 class="card-title text-truncate">{{ $productData->productName }}</h5>
+                                                <p class="mb-0">{{ $productData->productUnit->first()->unitMaster->unit }}</p>
+                                                <p class="mb-0">₹{{ $productData->productPrice }}</p>
                                             </div>
                                         </div>
                                     </a>
@@ -548,10 +548,10 @@
                     @endforeach
                 </div>
                 @if ($product->count() > 1)
-                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarouselSm" data-bs-slide="prev">
+                    <button class="product-carousel-control-prev carousel-control-prev" type="button" data-bs-target="#productCarouselSm" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#productCarouselSm" data-bs-slide="next">
+                    <button class="product-carousel-control-next carousel-control-next" type="button" data-bs-target="#productCarouselSm" data-bs-slide="next">
                         <span class="carousel-control-next-icon"></span>
                     </button>
                 @endif

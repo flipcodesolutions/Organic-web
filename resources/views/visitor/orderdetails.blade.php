@@ -37,15 +37,15 @@
                 <h5>Order Status</h5>
                 <div class="container pt-4">
                     <div class="d-flex flex-md-row flex-column justify-content-between align-items-md-center position-relative gap-4">
-            
+
                         <!-- Progress Line Background -->
                         <div class="position-absolute start-0 w-100 translate-middle-y bg-light d-none d-md-block"
                             style="height: 4px; z-index: 0; top: 32%;"></div>
-            
+
                         <!-- Progress Line Fill (you can adjust width dynamically) -->
                         <div class="position-absolute start-0 translate-middle-y bg-danger d-none d-md-block"
                             id="progress-fill" style="height: 4px; width: 1%; z-index: 1; top: 32%;"></div>
-            
+
                         <!-- Step 1 -->
                         <div class="d-flex flex-md-column flex-row align-items-center text-center position-relative" style="z-index: 2;">
                             <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center"
@@ -54,30 +54,30 @@
                             </div>
                             <small class="mt-md-2 ms-2 ms-md-0">Pending</small>
                         </div>
-            
+
                         <!-- Step 2 -->
                         <div class="d-flex flex-md-column flex-row align-items-center text-center position-relative" style="z-index: 2;">
-                            <div class="rounded-circle d-flex align-items-center justify-content-center 
+                            <div class="rounded-circle d-flex align-items-center justify-content-center
                                 {{ in_array($order->order_status, ['confirm', 'out for delivery', 'delivered']) ? 'text-white bg-danger' : 'bg-light text-dark' }}"
                                 style="width: 40px; height: 40px;">
                                 <i class="fas fa-check"></i>
                             </div>
                             <small class="mt-md-2 ms-2 ms-md-0">Order confirmed</small>
                         </div>
-            
+
                         <!-- Step 3 -->
                         <div class="d-flex flex-md-column flex-row align-items-center text-center position-relative" style="z-index: 2;">
-                            <div class="rounded-circle d-flex align-items-center justify-content-center 
+                            <div class="rounded-circle d-flex align-items-center justify-content-center
                                 {{ in_array($order->order_status, ['out for delivery', 'delivered']) ? 'text-white bg-danger' : 'bg-light text-dark' }}"
                                 style="width: 40px; height: 40px;">
                                 <i class="fas fa-truck"></i>
                             </div>
                             <small class="mt-md-2 ms-2 ms-md-0">Out for delivery</small>
                         </div>
-            
+
                         <!-- Step 4 -->
                         <div class="d-flex flex-md-column flex-row align-items-center text-center position-relative" style="z-index: 2;">
-                            <div class="rounded-circle d-flex align-items-center justify-content-center 
+                            <div class="rounded-circle d-flex align-items-center justify-content-center
                                 {{ $order->order_status == 'delivered' ? 'text-white bg-danger' : 'bg-light text-dark' }}"
                                 style="width: 40px; height: 40px;">
                                 <i class="fas fa-box"></i>
@@ -168,7 +168,7 @@
                                         <div class="d-flex flex-md-column flex-row align-items-md-center align-items-start text-md-center position-relative gap-2"
                                             style="z-index: 2;">
                                             <div class="d-flex align-items-center">
-                                                <div class="rounded-circle d-flex align-items-center justify-content-center 
+                                                <div class="rounded-circle d-flex align-items-center justify-content-center
                                                     {{ in_array($orderData->trackorder->orderStatus, ['confirm', 'out for delivery', 'delivered']) ? 'bg-danger text-white' : 'bg-light text-dark' }}"
                                                     style="width: 40px; height: 40px;">
                                                     <i class="fas fa-check"></i>
@@ -182,7 +182,7 @@
                                         <div class="d-flex flex-md-column flex-row align-items-md-center align-items-start text-md-center position-relative gap-2"
                                             style="z-index: 2;">
                                             <div class="d-flex align-items-center">
-                                                <div class="rounded-circle d-flex align-items-center justify-content-center 
+                                                <div class="rounded-circle d-flex align-items-center justify-content-center
                                                     {{ in_array($orderData->trackorder->orderStatus, ['out for delivery', 'delivered']) ? 'bg-danger text-white' : 'bg-light text-dark' }}"
                                                     style="width: 40px; height: 40px;">
                                                     <i class="fas fa-truck"></i>
@@ -196,7 +196,7 @@
                                         <div class="d-flex flex-md-column flex-row align-items-md-center align-items-start text-md-center position-relative gap-2"
                                             style="z-index: 2;">
                                             <div class="d-flex align-items-center">
-                                                <div class="rounded-circle d-flex align-items-center justify-content-center 
+                                                <div class="rounded-circle d-flex align-items-center justify-content-center
                                                     {{ $orderData->trackorder->orderStatus === 'delivered' ? 'bg-danger text-white' : 'bg-light text-dark' }}"
                                                     style="width: 40px; height: 40px;">
                                                     <i class="fas fa-box"></i>
@@ -229,7 +229,7 @@
                                         class="btn btn-success">Order Again</a>
                                 </div>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-2 py-3">
                                 <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                                     onclick="productid({{ $orderData->product->id }})">Write Product
                                     Review</a>

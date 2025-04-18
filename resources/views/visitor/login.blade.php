@@ -1,8 +1,8 @@
 @extends('visitor.layouts.app')
 @section('content')
-    <div class="container-fluid d-flex justify-content-center align-items-center"
-        style="background-color: blueviolet; height:638px">
-        <div class="card h-70 w-50 p-5" style="background-color: white">
+    <div class="container-fluid py-5 d-flex justify-content-center align-items-center"
+        style="background-color: blueviolet;">
+        <div class="card h-70  p-5" style="background-color: white;">
             <form method="POST" action="{{ route('visitor.login') }}">
                 @csrf
 
@@ -30,8 +30,8 @@
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-                <button type="signup" class="btn btn-primary">Sign up</button>
+                <button type="submit" class="btn btn-primary me-2 mt-3">Login</button>
+                <button type="signup" class="btn btn-primary mt-3">Sign up</button>
             </form>
         </div>
     </div>
