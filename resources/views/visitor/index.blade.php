@@ -311,19 +311,24 @@
             @endphp
 
             {{-- Carousel for large screens (4 items per slide) --}}
-            <div id="categoryCarouselLg" class="carousel slide d-none d-md-block" data-bs-ride="false" data-bs-interval="false">
+            <div id="categoryCarouselLg" class="carousel slide d-none d-md-block" data-bs-ride="false"
+                data-bs-interval="false">
+                <!-- Now visible on all screen sizes -->
+                {{-- <div id="categoryCarouselLg" class="carousel slide" data-bs-ride="false" data-bs-interval="false"> --}}
+
                 <div class="carousel-inner">
                     @foreach ($topCategories->chunk(4) as $index => $chunk)
                         <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                            <div class="row">
+                            <div class="row tea">
                                 @foreach ($chunk as $catData)
                                     <div class="col-lg-3 col-md-6 mb-3">
-                                        <a href="{{ route('home.category', $catData->id) }}" class="categorylink d-block w-100">
+                                        <a href="{{ route('home.category', $catData->id) }}"
+                                            class="categorylink d-block w-100">
                                             <div class="catcard card p-2 h-100">
                                                 <img src="{{ asset($catData->cat_icon) }}" class="card-img-top"
                                                     style="height: 280px; object-fit: contain;" alt="Category">
                                                 <div class="card-body text-center">
-                                                    <h5 class="card-title">{{ $catData->categoryName }}</h5>
+                                                    <h5 class="card-title text-truncate">{{ $catData->categoryName }}</h5>
                                                 </div>
                                             </div>
                                         </a>
@@ -334,20 +339,23 @@
                     @endforeach
                 </div>
                 @if ($topCategories->count() > 4)
-                    <button class="product-carousel-control-next carousel-control-prev" type="button" data-bs-target="#categoryCarouselLg" data-bs-slide="prev">
+                    <button class="product-carousel-control-next carousel-control-prev" type="button"
+                        data-bs-target="#categoryCarouselLg" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="product-carousel-control-next carousel-control-next" type="button" data-bs-target="#categoryCarouselLg" data-bs-slide="next">
+                    <button class="product-carousel-control-next carousel-control-next" type="button"
+                        data-bs-target="#categoryCarouselLg" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
                 @endif
             </div>
 
-            {{-- Carousel for small screens (1 item per slide) --}}
-            <div id="categoryCarouselSm" class="carousel slide d-block d-md-none" data-bs-ride="false" data-bs-interval="false">
+            {{-- Carousel for small screens --}}
+            {{-- <div id="categoryCarouselSm" class="carousel slide d-block" data-bs-ride="false" data-bs-interval="false">
                 <div class="carousel-inner">
+                    <div class="row tea">
                     @foreach ($topCategories as $index => $catData)
                         <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                             <a href="{{ route('home.category', $catData->id) }}" class="categorylink d-block w-100">
@@ -361,6 +369,7 @@
                             </a>
                         </div>
                     @endforeach
+                    </div>
                 </div>
                 @if ($topCategories->count() > 1)
                     <button class="product-carousel-control-next carousel-control-prev" type="button" data-bs-target="#categoryCarouselSm" data-bs-slide="prev">
@@ -373,10 +382,52 @@
                     </button>
                 @endif
             </div>
-        </div>
+        </div> --}}
 
 
-        {{-- <div class="container-fluid mt-3 mb-4">
+            <!-- This carousel is visible only on small screens (less than 768px) -->
+            <div class="d-block d-md-none">
+                <div id="categoryCarouselSm" class="carousel slide pb-3" data-bs-ride="false" data-bs-interval="false">
+                    <div class="carousel-inner">
+                        @foreach ($topCategories as $index => $catData)
+                            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                <a href="{{ route('home.category', $catData->id) }}" class="categorylink d-block w-100">
+                                    <div class="catcard card p-2">
+                                        <img src="{{ asset($catData->cat_icon) }}" class="card-img-top"
+                                            style="height: 280px; object-fit: contain;" alt="Category">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title text-truncate">{{ $catData->categoryName }}</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    @if ($topCategories->count() > 1)
+                        <button class="product-carousel-control-next carousel-control-prev" type="button"
+                            data-bs-target="#categoryCarouselSm" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="product-carousel-control-next carousel-control-next" type="button"
+                            data-bs-target="#categoryCarouselSm" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    @endif
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+            {{-- <div class="container-fluid mt-3 mb-4">
             <h1>Category</h1> --}}
 
             {{-- Grid View (Visible on md and up) --}}
@@ -424,8 +475,8 @@
                     @endforeach
                 </div> --}}
 
-                {{-- Carousel Controls --}}
-                {{-- <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel"
+            {{-- Carousel Controls --}}
+            {{-- <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
@@ -439,127 +490,146 @@
         </div> --}}
 
 
-        {{-- middle slider --}}
-        <div class="row">
-            <div id="carouselExampleAutoplayingmiddleimage" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    @foreach ($slider as $sliderData)
-                        @if ($sliderData->slider_pos == 'middle')
-                            <div class="carousel-item active">
-                                <a
-                                    href="{{ preg_replace('/^.*?(\/.*)/', '$1', $sliderData->navigatemaster->screenname) }}"><img
-                                        src="{{ asset('sliderimage/' . $sliderData->url) }}" class="d-block w-100"
-                                        alt="..." height="400px"></a>
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplayingmiddleimage"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplayingmiddleimage"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-
-        {{-- product slider --}}
-        <div class="container-fluid mt-3 mb-4">
-            <div class="row d-flex justify-content-between align-items-center mb-3">
-                <div class="col">
-                    <h1>Daily Fresh</h1>
-                </div>
-                <div class="col-auto">
-                    <a href="#">View all</a>
-                </div>
-            </div>
-
-            {{-- Carousel for Large Screens --}}
-            <div id="productCarouselLg" class="carousel slide d-none d-md-block" data-bs-ride="false">
-                <div class="carousel-inner">
-                    @php
-                        $counter = 0;
-                    @endphp
-                    @foreach ($product as $index => $productData)
-                        {{-- Start a new carousel item every 4 products --}}
-                        @if ($counter % 4 == 0)
-                            <div class="carousel-item {{ $counter == 0 ? 'active' : '' }}">
-                                <div class="row">
-                        @endif
-
-                        {{-- Display product card --}}
-                        <div class="col-lg-3 col-md-6  mb-3 d-flex ">
-                            <a href="{{ route('home.product', $productData->id) }}" class="productlink d-block w-100">
-                                <div class="catcard card p-2 h-100  d-flex flex-column">
-                                    <img src="{{ asset($productData->productImages->first()->url) }}" class="card-img-top" alt="Product" style="height: 280px; object-fit: contain;">
-                                    <div class="card-body text-center d-flex flex-column justify-content-between ">
-                                        <h5 class="card-title ">{{ $productData->productName }}</h5>
-                                        <p class="mb-0">{{ $productData->productUnit->first()->unitMaster->unit }}</p>
-                                        <p class="mb-0 ">₹{{ $productData->productPrice }}</p>
-                                    </div>
+            {{-- middle slider --}}
+            <div class="row">
+                <div id="carouselExampleAutoplayingmiddleimage" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach ($slider as $sliderData)
+                            @if ($sliderData->slider_pos == 'middle')
+                                <div class="carousel-item active">
+                                    <a
+                                        href="{{ preg_replace('/^.*?(\/.*)/', '$1', $sliderData->navigatemaster->screenname) }}"><img
+                                            src="{{ asset('sliderimage/' . $sliderData->url) }}" class="d-block w-100"
+                                            alt="..." height="400px"></a>
                                 </div>
-                            </a>
-                        </div>
+                            @endif
+                        @endforeach
+                    </div>
+                    <button class="carousel-control-prev" type="button"
+                        data-bs-target="#carouselExampleAutoplayingmiddleimage" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button"
+                        data-bs-target="#carouselExampleAutoplayingmiddleimage" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
 
-                        {{-- Close the carousel item after every 4 products --}}
-                        @if (($counter + 1) % 4 == 0 || $loop->last)
-                            </div> {{-- End row --}}
-                            </div> {{-- End carousel item --}}
-                        @endif
+            {{-- product slider --}}
+            <div class="container-fluid mt-3 mb-4">
+                <div class="row d-flex justify-content-between align-items-center mb-3">
+                    <div class="col">
+                        <h1>Daily Fresh</h1>
+                    </div>
+                    <div class="col-auto">
+                        <a href="#">View all</a>
+                    </div>
+                </div>
+
+                {{-- Carousel for Large Screens --}}
+                <div id="productCarouselLg" class="carousel slide d-none d-md-block" data-bs-ride="false">
+                    <div class="carousel-inner">
                         @php
-                            $counter++;
+                            $counter = 0;
                         @endphp
-                    @endforeach
-                </div>
-                @if ($product->count() > 4)
-                    <button class="product-carousel-control-prev carousel-control-prev" type="button" data-bs-target="#productCarouselLg" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </button>
-                    <button class="product-carousel-control-next carousel-control-next" type="button" data-bs-target="#productCarouselLg" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </button>
-                @endif
-            </div>
+                        @foreach ($product as $index => $productData)
+                            {{-- Start a new carousel item every 4 products --}}
+                            @if ($counter % 4 == 0)
+                                <div class="carousel-item {{ $counter == 0 ? 'active' : '' }}">
+                                    <div class="row tea">
+                            @endif
 
-            {{-- Carousel for Small Screens --}}
-            <div id="productCarouselSm" class="carousel slide d-block d-md-none" data-bs-ride="false">
-                <div class="carousel-inner">
-                    @foreach ($product as $index => $productData)
-                        <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3 d-flex">
-                                    <a href="{{ route('home.product', $productData->id) }}" class="productlink d-block w-100 text-decoration-none">
-                                        <div class="card h-100 d-flex flex-column justify-content-between">
-                                            <img src="{{ asset($productData->productImages->first()->url) }}" class="card-img-top" alt="Product" style="height: 280px; object-fit: contain;">
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title text-truncate">{{ $productData->productName }}</h5>
-                                                <p class="mb-0">{{ $productData->productUnit->first()->unitMaster->unit }}</p>
-                                                <p class="mb-0">₹{{ $productData->productPrice }}</p>
-                                            </div>
+                            {{-- Display product card --}}
+                            <div class="col-lg-3 col-md-6  mb-3 d-flex ">
+                                <a href="{{ route('home.product', $productData->id) }}"
+                                    class="productlink d-block w-100">
+                                    <div class="catcard card p-2 h-100  d-flex flex-column">
+                                        <img src="{{ asset($productData->productImages->first()->url) }}"
+                                            class="card-img-top" alt="Product"
+                                            style="height: 280px; object-fit: contain;">
+                                        <div class="card-body text-center d-flex flex-column justify-content-between ">
+                                            <h5 class="card-title text-truncate">{{ $productData->productName }}</h5>
+                                            <p class="mb-0">{{ $productData->productUnit->first()->unitMaster->unit }}
+                                            </p>
+                                            <p class="mb-0 ">₹{{ $productData->productPrice }}</p>
                                         </div>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
-                        </div>
-                    @endforeach
-                </div>
-                @if ($product->count() > 1)
-                    <button class="product-carousel-control-prev carousel-control-prev" type="button" data-bs-target="#productCarouselSm" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </button>
-                    <button class="product-carousel-control-next carousel-control-next" type="button" data-bs-target="#productCarouselSm" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </button>
+
+                            {{-- Close the carousel item after every 4 products --}}
+                            @if (($counter + 1) % 4 == 0 || $loop->last)
+                    </div> {{-- End row --}}
+                </div> {{-- End carousel item --}}
                 @endif
+                @php
+                    $counter++;
+                @endphp
+                @endforeach
             </div>
+            @if ($product->count() > 4)
+                <button class="product-carousel-control-prev carousel-control-prev" type="button"
+                    data-bs-target="#productCarouselLg" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="product-carousel-control-next carousel-control-next" type="button"
+                    data-bs-target="#productCarouselLg" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            @endif
         </div>
 
 
-        {{-- <div class="row">
+        <style>
+            .tea {
+                flex-wrap: nowrap !important;
+            }
+        </style>
+
+        {{-- Carousel for Small Screens --}}
+        <div id="productCarouselSm" class="carousel slide d-block d-md-none" data-bs-ride="false">
+            <div class="carousel-inner">
+                @foreach ($product as $index => $productData)
+                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                        <div class="row justify-content-center">
+                            <div class=" col-lg-3 col-md-4 col-sm-6 col-12 mb-3 d-flex">
+                                <a href="{{ route('home.product', $productData->id) }}"
+                                    class="productlink d-block w-100 text-decoration-none">
+                                    <div class="card h-100  d-flex flex-column justify-content-between">
+                                        <img src="{{ asset($productData->productImages->first()->url) }}"
+                                            class="card-img-top" alt="Product"
+                                            style="height: 280px; object-fit: contain;">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title text-truncate">{{ $productData->productName }}</h5>
+                                            <p class="mb-0">{{ $productData->productUnit->first()->unitMaster->unit }}
+                                            </p>
+                                            <p class="mb-0">₹{{ $productData->productPrice }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            @if ($product->count() > 1)
+                <button class="product-carousel-control-prev carousel-control-prev" type="button"
+                    data-bs-target="#productCarouselSm" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="product-carousel-control-next carousel-control-next" type="button"
+                    data-bs-target="#productCarouselSm" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            @endif
+        </div>
+    </div>
+
+
+    {{-- <div class="row">
             <div class="row d-flex">
                 <div class="col-11">
                     <h1>daily Fresh</h1>
@@ -602,33 +672,32 @@
             </div>
         </div> --}}
 
-        {{-- bottom slider --}}
-        <div class="row">
-            <div id="carouselExampleAutoplayingbottomimage" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    @foreach ($slider as $sliderData)
-                        @if ($sliderData->slider_pos == 'bottom')
-                            <div class="carousel-item active">
-                                <a
-                                    href="{{ preg_replace('/^.*?(\/.*)/', '$1', $sliderData->navigatemaster->screenname) }}"><img
-                                        src="{{ asset('sliderimage/' . $sliderData->url) }}" class="d-block w-100"
-                                        alt="..." height="500px"></a>
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
-                <button class="carousel-control-prev" type="button"
-                    data-bs-target="#carouselExampleAutoplayingbottomimage" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button"
-                    data-bs-target="#carouselExampleAutoplayingbottomimage" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+    {{-- bottom slider --}}
+    <div class="row">
+        <div id="carouselExampleAutoplayingbottomimage" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @foreach ($slider as $sliderData)
+                    @if ($sliderData->slider_pos == 'bottom')
+                        <div class="carousel-item active">
+                            <a href="{{ preg_replace('/^.*?(\/.*)/', '$1', $sliderData->navigatemaster->screenname) }}"><img
+                                    src="{{ asset('sliderimage/' . $sliderData->url) }}" class="d-block w-100"
+                                    alt="..." height="500px"></a>
+                        </div>
+                    @endif
+                @endforeach
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplayingbottomimage"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplayingbottomimage"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
+    </div>
     </div>
 
 
