@@ -15,6 +15,12 @@ Route::controller(VisitorController::class)->group(function(){
     Route::post('visitor/verifyotp','verifyotp')->name('visitor.verifyotp');
     Route::get('visitor/logout','visitorlogout')->name('visitor.logout');
 
+    // user login with google
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('visitor/login', 'handleGoogleCallback');
+
+    // Route::post('visitor/userregistration/{id?}','userregistration')->name('visitor.userregistration');
+
     // user profile
     Route::get('visitor/profile','profile')->name('visitor.profile');
     Route::post('visitor/updateprofile/{id?}','updateprofile')->name('visitor.updateprofile');

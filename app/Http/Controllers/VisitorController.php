@@ -19,11 +19,12 @@ use App\Models\Slider;
 use App\Models\TrackOrder;
 use App\Models\Unit;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-
+use Laravel\Socialite\Facades\Socialite;
 
 class VisitorController extends Controller
 {
@@ -83,12 +84,10 @@ class VisitorController extends Controller
                 $user = User::where('phone', $request->phone)->first();
                 session(['user' => $user]);
                 return response()->json(['success' => true], 200);
-            }
-            else{
+            } else {
                 return response()->json($data);
             }
-        }
-        else{
+        } else {
             return response()->json(['status' => false, 'message' => 'OTP vreification failed'], 500);
         }
 
@@ -105,6 +104,57 @@ class VisitorController extends Controller
         // }
     }
 
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+
+            $user = Socialite::driver('google')->user();
+            $finduser = User::where('google_id', $user->id)->first();
+
+            if ($finduser) {
+
+                session(['user' => $user]);
+
+                return redirect()->intended('/');
+            } else {
+                $newUser = User::updateOrCreate(['email' => $user->email], [
+                    'name' => $user->name,
+                    'google_id' => $user->id,
+                    'password' => encrypt('123456dummy')
+                ]);
+                // session(['newuser' => $newUser]);
+                // return redirect()->route('visitor.loginindex');
+                return redirect()->route('/');
+            }
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    // public function userregistration(Request $request, $id){
+    //     $user = User::find($id);
+    //     $user->name = $request->name;
+    //     $user->email = $request->email;
+    //     $user->phone = $request->phonenumber;
+
+    //     if ($request->hasFile('profilePic')) {
+    //         $image = $request->profilePic;
+
+    //         $profilepic = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+    //         $user->pro_pic = $profilepic;
+    //         $image->move(public_path('user_profile/'), $profilepic);
+    //     }
+    //     $user->save();
+
+    //     session(['user' => $user]);
+    //     session()->forget('newuser');
+    //     return redirect()->route('visitor.addaddress',['id' => $id]);
+    // }
 
     public function visitorlogout()
     {
