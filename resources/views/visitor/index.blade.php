@@ -303,6 +303,13 @@
             </div>
         </div> --}}
 
+
+        <style>
+            .coffee {
+                flex-wrap: nowrap !important;
+            }
+        </style>
+
         <div class="container-fluid mt-3 mb-4">
             <h1>Category</h1>
 
@@ -313,13 +320,12 @@
             {{-- Carousel for large screens (4 items per slide) --}}
             <div id="categoryCarouselLg" class="carousel slide d-none d-md-block" data-bs-ride="false"
                 data-bs-interval="false">
-                <!-- Now visible on all screen sizes -->
                 {{-- <div id="categoryCarouselLg" class="carousel slide" data-bs-ride="false" data-bs-interval="false"> --}}
 
                 <div class="carousel-inner">
                     @foreach ($topCategories->chunk(4) as $index => $chunk)
                         <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                            <div class="row tea">
+                            <div class="row coffee">
                                 @foreach ($chunk as $catData)
                                     <div class="col-lg-3 col-md-6 mb-3">
                                         <a href="{{ route('home.category', $catData->id) }}"
@@ -382,13 +388,14 @@
                     </button>
                 @endif
             </div>
-        </div> --}}
+          </div> --}}
 
 
             <!-- This carousel is visible only on small screens (less than 768px) -->
             <div class="d-block d-md-none">
                 <div id="categoryCarouselSm" class="carousel slide pb-3" data-bs-ride="false" data-bs-interval="false">
                     <div class="carousel-inner">
+
                         @foreach ($topCategories as $index => $catData)
                             <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                                 <a href="{{ route('home.category', $catData->id) }}" class="categorylink d-block w-100">
@@ -402,6 +409,7 @@
                                 </a>
                             </div>
                         @endforeach
+
                     </div>
 
                     @if ($topCategories->count() > 1)
@@ -487,7 +495,7 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-        </div> --}}
+         </div> --}}
 
 
             {{-- middle slider --}}
