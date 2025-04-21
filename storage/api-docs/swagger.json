@@ -1,0 +1,199 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Organic-Web",
+        "description": "* @OA\\Info(\n*    title=\"Organic-Web\",\n*    version=\"1.0.0\"\n* )",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Register a new user",
+                "operationId": "55d878b9fba2a7d46a2a488e3f31cab6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "phone",
+                                    "role"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "secret123"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "9876543210"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "example": "user"
+                                    },
+                                    "pro_pic": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "is_verfiy_email": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "is_verfiy_phone": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active"
+                                    },
+                                    "is_special": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "default_language": {
+                                        "type": "string",
+                                        "example": "en"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Registration successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Registration Successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "John Doe"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "john@example.com"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "9876543210"
+                                                },
+                                                "role": {
+                                                    "type": "string",
+                                                    "example": "user"
+                                                },
+                                                "pro_pic": {
+                                                    "type": "string",
+                                                    "example": "profile.jpg"
+                                                },
+                                                "is_verfiy_email": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "is_verfiy_phone": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "active"
+                                                },
+                                                "is_special": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                },
+                                                "default_language": {
+                                                    "type": "string",
+                                                    "example": "en"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-04-21T14:22:19+05:30"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-04-21T14:22:19+05:30"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "properties": {
+                                                "email": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The email field is required."
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Authentication",
+            "description": "Authentication"
+        }
+    ]
+}

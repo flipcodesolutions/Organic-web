@@ -1,0 +1,76 @@
+{
+    "Post": {
+      "path": "/api/register",
+      "summary": "Register a new user",
+      "tags": ["Authentication"],
+      "RequestBody": {
+        "required": true,
+        "MediaType": {
+          "mediaType": "multipart/form-data",
+          "Schema": {
+            "required": ["name", "email", "password", "phone", "role"],
+            "properties": {
+              "name": { "type": "string", "example": "John Doe" },
+              "email": { "type": "string", "format": "email", "example": "john@example.com" },
+              "password": { "type": "string", "format": "password", "example": "secret123" },
+              "phone": { "type": "string", "example": "9876543210" },
+              "role": { "type": "string", "example": "user" },
+              "pro_pic": { "type": "string", "format": "binary" },
+              "is_verfiy_email": { "type": "boolean", "example": true },
+              "is_verfiy_phone": { "type": "boolean", "example": false },
+              "status": { "type": "string", "example": "active" },
+              "is_special": { "type": "boolean", "example": false },
+              "default_language": { "type": "string", "example": "en" }
+            }
+          }
+        }
+      },
+      "Responses": [
+         {
+          "response": 200,
+          "description": "Registration successful",
+          "JsonContent": {
+            "properties": {
+              "success": { "type": "boolean", "example": true },
+              "message": { "type": "string", "example": "Registration Successfully" },
+              "data": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "integer", "example": 1 },
+                  "name": { "type": "string", "example": "John Doe" },
+                  "email": { "type": "string", "example": "john@example.com" },
+                  "phone": { "type": "string", "example": "9876543210" },
+                  "role": { "type": "string", "example": "user" },
+                  "pro_pic": { "type": "string", "example": "profile.jpg" },
+                  "is_verfiy_email": { "type": "boolean", "example": true },
+                  "is_verfiy_phone": { "type": "boolean", "example": false },
+                  "status": { "type": "string", "example": "active" },
+                  "is_special": { "type": "boolean", "example": false },
+                  "default_language": { "type": "string", "example": "en" },
+                  "created_at": { "type": "string", "format": "date-time", "example": "2025-04-21T14:22:19+05:30" },
+                  "updated_at": { "type": "string", "format": "date-time", "example": "2025-04-21T14:22:19+05:30" }
+                }
+              }
+            }
+          }
+         },
+         {
+          "response": 400,
+          "description": "Validation error",
+          "JsonContent": {
+            "properties": {
+              "success": { "type": "boolean", "example": false },
+              "message": { "type": "object" },
+              "email": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "The email field is required."
+                }
+              }
+            }
+          }
+         }
+        ]
+    }
+}
