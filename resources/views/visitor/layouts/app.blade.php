@@ -124,6 +124,7 @@
 <body>
 
     @include('visitor.layouts.header')
+    @include('visitor.layouts.loginmodel')
     @yield('content')
     @include('visitor.layouts.footer')
 
