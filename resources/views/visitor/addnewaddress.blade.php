@@ -11,7 +11,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Address line1</label>
-                    <input type="text" class="form-control" name="addressline1">
+                    <input type="text" class="form-control" name="addressline1" value="{{ old('addressline1') }}">
                     <span id="addressline1Error" class="text-danger">
                         @error('addressline1')
                             {{ $message }}
@@ -21,7 +21,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Address line2</label>
-                    <input type="text" class="form-control" name="addressline2">
+                    <input type="text" class="form-control" name="addressline2" value="{{ old('addressline2') }}">
                     <span id="addressline2Error" class="text-danger">
                         @error('addressline2')
                             {{ $message }}
@@ -34,7 +34,7 @@
                     <select name="city" id="city-dropdown" class="form-select" aria-label="Default select example">
                         <option value="" selected disabled>Select City</option>
                         @foreach ($city as $cityData)
-                            <option value="{{ $cityData->id }}">{{ $cityData->city_name_eng }}</option>
+                            <option value="{{ $cityData->id }}" {{ old('city') == $cityData->id ? 'selected':'' }}>{{ $cityData->city_name_eng }}</option>
                         @endforeach
                     </select>
                     <span id="cityError" class="text-danger">
@@ -49,7 +49,7 @@
                     <select name="landmark" id="landmark-dropdown" class="form-select" aria-label="Default select example">
                         <option value="" selected disabled>Select Landmark</option>
                         @foreach ($landmark as $landmarkData)
-                            <option value="{{ $landmarkData->id }}" data-city="{{ $landmarkData->city_id }}">
+                            <option value="{{ $landmarkData->id }}" data-city="{{ $landmarkData->city_id }}" {{ old('landmark') == $landmarkData->id ? 'selected':'' }}>
                                 {{ $landmarkData->landmark_eng }}
                             </option>
                         @endforeach
@@ -64,7 +64,7 @@
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">pincode</label>
                     <input type="text" class="form-control" name="pincode" maxlength="6"
-                        placeholder="6 digit [0-9] pin-code">
+                        placeholder="6 digit [0-9] pin-code" value="{{ old('pincode') }}">
                     <span id="pincodeError" class="text-danger">
                         @error('pincode')
                             {{ $message }}

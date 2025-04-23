@@ -81,9 +81,18 @@ class VisitorController extends Controller
         if ($apiresponse->successful()) {
             $data = $apiresponse->json();
             if ($data['success'] == true) {
-                $user = User::where('phone', $request->phone)->first();
-                session(['user' => $user]);
-                return response()->json(['success' => true], 200);
+                if ($data['data']['isNewUser'] == false) {
+                    $user = User::where('phone', $request->phone)->first();
+                    session(['user' => $user]);
+                    return response()->json(['success' => true], 200);
+                } else {
+                    $user = new User();
+                    $user->phone = $request->phone;
+                    $user->save();
+                    // $user = User::where('phone', $request->phone)->first();
+                    session(['newuser' => $user]);
+                    return response()->json(['success' => true, 'newuser' => true], 200);
+                }
             } else {
                 return response()->json($data);
             }
@@ -127,8 +136,8 @@ class VisitorController extends Controller
                     'google_id' => $user->id,
                     'password' => encrypt('123456dummy')
                 ]);
-                // session(['newuser' => $newUser]);
-                // return redirect()->route('visitor.loginindex');
+                session(['newuser' => $newUser]);
+                return redirect()->route('visitor.userregistrationindex');
                 return redirect()->route('/');
             }
         } catch (Exception $e) {
@@ -136,31 +145,70 @@ class VisitorController extends Controller
         }
     }
 
-    // public function userregistration(Request $request, $id){
-    //     $user = User::find($id);
-    //     $user->name = $request->name;
-    //     $user->email = $request->email;
-    //     $user->phone = $request->phonenumber;
+    public function userregistrationindex()
+    {
 
-    //     if ($request->hasFile('profilePic')) {
-    //         $image = $request->profilePic;
+        $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
+        $city = CityMaster::orderby('city_name_eng', 'asc')->get();
+        $landmark = LandmarkMaster::orderby('landmark_eng', 'asc')->get();
 
-    //         $profilepic = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-    //         $user->pro_pic = $profilepic;
-    //         $image->move(public_path('user_profile/'), $profilepic);
-    //     }
-    //     $user->save();
+        return view('visitor.userregistration', compact('category', 'city', 'landmark'));
+    }
 
-    //     session(['user' => $user]);
-    //     session()->forget('newuser');
-    //     return redirect()->route('visitor.addaddress',['id' => $id]);
-    // }
+    public function userregistration(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phonenumber' => 'required|numeric|digits:10',
+            'profilepicture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'addressline1' => 'required',
+            'addressline2' => 'required',
+            'pincode' => 'required|numeric|digits:6',
+            'city' => 'required',
+            'landmark' => 'required'
+        ], [
+            'phonenumber.required' => 'The mobile number field is required.',
+            'phonenumber.numeric' => 'The mobile number field must be a number.',
+            'phonenumber.digits' => 'The mobile number field must be 10 digits.',
+        ]);
+
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phonenumber;
+
+        if ($request->hasFile('profilepicture')) {
+            $image = $request->profilepicture;
+
+            $profilepic = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $user->pro_pic = $profilepic;
+            
+            $image->move(public_path('user_profile/'), $profilepic);
+        }
+
+        $user->save();
+
+        $address = new ShippingAddress();
+        $address->user_id = $id;
+        $address->address_line1 = $request->addressline1;
+        $address->address_line2 = $request->addressline2;
+        $address->pincode = $request->pincode;
+        $address->landmark_id = $request->landmark;
+
+        $address->save();
+
+        session()->forget('user');
+        session(['user'=>$user]);
+
+        return redirect()->route('visitor.index');        
+    }
 
     public function visitorlogout()
     {
         session()->flush();
 
-        return redirect()->back();
+        return redirect()->route('visitor.index');
     }
 
     public function profile()
@@ -219,9 +267,9 @@ class VisitorController extends Controller
     public function addaddress($id)
     {
         $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
-        $city = CityMaster::all();
-        $landmark = LandmarkMaster::all();
-        // return $landmark;
+        $city = CityMaster::orderby('city_name_eng', 'asc')->get();
+        $landmark = LandmarkMaster::orderby('landmark_eng', 'asc')->get();
+
         return view('visitor.addnewaddress', compact('category', 'city', 'landmark'));
     }
 
@@ -249,8 +297,8 @@ class VisitorController extends Controller
     {
         $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
         $address = ShippingAddress::with('landmark')->find($id);
-        $city = CityMaster::all();
-        $landmark = LandmarkMaster::all();
+        $city = CityMaster::orderby('city_name_eng', 'asc')->get();
+        $landmark = LandmarkMaster::orderby('landmark_eng', 'asc')->get();
 
         return view('visitor.editaddress', compact('category', 'address', 'city', 'landmark'));
     }

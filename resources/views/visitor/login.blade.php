@@ -15,7 +15,7 @@
 
                     <div class="sendotp">
                         <button type="button" name="btnLogin" id="btnLogin" class="btn btn-primary w-100">Send
-                            Otp</button>
+                            OTP</button>
                         <button class="btn btn-primary w-100" type="button" id="btnLogin2" disabled style="display: none">
                             <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
                             <span role="status">Sending Otp...</span>
@@ -23,19 +23,20 @@
                     </div>
 
                     <div class="verifyotp mt-2" style="display: none">
-                        <label for="exampleInputEmail1" class="form-label">Enter Otp</label>
+                        <label for="exampleInputEmail1" class="form-label">Enter OTP</label>
                         <input type="text" class="form-control" id="otp" name="otp" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                         <span class="text-danger" id="otpError"></span>
 
-                        <button class="btn btn-success mt-3 w-100" id="verifyotp">Verify Otp</button>
+                        <button class="btn btn-success mt-3 w-100" id="verifyotp">Verify OTP</button>
                     </div>
                 </form>
             </div>
             <div class="loginwithgmail">
                 <hr class="sidebar-divider">
                 <button class="btn btn-primary w-100" id="loginwithgoogle"><img
-                        src="{{ asset('visitor/images/google-icon.jpg') }}" class="me-2" style="height: 30px">Login With
+                        src="{{ asset('visitor/images/google-icon.jpg') }}" class="me-2" style="height: 30px">Login
+                    With
                     Google</button>
             </div>
         </div>
@@ -99,13 +100,20 @@
                 } else if (!regex1.test(otp)) {
                     $("#otpError").text("Please enter a valid otp");
                 } else {
+                    $('#verifyotp').prop('disabled', true).text('Verifying OTP');
                     $.post("{{ route('visitor.verifyotp') }}", {
                         "_token": "{{ csrf_token() }}",
                         "phone": phone,
                         "otp": otp
                     }, function(response) {
                         if (response.success == true) {
-                            window.location.href = '/';
+                            if (response.newuser && response.newuser == true) {
+                                console.log('hello new user');
+                                window.location.href =
+                                    "{{ route('visitor.userregistrationindex') }}";
+                            } else {
+                                window.location.href = '/';
+                            }
                         } else {
                             $("#otpError").text(response.message);
                         }
@@ -113,9 +121,6 @@
                 }
             });
 
-            // $("#loginwithgoogle").click(function(){
-            //     $.get("{{ route('auth.google') }}");
-            // });
             $("#loginwithgoogle").click(function() {
                 window.location.href = "{{ route('auth.google') }}"; // Redirect to the Google OAuth route
             });

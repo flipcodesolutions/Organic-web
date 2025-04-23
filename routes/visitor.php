@@ -19,7 +19,8 @@ Route::controller(VisitorController::class)->group(function(){
     Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
     Route::get('visitor/login', 'handleGoogleCallback');
 
-    // Route::post('visitor/userregistration/{id?}','userregistration')->name('visitor.userregistration');
+    Route::get('visitor/userregistrationindex','userregistrationindex')->name('visitor.userregistrationindex');
+    Route::post('visitor/userregistration/{id?}','userregistration')->name('visitor.userregistration');
 
     // user profile
     Route::get('visitor/profile','profile')->name('visitor.profile');
