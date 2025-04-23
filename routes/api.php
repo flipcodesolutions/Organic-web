@@ -25,13 +25,13 @@ Route::post('/register', [RegisterController::class, 'registerApi']);
 Route::get('users', [UserController::class, 'index']);
 Route::post('user/store', [UserController::class, 'store']);
 
-Route::post('sendOtp', [UserController::class, 'sendOtp']);
+Route::post('/sendOtp', [UserController::class, 'sendOtp']);
 Route::post('verifyOtp', [UserController::class, 'verifyOtp']);
 
 Route::post('checkEmail', [UserController::class, 'checkEmail']);
 Route::post('createProfile', [UserController::class, 'createProfile']);
 
-Route::group(['middleware' => 'auth:sanctum'], function () {
+// Route::group(['middleware' => 'auth:sanctum'], function () {
     //category
     Route::get('allCategories', [CategoryController::class, 'allCategories']);
     Route::get('idWiseCategory', [CategoryController::class, 'idWiseCategory']);
@@ -72,17 +72,17 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('updateCart/{id}', [CartController::class, 'updateCart']);
     Route::post('removeCart/{id}', [CartController::class, 'removeCart']);
 
-    //order 
+    //order
     Route::post('order', [OrderController::class, 'order']);
     Route::get('myOrders', [OrderController::class, 'myOrders']);
     Route::get('orderDetails/{id}', [OrderController::class, 'orderDetails']);
     Route::get('pointPer', [OrderController::class, 'pointPer']);
 
-    //product 
+    //product
     Route::get('products', [ProductController::class, 'products']);
     Route::get('homeProducts', [ProductController::class, 'homeProducts']);
     Route::get('allProducts', [ProductController::class, 'allProducts']);
 
     //cms
     Route::get('cms', [CmsController::class, 'cms']);
-});
+// });

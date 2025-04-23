@@ -119,7 +119,7 @@ class ContactController extends Controller
             $review->user_id = Auth::user()->id;
             $review->star = $request->star;
             $review->message = $request->message;
-            $review->rev_date = $review->rev_date;
+            $review->rev_data = $review->rev_date;
             $review->save();
 
             return Util::getSuccessMessage('Review Updated Successfully', $review);
