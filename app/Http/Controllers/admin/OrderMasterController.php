@@ -15,19 +15,22 @@ class OrderMasterController extends Controller
     public function index()
     {
         // $order = OrderMaster::where('status','active')->with('user','orderDetails.product','orderDetails.unit.unitMaster','orderDetails.trackorder')->orderBy('id','desc')->get();
+
         $order = OrderMaster::where('status', 'active')
-            ->whereHas('orderDetails.trackorder', function ($query) {
-                $query->where('orderStatus', 'pending');
-            })
             ->with([
                 'user',
-                'orderDetails.product',
-                'orderDetails.unit.unitMaster',
-                'orderDetails.trackorder'
-            ])
-            ->orderBy('id', 'desc')
-            ->get();
-        return $order;
+                'orderDetails' => function ($query) {
+                    $query->whereHas('trackorder', function ($q) {
+                        $q->where('orderStatus', 'pending');
+                    })->with([
+                        'product',
+                        'unit.unitMaster',
+                        'trackorder'
+                    ]);
+                }
+            ])->orderByDesc('id')->get();
+
+        // return $order;
         return view('admin.order_master.index', compact('order'));
     }
 

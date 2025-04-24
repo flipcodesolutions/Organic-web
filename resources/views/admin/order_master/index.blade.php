@@ -10,7 +10,7 @@
 
     <div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-body table-responsive">
+            <div class="card-body">
                 {{-- <table class="table table-bordered mt-2">
                     <thead>
                         <tr>
@@ -99,40 +99,41 @@
                     <tbody>
                         @if (count($order) > 0)
                             @foreach ($order as $key => $orderData)
-                                <tr class="table-active">
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $orderData->user->name }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($orderData->orderDate)->format('j - m - Y') }}</td>
-                                    <td>{{ $orderData->total_bill_amt }} ₹</td>
-                                    <td>{{ $orderData->payment_mode }}</td>
-                                    <td>
-                                        <p>{{ $orderData->addressLine1 }}</p>
-                                        <p>{{ $orderData->addressLine2 }}</p>
-                                        <p>{{ $orderData->landmark }} | {{ $orderData->area }} </p>
-                                        <p>{{ $orderData->city }} | {{ $orderData->pincode }}</p>
-                                    </td>
-                                    <td>
-                                        @foreach ($orderData->orderDetails as $key2 => $orderDetailsData)
+                                @foreach ($orderData->orderDetails as $key2 => $orderDetailsData)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $orderData->user->name }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($orderData->orderDate)->format('j - m - Y') }}</td>
+                                        <td>{{ $orderData->total_bill_amt }} ₹</td>
+                                        <td>{{ $orderData->payment_mode }}</td>
+                                        <td>
+                                            <p>{{ $orderData->addressLine1 }}</p>
+                                            <p>{{ $orderData->addressLine2 }}</p>
+                                            <p>{{ $orderData->landmark }} | {{ $orderData->area }} </p>
+                                            <p>{{ $orderData->city }} | {{ $orderData->pincode }}</p>
+                                        </td>
+                                        <td>
+                                            {{-- @foreach ($orderData->orderDetails as $key2 => $orderDetailsData) --}}
                                             <p>{{ $orderDetailsData->product->productName }}</p>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach ($orderData->orderDetails as $key2 => $orderDetailsData)
+                                            {{-- @endforeach --}}
+                                        </td>
+                                        <td>
+                                            {{-- @foreach ($orderData->orderDetails as $key2 => $orderDetailsData) --}}
                                             <p>{{ $orderDetailsData->Unit->unitMaster->unit }}</p>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach ($orderData->orderDetails as $key2 => $orderDetailsData)
+                                            {{-- @endforeach --}}
+                                        </td>
+                                        <td>
+                                            {{-- @foreach ($orderData->orderDetails as $key2 => $orderDetailsData) --}}
                                             <p>{{ $orderDetailsData->qty }}</p>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach ($orderData->orderDetails as $key2 => $orderDetailsData)
+                                            {{-- @endforeach --}}
+                                        </td>
+                                        <td>
+                                            {{-- @foreach ($orderData->orderDetails as $key2 => $orderDetailsData) --}}
                                             <p> {{ $orderDetailsData->total }} ₹</p>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach ($orderData->orderDetails as $key2 => $orderDetailsData)
+                                            {{-- @endforeach --}}
+                                        </td>
+                                        <td>
+                                            {{-- @foreach ($orderData->orderDetails as $key2 => $orderDetailsData) --}}
                                             <select name="status" id="">
                                                 <option value="pending"
                                                     {{ $orderDetailsData->trackorder->orderStatus == 'pending' ? 'selected disabled' : '' }}>
@@ -147,12 +148,18 @@
                                                     {{ $orderDetailsData->trackorder->orderStatus == 'delivered' ? 'selected disabled' : '' }}>
                                                     Delivered</option>
                                             </select>
-                                        @endforeach
-                                    </td>
+                                            {{-- @endforeach --}}
+                                        </td>
 
-                                </tr>
+                                    </tr>
+                                @endforeach
                             @endforeach
                         @else
+                            <tr>
+                                <td colspan="11" align="center" style="color: red;">
+                                    <h5>No Data Record Found</h5>
+                                </td>
+                            </tr>
                         @endif
 
                     </tbody>

@@ -5,7 +5,7 @@
         <div class="card w-50 p-5" style="background-color: white">
             @if (session()->has('newuser'))
                 <h2 class="mb-3">Welcome, tell us about you..</h2>
-                <form action="{{ route('visitor.userregistration') }}/{{ session('newuser')['id'] }}" method="post"
+                <form action="{{ route('visitor.userregistration') }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
 
@@ -48,8 +48,6 @@
                                 @enderror
                             </span>
                         </div>
-
-                        {{-- @dd(session('newuser')) --}}
 
                         <div class="mb-3">
                             <label class="mb-2">Mobile Number <span class="text-danger">*</span></label>

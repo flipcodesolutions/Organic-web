@@ -100,7 +100,8 @@
                         <button class="btn btn-primary" type="submit" id="addtocart"
                             style="padding: 10px 20px; font-size: 1rem; margin-right: 10px;">Add
                             to Cart</button>
-                        <button class="btn btn-success" {{ session()->has('user') ? '' : 'disabled' }} style="padding: 10px 20px; font-size: 1rem;" >Buy Now</button>
+                        <button class="btn btn-success" {{ session()->has('user') ? '' : 'disabled' }}
+                            style="padding: 10px 20px; font-size: 1rem;">Buy Now</button>
                     </div>
                 </div>
             </div>
@@ -187,9 +188,9 @@
             </div>
         </div>
     </div>
+@endsection
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+@section('scripts')
     <script>
         let globalSellPrice = 0;
         let unitdata = {};
@@ -302,5 +303,4 @@
             });
         });
     </script>
-
 @endsection

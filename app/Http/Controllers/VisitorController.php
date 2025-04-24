@@ -86,11 +86,9 @@ class VisitorController extends Controller
                     session(['user' => $user]);
                     return response()->json(['success' => true], 200);
                 } else {
-                    $user = new User();
-                    $user->phone = $request->phone;
-                    $user->save();
+                    // $user = user::all()->last();
                     // $user = User::where('phone', $request->phone)->first();
-                    session(['newuser' => $user]);
+                    session(['newuser' => ['phone' => $request->phone]]);
                     return response()->json(['success' => true, 'newuser' => true], 200);
                 }
             } else {
@@ -127,18 +125,21 @@ class VisitorController extends Controller
 
             if ($finduser) {
 
-                session(['user' => $user]);
+                session(['user' => $finduser]);
 
                 return redirect()->intended('/');
             } else {
-                $newUser = User::updateOrCreate(['email' => $user->email], [
+                // $newUser = User::updateOrCreate(['email' => $user->email], [
+                //     'name' => $user->name,
+                //     'google_id' => $user->id,
+                //     'password' => encrypt('123456dummy')
+                // ]);
+                session(['newuser' => [
+                    'email' => $user->email,
                     'name' => $user->name,
                     'google_id' => $user->id,
-                    'password' => encrypt('123456dummy')
-                ]);
-                session(['newuser' => $newUser]);
+                ]]);
                 return redirect()->route('visitor.userregistrationindex');
-                return redirect()->route('/');
             }
         } catch (Exception $e) {
             dd($e->getMessage());
@@ -155,12 +156,12 @@ class VisitorController extends Controller
         return view('visitor.userregistration', compact('category', 'city', 'landmark'));
     }
 
-    public function userregistration(Request $request, $id)
+    public function userregistration(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
-            'phonenumber' => 'required|numeric|digits:10',
+            'email' => 'required|email|unique:users,email',
+            'phonenumber' => 'required|numeric|digits:10|unique:users,phone',
             'profilepicture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'addressline1' => 'required',
             'addressline2' => 'required',
@@ -171,26 +172,29 @@ class VisitorController extends Controller
             'phonenumber.required' => 'The mobile number field is required.',
             'phonenumber.numeric' => 'The mobile number field must be a number.',
             'phonenumber.digits' => 'The mobile number field must be 10 digits.',
+            'phonenumber.unique' => 'The mobile number has already been taken.',
         ]);
 
-        $user = User::find($id);
+        $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phonenumber;
 
+        $user->google_id = session('newuser')['google_id'] ?? null;
+        
         if ($request->hasFile('profilepicture')) {
             $image = $request->profilepicture;
 
             $profilepic = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
             $user->pro_pic = $profilepic;
-            
+
             $image->move(public_path('user_profile/'), $profilepic);
         }
 
         $user->save();
 
         $address = new ShippingAddress();
-        $address->user_id = $id;
+        $address->user_id = $user->id;
         $address->address_line1 = $request->addressline1;
         $address->address_line2 = $request->addressline2;
         $address->pincode = $request->pincode;
@@ -199,9 +203,9 @@ class VisitorController extends Controller
         $address->save();
 
         session()->forget('user');
-        session(['user'=>$user]);
+        session(['user' => $user]);
 
-        return redirect()->route('visitor.index');        
+        return redirect()->route('visitor.index');
     }
 
     public function visitorlogout()
@@ -227,12 +231,13 @@ class VisitorController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
-            'phonenumber' => 'required|numeric|digits:10'
+            'email' => 'required|email|unique:users,email',
+            'phonenumber' => 'required|numeric|digits:10|unique:users,phone'
         ], [
             'phonenumber.required' => 'The mobile number field is required.',
             'phonenumber.numeric' => 'The mobile number field must be a number.',
             'phonenumber.digits' => 'The mobile number field must be 10 digits.',
+            'phonenumber.unique' => 'The mobile number has already been taken.',
         ]);
 
         $user = User::find($id);

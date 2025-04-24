@@ -20,7 +20,7 @@ Route::controller(VisitorController::class)->group(function(){
     Route::get('visitor/login', 'handleGoogleCallback');
 
     Route::get('visitor/userregistrationindex','userregistrationindex')->name('visitor.userregistrationindex');
-    Route::post('visitor/userregistration/{id?}','userregistration')->name('visitor.userregistration');
+    Route::post('visitor/userregistration','userregistration')->name('visitor.userregistration');
 
     // user profile
     Route::get('visitor/profile','profile')->name('visitor.profile');
