@@ -3,7 +3,7 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <div class="col">
-        <h1 class="h3 mb-0 text-gray-800">FAQs Management</h1>
+        <h1 class="h3 mb-1 text-gray-800">FAQs Management</h1>
     </div>
     <a class="btn btn-danger mr-1" href="{{ Route('faq.deactive') }}">Deactivated FAQs</a>
     <a class="btn btn-primary" href="{{ Route('faq.create') }}">Add</a>

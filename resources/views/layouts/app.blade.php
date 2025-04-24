@@ -344,17 +344,17 @@
                         <hr class="sidebar-divider">
 
                         <!-- Heading -->
-                        <div class="sidebar-heading">
+                        {{-- <div class="sidebar-heading">
                             Interface
-                        </div>
+                        </div> --}}
 
                         <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}" href="#"
+                            <a class="pt-1 pb-2 nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}" href="#"
                                 data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true"
                                 aria-controls="collapseUtilities">
                                 {{-- <i class="fas fa-fw fa-wrench"></i> --}}
-                                <i class="fa-solid fa-users"></i>
-                                <span>User Management</span>
+                                <i class="  fa-solid fa-users"></i>
+                                <span class="">User Management</span>
                             </a>
                             <div id="collapseUtilities"
                                 class="collapse {{ request()->routeIs('user.*') ? 'show' : '' }}"
@@ -384,7 +384,7 @@
                 </li> --}}
                         <!-- Reports -->
                         <li class="nav-item {{ request()->routeIs('reports.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('reports.*') ? '' : 'collapsed' }}"
+                            <a class="pt-3 pb-2 nav-link {{ request()->routeIs('reports.*') ? '' : 'collapsed' }}"
                                 href="#" data-toggle="collapse" data-target="#collapseFour"
                                 aria-expanded="true" aria-controls="collapseFour">
                                 <i class="fa-solid fa-file"></i>

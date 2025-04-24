@@ -4,11 +4,11 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <div class="col">
-            <h1 class="h3 mb-0 text-gray-800">Category Management</h1>
+            <h1 class="h3 mb-1 text-gray-800">Category Management</h1>
         </div>
-        <a class="b1 btn btn-danger mr-1" href="{{ route('category.deactiveindex') }}">Deactivated Categories
+        <a class="b1 btn btn-danger mr-1 mb-1" href="{{ route('category.deactiveindex') }}">Deactivated Categories
         </a>
-        <a class="btn btn-primary" href="{{ route('category.create') }}">Add</a>
+        <a class="btn btn-primary mb-1" href="{{ route('category.create') }}">Add</a>
     </div>
 
     {{-- <div class="container"> --}}    <div class="card-body p-0">

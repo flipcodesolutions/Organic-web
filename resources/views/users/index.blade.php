@@ -3,7 +3,7 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <div class="col">
-        <h1 class="h3 mb-0 text-gray-800">User Management</h1>
+        <h1 class="h3 mb-1 text-gray-800">User Management</h1>
     </div>
     <a class="btn btn-danger mr-1" href="{{ route('user.deactiveindex') }}">Deactivated Users</a>
     <a class="btn btn-primary" href="{{ route('user.create') }}">Add</a>

@@ -3,7 +3,7 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <div class="col">
-            <h1 class="h3 mb-0 text-gray-800">UnitMaster Management</h1>
+            <h1 class="h3 mb-1 text-gray-800">UnitMaster Management</h1>
         </div>
         <a class="b1 btn btn-danger mr-1" href="{{ Route('unitmaster.deactive') }}">Deactivated Units</a>
         <a class="btn btn-primary" href="{{ Route('unitmaster.create') }}">Add</a>
@@ -60,7 +60,7 @@
                             <tr>
                                 <td>{{ $index++ }}</td>
                                 <td>{{ $unitmasters->unit }}</td>
-                                <td>
+                                <td class="d-flex">
                                     <a href="{{ Route('unitmaster.edit', $unitmasters->id) }}" class="edit btn">
                                         <i class="fas fa-edit"></i>
                                     </a>

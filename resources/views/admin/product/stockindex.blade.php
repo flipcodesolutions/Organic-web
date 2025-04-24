@@ -67,7 +67,7 @@
                                             <label for="">Stock</label>
                                             <span>
                                                 @error('product_stock')
-                                                    <p class="text-danger">{{ $message }}</p>
+                                                    <p class=" text-danger">{{ $message }}</p>
                                                 @enderror
                                             </span>
                                         </div>

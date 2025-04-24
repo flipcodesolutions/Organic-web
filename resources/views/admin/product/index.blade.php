@@ -4,7 +4,7 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <div class="col">
-        <h1 class="h3 mb-0 text-gray-800">Products Management</h1>
+        <h1 class="h3 mb-1 text-gray-800">Products Management</h1>
     </div>
     <a class="b1 btn btn-danger mr-1" href="{{ route('product.deactiveindex') }}">Deactivated Products</a>
     <a class="btn btn-primary" href="{{ route('product.create') }}">Add</a></div>

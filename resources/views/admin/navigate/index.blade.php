@@ -4,10 +4,10 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <div class="col">
-        <h1 class="h3 mb-0 text-gray-800">Navigation Management</h1>
+        <h1 class="h3 mb-1 text-gray-800">Navigation Management</h1>
     </div>
-    <a class="b1 btn btn-danger mr-1" href="{{ route('navigate.deactiveindex') }}">Deactivated Navigations</a>
-    <a class="btn btn-primary" href="{{ route('navigate.create') }}">Add</a>
+    <a class="b1 btn btn-danger mr-1 mb-1" href="{{ route('navigate.deactiveindex') }}">Deactivated Navigations</a>
+    <a class="btn btn-primary mb-1" href="{{ route('navigate.create') }}">Add</a>
 </div>
 
 <div class="card-body p-0">
@@ -59,7 +59,7 @@
                                 <td>
                                     {{ $data->screenname }}
                                 </td>
-                                <td>
+                                <td class="d-flex">
                                     <a href="{{ route('navigate.edit') }}/{{ $data->id }}" class="edit btn">
                                         <i class="fas fa-edit"></i>
                                     </a>
