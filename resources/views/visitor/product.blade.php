@@ -58,7 +58,7 @@
                 <div class="row mt-auto">
                     {{-- product units --}}
                     <div class="unit  mb-2">
-                        <h5 class="mb-1">Select Unit</h5>
+                        <h5 class="mb-2">Select Unit</h5>
                         <div class="unit-section d-flex" style="gap: 6px">
                             @foreach ($product->productUnit as $unitData)
                                 <div class="card" id="selectedunit" onclick="selectedunit({{ json_encode($unitData) }})">
@@ -152,7 +152,54 @@
                     <a href="">view all</a>
                 </div> --}}
             </div>
-            <div class="row" style="justify-content: space-around; text-align: center;">
+
+            <div class="row justify-content-center text-center">
+                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @php
+                            // Group products in chunks of 2 for tablets
+                            $filtered = $similarproduct->where('id', '!=', request()->route('id'));
+                            $chunkedProducts = $filtered->chunk(2); // 2 per slide for tablets
+                        @endphp
+
+                        @foreach ($chunkedProducts as $chunkIndex => $productChunk)
+                            <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
+                                <div class="row">
+                                    @foreach ($productChunk as $productData)
+                                        <div class="col-12 col-md-6 col-lg-3 mb-3">
+                                            <a href="{{ route('home.product') }}/{{ $productData->id }}" class="productlink">
+                                                <div class="card p-2">
+                                                    <img src="{{ asset($productData->productImages->first()->url) }}"
+                                                         class="card-img-top" alt="..." height="180">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{ $productData->productName }}</h5>
+                                                        <p>{{ $productData->productUnit->first()->unitMaster->unit }}</p>
+                                                        <p>₹{{ $productData->productPrice }}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <button class="product-carousel-control-prev carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="product-carousel-control-next carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+
+
+
+            {{-- <div class="row" style="justify-content: space-around; text-align: center;">
                 <div id="productCarousel" class="productCarousel carousel">
                     <div class="product-carousel-inner">
                         @foreach ($similarproduct as $productData)
@@ -162,7 +209,7 @@
                                     <div class="product-carousel-item active">
                                         <div class="catcard card p-2">
                                             <img src="{{ asset($productData->productImages->first()->url) }}"
-                                                class="card-img-top" alt="..." height="280px">
+                                                class="card-img-top" alt="..." height="180px" >
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ $productData->productName }}</h5>
                                                 <p>{{ $productData->productUnit->first()->unitMaster->unit }}</p>
@@ -185,7 +232,9 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-            </div>
+            </div> --}}
+
+
         </div>
     </div>
 
