@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Services\TwilioVerifyService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class UserController extends Controller
 {
@@ -44,66 +45,122 @@ class UserController extends Controller
         }
     }
 
+
     public function sendOtp(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'phone' => 'required|digits:10',
-        ]);
-
-        if ($validator->fails()) {
-            return Util::getErrorMessage("Validation failed", $validator->errors());
-        }
-
-
         try {
-            $user = User::where('phone', $request->phone)->first();
+            $validator = Validator::make($request->all(), [
+                'phone' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return Util::getErrorMessage('Validation failed.', $validator->errors());
+            }
+
+            $contactNo = $request->input('contactNo');
             $otp = rand(1000, 9999);
+            $user = User::where('phone', $request->phone)->first();
+
             if ($user) {
-                return Util::getSuccessMessage('OTP sent successfully', ['isNewUser' => false, 'user' => $user, 'otp' => $otp]);
+                $user->otp = $otp;
+                $user->save();
+                return Util::getSuccessMessage('OTP sent successfully', [
+                    'isNewUser' => false,
+                    'otp' => $otp,
+                ]);
             } else {
-                return Util::getErrorMessage('User not registered', ['isNewUser' => true, 'otp' => $otp]);
+                Cache::put('otp_' . $contactNo, $otp, now()->addMinutes(5)); // 5 min expiry
+
+                return Util::getSuccessMessage('User not registered', [
+                    'isNewUser' => true,
+                    'otp' => $otp,
+                ]);
             }
         } catch (\Exception $e) {
-            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+            return Util::getErrorMessage('Failed to send OTP.', $e->getMessage());
         }
     }
 
+    // public function verifyOtp(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'phone' => 'required|digits:10',
+    //         'otp' => 'required|digits:4',
+    //         'latitude' => 'nullable',
+    //         'longitude' => 'nullable',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return Util::getErrorMessage("Validation failed", $validator->errors());
+    //     }
+
+    //     try {
+    //         $user = User::where('phone', $request->phone)->first();
+
+    //         if (!$user || $user->otp != $request->otp) {
+    //             return Util::getErrorMessage("Invalid OTP. Please try again.");
+    //         }
+
+    //         // OTP verified, update phone status
+    //         $user->is_verify_phone = 'yes';
+    //         $user->latitude = $request->latitude;
+    //         $user->longitude = $request->longitude;
+    //         $user->otp = null; // optional: clear OTP after use
+    //         $user->save();
+
+    //         // Create token
+    //         $token = $user->createToken('auth_token')->plainTextToken;
+
+    //         return Util::getSuccessMessage('User logged in successfully', [
+    //             'token' => $token,
+    //             'user' => $user,
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+    //     }
+    // }
+
+
     public function verifyOtp(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'phone' => 'required|digits:10',
-            'otp' => 'required|digits:4',
-            'latitude' => 'nullable',
-            'longitude' => 'nullable',
-        ]);
-
-        if ($validator->fails()) {
-            return Util::getErrorMessage("Validation failed", $validator->errors());
-        }
-
         try {
-            $user = User::where('phone', $request->phone)->first();
+            $validator = Validator::make($request->all(), [
+                'phone' => 'required|digits:10',
+                'otp' => 'required|digits:4',
+                'latitude' => 'nullable',
+                'longitude' => 'nullable',
+            ]);
 
-            if (!$user || $user->otp != $request->otp) {
-                return Util::getErrorMessage("Invalid OTP. Please try again.");
+            if ($validator->fails()) {
+                return Util::getErrorMessage("Validation failed", $validator->errors());
             }
 
-            // OTP verified, update phone status
-            $user->is_verify_phone = 'yes';
-            $user->latitude = $request->latitude;
-            $user->longitude = $request->longitude;
-            $user->otp = null; // optional: clear OTP after use
-            $user->save();
+            $contactNo = $request->input('contactNo');
+            $otp = $request->input('otp');
 
-            // Create token
-            $token = $user->createToken('auth_token')->plainTextToken;
+            $user = User::where('phone', $request->phone)->first();
 
-            return Util::getSuccessMessage('User logged in successfully', [
-                'token' => $token,
-                'user' => $user,
-            ]);
+            if ($user && $user->otp == $otp) {
+                $token = $user->createToken('auth_token')->plainTextToken; // 🧠 Laravel Sanctum
+
+                return Util::getSuccessMessage('OTP verified successfully', [
+                    'user' => $user,
+                    'token' => $token,
+                    'isNewUser' => false,
+                ]);
+            }
+
+            $cachedOtp = Cache::get('otp_' . $contactNo);
+            if (!$user && $cachedOtp == $otp) {
+                return Util::getSuccessMessage('OTP verified for unregistered user', [
+                    'isNewUser' => true,
+                    'contactNo' => $contactNo,
+                ]);
+            }
+
+            return Util::getErrorMessage('Invalid OTP.');
         } catch (\Exception $e) {
-            return Util::getErrorMessage('Something went wrong', ['error' => $e->getMessage()]);
+            return Util::getErrorMessage('OTP verification failed.', $e->getMessage());
         }
     }
 
