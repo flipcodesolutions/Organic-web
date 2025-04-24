@@ -5,16 +5,6 @@
         <h2>Your Orders</h2>
 
         @if (!empty($order))
-            {{-- filter --}}
-            <div class="filter mt-3">
-                <form action="" method="get" class="filter-form d-flex gap-2">
-                    {{-- <h5>Orders of</h5>
-                <input type="month" name="date"> --}}
-                    <label for="monthYear">Select Month and Year</label>
-                    <input type="text" name="filter_date" id="datepicker" class="form-control" placeholder="mm/yyyy"
-                        autocomplete="off">
-                </form>
-            </div>
             @foreach ($order as $orderData)
                 <div class="card my-3">
                     <div class="card-header d-flex justify-content-between">
@@ -62,16 +52,4 @@
             <h3>hello</h3>
         @endif
     </div>
-
-    <script>
-        $(document).ready(function() {
-            $('#datepicker').datepicker({
-                format: "mm/yyyy",
-                startView: "months",
-                minViewMode: "months",
-                autoclose: true,
-                todayHighlight: true
-            });
-        });
-    </script>
 @endsection
