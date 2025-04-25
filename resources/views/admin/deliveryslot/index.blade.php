@@ -3,10 +3,10 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <div class="col">
-        <h1 class="h3 mb-0 text-gray-800">DeliverySlots Management</h1>
+        <h1 class="h3 mb-1 text-gray-800">DeliverySlots Management</h1>
     </div>
-    <a class="b1 btn btn-danger mr-1" href="{{ Route('deliveryslot.deactive') }}">Deactivated DeliverySlots</a>
-    <a class="btn btn-primary" href="{{ Route('deliveryslot.create') }}">Add</a>
+    <a class="b1 btn btn-danger mr-1 mb-1" href="{{ Route('deliveryslot.deactive') }}">Deactivated DeliverySlots</a>
+    <a class="btn btn-primary mb-1" href="{{ Route('deliveryslot.create') }}">Add</a>
 </div>
 
 <div class="card-body p-0">

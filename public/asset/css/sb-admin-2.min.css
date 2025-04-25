@@ -294,7 +294,7 @@ button:not(:disabled),
 [type="submit"]:not(:disabled) {
     cursor: pointer;
     background-color: #858796;
-    color: #fff;
+    /* color: #fff; */
 }
 
 button::-moz-focus-inner,
@@ -1784,7 +1784,7 @@ pre code {
 
 .table th,
 .table td {
-    padding: 0.75rem;
+    /* padding: 0.75rem; */
     vertical-align: top;
     border-top: 1px solid #e3e6f0;
 }
@@ -7360,7 +7360,7 @@ button.bg-dark:focus {
 }
 
 .d-flex {
-    display: flex !important;
+    /* display: flex !important; */
 }
 
 .d-inline-flex {
