@@ -10,76 +10,45 @@
 
     <div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
-            <div class="card-body">
-                {{-- <table class="table table-bordered mt-2">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Coustemer Details</th>
-                            <th>Order Date</th>
-                            <th>Total Bill Ammount</th>
-                            <th>payment Method</th>
-                            <th>Address</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (count($order) > 0)
-                            @foreach ($order as $key => $orderData)
-                                <tr class="table-active">
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $orderData->user->name }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($orderData->orderDate)->format('j - m - Y') }}</td>
-                                    <td>{{ $orderData->total_bill_amt }} ₹</td>
-                                    <td>{{ $orderData->payment_mode }}</td>
-                                    <td>
-                                        <p>{{ $orderData->addressLine1 }}</p> 
-                                        <p>{{ $orderData->addressLine2 }}</p>
-                                        <p>{{ $orderData->landmark }} | {{ $orderData->area }} </p>
-                                        <p>{{ $orderData->city }} | {{ $orderData->pincode }}</p>
-                                    </td>
-                                    
-                                </tr>
-                                <tr >
-                                    <td colspan="6" class="pt-0">
-                                        <table class="table table-borderless table-hover  mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Product</th>
-                                                    <th>Unit</th>
-                                                    <th>Quentity</th>
-                                                    <th>Total Ammount</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($orderData->orderDetails as $key2 => $orderDetailsData)
-                                                    <tr class="bg-white text-dark">
-                                                        <td>{{ $key2 + 1 }}</td>
-                                                        <td>{{ $orderDetailsData->product->productName }}</td>
-                                                        <td>{{ $orderDetailsData->Unit->unitMaster->unit }}</td>
-                                                        <td>{{ $orderDetailsData->qty }}</td>
-                                                        <td>{{ $orderDetailsData->total }} ₹</td>
-                                                        <td>
-                                                            <select name="status" id="">
-                                                            <option value="pending" {{ $orderDetailsData->trackorder->orderStatus == 'pending' ? 'selected disabled' : '' }}>Pending</option>    
-                                                            <option value="confirm" {{ $orderDetailsData->trackorder->orderStatus == 'confirm' ? 'selected disabled':'' }}>Confirm</option>    
-                                                            <option value="out for delivery" {{ $orderDetailsData->trackorder->orderStatus == 'out for delivery' ? 'selected disabled':'' }}>Out for delivery</option>    
-                                                            <option value="delivered" {{ $orderDetailsData->trackorder->orderStatus == 'delivered' ? 'selected disabled':'' }}>Delivered</option>    
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
-                        @endif
+            {{-- filter --}}
+            <div class="mb-4 margin-bottom-30 m-4">
+                <form action="{{ route('order.index') }}" method="GET" class="filter-form">
+                    <div class="row align-items-end g-2">
 
-                    </tbody>
-                </table> --}}
+                        <!-- Global Search -->
+                        <div class="col">
+                            <label for="global" class="form-label"><b>Filter By Order Date:</b></label>
+                            <input type="date" id="date" name="date" value="{{ request('date') }}"
+                                class="form-control">
+                        </div>
+
+                        <!-- category Filter -->
+                        <div class="col">
+                            <label for="status" class="form-label"><b>Status:</b></label>
+                            <select id="status" name="status" class="form-select">
+                                <option value="" selected>Select Status</option>
+                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending
+                                </option>
+                                <option value="confirm" {{ request('status') == 'confirm' ? 'selected' : '' }}>Confirm
+                                </option>
+                                <option value="out for delivery"
+                                    {{ request('status') == 'out for delivery' ? 'selected' : '' }}>Out for delivery
+                                </option>
+                                <option value="delivered" {{ request('status') == 'delivered' ? 'selected' : '' }}>
+                                    Delivered</option>
+                            </select>
+                        </div>
+
+                        <!-- Submit & Reset Buttons -->
+                        <div class="col d-flex justify-content-end gap-2">
+                            <button type="submit" class="filter btn">Filter</button>
+                            <a href="{{ route('order.index') }}" class="reset btn">Reset</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card-body table-responsive">
                 <table class="table table-bordered mt-2">
                     <thead>
                         <tr>
@@ -99,7 +68,7 @@
                     <tbody>
                         @if (count($order) > 0)
                             @foreach ($order as $key => $orderData)
-                                @foreach ($orderData->orderDetails as $key2 => $orderDetailsData)
+                                @foreach ($orderData->orderDetails as $orderDetailsData)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $orderData->user->name }}</td>
@@ -113,28 +82,20 @@
                                             <p>{{ $orderData->city }} | {{ $orderData->pincode }}</p>
                                         </td>
                                         <td>
-                                            {{-- @foreach ($orderData->orderDetails as $key2 => $orderDetailsData) --}}
                                             <p>{{ $orderDetailsData->product->productName }}</p>
-                                            {{-- @endforeach --}}
                                         </td>
                                         <td>
-                                            {{-- @foreach ($orderData->orderDetails as $key2 => $orderDetailsData) --}}
                                             <p>{{ $orderDetailsData->Unit->unitMaster->unit }}</p>
-                                            {{-- @endforeach --}}
                                         </td>
                                         <td>
-                                            {{-- @foreach ($orderData->orderDetails as $key2 => $orderDetailsData) --}}
                                             <p>{{ $orderDetailsData->qty }}</p>
-                                            {{-- @endforeach --}}
                                         </td>
                                         <td>
-                                            {{-- @foreach ($orderData->orderDetails as $key2 => $orderDetailsData) --}}
                                             <p> {{ $orderDetailsData->total }} ₹</p>
-                                            {{-- @endforeach --}}
                                         </td>
                                         <td>
-                                            {{-- @foreach ($orderData->orderDetails as $key2 => $orderDetailsData) --}}
-                                            <select name="status" id="">
+                                            <select name="status" id="status{{ $orderDetailsData->trackorder->id }}"
+                                                onchange="updatestatus({{ $orderDetailsData->trackorder->id }})">
                                                 <option value="pending"
                                                     {{ $orderDetailsData->trackorder->orderStatus == 'pending' ? 'selected disabled' : '' }}>
                                                     Pending</option>
@@ -148,7 +109,6 @@
                                                     {{ $orderDetailsData->trackorder->orderStatus == 'delivered' ? 'selected disabled' : '' }}>
                                                     Delivered</option>
                                             </select>
-                                            {{-- @endforeach --}}
                                         </td>
 
                                     </tr>
@@ -164,8 +124,25 @@
 
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
+
+    <script>
+        function updatestatus(id) {
+            var selectedvalue = $("#status" + id).val();
+
+            $.post("{{ route('order.update') }}/" + id, {
+                "_token": "{{ csrf_token() }}",
+                "status": selectedvalue
+            }, function(response) {
+                if (response.status == true) {
+                    location.reload();
+                    alert('order updated successfully');
+                } else {
+                    alert('something went Wrong ')
+                }
+            });
+        }
+    </script>
 @endsection
