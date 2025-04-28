@@ -180,6 +180,8 @@
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 @if (session()->has('user'))
                                     {{ session('user')->name }}
+                                @else
+                                    sign in
                                 @endif
                             </span>
 
@@ -246,6 +248,8 @@
                         <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                             @if (session()->has('user'))
                                 {{ session('user')->name }}
+                            @else
+                                sign in
                             @endif
                         </span>
 
@@ -255,8 +259,10 @@
                 <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
                     id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel"> hello @if (session()->has('user'))
-                                , {{ session('user')->name }}
+                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel"> hello, @if (session()->has('user'))
+                                {{ session('user')->name }}
+                            @else
+                                sign in
                             @endif
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
@@ -269,7 +275,8 @@
                                         class="text-decoration-none text-black">Profile</a></li>
                                 <li class="list-group-item"><a href="{{ route('visitor.addressindex') }}"
                                         class="text-decoration-none text-black">Address</a></li>
-                                <li class="list-group-item"> Your Orders </li>
+                                <li class="list-group-item"><a href="{{ route('home.cart') }}" class="text-decoration-none text-black"> Cart </a></li>
+                                <li class="list-group-item"><a href="{{ route('home.orderindex') }}" class="text-decoration-none text-black"> Your Orders </a></li>
                                 <li class="list-group-item"> Policies </li>
                                 <li class="list-group-item"> FAQ </li>
                                 <li class="list-group-item"> Contact us </li>

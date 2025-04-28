@@ -12705,11 +12705,16 @@ form.user .btn-user {
 footer.sticky-footer {
     padding: 2rem 0;
     flex-shrink: 0;
+    margin-top: 500px;
+    margin-left: -24px;
+    margin-right: -24px;
 }
+
 
 footer.sticky-footer .copyright {
     line-height: 1;
     font-size: 0.8rem;
+
 }
 
 body.sidebar-toggled footer.sticky-footer {

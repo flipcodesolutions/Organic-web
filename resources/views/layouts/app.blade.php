@@ -245,7 +245,7 @@
                         </li>
 
                         <li
-                            class="nav-item {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
+                            class="nav-item {{ request()->routeIs('order.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('order.index') }}"><i class="fa-solid fa-truck"></i> <span>Order Management</span></a>
                         </li>
 
@@ -1002,8 +1002,8 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
+            <footer class=" sticky-footer  bg-white">
+                <div class="container-fluid px-0 ">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Your Website 2025</span>
                     </div>
