@@ -115,4 +115,5 @@ Route::controller(UnitController::class)->group(function(){
 
 Route::controller(OrderMasterController::class)->group(function(){
     Route::get('order/index','index')->name('order.index');
+    Route::post('order/update/{id?}','update')->name('order.update');
 });

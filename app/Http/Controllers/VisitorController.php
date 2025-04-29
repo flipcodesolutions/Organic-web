@@ -19,9 +19,12 @@ use App\Models\Slider;
 use App\Models\TrackOrder;
 use App\Models\Unit;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Laravel\Socialite\Facades\Socialite;
 
 class VisitorController extends Controller
 {
@@ -42,35 +45,174 @@ class VisitorController extends Controller
         return view('visitor.login', compact('category'));
     }
 
-    public function visitorauthenticate(Request $request)
+    public function sendotp(Request $request)
     {
-        $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        $apiurl = "https://vegi.psolution.in/api/sendOtp";
+
+        $apiresponse = Http::post($apiurl, [
+            'phone' => $request->phone
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 'active'])) {
-            $user = User::where('email', $request->email)->first();
+        if ($apiresponse->successful()) {
+            $data = $apiresponse->json();
+            $nestedData = $data['data'] ?? [];
 
-            Auth::loginUsingId($user->id);
+            // session([
+            //     'phone' => $request->phone,
+            //     'otp' => $nestedData['otp'] ?? null,
+            //     'isnew' => $nestedData['isNewUser'] ?? null,
+            // ]);
 
-            session(['user' => $user]);
-            session(['user_id' => $user->id]);
-
-            return redirect()->route('visitor.index');
+            return response()->json(['status' => true, 'otp' => $nestedData['otp']], 200);
+        } else {
+            return response()->json(['status' => false, 'message' => 'OTP sending failed'], 500);
         }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
     }
 
+    public function verifyotp(Request $request)
+    {
+        $apiurl = "https://vegi.psolution.in/api/verifyOtp";
+
+        $apiresponse = Http::post($apiurl, [
+            'phone' => $request->phone,
+            'otp' => $request->otp
+        ]);
+
+        if ($apiresponse->successful()) {
+            $data = $apiresponse->json();
+            if ($data['success'] == true) {
+                if ($data['data']['isNewUser'] == false) {
+                    $user = User::where('phone', $request->phone)->first();
+                    session(['user' => $user]);
+                    return response()->json(['success' => true], 200);
+                } else {
+                    // $user = user::all()->last();
+                    // $user = User::where('phone', $request->phone)->first();
+                    session(['newuser' => ['phone' => $request->phone]]);
+                    return response()->json(['success' => true, 'newuser' => true], 200);
+                }
+            } else {
+                return response()->json($data);
+            }
+        } else {
+            return response()->json(['status' => false, 'message' => 'OTP vreification failed'], 500);
+        }
+
+        // if ($request->phone == session('phone') && $request->otp == session('otp')) {
+        //     if (session('isnew') == true) {
+        //         return 'hyy';
+        //     } else {
+        //         $user = User::where('phone', $request->phone)->first();
+        //         session(['user' => $user]);
+        //         return response()->json(['success' => true], 200);
+        //     }
+        // } else {
+        //     return response()->json(['otpverificationsuccess' => false], 200);
+        // }
+    }
+
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+
+            $user = Socialite::driver('google')->user();
+            $finduser = User::where('google_id', $user->id)->first();
+
+            if ($finduser) {
+
+                session(['user' => $finduser]);
+
+                return redirect()->intended('/');
+            } else {
+                // $newUser = User::updateOrCreate(['email' => $user->email], [
+                //     'name' => $user->name,
+                //     'google_id' => $user->id,
+                //     'password' => encrypt('123456dummy')
+                // ]);
+                session(['newuser' => [
+                    'email' => $user->email,
+                    'name' => $user->name,
+                    'google_id' => $user->id,
+                ]]);
+                return redirect()->route('visitor.userregistrationindex');
+            }
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    public function userregistrationindex()
+    {
+
+        $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
+        $city = CityMaster::orderby('city_name_eng', 'asc')->get();
+        $landmark = LandmarkMaster::orderby('landmark_eng', 'asc')->get();
+
+        return view('visitor.userregistration', compact('category', 'city', 'landmark'));
+    }
+
+    public function userregistration(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'phonenumber' => 'required|numeric|digits:10|unique:users,phone',
+            'profilepicture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'addressline1' => 'required',
+            'addressline2' => 'required',
+            'pincode' => 'required|numeric|digits:6',
+            'city' => 'required',
+            'landmark' => 'required'
+        ], [
+            'phonenumber.required' => 'The mobile number field is required.',
+            'phonenumber.numeric' => 'The mobile number field must be a number.',
+            'phonenumber.digits' => 'The mobile number field must be 10 digits.',
+            'phonenumber.unique' => 'The mobile number has already been taken.',
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phonenumber;
+
+        $user->google_id = session('newuser')['google_id'] ?? null;
+        
+        if ($request->hasFile('profilepicture')) {
+            $image = $request->profilepicture;
+
+            $profilepic = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $user->pro_pic = $profilepic;
+
+            $image->move(public_path('user_profile/'), $profilepic);
+        }
+
+        $user->save();
+
+        $address = new ShippingAddress();
+        $address->user_id = $user->id;
+        $address->address_line1 = $request->addressline1;
+        $address->address_line2 = $request->addressline2;
+        $address->pincode = $request->pincode;
+        $address->landmark_id = $request->landmark;
+
+        $address->save();
+
+        session()->forget('user');
+        session(['user' => $user]);
+
+        return redirect()->route('visitor.index');
+    }
 
     public function visitorlogout()
     {
         session()->flush();
 
-        return redirect()->back();
+        return redirect()->route('visitor.index');
     }
 
     public function profile()
@@ -89,12 +231,13 @@ class VisitorController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
-            'phonenumber' => 'required|numeric|digits:10'
+            'email' => 'required|email|unique:users,email',
+            'phonenumber' => 'required|numeric|digits:10|unique:users,phone'
         ], [
             'phonenumber.required' => 'The mobile number field is required.',
             'phonenumber.numeric' => 'The mobile number field must be a number.',
             'phonenumber.digits' => 'The mobile number field must be 10 digits.',
+            'phonenumber.unique' => 'The mobile number has already been taken.',
         ]);
 
         $user = User::find($id);
@@ -129,9 +272,9 @@ class VisitorController extends Controller
     public function addaddress($id)
     {
         $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
-        $city = CityMaster::all();
-        $landmark = LandmarkMaster::all();
-        // return $landmark;
+        $city = CityMaster::orderby('city_name_eng', 'asc')->get();
+        $landmark = LandmarkMaster::orderby('landmark_eng', 'asc')->get();
+
         return view('visitor.addnewaddress', compact('category', 'city', 'landmark'));
     }
 
@@ -159,8 +302,8 @@ class VisitorController extends Controller
     {
         $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
         $address = ShippingAddress::with('landmark')->find($id);
-        $city = CityMaster::all();
-        $landmark = LandmarkMaster::all();
+        $city = CityMaster::orderby('city_name_eng', 'asc')->get();
+        $landmark = LandmarkMaster::orderby('landmark_eng', 'asc')->get();
 
         return view('visitor.editaddress', compact('category', 'address', 'city', 'landmark'));
     }

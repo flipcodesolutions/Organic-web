@@ -393,6 +393,22 @@
 
             <!-- This carousel is visible only on small screens (less than 768px) -->
             <div class="d-block d-md-none">
+                <div class="d-flex overflow-auto pb-3">
+                    @foreach ($topCategories as $catData)
+                        <a href="{{ route('home.category', $catData->id) }}" class="categorylink d-block me-3" style="min-width: 200px;">
+                            <div class="catcard card p-2">
+                                <img src="{{ asset($catData->cat_icon) }}" class="card-img-top"
+                                    style="height: 280px; object-fit: contain;" alt="Category">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title text-truncate">{{ $catData->categoryName }}</h5>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- <div class="d-block d-md-none">
                 <div id="categoryCarouselSm" class="carousel slide pb-3" data-bs-ride="false" data-bs-interval="false">
                     <div class="carousel-inner">
 
@@ -425,7 +441,7 @@
                         </button>
                     @endif
                 </div>
-            </div>
+            </div> --}}
 
 
 
@@ -598,7 +614,27 @@
         </style>
 
         {{-- Carousel for Small Screens --}}
-        <div id="productCarouselSm" class="carousel slide d-block d-md-none" data-bs-ride="false">
+        <div id="productCarouselSm" class="d-block d-md-none">
+            <div class="d-flex flex-nowrap overflow-auto">
+                @foreach ($product as $index => $productData)
+                    <div class="col-8 col-sm-6 col-md-4 col-lg-3 flex-shrink-0 mb-3">
+                        <a href="{{ route('home.product', $productData->id) }}" class="productlink d-block w-100 text-decoration-none">
+                            <div class="card h-100 d-flex me-3 flex-column justify-content-between">
+                                <img src="{{ asset($productData->productImages->first()->url) }}" class="card-img-top" alt="Product"
+                                    style="height: 280px; object-fit: contain;">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title text-truncate">{{ $productData->productName }}</h5>
+                                    <p class="mb-0">{{ $productData->productUnit->first()->unitMaster->unit }}</p>
+                                    <p class="mb-0">₹{{ $productData->productPrice }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- <div id="productCarouselSm" class="carousel slide d-block d-md-none" data-bs-ride="false">
             <div class="carousel-inner">
                 @foreach ($product as $index => $productData)
                     <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
@@ -633,7 +669,7 @@
                     <span class="carousel-control-next-icon"></span>
                 </button>
             @endif
-        </div>
+        </div> --}}
     </div>
 
 

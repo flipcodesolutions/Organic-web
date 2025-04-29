@@ -11,8 +11,16 @@ Route::controller(VisitorController::class)->group(function(){
 
     // user login / log out
     Route::get('visitor/loginindex','visitorlogin')->name('visitor.loginindex');
-    Route::post('visitor/login','visitorauthenticate')->name('visitor.login');
+    Route::post('visitor/sendotp','sendotp')->name('visitor.sendotp');
+    Route::post('visitor/verifyotp','verifyotp')->name('visitor.verifyotp');
     Route::get('visitor/logout','visitorlogout')->name('visitor.logout');
+
+    // user login with google
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('visitor/login', 'handleGoogleCallback');
+
+    Route::get('visitor/userregistrationindex','userregistrationindex')->name('visitor.userregistrationindex');
+    Route::post('visitor/userregistration','userregistration')->name('visitor.userregistration');
 
     // user profile
     Route::get('visitor/profile','profile')->name('visitor.profile');
