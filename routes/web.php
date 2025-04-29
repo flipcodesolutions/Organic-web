@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth'],'prefix' => 'admin'], function () {
     require __DIR__ . '/rahul.php';
     require __DIR__ . '/bhavana.php';
     require __DIR__ . '/hardik.php';
+    require __DIR__ . '/arit.php';
     // require __DIR__ . '/visitor.php';
 
     // Route::resource('roles', RoleController::class);
