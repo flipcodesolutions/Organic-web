@@ -60,14 +60,16 @@
                             <tr>
                                 <td>{{ $index++ }}</td>
                                 <td>{{ $unitmasters->unit }}</td>
-                                <td class="d-flex">
-                                    <a href="{{ Route('unitmaster.edit', $unitmasters->id) }}" class="edit btn">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" class="delete btn ml-2"
-                                        onclick="openDeactiveModal('{{ Route('unitmaster.delete', $unitmasters->id) }}')">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="{{ Route('unitmaster.edit', $unitmasters->id) }}" class="edit btn">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="delete btn ml-2"
+                                            onclick="openDeactiveModal('{{ Route('unitmaster.delete', $unitmasters->id) }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

@@ -2,15 +2,15 @@
 @section('header', 'Products')
 @section('content')
 
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <div class="col">
-        <h1 class="h3 mb-1 text-gray-800">Navigation Management</h1>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col">
+            <h1 class="h3 mb-1 text-gray-800">Navigation Management</h1>
+        </div>
+        <a class="b1 btn btn-danger mr-1 mb-1" href="{{ route('navigate.deactiveindex') }}">Deactivated Navigations</a>
+        <a class="btn btn-primary mb-1" href="{{ route('navigate.create') }}">Add</a>
     </div>
-    <a class="b1 btn btn-danger mr-1 mb-1" href="{{ route('navigate.deactiveindex') }}">Deactivated Navigations</a>
-    <a class="btn btn-primary mb-1" href="{{ route('navigate.create') }}">Add</a>
-</div>
 
-<div class="card-body p-0">
+    <div class="card-body p-0">
         <div class="card shadow-sm  bg-body rounded">
             {{-- <div class="card-header d-flex">
                 <div class="col text-white mt-2">
@@ -59,18 +59,20 @@
                                 <td>
                                     {{ $data->screenname }}
                                 </td>
-                                <td class="d-flex">
-                                    <a href="{{ route('navigate.edit') }}/{{ $data->id }}" class="edit btn">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" class="delete btn ml-2"
-                                        onclick="openDeactiveModal('{{ route('navigate.deactive') }}/{{ $data->id }}')">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                    {{-- <a href="{{ route('navigate.deactive') }}/{{ $data->id }}"
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="{{ route('navigate.edit') }}/{{ $data->id }}" class="edit btn">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="delete btn ml-2"
+                                            onclick="openDeactiveModal('{{ route('navigate.deactive') }}/{{ $data->id }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                        {{-- <a href="{{ route('navigate.deactive') }}/{{ $data->id }}"
                                         class="btn btn-danger">
                                         <i class="fas fa-remove"></i>
-                                    </a> --}}
+                                        </a> --}}
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

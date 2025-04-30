@@ -133,10 +133,7 @@
                                         <i class="fa fa-list-check mr-2"></i>
                                         <span>CMS Master</span></a>
 
-                                        <a class="collapse-item {{ request()->routeIs('crm_master.*') ? 'active' : '' }}"
-                                            href="{{ Route('crm-masters.index') }}">
-                                            <i class="fa fa-clipboard mr-2"></i>
-                                            <span>CRM Master</span></a>
+                                      
 
                                     {{-- point per --}}
                                     <a class="collapse-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}"

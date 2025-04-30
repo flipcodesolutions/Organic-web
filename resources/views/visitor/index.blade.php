@@ -318,7 +318,7 @@
             @endphp
 
             {{-- Carousel for large screens (4 items per slide) --}}
-            <div id="categoryCarouselLg" class="carousel slide d-none d-md-block" data-bs-ride="false"
+            <div id="categoryCarouselLg" class="carousel slide d-none d-md-block " data-bs-ride="false"
                 data-bs-interval="false">
                 {{-- <div id="categoryCarouselLg" class="carousel slide" data-bs-ride="false" data-bs-interval="false"> --}}
 
@@ -554,7 +554,7 @@
                 </div>
 
                 {{-- Carousel for Large Screens --}}
-                <div id="productCarouselLg" class="carousel slide d-none d-md-block" data-bs-ride="false">
+                <div id="productCarouselLg" class="carousel slide d-none d-md-block " data-bs-ride="false">
                     <div class="carousel-inner">
                         @php
                             $counter = 0;
