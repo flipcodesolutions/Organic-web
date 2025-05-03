@@ -1,41 +1,6 @@
 @extends('visitor.layouts.app')
 @section('content')
-<<<<<<< HEAD
-    <div class="container-fluid py-5 d-flex justify-content-center align-items-center"
-        style="background-color: blueviolet;">
-        <div class="card h-70  p-5" style="background-color: white;">
-            <form method="POST" action="{{ route('visitor.login') }}">
-                @csrf
-
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <span>
-                        @error('email')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </span>
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                    <span>
-                        @error('password')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </span>
-                    <a href=""><label for="">Forgot password</label></a>
-                </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit" class="btn btn-primary me-2 mt-3">Login</button>
-                <button type="signup" class="btn btn-primary mt-3">Sign up</button>
-            </form>
-=======
-    <div class="container-fluid d-flex justify-content-center align-items-center"
+    {{-- <div class="container-fluid d-flex justify-content-center align-items-center"
         style="background-color: blueviolet; height:638px">
         <div class="card h-70 w-50 p-5" style="background-color: white">
             <div class="loginwithmobile">
@@ -74,9 +39,52 @@
                     With
                     Google</button>
             </div>
->>>>>>> 60b1a22dbad6f193eea691ce562c8b0d3c6210b5
+        </div>
+    </div> --}}
+
+    <div class="container-fluid d-flex justify-content-center align-items-center" style="background-color: #6f42c1; height: 100vh;">
+        <div class="card shadow-lg rounded-5 p-4" style="background-color: white; max-width: 400px; width: 100%;">
+            <h2 class="text-center mb-4" style="color: #6f42c1;">Login With Mobile</h2>
+
+            <form>
+                <!-- Mobile number input -->
+                <div class="mb-4">
+                    {{-- <label for="phone" class="form-label text-muted">Mobile Number</label> --}}
+                    <input type="text" class="form-control" id="phone" name="phone" maxlength="10" placeholder="Enter your mobile number" style="border-radius: 20px;">
+                    <span class="text-danger" id="phoneError"></span>
+                </div>
+
+                <!-- Send OTP Button -->
+                <div class="d-flex justify-content-center mb-1">
+                    <button type="button" class="btn btn-primary w-100 rounded-pill" id="btnLogin" style="padding: 12px;">Send OTP</button>
+                    <button class="btn btn-primary w-100 rounded-pill mt-2" type="button" id="btnLogin2" disabled style="display: none; padding: 12px;">
+                        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                        <span role="status">Sending OTP...</span>
+                    </button>
+                </div>
+
+                <!-- OTP Verification -->
+                <div class="verifyotp mt-3" style="display: none;">
+                    {{-- <label for="otp" class="form-label text-muted">Enter OTP</label> --}}
+                    <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter OTP" style="border-radius: 20px;">
+                    <span class="text-danger" id="otpError"></span>
+
+                    <button type="button" class="btn btn-success w-100 rounded-pill mt-4" id="verifyotp">Verify OTP</button>
+                </div>
+            </form>
+
+            <!-- Google Login -->
+            <div class="loginwithgmail mt-4">
+                <hr class="sidebar-divider">
+                <button class="btn btn-danger w-100 rounded-pill" id="loginwithgoogle" style="padding: 12px;">
+                    <img src="{{ asset('visitor/images/google-icon.jpg') }}" class="me-2" style="height: 20px;">
+                    Login with Google
+                </button>
+            </div>
         </div>
     </div>
+
+
 @endsection
 
 @section('scripts')

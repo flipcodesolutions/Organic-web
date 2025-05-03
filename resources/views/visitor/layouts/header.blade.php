@@ -123,7 +123,7 @@
 
     </div> --}}
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    {{-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <div class="col-lg-2 col-md-10 col-sm-11">
                 <a class="navbar-brand " href="{{ route('visitor.index') }}">
@@ -135,14 +135,24 @@
             <div class="col-6 d-none d-lg-block">
                 <div class="search-bar row bg-light p-2 rounded-4">
                     <div class="col-md-4 d-none d-md-block">
+                        <select id="categorySelect" class="form-select border-0 bg-transparent">
+                            <option value="">All Categories</option>
+                            @foreach ($category as $allCategoryData)
+                                <option value="{{ url('category/' . $allCategoryData->id) }}">
+                                    {{ $allCategoryData->categoryName }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+                    {{-- <div class="col-md-4 d-none d-md-block">
                         <select class="form-select border-0 bg-transparent">
                             <option>All Categories</option>
                             @foreach ($category as $allCategoryData)
                                 <option><a href="">{{ $allCategoryData->categoryName }}</a></option>
                             @endforeach
                         </select>
-                    </div>
-                    <div class="col-11 col-md-7">
+                    </div> --}}
+                    {{-- <div class="col-11 col-md-7">
                         <form id="search-form" class="text-center" action="index.html" method="post">
                             <input type="text" class="form-control border-0 bg-transparent"
                                 placeholder="Search for more than 20,000 products">
@@ -202,16 +212,16 @@
                                         class="fas fa-sign-out-alt fa-sm fa-fw text-gray-400 me-2"></i>
                                     Log out</a></li>
                         @else
-                            <li><a class="dropdown-item" href="{{ route('visitor.loginindex') }}">Log in</a></li>
+                            <li><a class="dropdown-item" href="{{ route('visitor.loginindex') }}">Log in</a></li> --}}
                             {{-- <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#authModal">Login</a>
                             </li> --}}
-                            <li><a class="dropdown-item" href="">Sign Up</a></li>
-                        @endif
+                            {{-- <li><a class="dropdown-item" href="">Sign Up</a></li> --}}
+                        {{-- @endif
 
                     </ul>
-                </div>
+                </div> --}}
 
-                <div class="col-4 py-3">
+                {{-- <div class="col-4 py-3">
                     <a @if (session()->has('user')) href="{{ route('home.orderindex') }}" @else href="{{ route('visitor.loginindex') }}" @endif
                         class="btn btn-success d-flex w-auto justify-content-between align-items-center py-2">
                         <i class="fa-solid fa-receipt text-body-secondary fa-lg"></i> your orders
@@ -226,11 +236,11 @@
                         <h6>cart</h6>
                     </a>
                 </div>
-            </div>
+            </div> --}}
 
 
             {{-- for small screen  --}}
-            <div class="d-block d-lg-none">
+            {{-- <div class="d-block d-lg-none">
                 <button class="btn rounded-circle border-0 p-0" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
                     <div class="userimage">
@@ -313,6 +323,89 @@
                 </div>
             </div>
         </div>
+    </nav> --}}
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top py-3">
+        <div class="container-fluid">
+            {{-- Logo --}}
+            <a class="navbar-brand d-flex align-items-center" href="{{ route('visitor.index') }}">
+                <img src="{{ asset('visitor/images/logo.svg') }}" alt="logo" width="80">
+            </a>
+
+            {{-- Toggler for small devices --}}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            {{-- Navbar Content --}}
+            <div class="collapse navbar-collapse" id="navbarContent">
+                {{-- Search Bar --}}
+                <form class="d-flex flex-wrap flex-lg-nowrap align-items-center w-100 my-2 my-lg-0 gap-2">
+                    <select class="form-select" style="max-width: 200px;">
+                        <option value="">All Categories</option>
+                        @foreach ($category as $cat)
+                            <option value="{{ url('category/' . $cat->id) }}">{{ $cat->categoryName }}</option>
+                        @endforeach
+                    </select>
+                    <input type="text" class="form-control" placeholder="Search for 20,000+ products">
+                    <button class="btn btn-outline-secondary">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+
+                {{-- User, Orders, Cart --}}
+                <ul class="navbar-nav ms-auto align-items-center gap-2 mt-3 mt-lg-0">
+                    {{-- User Dropdown --}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+                            <img src="{{ asset(session('user') ? 'user_profile/' . session('user')->pro_pic : 'user_profile/1741682175_67cff5ff1ede5.png') }}"
+                                 alt="User" class="rounded-circle" width="40" height="40">
+                            <span class="ms-2">
+                                Hello, <strong>{{ session('user')->name ?? 'Sign in' }}</strong>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            @if (session()->has('user'))
+                                <li><a class="dropdown-item" href="{{ route('visitor.profile') }}"><i class="fa fa-user me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="{{ route('visitor.addressindex') }}"><i class="fa fa-map-marker-alt me-2"></i>Address</a></li>
+                                <li><a class="dropdown-item" href="{{ route('visitor.logout') }}"><i class="fa fa-sign-out-alt me-2"></i>Logout</a></li>
+                            @else
+                                <li><a class="dropdown-item" href="{{ route('visitor.loginindex') }}">Log in</a></li>
+                                <li><a class="dropdown-item" href="#">Sign Up</a></li>
+                            @endif
+                        </ul>
+                    </li>
+
+                    {{-- Orders --}}
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary" @if(session('user')) href="{{ route('home.orderindex') }}" @else href="{{ route('visitor.loginindex') }}" @endif>
+                            <i class="fa fa-box me-1"></i> Orders
+                        </a>
+                    </li>
+
+                    {{-- Cart --}}
+                    <li class="nav-item">
+                        <a class="btn btn-primary" @if(session('user')) href="{{ route('home.cart') }}" @else href="{{ route('visitor.loginindex') }}" @endif>
+                            <i class="fa fa-shopping-cart me-2"></i> Cart
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
+
+
+
+
+    <script>
+        document.getElementById('categorySelect').addEventListener('change', function () {
+            var selectedValue = this.value;
+            if (selectedValue) {
+                window.location.href = selectedValue;
+            }
+        });
+    </script>
 </header>

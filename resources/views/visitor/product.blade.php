@@ -83,7 +83,8 @@
                                     -
                                 </button>
                                 <!-- Quantity Display -->
-                                <input type="text" class="form-control form-control-sm text-center" id="quantity" value="1" readonly aria-label="Quantity" aria-describedby="quantity">
+                                <input type="text" class="form-control form-control-sm text-center" id="quantity"
+                                    value="1" readonly aria-label="Quantity" aria-describedby="quantity">
                                 <!-- Increment Button -->
                                 <button class="btn btn-outline-secondary" type="button" onclick="incrementquentity()"
                                     id="increment-btn">
@@ -99,7 +100,7 @@
                         <button class="btn btn-primary" type="submit" id="addtocart"
                             style="padding: 10px 20px; font-size: 1rem; margin-right: 10px;">Add
                             to Cart</button>
-                        <button class="btn btn-success" {{ session()->has('user') ? '' : 'disabled' }}
+                        <button class="btn btn-success" id="buynow" {{ session()->has('user') ? '' : 'disabled' }}
                             style="padding: 10px 20px; font-size: 1rem;">Buy Now</button>
                     </div>
                 </div>
@@ -125,8 +126,8 @@
                             <div class="col-1    d-flex align-items-center text-end ">
                                 {{-- <p>{{ $reviewData->star }} <span ><img src="{{ asset('visitor/images/star.svg') }}"
                                             alt=""></span> </p> --}}
-                                            <span class="me-1 text-end">{{ $reviewData->star }}</span>
-                                            <img class="text-end" src="{{ asset('visitor/images/star.svg') }}" alt="">
+                                <span class="me-1 text-end">{{ $reviewData->star }}</span>
+                                <img class="text-end" src="{{ asset('visitor/images/star.svg') }}" alt="">
                             </div>
                         </div>
 
@@ -144,63 +145,74 @@
         </div>
 
         {{-- similar Products --}}
-        <div class="row">
+        @php
+            $filteredSimilarProducts = isset($similarproduct)
+                ? $similarproduct->where('id', '!=', request()->route('id'))
+                : collect();
+        @endphp
+        @if ($filteredSimilarProducts->isNotEmpty())
             <div class="row">
-                <div class="col-11">
-                    <h3>Similar Products</h3>
-                </div>
-                {{-- <div class="col">
+                <div class="row">
+
+                    <div class="col-11">
+                        <h3>Similar Products</h3>
+                    </div>
+                    {{-- <div class="col">
                     <a href="">view all</a>
                 </div> --}}
-            </div>
-
-            <div class="row justify-content-center text-center">
-                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        @php
-                            // Group products in chunks of 2 for tablets
-                            $filtered = $similarproduct->where('id', '!=', request()->route('id'));
-                            $chunkedProducts = $filtered->chunk(2); // 2 per slide for tablets
-                        @endphp
-
-                        @foreach ($chunkedProducts as $chunkIndex => $productChunk)
-                            <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
-                                <div class="row">
-                                    @foreach ($productChunk as $productData)
-                                        <div class="col-12 col-md-6 col-lg-3 mb-3">
-                                            <a href="{{ route('home.product') }}/{{ $productData->id }}" class="productlink">
-                                                <div class="card p-2">
-                                                    <img src="{{ asset($productData->productImages->first()->url) }}"
-                                                         class="card-img-top" alt="..." height="180">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">{{ $productData->productName }}</h5>
-                                                        <p>{{ $productData->productUnit->first()->unitMaster->unit }}</p>
-                                                        <p>₹{{ $productData->productPrice }}</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-
-                    <button class="product-carousel-control-prev carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="product-carousel-control-next carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
-            </div>
+
+                <div class="row justify-content-center text-center">
+                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @php
+                                // Group products in chunks of 2 for tablets
+                                $filtered = $similarproduct->where('id', '!=', request()->route('id'));
+                                $chunkedProducts = $filtered->chunk(2); // 2 per slide for tablets
+                            @endphp
+
+                            @foreach ($chunkedProducts as $chunkIndex => $productChunk)
+                                <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
+                                    <div class="row">
+                                        @foreach ($productChunk as $productData)
+                                            <div class="col-12 col-md-6 col-lg-3 mb-3">
+                                                <a href="{{ route('home.product') }}/{{ $productData->id }}"
+                                                    class="productlink">
+                                                    <div class="card p-2">
+                                                        <img src="{{ asset($productData->productImages->first()->url) }}"
+                                                            class="card-img-top" alt="..." height="180">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{{ $productData->productName }}</h5>
+                                                            <p>{{ $productData->productUnit->first()->unitMaster->unit }}
+                                                            </p>
+                                                            <p>₹{{ $productData->productPrice }}</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <button class="product-carousel-control-prev carousel-control-prev" type="button"
+                            data-bs-target="#productCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="product-carousel-control-next carousel-control-next" type="button"
+                            data-bs-target="#productCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
 
 
 
 
-            {{-- <div class="row" style="justify-content: space-around; text-align: center;">
+                {{-- <div class="row" style="justify-content: space-around; text-align: center;">
                 <div id="productCarousel" class="productCarousel carousel">
                     <div class="product-carousel-inner">
                         @foreach ($similarproduct as $productData)
@@ -236,7 +248,8 @@
             </div> --}}
 
 
-        </div>
+            </div>
+        @endif
     </div>
 @endsection
 

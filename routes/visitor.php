@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(VisitorController::class)->group(function(){
 
     // home page
-    Route::get('/','index')->name('visitor.index'); 
+    Route::get('/','index')->name('visitor.index');
 
     // user login / log out
     Route::get('visitor/loginindex','visitorlogin')->name('visitor.loginindex');

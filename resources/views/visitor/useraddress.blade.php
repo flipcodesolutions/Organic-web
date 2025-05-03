@@ -2,7 +2,47 @@
 @section('content')
     <div class="container">
         <h3 class="m-3">Your Address</h3>
-        <div class="address-card d-flex flex-wrap align-items-stretch">
+
+
+        <div class="row g-3">
+            <!-- Add Address Card -->
+            <div class="col-12 col-sm-6 col-lg-4">
+                <a class="text-decoration-none" href="{{ route('visitor.addaddress') }}/{{ session('user')->id }}">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column justify-content-center text-center">
+                            <i class="fa-solid fa-square-plus fs-1 text-body-secondary mb-2"></i>
+                            <span>Add Address</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Address Cards -->
+            @foreach ($address as $addressData)
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <p class="m-0 fw-bold">{{ session('user')->name }}</p>
+                                <p class="m-0">{{ $addressData->address_line1 }}</p>
+                                <p class="m-0">{{ $addressData->address_line2 }}</p>
+                                <p class="m-0">{{ $addressData->landmark->landmark_eng }} | {{ $addressData->landmark->citymaster->area_eng }}</p>
+                                <p class="m-0">{{ $addressData->landmark->citymaster->city_name_eng }}</p>
+                                <p class="m-0">{{ $addressData->pincode }}</p>
+                            </div>
+                            <div class="mt-3">
+                                <a href="{{ route('visitor.editaddress') }}/{{ $addressData->id }}">Edit</a> |
+                                <a href="{{ route('visitor.deleteaddress') }}/{{ $addressData->id }}"  onclick="return confirm('Are you sure you want to delete this address?');">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+
+
+        {{-- <div class="address-card d-flex flex-wrap align-items-stretch">
             <a class="col-sm-12 col-md-6 col-lg-4 px-3 text-decoration-none my-2" href="{{ route('visitor.addaddress') }}/{{ session('user')->id }}">
                 <div class="card h-100" style="min-width: 262px">
                     <div class="card-body d-flex flex-column justify-content-center">
@@ -36,6 +76,6 @@
                     </div>
                 </div>
             @endforeach
-        </div>
+        </div> --}}
     </div>
 @endsection

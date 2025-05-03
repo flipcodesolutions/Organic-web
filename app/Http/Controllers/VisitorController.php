@@ -180,8 +180,8 @@ class VisitorController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phonenumber;
 
-        $user->google_id = session('newuser')['google_id'] ?? null;
-        
+        // $user->google_id = session('newuser')['google_id'] ?? null;
+
         if ($request->hasFile('profilepicture')) {
             $image = $request->profilepicture;
 
@@ -446,6 +446,10 @@ class VisitorController extends Controller
 
         $address = ShippingAddress::with('landmark.citymaster')->find($request->addressId);
 
+        if (!$address || !$address->landmark || !$address->landmark->citymaster) {
+            return back()->withErrors(['message' => 'Invalid or incomplete shipping address.']);
+        }
+        
         $order->addressLine1 = $address->address_line1;
         $order->addressLine2 = $address->address_line2;
         $order->landmark = $address->landmark->landmark_eng;
