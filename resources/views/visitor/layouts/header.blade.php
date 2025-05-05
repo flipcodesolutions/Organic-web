@@ -327,7 +327,7 @@
 
 
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top py-3">
+    <nav class="me-2 navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top py-3">
         <div class="container-fluid">
             {{-- Logo --}}
             <a class="navbar-brand d-flex align-items-center" href="{{ route('visitor.index') }}">
@@ -343,16 +343,18 @@
             <div class="collapse navbar-collapse" id="navbarContent">
                 {{-- Search Bar --}}
                 <form class="d-flex flex-wrap flex-lg-nowrap align-items-center w-100 my-2 my-lg-0 gap-2">
-                    <select class="form-select" style="max-width: 200px;">
+                    <select class="form-select" id="categorySelect" style="max-width: 200px;">
                         <option value="">All Categories</option>
                         @foreach ($category as $cat)
                             <option value="{{ url('category/' . $cat->id) }}">{{ $cat->categoryName }}</option>
                         @endforeach
                     </select>
-                    <input type="text" class="form-control" placeholder="Search for 20,000+ products">
-                    <button class="btn btn-outline-secondary">
-                        <i class="fa fa-search"></i>
-                    </button>
+                    <div class="d-flex">
+                        <input type="text" class="form-control w-auto" placeholder="Search for 20,000+ products">
+                        <button class="btn btn-outline-secondary ms-2">
+                          <i class="fa fa-search"></i>
+                        </button>
+                      </div>
                 </form>
 
                 {{-- User, Orders, Cart --}}
@@ -363,7 +365,7 @@
                             <img src="{{ asset(session('user') ? 'user_profile/' . session('user')->pro_pic : 'user_profile/1741682175_67cff5ff1ede5.png') }}"
                                  alt="User" class="rounded-circle" width="40" height="40">
                             <span class="ms-2">
-                                Hello, <strong>{{ session('user')->name ?? 'Sign in' }}</strong>
+                                 <strong>{{ session('user')->name ?? 'Sign in' }}</strong>
                             </span>
                         </a>
                         <ul class="dropdown-menu">
@@ -373,21 +375,21 @@
                                 <li><a class="dropdown-item" href="{{ route('visitor.logout') }}"><i class="fa fa-sign-out-alt me-2"></i>Logout</a></li>
                             @else
                                 <li><a class="dropdown-item" href="{{ route('visitor.loginindex') }}">Log in</a></li>
-                                <li><a class="dropdown-item" href="#">Sign Up</a></li>
+                                {{-- <li><a class="dropdown-item" href="#">Sign Up</a></li> --}}
                             @endif
                         </ul>
                     </li>
 
                     {{-- Orders --}}
                     <li class="nav-item">
-                        <a class="btn btn-outline-primary" @if(session('user')) href="{{ route('home.orderindex') }}" @else href="{{ route('visitor.loginindex') }}" @endif>
+                        <a class="btn " @if(session('user')) href="{{ route('home.orderindex') }}" @else href="{{ route('visitor.loginindex') }}" @endif>
                             <i class="fa fa-box me-1"></i> Orders
                         </a>
                     </li>
 
                     {{-- Cart --}}
                     <li class="nav-item">
-                        <a class="btn btn-primary" @if(session('user')) href="{{ route('home.cart') }}" @else href="{{ route('visitor.loginindex') }}" @endif>
+                        <a class="btn" @if(session('user')) href="{{ route('home.cart') }}" @else href="{{ route('visitor.loginindex') }}" @endif>
                             <i class="fa fa-shopping-cart me-2"></i> Cart
                         </a>
                     </li>

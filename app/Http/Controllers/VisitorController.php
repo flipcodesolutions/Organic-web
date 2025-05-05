@@ -449,7 +449,7 @@ class VisitorController extends Controller
         if (!$address || !$address->landmark || !$address->landmark->citymaster) {
             return back()->withErrors(['message' => 'Invalid or incomplete shipping address.']);
         }
-        
+
         $order->addressLine1 = $address->address_line1;
         $order->addressLine2 = $address->address_line2;
         $order->landmark = $address->landmark->landmark_eng;
@@ -501,6 +501,13 @@ class VisitorController extends Controller
 
     public function productreview(Request $request)
     {
+        $request->validate([
+            'productId' => 'required|exists:products,id',
+            'userId' => 'required|exists:users,id',
+            'review' => 'required|string',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+        
         $review = new Review();
         $review->product_id = $request->productId;
         $review->user_id = $request->userId;

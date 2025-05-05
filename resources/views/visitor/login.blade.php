@@ -42,45 +42,110 @@
         </div>
     </div> --}}
 
-    <div class="container-fluid d-flex justify-content-center align-items-center" style="background-color: #6f42c1; height: 100vh;">
+    {{-- <div class="container-fluid d-flex justify-content-center align-items-center" style="background-color: #6f42c1; height: 100vh;">
         <div class="card shadow-lg rounded-5 p-4" style="background-color: white; max-width: 400px; width: 100%;">
-            <h2 class="text-center mb-4" style="color: #6f42c1;">Login With Mobile</h2>
+            <h2 class="text-center mb-4" style="color: #6f42c1;">Login</h2>
 
-            <form>
+            <form> --}}
                 <!-- Mobile number input -->
-                <div class="mb-4">
+                {{-- <div class="mb-4"> --}}
                     {{-- <label for="phone" class="form-label text-muted">Mobile Number</label> --}}
-                    <input type="text" class="form-control" id="phone" name="phone" maxlength="10" placeholder="Enter your mobile number" style="border-radius: 20px;">
+                    {{-- <input type="text" class="form-control" id="phone" name="phone" maxlength="10" placeholder="Enter your mobile number" style="border-radius: 20px;">
                     <span class="text-danger" id="phoneError"></span>
-                </div>
+                </div> --}}
 
                 <!-- Send OTP Button -->
-                <div class="d-flex justify-content-center mb-1">
+                {{-- <div class="d-flex justify-content-center mb-1">
                     <button type="button" class="btn btn-primary w-100 rounded-pill" id="btnLogin" style="padding: 12px;">Send OTP</button>
                     <button class="btn btn-primary w-100 rounded-pill mt-2" type="button" id="btnLogin2" disabled style="display: none; padding: 12px;">
                         <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
                         <span role="status">Sending OTP...</span>
                     </button>
-                </div>
+                </div> --}}
 
                 <!-- OTP Verification -->
-                <div class="verifyotp mt-3" style="display: none;">
+                {{-- <div class="verifyotp mt-3" style="display: none;"> --}}
                     {{-- <label for="otp" class="form-label text-muted">Enter OTP</label> --}}
-                    <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter OTP" style="border-radius: 20px;">
+                    {{-- <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter OTP" style="border-radius: 20px;">
                     <span class="text-danger" id="otpError"></span>
 
                     <button type="button" class="btn btn-success w-100 rounded-pill mt-4" id="verifyotp">Verify OTP</button>
                 </div>
-            </form>
+            </form> --}}
 
             <!-- Google Login -->
-            <div class="loginwithgmail mt-4">
+            {{-- <div class="loginwithgmail mt-4">
                 <hr class="sidebar-divider">
-                <button class="btn btn-danger w-100 rounded-pill" id="loginwithgoogle" style="padding: 12px;">
+                <button class="btn w-100 rounded-pill" id="loginwithgoogle" style="padding: 12px;">
                     <img src="{{ asset('visitor/images/google-icon.jpg') }}" class="me-2" style="height: 20px;">
                     Login with Google
                 </button>
             </div>
+        </div>
+    </div> --}}
+
+
+
+
+
+
+
+    <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center" style="background: url('{{ asset('visitor/images/background.avif') }}')">
+        <div class="row shadow rounded-4 overflow-hidden w-100" style="max-width: 960px; background-color:white">
+
+          <!-- Left side: Login form -->
+          <div class="col-lg-6 col-md-12 p-5">
+            <!-- Header Navigation -->
+
+
+            <!-- Login Tabs -->
+            <div class="mb-4 text-center">
+              <h4 class="fw-bold d-inline border-bottom border-3 border-info pb-1 me-4 text-info">Login</h4>
+            </div>
+
+            <!-- Form Starts -->
+            <form>
+              <!-- Mobile number input -->
+              <div class="mb-4">
+                <input type="text" class="form-control rounded-pill" id="phone" name="phone" maxlength="10" placeholder="Enter your mobile number">
+                <span class="text-danger" id="phoneError"></span>
+              </div>
+
+
+
+
+              <!-- Send OTP Button -->
+              <div class="d-flex flex-column">
+                <button type="button" class="btn btn-success w-100 rounded-pill mb-2" id="btnLogin" style="padding: 12px;">Login</button>
+                <button class="btn btn-success w-100 rounded-pill mt-2" type="button" id="btnLogin2" disabled style="display: none; padding: 12px;">
+                  <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                  <span role="status">Sending OTP...</span>
+                </button>
+              </div>
+
+              <!-- OTP Verification -->
+              <div class="verifyotp mt-3" style="display: none;">
+                <input type="text" class="form-control rounded-pill mb-3" id="otp" name="otp" placeholder="Enter OTP">
+                <span class="text-danger" id="otpError"></span>
+                <button type="button" class="btn btn-info w-100 rounded-pill" id="verifyotp">Verify OTP</button>
+              </div>
+            </form>
+
+            <!-- Google Login -->
+            <div class="mt-4">
+              <hr>
+              <button class="btn btn-outline-dark w-100 rounded-pill d-flex align-items-center justify-content-center" id="loginwithgoogle" style="padding: 12px;">
+                <img src="{{ asset('visitor/images/google-icon.jpg') }}" class="me-2" style="height: 20px;">
+                Login with Google
+              </button>
+            </div>
+          </div>
+
+          <!-- Right side: Illustration -->
+          <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center bg-info bg-gradient">
+            <img src="{{ asset('visitor/images/login.jpg') }}" alt="Illustration" class="img-fluid p-4" style="max-height: 350px;">
+          </div>
+
         </div>
     </div>
 
