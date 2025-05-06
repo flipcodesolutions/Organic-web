@@ -97,7 +97,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // try { 
+        // try {
         // return $request;
         $product = new Product();
         $product->productName = $request->product_name;
@@ -538,7 +538,7 @@ class ProductController extends Controller
         return view('admin.product.deactiveproduct', compact('data', 'categories', 'childcat', 'brands'));
         // $products = Product::where('status', 'deactive')->with(['categories', 'productImages', 'productUnit.unitMaster'])->paginate(10);
         // return $products;
-        return view('admin.product.deactiveproduct', compact('products'));
+        // return view('admin.product.deactiveproduct', compact('products'));
         // } catch (\Exception $e) {
 
         //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');

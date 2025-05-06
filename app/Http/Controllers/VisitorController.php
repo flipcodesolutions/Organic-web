@@ -357,6 +357,7 @@ class VisitorController extends Controller
     public function product($id)
     {
         $category = Category::where('status', 'active')->orderby('categoryName', 'asc')->get();
+
         $product = Product::with('productUnit.unitMaster', 'productImages', 'reviews.user')->find($id);
         $similarproduct = Product::where([['status', '=', 'active'], ['categoryId', '=', $product->categoryId]])->get();
         return view('visitor.product', compact('product', 'category', 'similarproduct'));
@@ -507,7 +508,7 @@ class VisitorController extends Controller
             'review' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
         ]);
-        
+
         $review = new Review();
         $review->product_id = $request->productId;
         $review->user_id = $request->userId;
@@ -517,4 +518,5 @@ class VisitorController extends Controller
 
         return redirect()->back();
     }
+
 }

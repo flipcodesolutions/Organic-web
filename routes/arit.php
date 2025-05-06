@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Crm_MasterController;
+use App\Http\Controllers\ViewAllController;
 use Illuminate\Support\Facades\Route;
 
 // Route::controller(Crm_MasterController::class)->group(function(){
@@ -13,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 //     Route::delete('crm-master/delete/{crmMaster}', 'destroy')->name('crm-masters.destroy');
 
 // });
+// Route::get('visitor/view-all', [ViewAllController::class, 'viewall'])->name('view.all');

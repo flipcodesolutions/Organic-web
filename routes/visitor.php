@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\ViewAllController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(VisitorController::class)->group(function(){
@@ -52,8 +54,11 @@ Route::controller(VisitorController::class)->group(function(){
 
     // order detail page
     Route::post('productreview','productreview')->name('home.productreview');
+
 });
 
 // for download invoice pdf
 Route::get('invoicepdf/{id?}',[PdfController::class,'invoicePDF'])->name('home.invoice');
+Route::get('visitor/view-all', [ViewAllController::class, 'viewall'])->name('view.all');
+Route::get('/search', [SearchController::class, 'serach'])->name('search');
 ?>

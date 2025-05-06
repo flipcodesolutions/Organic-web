@@ -144,7 +144,7 @@
                             @endforeach
                         </select>
                     </div> --}}
-                    {{-- <div class="col-md-4 d-none d-md-block">
+    {{-- <div class="col-md-4 d-none d-md-block">
                         <select class="form-select border-0 bg-transparent">
                             <option>All Categories</option>
                             @foreach ($category as $allCategoryData)
@@ -152,7 +152,7 @@
                             @endforeach
                         </select>
                     </div> --}}
-                    {{-- <div class="col-11 col-md-7">
+    {{-- <div class="col-11 col-md-7">
                         <form id="search-form" class="text-center" action="index.html" method="post">
                             <input type="text" class="form-control border-0 bg-transparent"
                                 placeholder="Search for more than 20,000 products">
@@ -213,15 +213,15 @@
                                     Log out</a></li>
                         @else
                             <li><a class="dropdown-item" href="{{ route('visitor.loginindex') }}">Log in</a></li> --}}
-                            {{-- <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#authModal">Login</a>
+    {{-- <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#authModal">Login</a>
                             </li> --}}
-                            {{-- <li><a class="dropdown-item" href="">Sign Up</a></li> --}}
-                        {{-- @endif
+    {{-- <li><a class="dropdown-item" href="">Sign Up</a></li> --}}
+    {{-- @endif
 
                     </ul>
                 </div> --}}
 
-                {{-- <div class="col-4 py-3">
+    {{-- <div class="col-4 py-3">
                     <a @if (session()->has('user')) href="{{ route('home.orderindex') }}" @else href="{{ route('visitor.loginindex') }}" @endif
                         class="btn btn-success d-flex w-auto justify-content-between align-items-center py-2">
                         <i class="fa-solid fa-receipt text-body-secondary fa-lg"></i> your orders
@@ -239,8 +239,8 @@
             </div> --}}
 
 
-            {{-- for small screen  --}}
-            {{-- <div class="d-block d-lg-none">
+    {{-- for small screen  --}}
+    {{-- <div class="d-block d-lg-none">
                 <button class="btn rounded-circle border-0 p-0" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
                     <div class="userimage">
@@ -349,30 +349,58 @@
                             <option value="{{ url('category/' . $cat->id) }}">{{ $cat->categoryName }}</option>
                         @endforeach
                     </select>
-                    <div class="d-flex">
+                    <div class="position-relative w-100" style="max-width: 400px;">
+                        <div class="d-flex">
+                         <input type="text" id="searchInput" onkeyup="filterFunction()" class="form-control"
+                            placeholder="Search Product..." value="{{ request('searchInput') ?? old('searchInput') }}"
+                            autocomplete="off">
+                            <button class="btn btn-outline-secondary ms-2">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                        <!-- Dropdown List -->
+                        <div id="myDropdown" class="dropdown-content position-absolute w-100 p-0 shadow-sm"
+                            style="max-height: 200px; overflow-y: auto; display: none; background-color: #fff; z-index: 1000;">
+                            <a href="#" class="dropdown-item disabled">Select Product</a>
+                            {{-- @foreach ($product as $productData)
+                                <a href="{{ route('home.product', ['id' => $productData->id]) }}" class="dropdown-item"
+                                    data-value="{{ $productData->id }}">
+                                    {{ $productData->productName }}
+                                </a>
+                            @endforeach --}}
+
+
+                        </div>
+                    </div>
+
+                    {{-- <div class="d-flex">
                         <input type="text" class="form-control w-auto" placeholder="Search for 20,000+ products">
                         <button class="btn btn-outline-secondary ms-2">
-                          <i class="fa fa-search"></i>
+                            <i class="fa fa-search"></i>
                         </button>
-                      </div>
+                    </div> --}}
                 </form>
 
                 {{-- User, Orders, Cart --}}
                 <ul class="navbar-nav ms-auto align-items-center gap-2 mt-3 mt-lg-0">
                     {{-- User Dropdown --}}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
-                            <img src="{{ asset(session('user') ? 'user_profile/' . session('user')->pro_pic : 'user_profile/1741682175_67cff5ff1ede5.png') }}"
-                                 alt="User" class="rounded-circle" width="40" height="40">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
+                            data-bs-toggle="dropdown">
+                            <img src="{{ asset(session('user') ? 'user_profile/' . session('user')->pro_pic : 'user_profile/CustomerImage.jpeg') }}"
+                                alt="User" class="rounded-circle" width="40" height="40">
                             <span class="ms-2">
-                                 <strong>{{ session('user')->name ?? 'Sign in' }}</strong>
+                                <strong>{{ session('user')->name ?? 'Sign in' }}</strong>
                             </span>
                         </a>
                         <ul class="dropdown-menu">
                             @if (session()->has('user'))
-                                <li><a class="dropdown-item" href="{{ route('visitor.profile') }}"><i class="fa fa-user me-2"></i>Profile</a></li>
-                                <li><a class="dropdown-item" href="{{ route('visitor.addressindex') }}"><i class="fa fa-map-marker-alt me-2"></i>Address</a></li>
-                                <li><a class="dropdown-item" href="{{ route('visitor.logout') }}"><i class="fa fa-sign-out-alt me-2"></i>Logout</a></li>
+                                <li><a class="dropdown-item" href="{{ route('visitor.profile') }}"><i
+                                            class="fa fa-user me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="{{ route('visitor.addressindex') }}"><i
+                                            class="fa fa-map-marker-alt me-2"></i>Address</a></li>
+                                <li><a class="dropdown-item" href="{{ route('visitor.logout') }}"><i
+                                            class="fa fa-sign-out-alt me-2"></i>Logout</a></li>
                             @else
                                 <li><a class="dropdown-item" href="{{ route('visitor.loginindex') }}">Log in</a></li>
                                 {{-- <li><a class="dropdown-item" href="#">Sign Up</a></li> --}}
@@ -382,14 +410,16 @@
 
                     {{-- Orders --}}
                     <li class="nav-item">
-                        <a class="btn " @if(session('user')) href="{{ route('home.orderindex') }}" @else href="{{ route('visitor.loginindex') }}" @endif>
+                        <a class="btn "
+                            @if (session('user')) href="{{ route('home.orderindex') }}" @else href="{{ route('visitor.loginindex') }}" @endif>
                             <i class="fa fa-box me-1"></i> Orders
                         </a>
                     </li>
 
                     {{-- Cart --}}
                     <li class="nav-item">
-                        <a class="btn" @if(session('user')) href="{{ route('home.cart') }}" @else href="{{ route('visitor.loginindex') }}" @endif>
+                        <a class="btn"
+                            @if (session('user')) href="{{ route('home.cart') }}" @else href="{{ route('visitor.loginindex') }}" @endif>
                             <i class="fa fa-shopping-cart me-2"></i> Cart
                         </a>
                     </li>
@@ -403,10 +433,46 @@
 
 
     <script>
-        document.getElementById('categorySelect').addEventListener('change', function () {
+        document.getElementById('categorySelect').addEventListener('change', function() {
             var selectedValue = this.value;
             if (selectedValue) {
                 window.location.href = selectedValue;
+            }
+        });
+
+
+
+
+
+
+
+
+
+        function filterFunction() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toUpperCase();
+            const dropdown = document.getElementById("myDropdown");
+            const items = dropdown.getElementsByTagName("a");
+
+            // Show dropdown if input is not empty
+            dropdown.style.display = filter ? "block" : "none";
+
+            for (let i = 0; i < items.length; i++) {
+                const txtValue = items[i].textContent || items[i].innerText;
+                if (txtValue.toUpperCase().includes(filter)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        // Optional: hide dropdown when clicking outside
+        document.addEventListener("click", function(e) {
+            const input = document.getElementById("searchInput");
+            const dropdown = document.getElementById("myDropdown");
+            if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.style.display = "none";
             }
         });
     </script>

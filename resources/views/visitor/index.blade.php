@@ -236,7 +236,15 @@
                     <img src="{{asset('visitor/images/one piece2.jpg')}}" class="d-block w-100" alt="..." height="300px">
                 </div> --}}
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+            <button class="product-carousel-control-prev carousel-control-prev" type="button"
+                    data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="product-carousel-control-next carousel-control-next" type="button"
+                    data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            {{-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -245,7 +253,7 @@
                 data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
-            </button>
+            </button> --}}
         </div>
 
         {{-- <div class="container mt-3 mb-4">
@@ -395,7 +403,8 @@
             <div class="d-block d-md-none">
                 <div class="d-flex overflow-auto pb-3">
                     @foreach ($topCategories as $catData)
-                        <a href="{{ route('home.category', $catData->id) }}" class="categorylink d-block me-3" style="min-width: 200px;">
+                        <a href="{{ route('home.category', $catData->id) }}" class="categorylink d-block me-3"
+                            style="min-width: 200px;">
                             <div class="catcard card p-2">
                                 <img src="{{ asset($catData->cat_icon) }}" class="card-img-top"
                                     style="height: 280px; object-fit: contain;" alt="Category">
@@ -549,7 +558,7 @@
                         <h1>Daily Fresh</h1>
                     </div>
                     <div class="col-auto">
-                        <a href="#">View all</a>
+                        <a href="{{ route('view.all') }}">View all</a>
                     </div>
                 </div>
 
@@ -618,10 +627,11 @@
             <div class="d-flex flex-nowrap overflow-auto">
                 @foreach ($product as $index => $productData)
                     <div class="col-8 col-sm-6 col-md-4 col-lg-3 flex-shrink-0 mb-3">
-                        <a href="{{ route('home.product', $productData->id) }}" class="productlink d-block w-100 text-decoration-none">
+                        <a href="{{ route('home.product', $productData->id) }}"
+                            class="productlink d-block w-100 text-decoration-none">
                             <div class="card h-100 d-flex me-3 flex-column justify-content-between">
-                                <img src="{{ asset($productData->productImages->first()->url) }}" class="card-img-top" alt="Product"
-                                    style="height: 280px; object-fit: contain;">
+                                <img src="{{ asset($productData->productImages->first()->url) }}" class="card-img-top"
+                                    alt="Product" style="height: 280px; object-fit: contain;">
                                 <div class="card-body text-center">
                                     <h5 class="card-title text-truncate">{{ $productData->productName }}</h5>
                                     <p class="mb-0">{{ $productData->productUnit->first()->unitMaster->unit }}</p>

@@ -368,6 +368,7 @@
                     <div class="d-flex flex-column"
                         style="border-top: 1px solid rgb(242, 242, 242);
                                         border-left: 1px solid rgb(242, 242, 242);
+                                        border-right: 1px solid rgb(242, 242, 242);
                                         border-bottom: 1px solid rgb(242, 242, 242);
                                         padding: 20px;">
 
@@ -401,7 +402,7 @@
                                     <button class="btn btn-outline-secondary" type="button"
                                         onclick="decrementquentity()">-</button>
                                     <input type="text" class="form-control form-control-sm text-center" id="quantity"
-                                        value="1" readonly>
+                                        value="1" readonly style="width: 60px;">
                                     <button class="btn btn-outline-secondary" type="button"
                                         onclick="incrementquentity()">+</button>
                                 </div>
@@ -438,7 +439,7 @@
                                             @csrf
 
                                             <div class="modal-body">
-                                                <input type="hidden" name="userId" value="{{ session('user')->id }}">
+                                                {{-- <input type="hidden" name="userId" value="{{ session('user')->id }}"> --}}
                                                 <input type="hidden" name="productId" id="productReview">
                                                 <textarea class="form-control" name="review" placeholder="Write your feedback here" id="exampleFormControlTextarea1"
                                                     rows="3"></textarea>
@@ -507,12 +508,15 @@
 
 
 
-
+    <div class="row">
         @php
             $filteredSimilarProducts = isset($similarproduct)
                 ? $similarproduct->where('id', '!=', request()->route('id'))
                 : collect();
         @endphp
+        <div class="col-11 py-3">
+            <h3>Similar Products</h3>
+        </div>
         @if ($filteredSimilarProducts->isNotEmpty())
             <div class="row" style="justify-content: space-around; text-align: center;">
                 <div id="productCarousel" class="productCarousel carousel">
@@ -536,12 +540,12 @@
                             @endif
                         @endforeach
                     </div>
-                    <button class="product-carousel-control-prev carousel-control-prev" type="button"
+                    <button class="ms-3 product-carousel-control-prev carousel-control-prev" type="button"
                         data-bs-target="#productCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="product-carousel-control-next carousel-control-next" type="button"
+                    <button class="me-1 product-carousel-control-next carousel-control-next" type="button"
                         data-bs-target="#productCarousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
