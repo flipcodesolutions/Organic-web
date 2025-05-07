@@ -1,7 +1,13 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <header class="header sticky-top">
     <style>
         .dropdown-toggle::after {
             display: none !important;
+        }
+
+        .dropdown-menu {
+            /* display: block; */
+            position: absolute;
         }
     </style>
     {{-- <div class="container-fluid">
@@ -349,7 +355,17 @@
                             <option value="{{ url('category/' . $cat->id) }}">{{ $cat->categoryName }}</option>
                         @endforeach
                     </select>
-                    <div class="position-relative w-100" style="max-width: 400px;">
+                    <div class="d-flex position-relative" style="width: 100%; max-width: 400px;">
+                        <input type="text" class="form-control w-auto" id="search"
+                            placeholder="Search for 20,000+ products">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div id="searchList"></div>
+                        <button class="btn btn-outline-secondary ms-2">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    {{-- <div class="position-relative w-100" style="max-width: 400px;">
                         <div class="d-flex">
                          <input type="text" id="searchInput" onkeyup="filterFunction()" class="form-control"
                             placeholder="Search Product..." value="{{ request('searchInput') ?? old('searchInput') }}"
@@ -357,12 +373,12 @@
                             <button class="btn btn-outline-secondary ms-2">
                                 <i class="fa fa-search"></i>
                             </button>
-                        </div>
-                        <!-- Dropdown List -->
-                        <div id="myDropdown" class="dropdown-content position-absolute w-100 p-0 shadow-sm"
+                        </div> --}}
+                    <!-- Dropdown List -->
+                    {{-- <div id="myDropdown" class="dropdown-content position-absolute w-100 p-0 shadow-sm"
                             style="max-height: 200px; overflow-y: auto; display: none; background-color: #fff; z-index: 1000;">
-                            <a href="#" class="dropdown-item disabled">Select Product</a>
-                            {{-- @foreach ($product as $productData)
+                            <a href="#" class="dropdown-item disabled">Select Product</a> --}}
+                    {{-- @foreach ($product as $productData)
                                 <a href="{{ route('home.product', ['id' => $productData->id]) }}" class="dropdown-item"
                                     data-value="{{ $productData->id }}">
                                     {{ $productData->productName }}
@@ -370,15 +386,9 @@
                             @endforeach --}}
 
 
-                        </div>
-                    </div>
-
-                    {{-- <div class="d-flex">
-                        <input type="text" class="form-control w-auto" placeholder="Search for 20,000+ products">
-                        <button class="btn btn-outline-secondary ms-2">
-                            <i class="fa fa-search"></i>
-                        </button>
+                    {{-- </div>
                     </div> --}}
+
                 </form>
 
                 {{-- User, Orders, Cart --}}
@@ -440,40 +450,140 @@
             }
         });
 
+        // $("#search").keyup(function() {
+        //     var _token = $("input[name='_token']").val();
+        //     var name = $(this).val();
+
+        //     if (name.length > 0) { // Optional: prevents sending empty queries
+        //         $.ajax({
+        //             type: "POST",
+        //             url: "{{ route('autocomplete') }}",
+        //             data: {
+        //                 _token: _token,
+        //                 search: name
+        //             },
+        //             success: function(response) {
+        //                 console.log(response); // You can handle DOM update here
+        //             },
+        //             error: function(xhr) {
+        //                 console.error("Error:", xhr.responseText);
+        //             }
+        //         });
+        //     }
+        // });
 
 
 
+        // $("#search").keyup(function(){
+        //     var _token = $("input[name='_token']").val();
+        //     var name = $(this).val();
+
+        //     $.ajax({
+        //         type:"POST",
+        //         url:"{{ route('autocomplete') }}",
+        //         data:{_token: _token, search: name},
+        //         success:function(response){
+        //             var html = "<ul class='dropdown-menu'>";
+
+        //                 $.each(response, function(key, value){
+        //                     html = html + "<li><a href='{{ route('home.product') }}' class='dropdown-item'>"+value.productName+"</a><li>";
+
+        //                 });
+        //                 html = html + "</ul>";
+        //                 $("#searchList").html(html);
+
+        //             console.log(response);
+        //         }
+        //     })
+        // })
+
+        $(document).ready(function() {
+            // Trigger on input click to show all suggestions
+            $("#search").on("click", function() {
+                fetchDropdown('');
+
+            });
+
+            // Trigger on keyup to show filtered suggestions
+            $("#search").on("keyup", function() {
+                var name = $(this).val();
+                fetchDropdown(name);
+            });
+
+            // Function to fetch and show dropdown
+            function fetchDropdown(name) {
+                var _token = $("input[name='_token']").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('autocomplete') }}",
+                    data: {
+                        _token: _token,
+                        search: name
+                    },
+                    success: function(response) {
+                        if (response.length > 0) {
 
 
+                            var html =
+                                "<ul class='dropdown-menu show w-100' style='max-height:200px; overflow-y:auto; position:absolute; z-index:1000;'>";
 
+                            $.each(response, function(key, value) {
+                                html +=
+                                "<li><a href='/product/" + value.id + "' class='dropdown-item'>" +
+                                    value.productName + "</a></li>";
+                            });
 
-
-        function filterFunction() {
-            const input = document.getElementById("searchInput");
-            const filter = input.value.toUpperCase();
-            const dropdown = document.getElementById("myDropdown");
-            const items = dropdown.getElementsByTagName("a");
-
-            // Show dropdown if input is not empty
-            dropdown.style.display = filter ? "block" : "none";
-
-            for (let i = 0; i < items.length; i++) {
-                const txtValue = items[i].textContent || items[i].innerText;
-                if (txtValue.toUpperCase().includes(filter)) {
-                    items[i].style.display = "";
-                } else {
-                    items[i].style.display = "none";
-                }
+                            html += "</ul>";
+                            $("#searchList").html(html);
+                        } else {
+                            $("#searchList").empty();
+                        }
+                    }
+                });
             }
-        }
+
+            // Hide dropdown when clicking outside
+            $(document).on("click", function(e) {
+                if (!$(e.target).closest("#search, #searchList").length) {
+                    $("#searchList").empty();
+                }
+            });
+        });
+
+
+
+
+
+
+
+
+        // function filterFunction() {
+        //     const input = document.getElementById("searchInput");
+        //     const filter = input.value.toUpperCase();
+        //     const dropdown = document.getElementById("myDropdown");
+        //     const items = dropdown.getElementsByTagName("a");
+
+        //     // Show dropdown if input is not empty
+        //     dropdown.style.display = filter ? "block" : "none";
+
+        //     for (let i = 0; i < items.length; i++) {
+        //         const txtValue = items[i].textContent || items[i].innerText;
+        //         if (txtValue.toUpperCase().includes(filter)) {
+        //             items[i].style.display = "";
+        //         } else {
+        //             items[i].style.display = "none";
+        //         }
+        //     }
+        // }
 
         // Optional: hide dropdown when clicking outside
-        document.addEventListener("click", function(e) {
-            const input = document.getElementById("searchInput");
-            const dropdown = document.getElementById("myDropdown");
-            if (!input.contains(e.target) && !dropdown.contains(e.target)) {
-                dropdown.style.display = "none";
-            }
-        });
+        // document.addEventListener("click", function(e) {
+        //     const input = document.getElementById("searchInput");
+        //     const dropdown = document.getElementById("myDropdown");
+        //     if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+        //         dropdown.style.display = "none";
+        //     }
+        // });
     </script>
 </header>

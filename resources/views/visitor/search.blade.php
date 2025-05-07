@@ -1,4 +1,17 @@
-<ul class="list-group list-group-flush">
+@extends('visitor.layouts.app')
+@section('content')
+
+@endsection
+
+
+
+
+
+
+
+
+
+{{-- <ul class="list-group list-group-flush">
     <li class="list-group-item {{ request()->has('categoryId') ? '' : 'active bg-body-tertiary border-light' }}">
         <a href="{{ route('search', ['global' => request('global')]) }}" class="text-decoration-none text-dark">
             <div class="card category-card">
@@ -30,4 +43,4 @@
             </a>
         </li>
     @endforeach
-</ul>
+</ul> --}}

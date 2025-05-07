@@ -61,4 +61,5 @@ Route::controller(VisitorController::class)->group(function(){
 Route::get('invoicepdf/{id?}',[PdfController::class,'invoicePDF'])->name('home.invoice');
 Route::get('visitor/view-all', [ViewAllController::class, 'viewall'])->name('view.all');
 Route::get('/search', [SearchController::class, 'serach'])->name('search');
+Route::post('/search/autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
 ?>

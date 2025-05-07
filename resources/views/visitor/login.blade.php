@@ -90,7 +90,7 @@
 
 
 
-    <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center" style="background: url('{{ asset('visitor/images/background.avif') }}')">
+    <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center" style="background: url('{{ asset('visitor/images/background2.jpg') }}') no-repeat center center / cover; background-color: #0f172a;">
         <div class="row shadow rounded-4 overflow-hidden w-100" style="max-width: 960px; background-color:white">
 
           <!-- Left side: Login form -->
