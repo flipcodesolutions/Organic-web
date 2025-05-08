@@ -6,7 +6,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer-menu">
                         <img src="{{ asset('visitor/images/logo.svg') }}" width="240" height="70" alt="logo">
-                        <div class="social-links mt-3">
+                        {{-- <div class="social-links mt-3">
                             <ul class="d-flex list-unstyled gap-2">
                                 <li>
                                     <a href="#" class="btn btn-outline-light">
@@ -44,7 +44,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 

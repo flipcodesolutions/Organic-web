@@ -21,7 +21,7 @@ class UnitMasterController extends Controller
             });
         }
 
-        $data = $query->where('status', 'active')->paginate(10);
+        $data = $query->where('status', 'active')->paginate(5);
         $unitmasters = UnitMaster::where('status', 'active')->get();
         return view('admin.unitmaster.index', compact('data', 'unitmasters'));
     }

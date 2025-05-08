@@ -526,7 +526,7 @@
 
 
                             var html =
-                                "<ul class='dropdown-menu show w-100' style='max-height:200px; overflow-y:auto; position:absolute; z-index:1000;'>";
+                                "<ul class='dropdown-menu show w-110' style='max-height:200px; overflow-y:auto; position:absolute; z-index:1000;'>";
 
                             $.each(response, function(key, value) {
                                 html +=
