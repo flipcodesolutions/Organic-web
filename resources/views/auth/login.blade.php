@@ -35,7 +35,7 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"><img src="{{asset('user_profile/veggi.jpeg')}}" class="img-fluid rounded m-auto"></div>
+                            <div class="col-lg-6 col-12 d-flex justify-content-center align-items-center mb-4 mb-lg-0" style="min-height: 300px;"><img src="{{asset('user_profile/loginlogo1.png')}}" class="img-fluid rounded m-auto h-100"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
@@ -81,7 +81,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        
+
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             {{ __('Login') }}
                                         </button>
@@ -104,7 +104,7 @@
                                         {{-- <a class="small" href="forgot-password.html">Forgot Password?</a> --}}
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="{{ route('register')}}">Create an Account!</a>
+                                        <a class="h6" href="{{ route('register')}}">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>

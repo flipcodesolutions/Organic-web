@@ -133,7 +133,7 @@
                                         <i class="fa fa-list-check mr-2"></i>
                                         <span>CMS Master</span></a>
 
-                                      
+
 
                                     {{-- point per --}}
                                     <a class="collapse-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}"
@@ -162,34 +162,41 @@
                                 <span>Product</span>
                             </a>
 
+                            @php
+                                $isVendor = auth()->check() && auth()->user()->role === 'vendor';
+                            @endphp
                             <div id="collapseUtilities2"
                                 class="collapse {{ request()->routeIs('category.*') || request()->routeIs('brand.*') || request()->routeIs('product.*') || request()->routeIs('vendor.*') || request()->routeIs('unit.*') || request()->routeIs('stock.*') ? 'show' : '' }}"
                                 aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                    {{-- category --}}
-                                    <a class="collapse-item {{ request()->routeIs('category.*') ? 'active' : '' }}"
-                                        href="{{ route('category.index') }}">
-                                        <i class="fa fa-list mr-2"></i>
-                                        <span>Categories</span></a>
+                                    @unless ($isVendor)
+                                        {{-- category --}}
+                                        <a class="collapse-item {{ request()->routeIs('category.*') ? 'active' : '' }}"
+                                            href="{{ route('category.index') }}">
+                                            <i class="fa fa-list mr-2"></i>
+                                            <span>Categories</span></a>
 
-                                    {{-- brand --}}
-                                    <a class="collapse-item {{ request()->routeIs('brand.*') ? 'active' : '' }}"
-                                        href="{{ route('brand.index') }}">
-                                        <i class="fa-brands fa-fort-awesome mr-2"></i>
-                                        <span>Brands</span></a>
+                                        {{-- brand --}}
+                                        <a class="collapse-item {{ request()->routeIs('brand.*') ? 'active' : '' }}"
+                                            href="{{ route('brand.index') }}">
+                                            <i class="fa-brands fa-fort-awesome mr-2"></i>
+                                            <span>Brands</span></a>
+
+
+
+
+                                        {{-- price --}}
+                                        <a class="collapse-item {{ request()->routeIs('unit.*') ? 'active' : '' }}"
+                                            href="{{ route('unit.index') }}">
+                                            <i class="fa-solid fa-tags mr-2"></i>
+                                            <span>Price Update</span></a>
+                                    @endunless
 
                                     {{-- product --}}
                                     <a class="collapse-item {{ request()->routeIs('product.*') ? 'active' : '' }}"
                                         href="{{ route('product.index') }}">
                                         <i class="fa fa-carrot mr-2"></i>
                                         <span>Products</span></a>
-
-                                    {{-- price --}}
-                                    <a class="collapse-item {{ request()->routeIs('unit.*') ? 'active' : '' }}"
-                                        href="{{ route('unit.index') }}">
-                                        <i class="fa-solid fa-tags mr-2"></i>
-                                        <span>Price Update</span></a>
-
                                     {{-- stock update --}}
                                     <a class="collapse-item {{ request()->routeIs('stock.*') ? 'active' : '' }}"
                                         href="{{ route('stock.index') }}">
@@ -246,9 +253,9 @@
 
                         </li>
 
-                        <li
-                            class="nav-item {{ request()->routeIs('order.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('order.index') }}"><i class="fa-solid fa-truck"></i> <span>Order Management</span></a>
+                        <li class="nav-item {{ request()->routeIs('order.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('order.index') }}"><i class="fa-solid fa-truck"></i>
+                                <span>Order Management</span></a>
                         </li>
 
                         {{-- <li class="nav-item {{ request()->routeIs('category.*') ? 'active' : '' }}">
@@ -351,9 +358,9 @@
                         </div> --}}
 
                         <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
-                            <a class="pt-1 pb-2 nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}" href="#"
-                                data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true"
-                                aria-controls="collapseUtilities">
+                            <a class="pt-1 pb-2 nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}"
+                                href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                                aria-expanded="true" aria-controls="collapseUtilities">
                                 {{-- <i class="fas fa-fw fa-wrench"></i> --}}
                                 <i class="  fa-solid fa-users"></i>
                                 <span class="">User Management</span>
@@ -613,12 +620,21 @@
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow mb-4">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        @auth
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <img class="img-profile rounded-circle"
+                                    src="{{ asset('user_profile/' . Auth::user()->pro_pic) }}">
+                            </a>
+                        @endauth
+
+                        {{-- <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                             <img class="img-profile rounded-circle"
                                 src="{{ asset('user_profile/' . Auth::user()->pro_pic) }}">
-                        </a>
+                        </a> --}}
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
@@ -1054,13 +1070,13 @@
         <script>
             var message =
                 '{{ session()->has('
-                                                                                                                                                                                                            success ')
+                                                                                                                                                                                                                                                                            success ')
                     ? session()->get('
-                                                                                                                                                                                                            success ')
+                                                                                                                                                                                                                                                                            success ')
                     : (session()->has('
-                                                                                                                                                                                                            error ')
+                                                                                                                                                                                                                                                                            error ')
                         ? session()->get('
-                                                                                                                                                                                                            error ')
+                                                                                                                                                                                                                                                                            error ')
                         : implode("\\n", $errors->all())) }}';
 
             // If there is a success message
