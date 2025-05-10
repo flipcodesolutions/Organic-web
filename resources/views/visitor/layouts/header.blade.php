@@ -333,7 +333,7 @@
 
 
 
-    <nav class="me-2 navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top py-3">
+    <nav class="me-2 navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
         <div class="container-fluid">
             {{-- Logo --}}
             <a class="navbar-brand d-flex align-items-center" href="{{ route('visitor.index') }}">
