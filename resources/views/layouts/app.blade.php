@@ -90,6 +90,7 @@
                         </li>
 
                         {{-- master --}}
+                        @unless(Auth::user()->role === 'vendor')
                         <li
                             class="nav-item {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? 'active' : '' }}">
                             <a class="nav-link {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? '' : 'collapsed' }}"
@@ -150,6 +151,7 @@
                                 </div>
                             </div> --}}
                         </li>
+                        @endunless
 
                         {{-- product --}}
                         <li
@@ -213,6 +215,7 @@
                         </li>
 
                         {{-- setting --}}
+                        @unless(Auth::user()->role === 'vendor')
                         <li
                             class="nav-item {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
                             <a class="nav-link {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? '' : 'collapsed' }}"
@@ -252,6 +255,7 @@
                             </div>
 
                         </li>
+                        @endunless
 
                         <li class="nav-item {{ request()->routeIs('order.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('order.index') }}"><i class="fa-solid fa-truck"></i>
@@ -356,7 +360,7 @@
                         {{-- <div class="sidebar-heading">
                             Interface
                         </div> --}}
-
+                        @unless(Auth::user()->role === 'vendor')
                         <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
                             <a class="pt-1 pb-2 nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}"
                                 href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -377,6 +381,7 @@
                                 </div>
                             </div>
                         </li>
+                        @endunless
 
                         <!-- Nav Item - Pages Collapse Menu -->
                         {{-- <li class="nav-item">

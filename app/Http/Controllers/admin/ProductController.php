@@ -18,62 +18,182 @@ use Illuminate\Support\Facades\Validator as FacadesValidator;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
-    {
-        // try {
+    // public function index(Request $request)
+    // {
+    //     // try {
 
-        $query = Product::query();
+    //     $query = Product::query();
 
-        if ($request->filled('global')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('productName', 'like', '%' . $request->global . '%')
-                    ->orWhere('categoryId', 'like', '%' . $request->global . '%');
-            });
-        }
+    //     if ($request->filled('global')) {
+    //         $query->where(function ($q) use ($request) {
+    //             $q->where('productName', 'like', '%' . $request->global . '%')
+    //                 ->orWhere('categoryId', 'like', '%' . $request->global . '%');
+    //         });
+    //     }
 
-        if ($request->filled('categoryId')) {
-            $query->where('categoryID', $request->categoryId);
-        }
-        if ($request->filled('brandId')) {
-            $query->where('brandId', $request->brandId);
-        }
-        if ($request->filled('season')) {
-            $query->where('season', $request->season);
-        }
-        if ($request->filled('is_on_home')) {
-            $query->where('isOnHome', $request->is_on_home);
-        }
+    //     if ($request->filled('categoryId')) {
+    //         $query->where('categoryID', $request->categoryId);
+    //     }
+    //     if ($request->filled('brandId')) {
+    //         $query->where('brandId', $request->brandId);
+    //     }
+    //     if ($request->filled('season')) {
+    //         $query->where('season', $request->season);
+    //     }
+    //     if ($request->filled('is_on_home')) {
+    //         $query->where('isOnHome', $request->is_on_home);
+    //     }
 
-        $data = $query->where('status', 'active')->whereHas('categories', function ($query1) {
-            $query1->where('status', 'active');
-        })->whereHas('brand', function ($query2) {
-            $query2->where('status', 'active');
-        })->with(['categories', 'brand', 'productImages'])->paginate(10);
-        // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
-        //     $query->where('status', 'active');
-        // })->with(['categories', 'productImages'])->paginate(10);
+    //     $data = $query->where('status', 'active')->whereHas('categories', function ($query1) {
+    //         $query1->where('status', 'active');
+    //     })->whereHas('brand', function ($query2) {
+    //         $query2->where('status', 'active');
+    //     })->with(['categories', 'brand', 'productImages'])->paginate(10);
+    //     // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
+    //     //     $query->where('status', 'active');
+    //     // })->with(['categories', 'productImages'])->paginate(10);
 
-        $categories = Category::where([
-            ['status', '=', 'active'],
-            ['parent_category_id', '=', 0]
-        ])->orderBy('categoryName', 'asc')->get();
-        $childcat = Category::where([
-            ['status', '=', 'active'],
-            ['parent_category_id', '!=', 0]
-        ])->orderBy('categoryName', 'asc')->get();
-        $brands = Brand::where('status', 'active')->orderBy('brand_name', 'asc')->get();
-        // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
-        //     $query->where('status', 'active');
-        // })->with(['categories', 'productImages', 'productUnit.unitMaster'=> function($query){
-        //     $query->where('status','active')->select('id','unit');
-        // }])->paginate(10);
-        // return $products;
-        return view('admin.product.index', compact('data', 'categories', 'childcat', 'brands'));
-        // } catch (\Exception $e) {
+    //     $categories = Category::where([
+    //         ['status', '=', 'active'],
+    //         ['parent_category_id', '=', 0]
+    //     ])->orderBy('categoryName', 'asc')->get();
+    //     $childcat = Category::where([
+    //         ['status', '=', 'active'],
+    //         ['parent_category_id', '!=', 0]
+    //     ])->orderBy('categoryName', 'asc')->get();
+    //     $brands = Brand::where('status', 'active')->orderBy('brand_name', 'asc')->get();
+    //     // $products = Product::where('status', 'active')->whereHas('categories', function ($query) {
+    //     //     $query->where('status', 'active');
+    //     // })->with(['categories', 'productImages', 'productUnit.unitMaster'=> function($query){
+    //     //     $query->where('status','active')->select('id','unit');
+    //     // }])->paginate(10);
+    //     // return $products;
+    //     return view('admin.product.index', compact('data', 'categories', 'childcat', 'brands'));
+    //     // } catch (\Exception $e) {
 
-        //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
-        // }
+    //     //     return view('layouts.error')->with('error', 'Somthing went wrong please try again later!');
+    //     // }
+    // }
+
+//     public function index(Request $request)
+// {
+//     $query = Product::query();
+
+//     // Filter products for vendors only
+//     if (auth()->user()->role === 'vendor') {
+//         $query->where('userId', auth()->id());
+//     }
+
+//     // Global search
+//     if ($request->filled('global')) {
+//         $query->where(function ($q) use ($request) {
+//             $q->where('productName', 'like', '%' . $request->global . '%')
+//               ->orWhere('categoryId', 'like', '%' . $request->global . '%');
+//         });
+//     }
+
+//     // Other filters
+//     if ($request->filled('categoryId')) {
+//         $query->where('categoryId', $request->categoryId);
+//     }
+//     if ($request->filled('brandId')) {
+//         $query->where('brandId', $request->brandId);
+//     }
+//     if ($request->filled('season')) {
+//         $query->where('season', $request->season);
+//     }
+//     if ($request->filled('is_on_home')) {
+//         $query->where('isOnHome', $request->is_on_home);
+//     }
+
+//     // Final product query
+//     $data = $query->where('status', 'active')
+//                   ->whereHas('categories', function ($q1) {
+//                       $q1->where('status', 'active');
+//                   })
+//                   ->whereHas('brand', function ($q2) {
+//                       $q2->where('status', 'active');
+//                   })
+//                   ->with(['categories', 'brand', 'productImages'])
+//                   ->paginate(10);
+
+//     // Category and brand data
+//     $categories = Category::where('status', 'active')
+//         ->where('parent_category_id', 0)
+//         ->orderBy('categoryName', 'asc')
+//         ->get();
+
+//     $childcat = Category::where('status', 'active')
+//         ->where('parent_category_id', '!=', 0)
+//         ->orderBy('categoryName', 'asc')
+//         ->get();
+
+//     $brands = Brand::where('status', 'active')
+//         ->orderBy('brand_name', 'asc')
+//         ->get();
+
+//     return view('admin.product.index', compact('data', 'categories', 'childcat', 'brands'));
+// }
+
+public function index(Request $request)
+{
+    // Allow only vendors
+    // if (!auth()->user()->hasRole('vendor')) {
+    //     abort(403, 'Unauthorized action.');
+    // }
+
+    $query = Product::query();
+
+    // Filter only products owned by the vendor
+    $query->where('userId', auth()->id());
+
+    // Global search
+    if ($request->filled('global')) {
+        $query->where(function ($q) use ($request) {
+            $q->where('productName', 'like', '%' . $request->global . '%')
+              ->orWhere('categoryId', 'like', '%' . $request->global . '%');
+        });
     }
+
+    // Other filters...
+    if ($request->filled('categoryId')) {
+        $query->where('categoryId', $request->categoryId);
+    }
+    if ($request->filled('brandId')) {
+        $query->where('brandId', $request->brandId);
+    }
+    if ($request->filled('season')) {
+        $query->where('season', $request->season);
+    }
+    if ($request->filled('is_on_home')) {
+        $query->where('isOnHome', $request->is_on_home);
+    }
+
+    $data = $query->where('status', 'active')
+                  ->whereHas('categories', function ($q1) {
+                      $q1->where('status', 'active');
+                  })
+                  ->whereHas('brand', function ($q2) {
+                      $q2->where('status', 'active');
+                  })
+                  ->with(['categories', 'brand', 'productImages'])
+                  ->paginate(10);
+
+    $categories = Category::where('status', 'active')
+        ->where('parent_category_id', 0)
+        ->orderBy('categoryName', 'asc')->get();
+
+    $childcat = Category::where('status', 'active')
+        ->where('parent_category_id', '!=', 0)
+        ->orderBy('categoryName', 'asc')->get();
+
+    $brands = Brand::where('status', 'active')
+        ->orderBy('brand_name', 'asc')->get();
+
+    return view('admin.product.index', compact('data', 'categories', 'childcat', 'brands'));
+}
+
+
 
     public function create()
     {
@@ -651,19 +771,42 @@ class ProductController extends Controller
         // }
     }
 
+    // public function stockindex(Request $request)
+    // {
+    //     $query = Product::query();
+    //     $data = collect();
+
+    //     if ($request->filled('productId')) {
+    //         $query->where('id', $request->productId);
+    //         $data = $query->get();
+    //     }
+
+    //     $product = Product::where('status', 'active')->get();
+    //     return view('admin.product.stockindex', compact('product', 'data'));
+    // }
+
     public function stockindex(Request $request)
-    {
-        $query = Product::query();
-        $data = collect();
+{
+    $query = Product::query();
+    $data = collect();
 
-        if ($request->filled('productId')) {
-            $query->where('id', $request->productId);
-            $data = $query->get();
-        }
-
-        $product = Product::where('status', 'active')->get();
-        return view('admin.product.stockindex', compact('product', 'data'));
+    // Filter products by userId if the user is a vendor
+    if (auth()->check() && auth()->user()->role === 'vendor') {
+        $query->where('userId', auth()->id());
     }
+
+    // If a productId is passed in the request, filter by that as well
+    if ($request->filled('productId')) {
+        $query->where('id', $request->productId);
+        $data = $query->get();
+    }
+
+    // Get active products related to the logged-in vendor
+    $product = $query->where('status', 'active')->get();
+
+    return view('admin.product.stockindex', compact('product', 'data'));
+}
+
 
     public function stockupdate(Request $request, $id)
     {

@@ -25,14 +25,42 @@
                                 autocomplete="off">
 
                             <!-- Dropdown List -->
-                            <div id="myDropdown" class="dropdown-content position-absolute w-100 p-0 shadow-sm"
+                            {{-- <div id="myDropdown" class="dropdown-content position-absolute w-100 p-0 shadow-sm"
                                 style="max-height: 200px; overflow-y: auto; display: none;  background-color: #fff;">
                                 <a href="#" class="dropdown-item" data-value="">Select Product</a>
                                 @foreach ($product as $productData)
                                     <a href="#" class="dropdown-item" data-value="{{ $productData->id }}"
                                         {{ request('productId') == $productData->id ? 'selected' : '' }}>{{ $productData->productName }}</a>
                                 @endforeach
+                            </div> --}}
+                            <div id="myDropdown" class="dropdown-content position-absolute w-100 p-0 shadow-sm"
+                                style="max-height: 200px; overflow-y: auto; display: none; background-color: #fff;">
+
+                                @foreach ($product as $productData)
+                                    @if (auth()->check())
+                                        {{-- Admin user (ID 1): only show products not created by vendors --}}
+                                        @if (auth()->id() == 1 && $productData->userId != 1)
+                                            {{-- Skip vendor products --}}
+                                            @continue
+                                        @endif
+
+                                        {{-- Vendor user: show only their own products --}}
+                                        @if (auth()->id() != 1 && $productData->userId != auth()->id())
+                                            {{-- Skip other vendors' and admin products --}}
+                                            @continue
+                                        @endif
+                                    @endif
+
+                                    {{-- Show product --}}
+                                    <a href="#" class="dropdown-item" data-value="{{ $productData->id }}"
+                                        {{ request('productId') == $productData->id ? 'selected' : '' }}>
+                                        {{ $productData->productName }}
+                                    </a>
+                                @endforeach
+
                             </div>
+
+
 
                             <!-- Hidden Input to store selected value -->
                             <input type="hidden" name="productId" id="selectedProductId">
