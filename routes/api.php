@@ -31,7 +31,7 @@ Route::post('verifyOtp', [UserController::class, 'verifyOtp']);
 Route::post('checkEmail', [UserController::class, 'checkEmail']);
 Route::post('createProfile', [UserController::class, 'createProfile']);
 
-// Route::group(['middleware' => 'auth:sanctum'], function () {
+Route::group(['middleware' => 'auth:sanctum'], function () {
     //category
     Route::get('allCategories', [CategoryController::class, 'allCategories']);
     Route::get('idWiseCategory', [CategoryController::class, 'idWiseCategory']);
@@ -85,4 +85,4 @@ Route::post('createProfile', [UserController::class, 'createProfile']);
 
     //cms
     Route::get('cms', [CmsController::class, 'cms']);
-// });
+});
