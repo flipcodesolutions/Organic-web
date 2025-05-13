@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\OrderMaster;
@@ -60,24 +60,86 @@ class OrderMasterController extends Controller
             $order = $query->orderByDesc('id')->get();
             return view('admin.order_master.index', compact('order'));
         } else {
-            $order = OrderMaster::where('status', 'active')
-                ->with([
+            $order = OrderMaster::where('status', 'active');
+            if(Auth::user()->role == 'vendor'){
+                $order = $order->with([
                     'user',
                     'orderDetails' => function ($query) {
                         $query->whereHas('trackorder', function ($q) {
                             $q->where('orderStatus', 'pending');
                         })->with([
-                            'product',
                             'unit.unitMaster',
-                            'trackorder'
+                            'trackorder',
+                            'product' => function($q){
+                                $q->where('userId',Auth::user()->id);
+                            }
                         ]);
                     }
                 ])->orderByDesc('id')->get();
-
-            // return $order;
+                }
+                else{
+                     $order = $order->with([
+                    'user',
+                    'orderDetails' => function ($query) {
+                        $query->whereHas('trackorder', function ($q) {
+                            $q->where('orderStatus', 'pending');
+                        })->with([
+                            'unit.unitMaster',
+                            'trackorder',
+                            'product'
+                        ]);
+                    }
+                ])->orderByDesc('id')->get();
+                }
+            // return $orders;
             return view('admin.order_master.index', compact('order'));
         }
     }
+
+//     public function index(Request $request)
+// {
+//     $isVendor = Auth::check() && Auth::user()->role === 'Vendor';
+//     $vendorId = Auth::id();
+
+//     $query = OrderMaster::query();
+
+
+//     $query->where('status', 'active');
+
+//     if ($request->filled('date')) {
+//         $query->whereDate('orderDate', $request->date);
+//     }
+
+//     $query->with([
+//         'user',
+//         'orderDetails' => function ($orderDetailsQuery) use ($request, $isVendor, $vendorId) {
+
+//             if ($request->filled('status')) {
+//                 $orderDetailsQuery->whereHas('trackorder', function ($q) use ($request) {
+//                     $q->where('orderStatus', $request->status);
+//                 });
+//             } else {
+
+//                 $orderDetailsQuery->whereHas('trackorder', function ($q) {
+//                     $q->where('orderStatus', 'pending');
+//                 });
+//             }
+
+
+//             if ($isVendor) {
+//                 $orderDetailsQuery->whereHas('product', function ($q) use ($vendorId) {
+//                     $q->where('userId', $vendorId);
+//                 });
+//             }
+
+//             $orderDetailsQuery->with(['product', 'unit.unitMaster', 'trackorder']);
+//         }
+//     ]);
+
+//     $orders = $query->orderByDesc('id')->get();
+
+//     return view('admin.order_master.index', compact('orders'));
+// }
 
     /**
      * Show the form for creating a new resource.

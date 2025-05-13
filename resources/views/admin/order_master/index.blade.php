@@ -9,7 +9,7 @@
     </div>
 
     {{-- @dd(Auth::user()) --}}
-    @if (Auth::user()->role == 'Admin')
+    {{-- @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Vendor') --}}
         <div class="card-body p-0">
             <div class="card shadow-sm  bg-body rounded">
                 {{-- filter --}}
@@ -71,6 +71,7 @@
                             @if (count($order) > 1)
                                 @foreach ($order as $key => $orderData)
                                     @foreach ($orderData->orderDetails as $orderDetailsData)
+                                    @if ($orderDetailsData->product)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $orderData->user->name }}</td>
@@ -114,6 +115,8 @@
                                             </td>
 
                                         </tr>
+                                                                            @endif
+
                                     @endforeach
                                 @endforeach
                             @else
@@ -149,5 +152,5 @@
         </script>
     {{-- @else --}}
 
-    @endif
+    {{-- @endif --}}
 @endsection

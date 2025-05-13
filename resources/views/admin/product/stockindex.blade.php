@@ -36,17 +36,37 @@
                             <div id="myDropdown" class="dropdown-content position-absolute w-100 p-0 shadow-sm"
                                 style="max-height: 200px; overflow-y: auto; display: none; background-color: #fff;">
 
-                                @foreach ($product as $productData)
-                                    @if (auth()->check())
-                                        {{-- Admin user (ID 1): only show products not created by vendors --}}
-                                        @if (auth()->id() == 1 && $productData->userId != 1)
-                                            {{-- Skip vendor products --}}
-                                            @continue
-                                        @endif
+                                {{-- @foreach ($product as $productData)
+                                    @if (auth()->check()) --}}
+                                {{-- Admin user (ID 1): only show products not created by vendors --}}
+                                {{-- @if (auth()->id() == 1 && $productData->userId != 1) --}}
+                                {{-- Skip vendor products --}}
+                                {{-- @continue
+                                        @endif --}}
 
-                                        {{-- Vendor user: show only their own products --}}
-                                        @if (auth()->id() != 1 && $productData->userId != auth()->id())
-                                            {{-- Skip other vendors' and admin products --}}
+                                {{-- Vendor user: show only their own products --}}
+                                {{-- @if (auth()->id() != 1 && $productData->userId != auth()->id()) --}}
+                                {{-- Skip other vendors' and admin products --}}
+                                {{-- @continue
+                                        @endif
+                                    @endif --}}
+
+                                {{-- Show product --}}
+                                {{-- <a href="#" class="dropdown-item" data-value="{{ $productData->id }}"
+                                        {{ request('productId') == $productData->id ? 'selected' : '' }}>
+                                        {{ $productData->productName }}
+                                    </a>
+                                @endforeach --}}
+
+                                @foreach ($product as $productData)
+                                    @php
+                                        $isVendor = auth()->check() && auth()->user()->role === 'vendor';
+                                    @endphp
+
+                                    {{-- Show logic --}}
+                                    @if ($isVendor)
+                                        {{-- Vendor: only show their own products --}}
+                                        @if ($productData->userId != auth()->id())
                                             @continue
                                         @endif
                                     @endif
@@ -57,6 +77,7 @@
                                         {{ $productData->productName }}
                                     </a>
                                 @endforeach
+
 
                             </div>
 
