@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\vendor\PurchaseController;
 use App\Http\Controllers\Admin\Crm_MasterController;
 use App\Http\Controllers\ViewAllController;
 use Illuminate\Support\Facades\Route;
@@ -15,3 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 // });
 // Route::get('visitor/view-all', [ViewAllController::class, 'viewall'])->name('view.all');
+Route::get('/purchases', [PurchaseController::class, 'index'])->name('purchase.index');
+Route::get('/purchases/create', [PurchaseController::class, 'create'])->name('purchase.create');
+Route::post('/purchases', [PurchaseController::class, 'store'])->name('purchase.store');
+Route::get('/purchases/{purchase}', [PurchaseController::class, 'show'])->name('purchase.show');
+Route::get('/purchases/{purchase}/edit', [PurchaseController::class, 'edit'])->name('purchase.edit');
+Route::put('/purchases/{purchase}', [PurchaseController::class, 'update'])->name('purchase.update');
+Route::delete('/purchases/{purchase}', [PurchaseController::class, 'destroy'])->name('purchase.destroy');

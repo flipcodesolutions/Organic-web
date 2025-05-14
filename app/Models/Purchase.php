@@ -12,5 +12,18 @@ class Purchase extends Model
     public function productData(){
         return $this->belongsTo(Product::class,'product_id');
     }
+
+    public function product()
+{
+    return $this->belongsTo(Product::class);
+}
+
+    protected $fillable = [
+        'product_id',
+        'date',
+        'price',
+        'qty',
+        'status',
+    ];
 }
 ?>

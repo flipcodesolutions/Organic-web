@@ -90,67 +90,67 @@
                         </li>
 
                         {{-- master --}}
-                        @unless(Auth::user()->role === 'vendor')
-                        <li
-                            class="nav-item {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? '' : 'collapsed' }}"
-                                href="#" data-toggle="collapse" data-target="#collapseUtilities1"
-                                aria-expanded="true" aria-controls="collapseUtilities">
-                                {{-- <i class="fas fa-fw fa-wrench"></i> --}}
-                                <i class="fa-solid fa-server"></i>
-                                <span>Master</span>
-                            </a>
-                            <div id="collapseUtilities1"
-                                class="collapse {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? 'show' : '' }}"
-                                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                                <div class="bg-white py-2 collapse-inner rounded">
-                                    {{-- city --}}
-                                    <a class="collapse-item {{ request()->routeIs('city_master.*') ? 'active' : '' }}"
-                                        href="{{ route('city_master.index') }}">
-                                        <i class="fa fa-location-pin mr-2"></i>
-                                        <span>Cities</span></a>
+                        @unless (Auth::user()->role === 'vendor')
+                            <li
+                                class="nav-item {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? 'active' : '' }}">
+                                <a class="nav-link {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? '' : 'collapsed' }}"
+                                    href="#" data-toggle="collapse" data-target="#collapseUtilities1"
+                                    aria-expanded="true" aria-controls="collapseUtilities">
+                                    {{-- <i class="fas fa-fw fa-wrench"></i> --}}
+                                    <i class="fa-solid fa-server"></i>
+                                    <span>Master</span>
+                                </a>
+                                <div id="collapseUtilities1"
+                                    class="collapse {{ request()->routeIs('city_master.*') || request()->routeIs('landmark.*') || request()->routeIs('unitmaster.*') || request()->routeIs('faq.*') || request()->routeIS('cms_master.*') || request()->routeIs('pointper.*') ? 'show' : '' }}"
+                                    aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                                    <div class="bg-white py-2 collapse-inner rounded">
+                                        {{-- city --}}
+                                        <a class="collapse-item {{ request()->routeIs('city_master.*') ? 'active' : '' }}"
+                                            href="{{ route('city_master.index') }}">
+                                            <i class="fa fa-location-pin mr-2"></i>
+                                            <span>Cities</span></a>
 
-                                    {{-- landmark --}}
-                                    <a class="collapse-item {{ request()->routeIs('landmark.*') ? 'active' : '' }}"
-                                        href="{{ route('landmark.index') }}">
-                                        <i class="fa fa-street-view mr-2"></i>
-                                        <span>Landmark</span></a>
+                                        {{-- landmark --}}
+                                        <a class="collapse-item {{ request()->routeIs('landmark.*') ? 'active' : '' }}"
+                                            href="{{ route('landmark.index') }}">
+                                            <i class="fa fa-street-view mr-2"></i>
+                                            <span>Landmark</span></a>
 
-                                    {{-- unit master --}}
-                                    <a class="collapse-item {{ request()->routeIs('unitmaster.*') ? 'active' : '' }}"
-                                        href="{{ Route('unitmaster.index') }}">
-                                        <i class="fa fa-bookmark mr-2"></i>
-                                        <span>Unit Master</span></a>
+                                        {{-- unit master --}}
+                                        <a class="collapse-item {{ request()->routeIs('unitmaster.*') ? 'active' : '' }}"
+                                            href="{{ Route('unitmaster.index') }}">
+                                            <i class="fa fa-bookmark mr-2"></i>
+                                            <span>Unit Master</span></a>
 
-                                    {{-- faq --}}
-                                    <a class="collapse-item {{ request()->routeIs('faq.*') ? 'active' : '' }}"
-                                        href="{{ Route('faq.index') }}">
-                                        <i class="fa fa-person-circle-question mr-2"></i>
-                                        <span>FAQs</span></a>
+                                        {{-- faq --}}
+                                        <a class="collapse-item {{ request()->routeIs('faq.*') ? 'active' : '' }}"
+                                            href="{{ Route('faq.index') }}">
+                                            <i class="fa fa-person-circle-question mr-2"></i>
+                                            <span>FAQs</span></a>
 
-                                    {{-- cms master --}}
-                                    <a class="collapse-item {{ request()->routeIs('cms_master.*') ? 'active' : '' }}"
-                                        href="{{ Route('cms_master.index') }}">
-                                        <i class="fa fa-list-check mr-2"></i>
-                                        <span>CMS Master</span></a>
+                                        {{-- cms master --}}
+                                        <a class="collapse-item {{ request()->routeIs('cms_master.*') ? 'active' : '' }}"
+                                            href="{{ Route('cms_master.index') }}">
+                                            <i class="fa fa-list-check mr-2"></i>
+                                            <span>CMS Master</span></a>
 
 
 
-                                    {{-- point per --}}
-                                    <a class="collapse-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}"
-                                        href="{{ route('pointper.index') }}">
-                                        <i class="fa fa-basket-shopping mr-2"></i>
-                                        <span>Point Per</span></a>
+                                        {{-- point per --}}
+                                        <a class="collapse-item {{ request()->routeIs('pointper.*') ? 'active' : '' }}"
+                                            href="{{ route('pointper.index') }}">
+                                            <i class="fa fa-basket-shopping mr-2"></i>
+                                            <span>Point Per</span></a>
 
+                                    </div>
                                 </div>
-                            </div>
-                            {{-- <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                                {{-- <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                                 data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     <a class="collapse-item" href="{{ route('user.index') }}">User List</a>
                                 </div>
                             </div> --}}
-                        </li>
+                            </li>
                         @endunless
 
                         {{-- product --}}
@@ -205,6 +205,13 @@
                                         <i class="fa-solid fa-cubes-stacked mr-2"></i>
                                         <span>Stock Update</span></a>
 
+                                    {{-- purchases --}}
+                                    <a class="collapse-item {{ request()->routeIs('purchase.*') ? 'active' : '' }}"
+                                        href="{{ route('purchase.index') }}">
+                                        <i class="fa fa-shopping-cart mr-2"></i>
+                                        <span>Purchases</span></a>
+
+
                                     {{-- review --}}
                                     <a class="collapse-item {{ request()->routeIs('vendor.*') ? 'active' : '' }}"
                                         href="{{ route('vendor.reviews.index') }}">
@@ -215,46 +222,46 @@
                         </li>
 
                         {{-- setting --}}
-                        @unless(Auth::user()->role === 'vendor')
-                        <li
-                            class="nav-item {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? '' : 'collapsed' }}"
-                                href="#" data-toggle="collapse" data-target="#collapseUtilities3"
-                                aria-expanded="true" aria-controls="collapseUtilities">
-                                <i class="fa-solid fa-gears"></i> <span>Setting</span>
-                            </a>
+                        @unless (Auth::user()->role === 'vendor')
+                            <li
+                                class="nav-item {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'active' : '' }}">
+                                <a class="nav-link {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? '' : 'collapsed' }}"
+                                    href="#" data-toggle="collapse" data-target="#collapseUtilities3"
+                                    aria-expanded="true" aria-controls="collapseUtilities">
+                                    <i class="fa-solid fa-gears"></i> <span>Setting</span>
+                                </a>
 
-                            <div id="collapseUtilities3"
-                                class="collapse {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'show' : '' }}"
-                                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                                <div class="bg-white py-2 collapse-inner rounded">
-                                    {{-- navigation --}}
-                                    <a class="collapse-item {{ request()->routeIs('navigate.*') ? 'active' : '' }}"
-                                        href="{{ route('navigate.index') }}">
-                                        <i class="fa fa-location-dot mr-2"></i>
-                                        <span>Navigate</span></a>
+                                <div id="collapseUtilities3"
+                                    class="collapse {{ request()->routeIs('navigate.*') || request()->routeIs('slider.*') || request()->routeIs('notification.*') || request()->routeIs('deliveryslot.*') ? 'show' : '' }}"
+                                    aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                                    <div class="bg-white py-2 collapse-inner rounded">
+                                        {{-- navigation --}}
+                                        <a class="collapse-item {{ request()->routeIs('navigate.*') ? 'active' : '' }}"
+                                            href="{{ route('navigate.index') }}">
+                                            <i class="fa fa-location-dot mr-2"></i>
+                                            <span>Navigate</span></a>
 
-                                    {{-- slider --}}
-                                    <a class="collapse-item {{ request()->routeIs('slider.*') ? 'active' : '' }}"
-                                        href="{{ Route('slider.index') }}">
-                                        <i class="fa fa-photo-film mr-2"></i>
-                                        <span>Slider</span></a>
+                                        {{-- slider --}}
+                                        <a class="collapse-item {{ request()->routeIs('slider.*') ? 'active' : '' }}"
+                                            href="{{ Route('slider.index') }}">
+                                            <i class="fa fa-photo-film mr-2"></i>
+                                            <span>Slider</span></a>
 
-                                    {{-- notification --}}
-                                    <a class="collapse-item {{ request()->routeIs('notification.*') ? 'active' : '' }}"
-                                        href="{{ route('notification.index') }}">
-                                        <i class="fa fa-bell mr-2"></i>
-                                        <span>Notification</span></a>
+                                        {{-- notification --}}
+                                        <a class="collapse-item {{ request()->routeIs('notification.*') ? 'active' : '' }}"
+                                            href="{{ route('notification.index') }}">
+                                            <i class="fa fa-bell mr-2"></i>
+                                            <span>Notification</span></a>
 
-                                    {{-- delivery slots --}}
-                                    <a class="collapse-item {{ request()->routeIs('deliveryslot.*') ? 'active' : '' }}"
-                                        href="{{ Route('deliveryslot.index') }}">
-                                        <i class="fa fa-truck mr-2"></i>
-                                        <span>Delivery Slots</span></a>
+                                        {{-- delivery slots --}}
+                                        <a class="collapse-item {{ request()->routeIs('deliveryslot.*') ? 'active' : '' }}"
+                                            href="{{ Route('deliveryslot.index') }}">
+                                            <i class="fa fa-truck mr-2"></i>
+                                            <span>Delivery Slots</span></a>
+                                    </div>
                                 </div>
-                            </div>
 
-                        </li>
+                            </li>
                         @endunless
 
                         <li class="nav-item {{ request()->routeIs('order.*') ? 'active' : '' }}">
@@ -360,27 +367,27 @@
                         {{-- <div class="sidebar-heading">
                             Interface
                         </div> --}}
-                        @unless(Auth::user()->role === 'vendor')
-                        <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
-                            <a class="pt-1 pb-2 nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}"
-                                href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                                aria-expanded="true" aria-controls="collapseUtilities">
-                                {{-- <i class="fas fa-fw fa-wrench"></i> --}}
-                                <i class="  fa-solid fa-users"></i>
-                                <span class="">User Management</span>
-                            </a>
-                            <div id="collapseUtilities"
-                                class="collapse {{ request()->routeIs('user.*') ? 'show' : '' }}"
-                                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                                <div class="bg-white py-2 collapse-inner rounded">
-                                    <a class="collapse-item {{ request()->routeIs('user.*') ? 'active' : '' }}"
-                                        href="{{ route('user.index') }}">
-                                        <i class="fa-solid fa-user"></i>
-                                        <span>User List</span>
-                                    </a>
+                        @unless (Auth::user()->role === 'vendor')
+                            <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
+                                <a class="pt-1 pb-2 nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}"
+                                    href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                                    aria-expanded="true" aria-controls="collapseUtilities">
+                                    {{-- <i class="fas fa-fw fa-wrench"></i> --}}
+                                    <i class="  fa-solid fa-users"></i>
+                                    <span class="">User Management</span>
+                                </a>
+                                <div id="collapseUtilities"
+                                    class="collapse {{ request()->routeIs('user.*') ? 'show' : '' }}"
+                                    aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                                    <div class="bg-white py-2 collapse-inner rounded">
+                                        <a class="collapse-item {{ request()->routeIs('user.*') ? 'active' : '' }}"
+                                            href="{{ route('user.index') }}">
+                                            <i class="fa-solid fa-user"></i>
+                                            <span>User List</span>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
                         @endunless
 
                         <!-- Nav Item - Pages Collapse Menu -->
@@ -1075,13 +1082,13 @@
         <script>
             var message =
                 '{{ session()->has('
-                                                                                                                                                                                                                                                                            success ')
+                                                                                                                                                                                                                                                                                            success ')
                     ? session()->get('
-                                                                                                                                                                                                                                                                            success ')
+                                                                                                                                                                                                                                                                                            success ')
                     : (session()->has('
-                                                                                                                                                                                                                                                                            error ')
+                                                                                                                                                                                                                                                                                            error ')
                         ? session()->get('
-                                                                                                                                                                                                                                                                            error ')
+                                                                                                                                                                                                                                                                                            error ')
                         : implode("\\n", $errors->all())) }}';
 
             // If there is a success message
