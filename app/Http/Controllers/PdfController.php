@@ -33,18 +33,40 @@ class PdfController extends Controller
         // $data=['purchase'=>$purchase];
         $start_date = session('start_date');
         $end_date = session('end_date');
-        $data = Purchase::with("productData")->whereDate('date', '>=', $start_date)
-            ->whereDate('date', '<=', $end_date)
-            ->get();
+        $user = auth()->user();
 
+        $query = Purchase::with("productData")
+        ->whereDate('date', '>=', $start_date)
+        ->whereDate('date', '<=', $end_date);
+
+         if ($user->role === 'vendor') {
+        $query->whereHas('productData', function ($q) use ($user) {
+            $q->where('product_id', $user->id);
+        });
+    }
+
+    $data = $query->get();
+
+        // $data = Purchase::with("productData")->whereDate('date', '>=', $start_date)
+        //     ->whereDate('date', '<=', $end_date)
+        //     ->get();
+
+         $pdfData = [
+        'data' => $data,
+        'start_date' => $start_date,
+        'end_date' => $end_date,
+      ];
+
+      $pdf = Pdf::loadView('admin.reports.purchaseDateWisePDF', $pdfData)
+        ->setPaper('a4', 'portrait');
         //$data=['data'=>$data];
 
-        $data = [
-            'data' => $data,
-            'start_date' => $start_date,
-            'end_date' => $end_date
-        ];
-        $pdf = Pdf::loadView('admin.reports.purchaseDateWisePDF', $data)->setPaper('a4', 'potrait');
+        // $data = [
+        //     'data' => $data,
+        //     'start_date' => $start_date,
+        //     'end_date' => $end_date
+        // ];
+        // $pdf = Pdf::loadView('admin.reports.purchaseDateWisePDF', $data)->setPaper('a4', 'potrait');
         return $pdf->download('purchaseReport.pdf');
     }
 
@@ -55,7 +77,7 @@ class PdfController extends Controller
         // return $order;
         // return view('visitor.invoicePDF', compact('order'));
         // $users = User::get();
-        
+
         $data = [
             'order' => $order,
             'logo_path' => public_path('visitor/images/logo.svg')

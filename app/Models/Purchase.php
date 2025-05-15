@@ -18,12 +18,18 @@ class Purchase extends Model
     return $this->belongsTo(Product::class);
 }
 
+public function vendor()
+{
+    return $this->belongsTo(User::class, 'vendor_id');
+}
+
     protected $fillable = [
         'product_id',
         'date',
         'price',
         'qty',
         'status',
+
     ];
 }
 ?>

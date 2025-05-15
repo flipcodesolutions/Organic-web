@@ -20,5 +20,5 @@ Route::get('/purchases/create', [PurchaseController::class, 'create'])->name('pu
 Route::post('/purchases', [PurchaseController::class, 'store'])->name('purchase.store');
 Route::get('/purchases/{purchase}', [PurchaseController::class, 'show'])->name('purchase.show');
 Route::get('/purchases/{purchase}/edit', [PurchaseController::class, 'edit'])->name('purchase.edit');
-Route::put('/purchases/{purchase}', [PurchaseController::class, 'update'])->name('purchase.update');
+Route::post('/purchases/{purchase}', [PurchaseController::class, 'update'])->name('purchase.update');
 Route::delete('/purchases/{purchase}', [PurchaseController::class, 'destroy'])->name('purchase.destroy');

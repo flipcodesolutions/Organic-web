@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+@php
+    $role = auth()->user()->role;
+@endphp
 <div class="container">
     <h2>Purchase Details</h2>
     <ul class="list-group">
