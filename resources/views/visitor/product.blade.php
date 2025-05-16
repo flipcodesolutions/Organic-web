@@ -418,15 +418,15 @@
                         </div>
 
                         <!-- Product Reviews -->
-                        <div class="product-review mt-3">
+                        {{-- <div class="product-review mt-3">
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <h4 class="mb-0">Product Reviews</h4>
                                 <button class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                                     onclick="productid({{ $product->id }})">Write Product
                                     Review</button>
-                            </div>
-                            {{-- model for prodeuct review --}}
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                            </div> --}}
+                        {{-- model for prodeuct review --}}
+                        {{-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -438,9 +438,9 @@
                                         <form action="{{ route('home.productreview') }}" method="post">
                                             @csrf
 
-                                            <div class="modal-body">
-                                                {{-- <input type="hidden" name="userId" value="{{ session('user')->id }}"> --}}
-                                                <input type="hidden" name="productId" id="productReview">
+                                            <div class="modal-body"> --}}
+                        {{-- <input type="hidden" name="userId" value="{{ session('user')->id }}"> --}}
+                        {{-- <input type="hidden" name="productId" id="productReview">
                                                 <textarea class="form-control" name="review" placeholder="Write your feedback here" id="exampleFormControlTextarea1"
                                                     rows="3"></textarea>
                                                 <label for="star-rating" class="me-2">Give Stare Rating</label>
@@ -465,9 +465,9 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
-                            {{-- <h4>Product Reviews</h4> --}}
-                            @if ($product->reviews && $product->reviews->isNotEmpty())
+                            </div> --}}
+                        {{-- <h4>Product Reviews</h4> --}}
+                        {{-- @if ($product->reviews && $product->reviews->isNotEmpty())
                                 @foreach ($product->reviews as $reviewData)
                                     <div class="d-flex align-items-start mb-3">
                                         <img src="{{ asset('user_profile/' . $reviewData->user->pro_pic) }}"
@@ -490,6 +490,83 @@
                             @else
                                 <p style="font-size: 1rem;">Product reviews not available.</p>
                             @endif
+                        </div> --}}
+
+                        <div class="product-review mt-3">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h4 class="mb-0">Product Reviews</h4>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                    onclick="productid({{ $product->id }})">
+                                    Write Product Review
+                                </button>
+                            </div>
+
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <form action="{{ route('home.productreview') }}" method="POST">
+                                            @csrf
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Rate your experience</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="productId" id="productReview"
+                                                    value="{{ $product->id }}">
+
+                                                <div class="mb-3">
+                                                    <label for="review" class="form-label">Your Review</label>
+                                                    <textarea class="form-control" name="review" rows="3" placeholder="Write your feedback here" required></textarea>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Star Rating</label><br>
+                                                    <div class="rating-stars">
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            <input type="radio" id="star{{ $i }}"
+                                                                name="rating" value="{{ $i }}"
+                                                                {{ $i == 1 ? 'checked' : '' }}>
+                                                            <label for="star{{ $i }}">★</label>
+                                                        @endfor
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Submit Review</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if ($product->reviews && $product->reviews->isNotEmpty())
+                                @foreach ($product->reviews as $reviewData)
+                                    <div class="d-flex align-items-start mb-3">
+                                        <img src="{{ asset('user_profile/' . ($reviewData->user->pro_pic ?? 'default.jpg')) }}"
+                                            alt="User Image" class="me-3"
+                                            style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+
+                                        <div class="w-100">
+                                            <div class="d-flex justify-content-between">
+                                                <h6 class="mb-0">{{ $reviewData->user->name ?? 'Unknown User' }}</h6>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-warning fw-bold me-1">{{ $reviewData->star }}</span>
+                                                    <img src="{{ asset('visitor/images/star.svg') }}" alt="Star"
+                                                        style="width: 16px;">
+                                                </div>
+                                            </div>
+                                            <p class="mb-0">{{ $reviewData->message }}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                @endforeach
+                            @else
+                                <p class="text-muted">Product reviews not available.</p>
+                            @endif
                         </div>
 
 
@@ -508,54 +585,54 @@
 
 
 
-    <div class="row">
-        @php
-            $filteredSimilarProducts = isset($similarproduct)
-                ? $similarproduct->where('id', '!=', request()->route('id'))
-                : collect();
-        @endphp
-        <div class="col-11 py-3">
-            <h3>Similar Products</h3>
-        </div>
-        @if ($filteredSimilarProducts->isNotEmpty())
-            <div class="row" style="justify-content: space-around; text-align: center;">
-                <div id="productCarousel" class="productCarousel carousel">
-                    <div class="product-carousel-inner">
-                        @foreach ($similarproduct as $productData)
-                            @if ($productData->id != request()->route('id'))
-                                <a href="{{ route('home.product') }}/{{ $productData->id }}"
-                                    class="productlink col-lg-3 col-sm-12">
-                                    <div class="product-carousel-item active">
-                                        <div class="catcard card p-2">
-                                            <img src="{{ asset($productData->productImages->first()->url) }}"
-                                                class="card-img-top" alt="..." height="180px">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{ $productData->productName }}</h5>
-                                                <p>{{ $productData->productUnit->first()->unitMaster->unit }}</p>
-                                                <p>₹{{ $productData->productPrice }}</p>
+        <div class="row">
+            @php
+                $filteredSimilarProducts = isset($similarproduct)
+                    ? $similarproduct->where('id', '!=', request()->route('id'))
+                    : collect();
+            @endphp
+            <div class="col-11 py-3">
+                <h3>Similar Products</h3>
+            </div>
+            @if ($filteredSimilarProducts->isNotEmpty())
+                <div class="row" style="justify-content: space-around; text-align: center;">
+                    <div id="productCarousel" class="productCarousel carousel">
+                        <div class="product-carousel-inner">
+                            @foreach ($similarproduct as $productData)
+                                @if ($productData->id != request()->route('id'))
+                                    <a href="{{ route('home.product') }}/{{ $productData->id }}"
+                                        class="productlink col-lg-3 col-sm-12">
+                                        <div class="product-carousel-item active">
+                                            <div class="catcard card p-2">
+                                                <img src="{{ asset($productData->productImages->first()->url) }}"
+                                                    class="card-img-top" alt="..." height="180px">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ $productData->productName }}</h5>
+                                                    <p>{{ $productData->productUnit->first()->unitMaster->unit }}</p>
+                                                    <p>₹{{ $productData->productPrice }}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
-                            @endif
-                        @endforeach
+                                    </a>
+                                @endif
+                            @endforeach
+                        </div>
+                        <button class="ms-3 product-carousel-control-prev carousel-control-prev" type="button"
+                            data-bs-target="#productCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="me-1 product-carousel-control-next carousel-control-next" type="button"
+                            data-bs-target="#productCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
-                    <button class="ms-3 product-carousel-control-prev carousel-control-prev" type="button"
-                        data-bs-target="#productCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="me-1 product-carousel-control-next carousel-control-next" type="button"
-                        data-bs-target="#productCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
-            </div>
-        @endif
+            @endif
 
-    </div>
-    {{-- @endif --}}
+        </div>
+        {{-- @endif --}}
     </div>
 @endsection
 
@@ -722,10 +799,7 @@
 
 
         function productid(id) {
-        document.getElementById('productReview').value = id;
-    }
-
-
-
+            document.getElementById('productReview').value = id;
+        }
     </script>
 @endsection

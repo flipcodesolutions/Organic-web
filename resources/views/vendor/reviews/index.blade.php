@@ -18,7 +18,7 @@
             </div>
         </div> --}}
         <div class="card-body table-responsive">
-            <div class="loader"></div>
+            <div class="loader"></div>  
             <table class="table table-bordered mt-2">
 
                     <tr>
@@ -34,14 +34,15 @@
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $review->rev_date }}</td>
-                        <td>{{ $review->product->name ?? 'Unknown' }}</td>
+                        <td>{{ $review->product->productName }}</td>
                         <td>{{ $review->message }}</td>
                         <td>⭐ {{ $review->star }}/5</td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-        {{ $reviews->links() }}
+        {{-- {{ $reviews->links() }} --}}
+        {!! $reviews->links('pagination::bootstrap-5') !!}
         </div>
     </div>
 </div>

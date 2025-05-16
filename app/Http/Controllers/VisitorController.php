@@ -503,18 +503,18 @@ class VisitorController extends Controller
     public function productreview(Request $request)
     {
         $request->validate([
-            'productId' => 'required|exists:products,id',
-            'userId' => 'required|exists:users,id',
+            'productId' => 'required',
             'review' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
         ]);
 
         $review = new Review();
         $review->product_id = $request->productId;
-        $review->user_id = $request->userId;
+        $review->user_id = session('user')->id;
         $review->message = $request->review;
         $review->star = $request->rating;
         $review->save();
+
 
         return redirect()->back();
     }

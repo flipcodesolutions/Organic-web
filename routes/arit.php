@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\vendor\PurchaseController;
+// use App\Http\Controllers\vendor\VendorReviewController;
 use App\Http\Controllers\Admin\Crm_MasterController;
 use App\Http\Controllers\ViewAllController;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,8 @@ Route::get('/purchases/{purchase}', [PurchaseController::class, 'show'])->name('
 Route::get('/purchases/{purchase}/edit', [PurchaseController::class, 'edit'])->name('purchase.edit');
 Route::post('/purchases/{purchase}', [PurchaseController::class, 'update'])->name('purchase.update');
 Route::delete('/purchases/{purchase}', [PurchaseController::class, 'destroy'])->name('purchase.destroy');
+
+// Route::post('/reviews', [VendorReviewController::class, 'store'])->name('reviews.store');
+// Route::get('/product/{id}', [VendorReviewController::class, 'show'])->name('product.show');
+
+

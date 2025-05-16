@@ -19,4 +19,14 @@ class Review extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function user_id()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function class()
+{
+    return $this->belongsTo(Product::class);
+}
 }
