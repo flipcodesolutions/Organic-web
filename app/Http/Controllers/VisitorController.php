@@ -19,6 +19,7 @@ use App\Models\Slider;
 use App\Models\TrackOrder;
 use App\Models\Unit;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -510,7 +511,8 @@ class VisitorController extends Controller
 
         $review = new Review();
         $review->product_id = $request->productId;
-        $review->user_id = session('user')->id;
+         $review->user_id = Auth::id();
+        // $review->user_id = session('user')->id;
         $review->message = $request->review;
         $review->star = $request->rating;
         $review->save();
@@ -518,5 +520,40 @@ class VisitorController extends Controller
 
         return redirect()->back();
     }
+
+
+// public function productreview(Request $request)
+// {
+//     // return $request;
+
+//     $request->validate([
+//         'productId' => 'required|exists:products,id',
+//         'review' => 'required|string',
+//         'rating' => 'required|integer|min:1|max:5',
+//     ]);
+
+//     $review = new Review();
+
+//     $review->product_id = $request->productId;
+
+
+//     if (session()->has(key: 'user') && is_object(value: session('user'))) {
+//         $review->user_id = session('user')->id;
+//     }
+//     elseif (Auth::check()) {
+//         $review->user_id = Auth::id();
+//     } else {
+//         return redirect()->back()->withErrors(provider: ['error' => 'User not logged in']);
+//     }
+
+//     $review->message = $request->review;
+//     $review->star = $request->rating;
+//     // return $review;
+//     $review->save();
+
+
+//     return redirect()->back()->with(key: 'success', value: 'Review submitted successfully.');
+// }
+
 
 }

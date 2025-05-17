@@ -18,7 +18,7 @@
             </div>
         </div> --}}
         <div class="card-body table-responsive">
-            <div class="loader"></div>  
+            <div class="loader"></div>
             <table class="table table-bordered mt-2">
 
                     <tr>
