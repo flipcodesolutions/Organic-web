@@ -511,8 +511,8 @@ class VisitorController extends Controller
 
         $review = new Review();
         $review->product_id = $request->productId;
-         $review->user_id = Auth::id();
-        // $review->user_id = session('user')->id;
+        // $review->user_id = Auth::id();
+        $review->user_id = session('user')->id;
         $review->message = $request->review;
         $review->star = $request->rating;
         $review->save();

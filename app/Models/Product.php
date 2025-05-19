@@ -55,4 +55,9 @@ public function class()
     return $this->hasMany(Review::class);
 }
 
+public function products()
+{
+    return $this->hasMany(Product::class, 'vendor_id'); // Adjust foreign key if needed
+}
+
 }

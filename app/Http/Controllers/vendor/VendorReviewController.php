@@ -14,10 +14,19 @@ class VendorReviewController extends Controller
      */
     public function index()
     {
-        $vendorId = Auth::id();
-        $reviews = Review::whereHas('product', function ($query) use ($vendorId) {
-            $query->where('user_id', $vendorId);
-        })->with('product', 'user')->orderBy('rev_date', 'desc')->paginate(10);
+        // $vendorId = Auth::id();
+        // $reviews = Review::whereHas('product', function ($query) use ($vendorId) {
+        //     $query->where('user_id', $vendorId);
+        // })->with('product', 'user')->orderBy('rev_date', 'desc')->paginate(10);
+        if(Auth::user()->role == 'Admin')
+        {
+            $reviews = Review::with('product', 'user')->orderBy('rev_date', 'desc')->paginate(10);
+        }
+        else{
+            $reviews = Review::whereHas('product',function($query){
+                $query->where('userId',Auth::user()->id);
+            })->with('product', 'user')->orderBy('rev_date', 'desc')->paginate(10);
+        }
 
         return view('vendor.reviews.index', compact('reviews'));
     }
