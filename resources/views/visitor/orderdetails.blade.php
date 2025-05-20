@@ -224,6 +224,7 @@
                                     </p>
                                     <p>₹ {{ $orderData->total }}</p>
                                 </div>
+                                @if(isset($orderData->trackorder) && strtolower($orderData->trackorder->orderStatus) === 'delivered')
                                 <div class="mt-auto">
                                     <a href="{{ route('home.product') }}/{{ $orderData->product->id }}"
                                         class="btn btn-success">Order Again</a>
@@ -234,6 +235,7 @@
                                     onclick="productid({{ $orderData->product->id }})">Write Product
                                     Review</a>
                             </div>
+                            @endif
                         </div>
                     @endforeach
                 </div>

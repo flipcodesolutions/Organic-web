@@ -41,7 +41,7 @@ class PdfController extends Controller
 
          if ($user->role === 'vendor') {
         $query->whereHas('productData', function ($q) use ($user) {
-            $q->where('product_id', $user->id);
+            $q->where('userId', $user->id);
         });
     }
 

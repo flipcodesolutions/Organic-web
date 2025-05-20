@@ -1,6 +1,6 @@
 @extends('visitor.layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container my-3">
         <h3 class="m-3">Your Address</h3>
 
 
@@ -26,13 +26,17 @@
                                 <p class="m-0 fw-bold">{{ session('user')->name }}</p>
                                 <p class="m-0">{{ $addressData->address_line1 }}</p>
                                 <p class="m-0">{{ $addressData->address_line2 }}</p>
-                                <p class="m-0">{{ $addressData->landmark->landmark_eng }} | {{ $addressData->landmark->citymaster->area_eng }}</p>
+                                <p class="m-0">{{ $addressData->landmark->landmark_eng }} |
+                                    {{ $addressData->landmark->citymaster->area_eng }}</p>
                                 <p class="m-0">{{ $addressData->landmark->citymaster->city_name_eng }}</p>
                                 <p class="m-0">{{ $addressData->pincode }}</p>
                             </div>
                             <div class="mt-3">
                                 <a href="{{ route('visitor.editaddress') }}/{{ $addressData->id }}">Edit</a> |
-                                <a href="{{ route('visitor.deleteaddress') }}/{{ $addressData->id }}"  onclick="return confirm('Are you sure you want to delete this address?');">Delete</a>
+                                {{-- <a href="{{ route('visitor.deleteaddress') }}/{{ $addressData->id }}"  onclick="return confirm('Are you sure you want to delete this address?');">Delete</a> --}}
+                                <a href="" class="delete-btn"
+                                    data-url="{{ route('visitor.deleteaddress') }}/{{ $addressData->id }}">Delete</a>
+
                             </div>
                         </div>
                     </div>
@@ -78,4 +82,40 @@
             @endforeach
         </div> --}}
     </div>
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.delete-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    let url = this.getAttribute('data-url');
+
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to undo this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = url;
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 @endsection

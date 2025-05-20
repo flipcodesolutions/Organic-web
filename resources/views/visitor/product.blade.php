@@ -7,6 +7,28 @@
             height: 34px;
             margin-right: 10px
         }
+
+        .star-rating {
+            direction: rtl;
+            display: inline-flex;
+            font-size: 2rem;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star-rating input:checked~label,
+        .star-rating label:hover,
+        .star-rating label:hover~label {
+            color: gold;
+        }
     </style>
 
     <div class="container-fluid">
@@ -521,7 +543,7 @@
                                                     <textarea class="form-control" name="review" rows="3" placeholder="Write your feedback here" required></textarea>
                                                 </div>
 
-                                                <div class="mb-3">
+                                                {{-- <div class="mb-3">
                                                     <label class="form-label">Star Rating</label><br>
                                                     <div class="rating-stars">
                                                         @for ($i = 1; $i <= 5; $i++)
@@ -531,6 +553,20 @@
                                                             <label for="star{{ $i }}">★</label>
                                                         @endfor
                                                     </div>
+                                                </div> --}}
+
+                                                <label for="star-rating" class="me-2">Give Stare Rating</label>
+                                                <div class="star-rating">
+                                                    <input type="radio" id="star5" name="rating"
+                                                        value="5"><label for="star5">★</label>
+                                                    <input type="radio" id="star4" name="rating"
+                                                        value="4"><label for="star4">★</label>
+                                                    <input type="radio" id="star3" name="rating"
+                                                        value="3"><label for="star3">★</label>
+                                                    <input type="radio" id="star2" name="rating"
+                                                        value="2"><label for="star2">★</label>
+                                                    <input type="radio" id="star1" name="rating"
+                                                        value="1"><label for="star1">★</label>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">

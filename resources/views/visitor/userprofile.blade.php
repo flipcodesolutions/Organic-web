@@ -2,7 +2,7 @@
 @section('content')
     <div class="contanier">
         @if (session('user'))
-            <div class="row justify-content-center px-3">
+            <div class="row justify-content-center px-3 my-3">
                 <div class="col-lg-6">
                     <h2>Your Profile</h2>
                     <div class="d-flex justify-content-center">

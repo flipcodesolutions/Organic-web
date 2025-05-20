@@ -1,6 +1,6 @@
 @extends('visitor.layouts.app')
 @section('content')
-    <div class="order-container container h-100">
+    <div class="order-container container h-100 my-3">
 
         <h2>Your Orders</h2>
 
@@ -38,10 +38,12 @@
                                         <h6>{{ $orderDetailData->product->productName }}</h6>
                                         <p>{!! $orderDetailData->product->productDescription !!}</p>
                                     </div>
-                                    <div class="mt-auto">
-                                        <a href="{{ route('home.product') }}/{{ $orderDetailData->product->id }}"
-                                            class="btn btn-success">Order Again</a>
-                                    </div>
+                                    @if (isset($orderDetailData->trackorder) && strtolower($orderDetailData->trackorder->orderStatus) === 'delivered')
+                                        <div class="mt-auto">
+                                            <a href="{{ route('home.product') }}/{{ $orderDetailData->product->id }}"
+                                                class="btn btn-success">Order Again</a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach

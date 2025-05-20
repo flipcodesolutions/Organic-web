@@ -204,7 +204,7 @@
 
             <!-- Product Grid -->
             <div class="col-12 col-md-9 col-lg-10">
-                <h4 class="mb-3">Products</h4>
+                <h4 class="mb-3">{{ $catData->categoryName }}</h4>
                 <div class="row g-3">
                     @foreach ($product as $productData)
                         <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex align-items-stretch">

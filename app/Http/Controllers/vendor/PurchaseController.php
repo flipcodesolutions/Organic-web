@@ -13,18 +13,34 @@ class PurchaseController extends Controller
      * Display a listing of the resource.
      */
     public function index()
+    // {
+    //     //
+    //     $user = auth()->user();
+    //      if ($user->role === 'vendor') {
+    //     $purchases = Purchase::with('product')
+    //         ->where('product_id', $user->id)
+    //         ->get();
+    //      }else{
+    //     $purchases = Purchase::with('product')->get();
+    //     }
+    //     return view('admin.reports.purchaseindex', compact('purchases'));
+    // }
+
     {
-        //
-        $user = auth()->user();
-         if ($user->role === 'vendor') {
+    $user = auth()->user();
+
+    if ($user->role === 'vendor') {
         $purchases = Purchase::with('product')
-            ->where('product_id', $user->id)
+            ->whereHas('product', function ($query) use ($user) {
+                $query->where('userId', $user->id);
+            })
             ->get();
-         }else{
+    } else {
         $purchases = Purchase::with('product')->get();
-        }
-        return view('admin.reports.purchaseindex', compact('purchases'));
     }
+
+    return view('admin.reports.purchaseindex', compact('purchases'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -209,7 +225,7 @@ class PurchaseController extends Controller
         //     ->get();
         if ($user->role === 'vendor') {
         $query->whereHas('productData', function ($q) use ($user) {
-            $q->where('product_id', $user->id);
+            $q->where('userId', $user->id);
         });
     }
 
