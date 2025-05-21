@@ -1,6 +1,6 @@
 @extends('visitor.layouts.app')
 @section('content')
-    <div class="container d-flex justify-content-center">
+    <div class="container d-flex justify-content-center my-3">
         <div class="address-form col-lg-4 col-md-12">
             <div class="my-3">
                 <h5>Add new address</h5>

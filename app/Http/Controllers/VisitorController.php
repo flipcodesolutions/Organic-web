@@ -434,6 +434,11 @@ class VisitorController extends Controller
 
     public function placeorder(Request $request)
     {
+
+         $request->validate([
+        'addressId' => 'required|exists:shipping_addresses,id',
+        'paymentmethod' => 'required|in:1,2',
+    ]);
         $order = new OrderMaster();
         $order->userId = $request->userId;
         $order->total_order_amt = $request->totalPrice;
@@ -520,6 +525,27 @@ class VisitorController extends Controller
 
         return redirect()->back();
     }
+
+
+
+   public function destroy($id)
+{
+    $review = Review::find($id);
+
+    if (!$review) {
+        return redirect()->back()->with('error', 'Review not found.');
+    }
+
+    // Optional: Only allow the user who created the review to delete it
+    if (session('user')->id !== $review->user_id) {
+        return redirect()->back()->with('error', 'You are not authorized to delete this review.');
+    }
+
+    $review->delete();
+
+    return redirect()->back()->with('success', 'Review deleted successfully.');
+}
+
 
 
 // public function productreview(Request $request)

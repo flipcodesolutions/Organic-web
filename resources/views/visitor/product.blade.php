@@ -588,7 +588,16 @@
 
                                         <div class="w-100">
                                             <div class="d-flex justify-content-between">
-                                                <h6 class="mb-0">{{ $reviewData->user->name ?? 'Unknown User' }}</h6>
+                                                <h6 class="mb-0">
+                                                    {{ $reviewData->user->name ?? 'Unknown User' }}
+                                                    <a href="{{ route('home.deletereview', $reviewData->id) }}"
+                                                        class="mx-2 text-danger"
+                                                        onclick="return confirm('Are you sure you want to delete this review?');">
+                                                        <i class="fa-solid fa-trash text-danger"></i>
+                                                    </a>
+                                                </h6>
+
+
                                                 <div class="d-flex align-items-center">
                                                     <span class="text-warning fw-bold me-1">{{ $reviewData->star }}</span>
                                                     <img src="{{ asset('visitor/images/star.svg') }}" alt="Star"
@@ -627,44 +636,65 @@
                     ? $similarproduct->where('id', '!=', request()->route('id'))
                     : collect();
             @endphp
-            <div class="col-11 py-3">
-                <h3>Similar Products</h3>
-            </div>
             @if ($filteredSimilarProducts->isNotEmpty())
-                <div class="row" style="justify-content: space-around; text-align: center;">
-                    <div id="productCarousel" class="productCarousel carousel">
-                        <div class="product-carousel-inner">
-                            @foreach ($similarproduct as $productData)
-                                @if ($productData->id != request()->route('id'))
-                                    <a href="{{ route('home.product') }}/{{ $productData->id }}"
-                                        class="productlink col-lg-3 col-sm-12">
-                                        <div class="product-carousel-item active">
-                                            <div class="catcard card p-2">
-                                                <img src="{{ asset($productData->productImages->first()->url) }}"
-                                                    class="card-img-top" alt="..." height="180px">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">{{ $productData->productName }}</h5>
-                                                    <p>{{ $productData->productUnit->first()->unitMaster->unit }}</p>
-                                                    <p>₹{{ $productData->productPrice }}</p>
+                <div class="col-11 py-3">
+                    <h3>Similar Products</h3>
+                </div>
+                @if ($similarproduct->count() >= 5)
+                    <div class="row" style="justify-content: space-around; text-align: center;">
+                        <div id="productCarousel" class="productCarousel carousel">
+                            <div class="product-carousel-inner">
+                                @foreach ($similarproduct as $productData)
+                                    @if ($productData->id != request()->route('id'))
+                                        <a href="{{ route('home.product') }}/{{ $productData->id }}"
+                                            class="productlink col-lg-3 col-sm-12">
+                                            <div class="product-carousel-item active">
+                                                <div class="catcard card p-2">
+                                                    <img src="{{ asset($productData->productImages->first()->url) }}"
+                                                        class="card-img-top" alt="..." height="180px">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{ $productData->productName }}</h5>
+                                                        <p>{{ $productData->productUnit->first()->unitMaster->unit }}</p>
+                                                        <p>₹{{ $productData->productPrice }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                @endif
-                            @endforeach
+                                        </a>
+                                    @endif
+                                @endforeach
+                            </div>
+                            <button class="ms-3 product-carousel-control-prev carousel-control-prev" type="button"
+                                data-bs-target="#productCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="me-1 product-carousel-control-next carousel-control-next" type="button"
+                                data-bs-target="#productCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
-                        <button class="ms-3 product-carousel-control-prev carousel-control-prev" type="button"
-                            data-bs-target="#productCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="me-1 product-carousel-control-next carousel-control-next" type="button"
-                            data-bs-target="#productCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
-                </div>
+                @else
+                    <div class="row justify-content-start text-center">
+                        @foreach ($filteredSimilarProducts as $productData)
+                            <div class="col-lg-3 col-sm-6 mb-3">
+                                <a href="{{ route('home.product', $productData->id) }}" class="productlink">
+                                    <div class="catcard card p-2">
+                                        <img src="{{ asset($productData->productImages->first()->url) }}"
+                                            class="card-img-top" alt="..." height="180px">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $productData->productName }}</h5>
+                                            <p>{{ $productData->productUnit->first()->unitMaster->unit }}</p>
+                                            <p>₹{{ $productData->productPrice }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
             @endif
 
         </div>
@@ -837,5 +867,39 @@
         function productid(id) {
             document.getElementById('productReview').value = id;
         }
+
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-review');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const reviewId = this.getAttribute('data-id');
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Redirect to the delete route
+                        window.location.href = `/deletereview/${reviewId}`;
+                    }
+                });
+            });
+        });
+    });
+
+
     </script>
 @endsection

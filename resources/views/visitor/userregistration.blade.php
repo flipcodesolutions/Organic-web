@@ -1,6 +1,6 @@
 @extends('visitor.layouts.app')
 @section('content')
-    <div class="container-fluid d-flex justify-content-center align-items-center"
+    <div class="container-fluid d-flex justify-content-center align-items-center my-3"
         style="background-color: blueviolet; min-height:638px">
         <div class="card w-50 p-5" style="background-color: white">
             @if (session()->has('newuser'))

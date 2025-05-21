@@ -62,4 +62,7 @@ Route::get('invoicepdf/{id?}',[PdfController::class,'invoicePDF'])->name('home.i
 Route::get('visitor/view-all', [ViewAllController::class, 'viewall'])->name('view.all');
 Route::get('/search', [SearchController::class, 'serach'])->name('search');
 Route::post('/search/autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
+
+Route::get('/delete-review/{id}', [VisitorController::class, 'destroy'])->name('home.deletereview');
+
 ?>

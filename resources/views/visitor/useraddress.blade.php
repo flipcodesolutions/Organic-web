@@ -32,10 +32,18 @@
                                 <p class="m-0">{{ $addressData->pincode }}</p>
                             </div>
                             <div class="mt-3">
-                                <a href="{{ route('visitor.editaddress') }}/{{ $addressData->id }}">Edit</a> |
+                                {{-- <a href="{{ route('visitor.editaddress') }}/{{ $addressData->id }}">Edit</a> --}}
+                                <a class="mx-2" href="{{ route('visitor.editaddress', $addressData->id) }}">
+                                    <i class="fa-solid fa-pen-to-square text-primary" style="height: 20px"></i>
+                                </a> |
                                 {{-- <a href="{{ route('visitor.deleteaddress') }}/{{ $addressData->id }}"  onclick="return confirm('Are you sure you want to delete this address?');">Delete</a> --}}
-                                <a href="" class="delete-btn"
-                                    data-url="{{ route('visitor.deleteaddress') }}/{{ $addressData->id }}">Delete</a>
+                                {{-- <a href="" class="delete-btn"
+                                    data-url="{{ route('visitor.deleteaddress') }}/{{ $addressData->id }}">Delete</a> --}}
+
+                                <a href="" class="delete-btn mx-2"
+                                    data-url="{{ route('visitor.deleteaddress', $addressData->id) }}">
+                                    <i class="fa-solid fa-trash text-danger" style="height: 20px"></i>
+                                </a>
 
                             </div>
                         </div>

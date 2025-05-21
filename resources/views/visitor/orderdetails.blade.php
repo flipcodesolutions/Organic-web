@@ -24,7 +24,7 @@
         }
     </style>
 
-    <div class="order-details-container container sm-px-0">
+    <div class="order-details-container container sm-px-0 my-3">
         @if (session('user'))
             <h1>Order Details</h1>
             <div class="d-flex justify-content-between mb-2">

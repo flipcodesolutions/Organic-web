@@ -168,15 +168,17 @@
             <!-- Sidebar -->
             <div class="col-12 col-md-3 col-lg-2 mb-3 mb-md-0">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item {{ request()->has('categoryId') ? '' : 'active bg-body-tertiary border-light' }}">
-                        <a href="{{ route('home.category', ['id' => request()->route('id')]) }}" class="text-decoration-none text-dark">
+                    <li class="my-1 {{ request()->has('categoryId') ? '' : 'active bg-body-tertiary border-light' }}">
+                        <a href="{{ route('home.category', ['id' => request()->route('id')]) }}"
+                            class="text-decoration-none text-dark">
                             <div class="card category-card">
                                 <div class="row g-0">
                                     <div class="col-4 d-flex align-items-center">
-                                        <img src="{{ asset($category[0]->cat_icon ?? '') }}" alt="" class="img-thumbnail p-0">
+                                        <img src="{{ asset($category[0]->cat_icon ?? '') }}" alt=""
+                                            class="img-thumbnail p-0">
                                     </div>
                                     <div class="col-8 d-flex align-items-center">
-                                        <h6 class="mb-0 text-truncate ms-2">All</h6>
+                                        <h6 class=" mb-0 text-truncate ms-2">All</h6>
                                     </div>
                                 </div>
                             </div>
@@ -184,12 +186,15 @@
                     </li>
 
                     @foreach ($childcategory as $catData)
-                        <li class="list-group-item {{ request('categoryId') == $catData->id ? 'active bg-body-tertiary border-light' : '' }}">
-                            <a href="{{ route('home.category', ['id' => request()->route('id')]) }}?categoryId={{ $catData->id }}" class="text-decoration-none text-dark">
+                        <li
+                            class="my-1 {{ request('categoryId') == $catData->id ? 'active bg-body-tertiary border-light' : '' }}">
+                            <a href="{{ route('home.category', ['id' => request()->route('id')]) }}?categoryId={{ $catData->id }}"
+                                class="text-decoration-none text-dark">
                                 <div class="card category-card">
                                     <div class="row g-0">
                                         <div class="col-4 d-flex align-items-center">
-                                            <img src="{{ asset($catData->cat_icon) }}" alt="" class="img-thumbnail p-0">
+                                            <img src="{{ asset($catData->cat_icon) }}" alt=""
+                                                class="img-thumbnail p-0">
                                         </div>
                                         <div class="col-8 d-flex align-items-center">
                                             <p class="mb-0 text-truncate ms-2">{{ $catData->categoryName }}</p>
@@ -207,12 +212,47 @@
                 <h4 class="mb-3">{{ $catData->categoryName }}</h4>
                 <div class="row g-3">
                     @foreach ($product as $productData)
-                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex align-items-stretch">
+                        {{-- <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex align-items-stretch">
                             <a href="{{ route('home.product') }}/{{ $productData->id }}" class="w-100 text-decoration-none text-dark">
                                 <div class="card h-100 text-center p-1">
                                     <img src="{{ asset($productData->image) }}" alt="" class="img-fluid mx-auto" style="max-height: 177px;">
                                     <div class="card-body">
                                         <h6 class="card-title">{{ $productData->productName }}</h6>
+                                    </div>
+                                </div>
+                            </a>
+                        </div> --}}
+
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                            <a href="{{ route('home.product', $productData->id) }}"
+                                class="w-100 text-decoration-none text-dark">
+                                <div class="card h-100 text-center p-1">
+                                    <img src="{{ asset($productData->image) }}" alt="" class="img-fluid mx-auto"
+                                        style="max-height: 177px;">
+                                    <div class="card-body d-flex flex-column">
+                                        <h6 class="card-title mb-1 text-truncate">{{ $productData->productName }}</h6>
+                                        <p class="mb-0">{{ $productData->productUnit->first()->unitMaster->unit }}
+                                            </p>
+                                            <p class="mb-0 ">₹{{ $productData->productPrice }}</p>
+
+                                        <!-- Buttons -->
+                                        {{-- <div class="mt-auto">
+                                            <a href="{{ $productData->id }}" class="btn btn-sm btn-success w-100 mb-1">
+                                                Buy Now
+                                            </a>
+                                            <form action="" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $productData->id }}">
+                                                <button type="submit" class="btn btn-sm btn-primary w-100">
+                                                    Add to Cart
+                                                </button>
+                                            </form>
+                                        </div> --}}
+                                        <div class="action-buttons mb-4">
+                                            <button class="btn btn-primary me-2 my-3" type="submit" id="addtocart">Add to
+                                                Cart</button>
+                                            <button class="btn btn-success" id="buynow">Buy Now</button>
+                                        </div>
                                     </div>
                                 </div>
                             </a>

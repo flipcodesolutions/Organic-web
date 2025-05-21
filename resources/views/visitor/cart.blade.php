@@ -55,9 +55,14 @@
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-1 col-sm-1">
+                                                    {{-- <div class="col-lg-1 col-sm-1">
                                                         <a
                                                             href="{{ route('home.deletecart') }}/{{ $cartData->id }}">delete</a>
+                                                    </div> --}}
+                                                    <div class="col-lg-1 col-sm-1">
+                                                        <a href="{{ route('home.deletecart', $cartData->id) }}">
+                                                            <i class="fa-solid fa-trash text-danger my-1 mx-2" style="height: 25px"></i>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -109,7 +114,7 @@
                                         <input type="hidden" name="totalBillAmmount" id='totalBillAmmountInput'>
                                     </div>
 
-                                    <div class="address py-3" style="border-top: 1px dashed #e0e0e0;">
+                                    {{-- <div class="address py-3" style="border-top: 1px dashed #e0e0e0;">
                                         <h6>Select Delivery address</h6>
                                         @foreach ($address as $addressData)
                                             <div class="form-check">
@@ -127,7 +132,34 @@
                                                     address</a>
                                             </div>
                                         @endforeach
+                                    </div> --}}
+
+                                    <div class="address py-3" style="border-top: 1px dashed #e0e0e0;">
+                                        <h6>Select Delivery address</h6>
+
+
+                                        @foreach ($address as $addressData)
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="addressId"
+                                                    value="{{ $addressData->id }}" id="address{{ $addressData->id }}"
+                                                    {{ old('addressId') == $addressData->id ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="address{{ $addressData->id }}">
+                                                    {{ $addressData->address_line1 }},
+                                                    {{ $addressData->address_line2 }},
+                                                    {{ $addressData->landmark->landmark_eng }},
+                                                    {{ $addressData->pincode }}.
+                                                </label>
+                                            </div>
+                                            @if ($errors->has('addressId'))
+                                                <div class="text-danger mb-2">{{ $errors->first('addressId') }}</div>
+                                            @endif
+                                            <div class="my-2 mb-2">
+                                                <a class="btn btn-success" href="{{ route('visitor.editaddress', $addressData->id) }}">Edit
+                                                    address</a>
+                                            </div>
+                                        @endforeach
                                     </div>
+
 
                                     {{-- <div class="deliveryslot">
                                 <h6>Select Delivery slot</h6>
@@ -141,7 +173,7 @@
                                 </select>
                             </div> --}}
 
-                                    <div class="paymentmethod mb-3">
+                                    {{-- <div class="paymentmethod mb-3">
                                         <h6>Select payment method</h6>
                                         <select name="paymentmethod" class="form-select " aria-label="Large select example"
                                             id="">
@@ -149,7 +181,26 @@
                                             <option value="1">Case On Delevery</option>
                                             <option value="2">Pay Online</option>
                                         </select>
+                                    </div> --}}
+
+                                    <div class="paymentmethod mb-3">
+                                        <h6>Select payment method</h6>
+
+
+                                        <select name="paymentmethod" class="form-select" aria-label="Select Payment Method">
+                                            <option value="" disabled
+                                                {{ old('paymentmethod') == '' ? 'selected' : '' }}>Select Payment Method
+                                            </option>
+                                            <option value="1" {{ old('paymentmethod') == '1' ? 'selected' : '' }}>
+                                                Cash On Delivery</option>
+                                            <option value="2" {{ old('paymentmethod') == '2' ? 'selected' : '' }}>Pay
+                                                Online</option>
+                                        </select>
                                     </div>
+                                    @if ($errors->has('paymentmethod'))
+                                        <div class="text-danger mb-2">{{ $errors->first('paymentmethod') }}</div>
+                                    @endif
+
 
                                     <div class="placeorder">
                                         <button class="btn btn-success" type="submit"> Place Order </button>
