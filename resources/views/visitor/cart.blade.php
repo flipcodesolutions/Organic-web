@@ -61,7 +61,8 @@
                                                     </div> --}}
                                                     <div class="col-lg-1 col-sm-1">
                                                         <a href="{{ route('home.deletecart', $cartData->id) }}">
-                                                            <i class="fa-solid fa-trash text-danger my-1 mx-2" style="height: 25px"></i>
+                                                            <i class="fa-solid fa-trash text-danger my-2 mx-2"
+                                                                style="height: 20px"></i>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -154,7 +155,8 @@
                                                 <div class="text-danger mb-2">{{ $errors->first('addressId') }}</div>
                                             @endif
                                             <div class="my-2 mb-2">
-                                                <a class="btn btn-success" href="{{ route('visitor.editaddress', $addressData->id) }}">Edit
+                                                <a class="btn btn-success"
+                                                    href="{{ route('visitor.editaddress', $addressData->id) }}">Edit
                                                     address</a>
                                             </div>
                                         @endforeach
@@ -187,7 +189,8 @@
                                         <h6>Select payment method</h6>
 
 
-                                        <select name="paymentmethod" class="form-select" aria-label="Select Payment Method">
+                                        <select name="paymentmethod" class="form-select"
+                                            aria-label="Select Payment Method">
                                             <option value="" disabled
                                                 {{ old('paymentmethod') == '' ? 'selected' : '' }}>Select Payment Method
                                             </option>
@@ -333,8 +336,11 @@
                 </div>
             @else
                 <div class="d-flex gap-1 align-items-center">
-                    <span> Your cart is empty whould you like to <a href="{{ route('visitor.index') }}">continue
-                            shopping</a></span>
+                    {{-- <span> Your cart is empty whould you like to <a href="{{ route('visitor.index') }}">continue
+                            shopping</a></span> --}}
+                    <img src="{{ asset('visitor/images/117-1170538_404-your-cart-is-empty.png') }}" alt="Empty Cart"
+                        style="max-width: 300px; height: auto;">
+                    <a href="{{ route('visitor.index') }}" class="btn btn-primary">Continue Shopping</a>
                 </div>
             @endif
         @endif

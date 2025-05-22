@@ -357,7 +357,7 @@
                     </select>
                     <div class="d-flex position-relative" style="width: 100%; max-width: 400px;">
                         <input type="text" class="form-control w-auto" id="search"
-                            placeholder="Search for 20,000+ products">
+                            placeholder="Search...">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div id="searchList"></div>
                         <button class="btn btn-outline-secondary ms-2">

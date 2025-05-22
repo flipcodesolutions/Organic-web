@@ -435,10 +435,19 @@ class VisitorController extends Controller
     public function placeorder(Request $request)
     {
 
-         $request->validate([
-        'addressId' => 'required|exists:shipping_addresses,id',
-        'paymentmethod' => 'required|in:1,2',
-    ]);
+    //     $request->validate([
+    //     'addressId' => 'required|exists:shipping_addresses,id',
+    //     'paymentmethod' => 'required|in:1,2',
+    // ]);
+
+    $request->validate([
+    'addressId' => 'required|exists:shipping_addresses,id',
+    'paymentmethod' => 'required|in:1,2',
+], [
+    'addressId.required' => 'Please select a delivery address.',
+    'paymentmethod.required' => 'Please choose a payment method.',
+]);
+
         $order = new OrderMaster();
         $order->userId = $request->userId;
         $order->total_order_amt = $request->totalPrice;
