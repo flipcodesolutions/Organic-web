@@ -268,7 +268,17 @@
                                     <input type="number" class="form-control quantity-input mb-2" min="1"
                                         value="1" hidden>
 
-                                    <button class="btn btn-success" id="buynow"  {{ session()->has('user') ? '' : 'disabled' }}>Buy Now</button>
+                                    <input type="number" class="form-control quantity-input" value="1" min="1"
+                                        hidden>
+
+                                    {{-- <button class="btn btn-success buynow-btn" {{ session()->has('user') ? '' : 'disabled' }}>Buy Now</button> --}}
+
+                                    <button class="btn btn-success buynow-btn"
+                                        data-unit-id="{{ $productData->productUnit->first()->id }}"
+                                        data-product-id="{{ $productData->id }}"
+                                        data-total="{{ $productData->productPrice }}">
+                                        Buy Now
+                                    </button>
                                     <button class="btn btn-primary me-2 my-3 addtocart-btn" title="add to cart"
                                         data-unit-id="{{ $productData->productUnit->first()?->id }}"
                                         data-product-id="{{ $productData->id }}"
@@ -395,39 +405,107 @@
 
 
 
+        // $(document).ready(function() {
+        //     $(".buynow-btn").on("click", function() {
+        //         let productName = $(this).data("name");
+        //         let unitId = $(this).data("unit-id");
+        //         let productId = $(this).data("product-id");
+        //         let totalAmount = $(this).data("total");
+        //         let price = $(this).data("productPrice");
+        //         let quantity = 1;
+
+        //         let quantityField = $(this).closest(".card").find(".quantity-input");
+        //         if (quantityField.length > 0) {
+        //             quantity = parseInt(quantityField.val(), 10) || 1;
+        //         }
+
+        //         // if (!unitId || !productId) {
+        //         //     Swal.fire("Oops!", "Product information is incomplete!", "warning");
+        //         //     return;
+        //         // }
+
+        //         $.ajax({
+        //             url: "{{ route('home.cart') }}",
+        //             type: "get",
+        //             headers: {
+        //                 "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        //             },
+        //             contentType: "application/json",
+        //             data: JSON.stringify({
+        //                 unit_id: {
+        //                     id: unitId,
+        //                     product_id: productId
+        //                 },
+        //                 quantity: quantity,
+        //                 total_amount: totalAmount
+        //             }),
+        //             success: function(response) {
+        //                 console.log("Added to Cart:", response.message);
+        //                 alert(response.message);
+        //             },
+        //             error: function(xhr, status, error) {
+        //                 console.error("Error:", error);
+        //                 alert(response.message);
+        //             }
+        //         });
+        //     });
+        // });
+
+
+
         $(document).ready(function() {
-            $("#buynow").on("click", function() {
-                let quantityField = $("#quantity");
-                let currentValue = parseInt(quantityField.val(), 10);
+            $(".buynow-btn").on("click", function() {
+                let button = $(this);
+                let unitId = button.data("unit-id");
+                let productId = button.data("product-id");
+                let totalAmount = button.data("total");
+                let quantity = 1;
 
-                let totalamount = $('#totalAmount').text().replace(/[^\d.]/g, '');
-
-                if (!unitdata || !unitdata.id) {
-                    alert("Please select a unit first!");
-                    return;
+                let quantityField = button.closest(".card").find(".quantity-input");
+                if (quantityField.length > 0) {
+                    quantity = parseInt(quantityField.val(), 10) || 1;
                 }
 
                 $.ajax({
-                    url: "{{ route('home.addtocart') }}", // Ensure this URL is correct for your 'buynow' functionality
+                    url: "{{ route('home.addtocart') }}", // ✅ This route must allow POST
                     type: "POST",
                     headers: {
                         "X-CSRF-TOKEN": "{{ csrf_token() }}"
                     },
-                    data: {
-                        unit_id: unitdata,
-                        quantity: currentValue,
-                        total_amount: totalamount
-                    },
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        unit_id: {
+                            id: unitId,
+                            product_id: productId
+                        },
+                        quantity: quantity,
+                        total_amount: totalAmount
+                    }),
                     success: function(response) {
-                        console.log("Item purchased:", response.message);
-                        alert(response.message);
+                        console.log("Added to cart:", response.message || response);
+                        window.location.href =
+                        "{{ route('home.cart') }}"; // redirect to cart page
                     },
-                    error: function(xhr, status, error) {
-                        console.error("Error:", error);
-                        alert("There was an error while processing your request.");
+                    error: function(xhr) {
+                        console.error("Error adding to cart:", xhr.responseText);
+                        alert("Something went wrong.");
                     }
                 });
             });
         });
+
+
+
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     const buyNowButtons = document.querySelectorAll(".buynow-btn");
+
+        //     buyNowButtons.forEach(function(button) {
+        //         if (!button.hasAttribute("disabled")) {
+        //             button.addEventListener("click", function() {
+        //                 window.location.href = "{{ route('home.cart') }}";
+        //             });
+        //         }
+        //     });
+        // });
     </script>
 @endsection

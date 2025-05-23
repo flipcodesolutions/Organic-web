@@ -4,16 +4,48 @@
         @if (session()->has('user'))
             @if (count($cart) > 0)
                 <div class="row justify-content-between w-100">
+                    <div class="col-lg-9 col-sm-12 p-3 pb-0">
+                        <div class="card mb-3">
+                            <div class="row g-0">
+
+                                <div class="address py-3 mx-3" style="border-top: 1px dashed #e0e0e0;">
+                                    <h6>Select Delivery address</h6>
+                                    <h6>Delivered to: <strong>{{ session('user')->name ?? 'Sign in' }}</strong> </h6>
+                                    @foreach ($address as $addressData)
+                                        <div class="form-check">
+                                            <input class="form-check-input text-truncate" type="radio" name="addressId"
+                                                value="{{ $addressData->id }}" id="address{{ $addressData->id }}"
+                                                {{ old('addressId') == $addressData->id ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="address{{ $addressData->id }}">
+                                                {{ $addressData->address_line1 }},
+                                                {{ $addressData->address_line2 }},
+                                                {{ $addressData->landmark->landmark_eng }},
+                                                {{ $addressData->pincode }}.
+                                            </label>
+                                        </div>
+                                        @if ($errors->has('addressId'))
+                                            <div class="text-danger mb-2">{{ $errors->first('addressId') }}</div>
+                                        @endif
+                                        <div class="my-2 mb-2">
+                                            <a class="btn btn-success"
+                                                href="{{ route('visitor.editaddress', $addressData->id) }}">Edit
+                                                address</a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     {{-- left column --}}
-                    <div class="col-lg-9 col-sm-12 p-3">
+                    <div class="col-lg-9 col-sm-12 overflow-auto" style="max-height: 500px;">
                         @foreach ($cart as $key => $cartData)
                             @if ($cartData->products != null && $cartData->units != null)
                                 <div class="card mb-3">
                                     <div class="row g-0">
                                         <div class="col-md-2 d-flex justify-content-center py-3">
-                                            <img src="{{ asset($cartData->products->image) }}" class="img-fluid rounded-start"
-                                                alt="..." style="max-height: 185px;">
+                                            <img src="{{ asset($cartData->products->image) }}"
+                                                class="img-fluid rounded-start" alt="..." style="max-height: 185px;">
                                         </div>
                                         <div class="col-md-10">
                                             <div class="card-header d-flex justify-content-between">
@@ -75,7 +107,7 @@
                     </div>
 
                     {{-- right column --}}
-                    <div class="col-lg-3 col-sm-12 p-3">
+                    <div class="col-lg-3 col-sm-12 my-2">
                         <form action="{{ route('home.order') }}" method="post">
                             @csrf
 
@@ -121,7 +153,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio"
                                                     value="{{ $addressData->id }}" name="addressId" id="flexRadioDefault1">
-                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                <label class="form-che  1ck-label" for="flexRadioDefault1">
                                                     <span>{{ $addressData->address_line1 }}</span>,
                                                     <span>{{ $addressData->address_line2 }}</span>,
                                                     <span>{{ $addressData->landmark->landmark_eng }}</span>,
@@ -135,10 +167,9 @@
                                         @endforeach
                                     </div> --}}
 
-                                    <div class="address py-3" style="border-top: 1px dashed #e0e0e0;">
+                                    {{-- <div class="address py-3" style="border-top: 1px dashed #e0e0e0;">
                                         <h6>Select Delivery address</h6>
-
-
+                                        <h6>Deliver to: <strong>{{ session('user')->name ?? 'Sign in' }}</strong> </h6>
                                         @foreach ($address as $addressData)
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="addressId"
@@ -160,7 +191,7 @@
                                                     address</a>
                                             </div>
                                         @endforeach
-                                    </div>
+                                    </div> --}}
 
 
                                     {{-- <div class="deliveryslot">
@@ -215,7 +246,7 @@
 
 
                     {{-- <div class="col-lg-9 col-sm-12">
-                <div class="card my-3">
+                 <div class="card my-3">
                     <div class="card-body">
                         <div class="row">
                             <h3 class="card-title">Shopping Cart</h3>
@@ -306,7 +337,7 @@
 
                 </div>
 
-                <div class="col-lg-3 col-sm-12 d-flex justify-content-end">
+                 <div class="col-lg-3 col-sm-12 d-flex justify-content-end">
                     <div class="card my-3" style="width: 379px;">
                         <!-- <img src="..." class="card-img-top" alt="..."> -->
                         <div class="card-body d-flex flex-column">
@@ -331,8 +362,8 @@
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
-                </div>
-            </div> --}}
+                 </div>
+                 </div> --}}
                 </div>
             @else
                 <div class="d-flex gap-1 align-items-center">
