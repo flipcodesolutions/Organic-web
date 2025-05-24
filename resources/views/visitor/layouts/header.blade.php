@@ -356,8 +356,7 @@
                         @endforeach
                     </select>
                     <div class="d-flex position-relative" style="width: 100%; max-width: 400px;">
-                        <input type="text" class="form-control w-auto" id="search"
-                            placeholder="Search...">
+                        <input type="text" class="form-control w-auto" id="search" placeholder="Search...">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div id="searchList"></div>
                         <button class="btn btn-outline-secondary ms-2">
@@ -497,41 +496,125 @@
         //     })
         // })
 
+        // $(document).ready(function() {
+        //     // Trigger on input click to show all suggestions
+        //     $("#search").on("click", function() {
+        //         fetchDropdown('');
+
+        //     });
+
+        //     // Trigger on keyup to show filtered suggestions
+        //     $("#search").on("keyup", function() {
+        //         var name = $(this).val();
+        //         fetchDropdown(name);
+        //     });
+
+        //     // Function to fetch and show dropdown
+        //     function fetchDropdown(name) {
+        //         var _token = $("input[name='_token']").val();
+
+        //         $.ajax({
+        //             type: "POST",
+        //             url: "{{ route('autocomplete') }}",
+        //             data: {
+        //                 _token: _token,
+        //                 search: name
+        //             },
+        //             success: function(response) {
+        //                 if (response.length > 0) {
+
+
+        //                     var html =
+        //                         "<ul class='dropdown-menu show w-110' style='max-height:200px; overflow-y:auto; position:absolute; z-index:1000;'>";
+
+        //                     $.each(response, function(key, value) {
+        //                         html +=
+        //                         "<li><a href='/product/" + value.id + "' class='dropdown-item'>" +
+        //                             value.productName + "</a></li>";
+        //                     });
+
+        //                     html += "</ul>";
+        //                     $("#searchList").html(html);
+        //                 } else {
+        //                     $("#searchList").empty();
+        //                 }
+        //             }
+        //         });
+        //     }
+
+        //     // Hide dropdown when clicking outside
+        //     $(document).on("click", function(e) {
+        //         if (!$(e.target).closest("#search, #searchList").
+        //         length) {
+        //             $("#searchList").empty();
+        //         }
+        //     });
+        // });
+
+
         $(document).ready(function() {
-            // Trigger on input click to show all suggestions
+            let enterKeyTriggered = false;
+
+            // Show all suggestions on input click
             $("#search").on("click", function() {
                 fetchDropdown('');
-
             });
 
-            // Trigger on keyup to show filtered suggestions
-            $("#search").on("keyup", function() {
-                var name = $(this).val();
-                fetchDropdown(name);
+            // Filter suggestions on keyup (not Enter)
+            $("#search").on("keyup", function(e) {
+                if (!enterKeyTriggered && e.key !== "Enter") {
+                    fetchDropdown($(this).val());
+                }
             });
 
-            // Function to fetch and show dropdown
+            // Handle Enter key press
+            $("#search").on("keydown", function(e) {
+                if (e.key === "Enter" || e.keyCode === 13) {
+                    e.preventDefault(); // stop form submission
+                    enterKeyTriggered = true;
+                    fetchDropdown($(this).val());
+                }
+            });
+
+            // Prevent form submission globally
+            $("form").on("submit", function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Core fetch function
             function fetchDropdown(name) {
                 var _token = $("input[name='_token']").val();
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('autocomplete') }}",
+                    url: "{{ route('autocomplete') }}", // Laravel route
                     data: {
                         _token: _token,
                         search: name
                     },
                     success: function(response) {
+                        if (enterKeyTriggered) {
+                            enterKeyTriggered = false;
+
+                            if (response.length > 0) {
+                                // ✅ Redirect to first product
+                                window.location.href = "/product/" + response[0].id;
+                            } else {
+                                alert("No product found.");
+                            }
+
+                            return;
+                        }
+
+                        // Render dropdown if not Enter-triggered
                         if (response.length > 0) {
-
-
-                            var html =
-                                "<ul class='dropdown-menu show w-110' style='max-height:200px; overflow-y:auto; position:absolute; z-index:1000;'>";
+                            let html =
+                                "<ul class='dropdown-menu show w-100' style='max-height:200px; overflow-y:auto; position:absolute; z-index:1000;'>";
 
                             $.each(response, function(key, value) {
                                 html +=
-                                "<li><a href='/product/" + value.id + "' class='dropdown-item'>" +
-                                    value.productName + "</a></li>";
+                                    `<li><a href="/product/${value.id}" class="dropdown-item">${value.productName}</a></li>`;
                             });
 
                             html += "</ul>";
@@ -539,11 +622,14 @@
                         } else {
                             $("#searchList").empty();
                         }
+                    },
+                    error: function(xhr) {
+                        console.error("AJAX Error:", xhr.responseText);
                     }
                 });
             }
 
-            // Hide dropdown when clicking outside
+            // Hide dropdown on outside click
             $(document).on("click", function(e) {
                 if (!$(e.target).closest("#search, #searchList").length) {
                     $("#searchList").empty();

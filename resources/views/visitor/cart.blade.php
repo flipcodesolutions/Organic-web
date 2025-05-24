@@ -1,18 +1,40 @@
 @extends('visitor.layouts.app')
 @section('content')
+<style>
+    .change-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1;
+    color: black;
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    margin-top: 5px;
+}
+.price-column {
+    align-self: flex-start;
+    margin-left: auto;
+    position: relative;
+    top: 0;
+}
+</style>
     <div class="container-fluid d-flex justify-content-center" style="background-color: #EAEDED; min-height: 640px;">
         @if (session()->has('user'))
             @if (count($cart) > 0)
                 <div class="row justify-content-between w-100">
-                    <div class="col-lg-9 col-sm-12 p-3 pb-0">
+                    <div class="col-lg-9 col-sm-12 p-3 pb-0 ">
                         <div class="card mb-3">
                             <div class="row g-0">
 
-                                <div class="address py-3 mx-3" style="border-top: 1px dashed #e0e0e0;">
+                                <div class="address py-3 mx-2" style="border-top: 1px dashed #e0e0e0;">
                                     <h6>Select Delivery address</h6>
                                     <h6>Delivered to: <strong>{{ session('user')->name ?? 'Sign in' }}</strong> </h6>
                                     @foreach ($address as $addressData)
-                                        <div class="form-check">
+                                        <div class="form-check mx-1">
                                             <input class="form-check-input text-truncate" type="radio" name="addressId"
                                                 value="{{ $addressData->id }}" id="address{{ $addressData->id }}"
                                                 {{ old('addressId') == $addressData->id ? 'checked' : '' }}>
@@ -27,9 +49,8 @@
                                             <div class="text-danger mb-2">{{ $errors->first('addressId') }}</div>
                                         @endif
                                         <div class="my-2 mb-2">
-                                            <a class="btn btn-success"
-                                                href="{{ route('visitor.editaddress', $addressData->id) }}">Edit
-                                                address</a>
+                                            <a class="change-btn  btn btn-outline-secondary" style="color:black"
+                                                href="{{ route('visitor.editaddress', $addressData->id) }}">Change</a>
                                         </div>
                                     @endforeach
                                 </div>
@@ -48,7 +69,7 @@
                                                 class="img-fluid rounded-start" alt="..." style="max-height: 185px;">
                                         </div>
                                         <div class="col-md-10">
-                                            <div class="card-header d-flex justify-content-between">
+                                            <div class="card-header justify-content-between">
                                                 <div class="productdetail">
                                                     <h5 class="card-title">{{ $cartData->products->productName }}</h5>
                                                     <p> {{ $cartData->units->unitMaster->unit }} </p>
@@ -61,7 +82,7 @@
                                                     </h5>
                                                 </div>
                                             </div>
-                                            <div class="card-body">
+                                            <div class="card-body ">
                                                 <div class="price-section mb-2 d-flex ">
                                                     <div class="col-lg-2 col-sm-2 me-2">
                                                         <div class="input-group">
@@ -107,7 +128,8 @@
                     </div>
 
                     {{-- right column --}}
-                    <div class="col-lg-3 col-sm-12 my-2">
+                    {{-- <div class="row"> --}}
+                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2 price-column">
                         <form action="{{ route('home.order') }}" method="post">
                             @csrf
 
@@ -243,6 +265,7 @@
                             </div>
                         </form>
                     </div>
+                    {{-- </div> --}}
 
 
                     {{-- <div class="col-lg-9 col-sm-12">
@@ -371,7 +394,7 @@
                             shopping</a></span> --}}
                     <img src="{{ asset('visitor/images/117-1170538_404-your-cart-is-empty.png') }}" alt="Empty Cart"
                         style="max-width: 300px; height: auto;">
-                    <a href="{{ route('visitor.index') }}" class="btn btn-primary">Continue Shopping</a>
+                    <a href="{{ route('visitor.index') }}" class="">Continue Shopping</a>
                 </div>
             @endif
         @endif

@@ -590,11 +590,18 @@
                                             <div class="d-flex justify-content-between">
                                                 <h6 class="mb-0">
                                                     {{ $reviewData->user->name ?? 'Unknown User' }}
-                                                    <a href="{{ route('home.deletereview', $reviewData->id) }}"
+                                                    {{-- <a href="{{ route('home.deletereview', $reviewData->id) }}"
                                                         class="mx-2 text-danger"
                                                         onclick="return confirm('Are you sure you want to delete this review?');">
                                                         <i class="fa-solid fa-trash text-danger"></i>
-                                                    </a>
+                                                    </a> --}}
+                                                    @if (session('user') && session('user')->id === $reviewData->user_id)
+                                                        <a href="{{ route('home.deletereview', $reviewData->id) }}"
+                                                            class="mx-2 text-danger"
+                                                            onclick="return confirm('Are you sure you want to delete this review?');">
+                                                            <i class="fa-solid fa-trash text-danger"></i>
+                                                        </a>
+                                                    @endif
                                                 </h6>
 
 
@@ -872,34 +879,32 @@
 
 
 
-        src="https://cdn.jsdelivr.net/npm/sweetalert2@11"
+        src = "https://cdn.jsdelivr.net/npm/sweetalert2@11"
 
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const deleteButtons = document.querySelectorAll('.delete-review');
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.delete-review');
 
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const reviewId = this.getAttribute('data-id');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const reviewId = this.getAttribute('data-id');
 
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Redirect to the delete route
-                        window.location.href = `/deletereview/${reviewId}`;
-                    }
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirect to the delete route
+                            window.location.href = `/deletereview/${reviewId}`;
+                        }
+                    });
                 });
             });
         });
-    });
-
-
     </script>
 @endsection
